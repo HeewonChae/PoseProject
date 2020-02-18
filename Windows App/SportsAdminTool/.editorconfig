@@ -1,0 +1,7 @@
+﻿[*.{cs,vb}]
+
+# IDE0060: Remove unused parameter
+dotnet_code_quality_unused_parameters = non_public:suggestion
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none

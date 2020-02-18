@@ -1,0 +1,46 @@
+{
+  "Teams": [
+    {
+      "Index": 1,
+      "LeagueID": 1326,
+      "TeamName": "Independiente Santa Fe",
+      "CountryName": "Colombia",
+      "ConvertTeamID": 1139
+    },
+    {
+      "Index": 2,
+      "LeagueID": 536,
+      "TeamName": "Grobina",
+      "CountryName": "Latvia",
+      "ConvertTeamID": 4138
+    },
+    {
+      "Index": 3,
+      "LeagueID": 975,
+      "TeamName": "Muaither",
+      "CountryName": "Qatar",
+      "ConvertTeamID": 2902
+    },
+    {
+      "Index": 4,
+      "LeagueID": 351,
+      "TeamName": "Sydney II",
+      "CountryName": "Romania",
+      "ConvertTeamID": 2583
+    },
+    {
+      "Index": 5,
+      "LeagueID": 113,
+      "TeamName": "Sydney II",
+      "CountryName": "Turkey",
+      "ConvertTeamID": 997
+    },
+    {
+      "Index": 6,
+      "LeagueID": 1287,
+      "TeamName": "Real",
+      "CountryName": "Portugal",
+      "ConvertTeamID": 32000
+    }
+  ]
+}

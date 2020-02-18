@@ -1,0 +1,5 @@
+Data Binding
+    - 뷰의 Text속성에 {Binding PropertyName} 으로 바인딩후
+      연결된 cs 파일에서 this.BindingContext = this; 해주면 1차적인 바인딩은 성공.
+    
+    - 바인딩된 프로퍼티의 값이 변경됐을 경우 OnPropertyChanged()를 호출하여 xaml 파일에 알려주면 UI에 값이 갱신됨

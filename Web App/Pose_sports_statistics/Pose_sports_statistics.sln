@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pose_sports_statistics", "Pose_sports_statistics\Pose_sports_statistics.csproj", "{2BDF00A1-9FFF-4806-8AFA-FB2D8282DB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Data", "Repository.Data\Repository.Data.csproj", "{FAC723CC-C977-4808-99CA-0914A9366765}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{964A8597-299F-4ECD-B1DE-CD2364141780}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicCore", "..\..\Common Library\CommonLibrary\LogicCore\LogicCore.csproj", "{4375D35A-CCB4-4714-BE12-7828A548C543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\..\Common Library\CommonLibrary\Repository\Repository.csproj", "{E798B808-207E-48F7-A509-6473FB43EAE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidAPI", "..\..\Common Library\CommonLibrary\RapidAPI\RapidAPI.csproj", "{0310E278-EBFC-4DD8-8A36-27321A01C52F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BDF00A1-9FFF-4806-8AFA-FB2D8282DB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BDF00A1-9FFF-4806-8AFA-FB2D8282DB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BDF00A1-9FFF-4806-8AFA-FB2D8282DB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BDF00A1-9FFF-4806-8AFA-FB2D8282DB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAC723CC-C977-4808-99CA-0914A9366765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAC723CC-C977-4808-99CA-0914A9366765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAC723CC-C977-4808-99CA-0914A9366765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAC723CC-C977-4808-99CA-0914A9366765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4375D35A-CCB4-4714-BE12-7828A548C543} = {964A8597-299F-4ECD-B1DE-CD2364141780}
+		{E798B808-207E-48F7-A509-6473FB43EAE2} = {964A8597-299F-4ECD-B1DE-CD2364141780}
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F} = {964A8597-299F-4ECD-B1DE-CD2364141780}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13D01147-8CAE-4E10-945E-5B51A6AF6766}
+	EndGlobalSection
+EndGlobal

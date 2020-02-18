@@ -1,0 +1,149 @@
+﻿<Controls:MetroWindow x:Class="SportsAdminTool.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:local="clr-namespace:SportsAdminTool"
+                      mc:Ignorable="d"
+                      Title="Pose Sports" Height="900" Width="1200"
+                      ShowIconOnTitleBar="True" 
+                      Icon="mahapps.metro.logo.png"
+                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      WindowStartupLocation="CenterScreen"
+                      WindowButtonCommandsOverlayBehavior="Never"
+                      RightWindowCommandsOverlayBehavior="Never">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="TitleBar_ListIcon_Click">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconModern Width="24" 
+                                              Height="24" 
+                                              Kind="BookList" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl >
+            <Controls:Flyout x:Name="_globalFlyout" 
+                             Header="Flyout" 
+                             Position="Right" 
+                             Width="200">
+                <!-- Your custom content here -->
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+    <!--Root Grid-->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="225"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Controls:FlipView x:Name="_fv_football"
+                               Foreground="{DynamicResource WhiteBrush}"
+                               BannerText="FootballDB Initialize" Margin="10 20 10 20"
+                               Grid.Row="0"
+                               SelectionChanged="Fv_football_SelectionChanged">
+                <Controls:FlipView.Items>
+                    <Grid Background="LightSeaGreen" 
+                          MouseLeftButtonUp="Fv_item_initialize_footballdb_Click">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="_lbl_initialize_footballdb" 
+                               Grid.Row="0" 
+                               Content="Ready (country, league, team)" 
+                               Foreground="Black" 
+                               FontSize="14"/>
+                        <iconPacks:PackIconModern Width="80"
+                                                  Height="80"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Kind="SportFootball"
+                                                  Grid.Row="1"
+                                                  Grid.RowSpan="2"/>
+                        <Controls:ProgressRing x:Name="_progRing_initialize_footballdb" 
+                                               Width="80"
+                                               Height="80"
+                                               Foreground="Black" 
+                                               IsActive="False"
+                                               Grid.Row="1"
+                                               Grid.RowSpan="2"/>
+                    </Grid>
+                    <Grid Background="DodgerBlue" 
+                          MouseLeftButtonUp="Fv_item_collectDatas_and_predict_Click">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="_lbl_collectDatasAndPredict" 
+                               Grid.Row="0" 
+                               Content="Ready (fixtures, odds, standings)" 
+                               Foreground="Black" 
+                               FontSize="14"/>
+                        <iconPacks:PackIconModern Width="80"
+                                                  Height="80"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Kind="SportFootball"
+                                                  Grid.Row="1"
+                                                  Grid.RowSpan="2"/>
+                        <Controls:ProgressRing x:Name="_progRing_collectDatasAndPredict" 
+                                               Width="80"
+                                               Height="80"
+                                               Foreground="Black" 
+                                               IsActive="False"
+                                               Grid.Row="1"
+                                               Grid.RowSpan="2"/>
+                    </Grid>
+                    <Grid Background="DarkOrange" 
+                          MouseLeftButtonUp="Fv_item_check_completed_fixtures_Click">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="_lbl_check_completed_fixtures" 
+                               Grid.Row="0" 
+                               Content="Ready (last fixtures, H2H, statistics)" 
+                               Foreground="Black" 
+                               FontSize="14"/>
+                        <iconPacks:PackIconModern Width="80"
+                                                  Height="80"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Kind="SportFootball"
+                                                  Grid.Row="1"
+                                                  Grid.RowSpan="2"/>
+                        <Controls:ProgressRing x:Name="_progRing_check_completed_fixtures" 
+                                               Width="80"
+                                               Height="80"
+                                               Foreground="Black" 
+                                               IsActive="False"
+                                               Grid.Row="1"
+                                               Grid.RowSpan="2"/>
+                    </Grid>
+                </Controls:FlipView.Items>
+            </Controls:FlipView>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

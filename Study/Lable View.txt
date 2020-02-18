@@ -1,0 +1,15 @@
+Lable View
+    Properties
+        - FontSize // 열거형, 상수 모두 가능
+        - TextColor
+        - LineBreakMode // 개행 옵션 (한글은 한글자 단위로만 개행)
+            CharacterWrap // 뷰의 최대 사이즈를 넘어갈 경우 띄어쓰기 단위로 떨어지지 않고 묶어서 개행
+            WordWrap // 글의 길이가 뷰의 최대 사이즈를 넘어갈 경우 워드 단위로 짤라서 개행
+            NoWrap // 개행 안함
+            HeadTruncation // 글이 너무 길면 앞부분은 ...으로 처리
+            TailTruncation // 글이 너무 길면 뒷부분은 ...으로 처리
+            MiddleTruncation // 글이 너무 길면 가운데 부분은 ...으로 처리, 사용할 일 거의 없을듯
+    
+    Member
+        -FormattedText // 각 글자마다 다른 속성을 가지게 할 수 있음   
+
