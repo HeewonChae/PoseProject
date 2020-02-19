@@ -74,11 +74,11 @@ namespace WebServiceShare.WebServiceClient
 				if(requestContext.AttemptCnt < 3)
 					result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
 				else
-					_exceptionHandler?.Invoke(flurlException);
+					_exceptionHandler?.Invoke(flurlException).Wait();
 			}
 			catch (Exception ex)
 			{
-				_exceptionHandler?.Invoke(ex);
+				_exceptionHandler?.Invoke(ex).Wait();
 			}
 
 			return result;
@@ -121,8 +121,8 @@ namespace WebServiceShare.WebServiceClient
 					{
 						ClientContext.eCredentials = await WebClient.RequestAsync<byte[]>(new RequestContext()
 						{
-							ServiceUrl = AuthProxy.ServiceUrl,
 							MethodType = WebConfig.WebMethodType.POST,
+							ServiceUrl = AuthProxy.ServiceUrl,
 							SegmentGroup = AuthProxy.P_GetCredentials,
 						});
 					}

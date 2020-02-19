@@ -4,8 +4,10 @@ using Xamarin.Forms.Xaml;
 namespace Xamarin_Tutorial
 {
 	using Xamarin.Forms;
+    using Xamarin_Tutorial.InfraStructure;
+    using Xamarin_Tutorial.ViewMdels;
 
-	public partial class App : Application
+    public partial class App : Application
 	{
 		public App()
 		{
