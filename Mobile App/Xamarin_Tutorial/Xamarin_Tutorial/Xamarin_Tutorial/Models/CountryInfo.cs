@@ -50,13 +50,13 @@ namespace Xamarin_Tutorial.Models
         [JsonProperty("population")]
         public int Population { get; set; }
         [JsonProperty("latlng")]
-        public List<double> Latlng { get; set; }
+        public List<double?> Latlng { get; set; }
         [JsonProperty("demonym")]
         public string Demonym { get; set; }
         [JsonProperty("area")]
-        public double Area { get; set; }
+        public double? Area { get; set; }
         [JsonProperty("gini")]
-        public double Gini { get; set; }
+        public double? Gini { get; set; }
         [JsonProperty("timezones")]
         public List<string> Timezones { get; set; }
         [JsonProperty("borders")]

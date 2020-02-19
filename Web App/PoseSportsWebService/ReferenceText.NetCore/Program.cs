@@ -44,6 +44,8 @@ namespace ReferenceText.NetCore
 
 		static void Main(string[] args)
 		{
+			WebConfig.ServiceBaseUrl = "http://192.168.0.157:8888/";
+
 			WebClient.ExceptionHandler = Program.ExceptionHandler;
 
 			ClientContext.eCredentials = WebClient.RequestAsync<byte[]>(new RequestContext()

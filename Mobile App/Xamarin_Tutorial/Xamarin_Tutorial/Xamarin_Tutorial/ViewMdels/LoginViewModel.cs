@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,12 @@ namespace Xamarin_Tutorial.ViewMdels
 		#region Attributes
 		private string _email;
 		private string _password;
-		private bool _isRunning;
 		#endregion
 
 		#region Properties
 		public string Email { get => _email; set => SetValue(ref _email, value); }
 		public string Password { get => _password; set => SetValue(ref _password, value); }
-		public bool IsRunning { get => _isRunning; set => SetValue(ref _isRunning, value); }
 		public bool IsRemembered { get; set; }
-		public bool IsEnabled { get; set; }
 		#endregion
 
 		#region Commands
@@ -38,54 +36,36 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private async void Login()
 		{
-			if (!IsEnabled)
-				return;
-
 			if (string.IsNullOrEmpty(Email))
 			{
-				await Application.Current.MainPage.DisplayAlert(
-					"Error",
+				await UserDialogs.Instance.AlertAsync(
 					"Please enter your email",
+					"Error",
 					"Accept");
 			}
 			else if (string.IsNullOrEmpty(Password))
 			{
-				await Application.Current.MainPage.DisplayAlert(
-					"Error",
+				await UserDialogs.Instance.AlertAsync(
 					"Please enter your password",
+					"Error",
 					"Accept");
 			}
-
-			IsRunning = true;
-			IsEnabled = false;
 
 			if(!Email.Equals("korman2444@gmail.com") || !Password.Equals("1234"))
 			{
-				await Application.Current.MainPage.DisplayAlert(
-					"Error",
+				await UserDialogs.Instance.AlertAsync(
 					"Email or Password Incorrect",
+					"Error",
 					"Accept");
 
 				Password = string.Empty;
-				IsRunning = false;
-				IsEnabled = true;
 
 				return;
 			}
-
-			IsRunning = false;
-			IsEnabled = true;
-
-			await Application.Current.MainPage.DisplayAlert(
-				"Ok",
-				"Login Success",
-				"Accept");
-
-			Email = string.Empty;
-			Password = string.Empty;
-
+			
 			// Put Lands Page
-			await Application.Current.MainPage.Navigation.PushAsync(new LandsPage());
+				await Application.Current.MainPage.Navigation.PushAsync(
+					await Singleton.Get<MainViewModel>().Lands.GetViewPage());
 		}
 
 		public ICommand RegisterCommand
@@ -103,12 +83,17 @@ namespace Xamarin_Tutorial.ViewMdels
 		#endregion
 
 		#region Constructors
-		public LoginViewModel()
+		public LoginViewModel() {}
+		#endregion
+
+		#region Method
+		public override async Task<Page> GetViewPage()
 		{
-			this.IsEnabled = true;
 			this.IsRemembered = true;
 			this.Email = "korman2444@gmail.com";
 			this.Password = "1234";
+
+			return await Task.FromResult(new LoginPage());
 		}
 		#endregion
 	}

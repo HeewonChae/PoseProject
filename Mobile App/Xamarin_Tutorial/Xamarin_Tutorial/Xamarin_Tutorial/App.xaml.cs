@@ -12,7 +12,6 @@ namespace Xamarin_Tutorial
 		public App()
 		{
 			InitializeComponent();
-			MainPage = new NavigationPage(new Views.LoginPage());
 
 			//switch (Device.Idiom)
 			//{
@@ -31,8 +30,10 @@ namespace Xamarin_Tutorial
 			//}
 		}
 
-		protected override void OnStart()
+		protected override async void OnStart()
 		{
+			MainPage = new NavigationPage(
+				await Singleton.Get<MainViewModel>().Login.GetViewPage());
 		}
 
 		protected override void OnSleep()

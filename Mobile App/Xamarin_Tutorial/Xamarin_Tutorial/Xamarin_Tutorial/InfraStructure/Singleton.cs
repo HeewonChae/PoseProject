@@ -52,7 +52,7 @@ namespace Xamarin_Tutorial.InfraStructure
 
 		public static void Register<T>() where T : class, INode, new()
 		{
-			Register(new T());
+				Register(new T());
 		}
 	}
 }

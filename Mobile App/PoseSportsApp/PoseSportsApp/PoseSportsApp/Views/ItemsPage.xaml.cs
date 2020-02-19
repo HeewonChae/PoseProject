@@ -40,7 +40,7 @@ namespace PoseSportsApp.Views
 			if (!(args.SelectedItem is Item item))
 				return;
 
-			var hello = await WebFacade.RequestAsync<O_Hello>(
+			var hello = await ApiService.RequestAsync<O_Hello>(
 								WebConfig.WebMethodType.POST
 								, HelloWorldProxy.ServiceUrl
 								, HelloWorldProxy.P_Hello

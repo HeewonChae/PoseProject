@@ -12,6 +12,6 @@ namespace WebServiceShare
 			POST,
 		}
 
-		public static string ServiceBaseUrl { get; } = "http://192.168.0.157:8888/";
+		public static string ServiceBaseUrl { get; set; }
 	}
 }

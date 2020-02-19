@@ -8,7 +8,7 @@
              BindingContext="{Binding Main, Source={StaticResource Locator}}">
 
     <NavigationPage.TitleView>
-        <Label Text="Lands Page" 
+        <Label Text="Lands" 
                FontAttributes="Bold"
                FontSize="Title"/>
     </NavigationPage.TitleView>

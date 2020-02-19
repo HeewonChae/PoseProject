@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Xamarin_Tutorial.ViewMdels
 {
-	public class BaseViewModel : INotifyPropertyChanged
+	public abstract class BaseViewModel : INotifyPropertyChanged
 	{
 		#region Events
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -27,5 +29,11 @@ namespace Xamarin_Tutorial.ViewMdels
 			backingField = value;
 			OnPropertyChanged(propertyName);
 		}
+
+		/// <summary>
+		/// Page는 null 일 수 있음
+		/// </summary>
+		/// <returns></returns>
+		public abstract Task<Page> GetViewPage();
 	}
 }

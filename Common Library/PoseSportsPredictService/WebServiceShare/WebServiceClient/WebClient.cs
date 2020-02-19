@@ -74,11 +74,11 @@ namespace WebServiceShare.WebServiceClient
 				if(requestContext.AttemptCnt < 3)
 					result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
 				else
-					_exceptionHandler?.Invoke(flurlException).Wait();
+					_exceptionHandler?.Invoke(flurlException);
 			}
 			catch (Exception ex)
 			{
-				_exceptionHandler?.Invoke(ex).Wait();
+				_exceptionHandler?.Invoke(ex);
 			}
 
 			return result;

@@ -54,10 +54,6 @@
                         Text="{Binding Password, Mode=TwoWay}">
                     </Entry>
                 </Grid>
-                <ActivityIndicator 
-                    IsRunning="{Binding IsRunning, Mode=TwoWay}"
-                    VerticalOptions="Center">
-                </ActivityIndicator>
                 <StackLayout Orientation="Horizontal" Margin="20, 0">
                     <Label
                     Text="Remember in this device"
