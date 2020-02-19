@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
 using Xamarin_Tutorial.Services;
 using Xamarin_Tutorial.Views;
@@ -13,35 +14,35 @@ namespace Xamarin_Tutorial.ViewMdels
 	public class LandsViewModel : BaseViewModel
 	{
 		#region Attributes
-		private ObservableCollection<CountryInfo> _countries;
+		private ObservableCollection<CountryItem> _countries;
 		#endregion
 
 		#region Properties
-		public ObservableCollection<CountryInfo> Countries { get => _countries; set => SetValue(ref _countries, value); }
+		public ObservableCollection<CountryItem> Countries { get => _countries; set => SetValue(ref _countries, value); }
 		#endregion
 
 		#region Constructors
-		public LandsViewModel()
-		{
-		}
+		public LandsViewModel() {}
 		#endregion
 
-		#region Method
-		public override async Task<Page> GetViewPage()
+		#region Methods
+		public override async Task<Page> ShowViewPage()
 		{
 			var loadResult = await LoadCountries();
 			if (loadResult)
-				return new LandsPage();
+				return _coupledViewPage;
 
-			return null;
+			return await Singleton.Get<MainViewModel>().Login.ShowViewPage();
 		}
-		
+		#endregion
+
+		#region Services
 		private async Task<bool> LoadCountries()
 		{
-			if (_countries != null)
+			if (Countries != null)
 				return true;
 
-			var result = await ApiService.RequestAsync<CountryInfo[]>(
+			var result = await ApiService.RequestAsync<CountryItem[]>(
 				WebServiceShare.WebConfig.WebMethodType.GET,
 				"https://restcountries.eu/",
 				"rest/v2/all");
@@ -49,10 +50,10 @@ namespace Xamarin_Tutorial.ViewMdels
 			if (result == null)
 				return false;
 
-			_countries = new ObservableCollection<CountryInfo>(result);
+			Countries = new ObservableCollection<CountryItem>(result);
 
 			return true;
-		}
+		} 
 		#endregion
 	}
 }

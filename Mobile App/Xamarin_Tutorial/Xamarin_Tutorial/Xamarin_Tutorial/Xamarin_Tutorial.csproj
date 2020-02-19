@@ -27,9 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MainPage_Mobile.xaml.cs">
-      <DependentUpon>MainPage_Mobile.xaml</DependentUpon>
-    </Compile>
     <Compile Update="MainPage_UWP.xaml.cs">
       <DependentUpon>MainPage_UWP.xaml</DependentUpon>
     </Compile>

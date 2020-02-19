@@ -64,8 +64,8 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 			
 			// Put Lands Page
-				await Application.Current.MainPage.Navigation.PushAsync(
-					await Singleton.Get<MainViewModel>().Lands.GetViewPage());
+			Application.Current.MainPage = new NavigationPage(
+				await Singleton.Get<MainViewModel>().Lands.ShowViewPage());
 		}
 
 		public ICommand RegisterCommand
@@ -83,17 +83,17 @@ namespace Xamarin_Tutorial.ViewMdels
 		#endregion
 
 		#region Constructors
-		public LoginViewModel() {}
+		public LoginViewModel(){ }
 		#endregion
 
 		#region Method
-		public override async Task<Page> GetViewPage()
+		public override async Task<Page> ShowViewPage()
 		{
 			this.IsRemembered = true;
 			this.Email = "korman2444@gmail.com";
 			this.Password = "1234";
 
-			return await Task.FromResult(new LoginPage());
+			return await Task.FromResult(_coupledViewPage);
 		}
 		#endregion
 	}

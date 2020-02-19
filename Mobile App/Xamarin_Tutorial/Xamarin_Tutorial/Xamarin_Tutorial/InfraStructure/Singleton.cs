@@ -52,7 +52,14 @@ namespace Xamarin_Tutorial.InfraStructure
 
 		public static void Register<T>() where T : class, INode, new()
 		{
+			try
+			{
 				Register(new T());
+			}
+			catch (Exception ex)
+			{
+				int a = 0;
+			}
 		}
 	}
 }

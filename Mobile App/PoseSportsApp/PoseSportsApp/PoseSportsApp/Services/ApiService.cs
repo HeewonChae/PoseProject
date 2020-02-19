@@ -1,7 +1,9 @@
 ﻿using Acr.UserDialogs;
 using Flurl.Http;
 using Newtonsoft.Json;
+using Plugin.Connectivity;
 using PosePacket.WebError;
+using PoseSportsApp.Resources;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -46,7 +48,7 @@ namespace PoseSportsApp.Services
 					catch (Exception)
 					{
 						// 알 수 없는 서버 에러
-						await UserDialogs.Instance.AlertAsync("unkown Service Error");
+						await UserDialogs.Instance.AlertAsync("Unkown service error");
 					}
 				}
 				else
@@ -66,11 +68,26 @@ namespace PoseSportsApp.Services
 				await UserDialogs.Instance.AlertAsync("Unkown flurl error");
 			}
 		}
+
+		private static bool CheckInternetConnected()
+		{
+			if (!CrossConnectivity.Current.IsConnected)
+				return false;
+
+			return true;
+		}
 		#endregion
 
 		public static async Task<TOut> RequestAsync<TOut>(WebConfig.WebMethodType methodType, string serviceUrl, string segmentGroup, object data = null)
 		{
 			TOut result = default;
+
+			if (!CheckInternetConnected())
+			{
+				await UserDialogs.Instance.AlertAsync(AppStringResource.Check_Internet_Connection);
+				return result;
+
+			}
 
 			using (UserDialogs.Instance.Loading())
 			{

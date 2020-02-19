@@ -17,6 +17,9 @@
         <StackLayout
             BindingContext="{Binding Lands}"
             Padding="5">
+            <ListView
+                ItemsSource="{Binding Countries}">
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

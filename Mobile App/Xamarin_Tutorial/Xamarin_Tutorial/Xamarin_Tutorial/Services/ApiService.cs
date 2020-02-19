@@ -52,7 +52,7 @@ namespace Xamarin_Tutorial.Services
 			if (!CheckInternetConnected())
 			{
 				await UserDialogs.Instance.AlertAsync("Please check internet connection");
-				return default;
+				return result;
 
 			}
 

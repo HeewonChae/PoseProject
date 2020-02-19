@@ -17,23 +17,21 @@ namespace Xamarin_Tutorial
 			//{
 			//	case TargetIdiom.Desktop:
 			//	case TargetIdiom.Tablet:
-			//		MainPage = new MainPage_UWP();
 			//		break;
 
 			//	case TargetIdiom.Phone:
-			//		MainPage = new MainPage_Mobile();
 			//		break;
 
 			//	default:
-			//		MainPage = new MainPage_Mobile();
 			//		break;
 			//}
 		}
 
 		protected override async void OnStart()
 		{
-			MainPage = new NavigationPage(
-				await Singleton.Get<MainViewModel>().Login.GetViewPage());
+			var mainViewModel = Singleton.Get<MainViewModel>();
+			mainViewModel.Initialize();
+			MainPage = await mainViewModel.Login.ShowViewPage();
 		}
 
 		protected override void OnSleep()

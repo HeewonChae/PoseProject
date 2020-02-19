@@ -11,6 +11,8 @@ namespace Xamarin_Tutorial.InfraStructure
 
 		public InstanceLocator()
 		{
+			Singleton.Register<MainViewModel>();
+
 			this.Main = Singleton.Get<MainViewModel>();
 		}
 	}
