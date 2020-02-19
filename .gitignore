@@ -1,0 +1,12 @@
+﻿/Common Library/CommonLibrary/LogicCore/bin/Debug
+/Common Library/PoseSportsPredictService/PosePacket/bin/Debug/netstandard2.0
+/Common Library/PoseSportsPredictService/PosePacket/obj
+/Common Library/CommonLibrary/LogicCore/obj/Debug
+/Common Library/PoseSportsPredictService/WebServiceShare/bin/Debug/netstandard2.0
+/Common Library/PoseSportsPredictService/WebServiceShare/obj
+/Web App/PoseSportsWebService/CodeGenerator/bin/Debug
+/Web App/PoseSportsWebService/CodeGenerator/obj/Debug
+/Web App/PoseSportsWebService/ReferenceText.NetCore/bin/Debug/netcoreapp3.1
+/Web App/PoseSportsWebService/ReferenceText.NetCore/obj
+/Web App/PoseSportsWebService/SportsWebService/bin
+/Web App/PoseSportsWebService/SportsWebService/obj/Debug
