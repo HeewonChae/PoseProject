@@ -10,3 +10,11 @@
 /Web App/PoseSportsWebService/ReferenceText.NetCore/obj
 /Web App/PoseSportsWebService/SportsWebService/bin
 /Web App/PoseSportsWebService/SportsWebService/obj/Debug
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp/bin/Debug/netstandard2.0
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp/obj
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.Android/bin/Debug
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.Android/obj
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.iOS/bin/iPhone/Debug
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.iOS/obj
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.UWP/bin/x86/Debug
+/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.UWP/obj
