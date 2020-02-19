@@ -18,11 +18,5 @@ namespace Xamarin_Tutorial
 		{
 			InitializeComponent();
 		}
-
-		private void Button_Clicked(object sender, EventArgs e)
-		{
-			var dialer = DependencyService.Get<IDialer>();
-			dialer.Dial("010-8395-7750");
-		}
 	}
 }
