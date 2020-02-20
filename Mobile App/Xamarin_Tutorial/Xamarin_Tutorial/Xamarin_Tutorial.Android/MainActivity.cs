@@ -10,7 +10,7 @@ using Acr.UserDialogs;
 
 namespace Xamarin_Tutorial.Droid
 {
-    [Activity(Label = "Xamarin_Tutorial", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Xamarin_Tutorial", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.Locale| ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         bool doubleBackToExitPressedOnce = false;
@@ -45,7 +45,8 @@ namespace Xamarin_Tutorial.Droid
             }
 
             this.doubleBackToExitPressedOnce = true;
-            Toast.MakeText(this, "Message", ToastLength.Short).Show();
+            string message = GetString(Resource.String.PressBackTwiceToExit);
+            Toast.MakeText(this, message, ToastLength.Short).Show();
 
             new Handler().PostDelayed(() => {
                 doubleBackToExitPressedOnce = false;
