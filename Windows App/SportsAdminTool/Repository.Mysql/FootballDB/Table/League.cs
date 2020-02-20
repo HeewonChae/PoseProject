@@ -43,7 +43,7 @@ namespace Repository.Mysql.FootballDB.Table
 		public DateTime season_end { get; set; }
 
 		[Column(TypeName = "VARCHAR")]
-		[StringLength(64)]
+		[StringLength(100)]
 		[SqlDefaultValue(DefaultValue = "")]
 		public string logo { get; set; }
 

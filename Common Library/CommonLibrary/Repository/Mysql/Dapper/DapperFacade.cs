@@ -153,7 +153,6 @@ namespace Repository.Mysql.Dapper
 				catch (DbEntityValidationException ex)
 				{
 					errorEvent?.Invoke(new EntityStatus(ex));
-
 				}
 				catch (DbUpdateException ex)
 				{

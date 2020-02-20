@@ -29,7 +29,7 @@ namespace Repository.Mysql.FootballDB.Table
 		public string country_name { get; set; }
 
 		[Column(TypeName = "VARCHAR")]
-		[StringLength(64)]
+		[StringLength(100)]
 		[SqlDefaultValue(DefaultValue = "")]
 		public string logo { get; set; }
 

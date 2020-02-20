@@ -84,7 +84,7 @@ namespace Repository.Request
 
 			foreach (var error in entityStatus.Errors)
 			{
-				Dev.DebugString($"Error: {error.ErrorMessage} - Member: {error.MemberNames}");
+				Dev.DebugString($"Error: {error.ErrorMessage} - Member: {error.MemberNames}", ConsoleColor.Red);
 			}
 		}
 	}

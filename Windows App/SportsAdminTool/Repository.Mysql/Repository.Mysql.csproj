@@ -90,6 +90,10 @@
     <Compile Include="FootballDBMigrations\202002031300535_CreateFixtureTable1.designer.cs">
       <DependentUpon>202002031300535_CreateFixtureTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.cs" />
+    <Compile Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.designer.cs">
+      <DependentUpon>202002201810534_AlterLogoStringLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\Procedures\P_EXECUTE_QUERY.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_COVERAGE.cs" />
@@ -135,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FootballDBMigrations\202002031300535_CreateFixtureTable1.resx">
       <DependentUpon>202002031300535_CreateFixtureTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.resx">
+      <DependentUpon>202002201810534_AlterLogoStringLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

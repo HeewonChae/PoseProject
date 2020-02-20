@@ -24,7 +24,7 @@ namespace Repository.Mysql.FootballDB.Table
 		public string name { get; set; }
 
 		[Column(TypeName = "VARCHAR")]
-		[StringLength(64)]
+		[StringLength(100)]
 		[SqlDefaultValue(DefaultValue = "")]
 		public string flag { get; set; }
 
