@@ -12,26 +12,14 @@ namespace Xamarin_Tutorial
 		public App()
 		{
 			InitializeComponent();
-
-			//switch (Device.Idiom)
-			//{
-			//	case TargetIdiom.Desktop:
-			//	case TargetIdiom.Tablet:
-			//		break;
-
-			//	case TargetIdiom.Phone:
-			//		break;
-
-			//	default:
-			//		break;
-			//}
+			MainPage = new LoadingPage();
 		}
 
 		protected override async void OnStart()
 		{
-			var mainViewModel = Singleton.Get<MainViewModel>();
-			mainViewModel.Initialize();
-			MainPage = await mainViewModel.Login.ShowViewPage();
+			await ((LoadingPage)MainPage).AppLoadAsync();
+
+			MainPage = await Singleton.Get<ViewLocator>().Login.ShowView();
 		}
 
 		protected override void OnSleep()

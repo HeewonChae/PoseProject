@@ -9,15 +9,16 @@ using Xamarin_Tutorial.InfraStructure;
 
 namespace Xamarin_Tutorial.ViewMdels
 {
-	public abstract class BaseViewModel : INotifyPropertyChanged, ICarryViewPage
+	public abstract class BaseViewModel : INotifyPropertyChanged, ICarryView
 	{
-		#region IViewPage Impl
-		protected Page _coupledViewPage;
-		public Page CoupledViewPage { get => _coupledViewPage; set => _coupledViewPage = value; } 
+		#region ICarryView Impl
+		protected Page _coupledView;
+		public Page CoupledView { get => _coupledView; set => _coupledView = value; } 
 
-		public void SetViewPage(Page page)
+		public void SetView(Page page)
 		{
-			_coupledViewPage = page;
+			_coupledView = page;
+			_coupledView.BindingContext = this;
 		}
 		#endregion
 
@@ -34,7 +35,7 @@ namespace Xamarin_Tutorial.ViewMdels
 		/// Page는 null 일 수 있음
 		/// </summary>
 		/// <returns></returns>
-		public abstract Task<Page> ShowViewPage(); 
+		public abstract Task<Page> ShowView(); 
 		#endregion
 
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

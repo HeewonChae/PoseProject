@@ -4,8 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Tutorial.Views.LoginPage"
-             BindingContext="{Binding Main, Source={StaticResource Locator}}">
+             x:Class="Xamarin_Tutorial.Views.LoginPage">
 
     <NavigationPage.TitleView>
         <Label Text="Login" 
@@ -14,7 +13,7 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding Login}">
+        <ScrollView>
             <StackLayout>
                 <Image
                 HeightRequest="200"

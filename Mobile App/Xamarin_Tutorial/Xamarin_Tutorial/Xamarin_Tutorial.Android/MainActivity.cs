@@ -10,9 +10,11 @@ using Acr.UserDialogs;
 
 namespace Xamarin_Tutorial.Droid
 {
-    [Activity(Label = "Xamarin_Tutorial", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Xamarin_Tutorial", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        bool doubleBackToExitPressedOnce = false;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -31,6 +33,23 @@ namespace Xamarin_Tutorial.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (doubleBackToExitPressedOnce)
+            {
+                base.OnBackPressed();
+                Java.Lang.JavaSystem.Exit(0);
+                return;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.MakeText(this, "Message", ToastLength.Short).Show();
+
+            new Handler().PostDelayed(() => {
+                doubleBackToExitPressedOnce = false;
+            }, 2000);
         }
     }
 }

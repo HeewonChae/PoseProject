@@ -8,7 +8,7 @@
              x:Class="Xamarin_Tutorial.App">
     <Application.Resources>
         <ResourceDictionary>
-            <infra:InstanceLocator x:Key="Locator"/>
+            <!--<infra:ViewLocator x:Key="ViewLocator"/>-->
         </ResourceDictionary>    
     </Application.Resources>
 </Application>

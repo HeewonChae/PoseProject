@@ -14,6 +14,17 @@ namespace Xamarin_Tutorial.ViewMdels
 {
 	public class LoginViewModel : BaseViewModel
 	{
+		#region ICarryView Impl
+		public override async Task<Page> ShowView()
+		{
+			this.IsRemembered = true;
+			this.Email = "korman2444@gmail.com";
+			this.Password = "1234";
+
+			return await Task.FromResult(_coupledView);
+		}
+		#endregion
+
 		#region Attributes
 		private string _email;
 		private string _password;
@@ -65,7 +76,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			
 			// Put Lands Page
 			Application.Current.MainPage = new NavigationPage(
-				await Singleton.Get<MainViewModel>().Lands.ShowViewPage());
+				await Singleton.Get<ViewLocator>().Lands.ShowView());
 		}
 
 		public ICommand RegisterCommand
@@ -87,14 +98,7 @@ namespace Xamarin_Tutorial.ViewMdels
 		#endregion
 
 		#region Method
-		public override async Task<Page> ShowViewPage()
-		{
-			this.IsRemembered = true;
-			this.Email = "korman2444@gmail.com";
-			this.Password = "1234";
-
-			return await Task.FromResult(_coupledViewPage);
-		}
+		
 		#endregion
 	}
 }
