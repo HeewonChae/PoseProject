@@ -2,8 +2,6 @@
 using Flurl.Http;
 using Plugin.Connectivity;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WebServiceShare;
 using WebServiceShare.ServiceContext;
@@ -22,6 +20,7 @@ namespace Xamarin_Tutorial.Services
 		}
 
 		#region Exception Handler
+
 		private static async Task ExceptionHandler(Exception exception)
 		{
 			if (exception is FlurlHttpException flurlException)
@@ -43,7 +42,8 @@ namespace Xamarin_Tutorial.Services
 				await UserDialogs.Instance.AlertAsync(exception.Message);
 			}
 		}
-		#endregion
+
+		#endregion Exception Handler
 
 		public static async Task<TOut> RequestAsync<TOut>(WebConfig.WebMethodType methodType, string serviceUrl, string segmentGroup, object data = null)
 		{
@@ -53,7 +53,6 @@ namespace Xamarin_Tutorial.Services
 			{
 				await UserDialogs.Instance.AlertAsync("Please check internet connection");
 				return result;
-
 			}
 
 			using (UserDialogs.Instance.Loading())

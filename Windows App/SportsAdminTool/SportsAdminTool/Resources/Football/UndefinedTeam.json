@@ -41,6 +41,13 @@
       "TeamName": "Real",
       "CountryName": "Portugal",
       "ConvertTeamID": 32000
+    },
+    {
+      "Index": 7,
+      "LeagueID": 262,
+      "TeamName": "Academy Platamona",
+      "CountryName": "Greece",
+      "ConvertTeamID": 2100
     }
   ]
 }

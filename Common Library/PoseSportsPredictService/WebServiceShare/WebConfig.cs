@@ -1,8 +1,4 @@
-﻿using Flurl;
-using System;
-using System.Collections.Generic;
-
-namespace WebServiceShare
+﻿namespace WebServiceShare
 {
 	public static class WebConfig
 	{

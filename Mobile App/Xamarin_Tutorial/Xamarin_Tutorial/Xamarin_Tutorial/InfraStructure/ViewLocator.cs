@@ -1,7 +1,4 @@
 ﻿using Acr.UserDialogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin_Tutorial.ViewMdels;
 using Xamarin_Tutorial.Views;
 
@@ -10,9 +7,11 @@ namespace Xamarin_Tutorial.InfraStructure
 	public class ViewLocator : Singleton.INode
 	{
 		#region ViewModels
+
 		public LoginViewModel Login { get; set; }
 		public LandsViewModel Lands { get; set; }
-		#endregion
+
+		#endregion ViewModels
 
 		public void Initialize(IProgressDialog progress)
 		{

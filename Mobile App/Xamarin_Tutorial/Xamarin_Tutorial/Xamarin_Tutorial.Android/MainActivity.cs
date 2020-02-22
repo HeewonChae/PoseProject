@@ -1,56 +1,55 @@
-﻿using System;
-
+﻿using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using Acr.UserDialogs;
+using Android.Runtime;
+using Android.Widget;
 
 namespace Xamarin_Tutorial.Droid
 {
-    [Activity(Label = "Xamarin_Tutorial", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.Locale| ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
-    {
-        bool doubleBackToExitPressedOnce = false;
+	[Activity(Label = "Xamarin_Tutorial", Icon = "@mipmap/icon", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+	{
+		private bool doubleBackToExitPressedOnce = false;
 
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+		protected override void OnCreate(Bundle savedInstanceState)
+		{
+			TabLayoutResource = Resource.Layout.Tabbar;
+			ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(savedInstanceState);
+			base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            UserDialogs.Init(this);
+			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+			global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+			UserDialogs.Init(this);
 
-            LoadApplication(new App());
-        }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+			LoadApplication(new App());
+		}
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+		public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+		{
+			Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        public override void OnBackPressed()
-        {
-            if (doubleBackToExitPressedOnce)
-            {
-                base.OnBackPressed();
-                Java.Lang.JavaSystem.Exit(0);
-                return;
-            }
+			base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+		}
 
-            this.doubleBackToExitPressedOnce = true;
-            string message = GetString(Resource.String.PressBackTwiceToExit);
-            Toast.MakeText(this, message, ToastLength.Short).Show();
+		public override void OnBackPressed()
+		{
+			if (doubleBackToExitPressedOnce)
+			{
+				base.OnBackPressed();
+				Java.Lang.JavaSystem.Exit(0);
+				return;
+			}
 
-            new Handler().PostDelayed(() => {
-                doubleBackToExitPressedOnce = false;
-            }, 2000);
-        }
-    }
+			this.doubleBackToExitPressedOnce = true;
+			string message = GetString(Resource.String.PressBackTwiceToExit);
+			Toast.MakeText(this, message, ToastLength.Short).Show();
+
+			new Handler().PostDelayed(() =>
+			{
+				doubleBackToExitPressedOnce = false;
+			}, 2000);
+		}
+	}
 }

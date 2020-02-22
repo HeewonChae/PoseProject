@@ -7,9 +7,9 @@
              x:Class="Xamarin_Tutorial.Views.LoginPage">
 
     <NavigationPage.TitleView>
-        <Label Text="Login" 
+        <Label Text="Login"
                FontAttributes="Bold"
-               FontSize="Title"/>
+               FontSize="Title" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
@@ -22,8 +22,8 @@
                 <Grid
                 Margin="20, 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <Label
                     Grid.Row="0"
@@ -58,7 +58,7 @@
                     Text="Remember in this device"
                     VerticalOptions="Center">
                     </Label>
-                    <Switch 
+                    <Switch
                         HorizontalOptions="EndAndExpand"
                         IsToggled="{Binding IsRemembered, Mode=TwoWay}">
                     </Switch>

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Xamarin_Tutorial.InfraStructure
 {
@@ -8,9 +6,9 @@ namespace Xamarin_Tutorial.InfraStructure
 	{
 		public interface INode { }
 
-		class Holder<T> where T : class, INode, new()
+		private class Holder<T> where T : class, INode, new()
 		{
-			static T instance = null;
+			private static T instance = null;
 
 			public static T Instance
 			{
@@ -19,6 +17,7 @@ namespace Xamarin_Tutorial.InfraStructure
 					return instance ?? throw new Exception($"this instence not alloced Type: {typeof(T)}");
 				}
 			}
+
 			public static bool HasInstance
 			{
 				get { return instance != null; }

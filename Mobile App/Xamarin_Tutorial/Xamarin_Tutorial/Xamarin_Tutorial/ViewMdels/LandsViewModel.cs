@@ -1,23 +1,21 @@
-﻿using Acr.UserDialogs;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
 using Xamarin_Tutorial.Services;
-using Xamarin_Tutorial.Views;
 
 namespace Xamarin_Tutorial.ViewMdels
 {
 	public class LandsViewModel : BaseViewModel
 	{
 		#region ICarryViewPage Impl
+
 		public override async Task<Page> ShowView()
 		{
 			var loadResult = await LoadCountries();
@@ -26,24 +24,34 @@ namespace Xamarin_Tutorial.ViewMdels
 
 			return _coupledView;
 		}
-		#endregion
+
+		#endregion ICarryViewPage Impl
 
 		#region Attributes
+
 		public List<CountryItem> _countryList;
 		private ObservableCollection<CountryItem> _countries;
 		private string _filter;
-		#endregion
+
+		#endregion Attributes
 
 		#region Properties
+
 		public ObservableCollection<CountryItem> Countries { get => _countries; set => SetValue(ref _countries, value); }
 		public string Filter { get => _filter; set => SetValue(ref _filter, value); }
-		#endregion
+
+		#endregion Properties
 
 		#region Constructors
-		public LandsViewModel() {}
-		#endregion
+
+		public LandsViewModel()
+		{
+		}
+
+		#endregion Constructors
 
 		#region Commands
+
 		public ICommand RefreshCommand
 		{
 			get
@@ -67,9 +75,11 @@ namespace Xamarin_Tutorial.ViewMdels
 				return new RelayCommand(SelectCountry);
 			}
 		}
-		#endregion
+
+		#endregion Commands
 
 		#region Commands Impl
+
 		private void RefreshCountries()
 		{
 			throw new NotImplementedException();
@@ -77,7 +87,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private void SearchCountries()
 		{
-			if(string.IsNullOrEmpty(Filter))
+			if (string.IsNullOrEmpty(Filter))
 			{
 				Countries = new ObservableCollection<CountryItem>(_countryList);
 			}
@@ -92,13 +102,11 @@ namespace Xamarin_Tutorial.ViewMdels
 		{
 			throw new NotImplementedException();
 		}
-		#endregion
 
-		#region Methods
-		
-		#endregion
+		#endregion Commands Impl
 
 		#region Services
+
 		private async Task<bool> LoadCountries()
 		{
 			_countryList = await ApiService.RequestAsync<List<CountryItem>>(
@@ -112,7 +120,8 @@ namespace Xamarin_Tutorial.ViewMdels
 			Countries = new ObservableCollection<CountryItem>(_countryList);
 
 			return true;
-		} 
-		#endregion
+		}
+
+		#endregion Services
 	}
 }

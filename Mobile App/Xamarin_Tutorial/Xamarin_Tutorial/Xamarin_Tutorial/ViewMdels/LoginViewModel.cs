@@ -1,20 +1,17 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
-using Xamarin_Tutorial.Views;
 
 namespace Xamarin_Tutorial.ViewMdels
 {
 	public class LoginViewModel : BaseViewModel
 	{
 		#region ICarryView Impl
+
 		public override async Task<Page> ShowView()
 		{
 			this.IsRemembered = true;
@@ -23,23 +20,29 @@ namespace Xamarin_Tutorial.ViewMdels
 
 			return await Task.FromResult(_coupledView);
 		}
-		#endregion
+
+		#endregion ICarryView Impl
 
 		#region Attributes
+
 		private string _email;
 		private string _password;
-		#endregion
+
+		#endregion Attributes
 
 		#region Properties
+
 		public string Email { get => _email; set => SetValue(ref _email, value); }
 		public string Password { get => _password; set => SetValue(ref _password, value); }
 		public bool IsRemembered { get; set; }
-		#endregion
+
+		#endregion Properties
 
 		#region Commands
+
 		public ICommand LoginCommand
 		{
-			get 
+			get
 			{
 				return new RelayCommand(Login);
 			}
@@ -62,7 +65,7 @@ namespace Xamarin_Tutorial.ViewMdels
 					"Accept");
 			}
 
-			if(!Email.Equals("korman2444@gmail.com") || !Password.Equals("1234"))
+			if (!Email.Equals("korman2444@gmail.com") || !Password.Equals("1234"))
 			{
 				await UserDialogs.Instance.AlertAsync(
 					"Email or Password Incorrect",
@@ -73,7 +76,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 				return;
 			}
-			
+
 			// Put Lands Page
 			Application.Current.MainPage = new NavigationPage(
 				await Singleton.Get<ViewLocator>().Lands.ShowView());
@@ -91,14 +94,15 @@ namespace Xamarin_Tutorial.ViewMdels
 		{
 			throw new NotImplementedException();
 		}
-		#endregion
+
+		#endregion Commands
 
 		#region Constructors
-		public LoginViewModel(){ }
-		#endregion
 
-		#region Method
-		
-		#endregion
+		public LoginViewModel()
+		{
+		}
+
+		#endregion Constructors
 	}
 }

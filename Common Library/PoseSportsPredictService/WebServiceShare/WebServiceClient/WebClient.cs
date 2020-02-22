@@ -1,23 +1,24 @@
 ﻿using Flurl;
 using Flurl.Http;
-using Newtonsoft.Json;
-using WebServiceShare.ServiceContext;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using PosePacket;
 using PosePacket.Header;
 using PosePacket.Proxy;
 using PosePacket.WebError;
-using PosePacket;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebServiceShare.ServiceContext;
 
 namespace WebServiceShare.WebServiceClient
 {
 	public static class WebClient
 	{
 		#region Exception Handle Delegate
+
 		public delegate Task ExceptionHandlerDelegate(Exception exception);
 
-		static ExceptionHandlerDelegate _exceptionHandler = null;
+		private static ExceptionHandlerDelegate _exceptionHandler = null;
+
 		public static ExceptionHandlerDelegate ExceptionHandler
 		{
 			get
@@ -29,7 +30,8 @@ namespace WebServiceShare.WebServiceClient
 				_exceptionHandler += value;
 			}
 		}
-		#endregion
+
+		#endregion Exception Handle Delegate
 
 		public static async Task<TOut> RequestAsync<TOut>(RequestContext requestContext)
 		{
@@ -71,7 +73,7 @@ namespace WebServiceShare.WebServiceClient
 			}
 			catch (FlurlHttpException flurlException)
 			{
-				if(requestContext.AttemptCnt < 3)
+				if (requestContext.AttemptCnt < 3)
 					result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
 				else
 					_exceptionHandler?.Invoke(flurlException);
@@ -85,6 +87,7 @@ namespace WebServiceShare.WebServiceClient
 		}
 
 		#region Utility Function
+
 		private static List<string> ConvertSegments(string segmentGroup, object data)
 		{
 			var convertedSegments = new List<string>();
@@ -142,6 +145,7 @@ namespace WebServiceShare.WebServiceClient
 
 			return result;
 		}
-		#endregion
+
+		#endregion Utility Function
 	}
 }

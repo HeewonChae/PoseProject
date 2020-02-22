@@ -1,5 +1,4 @@
-﻿
-using PosePacket.Header;
+﻿using PosePacket.Header;
 
 namespace WebServiceShare.ServiceContext
 {

@@ -7,9 +7,9 @@
              x:Class="Xamarin_Tutorial.Views.LandsPage">
 
     <NavigationPage.TitleView>
-        <Label Text="Lands" 
+        <Label Text="Lands"
                FontAttributes="Bold"
-               FontSize="Title"/>
+               FontSize="Title" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
@@ -32,37 +32,37 @@
                                 HasShadow="true"
                                 Margin="5">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SelectCountryCommand}"/>
+                                    <TapGestureRecognizer Command="{Binding SelectCountryCommand}" />
                                 </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <!--<ffimageloading:CachedImage 
+                                    <!--<ffimageloading:CachedImage
                                         Grid.Column="0"
                                         HeightRequest="30"
                                         Source="{Binding Flag, Converter={StaticResource SvgImageSourceConverter}}"
                                         WidthRequest="60">
                                     </ffimageloading:CachedImage>-->
-                                    <StackLayout 
+                                    <StackLayout
                                         Grid.Column="1"
                                         VerticalOptions="Center">
-                                        <Label 
+                                        <Label
                                             FontAttributes="Bold"
-                                            FontSize="Medium" 
+                                            FontSize="Medium"
                                             Text="{Binding Name}"
                                             TextColor="Black">
                                         </Label>
-                                        <Label 
+                                        <Label
                                             Text="{Binding Capital}"
                                             TextColor="Black">
                                         </Label>
                                     </StackLayout>
-                                    <Image 
+                                    <Image
                                         Grid.Column="2"
-                                        HorizontalOptions="End" 
+                                        HorizontalOptions="End"
                                         Source="ic_launcher">
                                     </Image>
                                 </Grid>
