@@ -38,10 +38,11 @@ namespace Xamarin_Tutorial.ViewMdels
 			if (countryInfo == null)
 				return await Task.FromResult(false);
 
+			CountryName = countryInfo.Name;
+
 			// Setting LandPage
-			if (data[1] is LandViewModel landViewModel)
+			if (data.Length > 1 && data[1] is LandViewModel landViewModel)
 			{
-				CountryName = countryInfo.Name;
 				if (!await landViewModel.PrepareView(countryInfo))
 					return await Task.FromResult(false);
 
@@ -49,9 +50,8 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 
 			// Setting CurrencyPage
-			if (data[2] is CurrencyViewModel currencyViewModel)
+			if (data.Length > 2 && data[2] is CurrencyViewModel currencyViewModel)
 			{
-				CountryName = countryInfo.Name;
 				if (!await currencyViewModel.PrepareView(countryInfo))
 					return await Task.FromResult(false);
 

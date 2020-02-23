@@ -13,9 +13,9 @@ namespace SportsWebService.Service.Contract
 	public interface IAuth
 	{
 		[OperationContract]
-		[WebInvoke(Method = "POST", UriTemplate = "GetCredentials"
+		[WebInvoke(Method = "POST", UriTemplate = "PoseToken"
 			, RequestFormat = WebMessageFormat.Json
 			, ResponseFormat = WebMessageFormat.Json)]
-		byte[] P_GetCredentials(string i_json);
+		string P_PoseToken(string i_json);
 	}
 }

@@ -47,7 +47,7 @@ namespace PosePacket
 			public const int P_Hello = WebService.HelloWorld + 0001000;
 
 			// Auth
-			public const int P_GetCredentials = WebService.Auth + 0001000;
+			public const int P_PoseToken = WebService.Auth + 0001000;
 		}
 
 		public static class Procedure

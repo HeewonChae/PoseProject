@@ -102,7 +102,7 @@
     <Compile Include="Authentication\AuthorizationPolicy.cs" />
     <Compile Include="Authentication\PosePrincipal.cs" />
     <Compile Include="Authentication\ServiceRoleType.cs" />
-    <Compile Include="Command\Auth\P_GetCredentials.cs" />
+    <Compile Include="Command\Auth\P_PoseToken.cs" />
     <Compile Include="Command\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Authentication\ServerContext.cs" />

@@ -36,3 +36,14 @@
 /Windows App/SportsAdminTool/SandBox/bin/Debug
 /Windows App/SportsAdminTool/SportsAdminTool/bin/Debug
 /Windows App/SportsAdminTool/SportsAdminTool/obj/Debug
+/Web App/Xamain_Tutorial_Server/Xamain_Tutorial_Server/obj/Debug
+/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.API/obj/Debug
+/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.API/bin
+/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.Backend/bin
+/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.Backend/obj/Debug
+/Common Library/CommonLibrary/LogicCore/bin/Release
+/Common Library/CommonLibrary/LogicCore/obj/Release
+/Common Library/PoseSportsPredictService/PosePacket/bin/Release/netstandard2.0
+/Web App/PoseSportsWebService/CodeGenerator/bin/Release
+/Web App/PoseSportsWebService/CodeGenerator/obj/Release
+/Web App/PoseSportsWebService/SportsWebService/obj/Release

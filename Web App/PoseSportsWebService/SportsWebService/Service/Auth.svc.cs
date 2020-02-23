@@ -20,11 +20,11 @@ namespace SportsWebService.Service
 	// NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
 	public class Auth : Contract.IAuth
 	{
-		public byte[] P_GetCredentials(string i_json)
+		public string P_PoseToken(string i_json)
 		{
 			var input = i_json.JsonDeserialize<string>();
 
-			return Command.Auth.P_GetCredentials.Execute(input);
+			return Command.Auth.P_PoseToken.Execute(input);
 		}
 	}
 }
