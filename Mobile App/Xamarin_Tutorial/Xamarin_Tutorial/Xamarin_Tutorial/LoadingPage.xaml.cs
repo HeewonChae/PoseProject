@@ -20,9 +20,7 @@ namespace Xamarin_Tutorial
 			using (var progress = UserDialogs.Instance.Progress("Please Wait..."))
 			{
 				var viewLocator = new ViewLocator();
-				progress.PercentComplete += 10;
 				Singleton.Register(viewLocator);
-				progress.PercentComplete += 10;
 				viewLocator.Initialize(progress);
 
 				progress.PercentComplete = 100;

@@ -23,7 +23,8 @@
                 ItemsSource="{Binding Countries}"
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
-                RefreshCommand="{Binding RefreshCommand}">
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

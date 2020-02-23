@@ -10,18 +10,20 @@ namespace Xamarin_Tutorial.InfraStructure
 
 		public LoginViewModel Login { get; set; }
 		public LandsViewModel Lands { get; set; }
+		public LandDetailViewModel LandDetail { get; set; }
 
 		#endregion ViewModels
 
 		public void Initialize(IProgressDialog progress)
 		{
 			Login = new LoginViewModel();
-			Login.SetView(new LoginPage());
-			progress.PercentComplete += 30;
+			Login.SetCoupledView(new LoginPage());
 
 			Lands = new LandsViewModel();
-			Lands.SetView(new LandsPage());
-			progress.PercentComplete += 30;
+			Lands.SetCoupledView(new LandsPage());
+
+			LandDetail = new LandDetailViewModel();
+			LandDetail.SetCoupledView(new LandDetailPage());
 		}
 	}
 }

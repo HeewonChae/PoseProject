@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
 using Xamarin_Tutorial.Services;
@@ -16,28 +15,24 @@ namespace Xamarin_Tutorial.ViewMdels
 	{
 		#region ICarryViewPage Impl
 
-		public override async Task<Page> ShowView()
+		public override async Task<bool> PrepareView(params object[] data)
 		{
-			var loadResult = await LoadCountries();
-			if (!loadResult) // 실패시 로그인 화면으로
-				return await Singleton.Get<ViewLocator>().Login.ShowView();
-
-			return _coupledView;
+			return await LoadCountries();
 		}
 
 		#endregion ICarryViewPage Impl
 
 		#region Attributes
 
-		public List<CountryItem> _countryList;
-		private ObservableCollection<CountryItem> _countries;
+		public List<LandItemViewModel> _countryList;
+		private ObservableCollection<LandItemViewModel> _countries;
 		private string _filter;
 
 		#endregion Attributes
 
 		#region Properties
 
-		public ObservableCollection<CountryItem> Countries { get => _countries; set => SetValue(ref _countries, value); }
+		public ObservableCollection<LandItemViewModel> Countries { get => _countries; set => SetValue(ref _countries, value); }
 		public string Filter { get => _filter; set => SetValue(ref _filter, value); }
 
 		#endregion Properties
@@ -68,14 +63,6 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		public ICommand SelectCountryCommand
-		{
-			get
-			{
-				return new RelayCommand(SelectCountry);
-			}
-		}
-
 		#endregion Commands
 
 		#region Commands Impl
@@ -89,18 +76,14 @@ namespace Xamarin_Tutorial.ViewMdels
 		{
 			if (string.IsNullOrEmpty(Filter))
 			{
-				Countries = new ObservableCollection<CountryItem>(_countryList);
+				Countries = new ObservableCollection<LandItemViewModel>(_countryList);
 			}
 			else
 			{
-				Countries = new ObservableCollection<CountryItem>(_countryList
-					.Where(elem => elem.Name.ToLower().Contains(Filter)));
+				Countries = new ObservableCollection<LandItemViewModel>(_countryList
+					.Where(elem => elem.Name.ToLower().Contains(Filter)
+					|| elem.Capital.ToLower().Contains(Filter)));
 			}
-		}
-
-		private void SelectCountry()
-		{
-			throw new NotImplementedException();
 		}
 
 		#endregion Commands Impl
@@ -109,7 +92,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private async Task<bool> LoadCountries()
 		{
-			_countryList = await ApiService.RequestAsync<List<CountryItem>>(
+			_countryList = await ApiService.RequestAsync<List<LandItemViewModel>>(
 				WebServiceShare.WebConfig.WebMethodType.GET,
 				"https://restcountries.eu/",
 				"rest/v2/all");
@@ -117,7 +100,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			if (_countryList == null)
 				return false;
 
-			Countries = new ObservableCollection<CountryItem>(_countryList);
+			Countries = new ObservableCollection<LandItemViewModel>(_countryList);
 
 			return true;
 		}

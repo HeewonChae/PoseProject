@@ -86,10 +86,16 @@
                          Command="{Binding RegisterCommand}">
                     </Button>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    VerticalOptions="StartAndExpand">
                     <Image
                     Source="logo_facebook"
                     WidthRequest="50">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LodingFacebookCommand}" />
+                        </Image.GestureRecognizers>
                     </Image>
                     <Image
                     Source="logo_twitter"

@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
 
 namespace Xamarin_Tutorial.ViewMdels
@@ -12,13 +11,13 @@ namespace Xamarin_Tutorial.ViewMdels
 	{
 		#region ICarryView Impl
 
-		public override async Task<Page> ShowView()
+		public override async Task<bool> PrepareView(params object[] data)
 		{
 			this.IsRemembered = true;
 			this.Email = "korman2444@gmail.com";
 			this.Password = "1234";
 
-			return await Task.FromResult(_coupledView);
+			return await Task.FromResult(true);
 		}
 
 		#endregion ICarryView Impl
@@ -78,8 +77,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 
 			// Put Lands Page
-			Application.Current.MainPage = new NavigationPage(
-				await Singleton.Get<ViewLocator>().Lands.ShowView());
+			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Lands, this.CoupledView, true);
 		}
 
 		public ICommand RegisterCommand
