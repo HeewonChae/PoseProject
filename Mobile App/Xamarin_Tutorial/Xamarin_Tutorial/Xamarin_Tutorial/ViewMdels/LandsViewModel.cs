@@ -27,6 +27,7 @@ namespace Xamarin_Tutorial.ViewMdels
 		public List<LandItemViewModel> _countryList;
 		private ObservableCollection<LandItemViewModel> _countries;
 		private string _filter;
+		private bool _isRefresh;
 
 		#endregion Attributes
 
@@ -34,6 +35,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		public ObservableCollection<LandItemViewModel> Countries { get => _countries; set => SetValue(ref _countries, value); }
 		public string Filter { get => _filter; set => SetValue(ref _filter, value); }
+		public bool IsRefresh { get => _isRefresh; set => SetValue(ref _isRefresh, value); }
 
 		#endregion Properties
 
@@ -65,7 +67,14 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private void RefreshCountries()
 		{
-			throw new NotImplementedException();
+			if (IsRefresh)
+				return;
+
+			IsRefresh = true;
+
+			Countries = new ObservableCollection<LandItemViewModel>(_countryList);
+
+			IsRefresh = false;
 		}
 
 		private void SearchCountries()

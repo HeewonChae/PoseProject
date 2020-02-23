@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
+using FFImageLoading.Forms.Platform;
 
 namespace Xamarin_Tutorial.Droid
 {
@@ -21,6 +22,7 @@ namespace Xamarin_Tutorial.Droid
 
 			Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 			global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+			CachedImageRenderer.Init(true);
 			UserDialogs.Init(this);
 
 			LoadApplication(new App());

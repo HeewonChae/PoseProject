@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Tutorial.Views.LandsPage">
 
@@ -11,6 +14,13 @@
                FontAttributes="Bold"
                FontSize="Title" />
     </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ffimageloadingsvg:SvgImageSourceConverter
+                x:Key="SvgImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout Padding="5">
@@ -24,7 +34,8 @@
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
                 RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None">
+                SeparatorVisibility="None"
+                IsRefreshing="{Binding IsRefresh, Mode=OneWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -41,12 +52,12 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <!--<ffimageloading:CachedImage
+                                    <ffimageloading:CachedImage
                                         Grid.Column="0"
                                         HeightRequest="30"
                                         Source="{Binding Flag, Converter={StaticResource SvgImageSourceConverter}}"
                                         WidthRequest="60">
-                                    </ffimageloading:CachedImage>-->
+                                    </ffimageloading:CachedImage>
                                     <StackLayout
                                         Grid.Column="1"
                                         VerticalOptions="Center">

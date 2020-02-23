@@ -12,21 +12,27 @@ namespace Xamarin_Tutorial.ViewMdels
 	{
 		#region Attributes
 
+		//private CountryItem _countryInfo;
 		private string _name;
+
 		private string _capital;
 		private double _population;
 		private double _area;
 		private string _region;
+		private string _flag;
 
 		#endregion Attributes
 
 		#region Properties
 
+		//public CountryItem CountryInfo { get => _countryInfo; set => SetValue(ref _countryInfo, value); }
 		public string Name { get => _name; set => SetValue(ref _name, value); }
+
 		public string Capital { get => _capital; set => SetValue(ref _capital, value); }
 		public double Population { get => _population; set => SetValue(ref _population, value); }
 		public double Area { get => _area; set => SetValue(ref _area, value); }
 		public string Region { get => _region; set => SetValue(ref _region, value); }
+		public string Flag { get => _flag; set => SetValue(ref _flag, value); }
 
 		#endregion Properties
 
@@ -39,11 +45,14 @@ namespace Xamarin_Tutorial.ViewMdels
 
 			if (data.First() is CountryItem countryData)
 			{
+				//CountryInfo = countryData;
+
 				Name = countryData.Name;
 				Capital = countryData.Capital;
 				Population = countryData.Population;
 				Area = countryData.Area.HasValue ? countryData.Area.Value : 0.0;
 				Region = countryData.Region;
+				Flag = countryData.Flag;
 			}
 			else
 				return Task.FromResult(false);
