@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
@@ -12,9 +9,7 @@ namespace Xamarin_Tutorial.ViewMdels
 	{
 		#region Attributes
 
-		//private CountryItem _countryInfo;
 		private string _name;
-
 		private string _capital;
 		private double _population;
 		private double _area;
@@ -25,9 +20,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		#region Properties
 
-		//public CountryItem CountryInfo { get => _countryInfo; set => SetValue(ref _countryInfo, value); }
 		public string Name { get => _name; set => SetValue(ref _name, value); }
-
 		public string Capital { get => _capital; set => SetValue(ref _capital, value); }
 		public double Population { get => _population; set => SetValue(ref _population, value); }
 		public double Area { get => _area; set => SetValue(ref _area, value); }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PosePacket.Service.HelloWorld
+﻿namespace PosePacket.Service.HelloWorld
 {
 	public class I_Hello
 	{

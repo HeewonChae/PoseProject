@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin_Tutorial.InfraStructure;
 
 namespace Xamarin_Tutorial.InfraStructure
 {

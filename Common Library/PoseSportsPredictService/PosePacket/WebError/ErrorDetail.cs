@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PosePacket.WebError
+﻿namespace PosePacket.WebError
 {
 	public class ErrorDetail
 	{

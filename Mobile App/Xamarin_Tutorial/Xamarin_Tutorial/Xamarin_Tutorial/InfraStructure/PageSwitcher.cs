@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin_Tutorial.ViewMdels;
 
 namespace Xamarin_Tutorial.InfraStructure
 {
