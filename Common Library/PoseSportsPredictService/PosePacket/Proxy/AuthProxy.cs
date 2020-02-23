@@ -18,7 +18,7 @@ namespace PosePacket.Proxy
         
         private static string _serviceUrl = "Service/Auth.svc";
         
-        private static string _P_GetCredentials = "GetCredentials";
+        private static string _P_PoseToken = "PoseToken";
         
         // Service base url
         public static string ServiceUrl
@@ -29,14 +29,14 @@ namespace PosePacket.Proxy
             }
         }
         
-        // MethodType: POST, Segment: GetCredentials 
+        // MethodType: POST, Segment: PoseToken 
         // InputType: System.String 
         // OutputType: System.Byte[]
-        public static string P_GetCredentials
+        public static string P_PoseToken
         {
             get
             {
-                return _P_GetCredentials;
+                return _P_PoseToken;
             }
         }
     }

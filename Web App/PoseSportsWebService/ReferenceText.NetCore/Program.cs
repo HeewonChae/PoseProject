@@ -16,7 +16,7 @@ using WebServiceShare.WebServiceClient;
 
 namespace ReferenceText.NetCore
 {
-	class Program
+	internal class Program
 	{
 		private static Task ExceptionHandler(Exception exception)
 		{
@@ -42,18 +42,18 @@ namespace ReferenceText.NetCore
 			});
 		}
 
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			WebConfig.ServiceBaseUrl = "http://192.168.0.157:8888/";
 
 			WebClient.ExceptionHandler = Program.ExceptionHandler;
 
-			ClientContext.eCredentials = WebClient.RequestAsync<byte[]>(new RequestContext()
+			ClientContext.SetCredentialsFrom(WebClient.RequestAsync<string>(new RequestContext()
 			{
 				MethodType = WebConfig.WebMethodType.POST,
 				ServiceUrl = AuthProxy.ServiceUrl,
-				SegmentGroup = AuthProxy.P_GetCredentials,
-			}).Result;
+				SegmentGroup = AuthProxy.P_PoseToken,
+			}).Result);
 
 			Console.ReadLine();
 		}

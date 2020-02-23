@@ -122,12 +122,12 @@ namespace WebServiceShare.WebServiceClient
 					var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
 					if (error.ErrorCode == ServiceErrorCode.Authenticate.CredentialsExpire)
 					{
-						ClientContext.eCredentials = await WebClient.RequestAsync<byte[]>(new RequestContext()
+						ClientContext.SetCredentialsFrom(await WebClient.RequestAsync<string>(new RequestContext()
 						{
 							MethodType = WebConfig.WebMethodType.POST,
 							ServiceUrl = AuthProxy.ServiceUrl,
-							SegmentGroup = AuthProxy.P_GetCredentials,
-						});
+							SegmentGroup = AuthProxy.P_PoseToken,
+						}));
 					}
 				}
 				catch (Exception)

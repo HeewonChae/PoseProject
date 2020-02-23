@@ -16,5 +16,10 @@ namespace WebServiceShare.ServiceContext
 
 			return header;
 		}
+
+		public static void SetCredentialsFrom(string token)
+		{
+			eCredentials = System.Convert.FromBase64String(token);
+		}
 	}
 }
