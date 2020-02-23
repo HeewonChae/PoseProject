@@ -63,10 +63,6 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		#endregion Commands
-
-		#region Commands Impl
-
 		private void RefreshCountries()
 		{
 			throw new NotImplementedException();
@@ -86,7 +82,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		#endregion Commands Impl
+		#endregion Commands
 
 		#region Services
 

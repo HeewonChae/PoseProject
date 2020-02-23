@@ -10,7 +10,9 @@ namespace Xamarin_Tutorial.InfraStructure
 
 		public LoginViewModel Login { get; set; }
 		public LandsViewModel Lands { get; set; }
-		public LandDetailViewModel LandDetail { get; set; }
+		public LandViewModel Land { get; set; }
+		public LandTabbedViewModel LandTabbed { get; set; }
+		public CurrencyViewModel Currency { get; set; }
 
 		#endregion ViewModels
 
@@ -22,8 +24,14 @@ namespace Xamarin_Tutorial.InfraStructure
 			Lands = new LandsViewModel();
 			Lands.SetCoupledView(new LandsPage());
 
-			LandDetail = new LandDetailViewModel();
-			LandDetail.SetCoupledView(new LandDetailPage());
+			Land = new LandViewModel();
+			Land.SetCoupledView(new LandPage());
+
+			LandTabbed = new LandTabbedViewModel();
+			LandTabbed.SetCoupledView(new LandTabbedPage());
+
+			Currency = new CurrencyViewModel();
+			Currency.SetCoupledView(new CurrencyPage());
 		}
 	}
 }

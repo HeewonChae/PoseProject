@@ -30,6 +30,9 @@
     <Compile Update="MainPage_UWP.xaml.cs">
       <DependentUpon>MainPage_UWP.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\LandPage.xaml.cs">
+      <DependentUpon>LandPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -39,13 +42,19 @@
     <EmbeddedResource Update="MainPage_UWP.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LandDetailPage.xaml">
+    <EmbeddedResource Update="Views\CurrencyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LandPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LandsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="LoadingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LandTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
@@ -55,6 +64,5 @@
 
   <ItemGroup>
     <Folder Include="Utilities\" />
-    <Folder Include="Views\Controls\" />
   </ItemGroup>
 </Project>

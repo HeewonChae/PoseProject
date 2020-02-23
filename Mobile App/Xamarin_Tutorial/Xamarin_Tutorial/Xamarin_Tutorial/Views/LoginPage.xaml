@@ -4,13 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Tutorial.Views.LoginPage">
-
-    <NavigationPage.TitleView>
-        <Label Text="Login"
-               FontAttributes="Bold"
-               FontSize="Title" />
-    </NavigationPage.TitleView>
+             x:Class="Xamarin_Tutorial.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <ScrollView>

@@ -21,15 +21,16 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		#endregion Commands
-
-		#region Commands Impl
-
 		private async void SelectCountry()
 		{
-			await PageSwitcher.PushNavPageAsync(Singleton.Get<ViewLocator>().LandDetail, null, prepareData: this);
+			await PageSwitcher.PushNavPageAsync(
+				Singleton.Get<ViewLocator>().LandTabbed,
+				null,
+				this,
+				Singleton.Get<ViewLocator>().Land,
+				Singleton.Get<ViewLocator>().Currency);
 		}
 
-		#endregion Commands Impl
+		#endregion Commands
 	}
 }
