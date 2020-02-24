@@ -15,7 +15,8 @@
     <NavigationPage.TitleView>
         <Label Text="{Binding CountryName}"
                FontAttributes="Bold"
-               FontSize="Title" />
+               FontSize="Title" 
+               TextColor="White"/>
     </NavigationPage.TitleView>
 
     <!--Pages can be added as references or inline-->

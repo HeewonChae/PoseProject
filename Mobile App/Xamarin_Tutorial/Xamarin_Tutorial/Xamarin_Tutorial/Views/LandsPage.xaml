@@ -7,13 +7,8 @@
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              mc:Ignorable="d"
-             x:Class="Xamarin_Tutorial.Views.LandsPage">
-
-    <NavigationPage.TitleView>
-        <Label Text="Lands"
-               FontAttributes="Bold"
-               FontSize="Title" />
-    </NavigationPage.TitleView>
+             x:Class="Xamarin_Tutorial.Views.LandsPage"
+             Title="Lands">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -30,6 +25,7 @@
                 SearchCommand="{Binding SearchCommand}">
             </SearchBar>
             <ListView
+                x:Name="list_country"
                 ItemsSource="{Binding Countries}"
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
@@ -44,7 +40,10 @@
                                 HasShadow="true"
                                 Margin="5">
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SelectCountryCommand}" />
+                                    <TapGestureRecognizer Command="{Binding
+                                        Path=BindingContext.SelectCountryCommand,
+                                        Source={x:Reference list_country}}"
+                                        CommandParameter="{Binding .}" />
                                 </Frame.GestureRecognizers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>

@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
+using Xamarin_Tutorial.Views;
 
 namespace Xamarin_Tutorial.ViewMdels
 {
@@ -77,7 +78,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 
 			// Put Lands Page
-			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Lands, this.CoupledView, true);
+			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
 		}
 
 		public ICommand RegisterCommand

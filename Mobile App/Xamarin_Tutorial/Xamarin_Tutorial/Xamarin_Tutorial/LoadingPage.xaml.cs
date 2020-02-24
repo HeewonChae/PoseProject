@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
 
@@ -21,7 +20,7 @@ namespace Xamarin_Tutorial
 			{
 				var viewLocator = new ViewLocator();
 				Singleton.Register(viewLocator);
-				viewLocator.Initialize(progress);
+				viewLocator.Initialize();
 
 				progress.PercentComplete = 100;
 			}

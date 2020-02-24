@@ -13,10 +13,12 @@ namespace Xamarin_Tutorial.InfraStructure
 		public LandViewModel Land { get; set; }
 		public LandTabbedViewModel LandTabbed { get; set; }
 		public CurrencyViewModel Currency { get; set; }
+		public MasterViewModel Master { get; set; }
+		public MasterMenuViewModel MasterMenu { get; set; }
 
 		#endregion ViewModels
 
-		public void Initialize(IProgressDialog progress)
+		public void Initialize()
 		{
 			Login = new LoginViewModel();
 			Login.SetCoupledView(new LoginPage());
@@ -32,6 +34,12 @@ namespace Xamarin_Tutorial.InfraStructure
 
 			Currency = new CurrencyViewModel();
 			Currency.SetCoupledView(new CurrencyPage());
+
+			Master = new MasterViewModel();
+			Master.SetCoupledView(new MasterPage());
+
+			MasterMenu = new MasterMenuViewModel();
+			MasterMenu.SetCoupledView(new MasterMenuPage());
 		}
 	}
 }

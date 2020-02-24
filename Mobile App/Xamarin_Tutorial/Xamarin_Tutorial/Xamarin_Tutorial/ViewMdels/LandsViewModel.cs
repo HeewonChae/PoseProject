@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
+using Xamarin_Tutorial.Models;
 using Xamarin_Tutorial.Services;
 
 namespace Xamarin_Tutorial.ViewMdels
@@ -22,8 +23,8 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		#region Attributes
 
-		public List<LandItemViewModel> _countryList;
-		private ObservableCollection<LandItemViewModel> _countries;
+		private List<CountryItem> _countryList;
+		private ObservableCollection<CountryItem> _countries;
 		private string _filter;
 		private bool _isRefresh;
 
@@ -31,7 +32,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		#region Properties
 
-		public ObservableCollection<LandItemViewModel> Countries { get => _countries; set => SetValue(ref _countries, value); }
+		public ObservableCollection<CountryItem> Countries { get => _countries; set => SetValue(ref _countries, value); }
 		public string Filter { get => _filter; set => SetValue(ref _filter, value); }
 		public bool IsRefresh { get => _isRefresh; set => SetValue(ref _isRefresh, value); }
 
@@ -46,6 +47,14 @@ namespace Xamarin_Tutorial.ViewMdels
 		#endregion Constructors
 
 		#region Commands
+
+		public ICommand SelectCountryCommand
+		{
+			get
+			{
+				return new RelayCommand<CountryItem>(SelectCountry);
+			}
+		}
 
 		public ICommand RefreshCommand
 		{
@@ -63,6 +72,16 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
+		private void SelectCountry(CountryItem countryItem)
+		{
+			PageSwitcher.PushNavPageAsync(
+				Singleton.Get<ViewLocator>().LandTabbed,
+				null,
+				countryItem,
+				Singleton.Get<ViewLocator>().Land,
+				Singleton.Get<ViewLocator>().Currency);
+		}
+
 		private void RefreshCountries()
 		{
 			if (IsRefresh)
@@ -70,7 +89,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 			IsRefresh = true;
 
-			Countries = new ObservableCollection<LandItemViewModel>(_countryList);
+			Countries = new ObservableCollection<CountryItem>(_countryList);
 
 			IsRefresh = false;
 		}
@@ -79,11 +98,11 @@ namespace Xamarin_Tutorial.ViewMdels
 		{
 			if (string.IsNullOrEmpty(Filter))
 			{
-				Countries = new ObservableCollection<LandItemViewModel>(_countryList);
+				Countries = new ObservableCollection<CountryItem>(_countryList);
 			}
 			else
 			{
-				Countries = new ObservableCollection<LandItemViewModel>(_countryList
+				Countries = new ObservableCollection<CountryItem>(_countryList
 					.Where(elem => elem.Name.ToLower().Contains(Filter)
 					|| elem.Capital.ToLower().Contains(Filter)));
 			}
@@ -95,7 +114,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private async Task<bool> LoadCountries()
 		{
-			_countryList = await ApiService.RequestAsync<List<LandItemViewModel>>(
+			_countryList = await ApiService.RequestAsync<List<CountryItem>>(
 				WebServiceShare.WebConfig.WebMethodType.GET,
 				"https://restcountries.eu/",
 				"rest/v2/all");
@@ -103,7 +122,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			if (_countryList == null)
 				return false;
 
-			Countries = new ObservableCollection<LandItemViewModel>(_countryList);
+			Countries = new ObservableCollection<CountryItem>(_countryList);
 
 			return true;
 		}
