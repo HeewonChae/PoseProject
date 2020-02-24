@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
 using Xamarin_Tutorial.Services;
+using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial.ViewMdels
 {

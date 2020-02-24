@@ -1,12 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
+using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial.ViewMdels
 {

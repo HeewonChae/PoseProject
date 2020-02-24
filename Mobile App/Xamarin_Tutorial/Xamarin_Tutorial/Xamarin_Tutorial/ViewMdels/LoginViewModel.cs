@@ -4,7 +4,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
-using Xamarin_Tutorial.Views;
+using Xamarin_Tutorial.Models;
+using Xamarin_Tutorial.Services;
+using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial.ViewMdels
 {
@@ -14,9 +16,27 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		public override async Task<bool> PrepareView(params object[] data)
 		{
-			this.IsRemembered = true;
-			this.Email = "korman2444@gmail.com";
-			this.Password = "1234";
+			//string isRemember = LocalStorage.Storage[StorageKey.IsAccountRemember];
+			//if (!string.IsNullOrEmpty(isRemember))
+			//	IsRemembered = bool.Parse(isRemember);
+
+			//Email = LocalStorage.Storage[StorageKey.UserEmail];
+			//Password = LocalStorage.Storage[StorageKey.UserPassword];
+
+			var user = await SQLiteService.FirstAsync<User>();
+
+			if (user != null)
+			{
+				Email = user.Email;
+				Password = user.Password;
+				IsRemembered = user.IsRemember;
+			}
+			else
+			{
+				Email = string.Empty;
+				Password = string.Empty;
+				IsRemembered = false;
+			}
 
 			return await Task.FromResult(true);
 		}
@@ -27,6 +47,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private string _email;
 		private string _password;
+		private bool _isRemember;
 
 		#endregion Attributes
 
@@ -34,7 +55,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		public string Email { get => _email; set => SetValue(ref _email, value); }
 		public string Password { get => _password; set => SetValue(ref _password, value); }
-		public bool IsRemembered { get; set; }
+		public bool IsRemembered { get => _isRemember; set => SetValue(ref _isRemember, value); }
 
 		#endregion Properties
 
@@ -75,6 +96,29 @@ namespace Xamarin_Tutorial.ViewMdels
 				Password = string.Empty;
 
 				return;
+			}
+
+			//if (this.IsRemembered)
+			//{
+			//	LocalStorage.Storage[StorageKey.IsAccountRemember] = IsRemembered.ToString();
+			//	LocalStorage.Storage[StorageKey.UserEmail] = Email;
+			//	LocalStorage.Storage[StorageKey.UserPassword] = Password;
+			//}
+			//else
+			//{
+			//	LocalStorage.Storage[StorageKey.IsAccountRemember] = false.ToString();
+			//	LocalStorage.Storage[StorageKey.UserEmail] = string.Empty;
+			//	LocalStorage.Storage[StorageKey.UserPassword] = string.Empty;
+			//}
+
+			if (IsRemembered)
+			{
+				await SQLiteService.InsertOrUpdateAsync<User>(new User()
+				{
+					Email = Email,
+					Password = Password,
+					IsRemember = IsRemembered,
+				});
 			}
 
 			// Put Lands Page

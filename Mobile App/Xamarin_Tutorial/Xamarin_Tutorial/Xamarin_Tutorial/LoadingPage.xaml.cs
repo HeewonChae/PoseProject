@@ -1,7 +1,9 @@
 ﻿using Acr.UserDialogs;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
+using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial
 {
@@ -12,18 +14,43 @@ namespace Xamarin_Tutorial
 			InitializeComponent();
 		}
 
+		private IProgressDialog progress;
+
 		public async Task AppLoadAsync()
 		{
-			await Task.Delay(1).ConfigureAwait(false);
-
-			using (var progress = UserDialogs.Instance.Progress("Please Wait..."))
+			using (progress = UserDialogs.Instance.Progress("Please Wait..."))
 			{
 				var viewLocator = new ViewLocator();
-				Singleton.Register(viewLocator);
-				viewLocator.Initialize();
+				await UpdateProgress(30);
 
-				progress.PercentComplete = 100;
+				Singleton.Register(viewLocator);
+				await UpdateProgress(30);
+
+				viewLocator.Initialize();
+				await UpdateProgress(30);
+
+				await CompleteProgress();
 			}
+
+			progress = null;
+		}
+
+		private async Task UpdateProgress(int delta)
+		{
+			if (progress == null)
+				return;
+
+			progress.PercentComplete += delta;
+			await Task.Delay(1);
+		}
+
+		private async Task CompleteProgress()
+		{
+			if (progress == null)
+				return;
+
+			progress.PercentComplete = 100;
+			await Task.Delay(1);
 		}
 	}
 }

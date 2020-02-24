@@ -43,7 +43,7 @@ namespace Xamarin_Tutorial.ViewMdels
 				Name = countryData.Name;
 				Capital = countryData.Capital;
 				Population = countryData.Population;
-				Area = countryData.Area.HasValue ? countryData.Area.Value : 0.0;
+				Area = countryData.Area ?? 0.0;
 				Region = countryData.Region;
 				Flag = countryData.Flag;
 			}

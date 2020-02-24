@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Xamarin_Tutorial.ViewMdels;
+﻿using Xamarin_Tutorial.ViewMdels;
 using Xamarin_Tutorial.Views;
 
 namespace Xamarin_Tutorial.InfraStructure
