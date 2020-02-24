@@ -13,7 +13,7 @@
             x:Class="Xamarin_Tutorial.Views.LandTabbedPage">
 
     <NavigationPage.TitleView>
-        <Label Text="{Binding Name}"
+        <Label Text="{Binding CountryName}"
                FontAttributes="Bold"
                FontSize="Title" />
     </NavigationPage.TitleView>
