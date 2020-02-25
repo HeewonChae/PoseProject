@@ -1,12 +1,7 @@
-﻿using LogicCore;
+﻿using LogicCore.Utility;
 using Pose_sports_statistics.Logic.RapidAPI;
 using Repository.Data.Redis;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 using WebFormModel = Pose_sports_statistics.Models;
 

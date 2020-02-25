@@ -1,6 +1,7 @@
 ﻿using LogicCore;
 using Pose_sports_statistics.Logic.Football;
 using Pose_sports_statistics.Logic.RapidAPI;
+using RapidAPI.Models.Football.Enums;
 using Repository.Data.Redis;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Pose_sports_statistics.Controls
 		{
 			public string BookMakerName { get; set; }
 			public float HomeOdds { get; set; }
-			public float DrawOdds { get; set; } 
+			public float DrawOdds { get; set; }
 			public float AwayOdds { get; set; }
 			public double RefundRate { get; set; }
 			public double PredictionPG_Home { get; set; }
@@ -40,11 +41,11 @@ namespace Pose_sports_statistics.Controls
 
 			List<PredictionByOdds> list_predictionByOdds = new List<PredictionByOdds>();
 
-			if(oddsInfo != null && oddsInfo.Bookmakers.Length > 0)
+			if (oddsInfo != null && oddsInfo.Bookmakers.Length > 0)
 			{
-				foreach(var bookMaker in oddsInfo.Bookmakers)
+				foreach (var bookMaker in oddsInfo.Bookmakers)
 				{
-					var MatchWinnerInfo = bookMaker.BetInfos.Where(elem => elem.LabelID == (int)BetLabelType._Match_Winner).FirstOrDefault();
+					var MatchWinnerInfo = bookMaker.BetInfos.Where(elem => elem.LabelType == OddsLabelType.Match_Winner).FirstOrDefault();
 					if (MatchWinnerInfo == null)
 						continue;
 
@@ -69,7 +70,7 @@ namespace Pose_sports_statistics.Controls
 
 						list_predictionByOdds.Add(predictionByOdds);
 					}
-					catch(Exception e)
+					catch (Exception e)
 					{
 						break;
 					}

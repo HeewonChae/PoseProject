@@ -1,4 +1,4 @@
-﻿using LogicCore;
+﻿using LogicCore.Utility;
 using Pose_sports_statistics.Logic.RapidAPI;
 using Repository.Data.Redis;
 using System;
@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using WebFormModel = Pose_sports_statistics.Models;
@@ -46,26 +44,26 @@ namespace Pose_sports_statistics.Controls
 
 		private void CreateFixtureListView()
 		{
-			if (_searchTeamIDs == null 
+			if (_searchTeamIDs == null
 				|| _searchTeamNames == null
 				|| _searchTeamIDs.Length != _searchTeamNames.Length)
 				return;
 
 			// 텝 셋팅
-			for(int i = 0; i < _searchTeamIDs.Length; i++)
+			for (int i = 0; i < _searchTeamIDs.Length; i++)
 			{
 				tabContainer.Items.Add(new MenuItem($"&nbsp{_searchTeamNames[i].ToString()}&nbsp", i.ToString()));
 			}
 
 			// set standing
 			_leagueStanding = Singleton.Get<RedisCacheManager>()
-				.Get<IList<IList<WebFormModel.FootballStanding>>>
+				.Get<IList<WebFormModel.FootballStanding>>
 				(
 					() => RequestLoader.FootballStandingsByLeagueID(_searchLeagueID),
 					RequestLoader.Locker_FootballStandingsByLeagueID,
 					DateTime.Now.AddHours(1),
 					RedisKeyMaker.FootballStandingsByLeagueID(_searchLeagueID)
-				).SelectMany(elem => elem).ToList();
+				);
 
 			// 그리드 아이템 셋팅
 			BindData(_searchTeamIDs);
@@ -187,7 +185,7 @@ namespace Pose_sports_statistics.Controls
 
 					//결과
 					string[] scores = dataItem.Score.FullTime?.Split('-');
-					if(scores != null)
+					if (scores != null)
 					{
 						if (scores.Length > 1)
 						{
@@ -316,7 +314,7 @@ namespace Pose_sports_statistics.Controls
 					else
 						e.Row.Cells[3].Text = $"&nbsp{dataItem.AwayTeam.TeamName}&nbsp";
 
-					e.Row.Cells[4].Text = $"&nbsp{(dataItem.EventDate-DateTime.Now).Days}일 후&nbsp";
+					e.Row.Cells[4].Text = $"&nbsp{(dataItem.EventDate - DateTime.Now).Days}일 후&nbsp";
 				}
 			}
 		}

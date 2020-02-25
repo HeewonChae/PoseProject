@@ -36,6 +36,15 @@
     <File Include="bin/Content/images/raon_main3.png">
       <publishTime>11/26/2019 17:05:57</publishTime>
     </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>09/27/2019 09:55:36</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>11/16/2019 03:00:22</publishTime>
+    </File>
+    <File Include="bin/GameKernel.dll">
+      <publishTime>10/25/2019 12:32:48</publishTime>
+    </File>
     <File Include="bin/ko/Microsoft.AspNet.FriendlyUrls.resources.dll">
       <publishTime>07/30/2013 17:01:50</publishTime>
     </File>
@@ -43,10 +52,10 @@
       <publishTime>02/11/2014 15:28:42</publishTime>
     </File>
     <File Include="bin/LogicCore.dll">
-      <publishTime>01/25/2020 22:05:43</publishTime>
+      <publishTime>02/25/2020 20:53:32</publishTime>
     </File>
     <File Include="bin/LogicCore.pdb">
-      <publishTime>01/25/2020 22:05:43</publishTime>
+      <publishTime>02/25/2020 20:53:32</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>07/30/2013 16:57:30</publishTime>
@@ -66,6 +75,9 @@
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>07/10/2019 15:08:40</publishTime>
+    </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>11/09/2019 00:56:44</publishTime>
     </File>
@@ -73,37 +85,37 @@
       <publishTime>04/05/2019 07:53:04</publishTime>
     </File>
     <File Include="bin/Pose_sports_statistics.dll">
-      <publishTime>01/27/2020 00:43:11</publishTime>
+      <publishTime>02/25/2020 20:53:34</publishTime>
     </File>
     <File Include="bin/Pose_sports_statistics.pdb">
-      <publishTime>01/27/2020 00:43:11</publishTime>
+      <publishTime>02/25/2020 20:53:34</publishTime>
     </File>
     <File Include="bin/RapidAPI.dll">
-      <publishTime>01/25/2020 22:05:43</publishTime>
+      <publishTime>02/25/2020 20:53:33</publishTime>
     </File>
     <File Include="bin/RapidAPI.dll.config">
-      <publishTime>11/18/2019 03:18:43</publishTime>
+      <publishTime>01/28/2020 13:49:20</publishTime>
     </File>
     <File Include="bin/RapidAPI.pdb">
-      <publishTime>01/25/2020 22:05:43</publishTime>
+      <publishTime>02/25/2020 20:53:33</publishTime>
     </File>
     <File Include="bin/Repository.Data.dll">
-      <publishTime>01/27/2020 00:10:06</publishTime>
+      <publishTime>02/25/2020 20:53:33</publishTime>
     </File>
     <File Include="bin/Repository.Data.dll.config">
       <publishTime>11/20/2019 02:35:56</publishTime>
     </File>
     <File Include="bin/Repository.Data.pdb">
-      <publishTime>01/27/2020 00:10:06</publishTime>
+      <publishTime>02/25/2020 20:53:33</publishTime>
     </File>
     <File Include="bin/Repository.dll">
-      <publishTime>01/25/2020 22:05:44</publishTime>
+      <publishTime>02/25/2020 20:53:33</publishTime>
     </File>
     <File Include="bin/Repository.dll.config">
-      <publishTime>01/13/2020 23:24:24</publishTime>
+      <publishTime>02/05/2020 15:10:19</publishTime>
     </File>
     <File Include="bin/Repository.pdb">
-      <publishTime>01/25/2020 22:05:44</publishTime>
+      <publishTime>02/25/2020 20:53:33</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>07/03/2019 21:33:36</publishTime>
@@ -250,7 +262,7 @@
       <publishTime>04/10/2019 16:43:12</publishTime>
     </File>
     <File Include="bin/System.Buffers.dll">
-      <publishTime>01/13/2020 00:27:18</publishTime>
+      <publishTime>07/19/2017 10:01:28</publishTime>
     </File>
     <File Include="bin/System.IO.Pipelines.dll">
       <publishTime>08/13/2018 22:50:14</publishTime>
@@ -259,19 +271,25 @@
       <publishTime>06/06/2018 13:29:04</publishTime>
     </File>
     <File Include="bin/System.Numerics.Vectors.dll">
-      <publishTime>01/13/2020 00:27:18</publishTime>
+      <publishTime>07/19/2017 10:01:36</publishTime>
     </File>
     <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
-      <publishTime>01/13/2020 00:27:18</publishTime>
+      <publishTime>09/18/2018 19:38:10</publishTime>
     </File>
     <File Include="bin/System.Threading.Channels.dll">
       <publishTime>05/15/2018 13:29:54</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Dataflow.dll">
+      <publishTime>11/15/2019 08:38:02</publishTime>
     </File>
     <File Include="bin/System.Threading.Tasks.Extensions.dll">
       <publishTime>06/06/2018 13:29:04</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/UnityEngine.dll">
+      <publishTime>10/29/2019 12:20:54</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -319,10 +337,10 @@
       <publishTime>11/16/2019 15:09:44</publishTime>
     </File>
     <File Include="Controls/FootballFixtureDetail.ascx">
-      <publishTime>12/23/2019 04:49:25</publishTime>
+      <publishTime>02/02/2020 09:33:38</publishTime>
     </File>
     <File Include="Controls/FootballFixtureList.ascx">
-      <publishTime>01/26/2020 22:17:50</publishTime>
+      <publishTime>02/25/2020 20:34:56</publishTime>
     </File>
     <File Include="Controls/FootballH2HFixtureList.ascx">
       <publishTime>12/23/2019 03:34:27</publishTime>
@@ -343,7 +361,7 @@
       <publishTime>12/23/2019 05:47:59</publishTime>
     </File>
     <File Include="Controls/InterestedEventList.ascx">
-      <publishTime>01/26/2020 23:57:45</publishTime>
+      <publishTime>02/25/2020 20:34:53</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>11/26/2019 17:12:39</publishTime>
@@ -487,7 +505,7 @@
       <publishTime>11/16/2019 15:09:53</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/16/2020 04:22:42</publishTime>
+      <publishTime>02/25/2020 20:53:34</publishTime>
     </File>
   </ItemGroup>
 </Project>

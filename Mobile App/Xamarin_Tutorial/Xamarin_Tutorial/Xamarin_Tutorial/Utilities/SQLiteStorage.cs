@@ -8,13 +8,22 @@ using Xamarin_Tutorial.InfraStructure;
 
 namespace Xamarin_Tutorial.Utilities
 {
+	public static class SQLiteConfig
+	{
+		public static string Path { get; set; }
+		public static string FileName { get; set; }
+	}
+
 	public class SQLiteStorage<T> : IDisposable where T : ISQLiteData, new()
 	{
 		private readonly SQLiteAsyncConnection _connection;
 
 		public SQLiteStorage()
 		{
-			_connection = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "xamarin_tutorial3.db3"));
+			if (string.IsNullOrEmpty(SQLiteConfig.Path) || string.IsNullOrEmpty(SQLiteConfig.FileName))
+				throw new ArgumentException("Invalidate SQLiteConfig Path, FileName");
+
+			_connection = new SQLiteAsyncConnection(Path.Combine(SQLiteConfig.Path, SQLiteConfig.FileName));
 			_connection.CreateTableAsync<T>().Wait();
 		}
 

@@ -1,10 +1,4 @@
-﻿using LogicCore;
-using Pose_sports_statistics.Logic;
-using RapidAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using LogicCore.Utility;
 
 namespace Pose_sports_statistics
 {

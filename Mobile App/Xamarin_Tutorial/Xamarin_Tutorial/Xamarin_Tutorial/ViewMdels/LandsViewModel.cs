@@ -73,9 +73,9 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		private void SelectCountry(CountryItem countryItem)
+		private async void SelectCountry(CountryItem countryItem)
 		{
-			PageSwitcher.PushNavPageAsync(
+			await PageSwitcher.PushNavPageAsync(
 				Singleton.Get<ViewLocator>().LandTabbed,
 				null,
 				countryItem,

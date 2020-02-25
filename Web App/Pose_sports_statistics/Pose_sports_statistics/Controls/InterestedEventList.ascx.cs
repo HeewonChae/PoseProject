@@ -1,4 +1,4 @@
-﻿using LogicCore;
+﻿using LogicCore.Utility;
 using Newtonsoft.Json;
 using Pose_sports_statistics.Logic.RapidAPI;
 using Repository.Data.Redis;
@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -75,13 +74,13 @@ namespace Pose_sports_statistics.Controls
 
 					// 리그 5위 이상 팀 Bold체
 					var leaugeStandings = Singleton.Get<RedisCacheManager>()
-					.Get<IList<IList<WebFormModel.FootballStanding>>>
+					.Get<IList<WebFormModel.FootballStanding>>
 					(
 						() => RequestLoader.FootballStandingsByLeagueID(dataItem.LeagueID),
 						RequestLoader.Locker_FootballStandingsByLeagueID,
 						DateTime.Now.AddHours(4),
 						RedisKeyMaker.FootballStandingsByLeagueID(dataItem.LeagueID)
-					).SelectMany(elem => elem);
+					);
 
 					var homeStandingInfo = leaugeStandings.Where(elem => elem.TeamID == dataItem.HomeTeam.TeamID).FirstOrDefault();
 					var awayStandingInfo = leaugeStandings.Where(elem => elem.TeamID == dataItem.AwayTeam.TeamID).FirstOrDefault();
@@ -143,7 +142,7 @@ namespace Pose_sports_statistics.Controls
 
 				// refrash
 				Page.Response.Redirect(Page.Request.Url.ToString(), true);
-				return; 
+				return;
 			}
 
 			// 관심 경기에서 제거

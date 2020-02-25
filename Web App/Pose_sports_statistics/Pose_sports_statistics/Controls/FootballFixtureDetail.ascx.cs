@@ -1,20 +1,14 @@
-﻿using LogicCore;
-using Pose_sports_statistics.Logic;
+﻿using LogicCore.Utility;
 using Pose_sports_statistics.Logic.RapidAPI;
-using RapidAPI;
 using Repository.Data.Redis;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.ModelBinding;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using WebFormModel = Pose_sports_statistics.Models;
-
 
 namespace Pose_sports_statistics.Controls
 {
@@ -63,7 +57,7 @@ namespace Pose_sports_statistics.Controls
 			int goalAgainst = 0;
 			foreach (var selectedfixture in homefixtures)
 			{
-				if (string.IsNullOrEmpty(selectedfixture.Score.FullTime) 
+				if (string.IsNullOrEmpty(selectedfixture.Score.FullTime)
 					|| selectedfixture.LeagueID != fixture.LeagueID)
 					continue;
 
@@ -81,7 +75,6 @@ namespace Pose_sports_statistics.Controls
 			}
 			fixture.HomeLateSixGoalPoints = $"{goalCnt} : {goalAgainst}";
 
-
 			// 홈팀 최근 홈3경기 득실점
 			fixtureCnt = 0;
 			goalCnt = 0;
@@ -98,7 +91,6 @@ namespace Pose_sports_statistics.Controls
 				if (fixtureCnt >= 3)
 					break;
 
-				
 				string[] scoreSplit = selectedfixture.Score.FullTime.Split('-');
 
 				goalCnt += int.Parse(scoreSplit[0]);
@@ -148,7 +140,6 @@ namespace Pose_sports_statistics.Controls
 				if (fixtureCnt >= 3)
 					break;
 
-
 				string[] scoreSplit = selectedfixture.Score.FullTime.Split('-');
 
 				goalCnt += int.Parse(scoreSplit[1]);
@@ -160,7 +151,7 @@ namespace Pose_sports_statistics.Controls
 
 			// 홈팀 회복기간
 			var homeLastFixtures = homefixtures.FirstOrDefault();
-			if(homeLastFixtures != null)
+			if (homeLastFixtures != null)
 			{
 				fixture.HomeRecoveryDays = $"{(fixture.EventDate - homeLastFixtures.EventDate).Days}일";
 			}
@@ -183,13 +174,13 @@ namespace Pose_sports_statistics.Controls
 
 				// Load data
 				var standings = Singleton.Get<RedisCacheManager>()
-				.Get<IList<IList<WebFormModel.FootballStanding>>>
+				.Get<IList<WebFormModel.FootballStanding>>
 				(
 					() => RequestLoader.FootballStandingsByLeagueID(dataItem.LeagueID),
 					RequestLoader.Locker_FootballStandingsByLeagueID,
 					DateTime.Now.AddHours(1),
 					RedisKeyMaker.FootballStandingsByLeagueID(dataItem.LeagueID)
-				).SelectMany(elem => elem);
+				);
 
 				var homeTeamStatistics = Singleton.Get<RedisCacheManager>()
 				.Get<WebFormModel.FootballTeamStatistics>
@@ -219,7 +210,7 @@ namespace Pose_sports_statistics.Controls
 					var lbl_homeRank = this.form_fixture.Row.FindControl("lbl_homeRank") as Label;
 					lbl_homeRank.Text = homeStandingInfo.Rank.ToString();
 
-					if(homeStandingInfo.Forme != null)
+					if (homeStandingInfo.Forme != null)
 					{
 						for (int i = 0; i < homeStandingInfo.Forme.Length; i++)
 						{
@@ -245,7 +236,7 @@ namespace Pose_sports_statistics.Controls
 					var lbl_awayRank = this.form_fixture.Row.FindControl("lbl_awyaRank") as Label;
 					lbl_awayRank.Text = awayStandingInfo.Rank.ToString();
 
-					if(awayStandingInfo.Forme != null)
+					if (awayStandingInfo.Forme != null)
 					{
 						for (int i = 0; i < awayStandingInfo.Forme.Length; i++)
 						{

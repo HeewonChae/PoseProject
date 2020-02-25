@@ -122,7 +122,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 
 			// Put Lands Page
-			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
+			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
 		}
 
 		public ICommand RegisterCommand

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LogicCore;
+﻿using LogicCore.Utility;
 using Repository.Data.Redis.Cache;
+using System;
+using System.Threading.Tasks;
 
 namespace Repository.Data.Redis
 {

@@ -45,18 +45,18 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		private void SelectMenu(MenuItem selectedMenu)
+		private async void SelectMenu(MenuItem selectedMenu)
 		{
 			if (selectedMenu.Page == null)
 				return;
 
 			if (selectedMenu.Title.Equals("Logout"))
 			{
-				PageSwitcher.SwitchMainPageAsync(selectedMenu.Page, isNavPage: true);
+				await PageSwitcher.SwitchMainPageAsync(selectedMenu.Page, isNavPage: true);
 			}
 			else
 			{
-				PageSwitcher.PushNavPageAsync(selectedMenu.Page);
+				await PageSwitcher.PushNavPageAsync(selectedMenu.Page);
 			}
 		}
 

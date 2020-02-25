@@ -16,7 +16,9 @@
 		{
 			await ((LoadingPage)MainPage).AppLoadAsync();
 
-			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Login, isNavPage: true);
+			await PageSwitcher.SwitchMainPageAsync(
+				Singleton.Get<ViewLocator>().Login,
+				isNavPage: true);
 		}
 
 		protected override void OnSleep()

@@ -1,17 +1,12 @@
-﻿using LogicCore;
+﻿using LogicCore.Utility;
 using Newtonsoft.Json;
-using Pose_sports_statistics.Logic;
 using Pose_sports_statistics.Logic.RapidAPI;
-using RapidAPI;
-using RapidAPI.Models.Football;
 using Repository.Data.Redis;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.ModelBinding;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using WebFormModel = Pose_sports_statistics.Models;
@@ -78,7 +73,6 @@ namespace Pose_sports_statistics.Controls
 					DateTime.Now.AddHours(4),
 					RedisKeyMaker.FootballFixturesByDate(DateTime.Now)
 				);
-
 
 			// step1. 종료된 경기는 필터링
 			IEnumerable<WebFormModel.FootballFixture> filteredByData;
@@ -147,13 +141,13 @@ namespace Pose_sports_statistics.Controls
 
 					// 리그 5위 이상 팀 Bold체
 					var leaugeStandings = Singleton.Get<RedisCacheManager>()
-					.Get<IList<IList<WebFormModel.FootballStanding>>>
+					.Get<IList<WebFormModel.FootballStanding>>
 					(
 						() => RequestLoader.FootballStandingsByLeagueID(dataItem.LeagueID),
 						RequestLoader.Locker_FootballStandingsByLeagueID,
 						DateTime.Now.AddHours(4),
 						RedisKeyMaker.FootballStandingsByLeagueID(dataItem.LeagueID)
-					).SelectMany(elem => elem);
+					);
 
 					var homeStandingInfo = leaugeStandings.Where(elem => elem.TeamID == dataItem.HomeTeam.TeamID).FirstOrDefault();
 					var awayStandingInfo = leaugeStandings.Where(elem => elem.TeamID == dataItem.AwayTeam.TeamID).FirstOrDefault();
@@ -316,7 +310,7 @@ namespace Pose_sports_statistics.Controls
 			{
 				control.ForeColor = Color.Blue;
 			}
-			 
+
 			// 실점 6골 미만
 			if (against < 6)
 			{
@@ -342,7 +336,7 @@ namespace Pose_sports_statistics.Controls
 				return;
 
 			// 관심경기에 추가하는 경우
-			if(chkbox.Checked)
+			if (chkbox.Checked)
 			{
 				// 모든 경기 가져오기
 				var fixtures = Singleton.Get<RedisCacheManager>()
@@ -382,8 +376,6 @@ namespace Pose_sports_statistics.Controls
 						new DateTime(9999, 12, 31),
 						RedisKeyMaker.FootballInterestedFixture()
 					);
-
-
 			}
 			else // 관심경기에서 제거하는 경우
 			{

@@ -1,12 +1,10 @@
-﻿using LogicCore;
+﻿using LogicCore.Utility;
 using Pose_sports_statistics.Logic.RapidAPI;
 using Repository.Data.Redis;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using WebFormModel = Pose_sports_statistics.Models;
@@ -40,13 +38,13 @@ namespace Pose_sports_statistics.Controls
 				return null;
 
 			var standings = Singleton.Get<RedisCacheManager>()
-				.Get<IList<IList<WebFormModel.FootballStanding>>>
+				.Get<IList<WebFormModel.FootballStanding>>
 				(
 					() => RequestLoader.FootballStandingsByLeagueID(_searchLeagueID),
 					RequestLoader.Locker_FootballStandingsByLeagueID,
 					DateTime.Now.AddHours(1),
 					RedisKeyMaker.FootballStandingsByLeagueID(_searchLeagueID)
-				).Where(elem => elem.Where(innerElem => innerElem.TeamID == _searchTeamIDs[0]).Count() > 0).FirstOrDefault();
+				);
 
 			return standings;
 		}
@@ -64,7 +62,7 @@ namespace Pose_sports_statistics.Controls
 						e.Row.BackColor = Color.LemonChiffon;
 					}
 
-					if(dataItem.Forme != null)
+					if (dataItem.Forme != null)
 					{
 						for (int i = 0; i < dataItem.Forme.Length; i++)
 						{

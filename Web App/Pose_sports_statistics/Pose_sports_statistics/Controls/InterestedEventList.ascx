@@ -60,7 +60,7 @@
                                             <img src="<%# Item.AwayTeam.Logo %>" height="12" width="16">
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField HeaderText ="Status" DataField="StatusShort" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center"/>
+                                    <asp:BoundField HeaderText ="Status" DataField="Status" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center"/>
                                     <asp:TemplateField HeaderText="Detail" ItemStyle-Width="50">
                                         <ItemTemplate>
                                             <a href="<%#: GetRouteUrl("FootballFixtureByID", new {FixtureID = Item.FixtureID}) %>">

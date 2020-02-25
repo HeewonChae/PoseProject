@@ -8,7 +8,7 @@ namespace Xamarin_Tutorial.Utilities
 {
 	public static class PageSwitcher
 	{
-		public static async void SwitchMainPageAsync(BaseViewModel viewModel, bool isNavPage = false, params object[] prepareData)
+		public static async Task SwitchMainPageAsync(BaseViewModel viewModel, bool isNavPage = false, params object[] prepareData)
 		{
 			if (!await viewModel.PrepareView(prepareData))
 				throw new Exception("[Fail] Prepare main page");
@@ -19,7 +19,7 @@ namespace Xamarin_Tutorial.Utilities
 				Application.Current.MainPage = viewModel.CoupledView;
 		}
 
-		public static async void PushNavPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
+		public static async Task PushNavPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
 		{
 			if (Application.Current.MainPage is MasterDetailPage masterPage)
 			{

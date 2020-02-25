@@ -1,12 +1,10 @@
-﻿using LogicCore;
+﻿using LogicCore.Utility;
 using Pose_sports_statistics.Logic.RapidAPI;
 using Repository.Data.Redis;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using WebFormModel = Pose_sports_statistics.Models;
@@ -27,7 +25,7 @@ namespace Pose_sports_statistics.Controls
 
 			CreatePlayerListView();
 
-			// databind top scorer 
+			// databind top scorer
 			gv_topScorer.DataSource = Singleton.Get<RedisCacheManager>()
 				.Get<IList<WebFormModel.FootballPlayer>>
 				(
@@ -95,7 +93,6 @@ namespace Pose_sports_statistics.Controls
 				if (homePlayers?.Count() > 0)
 				{
 					BindPlayerByLeague(ref menu_homeLeagues, ref mview_homePlayers, ref homePlayers);
-
 				}
 			}
 

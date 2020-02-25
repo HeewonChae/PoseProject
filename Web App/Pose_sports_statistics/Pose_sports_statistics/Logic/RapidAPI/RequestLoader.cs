@@ -18,7 +18,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		// 관심경기 데이터 저장용..
 		public static object Locker_FootballInterestedFixture = new object();
 
-		readonly static FootballAPI FootballAPI;
+		private static readonly FootballAPI FootballAPI;
 
 		static RequestLoader()
 		{
@@ -31,6 +31,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		}
 
 		public static object Locker_FootballFixtureByID = new object();
+
 		public static Func<int, string> FootballFixtureByID = (fixtureId) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.FootballFixturesByID
@@ -41,6 +42,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballFixturesByDate = new object();
+
 		public static Func<DateTime, string> FootballFixturesByDate = (date) =>
 		{
 			// fixtureList 얻어오기
@@ -92,13 +94,13 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 						// 정보 부족 리그는 무시
 						if (curSeasonLeague == null
 						|| !curSeasonLeague.Coverage.Odds
-						|| !curSeasonLeague.Coverage.Standings
+						//|| !curSeasonLeague.Coverage.Standings
 						//|| !curSeasonLeague.Coverage.Players
 						//|| !curSeasonLeague.Coverage.TopScorers
 						)
 							return result;
 
-						// load oddsInfo 
+						// load oddsInfo
 						//var OddsList = FootballAPI.OddsByLeagueIDAndLableID(groupingFixtures.Key, (int)BetLabelType._Match_Winner);
 
 						//if (OddsList.Count > 0)
@@ -151,27 +153,30 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballStandingsByLeagueID = new object();
+
 		public static Func<int, string> FootballStandingsByLeagueID = (leagueID) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.StandingsByLeagueID
 				, leagueID
-				, out IList<IList<WebFormModel.FootballStanding>> standings);
+				, out IList<WebFormModel.FootballStanding> standings);
 
 			return JsonConvert.SerializeObject(standings);
 		};
 
 		public static object Locker_FootballTeamStatisticsByLeagueIDAndTeamID = new object();
-		public static Func<int, int , string> FootballTeamStatisticsByLeagueIDAndTeamID = (leagueID, teamID) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.TeamStatisticsByLeagueIDAndTeamID
-				, leagueID
-				, teamID
-				, out WebFormModel.FootballTeamStatistics standings);
 
-			return JsonConvert.SerializeObject(standings);
-		};
+		public static Func<int, int, string> FootballTeamStatisticsByLeagueIDAndTeamID = (leagueID, teamID) =>
+	   {
+		   FootballAPI.RequestEx(FootballAPI.TeamStatisticsByLeagueIDAndTeamID
+			   , leagueID
+			   , teamID
+			   , out WebFormModel.FootballTeamStatistics standings);
+
+		   return JsonConvert.SerializeObject(standings);
+	   };
 
 		public static object Locker_FootballFixtureByTeamID = new object();
+
 		public static Func<int, string> FootballFixtureByTeamID = (teamID) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.TeamFixturesByTeamID
@@ -196,6 +201,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballH2HFixtureByTeamID = new object();
+
 		public static Func<int, int, string> FootballH2HFixtureByTeamID = (teamID1, teamID2) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.FootballH2HFixtureByTeamID
@@ -207,6 +213,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballSeasonsByLeagueID = new object();
+
 		public static Func<int, string> FootballSeasonsByLeagueID = (leagueID) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueID
@@ -219,6 +226,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballPlayersByTeamIDAndSeason = new object();
+
 		public static Func<int, string, string> FootballPlayersByTeamIDAndSeason = (teamID, season) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.FootballPlayersByTeamIDAndSeason
@@ -230,6 +238,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballPredictionByFixtureID = new object();
+
 		public static Func<int, string> FootballPredictionByFixtureID = (fixtureID) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.FootballPredictionByFixtureID
@@ -240,6 +249,7 @@ namespace Pose_sports_statistics.Logic.RapidAPI
 		};
 
 		public static object Locker_FootballTopScorerByLeagueID = new object();
+
 		public static Func<int, string> FootballTopScorerByLeagueID = (leagueID) =>
 		{
 			FootballAPI.RequestEx(FootballAPI.FootballTopScorerByLeagueID
