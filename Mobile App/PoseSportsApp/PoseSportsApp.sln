@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseSportsApp.UWP", "PoseSportsApp\PoseSportsApp.UWP\PoseSportsApp.UWP.csproj", "{FE958AA2-E9E4-4A96-A91E-C41092336DCB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseSportsApp.Android", "PoseSportsApp\PoseSportsApp.Android\PoseSportsApp.Android.csproj", "{933FD6BC-F758-4403-84EE-3A309E048657}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseSportsApp.iOS", "PoseSportsApp\PoseSportsApp.iOS\PoseSportsApp.iOS.csproj", "{69C49666-A466-4BAA-A2C8-186166A0F831}"
@@ -33,42 +31,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|Any CPU.Build.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|Any CPU.Deploy.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|ARM.ActiveCfg = Debug|ARM
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|ARM.Build.0 = Debug|ARM
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|ARM.Deploy.0 = Debug|ARM
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|iPhone.ActiveCfg = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|iPhone.Build.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|iPhone.Deploy.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|iPhoneSimulator.Build.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|iPhoneSimulator.Deploy.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|x64.ActiveCfg = Debug|x64
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|x64.Build.0 = Debug|x64
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|x64.Deploy.0 = Debug|x64
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|x86.ActiveCfg = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|x86.Build.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Debug|x86.Deploy.0 = Debug|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|Any CPU.ActiveCfg = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|Any CPU.Build.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|Any CPU.Deploy.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|ARM.ActiveCfg = Release|ARM
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|ARM.Build.0 = Release|ARM
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|ARM.Deploy.0 = Release|ARM
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|iPhone.ActiveCfg = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|iPhone.Build.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|iPhone.Deploy.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|iPhoneSimulator.ActiveCfg = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|iPhoneSimulator.Build.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|iPhoneSimulator.Deploy.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|x64.ActiveCfg = Release|x64
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|x64.Build.0 = Release|x64
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|x64.Deploy.0 = Release|x64
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|x86.ActiveCfg = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|x86.Build.0 = Release|x86
-		{FE958AA2-E9E4-4A96-A91E-C41092336DCB}.Release|x86.Deploy.0 = Release|x86
 		{933FD6BC-F758-4403-84EE-3A309E048657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{933FD6BC-F758-4403-84EE-3A309E048657}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{933FD6BC-F758-4403-84EE-3A309E048657}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
