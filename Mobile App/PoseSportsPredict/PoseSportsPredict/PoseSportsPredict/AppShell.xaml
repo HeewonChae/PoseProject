@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       mc:Ignorable="d"
+       xmlns:local="clr-namespace:PoseSportsPredict.Views"
+       Title="PoseSportsPredict"
+       x:Class="PoseSportsPredict.AppShell">
+
+    <!--
+        Styles and Resources
+    -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarTitleColor" Value="White" />
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <!-- Your Pages -->
+    <!--<TabBar>
+        <Tab Title="Browse" Icon="tab_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
+        </Tab>
+        <Tab Title="About" Icon="tab_about.png">
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+        </Tab>
+    </TabBar>-->
+
+    <ShellItem Title="Browse" Icon="tab_feed.png">
+        <ShellSection Icon="tab_about">
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+        </ShellSection>
+
+        <ShellSection Icon="tab_about">
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+        </ShellSection>
+
+        <local:ItemsPage IconImageSource="tab_feed"></local:ItemsPage>
+        <local:AboutPage IconImageSource="tab_about"></local:AboutPage>
+    </ShellItem>
+
+    <ShellItem Title="About" Icon="tab_about.png">
+        <ShellSection>
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+        </ShellSection>
+    </ShellItem>
+
+    <MenuItem Text="Log Out" />
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="Navy">
+                <Label Text="Flyout Header section" TextColor="White">
+                </Label>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <!--<Shell.ItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                <Frame>
+                    <Label Text="{Binding Title}">
+                    </Label>
+                </Frame>
+            </ContentView>
+        </DataTemplate>
+    </Shell.ItemTemplate>-->
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                <Grid BackgroundColor="Navy">
+                    <Label Text="Menu section" TextColor="White">
+                    </Label>
+                </Grid>
+            </ContentView>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+</Shell>

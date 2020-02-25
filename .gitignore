@@ -55,3 +55,9 @@
 /Web App/Pose_sports_statistics/Pose_sports_statistics/obj
 /Web App/Pose_sports_statistics/Repository.Data/bin
 /Web App/Pose_sports_statistics/Repository.Data/obj
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/bin/Debug/netstandard2.0
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/obj
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/obj
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/bin/Debug
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.iOS/bin/iPhoneSimulator/Debug
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.iOS/obj

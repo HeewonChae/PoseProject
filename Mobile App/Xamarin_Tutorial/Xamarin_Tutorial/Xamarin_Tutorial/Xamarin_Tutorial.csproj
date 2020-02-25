@@ -20,6 +20,7 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
@@ -79,6 +80,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utilities\Converter\" />
+    <Folder Include="Utilities\Converters\" />
+    <Folder Include="Utilities\Behaviors\" />
   </ItemGroup>
 </Project>

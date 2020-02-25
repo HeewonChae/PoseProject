@@ -12,7 +12,7 @@ namespace Xamarin_Tutorial.ViewMdels
 {
 	public class LoginViewModel : BaseViewModel
 	{
-		#region ICarryView Impl
+		#region BaseViewModel Impl
 
 		public override async Task<bool> PrepareView(params object[] data)
 		{
@@ -41,7 +41,7 @@ namespace Xamarin_Tutorial.ViewMdels
 			return await Task.FromResult(true);
 		}
 
-		#endregion ICarryView Impl
+		#endregion BaseViewModel Impl
 
 		#region Attributes
 
@@ -139,13 +139,5 @@ namespace Xamarin_Tutorial.ViewMdels
 		}
 
 		#endregion Commands
-
-		#region Constructors
-
-		public LoginViewModel()
-		{
-		}
-
-		#endregion Constructors
 	}
 }

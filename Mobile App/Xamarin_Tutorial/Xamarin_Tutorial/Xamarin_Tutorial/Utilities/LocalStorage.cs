@@ -1,4 +1,5 @@
-﻿using Plugin.Settings;
+﻿using Newtonsoft.Json;
+using Plugin.Settings;
 using Xamarin_Tutorial.InfraStructure;
 
 namespace Xamarin_Tutorial.Utilities
@@ -42,6 +43,22 @@ namespace Xamarin_Tutorial.Utilities
 					CrossSettings.Current.AddOrUpdateValue(key, value);
 				}
 			}
+		}
+
+		public T GetValueOrDefault<T>(string key)
+		{
+			string savedValue = this[key];
+			if (savedValue.Equals(_defaultValue))
+				return default;
+
+			return JsonConvert.DeserializeObject<T>(savedValue);
+		}
+
+		public void AddOrUpdateValue<T>(string key, T @value)
+		{
+			string serializeValue = JsonConvert.SerializeObject(@value);
+
+			this[key] = serializeValue;
 		}
 	}
 }

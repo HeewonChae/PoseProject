@@ -3,16 +3,6 @@ Enable-Migrations -ProjectName Repository.Mysql -ContextTypeName Repository.Mysq
 Add-Migration -Name ******** -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.FootballDBMigrations.Configuration -Verbose
 Update-database -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.FootballDBMigrations.Configuration -Verbose
 
-// Name Space
-using FootballDB = Repository.Mysql.FootballDB;
-using ResourceModel = SportsAdminTool.Model.Resource;
-using AppModel = SportsAdminTool.Model;
-using ApiModel = RapidAPI.Models;
-
-using DatabaseLogic = SportsAdminTool.Logic.Database;
-using FootballLogic = SportsAdminTool.Logic.Football;
-using ApiLogic = SportsAdminTool.Logic.WebAPI;
-
 // DB Procedure
 public class P_EXECUTE_QUERY : MysqlQuery<T_in, T_out>
 {
