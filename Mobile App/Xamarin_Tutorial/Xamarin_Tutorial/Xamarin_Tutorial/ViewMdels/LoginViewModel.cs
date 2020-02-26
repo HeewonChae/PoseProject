@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
 using Xamarin_Tutorial.Services;
+using Xamarin_Tutorial.Services.Authentication;
 using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial.ViewMdels
@@ -121,8 +122,7 @@ namespace Xamarin_Tutorial.ViewMdels
 				});
 			}
 
-			// Put Lands Page
-			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
+			PoseLoginAsync();
 		}
 
 		public ICommand RegisterCommand
@@ -135,9 +135,48 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private void Register()
 		{
-			throw new NotImplementedException();
+		}
+
+		public ICommand LoginFacebookCommand
+		{
+			get
+			{
+				return new RelayCommand(LoginFacebook);
+			}
+		}
+
+		private void LoginFacebook()
+		{
+			UserDialogs.Instance.ShowLoading();
+
+			var externOAuthService = Singleton.Get<ExternOAuthService>();
+			if (externOAuthService.IsAuthenticated)
+				PoseLoginAsync();
+			else
+				externOAuthService.OAuthLoginAsync(PosePacket.Service.Auth.SNSProvider.Facebook);
 		}
 
 		#endregion Commands
+
+		#region Methods
+
+		public async void PoseLoginAsync()
+		{
+			var externAuthUser = Singleton.Get<ExternOAuthService>().AuthenticatedUser;
+			if (externAuthUser == null)
+			{
+				// Call P_ExternLogin
+				await Task.FromResult(true);
+			}
+			else
+			{
+				// Call P_Login
+				await Task.FromResult(true);
+			}
+
+			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
+		}
+
+		#endregion Methods
 	}
 }

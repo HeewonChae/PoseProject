@@ -17,7 +17,7 @@ namespace Xamarin_Tutorial.InfraStructure
 
 		#endregion ViewModels
 
-		public void Initialize()
+		public ViewLocator()
 		{
 			Login = new LoginViewModel();
 			Login.SetCoupledView(new LoginPage());

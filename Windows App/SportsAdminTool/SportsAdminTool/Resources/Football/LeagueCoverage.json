@@ -3127,7 +3127,7 @@
       "LeagueName": "CAF Champions League",
       "LeagueType": "Cup",
       "Country": "World",
-      "IsCoverage": false
+      "IsCoverage": true
     },
     {
       "Index": 448,
@@ -3204,7 +3204,7 @@
       "LeagueName": "Europa League",
       "LeagueType": "Cup",
       "Country": "World",
-      "IsCoverage": false
+      "IsCoverage": true
     },
     {
       "Index": 459,

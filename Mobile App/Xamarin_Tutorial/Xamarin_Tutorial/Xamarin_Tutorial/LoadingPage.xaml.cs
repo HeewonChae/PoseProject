@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_Tutorial.InfraStructure;
+using Xamarin_Tutorial.Services.Authentication;
 using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial
@@ -21,17 +22,18 @@ namespace Xamarin_Tutorial
 		{
 			using (progress = UserDialogs.Instance.Progress("Please Wait..."))
 			{
+				// Register Singleton
+				Singleton.Register<ViewLocator>();
+				Singleton.Register<ExternOAuthService>();
+				await UpdateProgress(20);
+
 				// SQLite Config
 				SQLiteConfig.Path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 				SQLiteConfig.FileName = "xamarin_tutorial3.db3";
 				await UpdateProgress(10);
 
-				// View Locator
-				var viewLocator = new ViewLocator();
-				await UpdateProgress(30);
-				Singleton.Register(viewLocator);
-				await UpdateProgress(30);
-				viewLocator.Initialize();
+				// Check Extern Auth
+				await Singleton.Get<ExternOAuthService>().IsAuthenticatedAndValid();
 				await UpdateProgress(30);
 
 				await CompleteProgress();

@@ -45,7 +45,7 @@ namespace Xamarin_Tutorial.Services
 
 		#endregion Exception Handler
 
-		public static async Task<TOut> RequestAsync<TOut>(WebConfig.WebMethodType methodType, string serviceUrl, string segmentGroup, object data = null)
+		public static async Task<TOut> RequestAsync<TOut>(RequestContext reqContext, bool isIndicateLoading = true, bool isIncludePoseHeader = true)
 		{
 			TOut result = default;
 
@@ -55,21 +55,22 @@ namespace Xamarin_Tutorial.Services
 				return result;
 			}
 
-			using (UserDialogs.Instance.Loading())
+			if (isIndicateLoading)
 			{
-				result = await WebClient.RequestAsync<TOut>(new RequestContext()
+				using (UserDialogs.Instance.Loading())
 				{
-					MethodType = methodType,
-					ServiceUrl = serviceUrl,
-					SegmentGroup = segmentGroup,
-					InputData = data,
-				});
+					result = await WebClient.RequestAsync<TOut>(reqContext, isIncludePoseHeader);
+				}
+			}
+			else
+			{
+				result = await WebClient.RequestAsync<TOut>(reqContext, isIncludePoseHeader);
 			}
 
 			return result;
 		}
 
-		private static bool CheckInternetConnected()
+		public static bool CheckInternetConnected()
 		{
 			if (!CrossConnectivity.Current.IsConnected)
 				return false;

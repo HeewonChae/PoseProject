@@ -8,6 +8,6 @@
 			POST,
 		}
 
-		public static string ServiceBaseUrl { get; set; }
+		public static string ServiceBaseUrl { get; set; } = string.Empty;
 	}
 }

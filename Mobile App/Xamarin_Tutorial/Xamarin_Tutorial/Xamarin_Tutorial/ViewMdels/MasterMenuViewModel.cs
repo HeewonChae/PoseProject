@@ -1,10 +1,12 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin_Tutorial.InfraStructure;
 using Xamarin_Tutorial.Models;
+using Xamarin_Tutorial.Services.Authentication;
 using Xamarin_Tutorial.Utilities;
 
 namespace Xamarin_Tutorial.ViewMdels
@@ -15,7 +17,17 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		public override Task<bool> PrepareView(params object[] data)
 		{
-			Menus = new ObservableCollection<MenuItem>(_menuList);
+			if (Menus == null)
+			{
+				_menuList = new List<MenuItem>()
+				{
+					new MenuItem(){ Icon= "ic_setting", Title= "Setting", Action= null,},
+					new MenuItem(){ Icon= "ic_chart", Title= "Statistics", Action = null,},
+					new MenuItem(){ Icon= "ic_exit", Title= "Logout", Action = this.LogoutAction, },
+				};
+
+				Menus = new ObservableCollection<MenuItem>(_menuList);
+			}
 
 			return Task.FromResult(true);
 		}
@@ -24,7 +36,7 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		#region Attributes
 
-		private readonly List<MenuItem> _menuList;
+		private List<MenuItem> _menuList;
 		private ObservableCollection<MenuItem> _menus;
 
 		#endregion Attributes
@@ -45,35 +57,22 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		private async void SelectMenu(MenuItem selectedMenu)
+		private void SelectMenu(MenuItem selectedMenu)
 		{
-			if (selectedMenu.Page == null)
-				return;
-
-			if (selectedMenu.Title.Equals("Logout"))
-			{
-				await PageSwitcher.SwitchMainPageAsync(selectedMenu.Page, isNavPage: true);
-			}
-			else
-			{
-				await PageSwitcher.PushNavPageAsync(selectedMenu.Page);
-			}
+			selectedMenu.Action?.Invoke();
 		}
 
 		#endregion Commands
 
-		#region Constructor
+		#region Actions
 
-		public MasterMenuViewModel()
+		public Action LogoutAction = () =>
 		{
-			_menuList = new List<MenuItem>()
-			{
-				new MenuItem(){ Icon= "ic_setting", Title= "Setting", Page= null,},
-				new MenuItem(){ Icon= "ic_chart", Title= "Statistics", Page = null,},
-				new MenuItem(){ Icon= "ic_exit", Title= "Logout", Page= Singleton.Get<ViewLocator>().Login,},
-			};
-		}
+			Singleton.Get<ExternOAuthService>().Logout();
 
-		#endregion Constructor
+			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Login, true);
+		};
+
+		#endregion Actions
 	}
 }

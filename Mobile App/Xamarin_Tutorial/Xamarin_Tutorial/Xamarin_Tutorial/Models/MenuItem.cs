@@ -9,6 +9,6 @@ namespace Xamarin_Tutorial.Models
 	{
 		public string Icon { get; set; }
 		public string Title { get; set; }
-		public BaseViewModel Page { get; set; }
+		public Action Action { get; set; }
 	}
 }

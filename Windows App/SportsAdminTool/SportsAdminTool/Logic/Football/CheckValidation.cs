@@ -26,6 +26,7 @@ namespace SportsAdminTool.Logic.Football
 		NULL,
 		_MAX_,
 	}
+
 	public struct InvalidTeam
 	{
 		public short TeamsID;
@@ -33,6 +34,7 @@ namespace SportsAdminTool.Logic.Football
 		public string CountryName;
 		public int ReasonType;
 	}
+
 	public struct InvalidLeague
 	{
 		public short LeagueID;
@@ -48,9 +50,10 @@ namespace SportsAdminTool.Logic.Football
 		private readonly List<InvalidTeam> _invalidTeams = new List<InvalidTeam>();
 
 		#region Check validation
+
 		public bool IsValidLeague(short leagueID, string leagueName, string countryName, bool isDB_check)
 		{
-			if(leagueID == 0)
+			if (leagueID == 0)
 			{
 				AddInvalidLeague(new InvalidLeague()
 				{
@@ -82,7 +85,6 @@ namespace SportsAdminTool.Logic.Football
 			{
 				result = ResourceModel.Football.LeagueCoverage.Dic_leagueCoverage[key].IsCoverage;
 			}
-
 
 			bool db_result = true;
 			if (isDB_check)
@@ -116,13 +118,11 @@ namespace SportsAdminTool.Logic.Football
 			if (convertedteamID != 0)
 				teamID = convertedteamID;
 
-
-
 			bool result = teamID != 0;
 
 			if (!result)
 			{
-				AddInvalidTeam(new InvalidTeam() 
+				AddInvalidTeam(new InvalidTeam()
 				{
 					TeamsID = teamID,
 					TeamName = teamName,
@@ -131,12 +131,12 @@ namespace SportsAdminTool.Logic.Football
 				});
 			}
 
-			if(result && isDB_check)
+			if (result && isDB_check)
 			{
 				result = DatabaseLogic.FootballFacade.SelectTeams(new FootballDB.Procedures.P_SELECT_TEAMS.Input()
-					{
-						Where = $"id = {teamID}",
-					})
+				{
+					Where = $"id = {teamID}",
+				})
 					.FirstOrDefault() != null;
 
 				if (!result)
@@ -154,7 +154,7 @@ namespace SportsAdminTool.Logic.Football
 			return result;
 		}
 
-		public bool IsValidStandings(IList<AppModel.Football.Standing>standings,
+		public bool IsValidStandings(IList<AppModel.Football.Standing> standings,
 			short leagueID, string leagueName, string countryName, bool checkExistLeagueInDB)
 		{
 			if (standings.Count == 0)
@@ -177,7 +177,7 @@ namespace SportsAdminTool.Logic.Football
 						})
 						.FirstOrDefault() != null;
 
-				if(!result)
+				if (!result)
 				{
 					AddInvalidLeague(new InvalidLeague()
 					{
@@ -222,14 +222,16 @@ namespace SportsAdminTool.Logic.Football
 
 			return false;
 		}
-		#endregion
 
+		#endregion Check validation
 
 		#region Add data
+
 		private readonly object _lockObject = new object();
+
 		private void AddInvalidLeague(InvalidLeague invalidLeague)
 		{
-			lock(_lockObject)
+			lock (_lockObject)
 			{
 				// TODO: Log
 				_invalidLeauges.Add(invalidLeague);
@@ -243,7 +245,6 @@ namespace SportsAdminTool.Logic.Football
 
 		private void AddInvalidTeam(InvalidTeam invalidTeam)
 		{
-
 			lock (_lockObject)
 			{
 				// TODO: Log
@@ -256,16 +257,18 @@ namespace SportsAdminTool.Logic.Football
 								, ConsoleColor.Red);
 			}
 		}
-		#endregion
+
+		#endregion Add data
 
 		#region GetError
+
 		public InvalidLeague[] GetErrorLeauges(InvalidType invalidType, bool isRemove)
 		{
 			lock (_lockObject)
 			{
 				var result = _invalidLeauges.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
-				
-				if(isRemove)
+
+				if (isRemove)
 				{
 					foreach (var data in result)
 					{
@@ -299,11 +302,12 @@ namespace SportsAdminTool.Logic.Football
 		{
 			return GetErrorLeauges(invalidType, false).Length > 0 || GetErrorTeams(invalidType, false).Length > 0;
 		}
-		#endregion
+
+		#endregion GetError
 
 		public void OutputErrorToJsonFile()
 		{
-			lock(_lockObject)
+			lock (_lockObject)
 			{
 				if (_invalidLeauges.Count > 0)
 				{

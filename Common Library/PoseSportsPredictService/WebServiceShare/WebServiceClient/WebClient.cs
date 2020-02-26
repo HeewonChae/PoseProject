@@ -33,20 +33,26 @@ namespace WebServiceShare.WebServiceClient
 
 		#endregion Exception Handle Delegate
 
-		public static async Task<TOut> RequestAsync<TOut>(RequestContext requestContext)
+		public static async Task<TOut> RequestAsync<TOut>(RequestContext requestContext, bool isIncludePoseHeader = true)
 		{
 			PoseHeader serviceHeader = new PoseHeader();
 			ClientContext.CopyTo(serviceHeader);
 
 			var endPointAddr = new Url(WebConfig.ServiceBaseUrl).AppendPathSegment(requestContext.ServiceUrl);
+			var flurlClient = new FlurlClient(endPointAddr);
+			if (isIncludePoseHeader)
+				flurlClient.WithHeader(PoseHeader.HEADER_NAME, serviceHeader);
+
 			var flurlReqeust = new FlurlClient(endPointAddr)
-				.WithHeader(PoseHeader.HEADER_NAME, serviceHeader)
 				.Request();
 
-			var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.InputData);
-			foreach (var convertedSegment in convertedSegments)
+			var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
+			flurlReqeust.AppendPathSegments(convertedSegments);
+
+			List<(string, string)> convertedParams = ConvertQueryParams(requestContext.QueryParamGroup, requestContext.QueryParamData);
+			foreach (var (name, value) in convertedParams)
 			{
-				flurlReqeust.AppendPathSegment(convertedSegment);
+				flurlReqeust.SetQueryParam(name, value);
 			}
 
 			return await SendAsync<TOut>(flurlReqeust, requestContext);
@@ -67,7 +73,7 @@ namespace WebServiceShare.WebServiceClient
 				else if (requestContext.MethodType == WebConfig.WebMethodType.POST)
 				{
 					result = await flurlRequest
-						.PostJsonAsync(requestContext.InputDataJsonSerialize())
+						.PostJsonAsync(requestContext.PostDataJsonSerialize())
 						.ReceiveJson<TOut>();
 				}
 			}
@@ -91,6 +97,10 @@ namespace WebServiceShare.WebServiceClient
 		private static List<string> ConvertSegments(string segmentGroup, object data)
 		{
 			var convertedSegments = new List<string>();
+
+			if (string.IsNullOrEmpty(segmentGroup))
+				return convertedSegments;
+
 			var segments = segmentGroup.Split('/');
 
 			foreach (var segment in segments)
@@ -107,6 +117,36 @@ namespace WebServiceShare.WebServiceClient
 			}
 
 			return convertedSegments;
+		}
+
+		private static List<(string name, string value)> ConvertQueryParams(string queryParamsGroup, object data)
+		{
+			var convertedParams = new List<(string name, string value)>();
+
+			if (string.IsNullOrEmpty(queryParamsGroup))
+				return convertedParams;
+
+			var queryParams = queryParamsGroup.Split('&');
+
+			foreach (var queryParam in queryParams)
+			{
+				var splitParam = queryParam.Split('=');
+				if (splitParam.Length != 2)
+					continue;
+
+				string queryName = splitParam[0];
+				string queryData = splitParam[1];
+
+				if (queryData.StartsWith("{"))
+				{
+					var propertyName = String.Join("", queryData.Split('{', '}'));
+					queryData = (string)data.GetType().GetProperty(propertyName).GetValue(data, null);
+				}
+
+				convertedParams.Add((queryName, queryData));
+			}
+
+			return convertedParams;
 		}
 
 		private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, RequestContext requestContext)

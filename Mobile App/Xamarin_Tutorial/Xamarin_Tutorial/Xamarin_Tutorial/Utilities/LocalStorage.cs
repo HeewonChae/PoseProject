@@ -9,6 +9,7 @@ namespace Xamarin_Tutorial.Utilities
 		public static string UserEmail = "UserEmail";
 		public static string UserPassword = "UserPassword";
 		public static string IsAccountRemember = "IsAccountRemember";
+		public static string ExternAuthUserInfo = "ExternAuthUserInfo";
 	}
 
 	public class LocalStorage
@@ -59,6 +60,11 @@ namespace Xamarin_Tutorial.Utilities
 			string serializeValue = JsonConvert.SerializeObject(@value);
 
 			this[key] = serializeValue;
+		}
+
+		public void Remove(string key)
+		{
+			this[key] = _defaultValue;
 		}
 	}
 }

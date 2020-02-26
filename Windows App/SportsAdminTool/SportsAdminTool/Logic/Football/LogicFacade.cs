@@ -12,6 +12,7 @@ using FootballDB = Repository.Mysql.FootballDB;
 using AppModel = SportsAdminTool.Model;
 using ApiModel = RapidAPI.Models;
 using System.Windows.Controls;
+using SportsAdminTool.Model.Resource.Football;
 
 namespace SportsAdminTool.Logic.Football
 {
@@ -296,7 +297,7 @@ namespace SportsAdminTool.Logic.Football
 
 				int fixtureCnt = db_fixtures.Count();
 				int loop = 0;
-				foreach(var db_fixture in db_fixtures)
+				foreach (var db_fixture in db_fixtures)
 				{
 					loop++;
 					mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Predict fixtrues ({loop}/{fixtureCnt})");
@@ -334,7 +335,7 @@ namespace SportsAdminTool.Logic.Football
 				{
 					Where = $"is_completed = 0 AND event_date < '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}'",
 				});
-				 
+
 				int fixtureCnt = db_fixtures.Count();
 				int loop = 0;
 				foreach (var db_fixture in db_fixtures)
@@ -389,7 +390,7 @@ namespace SportsAdminTool.Logic.Football
 			if (Database.FootballFacade.IsAlreadyUpdatedStandings(leagueID))
 				return true;
 
-			// Check league type  
+			// Check league type
 			var api_league = Database.FootballFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
 			{
 				Where = $"id = {leagueID}",
@@ -400,7 +401,7 @@ namespace SportsAdminTool.Logic.Football
 
 			// Call API
 			var api_standings = Singleton.Get<ApiLogic.FootballWebAPI>().GetStandingsByLeagueID(leagueID);
-			
+
 			// Check Standings validation
 			if (!Singleton.Get<CheckValidation>().IsValidStandings(api_standings, leagueID, leagueName, countryName, true))
 				return false;
@@ -468,7 +469,7 @@ namespace SportsAdminTool.Logic.Football
 					var api_team = Singleton.Get<ApiLogic.FootballWebAPI>().GetTeamByTeamID(errorTeam.TeamsID);
 
 					// DB Save
-					if(api_team != null)
+					if (api_team != null)
 						Database.FootballFacade.UpdateTeam(api_team);
 				}
 

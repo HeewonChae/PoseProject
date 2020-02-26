@@ -16,12 +16,16 @@ namespace SportsAdminTool.Model.Resource.Football
 	{
 		public readonly int Index = 0; // 리그 인덱스랑 상관없는 그냥 테이블 인덱스
 		public readonly string LeagueName = string.Empty;
+
 		[JsonConverter(typeof(StringEnumConverter))]
 		public readonly LeagueType LeagueType = LeagueType._NONE_;
+
 		public readonly string Country = string.Empty;
 		public readonly bool IsCoverage = false;
 
-		public LeagueCoverage() { }
+		public LeagueCoverage()
+		{
+		}
 
 		public LeagueCoverage(int index, string leaugeName, LeagueType leagueType, string country, bool isCoverage)
 		{
@@ -32,7 +36,7 @@ namespace SportsAdminTool.Model.Resource.Football
 			IsCoverage = isCoverage;
 		}
 
-		public static  Dictionary<string, LeagueCoverage> Dic_leagueCoverage { get; } = new Dictionary<string, LeagueCoverage>();
+		public static Dictionary<string, LeagueCoverage> Dic_leagueCoverage { get; } = new Dictionary<string, LeagueCoverage>();
 
 		void TableParser.IPostLoading.Process()
 		{
@@ -47,6 +51,18 @@ namespace SportsAdminTool.Model.Resource.Football
 		public static string MakeLeagueCoverageKey(string leaugeName, string country)
 		{
 			return $"{leaugeName}:{country}";
+		}
+
+		public static LeagueCoverage FindLeauge(string leaugeName, string country)
+		{
+			var key = MakeLeagueCoverageKey(leaugeName, country);
+
+			if (Dic_leagueCoverage.ContainsKey(key))
+			{
+				return Dic_leagueCoverage[key];
+			}
+
+			return null;
 		}
 	}
 }

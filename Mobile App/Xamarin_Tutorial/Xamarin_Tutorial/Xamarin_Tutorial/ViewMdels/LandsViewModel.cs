@@ -39,14 +39,6 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		#endregion Properties
 
-		#region Constructors
-
-		public LandsViewModel()
-		{
-		}
-
-		#endregion Constructors
-
 		#region Commands
 
 		public ICommand SelectCountryCommand
@@ -73,9 +65,9 @@ namespace Xamarin_Tutorial.ViewMdels
 			}
 		}
 
-		private async void SelectCountry(CountryItem countryItem)
+		private void SelectCountry(CountryItem countryItem)
 		{
-			await PageSwitcher.PushNavPageAsync(
+			PageSwitcher.PushNavPageAsync(
 				Singleton.Get<ViewLocator>().LandTabbed,
 				null,
 				countryItem,
@@ -115,10 +107,11 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		private async Task<bool> LoadCountries()
 		{
-			_countryList = await ApiService.RequestAsync<List<CountryItem>>(
-				WebServiceShare.WebConfig.WebMethodType.GET,
-				"https://restcountries.eu/",
-				"rest/v2/all");
+			_countryList = await ApiService.RequestAsync<List<CountryItem>>(new WebServiceShare.ServiceContext.RequestContext()
+			{
+				MethodType = WebServiceShare.WebConfig.WebMethodType.GET,
+				ServiceUrl = "https://restcountries.eu/rest/v2/all"
+			});
 
 			if (_countryList == null)
 				return false;

@@ -1,4 +1,5 @@
-﻿using FFImageLoading.Forms.Platform;
+﻿using Acr.UserDialogs;
+using FFImageLoading.Forms.Platform;
 using Foundation;
 using UIKit;
 
@@ -20,7 +21,10 @@ namespace Xamarin_Tutorial.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
+			global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+
 			CachedImageRenderer.Init();
+
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);
