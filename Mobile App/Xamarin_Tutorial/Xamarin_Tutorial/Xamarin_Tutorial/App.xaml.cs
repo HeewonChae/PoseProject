@@ -1,5 +1,6 @@
 ﻿namespace Xamarin_Tutorial
 {
+	using Plugin.LocalNotification;
 	using Xamarin.Forms;
 	using Xamarin_Tutorial.InfraStructure;
 	using Xamarin_Tutorial.Utilities;
@@ -9,6 +10,9 @@
 		public App()
 		{
 			InitializeComponent();
+
+			NotificationCenter.Current.NotificationTapped += LoadPageFromNotification;
+
 			MainPage = new LoadingPage();
 		}
 
@@ -16,7 +20,7 @@
 		{
 			await ((LoadingPage)MainPage).AppLoadAsync();
 
-			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Login, true);
+			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Login, true);
 		}
 
 		protected override void OnSleep()
@@ -24,6 +28,10 @@
 		}
 
 		protected override void OnResume()
+		{
+		}
+
+		private void LoadPageFromNotification(NotificationTappedEventArgs e)
 		{
 		}
 	}

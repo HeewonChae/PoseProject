@@ -11,16 +11,16 @@ namespace Xamarin_Tutorial
 {
 	public partial class LoadingPage : ContentPage
 	{
+		private IProgressDialog Progress { get; set; }
+
 		public LoadingPage()
 		{
 			InitializeComponent();
 		}
 
-		private IProgressDialog progress;
-
 		public async Task AppLoadAsync()
 		{
-			using (progress = UserDialogs.Instance.Progress("Please Wait..."))
+			using (Progress = UserDialogs.Instance.Progress("Please Wait..."))
 			{
 				// Register Singleton
 				Singleton.Register<ViewLocator>();
@@ -29,8 +29,8 @@ namespace Xamarin_Tutorial
 
 				// SQLite Config
 				SQLiteConfig.Path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-				SQLiteConfig.FileName = "xamarin_tutorial3.db3";
-				await UpdateProgress(10);
+				SQLiteConfig.FileName = "xamarin_tutorial4.db3";
+				await UpdateProgress(20);
 
 				// Check Extern Auth
 				await Singleton.Get<ExternOAuthService>().IsAuthenticatedAndValid();
@@ -39,24 +39,24 @@ namespace Xamarin_Tutorial
 				await CompleteProgress();
 			}
 
-			progress = null;
+			Progress = null;
 		}
 
 		private async Task UpdateProgress(int delta)
 		{
-			if (progress == null)
+			if (Progress == null)
 				return;
 
-			progress.PercentComplete += delta;
+			Progress.PercentComplete += delta;
 			await Task.Delay(1);
 		}
 
 		private async Task CompleteProgress()
 		{
-			if (progress == null)
+			if (Progress == null)
 				return;
 
-			progress.PercentComplete = 100;
+			Progress.PercentComplete = 100;
 			await Task.Delay(1);
 		}
 	}

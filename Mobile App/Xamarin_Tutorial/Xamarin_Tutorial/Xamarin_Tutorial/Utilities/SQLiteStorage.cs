@@ -69,7 +69,7 @@ namespace Xamarin_Tutorial.Utilities
 
 		public async Task<T> SelectAsync(int pk)
 		{
-			return await _connection.Table<T>().Where(m => m.ID == pk).FirstOrDefaultAsync();
+			return await _connection.Table<T>().Where(m => m.Id == pk).FirstOrDefaultAsync();
 		}
 
 		public void Dispose()

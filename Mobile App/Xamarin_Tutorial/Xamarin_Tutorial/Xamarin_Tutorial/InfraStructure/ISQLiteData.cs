@@ -7,6 +7,6 @@ namespace Xamarin_Tutorial.InfraStructure
 {
 	public interface ISQLiteData
 	{
-		int ID { get; set; }
+		int Id { get; set; }
 	}
 }

@@ -66,11 +66,11 @@ namespace Xamarin_Tutorial.ViewMdels
 
 		#region Actions
 
-		public Action LogoutAction = () =>
+		public Action LogoutAction = async () =>
 		{
 			Singleton.Get<ExternOAuthService>().Logout();
 
-			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Login, true);
+			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Login, true);
 		};
 
 		#endregion Actions

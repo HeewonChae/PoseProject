@@ -174,7 +174,9 @@ namespace Xamarin_Tutorial.ViewMdels
 				await Task.FromResult(true);
 			}
 
-			PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
+			await PageSwitcher.SwitchMainPageAsync(Singleton.Get<ViewLocator>().Master);
+
+			UserDialogs.Instance.HideLoading();
 		}
 
 		#endregion Methods

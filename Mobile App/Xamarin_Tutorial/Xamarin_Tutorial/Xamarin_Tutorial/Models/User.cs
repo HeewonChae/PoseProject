@@ -9,7 +9,7 @@ namespace Xamarin_Tutorial.Models
 	public class User : ISQLiteData
 	{
 		[PrimaryKey]
-		public int ID { get; set; } = 1;
+		public int Id { get; set; } = 1;
 
 		public string Email { get; set; }
 

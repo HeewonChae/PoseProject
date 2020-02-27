@@ -29,7 +29,7 @@ namespace Xamarin_Tutorial.Services
 			{
 				using (var con = new SQLiteStorage<T>())
 				{
-					var foundRecord = await con.SelectAsync(model.ID);
+					var foundRecord = await con.SelectAsync(model.Id);
 					if (foundRecord != null)
 					{
 						await con.UpdateAsync(model);
