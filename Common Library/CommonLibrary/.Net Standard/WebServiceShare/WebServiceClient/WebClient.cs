@@ -33,12 +33,12 @@ namespace WebServiceShare.WebServiceClient
 
 		#endregion Exception Handle Delegate
 
-		public static async Task<TOut> RequestAsync<TOut>(RequestContext requestContext, bool isIncludePoseHeader = true)
+		public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, bool isIncludePoseHeader = true)
 		{
 			PoseHeader serviceHeader = new PoseHeader();
 			ClientContext.CopyTo(serviceHeader);
 
-			var endPointAddr = new Url(WebConfig.ServiceBaseUrl).AppendPathSegment(requestContext.ServiceUrl);
+			var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.BaseUrl ?? "");
 			var flurlClient = new FlurlClient(endPointAddr);
 			if (isIncludePoseHeader)
 				flurlClient.WithHeader(PoseHeader.HEADER_NAME, serviceHeader);
@@ -58,19 +58,19 @@ namespace WebServiceShare.WebServiceClient
 			return await SendAsync<TOut>(flurlReqeust, requestContext);
 		}
 
-		private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, RequestContext requestContext)
+		private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
 		{
 			TOut result = default;
 			try
 			{
 				requestContext.AttemptCnt++;
 
-				if (requestContext.MethodType == WebConfig.WebMethodType.GET)
+				if (requestContext.MethodType == WebMethodType.GET)
 				{
 					result = await flurlRequest
 						.GetJsonAsync<TOut>();
 				}
-				else if (requestContext.MethodType == WebConfig.WebMethodType.POST)
+				else if (requestContext.MethodType == WebMethodType.POST)
 				{
 					result = await flurlRequest
 						.PostJsonAsync(requestContext.PostDataJsonSerialize())
@@ -149,33 +149,33 @@ namespace WebServiceShare.WebServiceClient
 			return convertedParams;
 		}
 
-		private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, RequestContext requestContext)
+		private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, WebRequestContext requestContext)
 		{
 			TOut result = default;
 
 			// 인증토큰 리프레쉬
-			if (flurlException.Call.Response != null
-				&& flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
-			{
-				try
-				{
-					var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
-					if (error.ErrorCode == ServiceErrorCode.Authenticate.CredentialsExpire)
-					{
-						ClientContext.SetCredentialsFrom(await WebClient.RequestAsync<string>(new RequestContext()
-						{
-							MethodType = WebConfig.WebMethodType.POST,
-							ServiceUrl = AuthProxy.ServiceUrl,
-							SegmentGroup = AuthProxy.P_PoseToken,
-						}));
-					}
-				}
-				catch (Exception)
-				{
-					_exceptionHandler?.Invoke(flurlException);
-					return result;
-				}
-			}
+			//if (flurlException.Call.Response != null
+			//	&& flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+			//{
+			//	try
+			//	{
+			//		var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
+			//		if (error.ErrorCode == ServiceErrorCode.Authenticate.CredentialsExpire)
+			//		{
+			//			ClientContext.SetCredentialsFrom(await WebClient.RequestAsync<string>(new RequestContext()
+			//			{
+			//				MethodType = WebConfig.WebMethodType.POST,
+			//				ServiceUrl = AuthProxy.ServiceUrl,
+			//				SegmentGroup = AuthProxy.P_PoseToken,
+			//			}));
+			//		}
+			//	}
+			//	catch (Exception)
+			//	{
+			//		_exceptionHandler?.Invoke(flurlException);
+			//		return result;
+			//	}
+			//}
 
 			// 재시도
 			if (flurlException.Call.Response != null)
