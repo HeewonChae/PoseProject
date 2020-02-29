@@ -1,53 +1,68 @@
-{
+﻿{
   "Teams": [
     {
       "Index": 1,
       "LeagueID": 1326,
       "TeamName": "Independiente Santa Fe",
       "CountryName": "Colombia",
-      "ConvertTeamID": 1139
+      "ConvertTeamID": 1139,
+      "ConvertTeamName": "Santa Fe"
     },
     {
       "Index": 2,
       "LeagueID": 536,
       "TeamName": "Grobina",
       "CountryName": "Latvia",
-      "ConvertTeamID": 4138
+      "ConvertTeamID": 4138,
+      "ConvertTeamName": "Grobiņa"
     },
     {
       "Index": 3,
       "LeagueID": 975,
       "TeamName": "Muaither",
       "CountryName": "Qatar",
-      "ConvertTeamID": 2902
+      "ConvertTeamID": 2902,
+      "ConvertTeamName": "Muaither SC"
     },
     {
       "Index": 4,
       "LeagueID": 351,
       "TeamName": "Sydney II",
       "CountryName": "Romania",
-      "ConvertTeamID": 2583
+      "ConvertTeamID": 2583,
+      "ConvertTeamName": "Politehnica Iasi"
     },
     {
       "Index": 5,
       "LeagueID": 113,
       "TeamName": "Sydney II",
       "CountryName": "Turkey",
-      "ConvertTeamID": 997
+      "ConvertTeamID": 997,
+      "ConvertTeamName": "Genclerbirligi"
     },
     {
       "Index": 6,
       "LeagueID": 1287,
       "TeamName": "Real",
       "CountryName": "Portugal",
-      "ConvertTeamID": 32000
+      "ConvertTeamID": 32000,
+      "ConvertTeamName": "Real"
     },
     {
       "Index": 7,
       "LeagueID": 262,
       "TeamName": "Academy Platamona",
       "CountryName": "Greece",
-      "ConvertTeamID": 2100
+      "ConvertTeamID": 2100,
+      "ConvertTeamName": "Aiginiakos"
+    },
+    {
+      "Index": 8,
+      "LeagueID": 300,
+      "TeamName": "Sydney II",
+      "CountryName": "Mexico",
+      "ConvertTeamID": 2310,
+      "ConvertTeamName": "Tapachula"
     }
   ]
 }

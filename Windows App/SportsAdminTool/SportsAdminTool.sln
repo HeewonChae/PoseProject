@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandBox", "SandBox\SandBox.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Mysql", "Repository.Mysql\Repository.Mysql.csproj", "{300D85B2-91DD-42C9-89C0-4A2900AA9993}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicCore", "..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj", "{4375D35A-CCB4-4714-BE12-7828A548C543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidAPI", "..\..\Common Library\DotNet_Framework\RapidAPI\RapidAPI.csproj", "{0310E278-EBFC-4DD8-8A36-27321A01C52F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\..\Common Library\DotNet_Framework\Repository\Repository.csproj", "{E798B808-207E-48F7-A509-6473FB43EAE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{300D85B2-91DD-42C9-89C0-4A2900AA9993}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{300D85B2-91DD-42C9-89C0-4A2900AA9993}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{300D85B2-91DD-42C9-89C0-4A2900AA9993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4375D35A-CCB4-4714-BE12-7828A548C543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0310E278-EBFC-4DD8-8A36-27321A01C52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E798B808-207E-48F7-A509-6473FB43EAE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

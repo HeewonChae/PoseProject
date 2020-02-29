@@ -45,7 +45,7 @@
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="GameKernel">
-      <HintPath>..\..\..\Common Library\CommonLibrary\External\GameKernel.dll</HintPath>
+      <HintPath>..\..\..\Common Library\External\GameKernel.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
@@ -120,8 +120,7 @@
       <HintPath>..\packages\MahApps.Metro.IconPacks.3.1.0\lib\net47\MahApps.Metro.IconPacks.Zondicons.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Common Library\CommonLibrary\RapidAPI\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
@@ -231,6 +230,23 @@
   <ItemGroup>
     <Resource Include="mahapps.metro.logo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
+      <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
+      <Name>LogicCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\RapidAPI\RapidAPI.csproj">
+      <Project>{0310E278-EBFC-4DD8-8A36-27321A01C52F}</Project>
+      <Name>RapidAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\Repository\Repository.csproj">
+      <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository.Mysql\Repository.Mysql.csproj">
+      <Project>{300d85b2-91dd-42c9-89c0-4a2900aa9993}</Project>
+      <Name>Repository.Mysql</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -15,6 +15,7 @@ namespace SportsAdminTool.Model.Resource.Football
 		public readonly string TeamName = string.Empty;
 		public readonly string CountryName = string.Empty;
 		public readonly short ConvertTeamID = 0;
+		public readonly string ConvertTeamName = string.Empty;
 
 		private static Dictionary<string, UndefinedTeam> Dic_undefinedTeam { get; } = new Dictionary<string, UndefinedTeam>();
 
@@ -28,16 +29,17 @@ namespace SportsAdminTool.Model.Resource.Football
 			return $"{CountryName}:{LeagueID}:{TeamName}";
 		}
 
-		public static bool TryConvertTeamID(string CountryName, short LeagueID, string TeamName, out short convertedTeamID)
+		public static bool TryConvertTeamID(string CountryName, short LeagueID, string TeamName, out short convertedTeamID, out string convertedTeamName)
 		{
 			convertedTeamID = 0;
+			convertedTeamName = string.Empty;
 
 			var key = MakeTeamConvertKey(CountryName, LeagueID, TeamName);
 			if (!Dic_undefinedTeam.ContainsKey(key))
 				return false;
 
 			convertedTeamID = Dic_undefinedTeam[key].ConvertTeamID;
-
+			convertedTeamName = Dic_undefinedTeam[key].ConvertTeamName;
 			return true;
 		}
 	}

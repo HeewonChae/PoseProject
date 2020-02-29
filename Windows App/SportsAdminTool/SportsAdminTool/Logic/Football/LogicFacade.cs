@@ -72,7 +72,7 @@ namespace SportsAdminTool.Logic.Football
 							return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
 
 						var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueID(league.id);
-						Database.FootballFacade.UpdateTeam(api_teams.ToArray());
+						Database.FootballFacade.UpdateTeam(league.id, api_teams.ToArray());
 					}
 				}
 
@@ -238,6 +238,7 @@ namespace SportsAdminTool.Logic.Football
 					return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
 
 				// Update odds
+				bool oddsUpdateSuccess = true;
 				{
 					mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update odds");
 
@@ -265,12 +266,16 @@ namespace SportsAdminTool.Logic.Football
 						var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByFixtureID(db_fixture.id);
 
 						// DB Save
+						int dbSaveResult = 0;
 						if (api_odds != null)
-							Database.FootballFacade.UpdateOdds(db_fixture.id, api_odds.Bookmakers);
+							dbSaveResult = Database.FootballFacade.UpdateOdds(db_fixture.id, api_odds.Bookmakers);
+
+						if (api_odds != null && dbSaveResult == 0)
+							oddsUpdateSuccess = false;
 					}
 				}
 
-				return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
+				return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB) && oddsUpdateSuccess;
 			});
 		}
 
@@ -448,7 +453,7 @@ namespace SportsAdminTool.Logic.Football
 					Database.FootballFacade.UpdateCoverage(api_league); // coverage
 
 					var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueID((short)api_league.LeagueID);
-					Database.FootballFacade.UpdateTeam(api_teams.ToArray());
+					Database.FootballFacade.UpdateTeam((short)api_league.LeagueID, api_teams.ToArray());
 				}
 
 				if (cancellationToken.IsCancellationRequested)
@@ -470,7 +475,7 @@ namespace SportsAdminTool.Logic.Football
 
 					// DB Save
 					if (api_team != null)
-						Database.FootballFacade.UpdateTeam(api_team);
+						Database.FootballFacade.UpdateTeam(errorTeam.LeagueID, api_team);
 				}
 
 				return true;

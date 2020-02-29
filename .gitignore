@@ -1,78 +1,36 @@
-﻿/Web App/PoseSportsWebService/CodeGenerator/bin/Debug
-/Web App/PoseSportsWebService/CodeGenerator/obj/Debug
+﻿/Common Library/DotNet_Framework/DotNet_Framework/bin
+/Common Library/DotNet_Framework/DotNet_Framework/obj
+/Common Library/DotNet_Framework/LogicCore/bin
+/Common Library/DotNet_Framework/LogicCore/obj
+/Common Library/DotNet_Framework/RapidAPI/bin
+/Common Library/DotNet_Framework/RapidAPI/obj
+/Common Library/DotNet_Framework/Repository/bin
+/Common Library/DotNet_Framework/Repository/obj
+/Common Library/DotNet_Standard/DotNet_Standard/bin
+/Common Library/DotNet_Standard/DotNet_Standard/obj
+/Common Library/DotNet_Standard/PosePacket/bin
+/Common Library/DotNet_Standard/PosePacket/obj
+/Common Library/DotNet_Standard/WebServiceShare/bin
+/Common Library/DotNet_Standard/WebServiceShare/obj
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/bin
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/obj
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/bin
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/obj
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.iOS/bin
+/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.iOS/obj
+/Web App/PoseSportsWebService/CodeGenerator/bin
+/Web App/PoseSportsWebService/CodeGenerator/obj
 /Web App/PoseSportsWebService/ReferenceText.NetCore/bin/Debug/netcoreapp3.1
 /Web App/PoseSportsWebService/ReferenceText.NetCore/obj
 /Web App/PoseSportsWebService/SportsWebService/bin
-/Web App/PoseSportsWebService/SportsWebService/obj/Debug
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp/bin/Debug/netstandard2.0
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp/obj
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.Android/bin/Debug
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.Android/obj
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.iOS/bin/iPhone/Debug
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.iOS/obj
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.UWP/bin/x86/Debug
-/Mobile App/PoseSportsApp/PoseSportsApp/PoseSportsApp.UWP/obj
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial/bin/Debug/netstandard2.0
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial/obj
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial.Android/bin/Debug
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial.Android/obj
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial.iOS/bin/iPhone/Debug
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial.iOS/obj
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial.UWP/bin/x86/Debug
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial.UWP/obj
-/Common Library/CommonLibrary/RapidAPI/bin/Debug
-/Common Library/CommonLibrary/RapidAPI/obj/Debug
-/Common Library/CommonLibrary/Repository/bin/Debug
-/Common Library/CommonLibrary/Repository/obj/Debug
-/Windows App/SportsAdminTool/Repository.Mysql/bin/Debug
-/Windows App/SportsAdminTool/Repository.Mysql/obj/Debug
-/Windows App/SportsAdminTool/SandBox/obj/Debug
-/Windows App/SportsAdminTool/SandBox/bin/Debug
-/Windows App/SportsAdminTool/SportsAdminTool/bin/Debug
-/Windows App/SportsAdminTool/SportsAdminTool/obj/Debug
-/Web App/Xamain_Tutorial_Server/Xamain_Tutorial_Server/obj/Debug
-/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.API/obj/Debug
-/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.API/bin
-/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.Backend/bin
-/Web App/Xamain_Tutorial_Server/Xamarin_Tutorial.Backend/obj/Debug
-/Common Library/CommonLibrary/LogicCore/bin/Release
-/Common Library/CommonLibrary/LogicCore/obj/Release
-/Common Library/PoseSportsPredictService/PosePacket/bin/Release/netstandard2.0
-/Web App/PoseSportsWebService/CodeGenerator/bin/Release
-/Web App/PoseSportsWebService/CodeGenerator/obj/Release
-/Web App/PoseSportsWebService/SportsWebService/obj/Release
-/Common Library/CommonLibrary/RapidAPI/bin/Release
-/Common Library/CommonLibrary/RapidAPI/obj/Release
-/Common Library/CommonLibrary/Repository/bin/Release
-/Common Library/CommonLibrary/Repository/obj/Release
+/Web App/PoseSportsWebService/SportsWebService/obj
 /Web App/Pose_sports_statistics/Pose_sports_statistics/bin
 /Web App/Pose_sports_statistics/Pose_sports_statistics/obj
 /Web App/Pose_sports_statistics/Repository.Data/bin
 /Web App/Pose_sports_statistics/Repository.Data/obj
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/bin/Debug/netstandard2.0
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/obj
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/obj
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/bin/Debug
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.iOS/bin/iPhoneSimulator/Debug
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.iOS/obj
-/Mobile App/Xamarin_Tutorial/Xamarin_Tutorial/Xamarin_Tutorial/bin/Debug/netstandard2.1
-/Common Library/CommonLibrary/.Net Framwork/LogicCore/bin
-/Common Library/CommonLibrary/.Net Framwork/LogicCore/obj
-/Common Library/CommonLibrary/.Net Framwork/RapidAPI/bin
-/Common Library/CommonLibrary/.Net Framwork/RapidAPI/obj
-/Common Library/CommonLibrary/.Net Framwork/Repository/bin
-/Common Library/CommonLibrary/.Net Framwork/Repository/obj
-/Common Library/CommonLibrary/.Net Standard/PosePacket/bin
-/Common Library/CommonLibrary/.Net Standard/PosePacket/obj
-/Common Library/CommonLibrary/.Net Standard/WebServiceShare/bin/Debug/netstandard2.0
-/Common Library/CommonLibrary/.Net Standard/WebServiceShare/obj
-/Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/bin/Debug/netstandard2.1
-/Common Library/DotNet_Framework/LogicCore/obj/Debug
-/Common Library/DotNet_Framework/LogicCore/bin/Debug
-/Common Library/DotNet_Framework/DotNet_Framework/bin/Debug
-/Common Library/DotNet_Framework/DotNet_Framework/obj/Debug
-/Common Library/DotNet_Framework/.vs/DotNet_Framework/v16
-/Common Library/DotNet_Framework/RapidAPI/bin/Debug
-/Common Library/DotNet_Framework/RapidAPI/obj/Debug
-/Common Library/DotNet_Framework/Repository/bin/Debug
-/Common Library/DotNet_Framework/Repository/obj/Debug
+/Windows App/SportsAdminTool/Repository.Mysql/bin
+/Windows App/SportsAdminTool/Repository.Mysql/obj
+/Windows App/SportsAdminTool/SandBox/bin
+/Windows App/SportsAdminTool/SandBox/obj
+/Windows App/SportsAdminTool/SportsAdminTool/bin
+/Windows App/SportsAdminTool/SportsAdminTool/obj

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using FootballDB = Repositories.Mysql.FootballDB;
+using FootballDB = Repository.Mysql.FootballDB;
 using AppModel = SportsAdminTool.Model;
 
 namespace SportsAdminTool.Logic.Football

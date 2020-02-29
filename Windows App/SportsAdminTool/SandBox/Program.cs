@@ -13,9 +13,9 @@ using LogicCore.File;
 
 namespace SandBox
 {
-	class Program
+	internal class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			// Prepare logical initialize
 			{
@@ -26,7 +26,7 @@ namespace SandBox
 				string tableRootPath = string.Concat(AppDomain.CurrentDomain.BaseDirectory, "Resources");
 				AppLogic.TableLoader.Init(tableRootPath);
 			}
-			
+
 			//MakeJsonFile();
 		}
 
@@ -44,7 +44,7 @@ namespace SandBox
 				};
 
 				P_SELECT_LEAGUES.SetInput(input);
-				var dbLeagues =  P_SELECT_LEAGUES.OnQuery();
+				var dbLeagues = P_SELECT_LEAGUES.OnQuery();
 
 				int index = 1;
 				foreach (var dbLeague in dbLeagues)

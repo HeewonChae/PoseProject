@@ -150,7 +150,7 @@ namespace SportsAdminTool.Logic.Database
 			return ExecuteSQL(sb.ToString());
 		}
 
-		public static int UpdateTeam(params AppModel.Football.Team[] teams)
+		public static int UpdateTeam(short leagueId, params AppModel.Football.Team[] teams)
 		{
 			if (teams.Length == 0)
 				return 0;
@@ -175,7 +175,15 @@ namespace SportsAdminTool.Logic.Database
 
 				var team = teams[i];
 
-				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)team.ID, team.Name, team.CountryName, false))
+				// TeamID 컨버트 가능한지..
+				ResourceModel.Football.UndefinedTeam.TryConvertTeamID(team.CountryName, leagueId, team.Name, out short convertedteamID, out string convertedTeamName);
+				if (convertedteamID != 0)
+				{
+					team.ID = convertedteamID;
+					team.Name = convertedTeamName;
+				}
+
+				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)team.ID, team.Name, leagueId, team.CountryName, false))
 					continue;
 
 				sb.Append($"({team.ID}, " +
@@ -226,7 +234,15 @@ namespace SportsAdminTool.Logic.Database
 
 				var standing = standings[i];
 
-				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)standing.TeamID, standing.TeamName, countryName, true))
+				// TeamID 컨버트 가능한지..
+				ResourceModel.Football.UndefinedTeam.TryConvertTeamID(countryName, leagueID, standing.TeamName, out short convertedteamID, out string convertedTeamName);
+				if (convertedteamID != 0)
+				{
+					standing.TeamID = convertedteamID;
+					standing.TeamName = convertedTeamName;
+				}
+
+				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)standing.TeamID, standing.TeamName, leagueID, countryName, true))
 				{
 					errorTeamCnt++;
 				}
@@ -298,10 +314,23 @@ namespace SportsAdminTool.Logic.Database
 
 				var fixture = fixtures[i];
 
-				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)fixture.HomeTeam.TeamID, fixture.HomeTeam.TeamName, fixture.League.Country, true))
+				// TeamID 컨버트 가능한지..
+				ResourceModel.Football.UndefinedTeam.TryConvertTeamID(fixture.League.Country, (short)fixture.LeagueID, fixture.HomeTeam.TeamName, out short convertedteamID, out string convertedTeamName);
+				if (convertedteamID != 0)
+				{
+					fixture.HomeTeam.TeamID = convertedteamID;
+					fixture.HomeTeam.TeamName = convertedTeamName;
+				}
+				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)fixture.HomeTeam.TeamID, fixture.HomeTeam.TeamName, (short)fixture.LeagueID, fixture.League.Country, true))
 					continue;
 
-				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)fixture.AwayTeam.TeamID, fixture.AwayTeam.TeamName, fixture.League.Country, true))
+				ResourceModel.Football.UndefinedTeam.TryConvertTeamID(fixture.League.Country, (short)fixture.LeagueID, fixture.AwayTeam.TeamName, out convertedteamID, out convertedTeamName);
+				if (convertedteamID != 0)
+				{
+					fixture.AwayTeam.TeamID = convertedteamID;
+					fixture.AwayTeam.TeamName = convertedTeamName;
+				}
+				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)fixture.AwayTeam.TeamID, fixture.AwayTeam.TeamName, (short)fixture.LeagueID, fixture.League.Country, true))
 					continue;
 
 				sb.Append($"({fixture.FixtureID}, " +

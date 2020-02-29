@@ -114,11 +114,6 @@ namespace SportsAdminTool.Logic.Football
 
 		public bool IsValidTeam(short teamID, string teamName, short leagueID, string countryName, bool isDB_check)
 		{
-			// TeamID 컨버트 가능한지..
-			ResourceModel.Football.UndefinedTeam.TryConvertTeamID(countryName, leagueID, teamName, out short convertedteamID);
-			if (convertedteamID != 0)
-				teamID = convertedteamID;
-
 			bool result = teamID != 0;
 
 			if (!result)

@@ -42,9 +42,11 @@ namespace SportsAdminTool
 				case 0:
 					flipview.BannerText = "Initialize FootballDB";
 					break;
+
 				case 1:
 					flipview.BannerText = "Collect Datas & Predict";
 					break;
+
 				case 2:
 					flipview.BannerText = "Check Completed Fixtures";
 					break;
@@ -55,6 +57,7 @@ namespace SportsAdminTool
 		/// Initialize footballdb
 		/// </summary>
 		private CancellationTokenSource _initFootballDb_cts = null;
+
 		public async void Fv_item_initialize_footballdb_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (this._progRing_initialize_footballdb.IsActive)
@@ -82,7 +85,7 @@ namespace SportsAdminTool
 			var token = _initFootballDb_cts.Token;
 
 			var ret = await FootballLogic.LogicFacade.InitializeFootballDB(token);
-			if(!ret)
+			if (!ret)
 			{
 				// Error처리
 				await FootballLogic.LogicFacade.SolveErrors(token, _lbl_initialize_footballdb);
@@ -95,7 +98,7 @@ namespace SportsAdminTool
 			await Task.Delay(500);
 
 			// 텍스트 원래대로 변경
-			this._lbl_initialize_footballdb.Content =  org_bannerText;
+			this._lbl_initialize_footballdb.Content = org_bannerText;
 			this._progRing_initialize_footballdb.IsActive = false;
 
 			// 다음 업데이트 알람
@@ -110,6 +113,7 @@ namespace SportsAdminTool
 		/// Update scheduled fixtures
 		/// </summary>
 		private CancellationTokenSource _collectDatasAndPredict_Cts = null;
+
 		public async void Fv_item_collectDatas_and_predict_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (this._progRing_collectDatasAndPredict.IsActive)
@@ -144,7 +148,8 @@ namespace SportsAdminTool
 				alarm.SetAlarm(30000); // 30초 후 다시 시작
 			}
 
-			await FootballLogic.LogicFacade.PredictFixtures(token);
+			if (ret)
+				await FootballLogic.LogicFacade.PredictFixtures(token);
 
 			await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile);
 
@@ -167,6 +172,7 @@ namespace SportsAdminTool
 		/// Check completed fixture
 		/// </summary>
 		private CancellationTokenSource _completedFixtures_Cts = null;
+
 		public async void Fv_item_check_completed_fixtures_Click(object sender, MouseButtonEventArgs e)
 		{
 			if (this._progRing_check_completed_fixtures.IsActive)
@@ -213,6 +219,7 @@ namespace SportsAdminTool
 		}
 
 		#region Thread Safe Change UI Element
+
 		/// <summary>
 		/// Set Label Content
 		/// </summary>
@@ -226,6 +233,7 @@ namespace SportsAdminTool
 				e.Content = str;
 			});
 		}
-		#endregion
+
+		#endregion Thread Safe Change UI Element
 	}
 }
