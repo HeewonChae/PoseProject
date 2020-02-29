@@ -672,11 +672,11 @@ namespace SportsAdminTool.Logic.Database
 
 		public static bool IsAlreadyUpdatedOdds(int fixtureID)
 		{
-			var db_standings = SelectOdds(fixtureID);
+			var db_odds = SelectOdds(fixtureID);
 
-			var firstData = db_standings.FirstOrDefault();
+			var firstData = db_odds.FirstOrDefault();
 
-			return firstData != null && firstData.upt_time.Date == DateTime.UtcNow.Date;
+			return firstData != null;
 		}
 
 		public static bool IsExistFixture(int fixtureID)

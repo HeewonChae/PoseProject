@@ -16,7 +16,7 @@ namespace PosePacket.Proxy
     public class HelloWorldProxy
     {
         
-        private static string _serviceUrl = "Service/HelloWorld.svc";
+        private static string _serviceUrl = "Services/HelloWorld.svc";
         
         private static string _P_Hello = "Hello";
         

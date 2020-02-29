@@ -203,6 +203,7 @@ namespace SportsAdminTool.Logic.Football
 					return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
 
 				// Update standings
+				bool standingsUpdateSuccess = true;
 				{
 					mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update standings");
 
@@ -222,20 +223,17 @@ namespace SportsAdminTool.Logic.Football
 						loop++;
 						mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update Standings ({loop}/{groupCnt})");
 
-						if (cancellationToken.IsCancellationRequested)
-							return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
 						var db_leauge = Database.FootballFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
 						{
 							Where = $"id = {db_groupingFixture.Key}",
 						}).FirstOrDefault();
 
-						UpdateStandings(db_groupingFixture.Key, db_leauge.name, db_leauge.country_name);
+						standingsUpdateSuccess = UpdateStandings(db_groupingFixture.Key, db_leauge.name, db_leauge.country_name);
 					}
 				}
 
 				if (cancellationToken.IsCancellationRequested)
-					return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
+					return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB) && standingsUpdateSuccess;
 
 				// Update odds
 				bool oddsUpdateSuccess = true;
@@ -255,9 +253,6 @@ namespace SportsAdminTool.Logic.Football
 						loop++;
 						mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update odds ({loop}/{fixtureCnt})");
 
-						if (cancellationToken.IsCancellationRequested)
-							return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
 						// Check already updated odds
 						if (Database.FootballFacade.IsAlreadyUpdatedOdds(db_fixture.id))
 							continue;
@@ -275,7 +270,7 @@ namespace SportsAdminTool.Logic.Football
 					}
 				}
 
-				return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB) && oddsUpdateSuccess;
+				return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB) && standingsUpdateSuccess && oddsUpdateSuccess;
 			});
 		}
 

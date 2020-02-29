@@ -2,12 +2,8 @@
 using PosePacket.Service.Auth;
 using SportsWebService.Authentication.ExternOAuth;
 using SportsWebService.Utility;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace SportsWebService.Commands.Auth
 {

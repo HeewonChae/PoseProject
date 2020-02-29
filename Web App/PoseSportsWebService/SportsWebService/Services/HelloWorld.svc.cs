@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
-using System.Text;
-using System.Web;
-using PosePacket.Service.HelloWorld;
+﻿using PosePacket.Service.HelloWorld;
 using SportsWebService.Utility;
+using System.Security.Permissions;
 
 namespace SportsWebService.Services
 {

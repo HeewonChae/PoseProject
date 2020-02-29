@@ -55,9 +55,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.2.4.4\lib\net40\protobuf-net.dll</HintPath>
-    </Reference>
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
@@ -135,17 +132,17 @@
     <Compile Include="WebBehavior\Server\ServiceInitialize\ServiceInitializationBehaviorSection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Standard\PosePacket\PosePacket.csproj">
-      <Project>{6c5e95ac-60ea-49df-9233-e274c54cd95a}</Project>
-      <Name>PosePacket</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Standard\WebServiceShare\WebServiceShare.csproj">
-      <Project>{4eff0dc6-6bda-40d1-860f-109c8af9c8d4}</Project>
-      <Name>WebServiceShare</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
       <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
       <Name>LogicCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj">
+      <Project>{41132f88-a0cd-4d5c-9351-c90f67369089}</Project>
+      <Name>PosePacket</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\WebServiceShare\WebServiceShare.csproj">
+      <Project>{1b9b667d-f935-4565-afbc-73bd6aef9cbd}</Project>
+      <Name>WebServiceShare</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

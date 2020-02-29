@@ -58,7 +58,6 @@ namespace PoseSportsPredict.Logic.ExternOAuth.Providers
 				Email = facebookUser.Email,
 				PictureUrl = facebookUser.Picture.Data.Url,
 				SNSProvider = SNSProviderType.Facebook,
-				ExpiresIn = DateTime.UtcNow.Add(new TimeSpan(6, 0, 0)), // TODO: 임시 ExpiresIn
 			};
 		}
 

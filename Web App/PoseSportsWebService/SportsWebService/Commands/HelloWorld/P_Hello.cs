@@ -1,14 +1,9 @@
 ﻿using PosePacket;
 using PosePacket.Service.HelloWorld;
-using SportsWebService.Authentication;
 using SportsWebService.Utility;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Web;
 
 namespace SportsWebService.Commands.HelloWorld
 {

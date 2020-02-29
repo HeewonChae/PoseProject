@@ -16,7 +16,7 @@ namespace PosePacket.Proxy
     public class AuthProxy
     {
         
-        private static string _serviceUrl = "Service/Auth.svc";
+        private static string _serviceUrl = "Services/Auth.svc";
         
         private static string _P_E_TokenRefresh = "TokenRefresh";
         
@@ -57,7 +57,7 @@ namespace PosePacket.Proxy
         
         // MethodType: POST, Segment: Login 
         // InputType: PosePacket.Service.Auth.I_Login 
-        // OutputType: System.String
+        // OutputType: PosePacket.Service.Auth.O_Login
         public static string P_E_Login
         {
             get

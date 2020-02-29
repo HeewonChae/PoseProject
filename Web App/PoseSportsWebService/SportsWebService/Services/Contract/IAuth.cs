@@ -24,12 +24,12 @@ namespace SportsWebService.Services.Contract
 		[WebInvoke(Method = "POST", UriTemplate = "CheckVaildOAuthUser"
 			, RequestFormat = WebMessageFormat.Json
 			, ResponseFormat = WebMessageFormat.Json)]
-		Task<string> P_E_CheckVaildOAuthUser(string e_json);
+		Task<ExternAuthUser> P_E_CheckVaildOAuthUser(string e_json);
 
 		[OperationContract]
 		[WebInvoke(Method = "POST", UriTemplate = "Login"
 			, RequestFormat = WebMessageFormat.Json
 			, ResponseFormat = WebMessageFormat.Json)]
-		string P_E_Login(string e_json);
+		O_Login P_E_Login(string e_json);
 	}
 }

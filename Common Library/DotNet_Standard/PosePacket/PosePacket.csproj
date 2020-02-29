@@ -8,5 +8,4 @@
     <Folder Include="Service\Football\" />
     <Folder Include="Proxy\" />
   </ItemGroup>
-
 </Project>

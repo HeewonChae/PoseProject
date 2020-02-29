@@ -1,13 +1,9 @@
 ﻿using GameKernel;
-using LogicCore.Utility;
 using PosePacket.WebError;
 using SportsWebService.App_Config;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.ServiceModel.Web;
-using System.Web;
 
 namespace SportsWebService.Utility
 {

@@ -1,10 +1,7 @@
 ﻿using PosePacket.Service.Auth;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using WebServiceShare.ExternAuthentication.Providers;
 using WebServiceShare.ExternAuthentication.Users;
 using WebServiceShare.ServiceContext;
@@ -69,10 +66,10 @@ namespace SportsWebService.Authentication.ExternOAuth
 				Email = facebookUser.Email,
 				PictureUrl = facebookUser.Picture.Data.Url,
 				SNSProvider = SNSProviderType.Facebook,
-				ExpiresIn = DateTime.UtcNow.Add(TimeSpan.FromSeconds(refreshInfo.ExpiresIn)), // TODO: 임시 ExpiresIn
+				ExpiresIn = DateTime.UtcNow.AddSeconds(refreshInfo.ExpiresIn),
 			};
-		}
 
-		#endregion Implement Abstract Method
+			#endregion Implement Abstract Method
+		}
 	}
 }

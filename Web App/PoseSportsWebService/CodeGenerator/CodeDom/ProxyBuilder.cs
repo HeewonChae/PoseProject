@@ -1,12 +1,9 @@
 ﻿using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PacketBuilder.CodeDom
 {
@@ -36,7 +33,7 @@ namespace PacketBuilder.CodeDom
 
 			// Mark as static class
 			//_targetClass.StartDirectives.Add(new CodeRegionDirective(
-		 //  CodeRegionMode.Start, Environment.NewLine + "static"));
+			//  CodeRegionMode.Start, Environment.NewLine + "static"));
 			//_targetClass.EndDirectives.Add(new CodeRegionDirective(
 			//		CodeRegionMode.End, string.Empty));
 
@@ -54,21 +51,19 @@ namespace PacketBuilder.CodeDom
 				Attributes = MemberAttributes.Private | MemberAttributes.Static,
 				Type = new CodeTypeReference(typeof(string)),
 				Name = "_serviceUrl",
-				InitExpression = new CodePrimitiveExpression($"Service/{_className}.svc")
+				InitExpression = new CodePrimitiveExpression($"Services/{_className}.svc")
 			};
 			_targetClass.Members.Add(serviceUrl);
 
-			Console.WriteLine($"{_className} Proxy - Add ServiceUrl field : Service/{_className}.svc");
-
-
+			Console.WriteLine($"{_className} Proxy - Add ServiceUrl field : Services/{_className}.svc");
 
 			var methods = _assambly.DeclaredMethods;
 			foreach (var declaredMethod in _assambly.DeclaredMethods)
 			{
 				var attrData = declaredMethod.CustomAttributes.Where(elem => elem.AttributeType.Name.Equals("WebInvokeAttribute")).FirstOrDefault();
-				if(attrData != null)
+				if (attrData != null)
 				{
-					string packetUrl = (string)attrData.NamedArguments.Where(elem => 
+					string packetUrl = (string)attrData.NamedArguments.Where(elem =>
 					elem.MemberName.Equals("UriTemplate")).First().TypedValue.Value;
 					string webMethodType = (string)attrData.NamedArguments.Where(elem =>
 					elem.MemberName.Equals("Method")).First().TypedValue.Value;
@@ -120,12 +115,12 @@ namespace PacketBuilder.CodeDom
 					// Find same name command
 					Type inputType = null;
 					Type outputType = null;
-					foreach(var declaredClass in _assambly.Assembly.DefinedTypes)
+					foreach (var declaredClass in _assambly.Assembly.DefinedTypes)
 					{
-						if(string.Equals(declaredMethod.Name, declaredClass.Name))
+						if (string.Equals(declaredMethod.Name, declaredClass.Name))
 						{
 							var WebModelTypeAttr = declaredClass.CustomAttributes.Where(elem => elem.AttributeType.Name.Equals("WebModelTypeAttribute")).FirstOrDefault();
-							if(WebModelTypeAttr != null)
+							if (WebModelTypeAttr != null)
 							{
 								inputType = (Type)WebModelTypeAttr.NamedArguments.Where(elem =>
 									elem.MemberName.Equals("InputType")).FirstOrDefault().TypedValue.Value;

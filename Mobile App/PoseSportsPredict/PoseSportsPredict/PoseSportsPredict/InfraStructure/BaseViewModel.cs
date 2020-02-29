@@ -79,7 +79,7 @@ namespace PoseSportsPredict.InfraStructure
 
 		public virtual void SetBusy(bool isBusy)
 		{
-			_isBusy = isBusy;
+			IsBusy = isBusy;
 		}
 
 		#endregion Methods

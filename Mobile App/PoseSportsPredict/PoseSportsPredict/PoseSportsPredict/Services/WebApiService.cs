@@ -42,7 +42,7 @@ namespace PoseSportsPredict.Services
 						var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
 						await UserDialogs.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
 					}
-					catch (Exception)
+					catch
 					{
 						// 알 수 없는 서버 에러
 						await UserDialogs.Instance.AlertAsync("Unkown service error");
@@ -67,7 +67,7 @@ namespace PoseSportsPredict.Services
 		{
 			TOut result = default;
 
-			if (!CheckInternetConnection())
+			if (!await CheckInternetConnection())
 			{
 				await UserDialogs.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
 				return result;
@@ -88,9 +88,39 @@ namespace PoseSportsPredict.Services
 			return result;
 		}
 
-		public static bool CheckInternetConnection()
+		public async Task<TOut> RequestAsyncWithToken<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true)
 		{
-			return !CrossConnectivity.IsSupported || CrossConnectivity.Current.IsConnected;
+			TOut result = default;
+
+			if (!await CheckInternetConnection())
+			{
+				return result;
+			}
+
+			if (isIndicateLoading)
+			{
+				using (UserDialogs.Instance.Loading())
+				{
+					result = await WebClient.RequestAsync<TOut>(reqContext);
+				}
+			}
+			else
+			{
+				result = await WebClient.RequestAsync<TOut>(reqContext);
+			}
+
+			return result;
+		}
+
+		public static async Task<bool> CheckInternetConnection()
+		{
+			if (CrossConnectivity.IsSupported && !CrossConnectivity.Current.IsConnected)
+			{
+				await UserDialogs.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+				return false;
+			}
+
+			return true;
 		}
 	}
 }

@@ -1,17 +1,8 @@
 ﻿using Flurl.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.WebError;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
-using WebServiceShare;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 

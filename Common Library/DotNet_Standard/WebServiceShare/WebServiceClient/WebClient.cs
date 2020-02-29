@@ -39,12 +39,9 @@ namespace WebServiceShare.WebServiceClient
 			ClientContext.CopyTo(serviceHeader);
 
 			var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.ServiceUrl ?? "");
-			var flurlClient = new FlurlClient(endPointAddr);
+			var flurlReqeust = new FlurlClient(endPointAddr).Request();
 			if (isIncludePoseHeader)
-				flurlClient.WithHeader(PoseHeader.HEADER_NAME, serviceHeader);
-
-			var flurlReqeust = new FlurlClient(endPointAddr)
-				.Request();
+				flurlReqeust.WithHeader(PoseHeader.HEADER_NAME, serviceHeader);
 
 			var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
 			flurlReqeust.AppendPathSegments(convertedSegments);
@@ -73,7 +70,7 @@ namespace WebServiceShare.WebServiceClient
 				else if (requestContext.MethodType == WebMethodType.POST)
 				{
 					result = await flurlRequest
-						.PostJsonAsync(requestContext.PostDataJsonSerialize())
+						.PostJsonAsync(requestContext.PostData)
 						.ReceiveJson<TOut>();
 				}
 			}

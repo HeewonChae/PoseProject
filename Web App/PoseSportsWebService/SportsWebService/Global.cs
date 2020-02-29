@@ -1,10 +1,6 @@
-﻿using LogicCore.Utility;
-using SportsWebService.Utility;
+﻿using SportsWebService.Utility;
 using SportsWebService.WebBehavior.Server.ServiceInitialize;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SportsWebService
 {

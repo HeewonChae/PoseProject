@@ -1,27 +1,27 @@
-﻿using PosePacket;
+﻿using LogicCore.Utility;
+using PosePacket;
 using SportsWebService.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Net;
 using System.Security.Principal;
-using System.ServiceModel;
-using System.ServiceModel.Web;
 using System.Text;
-using System.Web;
 
 namespace SportsWebService.Authentication
 {
 	public class PoseCredentials : IIdentity
 	{
-		public static readonly TimeSpan EffectiveTime = TimeSpan.FromMinutes(10); // 10분
+		public const int TOKEN_EXPIRE_IN = 60 * 60 * 1000; // 1시간
 		public static readonly PoseCredentials Default = new PoseCredentials();
 
 		#region IIdentity Implement
+
 		private bool _isAuthentication;
 
-		public string Name => SessionID;
+		public string Name => UserNo.ToString();
 		public string AuthenticationType => "Pose_Authenticaion";
+
 		public bool IsAuthenticated
 		{
 			get
@@ -34,37 +34,35 @@ namespace SportsWebService.Authentication
 
 			set { _isAuthentication = value; }
 		}
-		#endregion
 
-		private string _sessionId; // TODO: 구글 토큰이나.. 단말기 고유번호로 변경..
-		private long _certifiedTime;
+		#endregion IIdentity Implement
 
-		public string SessionID => _sessionId;
-		public long CertifiedTime => _certifiedTime;
-		
+		private long _userNo;
+		private long _expireTick;
+
+		public long UserNo => _userNo;
+		public long ExpireTime => _expireTick;
+
 		public PoseCredentials()
 		{
 			_isAuthentication = false;
-			_sessionId = Guid.NewGuid().ToString();
-			_certifiedTime = LogicCore.Utility.LogicTime.TIME();
+			_userNo = 0;
+			_expireTick = PoseCredentials.TOKEN_EXPIRE_IN;
 		}
 
-		#region Credentials Serializer
+		#region Static Methods
+
 		public static byte[] Serialize(PoseCredentials credentials)
 		{
 			List<byte> buffer = new List<byte>(1024);
 
 			try
 			{
-				byte[] strBytes = null;
-
 				// SessionID
-				strBytes = Encoding.UTF8.GetBytes(credentials._sessionId);
-				buffer.AddRange(BitConverter.GetBytes(strBytes.Length));
-				buffer.AddRange(strBytes);
+				buffer.AddRange(BitConverter.GetBytes(credentials._userNo));
 
 				// CertifiedTime
-				buffer.AddRange(BitConverter.GetBytes(credentials._certifiedTime));
+				buffer.AddRange(BitConverter.GetBytes(credentials._expireTick));
 			}
 			catch (Exception)
 			{
@@ -81,16 +79,13 @@ namespace SportsWebService.Authentication
 			try
 			{
 				int curPosition = 0;
-				int strSize = 0;
 
 				// SessionID
-				strSize = BitConverter.ToInt32(buffer, curPosition);
-				curPosition += 4;
-				credentials._sessionId = Encoding.UTF8.GetString(buffer, curPosition, strSize);
-				curPosition += strSize;
+				credentials._userNo = BitConverter.ToInt64(buffer, curPosition);
+				curPosition += 8;
 
 				// CertifiedTime
-				credentials._certifiedTime = BitConverter.ToInt64(buffer, curPosition);
+				credentials._expireTick = BitConverter.ToInt64(buffer, curPosition);
 				curPosition += 8;
 			}
 			catch (Exception)
@@ -100,6 +95,7 @@ namespace SportsWebService.Authentication
 
 			return credentials;
 		}
-		#endregion
+
+		#endregion Static Methods
 	}
 }

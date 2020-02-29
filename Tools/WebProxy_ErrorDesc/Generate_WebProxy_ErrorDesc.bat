@@ -26,7 +26,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 @echo call exe
-pushd "C:\PoseProject\Web App\PoseSportsWebService\PacketBuilder\bin\Release"
+pushd "C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator\bin\Release"
 	CodeGenerator.exe
 popd
 

@@ -59,11 +59,6 @@ namespace PoseSportsPredict.ViewModels
 
 		private async void LoginFacebook()
 		{
-			if (IsBusy)
-				return;
-
-			SetBusy(true);
-
 			if (!_OAuthService.IsAuthenticated
 				|| !(_OAuthService.AuthenticatedUser.SNSProvider == SNSProviderType.Facebook))
 				await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
@@ -79,9 +74,10 @@ namespace PoseSportsPredict.ViewModels
 		{
 			var loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
 			{
-				BaseUrl = AppConfig.PoseWebBaseUrl,
 				MethodType = WebMethodType.POST,
-				ServiceUrl = AuthProxy.P_E_Login,
+				BaseUrl = AppConfig.PoseWebBaseUrl,
+				ServiceUrl = AuthProxy.ServiceUrl,
+				SegmentGroup = AuthProxy.P_E_Login,
 				PostData = new I_Login
 				{
 					PlatformId = _OAuthService.AuthenticatedUser.Id,
@@ -91,14 +87,11 @@ namespace PoseSportsPredict.ViewModels
 			if (loginResult == null)
 			{
 				_OAuthService.Logout();
-				SetBusy(false);
 				return false;
 			}
 
 			ClientContext.SetCredentialsFrom(loginResult.PoseToken);
-			LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddSeconds(loginResult.TokenExpireIn));
-
-			SetBusy(false);
+			LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
 
 			return true;
 		}

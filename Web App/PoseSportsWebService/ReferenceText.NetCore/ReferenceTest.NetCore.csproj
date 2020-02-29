@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Standard\PosePacket\PosePacket.csproj" />
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Standard\WebServiceShare\WebServiceShare.csproj" />
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj" />
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\WebServiceShare\WebServiceShare.csproj" />
   </ItemGroup>
 
 </Project>

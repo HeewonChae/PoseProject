@@ -56,8 +56,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Standard\PosePacket\PosePacket.csproj">
-      <Project>{6c5e95ac-60ea-49df-9233-e274c54cd95a}</Project>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
+      <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
+      <Name>LogicCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj">
+      <Project>{41132f88-a0cd-4d5c-9351-c90f67369089}</Project>
       <Name>PosePacket</Name>
     </ProjectReference>
     <ProjectReference Include="..\SportsWebService\SportsWebService.csproj">

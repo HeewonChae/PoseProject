@@ -1,8 +1,4 @@
 ﻿using GameKernel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SportsWebService.App_Config
 {

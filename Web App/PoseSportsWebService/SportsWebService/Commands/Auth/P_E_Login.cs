@@ -3,10 +3,8 @@ using PosePacket.Service.Auth;
 using SportsWebService.Authentication;
 using SportsWebService.Utility;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 
 namespace SportsWebService.Commands.Auth
 {
@@ -36,7 +34,7 @@ namespace SportsWebService.Commands.Auth
 			return new O_Login
 			{
 				PoseToken = Convert.ToBase64String(eCredential),
-				TokenExpireIn = 60 * 60 // 3600초 (1시간)
+				TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
 			};
 		}
 	}

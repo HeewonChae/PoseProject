@@ -9,5 +9,7 @@ namespace PoseSportsPredict.InfraStructure
 	public interface IWebApiService
 	{
 		Task<TOut> RequestAsync<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true);
+
+		Task<TOut> RequestAsyncWithToken<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true);
 	}
 }

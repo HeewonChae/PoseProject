@@ -3,6 +3,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logic.ExternOAuth.Providers;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels;
 using Shiny;
@@ -33,8 +34,11 @@ namespace PoseSportsPredict.Services
 		{
 			try
 			{
-				if (WebApiService.CheckInternetConnection())
+				if (!await WebApiService.CheckInternetConnection())
+				{
 					_isAuthenticated = false;
+					return;
+				}
 
 				var oAuth = OAuthProviderFactory.CreateProvider(provider);
 				var authenticator = new OAuth2Authenticator(
@@ -51,37 +55,39 @@ namespace PoseSportsPredict.Services
 						string token = eventArgs.Account.Properties["access_token"];
 
 						// P_E_CheckVaildOAuthUser
-						var checkResult = await _webApiService.RequestAsync<ExternAuthUser>(new WebRequestContext
+						_authenticatedUser = await _webApiService.RequestAsync<ExternAuthUser>(new WebRequestContext
 						{
-							BaseUrl = AppConfig.PoseWebBaseUrl,
 							MethodType = WebMethodType.POST,
-							ServiceUrl = AuthProxy.P_E_CheckVaildOAuthUser,
+							BaseUrl = AppConfig.PoseWebBaseUrl,
+							ServiceUrl = AuthProxy.ServiceUrl,
+							SegmentGroup = AuthProxy.P_E_CheckVaildOAuthUser,
 							PostData = new I_CheckVaildOAuthUser
 							{
 								SNSProvider = provider,
 								AccessToken = token,
 							}
 						});
-						if (checkResult == null)
+						if (_authenticatedUser == null)
 							return;
 
 						// PoseWebLogin
 						var loginResult = await ShinyHost.Resolve<LoginViewModel>().PoseWebLogin();
 						if (!loginResult)
+						{
+							_authenticatedUser = null;
 							return;
+						}
 
-						_authenticatedUser = checkResult;
-						_isAuthenticated = true;
 						LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
-
 						await UserDialogs.Instance.AlertAsync("OAuth Completed");
+
+						_isAuthenticated = true;
 					}
 				};
 
 				// Error
 				authenticator.Error += async (sender, eventArgs) =>
 				{
-					_isAuthenticated = false;
 					await UserDialogs.Instance.AlertAsync($"OAuth error: {eventArgs.Message}");
 				};
 
@@ -91,7 +97,6 @@ namespace PoseSportsPredict.Services
 				// 로그인 폼 닫힘
 				presenter.Completed += (sender, eventArgs) =>
 				{
-					ShinyHost.Resolve<LoginViewModel>().SetBusy(false);
 				};
 			}
 			catch (Exception ex)
@@ -115,7 +120,9 @@ namespace PoseSportsPredict.Services
 				return _isAuthenticated;
 
 			var oAuth = OAuthProviderFactory.CreateProvider(_authenticatedUser.SNSProvider);
-			_authenticatedUser = await oAuth.GetUserInfoAsync(_authenticatedUser.Token);
+			var authUser = await oAuth.GetUserInfoAsync(_authenticatedUser.Token);
+			authUser.ExpiresIn = _authenticatedUser.ExpiresIn;
+			_authenticatedUser = authUser;
 
 			// 유저데이터 받아오기 실패
 			if (_authenticatedUser == null)
@@ -127,6 +134,7 @@ namespace PoseSportsPredict.Services
 		public void Logout()
 		{
 			_isAuthenticated = false;
+			_authenticatedUser = null;
 			LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
 		}
 	}
