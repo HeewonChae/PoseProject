@@ -52,6 +52,16 @@ namespace PoseSportsPredict.InfraStructure
 
 		#endregion Constructors
 
+		#region Abstract Method
+
+		/// <summary>
+		/// Page는 null 일 수 있음
+		/// </summary>
+		/// <returns></returns>
+		public abstract Task<bool> PrepareView(params object[] data);
+
+		#endregion Abstract Method
+
 		#region Methods
 
 		protected bool SetValue<T>(ref T backingStore, T value,
@@ -67,16 +77,11 @@ namespace PoseSportsPredict.InfraStructure
 			return true;
 		}
 
+		public virtual void SetBusy(bool isBusy)
+		{
+			_isBusy = isBusy;
+		}
+
 		#endregion Methods
-
-		#region Abstract Method
-
-		/// <summary>
-		/// Page는 null 일 수 있음
-		/// </summary>
-		/// <returns></returns>
-		public abstract Task<bool> PrepareView(params object[] data);
-
-		#endregion Abstract Method
 	}
 }

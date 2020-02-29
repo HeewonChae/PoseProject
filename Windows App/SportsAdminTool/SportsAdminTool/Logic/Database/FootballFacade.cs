@@ -1,5 +1,4 @@
-﻿
-using LogicCore.Utility;
+﻿using LogicCore.Utility;
 using LogicCore.Debug;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ namespace SportsAdminTool.Logic.Database
 	public static class FootballFacade
 	{
 		#region Update
+
 		public static int UpdateCountry(params AppModel.Football.Country[] countries)
 		{
 			if (countries.Length == 0)
@@ -37,7 +37,7 @@ namespace SportsAdminTool.Logic.Database
 				$"`{nameof(FootballDB.Table.Country.upt_time)}`)");
 			sb.Append("VALUES");
 
-			for(int i = 0; i < countries.Length; i++)
+			for (int i = 0; i < countries.Length; i++)
 			{
 				if (i != 0)
 					sb.Append(", ");
@@ -175,7 +175,7 @@ namespace SportsAdminTool.Logic.Database
 
 				var team = teams[i];
 
-				if(!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)team.ID, team.Name, team.CountryName, false))
+				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)team.ID, team.Name, team.CountryName, false))
 					continue;
 
 				sb.Append($"({team.ID}, " +
@@ -265,7 +265,7 @@ namespace SportsAdminTool.Logic.Database
 
 			return ExecuteSQL(sb.ToString());
 		}
-		
+
 		public static int UpdateFixture(bool is_completed, bool is_predicted, params AppModel.Football.Fixture[] fixtures)
 		{
 			if (fixtures.Length == 0)
@@ -303,7 +303,6 @@ namespace SportsAdminTool.Logic.Database
 
 				if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)fixture.AwayTeam.TeamID, fixture.AwayTeam.TeamName, fixture.League.Country, true))
 					continue;
-
 
 				sb.Append($"({fixture.FixtureID}, " +
 					$"{fixture.LeagueID}, " +
@@ -522,9 +521,11 @@ namespace SportsAdminTool.Logic.Database
 
 			return ExecuteSQL(sb.ToString());
 		}
-		#endregion
+
+		#endregion Update
 
 		#region Select
+
 		public static IEnumerable<FootballDB.Table.League> SelectOnGogingCoverageLeagues()
 		{
 			Dev.DebugString("Call DB - FootballFacade.SelectOnGogingCoverageLeagues");
@@ -612,9 +613,11 @@ namespace SportsAdminTool.Logic.Database
 				return P_SELECT_ODDS.OnQuery();
 			}
 		}
-		#endregion
+
+		#endregion Select
 
 		#region Delete
+
 		public static int DeleteFixtures(int fixtureID)
 		{
 			if (fixtureID == 0)
@@ -623,11 +626,12 @@ namespace SportsAdminTool.Logic.Database
 			Dev.DebugString("Call DB - FootballFacade.DeleteFixtures");
 
 			return ExecuteSQL($"DELETE FROM fixture WHERE id = {fixtureID}");
-
 		}
-		#endregion
+
+		#endregion Delete
 
 		#region Check Validation
+
 		public static bool IsAlreadyUpdatedStandings(short leagueID)
 		{
 			var db_standings = SelectStandings(leagueID);
@@ -658,7 +662,8 @@ namespace SportsAdminTool.Logic.Database
 
 			return firstData != null;
 		}
-		#endregion
+
+		#endregion Check Validation
 
 		public static int ExecuteSQL(string sql)
 		{

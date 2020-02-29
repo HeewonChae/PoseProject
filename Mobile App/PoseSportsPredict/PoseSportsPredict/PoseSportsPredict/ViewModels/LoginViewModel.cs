@@ -1,12 +1,18 @@
-﻿using Plugin.LocalNotification;
+﻿using GalaSoft.MvvmLight.Command;
+using Plugin.LocalNotification;
+using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WebServiceShare.ExternAuthentication;
+using WebServiceShare.ServiceContext;
+using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
@@ -17,24 +23,7 @@ namespace PoseSportsPredict.ViewModels
 
 		public override async Task<bool> PrepareView(params object[] data)
 		{
-			var request = new NotificationRequest
-			{
-				NotificationId = 1,
-				Title = "Test",
-				Description = $"Notification Activate",
-				NotifyTime = DateTime.Now.AddSeconds(5),
-				ReturningData = "dummy",
-				Android = new Plugin.LocalNotification.AndroidOptions
-				{
-					IconName = "round_android_black_24",
-				},
-			};
-
-			NotificationCenter.Current.Show(request);
-
-			//await _OAuthService.OAuthLoginAsync(SNSProvider.Facebook);
-
-			return true;
+			return await Task.FromResult(true);
 		}
 
 		#endregion BaseViewModel
@@ -42,17 +31,78 @@ namespace PoseSportsPredict.ViewModels
 		#region Services
 
 		private IOAuthService _OAuthService;
+		private IWebApiService _webApiService;
 
 		#endregion Services
 
 		#region Constructors
 
-		public LoginViewModel(LoginPage page
-			, IOAuthService OAuthService) : base(page)
+		public LoginViewModel(LoginPage page,
+			IOAuthService OAuthService,
+			IWebApiService webApiService) : base(page)
 		{
 			_OAuthService = OAuthService;
+			_webApiService = webApiService;
 		}
 
 		#endregion Constructors
+
+		#region Commands
+
+		public ICommand LoginFacebookCommand
+		{
+			get
+			{
+				return new RelayCommand(LoginFacebook);
+			}
+		}
+
+		private async void LoginFacebook()
+		{
+			if (IsBusy)
+				return;
+
+			SetBusy(true);
+
+			if (!_OAuthService.IsAuthenticated
+				|| !(_OAuthService.AuthenticatedUser.SNSProvider == SNSProviderType.Facebook))
+				await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
+			else
+				await PoseWebLogin();
+		}
+
+		#endregion Commands
+
+		#region Methods
+
+		public async Task<bool> PoseWebLogin()
+		{
+			var loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
+			{
+				BaseUrl = AppConfig.PoseWebBaseUrl,
+				MethodType = WebMethodType.POST,
+				ServiceUrl = AuthProxy.P_E_Login,
+				PostData = new I_Login
+				{
+					PlatformId = _OAuthService.AuthenticatedUser.Id,
+				}
+			});
+
+			if (loginResult == null)
+			{
+				_OAuthService.Logout();
+				SetBusy(false);
+				return false;
+			}
+
+			ClientContext.SetCredentialsFrom(loginResult.PoseToken);
+			LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddSeconds(loginResult.TokenExpireIn));
+
+			SetBusy(false);
+
+			return true;
+		}
+
+		#endregion Methods
 	}
 }

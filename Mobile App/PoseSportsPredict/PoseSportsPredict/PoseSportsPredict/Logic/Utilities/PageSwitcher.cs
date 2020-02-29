@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.Logic.Utilities
 {
-	public class PageSwitcher : IPageSwitcher
+	public static class PageSwitcher
 	{
-		public async Task SwitchMainPageAsync(BaseViewModel viewModel, bool isNavPage = false, params object[] prepareData)
+		public static async Task SwitchMainPageAsync(BaseViewModel viewModel, bool isNavPage = false, params object[] prepareData)
 		{
 			if (!await viewModel.PrepareView(prepareData))
 				throw new Exception("[Fail] Prepare main page");
@@ -20,7 +20,7 @@ namespace PoseSportsPredict.Logic.Utilities
 				Application.Current.MainPage = viewModel.CoupledPage;
 		}
 
-		public async Task PushNavPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
+		public static async Task PushNavPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
 		{
 			if (Application.Current.MainPage is MasterDetailPage masterPage)
 			{
@@ -44,7 +44,7 @@ namespace PoseSportsPredict.Logic.Utilities
 			}
 		}
 
-		public async Task PushNavModalPageAsync(BaseViewModel viewModel, Page errorPage = null, bool isNavPage = false, params object[] prepareData)
+		public static async Task PushNavModalPageAsync(BaseViewModel viewModel, Page errorPage = null, bool isNavPage = false, params object[] prepareData)
 		{
 			if (Application.Current.MainPage is MasterDetailPage masterPage)
 			{

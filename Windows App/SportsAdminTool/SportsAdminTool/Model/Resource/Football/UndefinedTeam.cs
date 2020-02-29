@@ -20,19 +20,19 @@ namespace SportsAdminTool.Model.Resource.Football
 
 		void TableParser.IPostLoading.Process()
 		{
-			Dic_undefinedTeam.Add(MakeTeamConvertKey(this.CountryName, this.TeamName), this);
+			Dic_undefinedTeam.Add(MakeTeamConvertKey(this.CountryName, this.LeagueID, this.TeamName), this);
 		}
 
-		private static string MakeTeamConvertKey(string CountryName, string TeamName)
+		private static string MakeTeamConvertKey(string CountryName, short LeagueID, string TeamName)
 		{
-			return $"{CountryName}:{TeamName}";
+			return $"{CountryName}:{LeagueID}:{TeamName}";
 		}
 
-		public static bool TryConvertTeamID(string CountryName, string TeamName, out short convertedTeamID)
+		public static bool TryConvertTeamID(string CountryName, short LeagueID, string TeamName, out short convertedTeamID)
 		{
 			convertedTeamID = 0;
 
-			var key = MakeTeamConvertKey(CountryName, TeamName);
+			var key = MakeTeamConvertKey(CountryName, LeagueID, TeamName);
 			if (!Dic_undefinedTeam.ContainsKey(key))
 				return false;
 

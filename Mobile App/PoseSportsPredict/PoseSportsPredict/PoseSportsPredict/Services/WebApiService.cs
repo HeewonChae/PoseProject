@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using Flurl.Http;
 using Plugin.Connectivity;
+using PosePacket.WebError;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Resources;
 using System;
@@ -12,7 +13,7 @@ using WebServiceShare.WebServiceClient;
 
 namespace PoseSportsPredict.Services
 {
-	public class WebApiService : IWebApiService
+	public sealed class WebApiService : IWebApiService
 	{
 		public WebApiService()
 		{
@@ -22,7 +23,7 @@ namespace PoseSportsPredict.Services
 
 		#region Exception Handler
 
-		private async Task ExceptionHandler(Exception exception)
+		private async void ExceptionHandler(Exception exception)
 		{
 			if (exception is FlurlHttpException flurlException)
 			{
@@ -30,17 +31,33 @@ namespace PoseSportsPredict.Services
 				{
 					// 서버에 연결할 수 없음
 					await UserDialogs.Instance.AlertAsync("Service unavailable");
+
+					// TODO: 로그인 화면으로 이동
+					return;
+				}
+				else if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+				{
+					try
+					{
+						var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
+						await UserDialogs.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
+					}
+					catch (Exception)
+					{
+						// 알 수 없는 서버 에러
+						await UserDialogs.Instance.AlertAsync("Unkown service error");
+					}
 				}
 				else
 				{
+#if DEBUG
 					await UserDialogs.Instance.AlertAsync(flurlException.Message
 					, $"ErrorCode: {((int)flurlException.Call.Response.StatusCode).ToString()}");
+#else
+					await UserDialogs.Instance.AlertAsync(httpEx.Call.Response.StatusCode.ToString()
+					, $"Service ErrorCode: {((int)flurlException.Call.Response.StatusCode).ToString()}");
+#endif
 				}
-			}
-			else
-			{
-				// 알 수 없는 Flurl Client 에러
-				await UserDialogs.Instance.AlertAsync(exception.Message);
 			}
 		}
 
@@ -60,12 +77,12 @@ namespace PoseSportsPredict.Services
 			{
 				using (UserDialogs.Instance.Loading())
 				{
-					result = await WebClient.RequestAsync<TOut>(reqContext);
+					result = await WebClient.RequestAsync<TOut>(reqContext, false);
 				}
 			}
 			else
 			{
-				result = await WebClient.RequestAsync<TOut>(reqContext);
+				result = await WebClient.RequestAsync<TOut>(reqContext, false);
 			}
 
 			return result;

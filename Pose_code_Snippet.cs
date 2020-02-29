@@ -42,3 +42,25 @@ public class P_EXECUTE_QUERY : MysqlQuery<T_in, T_out>
         // Error Control
     }
 }
+
+// Command
+[WebModelType(InputType = typeof(), OutputType = typeof())]
+public static class P_Command
+{
+    public static class RowCode
+    {
+        [Description("Invalid input value")]
+        public const int Invalid_InputValue = ServiceErrorCode.WebMethod.P_Command + 1;
+    }
+
+    public static output Execute(input input)
+    {
+        if (input == null)
+            ErrorHandler.OccurException(RowCode.Invalid_Command);
+        return outpout;
+    }
+}
+
+
+ServerContext.Current.CreateCredentials();
+			byte[] eCredential = ServerContext.Current.EncryptCredentials();

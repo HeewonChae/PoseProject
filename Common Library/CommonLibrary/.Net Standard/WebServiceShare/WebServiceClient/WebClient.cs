@@ -15,7 +15,7 @@ namespace WebServiceShare.WebServiceClient
 	{
 		#region Exception Handle Delegate
 
-		public delegate Task ExceptionHandlerDelegate(Exception exception);
+		public delegate void ExceptionHandlerDelegate(Exception exception);
 
 		private static ExceptionHandlerDelegate _exceptionHandler = null;
 
@@ -38,7 +38,7 @@ namespace WebServiceShare.WebServiceClient
 			PoseHeader serviceHeader = new PoseHeader();
 			ClientContext.CopyTo(serviceHeader);
 
-			var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.BaseUrl ?? "");
+			var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.ServiceUrl ?? "");
 			var flurlClient = new FlurlClient(endPointAddr);
 			if (isIncludePoseHeader)
 				flurlClient.WithHeader(PoseHeader.HEADER_NAME, serviceHeader);
@@ -79,7 +79,7 @@ namespace WebServiceShare.WebServiceClient
 			}
 			catch (FlurlHttpException flurlException)
 			{
-				if (requestContext.AttemptCnt < 3)
+				if (requestContext.AttemptCnt < WebConfig.ReTryCount)
 					result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
 				else
 					_exceptionHandler?.Invoke(flurlException);

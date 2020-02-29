@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using FootballDB = Repository.Mysql.FootballDB;
+using FootballDB = Repositories.Mysql.FootballDB;
 using AppModel = SportsAdminTool.Model;
 
 namespace SportsAdminTool.Logic.Football
@@ -16,7 +16,7 @@ namespace SportsAdminTool.Logic.Football
 			dbModel = new FootballDB.Table.FixtureStatistic[2]
 				{
 					new FootballDB.Table.FixtureStatistic(),
-					new FootballDB.Table.FixtureStatistic() 
+					new FootballDB.Table.FixtureStatistic()
 				};
 
 			dbModel[0].fixture_id = fixtureID;

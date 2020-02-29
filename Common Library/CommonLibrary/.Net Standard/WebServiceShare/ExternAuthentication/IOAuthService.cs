@@ -12,7 +12,7 @@ namespace WebServiceShare.ExternAuthentication
 
 		ExternAuthUser AuthenticatedUser { get; }
 
-		Task OAuthLoginAsync(SNSProvider provider);
+		Task OAuthLoginAsync(SNSProviderType provider);
 
 		Task<bool> IsAuthenticatedAndValid();
 

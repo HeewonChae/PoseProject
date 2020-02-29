@@ -1,1 +1,28 @@
-{"Items":[{"ErrorCode":201001001,"Description":"Invalid name value"},{"ErrorCode":202001001,"Description":"Invalid input value"}]}
+{
+  "Items": [
+    {
+      "ErrorCode": 201001001,
+      "Description": "Invalid name value"
+    },
+    {
+      "ErrorCode": 202001001,
+      "Description": "Invalid input value"
+    },
+    {
+      "ErrorCode": 202001002,
+      "Description": "Invalid AccessToken"
+    },
+    {
+      "ErrorCode": 202001003,
+      "Description": "Failed OAuth"
+    },
+    {
+      "ErrorCode": 202002001,
+      "Description": "Invalid input value"
+    },
+    {
+      "ErrorCode": 202002002,
+      "Description": "Invalid platform Id"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ namespace WebServiceShare.ExternAuthentication.Providers
 {
 	public abstract class OAuthBase
 	{
-		public SNSProvider Provider { get; protected set; }
+		public SNSProviderType Provider { get; protected set; }
 		public string Description { get; protected set; }
 		public string ClientId { get; protected set; }
 		public string ClientSecret { get; protected set; }

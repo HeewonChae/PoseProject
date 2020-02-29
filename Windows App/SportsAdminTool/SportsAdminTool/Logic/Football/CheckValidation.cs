@@ -31,6 +31,7 @@ namespace SportsAdminTool.Logic.Football
 	{
 		public short TeamsID;
 		public string TeamName;
+		public short LeagueID;
 		public string CountryName;
 		public int ReasonType;
 	}
@@ -111,10 +112,10 @@ namespace SportsAdminTool.Logic.Football
 			return result && db_result;
 		}
 
-		public bool IsValidTeam(short teamID, string teamName, string countryName, bool isDB_check)
+		public bool IsValidTeam(short teamID, string teamName, short leagueID, string countryName, bool isDB_check)
 		{
 			// TeamID 컨버트 가능한지..
-			ResourceModel.Football.UndefinedTeam.TryConvertTeamID(countryName, teamName, out short convertedteamID);
+			ResourceModel.Football.UndefinedTeam.TryConvertTeamID(countryName, leagueID, teamName, out short convertedteamID);
 			if (convertedteamID != 0)
 				teamID = convertedteamID;
 
@@ -126,6 +127,7 @@ namespace SportsAdminTool.Logic.Football
 				{
 					TeamsID = teamID,
 					TeamName = teamName,
+					LeagueID = leagueID,
 					CountryName = countryName,
 					ReasonType = (int)InvalidType.Zero,
 				});
@@ -145,6 +147,7 @@ namespace SportsAdminTool.Logic.Football
 					{
 						TeamsID = teamID,
 						TeamName = teamName,
+						LeagueID = leagueID,
 						CountryName = countryName,
 						ReasonType = (int)InvalidType.NotExistInDB,
 					});

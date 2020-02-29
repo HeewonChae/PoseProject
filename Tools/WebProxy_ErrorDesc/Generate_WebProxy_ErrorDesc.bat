@@ -3,8 +3,8 @@
 rem 경로 셋팅
 SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin
 SET ProjectPath=C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator
-SET OutputPath1=C:\PoseProject_Git\Web App\PoseSportsWebService\PacketBuilder\bin\Release\Proxy
-SET OutputPath2=C:\PoseProjec_Gitt\Web App\PoseSportsWebService\PacketBuilder\bin\Release\ErrorDescription
+SET OutputPath1=C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator\bin\Release\Proxy
+SET OutputPath2=C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator\bin\Release\ErrorDescription
 SET CopyPath1=C:\PoseProject_Git\Common Library\CommonLibrary\.Net Standard\PosePacket\Proxy
 SET CopyPath2=C:\PoseProject_Git\Web App\PoseSportsWebService\SportsWebService\App_Data
 
@@ -27,11 +27,9 @@ IF %ERRORLEVEL% NEQ 0 (
 
 @echo call exe
 pushd "C:\PoseProject\Web App\PoseSportsWebService\PacketBuilder\bin\Release"
-	PacketBuilder.exe
+	CodeGenerator.exe
 popd
 
 @echo 2. Copy to work dir
 xcopy /s /e /y /k /r "%OutputPath1%" "%CopyPath1%"
 xcopy /s /e /y /k /r "%OutputPath2%" "%CopyPath2%"
-
-@echo End WebProxy.bat

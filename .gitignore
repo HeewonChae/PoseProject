@@ -1,10 +1,4 @@
-﻿/Common Library/CommonLibrary/LogicCore/bin/Debug
-/Common Library/PoseSportsPredictService/PosePacket/bin/Debug/netstandard2.0
-/Common Library/PoseSportsPredictService/PosePacket/obj
-/Common Library/CommonLibrary/LogicCore/obj/Debug
-/Common Library/PoseSportsPredictService/WebServiceShare/bin/Debug/netstandard2.0
-/Common Library/PoseSportsPredictService/WebServiceShare/obj
-/Web App/PoseSportsWebService/CodeGenerator/bin/Debug
+﻿/Web App/PoseSportsWebService/CodeGenerator/bin/Debug
 /Web App/PoseSportsWebService/CodeGenerator/obj/Debug
 /Web App/PoseSportsWebService/ReferenceText.NetCore/bin/Debug/netcoreapp3.1
 /Web App/PoseSportsWebService/ReferenceText.NetCore/obj
@@ -73,3 +67,8 @@
 /Common Library/CommonLibrary/.Net Standard/WebServiceShare/bin/Debug/netstandard2.0
 /Common Library/CommonLibrary/.Net Standard/WebServiceShare/obj
 /Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/bin/Debug/netstandard2.1
+/Common Library/DotNet_Framework/LogicCore/obj/Debug
+/Common Library/DotNet_Framework/LogicCore/bin/Debug
+/Common Library/DotNet_Framework/DotNet_Framework/bin/Debug
+/Common Library/DotNet_Framework/DotNet_Framework/obj/Debug
+/Common Library/DotNet_Framework/.vs/DotNet_Framework/v16

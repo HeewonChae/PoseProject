@@ -1,5 +1,4 @@
-﻿using LogicCore.File;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,11 +36,11 @@ namespace PacketBuilder.CodeDom
 
 		public void ParseErrorCode()
 		{
-			foreach(var declareType in _assambly.DefinedTypes)
+			foreach (var declareType in _assambly.DefinedTypes)
 			{
-				foreach(var codeJsonDesc in GetErrorCodeDesc(declareType))
+				foreach (var codeJsonDesc in GetErrorCodeDesc(declareType))
 				{
-					if(_codeJsonRoot.Items.Find(elem => elem.ErrorCode == codeJsonDesc.ErrorCode) != null)
+					if (_codeJsonRoot.Items.Find(elem => elem.ErrorCode == codeJsonDesc.ErrorCode) != null)
 					{
 						throw new Exception($"Alread Exist ErrorCode ErrorCode: {codeJsonDesc.ErrorCode}, Description: {codeJsonDesc.Description}");
 					}

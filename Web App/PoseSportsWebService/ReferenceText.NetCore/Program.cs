@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PosePacket.Proxy;
+using PosePacket.Service.Auth;
 using PosePacket.WebError;
 using System;
 using System.Collections.Generic;
@@ -18,41 +19,43 @@ namespace ReferenceText.NetCore
 {
 	internal class Program
 	{
-		private static Task ExceptionHandler(Exception exception)
+		private static async void ExceptionHandler(Exception exception)
 		{
-			return Task.Run(async () =>
+			if (exception is FlurlHttpException)
 			{
-				if (exception is FlurlHttpException)
+				var flurlException = exception as FlurlHttpException;
+				if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
 				{
-					var flurlException = exception as FlurlHttpException;
-					if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
-					{
-						var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
-						Console.WriteLine($"ErrorCode: {error.ErrorCode} Message: {error.Message}");
-					}
-					else
-					{
-						Console.WriteLine($"{flurlException.Message}");
-					}
+					var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
+					Console.WriteLine($"ErrorCode: {error.ErrorCode} Message: {error.Message}");
 				}
 				else
 				{
-					Console.WriteLine($"{exception.Message}");
+					Console.WriteLine($"{flurlException.Message}");
 				}
-			});
+			}
+			else
+			{
+				Console.WriteLine($"{exception.Message}");
+			}
 		}
 
 		private static void Main(string[] args)
 		{
-			WebConfig.ServiceBaseUrl = "http://192.168.0.157:8888/";
+			string serviceBaseUrl = "http://192.168.0.157:8888/";
 
 			WebClient.ExceptionHandler = Program.ExceptionHandler;
 
-			ClientContext.SetCredentialsFrom(WebClient.RequestAsync<string>(new RequestContext()
+			ClientContext.SetCredentialsFrom(WebClient.RequestAsync<string>(new WebRequestContext()
 			{
-				MethodType = WebConfig.WebMethodType.POST,
+				MethodType = WebMethodType.POST,
+				BaseUrl = serviceBaseUrl,
 				ServiceUrl = AuthProxy.ServiceUrl,
-				SegmentGroup = AuthProxy.P_PoseToken,
+				SegmentGroup = AuthProxy.P_E_Login,
+				PostData = new I_Login
+				{
+					PlatformId = "test",
+				},
 			}).Result);
 
 			Console.ReadLine();

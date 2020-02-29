@@ -114,16 +114,6 @@
     <Compile Include="Utility\FixedMySqlMigrationCodeGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\LogicCore\LogicCore.csproj">
-      <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
-      <Name>LogicCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\Repository\Repository.csproj">
-      <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
@@ -143,6 +133,9 @@
     <EmbeddedResource Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.resx">
       <DependentUpon>202002201810534_AlterLogoStringLength.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <StackLayout Margin="0, 30">
             <ActivityIndicator
-                IsRunning="{Binding IsLoading}"
+                IsRunning="True"
                 HorizontalOptions="Center"
                 VerticalOptions="EndAndExpand">
             </ActivityIndicator>

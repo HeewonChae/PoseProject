@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace PacketBuilder
 {
-	class Program
+	internal class Program
 	{
-		static void Main(string[] args)
+		private static void Main(string[] args)
 		{
 			// Web Service Proxy
 			var webServiceAssembly = typeof(SportsWebService.Global).Assembly;
-			
-			foreach(var definedType in webServiceAssembly.DefinedTypes)
+
+			foreach (var definedType in webServiceAssembly.DefinedTypes)
 			{
 				var attrData = definedType.CustomAttributes.Where(elem => elem.AttributeType.Name.Equals("ServiceContractAttribute")).FirstOrDefault();
 				if (attrData != null)
@@ -32,6 +32,9 @@ namespace PacketBuilder
 			ErrorCodeDescriptionBuilder errorCodeBuilder = new ErrorCodeDescriptionBuilder(webServiceAssembly);
 			errorCodeBuilder.ParseErrorCode();
 			errorCodeBuilder.GenerateJsonFile();
+
+			Console.WriteLine("Complete!!!");
+			Console.ReadLine();
 		}
 	}
 }

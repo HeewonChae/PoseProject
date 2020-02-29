@@ -7,9 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
+    <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Plugin.LocalNotification" Version="4.1.4" />
     <PackageReference Include="Shiny.Core" Version="1.0.0.1182" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.0" />

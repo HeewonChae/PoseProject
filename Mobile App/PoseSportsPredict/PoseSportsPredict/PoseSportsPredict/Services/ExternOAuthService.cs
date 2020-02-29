@@ -1,0 +1,133 @@
+﻿using Acr.UserDialogs;
+using PosePacket.Proxy;
+using PosePacket.Service.Auth;
+using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logic.ExternOAuth.Providers;
+using PoseSportsPredict.Utilities.LocalStorage;
+using PoseSportsPredict.ViewModels;
+using Shiny;
+using System;
+using System.Threading.Tasks;
+using WebServiceShare.ExternAuthentication;
+using WebServiceShare.ServiceContext;
+using WebServiceShare.WebServiceClient;
+using Xamarin.Auth;
+
+namespace PoseSportsPredict.Services
+{
+	public sealed class ExternOAuthService : IOAuthService
+	{
+		private bool _isAuthenticated;
+		private ExternAuthUser _authenticatedUser;
+		private IWebApiService _webApiService;
+
+		public bool IsAuthenticated => _isAuthenticated;
+		public ExternAuthUser AuthenticatedUser => _authenticatedUser;
+
+		public ExternOAuthService(IWebApiService webApiService)
+		{
+			_webApiService = webApiService;
+		}
+
+		public async Task OAuthLoginAsync(SNSProviderType provider)
+		{
+			try
+			{
+				if (WebApiService.CheckInternetConnection())
+					_isAuthenticated = false;
+
+				var oAuth = OAuthProviderFactory.CreateProvider(provider);
+				var authenticator = new OAuth2Authenticator(
+					oAuth.ClientId,
+					oAuth.Scope,
+					new Uri(oAuth.AuthorizationUrl),
+					new Uri(oAuth.RedirectUrl));
+
+				// Completed
+				authenticator.Completed += async (sender, eventArgs) =>
+				{
+					if (eventArgs.IsAuthenticated)
+					{
+						string token = eventArgs.Account.Properties["access_token"];
+
+						// P_E_CheckVaildOAuthUser
+						var checkResult = await _webApiService.RequestAsync<ExternAuthUser>(new WebRequestContext
+						{
+							BaseUrl = AppConfig.PoseWebBaseUrl,
+							MethodType = WebMethodType.POST,
+							ServiceUrl = AuthProxy.P_E_CheckVaildOAuthUser,
+							PostData = new I_CheckVaildOAuthUser
+							{
+								SNSProvider = provider,
+								AccessToken = token,
+							}
+						});
+						if (checkResult == null)
+							return;
+
+						// PoseWebLogin
+						var loginResult = await ShinyHost.Resolve<LoginViewModel>().PoseWebLogin();
+						if (!loginResult)
+							return;
+
+						_authenticatedUser = checkResult;
+						_isAuthenticated = true;
+						LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
+
+						await UserDialogs.Instance.AlertAsync("OAuth Completed");
+					}
+				};
+
+				// Error
+				authenticator.Error += async (sender, eventArgs) =>
+				{
+					_isAuthenticated = false;
+					await UserDialogs.Instance.AlertAsync($"OAuth error: {eventArgs.Message}");
+				};
+
+				var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+				presenter.Login(authenticator);
+
+				// 로그인 폼 닫힘
+				presenter.Completed += (sender, eventArgs) =>
+				{
+					ShinyHost.Resolve<LoginViewModel>().SetBusy(false);
+				};
+			}
+			catch (Exception ex)
+			{
+				await UserDialogs.Instance.AlertAsync($"OAuth exception: {ex.Message}");
+			}
+		}
+
+		public async Task<bool> IsAuthenticatedAndValid()
+		{
+			_isAuthenticated = false;
+
+			LocalStorage.Storage.GetValueOrDefault(LocalStorageKey.SavedAuthenticatedUser, out _authenticatedUser);
+
+			// 저장된 인증 유저 없음
+			if (_authenticatedUser == null)
+				return _isAuthenticated;
+
+			// 토큰 기한 만료
+			if (_authenticatedUser.ExpiresIn < DateTime.UtcNow)
+				return _isAuthenticated;
+
+			var oAuth = OAuthProviderFactory.CreateProvider(_authenticatedUser.SNSProvider);
+			_authenticatedUser = await oAuth.GetUserInfoAsync(_authenticatedUser.Token);
+
+			// 유저데이터 받아오기 실패
+			if (_authenticatedUser == null)
+				return _isAuthenticated;
+
+			return _isAuthenticated = true;
+		}
+
+		public void Logout()
+		{
+			_isAuthenticated = false;
+			LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
+		}
+	}
+}

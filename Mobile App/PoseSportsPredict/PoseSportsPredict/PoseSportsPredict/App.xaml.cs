@@ -1,5 +1,6 @@
 ﻿using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logic.Utilities;
 using PoseSportsPredict.ViewModels;
 using Shiny;
 using System;
@@ -14,7 +15,7 @@ namespace PoseSportsPredict
 		{
 			InitializeComponent();
 
-			MainPage = new LoadingPage();
+			MainPage = ShinyHost.Resolve<LoadingPage>();
 		}
 
 		protected override async void OnStart()
@@ -24,7 +25,7 @@ namespace PoseSportsPredict
 				await loadingPage.LoadingAsync();
 			}
 
-			await ShinyHost.Resolve<IPageSwitcher>().SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
+			await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
 		}
 
 		protected override void OnSleep()

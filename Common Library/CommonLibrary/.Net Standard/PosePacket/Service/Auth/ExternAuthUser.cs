@@ -18,7 +18,7 @@ namespace PosePacket.Service.Auth
 
 		public string PictureUrl { get; set; }
 
-		public SNSProvider Provider { get; set; }
+		public SNSProviderType SNSProvider { get; set; }
 
 		public DateTime ExpiresIn { get; set; }
 	}

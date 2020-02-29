@@ -40,3 +40,19 @@ MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) 
     Items.Add(newItem);
     await DataStore.AddItemAsync(newItem);
 });
+
+//6. LocalNotification
+var request = new NotificationRequest
+{
+    NotificationId = 1,
+    Title = "Test",
+    Description = $"Notification Activate",
+    NotifyTime = DateTime.Now.AddSeconds(5),
+    ReturningData = "dummy",
+    Android = new Plugin.LocalNotification.AndroidOptions
+    {
+        IconName = "round_android_black_24",
+    },
+};
+
+NotificationCenter.Current.Show(request);

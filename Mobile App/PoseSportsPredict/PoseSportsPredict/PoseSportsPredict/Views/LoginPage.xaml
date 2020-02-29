@@ -5,14 +5,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="PoseSportsPredict.Views.LoginPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            <Label
-                Text="Hello Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="Center" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image
+                Grid.Row="2"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Source="facegbook_login"
+                HeightRequest="70">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginFacebookCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

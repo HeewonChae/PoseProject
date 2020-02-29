@@ -36,13 +36,16 @@
 		{
 		}
 
-		public static class WebMethod
+		public static class WebMethod_Auth
 		{
-			// HelloWorld
-			public const int P_Hello = WebService.HelloWorld + 0001000;
+			public const int P_E_CheckVaildOAuthUser = WebService.Auth + 0001000;
 
-			// Auth
-			public const int P_PoseToken = WebService.Auth + 0001000;
+			public const int P_E_Login = WebService.Auth + 0002000;
+		}
+
+		public static class WebMethod_HelloWorld
+		{
+			public const int P_Hello = WebService.HelloWorld + 0001000;
 		}
 
 		public static class Procedure

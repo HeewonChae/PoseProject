@@ -28,6 +28,7 @@ namespace PoseSportsPredict.Droid
 			base.OnCreate(savedInstanceState);
 
 			//Initialize shiny
+			Shiny.AndroidShinyHost.ValidateScopes = false;
 			Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
 
 			global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");

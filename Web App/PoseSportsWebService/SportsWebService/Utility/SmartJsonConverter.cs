@@ -19,9 +19,28 @@ namespace SportsWebService.Utility
 			{
 				result = JsonConvert.DeserializeObject<TOut>(jsonString);
 			}
-			catch(Exception)
+			catch (Exception)
 			{
 				ErrorHandler.OccurException(System.Net.HttpStatusCode.BadRequest);
+			}
+
+			return result;
+		}
+
+		public static string JsonSerialize(this object @object)
+		{
+			string result = string.Empty;
+
+			if (@object == null)
+				return result;
+
+			try
+			{
+				result = JsonConvert.SerializeObject(@object);
+			}
+			catch (Exception)
+			{
+				return string.Empty;
 			}
 
 			return result;

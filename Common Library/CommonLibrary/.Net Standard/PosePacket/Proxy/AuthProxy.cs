@@ -18,7 +18,11 @@ namespace PosePacket.Proxy
         
         private static string _serviceUrl = "Service/Auth.svc";
         
-        private static string _P_PoseToken = "PoseToken";
+        private static string _P_E_TokenRefresh = "TokenRefresh";
+        
+        private static string _P_E_CheckVaildOAuthUser = "CheckVaildOAuthUser";
+        
+        private static string _P_E_Login = "Login";
         
         // Service base url
         public static string ServiceUrl
@@ -29,14 +33,36 @@ namespace PosePacket.Proxy
             }
         }
         
-        // MethodType: POST, Segment: PoseToken 
-        // InputType: System.String 
-        // OutputType: System.Byte[]
-        public static string P_PoseToken
+        // MethodType: GET, Segment: TokenRefresh 
+        // InputType: null 
+        // OutputType: null
+        public static string P_E_TokenRefresh
         {
             get
             {
-                return _P_PoseToken;
+                return _P_E_TokenRefresh;
+            }
+        }
+        
+        // MethodType: POST, Segment: CheckVaildOAuthUser 
+        // InputType: PosePacket.Service.Auth.I_CheckVaildOAuthUser 
+        // OutputType: PosePacket.Service.Auth.ExternAuthUser
+        public static string P_E_CheckVaildOAuthUser
+        {
+            get
+            {
+                return _P_E_CheckVaildOAuthUser;
+            }
+        }
+        
+        // MethodType: POST, Segment: Login 
+        // InputType: PosePacket.Service.Auth.I_Login 
+        // OutputType: System.String
+        public static string P_E_Login
+        {
+            get
+            {
+                return _P_E_Login;
             }
         }
     }

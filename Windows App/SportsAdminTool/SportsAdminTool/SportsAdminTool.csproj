@@ -232,19 +232,15 @@
     <Resource Include="mahapps.metro.logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\LogicCore\LogicCore.csproj">
+    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Framwork\LogicCore\LogicCore.csproj">
       <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
       <Name>LogicCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\RapidAPI\RapidAPI.csproj">
+    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\.Net Framwork\RapidAPI\RapidAPI.csproj">
       <Project>{0310e278-ebfc-4dd8-8a36-27321a01c52f}</Project>
       <Name>RapidAPI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\Repository\Repository.csproj">
-      <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Repository.Mysql\Repository.Mysql.csproj">
+    <ProjectReference Include="..\Repositories.Mysql\Repository.Mysql.csproj">
       <Project>{300d85b2-91dd-42c9-89c0-4a2900aa9993}</Project>
       <Name>Repository.Mysql</Name>
     </ProjectReference>
