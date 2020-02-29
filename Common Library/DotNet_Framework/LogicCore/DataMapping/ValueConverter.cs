@@ -1,12 +1,8 @@
 ﻿using LogicCore.DataMapping.Utilities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.DataMapping
 {
@@ -95,15 +91,19 @@ namespace LogicCore.DataMapping
 						case TypeConversion.Direct:
 							destination = source;
 							break;
+
 						case TypeConversion.Enum:
 							destination = FromEnum(sourceType, destinationType, source);
 							break;
+
 						case TypeConversion.Convertable:
 							destination = FromConvertable(sourceType, destinationType, source);
 							break;
+
 						case TypeConversion.Converter:
 							destination = FromConverter(sourceType, destinationType, source);
 							break;
+
 						case TypeConversion.String:
 							destination = FromString(sourceType, destinationType, source);
 							break;
@@ -219,7 +219,7 @@ namespace LogicCore.DataMapping
 		}
 	}
 
-	#endregion
+	#endregion ValueConverter
 
 	#region ValueConverterException
 
@@ -243,8 +243,8 @@ namespace LogicCore.DataMapping
 			: base(info, context)
 		{ }
 
-		#endregion
+		#endregion Ctor
 	}
 
-	#endregion
+	#endregion ValueConverterException
 }

@@ -1,6 +1,5 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility.Pool;
-using System;
 using System.Collections.Generic;
 
 namespace LogicCore.AIBehaviour
@@ -22,13 +21,16 @@ namespace LogicCore.AIBehaviour
 		public string Name => _name;
 		public Status LastStatus => _lastStatus;
 		public long CurrentTime { get; set; }
+
 		public Node Parent
 		{
 			get => _parent;
 			internal set => _parent = value;
 		}
 
-		public virtual void OnAlloc(){}
+		public virtual void OnAlloc()
+		{
+		}
 
 		public virtual void OnFree()
 		{
@@ -44,6 +46,7 @@ namespace LogicCore.AIBehaviour
 		}
 
 		public abstract IEnumerable<Status> Execute();
+
 		public abstract void FreeAll();
 
 		public Status OnUpdate(long time)

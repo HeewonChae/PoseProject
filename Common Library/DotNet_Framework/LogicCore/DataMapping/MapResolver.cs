@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.DataMapping
 {
@@ -23,7 +21,7 @@ namespace LogicCore.DataMapping
 		/// </summary>
 		private static readonly Dictionary<string, Map> maps = new Dictionary<string, Map>();
 
-		#endregion
+		#endregion Fields
 
 		#region Resolving the mappings
 
@@ -181,10 +179,10 @@ namespace LogicCore.DataMapping
 			return false;
 		}
 
-		#endregion
+		#endregion Resolving the mappings
 	}
 
-	#endregion
+	#endregion MapResolver
 
 	#region MapResolveOptions
 
@@ -205,5 +203,5 @@ namespace LogicCore.DataMapping
 		UsePrivateSetter = 1
 	}
 
-	#endregion
+	#endregion MapResolveOptions
 }

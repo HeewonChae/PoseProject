@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace LogicCore.ConfigProvider
 {
@@ -41,7 +36,6 @@ namespace LogicCore.ConfigProvider
 
 			// Open the configuration.
 			config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-
 		}
 
 		/// <summary>

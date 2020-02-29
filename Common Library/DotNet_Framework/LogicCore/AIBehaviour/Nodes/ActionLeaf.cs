@@ -2,9 +2,6 @@
 using LogicCore.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.AIBehaviour.Nodes
 {
@@ -13,7 +10,7 @@ namespace LogicCore.AIBehaviour.Nodes
 		/// <summary>
 		/// Function to invoke for the action.
 		/// </summary>
-		Func<long, Status> _behaviour;
+		private Func<long, Status> _behaviour;
 
 		public void OnAlloc(string name, Func<long, Status> behaviour)
 		{

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.Utility.Collection
 {
@@ -12,7 +9,9 @@ namespace LogicCore.Utility.Collection
 
 		public int Count { get { return this._elements.Count; } }
 
-		public MaxHeap() : this(16) { }
+		public MaxHeap() : this(16)
+		{
+		}
 
 		public MaxHeap(int capacity)
 		{
@@ -63,6 +62,7 @@ namespace LogicCore.Utility.Collection
 
 			return this._elements[0];
 		}
+
 		public void RemoveFirst()
 		{
 			int count = this._elements.Count;
@@ -157,7 +157,7 @@ namespace LogicCore.Utility.Collection
 			}
 		}
 
-		void Swap(int index1, int index2)
+		private void Swap(int index1, int index2)
 		{
 			T temp = this._elements[index1];
 			this._elements[index1] = this._elements[index2];
@@ -171,7 +171,9 @@ namespace LogicCore.Utility.Collection
 
 		public int Count { get { return this._elements.Count; } }
 
-		public MaxHeap() : this(16) { }
+		public MaxHeap() : this(16)
+		{
+		}
 
 		public MaxHeap(int capacity)
 		{
@@ -317,7 +319,7 @@ namespace LogicCore.Utility.Collection
 			}
 		}
 
-		void swap(int index1, int index2)
+		private void swap(int index1, int index2)
 		{
 			KeyValuePair<TKey, TValue> temp = this._elements[index1];
 			this._elements[index1] = this._elements[index2];

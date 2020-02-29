@@ -1,13 +1,11 @@
 ﻿using LogicCore.AIBehaviour.Nodes;
-using LogicCore.AIBehaviour.Nodes.Decorators;
 using LogicCore.AIBehaviour.Nodes.Composites;
+using LogicCore.AIBehaviour.Nodes.Decorators;
 using LogicCore.Debug;
 using LogicCore.Utility;
 using LogicCore.Utility.Pool;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace LogicCore.AIBehaviour
 {
@@ -16,8 +14,11 @@ namespace LogicCore.AIBehaviour
 		private Node _curNode = null;
 		private readonly Stack<Node> _parentNodes = new Stack<Node>();
 
-		public void OnAlloc() { }
-		public void OnFree() 
+		public void OnAlloc()
+		{
+		}
+
+		public void OnFree()
 		{
 			CleanUp();
 		}
@@ -93,6 +94,7 @@ namespace LogicCore.AIBehaviour
 			_parentNodes.Push(repeatUntilFailure);
 			return this;
 		}
+
 		/// <summary>
 		/// decoration(repeater) for action
 		/// </summary>
@@ -132,7 +134,6 @@ namespace LogicCore.AIBehaviour
 			_parentNodes.Push(squence);
 			return this;
 		}
-
 
 		/// <summary>
 		/// composite(parallel) for action
@@ -175,7 +176,6 @@ namespace LogicCore.AIBehaviour
 
 			return this;
 		}
-
 
 		/// <summary>
 		/// decoration(repeater) for action

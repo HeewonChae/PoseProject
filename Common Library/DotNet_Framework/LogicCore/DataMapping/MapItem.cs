@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.DataMapping
 {
@@ -17,7 +13,7 @@ namespace LogicCore.DataMapping
 		private readonly object mutex = new object();
 		private string key;
 
-		#endregion
+		#endregion Fields
 
 		#region Ctor
 
@@ -46,7 +42,7 @@ namespace LogicCore.DataMapping
 			this.Map = map;
 		}
 
-		#endregion
+		#endregion Ctor
 
 		#region Properties
 
@@ -87,14 +83,14 @@ namespace LogicCore.DataMapping
 			{
 				if (key == null)
 				{
-					key = String.Concat(Source.Name,":" ,Source.Type.FullName,";", Destination.Name, ":", Destination.Type.FullName);
+					key = String.Concat(Source.Name, ":", Source.Type.FullName, ";", Destination.Name, ":", Destination.Type.FullName);
 				}
 
 				return key;
 			}
 		}
 
-		#endregion
+		#endregion Properties
 
 		#region Item class
 
@@ -108,7 +104,7 @@ namespace LogicCore.DataMapping
 			private MemberType? memberType = null;
 			private Type type = null;
 
-			#endregion
+			#endregion Fields
 
 			#region Ctor
 
@@ -128,7 +124,7 @@ namespace LogicCore.DataMapping
 				this.MemberInfo = memberInfo;
 			}
 
-			#endregion
+			#endregion Ctor
 
 			#region Properties
 
@@ -197,7 +193,7 @@ namespace LogicCore.DataMapping
 			/// </remarks>
 			public MemberInfo MemberInfo { get; private set; }
 
-			#endregion
+			#endregion Properties
 
 			#region Methods
 
@@ -279,10 +275,10 @@ namespace LogicCore.DataMapping
 				return type;
 			}
 
-			#endregion
+			#endregion Methods
 		}
 
-		#endregion
+		#endregion Item class
 
 		#region MemberType enum
 
@@ -302,7 +298,7 @@ namespace LogicCore.DataMapping
 			Method
 		}
 
-		#endregion
+		#endregion MemberType enum
 
 		#region Methods
 
@@ -314,6 +310,6 @@ namespace LogicCore.DataMapping
 			this.Map = null;
 		}
 
-		#endregion
+		#endregion Methods
 	}
 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogicCore.Utility
 {
@@ -11,10 +7,10 @@ namespace LogicCore.Utility
 	{
 		public interface INode { }
 
-		class Holder<T> where T : class, INode, new()
+		private class Holder<T> where T : class, INode, new()
 		{
-			static readonly Lazy<T> lazyInstance = new Lazy<T>(() => new T(), LazyThreadSafetyMode.ExecutionAndPublication);
-			static T instance = null;
+			private static readonly Lazy<T> lazyInstance = new Lazy<T>(() => new T(), LazyThreadSafetyMode.ExecutionAndPublication);
+			private static T instance = null;
 
 			public static T Instance
 			{
@@ -23,6 +19,7 @@ namespace LogicCore.Utility
 					return instance ?? lazyInstance.Value;
 				}
 			}
+
 			public static bool HasInstance
 			{
 				get { return (instance != null) || (lazyInstance.IsValueCreated == true); }

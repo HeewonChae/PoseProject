@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.Debug
 {
@@ -25,7 +21,6 @@ namespace LogicCore.Debug
 								[System.Runtime.CompilerServices.CallerLineNumber] int line = 0,
 								[System.Runtime.CompilerServices.CallerFilePath] string fileName = "")
 		{
-
 			if (condition == true)
 			{
 				return;

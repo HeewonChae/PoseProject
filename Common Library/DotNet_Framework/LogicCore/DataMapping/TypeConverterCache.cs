@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.DataMapping
 {
@@ -17,7 +15,7 @@ namespace LogicCore.DataMapping
 		private static readonly Dictionary<string, TypeConverter> cache = new Dictionary<string, TypeConverter>();
 		private static readonly object mutex = new object();
 
-		#endregion
+		#endregion Fields
 
 		#region Methods
 
@@ -141,6 +139,6 @@ namespace LogicCore.DataMapping
 			return null;
 		}
 
-		#endregion
+		#endregion Methods
 	}
 }

@@ -1,9 +1,6 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility.Pool;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace LogicCore.Utility
@@ -14,7 +11,7 @@ namespace LogicCore.Utility
 
 		public class Reservation : IPoolable
 		{
-			static int Indexer = 0x1000;
+			private static int Indexer = 0x1000;
 
 			public int Index = 0;
 			public OnTime OnTime { get; internal set; }
@@ -24,7 +21,10 @@ namespace LogicCore.Utility
 				Index = Interlocked.Add(ref Reservation.Indexer, 0x02);
 			}
 
-			public void OnAlloc() { }
+			public void OnAlloc()
+			{
+			}
+
 			public void OnFree()
 			{
 				this.OnTime = null;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.Utility.Collection
 {
@@ -12,7 +9,9 @@ namespace LogicCore.Utility.Collection
 
 		public int Count { get { return this._elements.Count; } }
 
-		public MinHeap() : this(16) { }
+		public MinHeap() : this(16)
+		{
+		}
 
 		public MinHeap(int capacity)
 		{
@@ -158,7 +157,7 @@ namespace LogicCore.Utility.Collection
 			}
 		}
 
-		void Swap(int index1, int index2)
+		private void Swap(int index1, int index2)
 		{
 			T temp = this._elements[index1];
 			this._elements[index1] = this._elements[index2];
@@ -172,7 +171,9 @@ namespace LogicCore.Utility.Collection
 
 		public int Count { get { return this._elements.Count; } }
 
-		public MinHeap() : this(16) { }
+		public MinHeap() : this(16)
+		{
+		}
 
 		public MinHeap(int capacity)
 		{
@@ -189,6 +190,7 @@ namespace LogicCore.Utility.Collection
 			this._elements.Add(pair);
 			this.BubbleUp();
 		}
+
 		public void Add(TKey key, TValue value)
 		{
 			this._elements.Add(new KeyValuePair<TKey, TValue>(key, value));
@@ -323,7 +325,7 @@ namespace LogicCore.Utility.Collection
 			}
 		}
 
-		void Swap(int index1, int index2)
+		private void Swap(int index1, int index2)
 		{
 			KeyValuePair<TKey, TValue> temp = this._elements[index1];
 			this._elements[index1] = this._elements[index2];

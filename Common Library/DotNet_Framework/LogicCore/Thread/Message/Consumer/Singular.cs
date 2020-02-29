@@ -1,9 +1,6 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
@@ -61,6 +58,7 @@ namespace LogicCore.Thread.Message.Consumer
 		}
 
 		private CancellationTokenSource _cts;
+
 		public bool Start()
 		{
 			Dev.Assert(_cts == null);
@@ -68,7 +66,7 @@ namespace LogicCore.Thread.Message.Consumer
 
 			Task.Factory.StartNew((@singular) => Singular.Process(@singular as Singular)
 				  , this
-				  , TaskCreationOptions.LongRunning 
+				  , TaskCreationOptions.LongRunning
 				  | TaskCreationOptions.DenyChildAttach)
 					.ContinueWith(
 						(prevTasks) =>
@@ -77,9 +75,8 @@ namespace LogicCore.Thread.Message.Consumer
 							{
 								prevTasks.Exception.Handle((ex) => _handler(ex));
 							}
-
-						}, TaskContinuationOptions.OnlyOnFaulted 
-							| TaskContinuationOptions.ExecuteSynchronously 
+						}, TaskContinuationOptions.OnlyOnFaulted
+							| TaskContinuationOptions.ExecuteSynchronously
 							| TaskContinuationOptions.DenyChildAttach);
 
 			return true;

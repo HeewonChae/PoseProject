@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.DataMapping
 {
@@ -21,7 +18,7 @@ namespace LogicCore.DataMapping
 		private List<MapItem> items;
 		private Dictionary<string, Map> subMaps;
 
-		#endregion
+		#endregion Fields
 
 		#region Ctor
 
@@ -39,7 +36,7 @@ namespace LogicCore.DataMapping
 			this.subMaps = new Dictionary<string, Map>();
 		}
 
-		#endregion
+		#endregion Ctor
 
 		#region Properties
 
@@ -52,7 +49,7 @@ namespace LogicCore.DataMapping
 			get { return this.items; }
 		}
 
-		#endregion
+		#endregion Properties
 
 		#region Simple mapping
 
@@ -124,7 +121,7 @@ namespace LogicCore.DataMapping
 			return Add<TSource, TDestination>(sourceMemberName, destinationMemberName);
 		}
 
-		#endregion
+		#endregion Simple mapping
 
 		#region Complex mapping
 
@@ -199,7 +196,7 @@ namespace LogicCore.DataMapping
 			return Complex<TSource, TDestination>(sourceMemberName, destinationMemberName);
 		}
 
-		#endregion
+		#endregion Complex mapping
 
 		#region Ignorance
 
@@ -229,7 +226,7 @@ namespace LogicCore.DataMapping
 
 		/// <summary>
 		/// Marks the mapping where provided source or destination member name is equal to
-		/// provided member name as ignored. If you want to remove mapping completely, 
+		/// provided member name as ignored. If you want to remove mapping completely,
 		/// use <see cref="Remove"/> method.
 		/// </summary>
 		/// <param name="memberName">A name of the source or destination member to mark as ignored.</param>
@@ -375,7 +372,7 @@ namespace LogicCore.DataMapping
 			return this;
 		}
 
-		#endregion
+		#endregion Ignorance
 
 		#region Removing
 
@@ -485,7 +482,7 @@ namespace LogicCore.DataMapping
 			return Remove(name);
 		}
 
-		#endregion
+		#endregion Removing
 
 		#region Methods
 
@@ -630,6 +627,6 @@ namespace LogicCore.DataMapping
 			return this;
 		}
 
-		#endregion
+		#endregion Methods
 	}
 }

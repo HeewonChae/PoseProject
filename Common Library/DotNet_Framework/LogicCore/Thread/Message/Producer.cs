@@ -1,16 +1,12 @@
 ﻿using LogicCore.Debug;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace LogicCore.Thread.Message
 {
 	public abstract class Producer : IComparable<Producer>
 	{
-		static int Indexer = 0x1000;
+		private static int Indexer = 0x1000;
 		public int Index = 0;
 
 		public Producer()
@@ -28,7 +24,7 @@ namespace LogicCore.Thread.Message
 			return 0;
 		}
 
-		bool lastPostResult = false;
+		private bool lastPostResult = false;
 
 		public bool Produce(Consumer.Singular consumer, Worker worker)
 		{

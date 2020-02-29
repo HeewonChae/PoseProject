@@ -8,6 +8,7 @@ namespace LogicCore.Utility
 	public class Alarm : Singleton.INode
 	{
 		public delegate void OnTime(long time, IAlarmPayload payload);
+
 		public delegate void OnCancel();
 
 		public interface IAlarmPayload
@@ -20,19 +21,22 @@ namespace LogicCore.Utility
 			public interface IHandle
 			{
 				Reservation Reservation { get; set; }
+
 				void CancelReservation();
 			}
 
 			internal long Time { get; set; }
 			internal OnTime OnTime { get; set; }
-			internal OnCancel OnCancel { get;  set; }
+			internal OnCancel OnCancel { get; set; }
 			internal IAlarmPayload Payload { get; set; }
 			internal IHandle Handler { get; set; }
 
 			public bool IsCalled { get; internal set; }
 			public bool IsCanceled { get; internal set; }
 
-			public void OnAlloc() { }
+			public void OnAlloc()
+			{
+			}
 
 			public void OnFree()
 			{
@@ -86,7 +90,7 @@ namespace LogicCore.Utility
 
 			Monitor.Enter(_blocker);
 
-			if(!reservation.IsCalled)
+			if (!reservation.IsCalled)
 			{
 				reservation.IsCanceled = true;
 				reservation.OnCancel?.Invoke();
@@ -113,7 +117,7 @@ namespace LogicCore.Utility
 				{
 					pair.Value.IsCalled = true;
 
-					if(pair.Value.Handler != null)
+					if (pair.Value.Handler != null)
 						pair.Value.Handler.Reservation = null;
 
 					pair.Value.OnTime?.Invoke(pair.Key, pair.Value.Payload);

@@ -3,10 +3,6 @@ using LogicCore.Debug;
 using LogicCore.Utility;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.File
 {
@@ -33,6 +29,7 @@ namespace LogicCore.File
 		}
 
 		#region CSV
+
 		/// <summary>
 		/// Parse one csv format file
 		/// </summary>
@@ -58,9 +55,11 @@ namespace LogicCore.File
 			}
 			return false;
 		}
-		#endregion
+
+		#endregion CSV
 
 		#region JSON
+
 		/// <summary>
 		/// Deserialize Json file to Object(T)
 		/// </summary>
@@ -83,7 +82,7 @@ namespace LogicCore.File
 
 			return (T)loader.Deserialize(buffer);
 		}
-		
+
 		/// <summary>
 		/// Parse Json Table
 		/// </summary>
@@ -113,7 +112,7 @@ namespace LogicCore.File
 
 				if (!GameDatabase.LoadTableJson(tableName, loader, buffer, IndexFieldName: indexField, additive: additive))
 					throw new Exception("load table Failedd by unknown problem");
-				
+
 				if (typeof(IPostLoading).IsAssignableFrom(recordType))
 					_postLoadingTables.Add(tableName);
 
@@ -137,7 +136,7 @@ namespace LogicCore.File
 		/// <param name="supportTypes"></param>
 		/// <param name="indexField"></param>
 		/// <returns></returns>
-		public bool TryLoadJsonSingleRow(string tableName, Type recordType, byte[] buffer, 
+		public bool TryLoadJsonSingleRow(string tableName, Type recordType, byte[] buffer,
 			IList<(Type, string)> supportTypes, string indexField = "Index")
 		{
 			try
@@ -167,9 +166,11 @@ namespace LogicCore.File
 
 			return false;
 		}
-		#endregion
+
+		#endregion JSON
 
 		#region XML
+
 		public bool TryLoadSimpleXml(string tableName, string recordName, Type recordType, byte[] buffer)
 		{
 			try
@@ -179,7 +180,7 @@ namespace LogicCore.File
 
 				if (typeof(IPostLoading).IsAssignableFrom(recordType))
 					_postLoadingTables.Add(tableName);
-				
+
 				return false;
 			}
 			catch (Exception ex)
@@ -188,9 +189,11 @@ namespace LogicCore.File
 			}
 			return false;
 		}
-		#endregion
+
+		#endregion XML
 
 		#region Table Post Load
+
 		public void PostLoadingTables()
 		{
 			foreach (var tableName in this._postLoadingTables)
@@ -225,14 +228,16 @@ namespace LogicCore.File
 					item.Process();
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				_loadingErrorMessages.Add($"PostLoading table: {tableName} - {ex.Message}");
 			}
 		}
-		#endregion
+
+		#endregion Table Post Load
 
 		#region Utility
+
 		public void PrintErrorMessage()
 		{
 			if (_loadingErrorMessages.Count == 0)
@@ -243,6 +248,7 @@ namespace LogicCore.File
 
 			_loadingErrorMessages.Clear();
 		}
-		#endregion
+
+		#endregion Utility
 	}
 }

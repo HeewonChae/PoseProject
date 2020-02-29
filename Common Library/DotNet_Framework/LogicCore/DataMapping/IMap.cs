@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicCore.DataMapping
 {
@@ -67,7 +64,7 @@ namespace LogicCore.DataMapping
 		/// <returns>A changed <see cref="IMap"/>.</returns>
 		IMap Add<TSource, TDestination>(Expression<Func<TSource, object>> sourceMember, Expression<Func<TDestination, object>> destinationMember) where TDestination : new();
 
-		#endregion
+		#endregion Simple mapping
 
 		/// <summary>
 		/// Clears map from all the mappings.
@@ -130,7 +127,7 @@ namespace LogicCore.DataMapping
 		/// </exception>
 		IMap Complex<TSource, TDestination>(Expression<Func<TSource, object>> sourceMember, Expression<Func<TDestination, object>> destinationMember) where TDestination : new();
 
-		#endregion
+		#endregion Complex mapping
 
 		#region Ignorance
 
@@ -147,7 +144,7 @@ namespace LogicCore.DataMapping
 
 		/// <summary>
 		/// Marks the mapping where provided source or destination member name is equal to
-		/// provided member name as ignored. If you want to remove mapping completely, 
+		/// provided member name as ignored. If you want to remove mapping completely,
 		/// use <see cref="Remove"/> method.
 		/// </summary>
 		/// <param name="memberName">A name of the source or destination member to mark as ignored.</param>
@@ -210,7 +207,7 @@ namespace LogicCore.DataMapping
 		/// <returns>A changed <see cref="Map"/> instance.</returns>
 		IMap UnignoreAll();
 
-		#endregion
+		#endregion Ignorance
 
 		#region Removing
 
@@ -249,6 +246,6 @@ namespace LogicCore.DataMapping
 		/// <returns>A changed <see cref="IMap"/> instance.</returns>
 		IMap Remove<T>(Expression<Func<T, object>> expression);
 
-		#endregion
+		#endregion Removing
 	}
 }
