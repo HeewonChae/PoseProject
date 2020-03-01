@@ -70,7 +70,7 @@ namespace WebServiceShare.WebServiceClient
 				else if (requestContext.MethodType == WebMethodType.POST)
 				{
 					result = await flurlRequest
-						.PostJsonAsync(requestContext.PostData)
+						.PostJsonAsync(requestContext.JsonSerialize())
 						.ReceiveJson<TOut>();
 				}
 			}
@@ -151,28 +151,12 @@ namespace WebServiceShare.WebServiceClient
 			TOut result = default;
 
 			// 인증토큰 리프레쉬
-			//if (flurlException.Call.Response != null
-			//	&& flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
-			//{
-			//	try
-			//	{
-			//		var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
-			//		if (error.ErrorCode == ServiceErrorCode.Authenticate.CredentialsExpire)
-			//		{
-			//			ClientContext.SetCredentialsFrom(await WebClient.RequestAsync<string>(new RequestContext()
-			//			{
-			//				MethodType = WebConfig.WebMethodType.POST,
-			//				ServiceUrl = AuthProxy.ServiceUrl,
-			//				SegmentGroup = AuthProxy.P_PoseToken,
-			//			}));
-			//		}
-			//	}
-			//	catch (Exception)
-			//	{
-			//		_exceptionHandler?.Invoke(flurlException);
-			//		return result;
-			//	}
-			//}
+			if (flurlException.Call.Response != null
+				&& flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+			{
+				_exceptionHandler?.Invoke(flurlException);
+				return result;
+			}
 
 			// 재시도
 			if (flurlException.Call.Response != null)

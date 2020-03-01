@@ -13,5 +13,16 @@ namespace WebServiceShare.ServiceContext
 		public object QueryParamData { get; set; }
 		public object PostData { get; set; }
 		public int AttemptCnt { get; set; }
+
+		public string JsonSerialize()
+		{
+			if (PostData != null && PostData is string)
+				return PostData.ToString();
+
+			if (PostData != null)
+				return JsonConvert.SerializeObject(PostData);
+
+			return string.Empty;
+		}
 	}
 }

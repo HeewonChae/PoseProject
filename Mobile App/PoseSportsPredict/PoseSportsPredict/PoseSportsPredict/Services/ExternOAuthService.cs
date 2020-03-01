@@ -70,6 +70,8 @@ namespace PoseSportsPredict.Services
 						if (_authenticatedUser == null)
 							return;
 
+						await UserDialogs.Instance.AlertAsync("OAuth Completed");
+
 						// PoseWebLogin
 						var loginResult = await ShinyHost.Resolve<LoginViewModel>().PoseWebLogin();
 						if (!loginResult)
@@ -79,8 +81,6 @@ namespace PoseSportsPredict.Services
 						}
 
 						LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
-						await UserDialogs.Instance.AlertAsync("OAuth Completed");
-
 						_isAuthenticated = true;
 					}
 				};
@@ -97,6 +97,7 @@ namespace PoseSportsPredict.Services
 				// 로그인 폼 닫힘
 				presenter.Completed += (sender, eventArgs) =>
 				{
+					ShinyHost.Resolve<LoginViewModel>().SetBusy(false);
 				};
 			}
 			catch (Exception ex)

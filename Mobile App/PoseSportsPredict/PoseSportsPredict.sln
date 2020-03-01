@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosePacket", "..\..\Common 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServiceShare", "..\..\Common Library\DotNet_Standard\WebServiceShare\WebServiceShare.csproj", "{34760DE0-62B6-4D2C-8A61-17210662D51B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoseCrypto", "..\..\Common Library\DotNet_Standard\PoseCrypto\PoseCrypto.csproj", "{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,18 @@ Global
 		{34760DE0-62B6-4D2C-8A61-17210662D51B}.Release|iPhone.Build.0 = Release|Any CPU
 		{34760DE0-62B6-4D2C-8A61-17210662D51B}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{34760DE0-62B6-4D2C-8A61-17210662D51B}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Release|iPhone.Build.0 = Release|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +124,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{61D777A5-4862-4990-B2CB-958F9AE0732F} = {C32ADECE-7A38-45FA-910D-34CB70B90332}
 		{34760DE0-62B6-4D2C-8A61-17210662D51B} = {C32ADECE-7A38-45FA-910D-34CB70B90332}
+		{8A8613C5-5184-4B3D-9ABA-D16453A38DFD} = {C32ADECE-7A38-45FA-910D-34CB70B90332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A010BAE-799A-4760-8FE0-A60D1C70DB24}

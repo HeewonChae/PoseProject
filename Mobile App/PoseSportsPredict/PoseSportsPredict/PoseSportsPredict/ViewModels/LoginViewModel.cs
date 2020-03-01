@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
 using Plugin.LocalNotification;
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
@@ -59,8 +60,13 @@ namespace PoseSportsPredict.ViewModels
 
 		private async void LoginFacebook()
 		{
+			if (IsBusy)
+				return;
+
+			SetBusy(true);
+
 			if (!_OAuthService.IsAuthenticated
-				|| !(_OAuthService.AuthenticatedUser.SNSProvider == SNSProviderType.Facebook))
+				|| _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Facebook)
 				await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
 			else
 				await PoseWebLogin();
@@ -87,12 +93,16 @@ namespace PoseSportsPredict.ViewModels
 			if (loginResult == null)
 			{
 				_OAuthService.Logout();
+				SetBusy(false);
 				return false;
 			}
 
 			ClientContext.SetCredentialsFrom(loginResult.PoseToken);
 			LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
 
+			await UserDialogs.Instance.AlertAsync("Login Completed");
+
+			SetBusy(false);
 			return true;
 		}
 
