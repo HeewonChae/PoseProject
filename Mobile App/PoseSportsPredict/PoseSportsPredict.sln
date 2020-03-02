@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoseSportsPredict.iOS", "Po
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoseSportsPredict", "PoseSportsPredict\PoseSportsPredict\PoseSportsPredict.csproj", "{70BA522F-98B8-4B45-AF42-3E3DB7B4E056}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C32ADECE-7A38-45FA-910D-34CB70B90332}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Share", "Share", "{C32ADECE-7A38-45FA-910D-34CB70B90332}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosePacket", "..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj", "{61D777A5-4862-4990-B2CB-958F9AE0732F}"
 EndProject

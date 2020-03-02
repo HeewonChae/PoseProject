@@ -2,24 +2,25 @@
 
 namespace WebServiceShare.ServiceContext
 {
-	public class ClientContext
-	{
-		public static byte[] eSignature { get; set; } = new byte[0];
-		public static byte[] eSignatureIV { get; set; } = new byte[0];
-		public static byte[] eCredentials { get; set; } = new byte[0];
+    public class ClientContext
+    {
+        private static PoseHeader _header = new PoseHeader();
+        public static byte[] eSignature { get; set; } = new byte[0];
+        public static byte[] eSignatureIV { get; set; } = new byte[0];
+        public static byte[] eCredentials { get; set; } = new byte[0];
 
-		public static PoseHeader CopyTo(PoseHeader header)
-		{
-			header.eSignature = eSignature;
-			header.eSignatureIV = eSignatureIV;
-			header.eCredentials = eCredentials;
+        public static PoseHeader MakeHeader()
+        {
+            _header.eSignature = eSignature;
+            _header.eSignatureIV = eSignatureIV;
+            _header.eCredentials = eCredentials;
 
-			return header;
-		}
+            return _header;
+        }
 
-		public static void SetCredentialsFrom(string token)
-		{
-			eCredentials = System.Convert.FromBase64String(token);
-		}
-	}
+        public static void SetCredentialsFrom(string token)
+        {
+            eCredentials = System.Convert.FromBase64String(token);
+        }
+    }
 }

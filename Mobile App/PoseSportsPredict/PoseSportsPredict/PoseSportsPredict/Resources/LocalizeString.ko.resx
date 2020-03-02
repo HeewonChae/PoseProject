@@ -120,4 +120,7 @@
   <data name="Check_Internet_Connection" xml:space="preserve">
     <value>인터넷 상태를 확인 해주세요.</value>
   </data>
+  <data name="ServiceNotAvailable" xml:space="preserve">
+    <value>서비스를 이용할 수 없습니다.</value>
+  </data>
 </root>

@@ -1,76 +1,116 @@
-﻿using PosePacket.Header;
+﻿using LogicCore.Utility;
+using PosePacket.Header;
+using SportsWebService.Utilities;
+using System.Net;
 using System.ServiceModel;
 
 namespace SportsWebService.Authentication
 {
-	/// <summary>
-	/// This class will act as a custom context, an extension to the OperationContext.
-	/// This class holds all context information for our application.
-	/// </summary>
-	public class ServerContext : IExtension<OperationContext>
-	{
-		public const string CONTEXT_PROPERTY_NAME = "ServerContext";
+    /// <summary>
+    /// This class will act as a custom context, an extension to the OperationContext.
+    /// This class holds all context information for our application.
+    /// </summary>
+    public class ServerContext : IExtension<OperationContext>
+    {
+        public const string CONTEXT_PROPERTY_NAME = "ServerContext";
 
-		internal byte[] _eSignature;
-		internal byte[] _eSignatureIV;
-		internal byte[] _eCredentials;
+        internal byte[] _eSignature;
+        internal byte[] _eSignatureIV;
+        internal byte[] _eCredentials;
 
-		public PoseCredentials Credentials { get; private set; }
+        public PoseCredentials Credentials { get; private set; }
 
-		// Get the current one from the extensions that are added to OperationContext.
-		public static ServerContext Current
-		{
-			get
-			{
-				return OperationContext.Current.IncomingMessageProperties[CONTEXT_PROPERTY_NAME] as ServerContext;
-			}
-		}
+        #region Crypto
 
-		public static bool IsExistData => OperationContext.Current.IncomingMessageProperties.ContainsKey(CONTEXT_PROPERTY_NAME);
+        private byte[] _signature;
+        private byte[] _signatureIV;
 
-		public ServerContext(PoseHeader header)
-		{
-			if (header == null)
-				return;
+        public byte[] Signature => _signature;
+        public byte[] SignatureIV => _signatureIV;
 
-			_eSignature = header.eSignature;
-			_eSignatureIV = header.eSignatureIV;
-			_eCredentials = header.eCredentials;
-		}
+        public void SetSignature(byte[] signature) => _signature = signature;
 
-		public PoseCredentials CreateCredentials()
-		{
-			return Credentials = new PoseCredentials();
-		}
+        public void SetSignatureIV(byte[] signatureIV) => _signatureIV = signatureIV;
 
-		public PoseCredentials DecryptCredentials()
-		{
-			if (_eCredentials == null || _eCredentials.Length == 0)
-			{
-				Credentials = PoseCredentials.Default;
-				return Credentials;
-			}
+        #endregion Crypto
 
-			return Credentials = PoseCredentials.Deserialize(_eCredentials);
-		}
+        // Get the current one from the extensions that are added to OperationContext.
+        public static ServerContext Current
+        {
+            get
+            {
+                return OperationContext.Current.IncomingMessageProperties[CONTEXT_PROPERTY_NAME] as ServerContext;
+            }
+        }
 
-		public byte[] EncryptCredentials()
-		{
-			return _eCredentials = PoseCredentials.Serialize(Credentials);
-		}
+        public static bool IsExistData => OperationContext.Current.IncomingMessageProperties.ContainsKey(CONTEXT_PROPERTY_NAME);
 
-		#region For MessageHeader Behavior
+        public ServerContext(PoseHeader header)
+        {
+            if (header == null)
+                return;
 
-		public void Attach(OperationContext owner)
-		{
-			owner.IncomingMessageProperties.Add(CONTEXT_PROPERTY_NAME, this);
-		}
+            _eSignature = header.eSignature;
+            _eSignatureIV = header.eSignatureIV;
+            _eCredentials = header.eCredentials;
+        }
 
-		public void Detach(OperationContext owner)
-		{
-			owner.IncomingMessageProperties.Remove(CONTEXT_PROPERTY_NAME);
-		}
+        public PoseCredentials CreateCredentials()
+        {
+            return Credentials = new PoseCredentials();
+        }
 
-		#endregion For MessageHeader Behavior
-	}
+        public PoseCredentials DecryptCredentials()
+        {
+            if (_eCredentials == null || _eCredentials.Length == 0)
+            {
+                if (_eSignature != null && _eSignature.Length >= 0
+                && _eSignatureIV != null && _eSignatureIV.Length >= 0)
+                {
+                    byte[] signature = Singleton.Get<CryptoFacade>().Decrypt_RSA(_eSignature);
+                    byte[] signatureIV = Singleton.Get<CryptoFacade>().Decrypt_RSA(_eSignatureIV);
+                    SetSignature(signature);
+                    SetSignatureIV(signatureIV);
+                }
+                return Credentials = PoseCredentials.Default;
+            }
+
+            try
+            {
+                byte[] signature = Singleton.Get<CryptoFacade>().Decrypt_RSA(_eSignature);
+                byte[] signatureIV = Singleton.Get<CryptoFacade>().Decrypt_RSA(_eSignatureIV);
+                byte[] credentials = Singleton.Get<CryptoFacade>().Decrypt_RSA(_eCredentials);
+
+                Credentials = PoseCredentials.Deserialize(credentials);
+                SetSignature(signature);
+                SetSignatureIV(signatureIV);
+            }
+            catch
+            {
+                ErrorHandler.OccurException(HttpStatusCode.Unauthorized);
+            }
+
+            return Credentials;
+        }
+
+        public byte[] EncryptCredentials(PoseCredentials credentials)
+        {
+            byte[] credentials_serialize = PoseCredentials.Serialize(credentials);
+            return Singleton.Get<CryptoFacade>().Encrypt_RSA(credentials_serialize);
+        }
+
+        #region For MessageHeader Behavior
+
+        public void Attach(OperationContext owner)
+        {
+            owner.IncomingMessageProperties.Add(CONTEXT_PROPERTY_NAME, this);
+        }
+
+        public void Detach(OperationContext owner)
+        {
+            owner.IncomingMessageProperties.Remove(CONTEXT_PROPERTY_NAME);
+        }
+
+        #endregion For MessageHeader Behavior
+    }
 }

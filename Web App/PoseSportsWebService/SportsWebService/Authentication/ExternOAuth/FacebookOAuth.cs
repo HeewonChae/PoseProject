@@ -38,8 +38,7 @@ namespace SportsWebService.Authentication.ExternOAuth
 				BaseUrl = RequestTokenUrl,
 				QueryParamGroup = "grant_type=fb_exchange_token&client_id={client_id}&client_secret={client_secret}&fb_exchange_token={fb_exchange_token}",
 				QueryParamData = new { client_id = ClientId, client_secret = ClientSecret, fb_exchange_token = token },
-			},
-			false);
+			});
 
 			if (refreshInfo == null)
 				return null;
@@ -51,8 +50,7 @@ namespace SportsWebService.Authentication.ExternOAuth
 				BaseUrl = UserInfoUrl,
 				QueryParamGroup = "fields={fields}&access_token={access_token}",
 				QueryParamData = new { fields = "email,picture,first_name,last_name", access_token = token },
-			},
-			false);
+			});
 
 			if (facebookUser == null)
 				return null;

@@ -23,6 +23,7 @@ namespace PoseSportsPredict
 
 		private void RegisterServices(IServiceCollection services)
 		{
+			services.AddSingleton<CryptoService>();
 			services.AddSingleton<IWebApiService, WebApiService>();
 			services.AddSingleton<ISQLiteService, SQLiteService>();
 			services.AddSingleton<IOAuthService, ExternOAuthService>();

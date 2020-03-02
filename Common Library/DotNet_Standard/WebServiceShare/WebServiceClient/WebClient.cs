@@ -33,15 +33,17 @@ namespace WebServiceShare.WebServiceClient
 
 		#endregion Exception Handle Delegate
 
-		public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, bool isIncludePoseHeader = true)
+		public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, params (string name, object value)[] headers)
 		{
-			PoseHeader serviceHeader = new PoseHeader();
-			ClientContext.CopyTo(serviceHeader);
-
 			var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.ServiceUrl ?? "");
 			var flurlReqeust = new FlurlClient(endPointAddr).Request();
-			if (isIncludePoseHeader)
-				flurlReqeust.WithHeader(PoseHeader.HEADER_NAME, serviceHeader);
+			if (headers != null)
+			{
+				foreach (var (name, value) in headers)
+				{
+					flurlReqeust.WithHeader(name, value);
+				}
+			}
 
 			var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
 			flurlReqeust.AppendPathSegments(convertedSegments);

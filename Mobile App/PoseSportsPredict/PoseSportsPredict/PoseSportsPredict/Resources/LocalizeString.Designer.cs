@@ -68,5 +68,14 @@ namespace PoseSportsPredict.Resources {
                 return ResourceManager.GetString("Check_Internet_Connection", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service is not available.
+        /// </summary>
+        public static string ServiceNotAvailable {
+            get {
+                return ResourceManager.GetString("ServiceNotAvailable", resourceCulture);
+            }
+        }
     }
 }

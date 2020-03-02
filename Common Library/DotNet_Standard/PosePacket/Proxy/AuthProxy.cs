@@ -18,6 +18,8 @@ namespace PosePacket.Proxy
         
         private static string _serviceUrl = "Services/Auth.svc";
         
+        private static string _P_PUBLISHKEY = "PUBLISHKEY";
+        
         private static string _P_E_TokenRefresh = "TokenRefresh";
         
         private static string _P_E_CheckVaildOAuthUser = "CheckVaildOAuthUser";
@@ -33,7 +35,18 @@ namespace PosePacket.Proxy
             }
         }
         
-        // MethodType: GET, Segment: TokenRefresh 
+        // MethodType: GET, Segment: PUBLISHKEY 
+        // InputType: null 
+        // OutputType: null
+        public static string P_PUBLISHKEY
+        {
+            get
+            {
+                return _P_PUBLISHKEY;
+            }
+        }
+        
+        // MethodType: POST, Segment: TokenRefresh 
         // InputType: null 
         // OutputType: null
         public static string P_E_TokenRefresh

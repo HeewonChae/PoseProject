@@ -100,4 +100,7 @@
   <data name="Check_Internet_Connection" xml:space="preserve">
     <value>Please check your internet connection.</value>
   </data>
+  <data name="ServiceNotAvailable" xml:space="preserve">
+    <value>Service is not available</value>
+  </data>
 </root>

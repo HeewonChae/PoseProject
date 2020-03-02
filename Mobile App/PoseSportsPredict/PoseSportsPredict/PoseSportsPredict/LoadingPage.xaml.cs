@@ -1,45 +1,86 @@
-﻿using System.Threading.Tasks;
+﻿using Acr.UserDialogs;
+using PosePacket.Proxy;
+using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
+using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
+using WebServiceShare.ServiceContext;
+using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace PoseSportsPredict
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoadingPage : ContentPage
-	{
-		#region Members
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LoadingPage : ContentPage
+    {
+        #region Services
 
-		private bool _isLoaded;
-		private IOAuthService _OAuthService;
+        private IWebApiService _webApiService;
+        private IOAuthService _OAuthService;
+        private CryptoService _cryptoService;
 
-		#endregion Members
+        #endregion Services
 
-		#region Constructors
+        #region Fields
 
-		public LoadingPage(IOAuthService OAuthService)
-		{
-			InitializeComponent();
+        private bool _isLoaded;
 
-			_OAuthService = OAuthService;
-			BindingContext = this;
-		}
+        #endregion Fields
 
-		#endregion Constructors
+        #region Constructors
 
-		#region Methods
+        public LoadingPage(
+            CryptoService cryptoService,
+            IWebApiService webApiService,
+            IOAuthService OAuthService)
+        {
+            InitializeComponent();
 
-		public async Task LoadingAsync()
-		{
-			if (_isLoaded)
-				return;
+            _cryptoService = cryptoService;
+            _webApiService = webApiService;
+            _OAuthService = OAuthService;
+            BindingContext = this;
+        }
 
-			await _OAuthService.IsAuthenticatedAndValid();
+        #endregion Constructors
 
-			_isLoaded = true;
-			return;
-		}
+        #region Methods
 
-		#endregion Methods
-	}
+        public async Task<bool> LoadingAsync()
+        {
+            if (_isLoaded)
+                return false;
+
+            while (!await WebApiService.CheckInternetConnection())
+            { }
+
+            string serverPubKey = await _webApiService.RequestAsync<string>(new WebRequestContext
+            {
+                MethodType = WebMethodType.GET,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = AuthProxy.ServiceUrl,
+                SegmentGroup = AuthProxy.P_PUBLISHKEY,
+            },
+            false);
+
+            if (string.IsNullOrEmpty(serverPubKey))
+            {
+                await UserDialogs.Instance.AlertAsync(LocalizeString.ServiceNotAvailable);
+                return false;
+            }
+
+            _cryptoService.RSA_FromXmlString(serverPubKey);
+            ClientContext.eSignature = _cryptoService.GetEncryptedSignature();
+            ClientContext.eSignatureIV = _cryptoService.GetEncryptedSignatureIV();
+
+            await _OAuthService.IsAuthenticatedAndValid();
+
+            _isLoaded = true;
+            return true;
+        }
+
+        #endregion Methods
+    }
 }

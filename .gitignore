@@ -12,6 +12,8 @@
 /Common Library/DotNet_Standard/PosePacket/obj
 /Common Library/DotNet_Standard/WebServiceShare/bin
 /Common Library/DotNet_Standard/WebServiceShare/obj
+/Common Library/DotNet_Standard/PoseCrypto/bin
+/Common Library/DotNet_Standard/PoseCrypto/obj
 /Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/bin
 /Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict/obj
 /Mobile App/PoseSportsPredict/PoseSportsPredict/PoseSportsPredict.Android/bin
@@ -28,11 +30,9 @@
 /Web App/Pose_sports_statistics/Pose_sports_statistics/obj
 /Web App/Pose_sports_statistics/Repository.Data/bin
 /Web App/Pose_sports_statistics/Repository.Data/obj
-/Windows App/SportsAdminTool/Repository.Mysql/bin
-/Windows App/SportsAdminTool/Repository.Mysql/obj
 /Windows App/SportsAdminTool/SandBox/bin
 /Windows App/SportsAdminTool/SandBox/obj
 /Windows App/SportsAdminTool/SportsAdminTool/bin
 /Windows App/SportsAdminTool/SportsAdminTool/obj
-/Common Library/DotNet_Standard/PoseCrypto/bin
-/Common Library/DotNet_Standard/PoseCrypto/obj
+/Web App/PoseSportsWebService/Repository.Mysql/bin
+/Web App/PoseSportsWebService/Repository.Mysql/obj

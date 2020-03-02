@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
+using System.ServiceModel.Dispatcher;
 
 namespace SportsWebService.WebBehavior.Server.ServiceInitialize
 {
@@ -28,7 +29,7 @@ namespace SportsWebService.WebBehavior.Server.ServiceInitialize
 		public void ApplyDispatchBehavior(ServiceDescription serviceDescription,
 										  ServiceHostBase serviceHostBase)
 		{
-			_serviceInitialization.Initialize();
+			//_serviceInitialization.Initialize();
 		}
 
 		public void Validate(ServiceDescription serviceDescription,

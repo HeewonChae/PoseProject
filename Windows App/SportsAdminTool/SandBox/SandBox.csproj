@@ -62,7 +62,7 @@
       <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
       <Name>Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository.Mysql\Repository.Mysql.csproj">
+    <ProjectReference Include="..\..\..\Web App\PoseSportsWebService\Repository.Mysql\Repository.Mysql.csproj">
       <Project>{300d85b2-91dd-42c9-89c0-4a2900aa9993}</Project>
       <Name>Repository.Mysql</Name>
     </ProjectReference>

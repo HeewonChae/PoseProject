@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common Library\DotNet_Standard\PoseCrypto\PoseCrypto.csproj" />
     <ProjectReference Include="..\..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj" />
     <ProjectReference Include="..\..\..\..\Common Library\DotNet_Standard\WebServiceShare\WebServiceShare.csproj" />
   </ItemGroup>

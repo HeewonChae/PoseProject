@@ -1,10 +1,22 @@
 ﻿using GameKernel;
+using LogicCore.File;
+using System.Collections.Generic;
 
 namespace SportsWebService.App_Config
 {
-	public class ErrorCodeDescription : IRecord
-	{
-		public readonly int ErrorCode = 0;
-		public readonly string Description = string.Empty;
-	}
+    public sealed class ErrorCodeDescription : IRecord
+    {
+        public int ErrorCode;
+        public string Description;
+
+        public static Dictionary<int, string> Errors = new Dictionary<int, string>();
+
+        public static string GetErrorDesc(int errorCode)
+        {
+            if (Errors.ContainsKey(errorCode))
+                return Errors[errorCode];
+
+            return string.Empty;
+        }
+    }
 }

@@ -18,94 +18,94 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {
-	public class LoginViewModel : BaseViewModel
-	{
-		#region BaseViewModel
+    public class LoginViewModel : BaseViewModel
+    {
+        #region BaseViewModel
 
-		public override async Task<bool> PrepareView(params object[] data)
-		{
-			return await Task.FromResult(true);
-		}
+        public override async Task<bool> PrepareView(params object[] data)
+        {
+            return await Task.FromResult(true);
+        }
 
-		#endregion BaseViewModel
+        #endregion BaseViewModel
 
-		#region Services
+        #region Services
 
-		private IOAuthService _OAuthService;
-		private IWebApiService _webApiService;
+        private IOAuthService _OAuthService;
+        private IWebApiService _webApiService;
 
-		#endregion Services
+        #endregion Services
 
-		#region Constructors
+        #region Constructors
 
-		public LoginViewModel(LoginPage page,
-			IOAuthService OAuthService,
-			IWebApiService webApiService) : base(page)
-		{
-			_OAuthService = OAuthService;
-			_webApiService = webApiService;
-		}
+        public LoginViewModel(LoginPage page,
+            IOAuthService OAuthService,
+            IWebApiService webApiService) : base(page)
+        {
+            _OAuthService = OAuthService;
+            _webApiService = webApiService;
+        }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Commands
+        #region Commands
 
-		public ICommand LoginFacebookCommand
-		{
-			get
-			{
-				return new RelayCommand(LoginFacebook);
-			}
-		}
+        public ICommand LoginFacebookCommand
+        {
+            get
+            {
+                return new RelayCommand(LoginFacebook);
+            }
+        }
 
-		private async void LoginFacebook()
-		{
-			if (IsBusy)
-				return;
+        private async void LoginFacebook()
+        {
+            if (IsBusy)
+                return;
 
-			SetBusy(true);
+            SetBusy(true);
 
-			if (!_OAuthService.IsAuthenticated
-				|| _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Facebook)
-				await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
-			else
-				await PoseWebLogin();
-		}
+            if (!_OAuthService.IsAuthenticated
+                || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Facebook)
+                await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
+            else
+                await PoseWebLogin();
+        }
 
-		#endregion Commands
+        #endregion Commands
 
-		#region Methods
+        #region Methods
 
-		public async Task<bool> PoseWebLogin()
-		{
-			var loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
-			{
-				MethodType = WebMethodType.POST,
-				BaseUrl = AppConfig.PoseWebBaseUrl,
-				ServiceUrl = AuthProxy.ServiceUrl,
-				SegmentGroup = AuthProxy.P_E_Login,
-				PostData = new I_Login
-				{
-					PlatformId = _OAuthService.AuthenticatedUser.Id,
-				}
-			});
+        public async Task<bool> PoseWebLogin()
+        {
+            var loginResult = await _webApiService.EncrpytRequestAsyncWithToken<O_Login>(new WebRequestContext
+            {
+                MethodType = WebMethodType.POST,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = AuthProxy.ServiceUrl,
+                SegmentGroup = AuthProxy.P_E_Login,
+                PostData = new I_Login
+                {
+                    PlatformId = _OAuthService.AuthenticatedUser.Id,
+                }
+            });
 
-			if (loginResult == null)
-			{
-				_OAuthService.Logout();
-				SetBusy(false);
-				return false;
-			}
+            if (loginResult == null)
+            {
+                _OAuthService.Logout();
+                SetBusy(false);
+                return false;
+            }
 
-			ClientContext.SetCredentialsFrom(loginResult.PoseToken);
-			LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
+            ClientContext.SetCredentialsFrom(loginResult.PoseToken);
+            LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
 
-			await UserDialogs.Instance.AlertAsync("Login Completed");
+            await UserDialogs.Instance.AlertAsync("Login Completed");
 
-			SetBusy(false);
-			return true;
-		}
+            SetBusy(false);
+            return true;
+        }
 
-		#endregion Methods
-	}
+        #endregion Methods
+    }
 }

@@ -8,13 +8,13 @@ namespace PosePacket.Header
 		public const string HEADER_NAME = "EncryptData";
 		public const string HEADER_NAMESPACE = "http://pose-sports-predict.com";
 
-		public byte[] eSignature { get; set; } = new byte[0];
-		public byte[] eSignatureIV { get; set; } = new byte[0];
-		public byte[] eCredentials { get; set; } = new byte[0];
+		public byte[] eSignature { get; set; }
+		public byte[] eSignatureIV { get; set; }
+		public byte[] eCredentials { get; set; }
 
 		public override string ToString()
 		{
-			List<byte> buffer = new List<byte>(1024);
+			List<byte> buffer = new List<byte>();
 
 			int lenth = eSignature.Length;
 			buffer.AddRange(BitConverter.GetBytes(lenth));

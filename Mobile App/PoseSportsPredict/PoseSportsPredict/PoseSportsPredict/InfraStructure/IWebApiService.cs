@@ -11,5 +11,9 @@ namespace PoseSportsPredict.InfraStructure
 		Task<TOut> RequestAsync<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true);
 
 		Task<TOut> RequestAsyncWithToken<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true);
+
+		Task<TOut> EncryptRequestAsync<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true);
+
+		Task<TOut> EncrpytRequestAsyncWithToken<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true);
 	}
 }

@@ -1,101 +1,99 @@
 ﻿using LogicCore.Utility;
 using PosePacket;
-using SportsWebService.Utility;
+using SportsWebService.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
 using System.Security.Principal;
-using System.Text;
 
 namespace SportsWebService.Authentication
 {
-	public class PoseCredentials : IIdentity
-	{
-		public const int TOKEN_EXPIRE_IN = 60 * 60 * 1000; // 1시간
-		public static readonly PoseCredentials Default = new PoseCredentials();
+    public class PoseCredentials : IIdentity
+    {
+        public const int TOKEN_EXPIRE_IN = 60 * 60 * 1000; // 1시간
+        public static readonly PoseCredentials Default = new PoseCredentials();
 
-		#region IIdentity Implement
+        #region IIdentity
 
-		private bool _isAuthentication;
+        private bool _isAuthentication;
 
-		public string Name => UserNo.ToString();
-		public string AuthenticationType => "Pose_Authenticaion";
+        public string Name => UserNo.ToString();
+        public string AuthenticationType => "Pose_Authenticaion";
 
-		public bool IsAuthenticated
-		{
-			get
-			{
-				if (!_isAuthentication)
-					ErrorHandler.OccurException(ServiceErrorCode.Authenticate.CredentialsExpire);
+        public bool IsAuthenticated
+        {
+            get
+            {
+                if (!_isAuthentication)
+                    ErrorHandler.OccurException(ServiceErrorCode.Authenticate.CredentialsExpire);
 
-				return _isAuthentication;
-			}
+                return _isAuthentication;
+            }
 
-			set { _isAuthentication = value; }
-		}
+            set { _isAuthentication = value; }
+        }
 
-		#endregion IIdentity Implement
+        #endregion IIdentity
 
-		private long _userNo;
-		private long _expireTick;
+        private long _userNo;
+        private long _expireTime;
 
-		public long UserNo => _userNo;
-		public long ExpireTime => _expireTick;
+        public long UserNo => _userNo;
+        public long ExpireTime => _expireTime;
 
-		public PoseCredentials()
-		{
-			_isAuthentication = false;
-			_userNo = 0;
-			_expireTick = PoseCredentials.TOKEN_EXPIRE_IN;
-		}
+        public void SetUserNo(long userNo) => _userNo = userNo;
 
-		#region Static Methods
+        public void RefreshExpireTime() => _expireTime = LogicTime.TIME() + PoseCredentials.TOKEN_EXPIRE_IN;
 
-		public static byte[] Serialize(PoseCredentials credentials)
-		{
-			List<byte> buffer = new List<byte>(1024);
+        #region Serialize Methods
 
-			try
-			{
-				// SessionID
-				buffer.AddRange(BitConverter.GetBytes(credentials._userNo));
+        public static byte[] Serialize(PoseCredentials credentials)
+        {
+            List<byte> buffer = new List<byte>();
 
-				// CertifiedTime
-				buffer.AddRange(BitConverter.GetBytes(credentials._expireTick));
-			}
-			catch (Exception)
-			{
-				ErrorHandler.OccurException(HttpStatusCode.Unauthorized);
-			}
+            try
+            {
+                // SessionID
+                buffer.AddRange(BitConverter.GetBytes(credentials._userNo));
 
-			return buffer.ToArray();
-		}
+                // CertifiedTime
+                buffer.AddRange(BitConverter.GetBytes(credentials._expireTime));
+            }
+            catch (Exception)
+            {
+                ErrorHandler.OccurException(HttpStatusCode.Unauthorized);
+            }
 
-		public static PoseCredentials Deserialize(byte[] buffer)
-		{
-			PoseCredentials credentials = new PoseCredentials();
+            return buffer.ToArray();
+        }
 
-			try
-			{
-				int curPosition = 0;
+        public static PoseCredentials Deserialize(byte[] buffer)
+        {
+            PoseCredentials credentials = new PoseCredentials();
 
-				// SessionID
-				credentials._userNo = BitConverter.ToInt64(buffer, curPosition);
-				curPosition += 8;
+            try
+            {
+                int curPosition = 0;
 
-				// CertifiedTime
-				credentials._expireTick = BitConverter.ToInt64(buffer, curPosition);
-				curPosition += 8;
-			}
-			catch (Exception)
-			{
-				ErrorHandler.OccurException(HttpStatusCode.Unauthorized);
-			}
+                // SessionID
+                credentials._userNo = BitConverter.ToInt64(buffer, curPosition);
+                curPosition += 8;
 
-			return credentials;
-		}
+                // CertifiedTime
+                credentials._expireTime = BitConverter.ToInt64(buffer, curPosition);
+                curPosition += 8;
 
-		#endregion Static Methods
-	}
+                if (buffer.Length != curPosition)
+                    throw new Exception();
+            }
+            catch (Exception)
+            {
+                ErrorHandler.OccurException(HttpStatusCode.Unauthorized);
+            }
+
+            return credentials;
+        }
+
+        #endregion Serialize Methods
+    }
 }

@@ -8,12 +8,12 @@ namespace PoseCrypto._RSA
 {
 	public class RSACryptoProvider
 	{
-		public static RSA Get_RSA(string keyContainerName = null)
+		public static RSACryptoServiceProvider Get_RSA(string keyContainerName = null)
 		{
 			return Create_RSA(keyContainerName);
 		}
 
-		public static RSA FromXmlString(string pub_key)
+		public static RSACryptoServiceProvider FromXmlString(string pub_key)
 		{
 			if (pub_key == null)
 				return null;
@@ -34,7 +34,7 @@ namespace PoseCrypto._RSA
 			return null;
 		}
 
-		private static RSA Create_RSA(string keyContainerName = null)
+		private static RSACryptoServiceProvider Create_RSA(string keyContainerName = null)
 		{
 			try
 			{
