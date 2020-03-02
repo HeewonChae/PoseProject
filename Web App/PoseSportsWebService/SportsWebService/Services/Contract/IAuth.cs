@@ -20,10 +20,9 @@ namespace SportsWebService.Services.Contract
         string P_PUBLISHKEY();
 
         [OperationContract]
-        [WebInvoke(Method = "POST", UriTemplate = "TokenRefresh"
-            , RequestFormat = WebMessageFormat.Json
+        [WebInvoke(Method = "GET", UriTemplate = "TokenRefresh"
             , ResponseFormat = WebMessageFormat.Json)]
-        string P_E_TokenRefresh(string e_json);
+        string P_E_TokenRefresh();
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "CheckVaildOAuthUser"
@@ -35,6 +34,6 @@ namespace SportsWebService.Services.Contract
         [WebInvoke(Method = "POST", UriTemplate = "Login"
             , RequestFormat = WebMessageFormat.Json
             , ResponseFormat = WebMessageFormat.Json)]
-        string P_E_Login(string e_json);
+        Task<string> P_E_Login(string e_json);
     }
 }

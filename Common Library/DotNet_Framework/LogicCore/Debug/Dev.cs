@@ -5,7 +5,7 @@ namespace LogicCore.Debug
 {
     public static class Dev
     {
-        //[Conditional("DEBUG")]
+        [Conditional("DEBUG")]
         public static void DebugString(string message, ConsoleColor foregroundColor = ConsoleColor.White)
         {
             var orgColor = Console.ForegroundColor;
@@ -13,7 +13,6 @@ namespace LogicCore.Debug
             Console.ForegroundColor = foregroundColor;
 
             Trace.WriteLine(message);
-            Console.WriteLine(message);
 
             Console.ForegroundColor = orgColor;
         }

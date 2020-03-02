@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace WebServiceShare.ExternAuthentication
 {
-	public interface IOAuthService
-	{
-		bool IsAuthenticated { get; }
+    public interface IOAuthService
+    {
+        bool IsAuthenticated { get; }
 
-		ExternAuthUser AuthenticatedUser { get; }
+        ExternAuthUser AuthenticatedUser { get; }
 
-		Task OAuthLoginAsync(SNSProviderType provider);
+        Task OAuthLoginAsync(SNSProviderType provider);
 
-		Task<bool> IsAuthenticatedAndValid();
+        Task<bool> IsAuthenticatedAndValid();
 
-		void Logout();
-	}
+        Task Logout();
+    }
 }

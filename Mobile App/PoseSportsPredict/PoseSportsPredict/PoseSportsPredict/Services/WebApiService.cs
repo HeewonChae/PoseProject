@@ -1,15 +1,20 @@
 ﻿using Acr.UserDialogs;
 using Flurl.Http;
 using Plugin.Connectivity;
+using PosePacket;
 using PosePacket.Header;
+using PosePacket.Proxy;
+using PosePacket.Service.Auth;
 using PosePacket.WebError;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logic.Utilities;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities.LocalStorage;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 
@@ -36,7 +41,7 @@ namespace PoseSportsPredict.Services
                 if (flurlException.Call.Response == null)
                 {
                     // 서버에 연결할 수 없음
-                    await UserDialogs.Instance.AlertAsync(LocalizeString.ServiceNotAvailable);
+                    await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
 
                     // TODO: 로그인 화면으로 이동
                     return;
@@ -103,6 +108,28 @@ namespace PoseSportsPredict.Services
                 return result;
             }
 
+            // 토큰 만료 시간 체크
+            LocalStorage.Storage.GetValueOrDefault<DateTime>(LocalStorageKey.PoseTokenExpireTime, out DateTime expireIn);
+            if (expireIn < DateTime.UtcNow.AddMinutes(5))
+            {
+                // P_E_TokenRefresh
+                var refreshToken = await this.EncryptRequestAsync<O_TokenRefresh>(new WebRequestContext
+                {
+                    MethodType = WebMethodType.GET,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = AuthProxy.ServiceUrl,
+                    SegmentGroup = AuthProxy.P_E_TokenRefresh,
+                });
+
+                if (refreshToken == null)
+                {
+                    return result;
+                }
+
+                ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
+                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn));
+            }
+
             if (isIndicateLoading)
             {
                 using (UserDialogs.Instance.Loading())
@@ -139,12 +166,12 @@ namespace PoseSportsPredict.Services
             {
                 using (UserDialogs.Instance.Loading())
                 {
-                    eResult = await WebClient.RequestAsync<string>(reqContext);
+                    eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
                 }
             }
             else
             {
-                eResult = await WebClient.RequestAsync<string>(reqContext);
+                eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
             }
 
             // Decrpyt output
@@ -170,6 +197,28 @@ namespace PoseSportsPredict.Services
             if (reqContext.PostData != null)
             {
                 reqContext.PostData = _cryptoService.Encrypt_AES(reqContext.JsonSerialize());
+            }
+
+            // 토큰 만료 시간 체크
+            LocalStorage.Storage.GetValueOrDefault<DateTime>(LocalStorageKey.PoseTokenExpireTime, out DateTime expireIn);
+            if (expireIn < DateTime.UtcNow.AddMinutes(5))
+            {
+                // P_E_TokenRefresh
+                var refreshToken = await this.EncryptRequestAsync<O_TokenRefresh>(new WebRequestContext
+                {
+                    MethodType = WebMethodType.GET,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = AuthProxy.ServiceUrl,
+                    SegmentGroup = AuthProxy.P_E_TokenRefresh,
+                });
+
+                if (refreshToken == null)
+                {
+                    return result;
+                }
+
+                ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
+                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn));
             }
 
             string eResult;

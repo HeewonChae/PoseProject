@@ -46,9 +46,9 @@ namespace PosePacket.Proxy
             }
         }
         
-        // MethodType: POST, Segment: TokenRefresh 
+        // MethodType: GET, Segment: TokenRefresh 
         // InputType: null 
-        // OutputType: null
+        // OutputType: PosePacket.Service.Auth.O_TokenRefresh
         public static string P_E_TokenRefresh
         {
             get

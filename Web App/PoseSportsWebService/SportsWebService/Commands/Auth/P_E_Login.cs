@@ -1,10 +1,13 @@
-﻿using PosePacket;
+﻿using LogicCore.Utility;
+using PosePacket;
 using PosePacket.Service.Auth;
 using SportsWebService.Authentication;
 using SportsWebService.Infrastructure;
 using SportsWebService.Utilities;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
+using PoseGlobalDB = Repository.Mysql.PoseGlobalDB;
 
 namespace SportsWebService.Commands.Auth
 {
@@ -18,9 +21,12 @@ namespace SportsWebService.Commands.Auth
 
             [Description("Invalid platform Id")]
             public const int Invalid_PlatformId = ServiceErrorCode.WebMethod_Auth.P_E_Login + 2;
+
+            [Description("Failed User Login")]
+            public const int Failed_User_Login = ServiceErrorCode.WebMethod_Auth.P_E_Login + 3;
         }
 
-        public static O_Login Execute(I_Login input)
+        public async static Task<O_Login> Execute(I_Login input)
         {
             if (input == null)
                 ErrorHandler.OccurException(RowCode.Invalid_InputValue);
@@ -28,11 +34,25 @@ namespace SportsWebService.Commands.Auth
             if (string.IsNullOrEmpty(input.PlatformId))
                 ErrorHandler.OccurException(RowCode.Invalid_PlatformId);
 
-            var credential = ServerContext.Current.CreateCredentials();
-            credential.SetUserNo(0);
-            credential.RefreshExpireTime();
+            // Check DB
+            long user_no = 0;
+            using (var P_USER_LOGIN = new PoseGlobalDB.Procedures.P_USER_LOGIN())
+            {
+                P_USER_LOGIN.SetInput(input.PlatformId);
 
-            byte[] eCredential = ServerContext.Current.EncryptCredentials(credential);
+                long? queryResult = await P_USER_LOGIN.OnQueryAsync();
+
+                if (P_USER_LOGIN.EntityStatus != null || !queryResult.HasValue)
+                    ErrorHandler.OccurException(RowCode.Failed_User_Login);
+
+                user_no = queryResult.Value;
+            }
+
+            var credentials = new PoseCredentials();
+            credentials.SetUserNo(user_no);
+            credentials.RefreshExpireTime();
+
+            byte[] eCredential = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials));
 
             return new O_Login
             {

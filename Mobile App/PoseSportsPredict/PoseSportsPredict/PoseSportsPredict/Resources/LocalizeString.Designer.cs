@@ -70,11 +70,20 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Service is not available.
+        ///   Looks up a localized string similar to Not authenticated User..
         /// </summary>
-        public static string ServiceNotAvailable {
+        public static string Not_Authenticated_User {
             get {
-                return ResourceManager.GetString("ServiceNotAvailable", resourceCulture);
+                return ResourceManager.GetString("Not_Authenticated_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service is not available..
+        /// </summary>
+        public static string Service_Not_Available {
+            get {
+                return ResourceManager.GetString("Service_Not_Available", resourceCulture);
             }
         }
     }

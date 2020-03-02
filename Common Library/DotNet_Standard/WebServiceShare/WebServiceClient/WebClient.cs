@@ -11,164 +11,161 @@ using WebServiceShare.ServiceContext;
 
 namespace WebServiceShare.WebServiceClient
 {
-	public static class WebClient
-	{
-		#region Exception Handle Delegate
+    public static class WebClient
+    {
+        #region Exception Handle Delegate
 
-		public delegate void ExceptionHandlerDelegate(Exception exception);
+        public delegate void ExceptionHandlerDelegate(Exception exception);
 
-		private static ExceptionHandlerDelegate _exceptionHandler = null;
+        private static ExceptionHandlerDelegate _exceptionHandler = null;
 
-		public static ExceptionHandlerDelegate ExceptionHandler
-		{
-			get
-			{
-				return _exceptionHandler;
-			}
-			set
-			{
-				_exceptionHandler += value;
-			}
-		}
+        public static ExceptionHandlerDelegate ExceptionHandler
+        {
+            get
+            {
+                return _exceptionHandler;
+            }
+            set
+            {
+                _exceptionHandler += value;
+            }
+        }
 
-		#endregion Exception Handle Delegate
+        #endregion Exception Handle Delegate
 
-		public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, params (string name, object value)[] headers)
-		{
-			var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.ServiceUrl ?? "");
-			var flurlReqeust = new FlurlClient(endPointAddr).Request();
-			if (headers != null)
-			{
-				foreach (var (name, value) in headers)
-				{
-					flurlReqeust.WithHeader(name, value);
-				}
-			}
+        public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, params (string name, object value)[] headers)
+        {
+            var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.ServiceUrl ?? "");
+            var flurlReqeust = new FlurlClient(endPointAddr).Request();
+            if (headers != null)
+            {
+                foreach (var (name, value) in headers)
+                {
+                    flurlReqeust.WithHeader(name, value);
+                }
+            }
 
-			var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
-			flurlReqeust.AppendPathSegments(convertedSegments);
+            var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
+            flurlReqeust.AppendPathSegments(convertedSegments);
 
-			List<(string, string)> convertedParams = ConvertQueryParams(requestContext.QueryParamGroup, requestContext.QueryParamData);
-			foreach (var (name, value) in convertedParams)
-			{
-				flurlReqeust.SetQueryParam(name, value);
-			}
+            List<(string, string)> convertedParams = ConvertQueryParams(requestContext.QueryParamGroup, requestContext.QueryParamData);
+            foreach (var (name, value) in convertedParams)
+            {
+                flurlReqeust.SetQueryParam(name, value);
+            }
 
-			return await SendAsync<TOut>(flurlReqeust, requestContext);
-		}
+            return await SendAsync<TOut>(flurlReqeust, requestContext);
+        }
 
-		private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
-		{
-			TOut result = default;
-			try
-			{
-				requestContext.AttemptCnt++;
+        private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
+        {
+            TOut result = default;
+            try
+            {
+                requestContext.AttemptCnt++;
 
-				if (requestContext.MethodType == WebMethodType.GET)
-				{
-					result = await flurlRequest
-						.GetJsonAsync<TOut>();
-				}
-				else if (requestContext.MethodType == WebMethodType.POST)
-				{
-					result = await flurlRequest
-						.PostJsonAsync(requestContext.JsonSerialize())
-						.ReceiveJson<TOut>();
-				}
-			}
-			catch (FlurlHttpException flurlException)
-			{
-				if (requestContext.AttemptCnt < WebConfig.ReTryCount)
-					result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
-				else
-					_exceptionHandler?.Invoke(flurlException);
-			}
-			catch (Exception ex)
-			{
-				_exceptionHandler?.Invoke(ex);
-			}
+                if (requestContext.MethodType == WebMethodType.GET)
+                {
+                    result = await flurlRequest
+                        .GetJsonAsync<TOut>();
+                }
+                else if (requestContext.MethodType == WebMethodType.POST)
+                {
+                    result = await flurlRequest
+                        .PostJsonAsync(requestContext.JsonSerialize())
+                        .ReceiveJson<TOut>();
+                }
+            }
+            catch (FlurlHttpException flurlException)
+            {
+                if (requestContext.AttemptCnt < WebConfig.ReTryCount)
+                    result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
+                else
+                    _exceptionHandler?.Invoke(flurlException);
+            }
+            catch (Exception ex)
+            {
+                _exceptionHandler?.Invoke(ex);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		#region Utility Function
+        #region Utility Function
 
-		private static List<string> ConvertSegments(string segmentGroup, object data)
-		{
-			var convertedSegments = new List<string>();
+        private static List<string> ConvertSegments(string segmentGroup, object data)
+        {
+            var convertedSegments = new List<string>();
 
-			if (string.IsNullOrEmpty(segmentGroup))
-				return convertedSegments;
+            if (string.IsNullOrEmpty(segmentGroup))
+                return convertedSegments;
 
-			var segments = segmentGroup.Split('/');
+            var segments = segmentGroup.Split('/');
 
-			foreach (var segment in segments)
-			{
-				if (segment.StartsWith("{"))
-				{
-					var propertyName = String.Join("", segment.Split('{', '}'));
-					convertedSegments.Add((string)data.GetType().GetProperty(propertyName).GetValue(data, null));
-				}
-				else
-				{
-					convertedSegments.Add(segment);
-				}
-			}
+            foreach (var segment in segments)
+            {
+                if (segment.StartsWith("{"))
+                {
+                    var propertyName = String.Join("", segment.Split('{', '}'));
+                    convertedSegments.Add((string)data.GetType().GetProperty(propertyName).GetValue(data, null));
+                }
+                else
+                {
+                    convertedSegments.Add(segment);
+                }
+            }
 
-			return convertedSegments;
-		}
+            return convertedSegments;
+        }
 
-		private static List<(string name, string value)> ConvertQueryParams(string queryParamsGroup, object data)
-		{
-			var convertedParams = new List<(string name, string value)>();
+        private static List<(string name, string value)> ConvertQueryParams(string queryParamsGroup, object data)
+        {
+            var convertedParams = new List<(string name, string value)>();
 
-			if (string.IsNullOrEmpty(queryParamsGroup))
-				return convertedParams;
+            if (string.IsNullOrEmpty(queryParamsGroup))
+                return convertedParams;
 
-			var queryParams = queryParamsGroup.Split('&');
+            var queryParams = queryParamsGroup.Split('&');
 
-			foreach (var queryParam in queryParams)
-			{
-				var splitParam = queryParam.Split('=');
-				if (splitParam.Length != 2)
-					continue;
+            foreach (var queryParam in queryParams)
+            {
+                var splitParam = queryParam.Split('=');
+                if (splitParam.Length != 2)
+                    continue;
 
-				string queryName = splitParam[0];
-				string queryData = splitParam[1];
+                string queryName = splitParam[0];
+                string queryData = splitParam[1];
 
-				if (queryData.StartsWith("{"))
-				{
-					var propertyName = String.Join("", queryData.Split('{', '}'));
-					queryData = (string)data.GetType().GetProperty(propertyName).GetValue(data, null);
-				}
+                if (queryData.StartsWith("{"))
+                {
+                    var propertyName = String.Join("", queryData.Split('{', '}'));
+                    queryData = (string)data.GetType().GetProperty(propertyName).GetValue(data, null);
+                }
 
-				convertedParams.Add((queryName, queryData));
-			}
+                convertedParams.Add((queryName, queryData));
+            }
 
-			return convertedParams;
-		}
+            return convertedParams;
+        }
 
-		private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, WebRequestContext requestContext)
-		{
-			TOut result = default;
+        private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, WebRequestContext requestContext)
+        {
+            TOut result = default;
 
-			// 인증토큰 리프레쉬
-			if (flurlException.Call.Response != null
-				&& flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
-			{
-				_exceptionHandler?.Invoke(flurlException);
-				return result;
-			}
+            if (flurlException.Call.Response != null
+                && flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+            {
+                _exceptionHandler?.Invoke(flurlException);
+                return result;
+            }
+            else if (flurlException.Call.Response != null)// 재시도
+            {
+                result = await WebClient.RequestAsync<TOut>(requestContext);
+            }
 
-			// 재시도
-			if (flurlException.Call.Response != null)
-			{
-				result = await WebClient.RequestAsync<TOut>(requestContext);
-			}
+            return result;
+        }
 
-			return result;
-		}
-
-		#endregion Utility Function
-	}
+        #endregion Utility Function
+    }
 }

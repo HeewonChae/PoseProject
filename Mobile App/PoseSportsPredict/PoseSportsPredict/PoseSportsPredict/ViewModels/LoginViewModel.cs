@@ -78,7 +78,7 @@ namespace PoseSportsPredict.ViewModels
 
         public async Task<bool> PoseWebLogin()
         {
-            var loginResult = await _webApiService.EncrpytRequestAsyncWithToken<O_Login>(new WebRequestContext
+            var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
             {
                 MethodType = WebMethodType.POST,
                 BaseUrl = AppConfig.PoseWebBaseUrl,
@@ -92,7 +92,7 @@ namespace PoseSportsPredict.ViewModels
 
             if (loginResult == null)
             {
-                _OAuthService.Logout();
+                await _OAuthService.Logout();
                 SetBusy(false);
                 return false;
             }

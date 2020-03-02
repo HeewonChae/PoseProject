@@ -13,14 +13,14 @@ namespace Repository.Mysql.FootballDBMigrations
 
             SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.Entity.MySqlMigrationSqlGenerator());
 
-            CodeGenerator = new Utility.FixedMySqlMigrationCodeGenerator();
+            CodeGenerator = new Utilities.FixedMySqlMigrationCodeGenerator();
         }
 
         protected override void Seed(Repository.Mysql.Contexts.FootballDB context)
         {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
         }
     }

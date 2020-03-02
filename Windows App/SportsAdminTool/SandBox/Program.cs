@@ -13,55 +13,55 @@ using LogicCore.File;
 
 namespace SandBox
 {
-	internal class Program
-	{
-		private static void Main(string[] args)
-		{
-			// Prepare logical initialize
-			{
-				Repository.RepositoryStatic.Init_Mysql();
-				// Football Data Mapping API Model to App Model
-				AppModel.Football.Mapper.FootballMapper.Mapping();
-				// Load Table
-				string tableRootPath = string.Concat(AppDomain.CurrentDomain.BaseDirectory, "Resources");
-				AppLogic.TableLoader.Init(tableRootPath);
-			}
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            // Prepare logical initialize
+            {
+                Repository.RepositoryStatic.Init_Mysql();
+                // Football Data Mapping API Model to App Model
+                AppModel.Football.Mapper.FootballMapper.Mapping();
+                // Load Table
+                string tableRootPath = string.Concat(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+                AppLogic.TableLoader.Init(tableRootPath);
+            }
 
-			//MakeJsonFile();
-		}
+            //MakeJsonFile();
+        }
 
-		public static void MakeJsonFile()
-		{
-			var Leagues = new List<ResourceModel.Football.LeagueCoverage>();
+        public static void MakeJsonFile()
+        {
+            var Leagues = new List<ResourceModel.Football.LeagueCoverage>();
 
-			// LeagueInfo to JsonFile
-			using (var P_SELECT_LEAGUES = new FootballDB.Procedures.P_SELECT_LEAGUES())
-			{
-				var input = new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
-				{
-					GroupBy = "country_name, type, name",
-					OrderBy = "country_name asc, type desc, name asc",
-				};
+            // LeagueInfo to JsonFile
+            using (var P_SELECT_LEAGUES = new FootballDB.Procedures.P_SELECT_LEAGUES())
+            {
+                var input = new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
+                {
+                    GroupBy = "country_name, type, name",
+                    OrderBy = "country_name asc, type desc, name asc",
+                };
 
-				P_SELECT_LEAGUES.SetInput(input);
-				var dbLeagues = P_SELECT_LEAGUES.OnQuery();
+                P_SELECT_LEAGUES.SetInput(input);
+                var dbLeagues = P_SELECT_LEAGUES.OnQuery();
 
-				int index = 1;
-				foreach (var dbLeague in dbLeagues)
-				{
-					Leagues.Add(new ResourceModel.Football.LeagueCoverage
-						(index
-						, dbLeague.name
-						, (ResourceModel.Football.Enums.LeagueType)Enum.Parse(typeof(ResourceModel.Football.Enums.LeagueType), dbLeague.type)
-						, dbLeague.country_name
-						, false));
+                int index = 1;
+                foreach (var dbLeague in dbLeagues)
+                {
+                    Leagues.Add(new ResourceModel.Football.LeagueCoverage
+                        (index
+                        , dbLeague.name
+                        , (ResourceModel.Football.Enums.LeagueType)Enum.Parse(typeof(ResourceModel.Football.Enums.LeagueType), dbLeague.type)
+                        , dbLeague.country_name
+                        , false));
 
-					index++;
-				}
-			}
+                    index++;
+                }
+            }
 
-			var serializeString = JsonConvert.SerializeObject(Leagues, Formatting.Indented);
-			FileFacade.MakeSimpleTextFile("C:\\Users\\korma\\Desktop", "leauges.json", serializeString);
-		}
-	}
+            var serializeString = JsonConvert.SerializeObject(Leagues, Formatting.Indented);
+            FileFacade.MakeSimpleTextFile("C:\\Users\\korma\\Desktop", "leauges.json", serializeString);
+        }
+    }
 }

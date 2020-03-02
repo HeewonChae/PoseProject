@@ -31,7 +31,7 @@ namespace SportsWebService.Services
             return Singleton.Get<CryptoFacade>().Encrypt_AES(result.JsonSerialize(), signature, signatureIV);
         }
 
-        public string P_E_Login(string e_json)
+        public async Task<string> P_E_Login(string e_json)
         {
             var signature = ServerContext.Current.Signature;
             var signatureIV = ServerContext.Current.SignatureIV;
@@ -40,15 +40,17 @@ namespace SportsWebService.Services
                             .Decrypt_AES(e_json, signature, signatureIV)
                             .JsonDeserialize<I_Login>();
 
-            var result = Commands.Auth.P_E_Login.Execute(input);
+            var result = await Commands.Auth.P_E_Login.Execute(input);
 
             return Singleton.Get<CryptoFacade>().Encrypt_AES(result.JsonSerialize(), signature, signatureIV);
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
-        public string P_E_TokenRefresh(string e_json)
+        public string P_E_TokenRefresh()
         {
-            throw new NotImplementedException();
+            var result = Commands.Auth.P_E_TokenRefresh.Execute();
+
+            return Singleton.Get<CryptoFacade>().Encrypt_AES(result.JsonSerialize()
+                , ServerContext.Current.Signature, ServerContext.Current.SignatureIV);
         }
     }
 }

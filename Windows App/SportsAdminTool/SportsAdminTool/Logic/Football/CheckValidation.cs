@@ -90,7 +90,7 @@ namespace SportsAdminTool.Logic.Football
 			bool db_result = true;
 			if (isDB_check)
 			{
-				db_result = DatabaseLogic.FootballFacade.SelectLeagues(
+				db_result = DatabaseLogic.FootballDBFacade.SelectLeagues(
 					new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
 					{
 						Where = $"id = {leagueID}"
@@ -130,7 +130,7 @@ namespace SportsAdminTool.Logic.Football
 
 			if (result && isDB_check)
 			{
-				result = DatabaseLogic.FootballFacade.SelectTeams(new FootballDB.Procedures.P_SELECT_TEAMS.Input()
+				result = DatabaseLogic.FootballDBFacade.SelectTeams(new FootballDB.Procedures.P_SELECT_TEAMS.Input()
 				{
 					Where = $"id = {teamID}",
 				})
@@ -168,7 +168,7 @@ namespace SportsAdminTool.Logic.Football
 
 			if (checkExistLeagueInDB)
 			{
-				bool result = DatabaseLogic.FootballFacade.SelectLeagues(
+				bool result = DatabaseLogic.FootballDBFacade.SelectLeagues(
 						new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
 						{
 							Where = $"id = {leagueID}"

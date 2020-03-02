@@ -55,7 +55,7 @@ namespace PoseSportsPredict.Services
                         string token = eventArgs.Account.Properties["access_token"];
 
                         // P_E_CheckVaildOAuthUser
-                        _authenticatedUser = await _webApiService.EncrpytRequestAsyncWithToken<ExternAuthUser>(new WebRequestContext
+                        _authenticatedUser = await _webApiService.EncryptRequestAsync<ExternAuthUser>(new WebRequestContext
                         {
                             MethodType = WebMethodType.POST,
                             BaseUrl = AppConfig.PoseWebBaseUrl,
@@ -132,11 +132,13 @@ namespace PoseSportsPredict.Services
             return _isAuthenticated = true;
         }
 
-        public void Logout()
+        public Task Logout()
         {
             _isAuthenticated = false;
             _authenticatedUser = null;
             LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
+
+            return Task.FromResult(true);
         }
     }
 }

@@ -67,7 +67,7 @@ namespace PoseSportsPredict
 
             if (string.IsNullOrEmpty(serverPubKey))
             {
-                await UserDialogs.Instance.AlertAsync(LocalizeString.ServiceNotAvailable);
+                await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
                 return false;
             }
 
@@ -75,7 +75,10 @@ namespace PoseSportsPredict
             ClientContext.eSignature = _cryptoService.GetEncryptedSignature();
             ClientContext.eSignatureIV = _cryptoService.GetEncryptedSignatureIV();
 
-            await _OAuthService.IsAuthenticatedAndValid();
+            if (!await _OAuthService.IsAuthenticatedAndValid())
+            {
+                await _OAuthService.Logout();
+            }
 
             _isLoaded = true;
             return true;

@@ -55,11 +55,6 @@ namespace SportsWebService.Authentication
             _eCredentials = header.eCredentials;
         }
 
-        public PoseCredentials CreateCredentials()
-        {
-            return Credentials = new PoseCredentials();
-        }
-
         public PoseCredentials DecryptCredentials()
         {
             if (_eCredentials == null || _eCredentials.Length == 0)
@@ -91,12 +86,6 @@ namespace SportsWebService.Authentication
             }
 
             return Credentials;
-        }
-
-        public byte[] EncryptCredentials(PoseCredentials credentials)
-        {
-            byte[] credentials_serialize = PoseCredentials.Serialize(credentials);
-            return Singleton.Get<CryptoFacade>().Encrypt_RSA(credentials_serialize);
         }
 
         #region For MessageHeader Behavior

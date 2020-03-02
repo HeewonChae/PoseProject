@@ -166,7 +166,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logic\Comparer\AppFootballFixtureComparer.cs" />
-    <Compile Include="Logic\Database\FootballFacade.cs" />
+    <Compile Include="Logic\Database\FootballDBFacade.cs" />
     <Compile Include="Logic\Football\Alarm\CheckCompletedFixtures.cs" />
     <Compile Include="Logic\Football\Alarm\CollectDatasAndPredict.cs" />
     <Compile Include="Logic\Football\Alarm\InitializeDatabase.cs" />

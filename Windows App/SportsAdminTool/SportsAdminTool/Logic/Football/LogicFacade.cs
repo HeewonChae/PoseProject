@@ -36,7 +36,7 @@ namespace SportsAdminTool.Logic.Football
                 {
                     mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update countries");
                     var api_countries = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllCountries();
-                    Database.FootballFacade.UpdateCountry(api_countries.ToArray());
+                    Database.FootballDBFacade.UpdateCountry(api_countries.ToArray());
                 }
 
                 if (cancellationToken.IsCancellationRequested)
@@ -46,8 +46,8 @@ namespace SportsAdminTool.Logic.Football
                 {
                     mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update leagues");
                     var api_leagues = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllAvailableLeauges();
-                    Database.FootballFacade.UpdateLeague(api_leagues.ToArray());
-                    Database.FootballFacade.UpdateCoverage(api_leagues.ToArray());
+                    Database.FootballDBFacade.UpdateLeague(api_leagues.ToArray());
+                    Database.FootballDBFacade.UpdateCoverage(api_leagues.ToArray());
                 }
 
                 if (cancellationToken.IsCancellationRequested)
@@ -56,7 +56,7 @@ namespace SportsAdminTool.Logic.Football
                 // Update team
                 {
                     mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update teams");
-                    var onGoingLeauges = Database.FootballFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
+                    var onGoingLeauges = Database.FootballDBFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
                     {
                         Where = "is_current = 1",
                     });
@@ -72,7 +72,7 @@ namespace SportsAdminTool.Logic.Football
                             return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
 
                         var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueID(league.id);
-                        Database.FootballFacade.UpdateTeam(league.id, api_teams.ToArray());
+                        Database.FootballDBFacade.UpdateTeam(league.id, api_teams.ToArray());
                     }
                 }
 
@@ -118,7 +118,7 @@ namespace SportsAdminTool.Logic.Football
                             return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
 
                         // Check exist in db
-                        if (Database.FootballFacade.IsExistFixture(api_fixture.FixtureID))
+                        if (Database.FootballDBFacade.IsExistFixture(api_fixture.FixtureID))
                             continue;
 
                         // Updte home & away last fixtrues, H2H (컵 경기 포함)
@@ -155,7 +155,7 @@ namespace SportsAdminTool.Logic.Football
                             mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update last fixtrues ({innerLoop}/{lastFixturesCnt})");
 
                             // Check exist in db
-                            if (Database.FootballFacade.IsExistFixture(api_lastFixture.FixtureID))
+                            if (Database.FootballDBFacade.IsExistFixture(api_lastFixture.FixtureID))
                                 continue;
 
                             var api_fixtureStatistic = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixtureStatisticByFixtureID(api_lastFixture.FixtureID);
@@ -165,11 +165,11 @@ namespace SportsAdminTool.Logic.Football
                                 DataConverter.CovertAppModelToDbModel(api_lastFixture.FixtureID, (short)api_lastFixture.HomeTeam.TeamID, (short)api_lastFixture.AwayTeam.TeamID, api_fixtureStatistic,
                                     out FootballDB.Tables.FixtureStatistic[] coverted_fixtureStatistics);
 
-                                Database.FootballFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
+                                Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
                             }
 
                             // Call DB
-                            isLastFixturesUpdateSuccess = isLastFixturesUpdateSuccess && Database.FootballFacade.UpdateFixture(true, true, api_lastFixture) > 0;
+                            isLastFixturesUpdateSuccess = isLastFixturesUpdateSuccess && Database.FootballDBFacade.UpdateFixture(true, true, api_lastFixture) > 0;
                         }
 
                         // Update standing
@@ -195,7 +195,7 @@ namespace SportsAdminTool.Logic.Football
                             continue;
 
                         // Call DB
-                        Database.FootballFacade.UpdateFixture(false, false, api_fixture);
+                        Database.FootballDBFacade.UpdateFixture(false, false, api_fixture);
                     }
                 }
 
@@ -208,7 +208,7 @@ namespace SportsAdminTool.Logic.Football
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update standings");
 
                     // Call DB
-                    var db_fixtures = Database.FootballFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
+                    var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
                     {
                         Where = $"is_predicted = 0",
                     });
@@ -223,7 +223,7 @@ namespace SportsAdminTool.Logic.Football
                         loop++;
                         mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update Standings ({loop}/{groupCnt})");
 
-                        var db_leauge = Database.FootballFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
+                        var db_leauge = Database.FootballDBFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
                         {
                             Where = $"id = {db_groupingFixture.Key}",
                         }).FirstOrDefault();
@@ -241,7 +241,7 @@ namespace SportsAdminTool.Logic.Football
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update odds");
 
                     // Call DB
-                    var db_fixtures = Database.FootballFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
+                    var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
                     {
                         Where = $"is_predicted = 0",
                     });
@@ -254,7 +254,7 @@ namespace SportsAdminTool.Logic.Football
                         mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update odds ({loop}/{fixtureCnt})");
 
                         // Check already updated odds
-                        if (Database.FootballFacade.IsAlreadyUpdatedOdds(db_fixture.id))
+                        if (Database.FootballDBFacade.IsAlreadyUpdatedOdds(db_fixture.id))
                             continue;
 
                         // Call API
@@ -263,7 +263,7 @@ namespace SportsAdminTool.Logic.Football
                         // DB Save
                         int dbSaveResult = 0;
                         if (api_odds != null)
-                            dbSaveResult = Database.FootballFacade.UpdateOdds(db_fixture.id, api_odds.Bookmakers);
+                            dbSaveResult = Database.FootballDBFacade.UpdateOdds(db_fixture.id, api_odds.Bookmakers);
 
                         if (api_odds != null && dbSaveResult == 0)
                             oddsUpdateSuccess = false;
@@ -290,7 +290,7 @@ namespace SportsAdminTool.Logic.Football
 
                 mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Predict fixtrues");
 
-                var db_fixtures = Database.FootballFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
+                var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
                 {
                     Where = $"is_predicted = 0",
                 });
@@ -308,7 +308,7 @@ namespace SportsAdminTool.Logic.Football
                     db_fixture.is_predicted = true;
 
                     // DB Save
-                    Database.FootballFacade.UpdateFixture(db_fixture);
+                    Database.FootballDBFacade.UpdateFixture(db_fixture);
                 }
 
                 return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
@@ -331,7 +331,7 @@ namespace SportsAdminTool.Logic.Football
 
                 mainWindow.Set_Lable(mainWindow._lbl_check_completed_fixtures, "Check completed fixtures");
 
-                var db_fixtures = Database.FootballFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
+                var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
                 {
                     Where = $"is_completed = 0 AND event_date < '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}'",
                 });
@@ -351,7 +351,7 @@ namespace SportsAdminTool.Logic.Football
 
                     if (!Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status))
                     {
-                        Database.FootballFacade.DeleteFixtures(db_fixture.id);
+                        Database.FootballDBFacade.DeleteFixtures(db_fixture.id);
                         continue;
                     }
 
@@ -361,7 +361,7 @@ namespace SportsAdminTool.Logic.Football
                         && api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
                         && api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.PEN)) // 승부차기 후 종료
                     {
-                        Database.FootballFacade.DeleteFixtures(db_fixture.id);
+                        Database.FootballDBFacade.DeleteFixtures(db_fixture.id);
                         continue;
                     }
 
@@ -372,12 +372,12 @@ namespace SportsAdminTool.Logic.Football
                         DataConverter.CovertAppModelToDbModel(api_fixture.FixtureID, (short)api_fixture.HomeTeam.TeamID, (short)api_fixture.AwayTeam.TeamID, api_fixture.Statistic,
                             out FootballDB.Tables.FixtureStatistic[] coverted_fixtureStatistics);
 
-                        Database.FootballFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
+                        Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
                     }
 
                     // DB Save
                     db_fixture.is_completed = true;
-                    Database.FootballFacade.UpdateFixture(db_fixture);
+                    Database.FootballDBFacade.UpdateFixture(db_fixture);
                 }
 
                 return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
@@ -387,11 +387,11 @@ namespace SportsAdminTool.Logic.Football
         public static bool UpdateStandings(short leagueID, string leagueName, string countryName)
         {
             // Check already updated standings
-            if (Database.FootballFacade.IsAlreadyUpdatedStandings(leagueID))
+            if (Database.FootballDBFacade.IsAlreadyUpdatedStandings(leagueID))
                 return true;
 
             // Check league type
-            var api_league = Database.FootballFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
+            var api_league = Database.FootballDBFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
             {
                 Where = $"id = {leagueID}",
             }).FirstOrDefault();
@@ -410,7 +410,7 @@ namespace SportsAdminTool.Logic.Football
                 return true;
 
             // Call DB
-            return Database.FootballFacade.UpdateStanding(leagueID, countryName, api_standings.ToArray()) > 0;
+            return Database.FootballDBFacade.UpdateStanding(leagueID, countryName, api_standings.ToArray()) > 0;
         }
 
         /// <summary>
@@ -444,11 +444,11 @@ namespace SportsAdminTool.Logic.Football
                     var api_league = Singleton.Get<ApiLogic.FootballWebAPI>().GetLeagueByLeagueID(errorLeague.LeagueID);
 
                     // DB Save
-                    Database.FootballFacade.UpdateLeague(api_league); // league
-                    Database.FootballFacade.UpdateCoverage(api_league); // coverage
+                    Database.FootballDBFacade.UpdateLeague(api_league); // league
+                    Database.FootballDBFacade.UpdateCoverage(api_league); // coverage
 
                     var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueID((short)api_league.LeagueID);
-                    Database.FootballFacade.UpdateTeam((short)api_league.LeagueID, api_teams.ToArray());
+                    Database.FootballDBFacade.UpdateTeam((short)api_league.LeagueID, api_teams.ToArray());
                 }
 
                 if (cancellationToken.IsCancellationRequested)
@@ -470,7 +470,7 @@ namespace SportsAdminTool.Logic.Football
 
                     // DB Save
                     if (api_team != null)
-                        Database.FootballFacade.UpdateTeam(errorTeam.LeagueID, api_team);
+                        Database.FootballDBFacade.UpdateTeam(errorTeam.LeagueID, api_team);
                 }
 
                 return true;
