@@ -69,14 +69,36 @@ namespace PoseSportsPredict.ViewModels
                 || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Facebook)
                 await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
             else
-                await PoseWebLogin();
+                await PoseLogin();
+        }
+
+        public ICommand LoginGoogleCommand
+        {
+            get
+            {
+                return new RelayCommand(LoginGoogle);
+            }
+        }
+
+        private async void LoginGoogle()
+        {
+            if (IsBusy)
+                return;
+
+            SetBusy(true);
+
+            if (!_OAuthService.IsAuthenticated
+                || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Google)
+                await _OAuthService.OAuthLoginAsync(SNSProviderType.Google);
+            else
+                await PoseLogin();
         }
 
         #endregion Commands
 
         #region Methods
 
-        public async Task<bool> PoseWebLogin()
+        public async Task<bool> PoseLogin()
         {
             var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
             {
@@ -97,6 +119,7 @@ namespace PoseSportsPredict.ViewModels
                 return false;
             }
 
+            // Update PoseToken, Update ExpireTime
             ClientContext.SetCredentialsFrom(loginResult.PoseToken);
             LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
 

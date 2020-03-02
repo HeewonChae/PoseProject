@@ -7,12 +7,11 @@ using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.WebError;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Logic.Utilities;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities;
 using PoseSportsPredict.Utilities.LocalStorage;
+using Shiny;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
@@ -43,7 +42,8 @@ namespace PoseSportsPredict.Services
                     // 서버에 연결할 수 없음
                     await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
 
-                    // TODO: 로그인 화면으로 이동
+                    // 로그인 화면으로 이동
+                    await ShinyHost.Resolve<IOAuthService>().Logout();
                     return;
                 }
                 else if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
@@ -51,12 +51,23 @@ namespace PoseSportsPredict.Services
                     try
                     {
                         var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
-                        await UserDialogs.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
+
+                        if (error.ErrorCode == (ServiceErrorCode.Authenticate.Credentials + 1))
+                        {
+                            await UserDialogs.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials);
+
+                            // 로그인 화면으로 이동
+                            await ShinyHost.Resolve<IOAuthService>().Logout();
+                            return;
+                        }
+                        else
+                        {
+                            await UserDialogs.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
+                        }
                     }
                     catch
                     {
-                        // 알 수 없는 서버 에러
-                        await UserDialogs.Instance.AlertAsync("Unkown service error");
+                        await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
                     }
                 }
                 else

@@ -3,6 +3,7 @@ using PosePacket;
 using SportsWebService.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net;
 using System.Security.Principal;
 
@@ -10,6 +11,12 @@ namespace SportsWebService.Authentication
 {
     public class PoseCredentials : IIdentity
     {
+        public static class RowCode
+        {
+            [Description("Not Authenticated Credentials")]
+            public const int Not_Authenticated_Credentials = ServiceErrorCode.Authenticate.Credentials + 1;
+        }
+
         public const int TOKEN_EXPIRE_IN = 60 * 60 * 1000; // 1시간
         public static readonly PoseCredentials Default = new PoseCredentials();
 
@@ -25,7 +32,7 @@ namespace SportsWebService.Authentication
             get
             {
                 if (!_isAuthentication)
-                    ErrorHandler.OccurException(ServiceErrorCode.Authenticate.CredentialsExpire);
+                    ErrorHandler.OccurException(RowCode.Not_Authenticated_Credentials);
 
                 return _isAuthentication;
             }

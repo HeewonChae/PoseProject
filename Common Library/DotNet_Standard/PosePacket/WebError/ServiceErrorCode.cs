@@ -14,7 +14,7 @@
 
         public static class Authenticate
         {
-            public const int CredentialsExpire = Root.Authenticate + 1;
+            public const int Credentials = Root.Authenticate + 01000000;
         }
 
         public static class WebService

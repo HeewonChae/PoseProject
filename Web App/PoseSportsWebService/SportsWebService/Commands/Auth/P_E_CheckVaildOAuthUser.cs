@@ -1,5 +1,6 @@
 ﻿using PosePacket;
 using PosePacket.Service.Auth;
+using SportsWebService.Authentication;
 using SportsWebService.Authentication.ExternOAuth;
 using SportsWebService.Infrastructure;
 using SportsWebService.Utilities;
@@ -50,6 +51,7 @@ namespace SportsWebService.Commands.Auth
                 {
                     PlatformId = externAuthUser.Id,
                     PlatformType = (short)externAuthUser.SNSProvider,
+                    RoleType = (int)ServiceRoleType.User,
                     InsertTime = DateTime.UtcNow,
                 });
 

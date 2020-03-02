@@ -14,6 +14,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
         {
             public string PlatformId;
             public short PlatformType;
+            public int RoleType;
             public DateTime InsertTime;
         }
 
@@ -49,9 +50,8 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                         }
                         else
                         {
-                            var affectedRows = pose_globalDB.ExecuteSQL("INSERT INTO user_base(platform_id, platform_type, last_login_date, ipt_date)" +
-                                                                            "VALUE(@platform_id, @platform_type, @last_login_date, @ipt_date);",
-                                                                            new { platform_id = _input.PlatformId, platform_type = _input.PlatformType, last_login_date = _input.InsertTime, ipt_date = _input.InsertTime });
+                            var affectedRows = pose_globalDB.ExecuteSQL("INSERT INTO user_base(platform_id, platform_type, role_type, last_login_date, ipt_date)VALUE(@platform_id, @platform_type, @role_type, @last_login_date, @ipt_date);",
+                                                                            new { platform_id = _input.PlatformId, platform_type = _input.PlatformType, role_type = _input.RoleType, last_login_date = _input.InsertTime, ipt_date = _input.InsertTime });
 
                             if (affectedRows == 1)
                                 _output = true;

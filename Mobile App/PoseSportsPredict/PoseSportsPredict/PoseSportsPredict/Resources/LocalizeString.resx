@@ -103,7 +103,7 @@
   <data name="Service_Not_Available" xml:space="preserve">
     <value>Service is not available.</value>
   </data>
-  <data name="Not_Authenticated_User" xml:space="preserve">
+  <data name="Not_Authenticated_Credencials" xml:space="preserve">
     <value>Not authenticated User.</value>
   </data>
 </root>

@@ -72,9 +72,9 @@ namespace PoseSportsPredict.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Not authenticated User..
         /// </summary>
-        public static string Not_Authenticated_User {
+        public static string Not_Authenticated_Credencials {
             get {
-                return ResourceManager.GetString("Not_Authenticated_User", resourceCulture);
+                return ResourceManager.GetString("Not_Authenticated_Credencials", resourceCulture);
             }
         }
         

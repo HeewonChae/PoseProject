@@ -27,6 +27,10 @@ namespace Repository.Mysql.PoseGlobalDB.Tables
         public short platform_type { get; set; }
 
         [Required]
+        [Column(TypeName = "INT")]
+        public int role_type { get; set; }
+
+        [Required]
         public DateTime last_login_date { get; set; }
 
         [Required]

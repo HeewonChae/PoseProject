@@ -102,9 +102,9 @@
     <Compile Include="FootballDB\Tables\Odds.cs" />
     <Compile Include="FootballDB\Tables\Standing.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202003021430170_InitUserBase.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202003021430170_InitUserBase.designer.cs">
-      <DependentUpon>202003021430170_InitUserBase.cs</DependentUpon>
+    <Compile Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.cs" />
+    <Compile Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.designer.cs">
+      <DependentUpon>202003022333493_InitUserBase.cs</DependentUpon>
     </Compile>
     <Compile Include="PoseGlobalDBMigrations\Configuration.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_INSERT_USER_BASE.cs" />
@@ -133,8 +133,8 @@
     <EmbeddedResource Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.resx">
       <DependentUpon>202002201810534_AlterLogoStringLength.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PoseGlobalDBMigrations\202003021430170_InitUserBase.resx">
-      <DependentUpon>202003021430170_InitUserBase.cs</DependentUpon>
+    <EmbeddedResource Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.resx">
+      <DependentUpon>202003022333493_InitUserBase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

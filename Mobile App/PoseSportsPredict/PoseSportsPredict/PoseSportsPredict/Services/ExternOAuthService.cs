@@ -2,8 +2,7 @@
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Logic.ExternOAuth.Providers;
-using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities.ExternOAuth.Providers;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels;
 using Shiny;
@@ -73,7 +72,7 @@ namespace PoseSportsPredict.Services
                         await UserDialogs.Instance.AlertAsync("OAuth Completed");
 
                         // PoseWebLogin
-                        var loginResult = await ShinyHost.Resolve<LoginViewModel>().PoseWebLogin();
+                        var loginResult = await ShinyHost.Resolve<LoginViewModel>().PoseLogin();
                         if (!loginResult)
                         {
                             _authenticatedUser = null;

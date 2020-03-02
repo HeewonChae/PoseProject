@@ -123,7 +123,7 @@
   <data name="Service_Not_Available" xml:space="preserve">
     <value>서비스를 이용할 수 없습니다.</value>
   </data>
-  <data name="Not_Authenticated_User" xml:space="preserve">
+  <data name="Not_Authenticated_Credencials" xml:space="preserve">
     <value>인증되지 않은 계정 입니다.</value>
   </data>
 </root>

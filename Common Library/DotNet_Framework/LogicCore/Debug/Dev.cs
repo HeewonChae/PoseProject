@@ -28,7 +28,6 @@ namespace LogicCore.Debug
 
             message = $"ASSERT FALSE : {fileName} - line:{line}, msg:{message}";
 
-            Console.WriteLine(message);
             Trace.Assert(condition, message);
         }
     }
