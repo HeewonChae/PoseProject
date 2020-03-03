@@ -35,21 +35,20 @@ namespace SportsWebService.Commands.Auth
                 ErrorHandler.OccurException(RowCode.Invalid_PlatformId);
 
             // Check DB
-            long user_no = 0;
+            PoseGlobalDB.Tables.UserBase db_output;
             using (var P_USER_LOGIN = new PoseGlobalDB.Procedures.P_USER_LOGIN())
             {
                 P_USER_LOGIN.SetInput(input.PlatformId);
 
-                long? queryResult = await P_USER_LOGIN.OnQueryAsync();
+                db_output = await P_USER_LOGIN.OnQueryAsync();
 
-                if (P_USER_LOGIN.EntityStatus != null || !queryResult.HasValue)
+                if (P_USER_LOGIN.EntityStatus != null || db_output == null)
                     ErrorHandler.OccurException(RowCode.Failed_User_Login);
-
-                user_no = queryResult.Value;
             }
 
             var credentials = new PoseCredentials();
-            credentials.SetUserNo(user_no);
+            credentials.SetUserNo(db_output.user_no);
+            credentials.SetServiceRoleType(db_output.role_type);
             credentials.RefreshExpireTime();
 
             byte[] eCredential = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials));

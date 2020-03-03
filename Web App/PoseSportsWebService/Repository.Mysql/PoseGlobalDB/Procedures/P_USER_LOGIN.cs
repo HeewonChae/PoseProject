@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Tables = Repository.Mysql.PoseGlobalDB.Tables;
+
 namespace Repository.Mysql.PoseGlobalDB.Procedures
 {
-    public class P_USER_LOGIN : MysqlQuery<string, long?> // input = flatform_id
+    public class P_USER_LOGIN : MysqlQuery<string, Tables.UserBase> // input = flatform_id
     {
         public override void OnAlloc()
         {
@@ -25,16 +27,16 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
             // if you need Binding Parameters, write here
         }
 
-        public override long? OnQuery()
+        public override Tables.UserBase OnQuery()
         {
             DapperFacade.DoWithDBContext(
                     null,
                      (Contexts.PoseGlobalDB pose_globalDB) =>
                      {
-                         _output = pose_globalDB.ExecuteScalar<long?>("SELECT user_no FROM user_base WHERE platform_id = @platform_id",
-                                                                               new { platform_id = _input });
+                         _output = pose_globalDB.QuerySQL<Tables.UserBase>("SELECT * FROM user_base WHERE platform_id = @platform_id",
+                                                                               new { platform_id = _input }).FirstOrDefault();
 
-                         if (_output.HasValue)
+                         if (_output != null)
                          {
                              pose_globalDB.ExecuteSQL("UPDATE user_base SET last_login_date = @last_login_date WHERE platform_id = @platform_id",
                                                                                 new { last_login_date = DateTime.UtcNow, platform_id = _input });

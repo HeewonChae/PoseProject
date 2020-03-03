@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logic\" />
     <Folder Include="Models\" />
   </ItemGroup>
 

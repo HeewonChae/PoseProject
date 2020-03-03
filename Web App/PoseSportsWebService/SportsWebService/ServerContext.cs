@@ -1,10 +1,11 @@
 ﻿using LogicCore.Utility;
 using PosePacket.Header;
+using SportsWebService.Authentication;
 using SportsWebService.Utilities;
 using System.Net;
 using System.ServiceModel;
 
-namespace SportsWebService.Authentication
+namespace SportsWebService
 {
     /// <summary>
     /// This class will act as a custom context, an extension to the OperationContext.

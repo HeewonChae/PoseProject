@@ -44,13 +44,17 @@ namespace SportsWebService.Authentication
 
         private long _userNo;
         private long _expireTime;
+        private int _serviceRoleType;
 
         public long UserNo => _userNo;
         public long ExpireTime => _expireTime;
+        public int ServiceRoleType => _serviceRoleType;
 
         public void SetUserNo(long userNo) => _userNo = userNo;
 
         public void RefreshExpireTime() => _expireTime = LogicTime.TIME() + PoseCredentials.TOKEN_EXPIRE_IN;
+
+        public void SetServiceRoleType(int serviceRoleType) => _serviceRoleType = serviceRoleType;
 
         #region Serialize Methods
 
@@ -65,6 +69,9 @@ namespace SportsWebService.Authentication
 
                 // CertifiedTime
                 buffer.AddRange(BitConverter.GetBytes(credentials._expireTime));
+
+                // CertifiedTime
+                buffer.AddRange(BitConverter.GetBytes(credentials._serviceRoleType));
             }
             catch (Exception)
             {
@@ -89,6 +96,10 @@ namespace SportsWebService.Authentication
                 // CertifiedTime
                 credentials._expireTime = BitConverter.ToInt64(buffer, curPosition);
                 curPosition += 8;
+
+                // CertifiedTime
+                credentials._serviceRoleType = BitConverter.ToInt32(buffer, curPosition);
+                curPosition += 4;
 
                 if (buffer.Length != curPosition)
                     throw new Exception();

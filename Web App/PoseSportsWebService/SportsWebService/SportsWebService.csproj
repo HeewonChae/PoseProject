@@ -113,7 +113,7 @@
     <Compile Include="Commands\Auth\P_E_TokenRefresh.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
-    <Compile Include="Authentication\ServerContext.cs" />
+    <Compile Include="ServerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

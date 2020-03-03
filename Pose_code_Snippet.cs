@@ -3,6 +3,11 @@ Enable-Migrations -ProjectName Repository.Mysql -ContextTypeName Repository.Mysq
 Add-Migration -Name ******** -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.FootballDBMigrations.Configuration -Verbose
 Update-database -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.FootballDBMigrations.Configuration -Verbose
 
+// PoseGlobalDB Code First
+enable-Migrations -ProjectName Repository.Mysql -ContextTypeName Repository.Mysql.Contexts.PoseGlobalDB -MigrationsDirectory PoseGlobalDBMigrations -Verbose
+Add-Migration -Name ******** -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.PoseGlobalDBMigrations.Configuration -Verbose
+Update-database -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.PoseGlobalDBMigrations.Configuration -Verbose
+
 // DB Procedure
 public class P_EXECUTE_QUERY : MysqlQuery<T_in, T_out>
 {
@@ -60,7 +65,3 @@ public static class P_Command
         return outpout;
     }
 }
-
-
-ServerContext.Current.CreateCredentials();
-			byte[] eCredential = ServerContext.Current.EncryptCredentials();
