@@ -1,4 +1,7 @@
 ﻿using LogicCore.Converter;
+using PosePacket;
+using SportsWebService.Utilities;
+using System.ComponentModel;
 using System.Security.Principal;
 using System.Threading;
 
@@ -6,6 +9,12 @@ namespace SportsWebService.Authentication
 {
     public class PosePrincipal : IPrincipal
     {
+        public static class RowCode
+        {
+            [Description("Don't have permission to use the service")]
+            public const int None_Service_Permission = ServiceErrorCode.Authenticate.Principal + 1;
+        }
+
         private readonly PoseCredentials _identity;
         private ServiceRoleType _role;
 
@@ -38,7 +47,10 @@ namespace SportsWebService.Authentication
 
             var result = role.TryParseEnum(out ServiceRoleType roleType);
 
-            return result && (int)roleType <= (int)Role;
+            if (!(result && (int)roleType <= (int)Role))
+                ErrorHandler.OccurException(RowCode.None_Service_Permission);
+
+            return true;
         }
 
         protected virtual void EnsureRoles()

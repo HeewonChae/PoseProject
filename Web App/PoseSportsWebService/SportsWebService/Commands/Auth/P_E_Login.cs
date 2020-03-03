@@ -22,7 +22,7 @@ namespace SportsWebService.Commands.Auth
             [Description("Invalid platform Id")]
             public const int Invalid_PlatformId = ServiceErrorCode.WebMethod_Auth.P_E_Login + 2;
 
-            [Description("Failed User Login")]
+            [Description("Failed user login")]
             public const int Failed_User_Login = ServiceErrorCode.WebMethod_Auth.P_E_Login + 3;
         }
 

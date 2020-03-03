@@ -16,15 +16,10 @@ namespace PoseSportsPredict
 
         protected override async void OnStart()
         {
-            bool lodingSuccess = false;
             if (MainPage is LoadingPage loadingPage)
             {
-                lodingSuccess = await loadingPage.LoadingAsync();
-            }
-
-            if (lodingSuccess)
-            {
-                await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
+                if (await loadingPage.LoadingAsync())
+                    await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
             }
         }
 

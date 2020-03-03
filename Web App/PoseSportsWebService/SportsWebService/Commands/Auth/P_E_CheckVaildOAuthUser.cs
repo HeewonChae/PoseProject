@@ -20,13 +20,13 @@ namespace SportsWebService.Commands.Auth
             [Description("Invalid input value")]
             public const int Invalid_InputValue = ServiceErrorCode.WebMethod_Auth.P_E_CheckVaildOAuthUser + 1;
 
-            [Description("Invalid AccessToken")]
+            [Description("Invalid access token")]
             public const int Invalid_AccessToken = ServiceErrorCode.WebMethod_Auth.P_E_CheckVaildOAuthUser + 2;
 
             [Description("Failed OAuth")]
             public const int Failed_OAuth = ServiceErrorCode.WebMethod_Auth.P_E_CheckVaildOAuthUser + 3;
 
-            [Description("Failed Save DB")]
+            [Description("Failed save database")]
             public const int Failed_Save_DB = ServiceErrorCode.WebMethod_Auth.P_E_CheckVaildOAuthUser + 4;
         }
 

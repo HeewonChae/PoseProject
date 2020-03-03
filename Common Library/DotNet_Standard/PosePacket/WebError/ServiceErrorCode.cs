@@ -15,6 +15,7 @@
         public static class Authenticate
         {
             public const int Credentials = Root.Authenticate + 01000000;
+            public const int Principal = Root.Authenticate + 02000000;
         }
 
         public static class WebService

@@ -17,14 +17,14 @@ namespace SportsWebService.Commands.Auth
     {
         public static class RowCode
         {
-            [Description("Invalid User")]
-            public const int Invalid_User = ServiceErrorCode.WebMethod_Auth.P_E_TokenRefresh + 1;
+            [Description("Invalid credentials")]
+            public const int Invalid_Credentials = ServiceErrorCode.WebMethod_Auth.P_E_TokenRefresh + 1;
         }
 
         public static O_TokenRefresh Execute()
         {
             if (ServerContext.Current.Credentials == PoseCredentials.Default)
-                ErrorHandler.OccurException(RowCode.Invalid_User);
+                ErrorHandler.OccurException(RowCode.Invalid_Credentials);
 
             var credentials = new PoseCredentials();
             credentials.SetUserNo(ServerContext.Current.Credentials.UserNo);

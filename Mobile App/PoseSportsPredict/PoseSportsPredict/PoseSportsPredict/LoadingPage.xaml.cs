@@ -51,7 +51,7 @@ namespace PoseSportsPredict
         public async Task<bool> LoadingAsync()
         {
             if (_isLoaded)
-                return false;
+                return _isLoaded;
 
             while (!await WebApiService.CheckInternetConnection())
             { }
@@ -68,7 +68,7 @@ namespace PoseSportsPredict
             if (string.IsNullOrEmpty(serverPubKey))
             {
                 await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
-                return false;
+                return _isLoaded;
             }
 
             _cryptoService.RSA_FromXmlString(serverPubKey);
@@ -81,7 +81,7 @@ namespace PoseSportsPredict
             }
 
             _isLoaded = true;
-            return true;
+            return _isLoaded;
         }
 
         #endregion Methods

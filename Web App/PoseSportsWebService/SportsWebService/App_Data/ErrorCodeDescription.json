@@ -36,6 +36,10 @@
     "Description": "Invalid User"
   },
   {
+    "ErrorCode": 102000001,
+    "Description": "None Service Permission"
+  },
+  {
     "ErrorCode": 101000001,
     "Description": "Not Authenticated Credentials"
   }

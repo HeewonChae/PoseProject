@@ -13,7 +13,7 @@ namespace SportsWebService.Authentication
     {
         public static class RowCode
         {
-            [Description("Not Authenticated Credentials")]
+            [Description("Not authenticated credentials")]
             public const int Not_Authenticated_Credentials = ServiceErrorCode.Authenticate.Credentials + 1;
         }
 
