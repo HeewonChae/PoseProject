@@ -66,21 +66,20 @@ namespace PoseSportsPredict.Services
                                 AccessToken = token,
                             }
                         });
-                        if (_authenticatedUser == null)
-                            return;
 
-                        await UserDialogs.Instance.AlertAsync("OAuth Completed");
-
-                        // PoseWebLogin
-                        var loginResult = await ShinyHost.Resolve<LoginViewModel>().PoseLogin();
-                        if (!loginResult)
+                        if (_authenticatedUser != null)
                         {
-                            _authenticatedUser = null;
-                            return;
+                            // PoseLogin
+                            if (!await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
+                            {
+                                _authenticatedUser = null;
+                            }
+                            else // Login success
+                            {
+                                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
+                                _isAuthenticated = true;
+                            }
                         }
-
-                        LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
-                        _isAuthenticated = true;
                     }
                 };
 

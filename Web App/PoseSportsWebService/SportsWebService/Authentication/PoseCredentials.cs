@@ -11,14 +11,14 @@ namespace SportsWebService.Authentication
 {
     public class PoseCredentials : IIdentity
     {
+        public const int TOKEN_EXPIRE_IN = 60 * 60 * 1000; // 1시간
+        public static readonly PoseCredentials Default = new PoseCredentials();
+
         public static class RowCode
         {
             [Description("Not authenticated credentials")]
             public const int Not_Authenticated_Credentials = ServiceErrorCode.Authenticate.Credentials + 1;
         }
-
-        public const int TOKEN_EXPIRE_IN = 60 * 60 * 1000; // 1시간
-        public static readonly PoseCredentials Default = new PoseCredentials();
 
         #region IIdentity
 

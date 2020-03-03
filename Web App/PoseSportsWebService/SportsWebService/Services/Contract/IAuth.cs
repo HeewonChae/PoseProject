@@ -34,6 +34,6 @@ namespace SportsWebService.Services.Contract
         [WebInvoke(Method = "POST", UriTemplate = "Login"
             , RequestFormat = WebMessageFormat.Json
             , ResponseFormat = WebMessageFormat.Json)]
-        Task<string> P_E_Login(string e_json);
+        string P_E_Login(string e_json);
     }
 }

@@ -35,16 +35,9 @@ namespace SportsWebService
 
         #endregion Crypto
 
-        // Get the current one from the extensions that are added to OperationContext.
-        public static ServerContext Current
-        {
-            get
-            {
-                return OperationContext.Current.IncomingMessageProperties[CONTEXT_PROPERTY_NAME] as ServerContext;
-            }
-        }
-
         public static bool IsExistData => OperationContext.Current.IncomingMessageProperties.ContainsKey(CONTEXT_PROPERTY_NAME);
+
+        public static ServerContext Current => OperationContext.Current.IncomingMessageProperties[CONTEXT_PROPERTY_NAME] as ServerContext;
 
         public ServerContext(PoseHeader header)
         {

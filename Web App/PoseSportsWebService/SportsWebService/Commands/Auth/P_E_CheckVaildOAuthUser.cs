@@ -55,7 +55,7 @@ namespace SportsWebService.Commands.Auth
                     InsertTime = DateTime.UtcNow,
                 });
 
-                bool queryResult = await P_INSERT_USER_BASE.OnQueryAsync();
+                bool queryResult = P_INSERT_USER_BASE.OnQuery();
 
                 if (P_INSERT_USER_BASE.EntityStatus != null || !queryResult)
                     ErrorHandler.OccurException(RowCode.Failed_Save_DB);

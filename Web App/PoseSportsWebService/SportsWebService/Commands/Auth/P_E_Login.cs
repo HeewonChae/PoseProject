@@ -26,7 +26,7 @@ namespace SportsWebService.Commands.Auth
             public const int Failed_User_Login = ServiceErrorCode.WebMethod_Auth.P_E_Login + 3;
         }
 
-        public async static Task<O_Login> Execute(I_Login input)
+        public static O_Login Execute(I_Login input)
         {
             if (input == null)
                 ErrorHandler.OccurException(RowCode.Invalid_InputValue);
@@ -35,27 +35,25 @@ namespace SportsWebService.Commands.Auth
                 ErrorHandler.OccurException(RowCode.Invalid_PlatformId);
 
             // Check DB
-            PoseGlobalDB.Tables.UserBase db_output;
+            PoseGlobalDB.Procedures.P_USER_LOGIN.Output db_output;
             using (var P_USER_LOGIN = new PoseGlobalDB.Procedures.P_USER_LOGIN())
             {
                 P_USER_LOGIN.SetInput(input.PlatformId);
 
-                db_output = await P_USER_LOGIN.OnQueryAsync();
+                db_output = P_USER_LOGIN.OnQuery();
 
-                if (P_USER_LOGIN.EntityStatus != null || db_output == null)
-                    ErrorHandler.OccurException(RowCode.Failed_User_Login);
+                //if (P_USER_LOGIN.EntityStatus != null || db_output.Success == false)
+                ErrorHandler.OccurException(RowCode.Failed_User_Login);
             }
 
             var credentials = new PoseCredentials();
-            credentials.SetUserNo(db_output.user_no);
-            credentials.SetServiceRoleType(db_output.role_type);
+            credentials.SetUserNo(db_output.UserNo);
+            credentials.SetServiceRoleType(db_output.RoleType);
             credentials.RefreshExpireTime();
-
-            byte[] eCredential = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials));
 
             return new O_Login
             {
-                PoseToken = Convert.ToBase64String(eCredential),
+                PoseToken = Convert.ToBase64String(Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials))),
                 TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
             };
         }

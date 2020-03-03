@@ -28,13 +28,12 @@ namespace SportsWebService.Commands.Auth
 
             var credentials = new PoseCredentials();
             credentials.SetUserNo(ServerContext.Current.Credentials.UserNo);
+            credentials.SetServiceRoleType(ServerContext.Current.Credentials.ServiceRoleType);
             credentials.RefreshExpireTime();
-
-            byte[] eCredential = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials));
 
             return new O_TokenRefresh
             {
-                PoseToken = Convert.ToBase64String(eCredential),
+                PoseToken = Convert.ToBase64String(Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials))),
                 TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
             };
         }
