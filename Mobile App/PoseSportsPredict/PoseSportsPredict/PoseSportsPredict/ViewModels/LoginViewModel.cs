@@ -1,20 +1,17 @@
-﻿using Acr.UserDialogs;
-using GalaSoft.MvvmLight.Command;
-using Plugin.LocalNotification;
+﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.Views;
+using Shiny;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
-using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -50,13 +47,7 @@ namespace PoseSportsPredict.ViewModels
 
         #region Commands
 
-        public ICommand LoginFacebookCommand
-        {
-            get
-            {
-                return new RelayCommand(LoginFacebook);
-            }
-        }
+        public ICommand LoginFacebookCommand { get => new RelayCommand(LoginFacebook); }
 
         private async void LoginFacebook()
         {
@@ -72,13 +63,7 @@ namespace PoseSportsPredict.ViewModels
                 await PoseLogin();
         }
 
-        public ICommand LoginGoogleCommand
-        {
-            get
-            {
-                return new RelayCommand(LoginGoogle);
-            }
-        }
+        public ICommand LoginGoogleCommand { get => new RelayCommand(LoginGoogle); }
 
         private async void LoginGoogle()
         {
@@ -100,6 +85,8 @@ namespace PoseSportsPredict.ViewModels
 
         public async Task<bool> PoseLogin()
         {
+            SetBusy(true);
+
             var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
             {
                 MethodType = WebMethodType.POST,
@@ -110,7 +97,7 @@ namespace PoseSportsPredict.ViewModels
                 {
                     PlatformId = _OAuthService.AuthenticatedUser.Id,
                 }
-            });
+            }, false);
 
             if (loginResult == null)
             {
@@ -123,7 +110,7 @@ namespace PoseSportsPredict.ViewModels
             ClientContext.SetCredentialsFrom(loginResult.PoseToken);
             LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
 
-            await UserDialogs.Instance.AlertAsync("Login Completed");
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppShellViewModel>());
 
             SetBusy(false);
             return true;

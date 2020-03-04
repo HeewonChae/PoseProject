@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<forms:TopTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:Naxam.Controls.Forms;assembly=Naxam.TopTabbedPage.Forms"
+             xmlns:football="clr-namespace:PoseSportsPredict.Views.Football"
+             xmlns:controls="clr-namespace:PoseSportsPredict.Logics.Common"
+             mc:Ignorable="d"
+             x:Class="PoseSportsPredict.Views.ref.TopTabbedPage1"
+             Title="TopTabbedPage"
+             SelectedTabColor="White"
+             UnselectedTabColor="LightGray"
+             BackgroundColor="White"
+             BarTextColor="#00b9e1"
+             BarIndicatorColor="#00b9e1"
+             BarBackgroundColor="#ffffff"
+             SwipeEnabled="True">
+
+    <football:ItemsPage Title="day-3" />
+    <football:ItemsPage Title="day-2" />
+    <football:ItemsPage  Title="yester" />
+    <football:ItemsPage Title="today" x:Name="todayItems" />
+    <football:ItemsPage Title="tomorrow" />
+    <football:ItemsPage  Title="day+2" />
+    <football:ItemsPage Title="day+3" />
+</forms:TopTabbedPage>

@@ -3,7 +3,9 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels;
+using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
+using PoseSportsPredict.Views.Football;
 using Shiny;
 using WebServiceShare.ExternAuthentication;
 
@@ -32,6 +34,12 @@ namespace PoseSportsPredict
             services.AddSingleton<LoadingPage>();
             services.AddSingleton<LoginPage>();
             services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<AppShellPage>();
+            services.AddSingleton<AppShellViewModel>();
+            services.AddSingleton<NewItemPage>();
+            services.AddSingleton<NewItemViewModel>();
+            services.AddTransient<ItemDetailPage>();
+            services.AddTransient<ItemDetailViewModel>();
         }
     }
 }

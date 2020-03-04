@@ -21,8 +21,9 @@ namespace SportsWebService.Services
         {
             var result = Commands.Auth.P_E_TokenRefresh.Execute();
 
-            return Singleton.Get<CryptoFacade>().Encrypt_AES(result.JsonSerialize()
-                , ServerContext.Current.Signature, ServerContext.Current.SignatureIV);
+            return Singleton.Get<CryptoFacade>().Encrypt_AES(result.JsonSerialize(),
+                ServerContext.Current.Signature,
+                ServerContext.Current.SignatureIV);
         }
 
         public async Task<string> P_E_CheckVaildOAuthUser(string e_json)

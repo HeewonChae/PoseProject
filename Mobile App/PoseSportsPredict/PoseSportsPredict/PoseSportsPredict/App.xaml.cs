@@ -1,4 +1,5 @@
-﻿using PoseSportsPredict.Logics;
+﻿using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels;
 using Shiny;
 using Xamarin.Forms;
@@ -10,6 +11,8 @@ namespace PoseSportsPredict
         public App()
         {
             InitializeComponent();
+
+            DependencyService.Register<MockDataStore>();
 
             MainPage = ShinyHost.Resolve<LoadingPage>();
         }

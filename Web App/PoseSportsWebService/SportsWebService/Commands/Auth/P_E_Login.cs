@@ -42,8 +42,8 @@ namespace SportsWebService.Commands.Auth
 
                 db_output = P_USER_LOGIN.OnQuery();
 
-                //if (P_USER_LOGIN.EntityStatus != null || db_output.Success == false)
-                ErrorHandler.OccurException(RowCode.Failed_User_Login);
+                if (P_USER_LOGIN.EntityStatus != null || db_output.Success == false)
+                    ErrorHandler.OccurException(RowCode.Failed_User_Login);
             }
 
             var credentials = new PoseCredentials();

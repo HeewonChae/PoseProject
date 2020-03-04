@@ -56,3 +56,21 @@ var request = new NotificationRequest
 };
 
 NotificationCenter.Current.Show(request);
+
+//7. BaseViewModel
+#region BaseViewModel
+
+public override async Task<bool> PrepareView(params object[] data)
+{
+    return true;
+}
+
+#endregion BaseViewModel
+
+#region Constructors
+
+public AppMasterViewModel(AppMasterPage page) : base(page)
+{
+}
+
+#endregion Constructors
