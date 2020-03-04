@@ -33,6 +33,8 @@ namespace PoseSportsPredict.Droid.Renderer
         public override void OnViewAdded(Android.Views.View child)
         {
             base.OnViewAdded(child);
+
+            //Scrollable
             var tabLayout = child as TabLayout;
             if (tabLayout != null)
             {
@@ -44,19 +46,20 @@ namespace PoseSportsPredict.Droid.Renderer
         {
             base.OnElementChanged(e);
 
-            //find the pager and tabs
-            for (int i = 0; i < ChildCount; ++i)
-            {
-                Android.Views.View view = (Android.Views.View)GetChildAt(i);
-                if (view is TabLayout) TabsLayout = (TabLayout)view;
-                else if (view is ViewPager) PagerLayout = (ViewPager)view;
-            }
+            //// Disable tab swipe
+            ////find the pager and tabs
+            //for (int i = 0; i < ChildCount; ++i)
+            //{
+            //    Android.Views.View view = (Android.Views.View)GetChildAt(i);
+            //    if (view is TabLayout) TabsLayout = (TabLayout)view;
+            //    else if (view is ViewPager) PagerLayout = (ViewPager)view;
+            //}
 
-            if (PagerLayout != null) //now disable the swiping
-            {
-                var propertyInfo = PagerLayout.GetType().GetProperty("EnableGesture");
-                propertyInfo.SetValue(PagerLayout, false, null);
-            }
+            //if (PagerLayout != null) //now disable the swiping
+            //{
+            //    var propertyInfo = PagerLayout.GetType().GetProperty("EnableGesture");
+            //    propertyInfo.SetValue(PagerLayout, false, null);
+            //}
         }
     }
 }

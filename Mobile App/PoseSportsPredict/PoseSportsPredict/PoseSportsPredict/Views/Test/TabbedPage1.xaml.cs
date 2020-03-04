@@ -17,7 +17,8 @@ namespace PoseSportsPredict.Views.Football
         public TabbedPage1()
         {
             InitializeComponent();
-            //PlatformConfig.AndroidSpecific.TabbedPage.SetIsSwipePagingEnabled(this, false);
+            PlatformConfig.AndroidSpecific.TabbedPage.SetIsSwipePagingEnabled(this, true);
+            PlatformConfig.AndroidSpecific.TabbedPage.SetToolbarPlacement(this, PlatformConfig.AndroidSpecific.ToolbarPlacement.Top);
             this.CurrentPage = todayItems;
         }
     }
