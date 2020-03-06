@@ -108,9 +108,9 @@ namespace PoseSportsPredict.ViewModels
 
             // Update PoseToken, Update ExpireTime
             ClientContext.SetCredentialsFrom(loginResult.PoseToken);
-            LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn));
+            ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
 
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppShellViewModel>());
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
 
             SetBusy(false);
             return true;

@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Views.Football;
+using PoseSportsPredict.Views.Test;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +9,7 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Test
 {
     public class AboutViewModel : BaseViewModel
     {

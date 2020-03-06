@@ -27,7 +27,7 @@ namespace PoseSportsPredict.InfraStructure
 
         #region Attributes
 
-        private readonly Page _coupledPage;
+        private Page _coupledPage;
         private bool _isBusy;
         private string _title = string.Empty;
 
@@ -59,7 +59,12 @@ namespace PoseSportsPredict.InfraStructure
         /// Page는 null 일 수 있음
         /// </summary>
         /// <returns></returns>
-        public abstract Task<bool> PrepareView(params object[] data);
+        public abstract Task<bool> PrepareView(params object[] datas);
+
+        public virtual Task ShowedView(params object[] datas)
+        {
+            return Task.FromResult(true);
+        }
 
         #endregion Abstract Method
 
@@ -87,6 +92,8 @@ namespace PoseSportsPredict.InfraStructure
             else
                 UserDialogs.Instance.HideLoading();
         }
+
+        protected void SetCoupledPage(Page page) => _coupledPage = page;
 
         #endregion Methods
     }

@@ -10,13 +10,16 @@
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naxam.TopTabbedPage.Forms" Version="0.0.3.5" />
     <PackageReference Include="Plugin.LocalNotification" Version="4.1.4" />
+    <PackageReference Include="Sharpnado.Presentation.Forms" Version="1.4.0" />
     <PackageReference Include="Shiny.Core" Version="1.0.0.1182" />
+    <PackageReference Include="SlideOverKit" Version="2.1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.356" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.0" />
+    <PackageReference Include="Xamarin.KeyboardHelper" Version="2.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +33,15 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>LocalizeString.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AppMasterMenuPage.xaml.cs">
+      <DependentUpon>AppMasterMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Football\FootballTabbedPage.xaml.cs">
+      <DependentUpon>FootballTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Football\FootballMatchesPage.xaml.cs">
+      <DependentUpon>FootballMatchesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Test\AppShellPage.xaml.cs">
       <DependentUpon>AppShellPage.xaml</DependentUpon>
@@ -46,6 +58,18 @@
     <EmbeddedResource Update="Resources\LocalizeString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizeString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballLeaguesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballMatchesPage_IOS.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballTabbedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballMatchesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Test\TabbedPage1.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -78,8 +102,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Football\" />
+    <Folder Include="CustomViews\" />
     <Folder Include="ViewModels\Common\" />
-    <Folder Include="ViewModels\Football\" />
-    <Folder Include="Views\Football\" />
   </ItemGroup>
 </Project>

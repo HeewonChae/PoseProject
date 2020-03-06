@@ -30,6 +30,7 @@ namespace PoseSportsPredict.iOS
 
             // Initialize extern module
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+            Xamarin.KeyboardHelper.Platform.iOS.Effects.Init();
 
             LoadApplication(new App());
 

@@ -7,9 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
-namespace PoseSportsPredict.Views.Football
+using PlatformConfig = Xamarin.Forms.PlatformConfiguration;
+
+namespace PoseSportsPredict.Views.Test
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewItemPage : ContentPage
@@ -17,6 +21,8 @@ namespace PoseSportsPredict.Views.Football
         public NewItemPage()
         {
             InitializeComponent();
+
+            Xamarin.Forms.Application.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
     }
 }

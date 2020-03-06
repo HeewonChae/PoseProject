@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 using PlatformConfig = Xamarin.Forms.PlatformConfiguration;
 
-namespace PoseSportsPredict.Views.Football
+namespace PoseSportsPredict.Views.Test
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabbedPage1 : TabbedPage

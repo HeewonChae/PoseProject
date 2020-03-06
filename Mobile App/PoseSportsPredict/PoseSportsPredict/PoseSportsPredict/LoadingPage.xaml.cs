@@ -1,8 +1,11 @@
 ﻿using Acr.UserDialogs;
 using PosePacket.Proxy;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
+using PoseSportsPredict.ViewModels;
+using Shiny;
 using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
@@ -78,9 +81,12 @@ namespace PoseSportsPredict
             if (!await _OAuthService.IsAuthenticatedAndValid())
             {
                 await _OAuthService.Logout();
+                return _isLoaded;
             }
 
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
             _isLoaded = true;
+
             return _isLoaded;
         }
 

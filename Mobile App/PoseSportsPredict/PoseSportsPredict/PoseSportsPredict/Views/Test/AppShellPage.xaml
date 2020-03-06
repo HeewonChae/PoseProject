@@ -4,10 +4,8 @@
        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
-       xmlns:football="clr-namespace:PoseSportsPredict.Views.Football"
        xmlns:test="clr-namespace:PoseSportsPredict.Views.Test"
-       xmlns:local="clr-namespace:PoseSportsPredict.Views"
-       x:Class="PoseSportsPredict.Views.AppShellPage"
+       x:Class="PoseSportsPredict.Views.Test.AppShellPage"
        xmlns:controls="clr-namespace:PoseSportsPredict.Logics.Common"
        FlyoutHeaderBehavior="Fixed"
        ItemTemplate="{StaticResource FlyoutTemplateSelector}">
@@ -105,7 +103,7 @@
     </Shell.MenuItemTemplate>
 
     <!--Shell Contents-->
-    <ShellContent Title="Sports Category" Route="shell_Header" ContentTemplate="{DataTemplate local:TempPage}" />
+    <ShellContent Title="Sports Category" Route="shell_Header" ContentTemplate="{DataTemplate test:TempPage}" />
 
     <FlyoutItem
         x:Name="fi_football"
@@ -114,13 +112,13 @@
         <ShellContent
             Title="Browse"
             Icon="tab_feed"
-            ContentTemplate="{DataTemplate football:TabbedPage1}" />
+            ContentTemplate="{DataTemplate test:TabbedPage1}" />
         <ShellContent
             Title="About"
             Icon="tab_about">
             <ShellContent.ContentTemplate>
                 <OnPlatform x:TypeArguments="DataTemplate">
-                    <On Platform="Android" Value="{DataTemplate football:TabbedPage1}" />
+                    <On Platform="Android" Value="{DataTemplate test:TabbedPage1}" />
                     <On Platform="IOS" Value="{DataTemplate test:TopTabbedPage1}" />
                 </OnPlatform>
             </ShellContent.ContentTemplate>
@@ -134,12 +132,12 @@
         <ShellContent
             Title="Browse"
             Icon="tab_feed"
-            ContentTemplate="{DataTemplate football:ItemsPage}" />
+            ContentTemplate="{DataTemplate test:ItemsPage}" />
         <ShellContent
             Title="About"
             Icon="tab_about"
-            ContentTemplate="{DataTemplate football:AboutPage}" />
+            ContentTemplate="{DataTemplate test:AboutPage}" />
     </FlyoutItem>
 
-    <ShellContent Title="Favorite League" Route="menu_Header" ContentTemplate="{DataTemplate local:TempPage}" />
+    <ShellContent Title="Favorite League" Route="menu_Header" ContentTemplate="{DataTemplate test:TempPage}" />
 </Shell>

@@ -12,6 +12,7 @@ namespace LogicCore.Debug
 
             Console.ForegroundColor = foregroundColor;
 
+            Console.WriteLine(message);
             Trace.WriteLine(message);
 
             Console.ForegroundColor = orgColor;

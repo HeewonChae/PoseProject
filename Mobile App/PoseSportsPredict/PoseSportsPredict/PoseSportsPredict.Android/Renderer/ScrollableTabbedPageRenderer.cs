@@ -35,8 +35,7 @@ namespace PoseSportsPredict.Droid.Renderer
             base.OnViewAdded(child);
 
             //Scrollable
-            var tabLayout = child as TabLayout;
-            if (tabLayout != null)
+            if (child is TabLayout tabLayout)
             {
                 tabLayout.TabMode = TabLayout.ModeScrollable;
             }

@@ -120,8 +120,7 @@ namespace PoseSportsPredict.Services
             }
 
             // 토큰 만료 시간 체크
-            LocalStorage.Storage.GetValueOrDefault<DateTime>(LocalStorageKey.PoseTokenExpireTime, out DateTime expireIn);
-            if (expireIn < DateTime.UtcNow.AddMinutes(5))
+            if (ClientContext.TokenExpireIn < DateTime.UtcNow.AddMinutes(5))
             {
                 // P_E_TokenRefresh
                 var refreshToken = await this.EncryptRequestAsync<O_TokenRefresh>(new WebRequestContext
@@ -138,7 +137,7 @@ namespace PoseSportsPredict.Services
                 }
 
                 ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
-                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn));
+                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
             }
 
             if (isIndicateLoading)
@@ -211,8 +210,7 @@ namespace PoseSportsPredict.Services
             }
 
             // 토큰 만료 시간 체크
-            LocalStorage.Storage.GetValueOrDefault<DateTime>(LocalStorageKey.PoseTokenExpireTime, out DateTime expireIn);
-            if (expireIn < DateTime.UtcNow.AddMinutes(5))
+            if (ClientContext.TokenExpireIn < DateTime.UtcNow.AddMinutes(5))
             {
                 // P_E_TokenRefresh
                 var refreshToken = await this.EncryptRequestAsync<O_TokenRefresh>(new WebRequestContext
@@ -229,7 +227,7 @@ namespace PoseSportsPredict.Services
                 }
 
                 ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
-                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.PoseTokenExpireTime, DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn));
+                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
             }
 
             string eResult;

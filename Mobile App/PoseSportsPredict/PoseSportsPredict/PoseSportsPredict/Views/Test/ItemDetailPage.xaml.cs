@@ -1,5 +1,4 @@
 ﻿using PoseSportsPredict.Models;
-using PoseSportsPredict.ViewModels.Football;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PoseSportsPredict.Views.Football
+namespace PoseSportsPredict.Views.Test
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ItemDetailPage : ContentPage

@@ -2,8 +2,9 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
-using PoseSportsPredict.Views.Football;
+using PoseSportsPredict.Views.Test;
 using Shiny;
+using SlideOverKit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +12,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.KeyboardHelper;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Test
 {
     public class ItemsViewModel : BaseViewModel
     {
@@ -102,6 +104,14 @@ namespace PoseSportsPredict.ViewModels.Football
         }
 
         public ICommand ItemSelectedCommand { get => new RelayCommand<Item>(item => ItemSelected(item)); }
+
+        //private async void ItemSelected(Item selectedItem)
+        //{
+        //    if (selectedItem == null)
+        //        return;
+
+        //    await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<ItemDetailViewModel>(), null, selectedItem);
+        //}
 
         private async void ItemSelected(Item selectedItem)
         {

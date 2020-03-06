@@ -2,12 +2,12 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
-using PoseSportsPredict.Views.Football;
+using PoseSportsPredict.Views.Test;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Test
 {
     public class NewItemViewModel : BaseViewModel
     {
@@ -15,13 +15,18 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public override Task<bool> PrepareView(params object[] data)
         {
-            Item = new Item
-            {
-                Text = "Item name",
-                Description = "This is an item description."
-            };
+            Item = new Item();
 
             return Task.FromResult(true);
+        }
+
+        public override Task ShowedView(params object[] datas)
+        {
+            //var entry = CoupledPage.FindByName<Entry>("_txtEntry");
+            //entry.CursorPosition = 0;
+            //entry.Focus();
+
+            return base.ShowedView(datas);
         }
 
         #endregion BaseViewModel
@@ -55,9 +60,9 @@ namespace PoseSportsPredict.ViewModels.Football
             await PageSwitcher.PopModalAsync();
         }
 
-        public ICommand AddItemCommand { get => new RelayCommand(AddItem); }
+        public ICommand SaveItemCommand { get => new RelayCommand(SaveItem); }
 
-        public async void AddItem()
+        public async void SaveItem()
         {
             MessagingCenter.Send(this, "AddItem", Item);
             await PageSwitcher.PopModalAsync();

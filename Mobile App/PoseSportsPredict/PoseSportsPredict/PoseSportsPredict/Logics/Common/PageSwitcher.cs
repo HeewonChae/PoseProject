@@ -16,6 +16,8 @@ namespace PoseSportsPredict.Logics.Common
                 Application.Current.MainPage = new NavigationPage(viewModel.CoupledPage);
             else
                 Application.Current.MainPage = viewModel.CoupledPage;
+
+            await viewModel.ShowedView();
         }
 
         public static async Task PushNavPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
@@ -40,6 +42,8 @@ namespace PoseSportsPredict.Logics.Common
 
                 await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
             }
+
+            await viewModel.ShowedView();
         }
 
         public static async Task PushModalPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
@@ -64,6 +68,8 @@ namespace PoseSportsPredict.Logics.Common
 
                 await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(viewModel.CoupledPage));
             }
+
+            await viewModel.ShowedView();
         }
 
         public static async Task PopModalAsync()

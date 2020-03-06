@@ -2,8 +2,8 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
-using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
+using PoseSportsPredict.Views.Test;
 using Shiny;
 using System;
 using System.Diagnostics;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.ViewModels
+namespace PoseSportsPredict.ViewModels.Test
 {
     public class AppShellViewModel : BaseViewModel
     {
@@ -86,10 +86,12 @@ namespace PoseSportsPredict.ViewModels
 
         private MenuItem CreateMenuItem(Item item)
         {
-            var menuItem = new MenuItem();
-            menuItem.Text = item.Text;
-            menuItem.Command = MenuSelectedCommands;
-            menuItem.CommandParameter = item;
+            var menuItem = new MenuItem
+            {
+                Text = item.Text,
+                Command = MenuSelectedCommands,
+                CommandParameter = item
+            };
             return menuItem;
         }
 

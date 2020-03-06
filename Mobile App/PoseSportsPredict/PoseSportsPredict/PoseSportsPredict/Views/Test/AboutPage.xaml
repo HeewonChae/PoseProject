@@ -4,8 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PoseSportsPredict.Views.Football.AboutPage"
-             xmlns:vm="clr-namespace:PoseSportsPredict.ViewModels.Football"
+             x:Class="PoseSportsPredict.Views.Test.AboutPage"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
