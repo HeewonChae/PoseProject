@@ -60,9 +60,6 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.0.35</Version>
     </PackageReference>
-    <PackageReference Include="Naxam.TopTabbedPage.Forms">
-      <Version>0.0.3.5</Version>
-    </PackageReference>
     <PackageReference Include="Plugin.LocalNotification">
       <Version>4.1.4</Version>
     </PackageReference>

@@ -47,7 +47,6 @@ namespace PoseSportsPredict
             services.AddSingleton<FootballTabbedPage>();
             services.AddSingleton<FootballTabbedViewModel>();
             services.AddSingleton<FootballMatchesPage>();
-            services.AddSingleton<FootballMatchesPage_IOS>();
             services.AddSingleton<FootballMatchesViewModel>();
             services.AddSingleton<FootballLeaguesPage>();
             services.AddSingleton<FootballLeaguesViewModel>();

@@ -15,10 +15,11 @@ namespace PoseSportsPredict.ViewModels
 
         public override async Task<bool> PrepareView(params object[] data)
         {
+            var masterPate = CoupledPage as AppMasterPage;
+
             if (!await _menuViewModel.PrepareView(ShinyHost.Resolve<FootballTabbedViewModel>()))
                 return false;
 
-            var masterPate = CoupledPage as AppMasterPage;
             masterPate.Master = _menuViewModel.CoupledPage;
             masterPate.Detail = _defaultDetailViewModel.CoupledPage;
 
@@ -39,7 +40,6 @@ namespace PoseSportsPredict.ViewModels
         public AppMasterViewModel(AppMasterPage page) : base(page)
         {
             _menuViewModel = ShinyHost.Resolve<AppMasterMenuViewModel>();
-            _defaultDetailViewModel = ShinyHost.Resolve<FootballTabbedViewModel>();
         }
 
         #endregion Constructors

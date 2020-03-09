@@ -23,6 +23,7 @@ namespace PoseSportsPredict.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Naxam.Controls.Platform.iOS.TopTabbedRenderer.Init();
+            Shiny.iOSShinyHost.ValidateScopes = false;
             Shiny.iOSShinyHost.Init(new ShinyAppStartup());
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");

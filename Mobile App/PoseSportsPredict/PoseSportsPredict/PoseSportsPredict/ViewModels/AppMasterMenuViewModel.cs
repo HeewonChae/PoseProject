@@ -17,7 +17,7 @@ namespace PoseSportsPredict.ViewModels
         public override async Task<bool> PrepareView(params object[] datas)
         {
             if (datas == null)
-                return false;
+                return true;
 
             var sportsCategories = new List<MasterMenuItem>();
             foreach (var data in datas)

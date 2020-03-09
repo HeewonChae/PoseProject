@@ -15,23 +15,17 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region BaseViewModel
 
-        public override async Task<bool> PrepareView(params object[] data)
+        public override Task<bool> PrepareView(params object[] data)
         {
-            return true;
+            return Task.FromResult(true);
         }
 
         #endregion BaseViewModel
 
         #region Constructors
 
-        public FootballMatchesViewModel(FootballMatchesPage page,
-            FootballMatchesPage_IOS page_ios) : base(page)
+        public FootballMatchesViewModel(FootballMatchesPage page) : base(page)
         {
-            if (DeviceInfo.Platform == DevicePlatform.iOS)
-            {
-                page_ios.BindingContext = this;
-                SetCoupledPage(page_ios);
-            }
         }
 
         #endregion Constructors

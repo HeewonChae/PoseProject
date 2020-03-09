@@ -62,9 +62,6 @@
     <EmbeddedResource Update="Views\Football\FootballLeaguesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchesPage_IOS.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\FootballTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -101,6 +98,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Logics\Common\Behaviors\" />
     <Folder Include="Models\Football\" />
     <Folder Include="CustomViews\" />
     <Folder Include="ViewModels\Common\" />

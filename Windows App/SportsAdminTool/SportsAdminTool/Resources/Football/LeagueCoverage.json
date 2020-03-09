@@ -3345,6 +3345,55 @@
       "LeagueType": "League",
       "Country": "Zimbabwe",
       "IsCoverage": false
+    },
+    {
+      "Index": 479,
+      "LeagueName": "Queensland NPL",
+      "LeagueType": "League",
+      "Country": "Australia",
+      "IsCoverage": false
+    },
+    {
+      "Index": 480,
+      "LeagueName": "U19 Bundesliga",
+      "LeagueType": "League",
+      "Country": "Germany",
+      "IsCoverage": false
+    },
+    {
+      "Index": 481,
+      "LeagueName": "Tweede Divisie",
+      "LeagueType": "League",
+      "Country": "Netherlands",
+      "IsCoverage": false
+    },
+    {
+      "Index": 482,
+      "LeagueName": "First Amateur Division",
+      "LeagueType": "League",
+      "Country": "Belgium",
+      "IsCoverage": false
+    },
+    {
+      "Index": 483,
+      "LeagueName": "Coppa",
+      "LeagueType": "Cup",
+      "Country": "Belarus",
+      "IsCoverage": false
+    },
+    {
+      "Index": 484,
+      "LeagueName": "Super League 2",
+      "LeagueType": "League",
+      "Country": "Greece",
+      "IsCoverage": false
+    },
+    {
+      "Index": 485,
+      "LeagueName": "Cup",
+      "LeagueType": "Cup",
+      "Country": "South-Africa",
+      "IsCoverage": false
     }
   ]
 }

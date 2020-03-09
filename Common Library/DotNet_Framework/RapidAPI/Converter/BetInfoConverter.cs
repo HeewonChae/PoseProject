@@ -38,7 +38,8 @@ namespace RapidAPI.Converter
 							betInfo.BetValues = filteredValues.ToArray();
 						}
 
-						betInfos.Add(betInfo);
+						if(betInfo.BetValues.Length != 0)
+							betInfos.Add(betInfo);
 					}
 				}
 

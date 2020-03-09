@@ -703,6 +703,11 @@ namespace SportsAdminTool.Logic.Database
                 P_EXECUTE_QUERY.SetInput(sql);
                 result = P_EXECUTE_QUERY.OnQuery();
 
+                if (P_EXECUTE_QUERY.EntityStatus != null)
+                {
+                    Dev.DebugString($"Error SQL: {sql}");
+                }
+
                 Dev.DebugString($"Affected row cout: {result}");
             }
 
