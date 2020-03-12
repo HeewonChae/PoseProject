@@ -5,6 +5,8 @@ using PoseSportsPredict.ViewModels;
 using Shiny;
 using System.Globalization;
 using Xamarin.Forms;
+using XF.Material.Forms.Resources;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict
 {
@@ -20,9 +22,9 @@ namespace PoseSportsPredict
         public App()
         {
             InitializeComponent();
+            XF.Material.Forms.Material.Init(this);
 
             DependencyService.Register<MockDataStore>();
-
             MainPage = ShinyHost.Resolve<LoadingPage>();
         }
 

@@ -106,4 +106,22 @@
   <data name="Not_Authenticated_Credencials" xml:space="preserve">
     <value>Not authenticated User.</value>
   </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Tomorrow</value>
+  </data>
+  <data name="Football" xml:space="preserve">
+    <value>Football</value>
+  </data>
+  <data name="Matche" xml:space="preserve">
+    <value>Matche</value>
+  </data>
+  <data name="League" xml:space="preserve">
+    <value>League</value>
+  </data>
 </root>

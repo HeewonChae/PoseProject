@@ -3394,6 +3394,20 @@
       "LeagueType": "Cup",
       "Country": "South-Africa",
       "IsCoverage": false
+    },
+    {
+      "Index": 486,
+      "LeagueName": "Cup",
+      "LeagueType": "Cup",
+      "Country": "Tunisia",
+      "IsCoverage": false
+    },
+    {
+      "Index": 487,
+      "LeagueName": "King's Cup",
+      "LeagueType": "Cup",
+      "Country": "Saudi-Arabia",
+      "IsCoverage": false
     }
   ]
 }

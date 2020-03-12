@@ -23,12 +23,14 @@ namespace PoseSportsPredict.Views.Test
             _viewModel = new ItemsViewModel(this);
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
             if (_viewModel.Items == null)
-                await _viewModel.PrepareView();
+                _viewModel.OnPrepareView();
+
+            _viewModel.OnApearing();
         }
     }
 }

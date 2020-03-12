@@ -1,9 +1,9 @@
-﻿using Acr.UserDialogs;
-using PoseSportsPredict.InfraStructure.SQLite;
+﻿using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Utilities.SQLiteConnection;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Services
 {
@@ -20,7 +20,8 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await UserDialogs.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                throw;
             }
         }
 
@@ -48,7 +49,8 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await UserDialogs.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                throw;
             }
         }
 
@@ -70,7 +72,8 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await UserDialogs.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                throw;
             }
 
             return result;
@@ -89,7 +92,8 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await UserDialogs.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                throw;
             }
 
             return result;

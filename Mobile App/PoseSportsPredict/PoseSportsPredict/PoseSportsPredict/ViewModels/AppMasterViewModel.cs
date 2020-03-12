@@ -1,4 +1,5 @@
 ﻿using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
 using Shiny;
@@ -6,32 +7,30 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels
 {
-    public class AppMasterViewModel : BaseViewModel
+    public class AppMasterViewModel : NavigableViewModel
     {
-        #region BaseViewModel
+        #region NavigableViewModel
 
-        public override async Task<bool> PrepareView(params object[] data)
+        public override bool OnPrepareView(params object[] datas)
         {
-            var masterPate = CoupledPage as AppMasterPage;
+            var masterPage = this.CoupledPage as AppMasterPage;
 
-            if (!await _menuViewModel.PrepareView(ShinyHost.Resolve<FootballTabbedViewModel>()))
-                return false;
-
-            masterPate.Master = _menuViewModel.CoupledPage;
-            masterPate.Detail = _defaultDetailViewModel.CoupledPage;
+            masterPage.Master = _masterMenuViewModel.CoupledPage;
+            masterPage.Detail = _defaultDetailViewModel.CoupledPage;
 
             return true;
         }
 
-        #endregion BaseViewModel
+        #endregion NavigableViewModel
 
         #region Fields
 
-        private AppMasterMenuViewModel _menuViewModel;
-        private BaseViewModel _defaultDetailViewModel;
+        private AppMasterMenuViewModel _masterMenuViewModel;
+        private NavigableViewModel _defaultDetailViewModel;
 
         #endregion Fields
 
@@ -39,7 +38,8 @@ namespace PoseSportsPredict.ViewModels
 
         public AppMasterViewModel(AppMasterPage page) : base(page)
         {
-            _menuViewModel = ShinyHost.Resolve<AppMasterMenuViewModel>();
+            _masterMenuViewModel = ShinyHost.Resolve<AppMasterMenuViewModel>();
+            _defaultDetailViewModel = ShinyHost.Resolve<FootballMainViewModel>();
         }
 
         #endregion Constructors

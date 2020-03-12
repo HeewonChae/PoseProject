@@ -126,4 +126,22 @@
   <data name="Not_Authenticated_Credencials" xml:space="preserve">
     <value>인증되지 않은 계정 입니다.</value>
   </data>
+  <data name="Today" xml:space="preserve">
+    <value>오늘</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>어제</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>내일</value>
+  </data>
+  <data name="Football" xml:space="preserve">
+    <value>축구</value>
+  </data>
+  <data name="Matche" xml:space="preserve">
+    <value>경기</value>
+  </data>
+  <data name="League" xml:space="preserve">
+    <value>리그</value>
+  </data>
 </root>

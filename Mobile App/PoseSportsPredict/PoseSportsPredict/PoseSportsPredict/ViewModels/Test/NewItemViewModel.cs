@@ -2,6 +2,7 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Test;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,24 +10,15 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Test
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewItemViewModel : NavigableViewModel
     {
         #region BaseViewModel
 
-        public override Task<bool> PrepareView(params object[] data)
+        public override bool OnPrepareView(params object[] datas)
         {
             Item = new Item();
 
-            return Task.FromResult(true);
-        }
-
-        public override Task ShowedView(params object[] datas)
-        {
-            //var entry = CoupledPage.FindByName<Entry>("_txtEntry");
-            //entry.CursorPosition = 0;
-            //entry.Focus();
-
-            return base.ShowedView(datas);
+            return base.OnPrepareView(datas);
         }
 
         #endregion BaseViewModel

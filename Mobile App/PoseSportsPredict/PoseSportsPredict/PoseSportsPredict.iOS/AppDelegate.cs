@@ -23,15 +23,15 @@ namespace PoseSportsPredict.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Naxam.Controls.Platform.iOS.TopTabbedRenderer.Init();
-            Shiny.iOSShinyHost.ValidateScopes = false;
-            Shiny.iOSShinyHost.Init(new ShinyAppStartup());
+
+            // Initialize Shiny
+            this.InitShiny();
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
 
             // Initialize extern module
-            global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
-            Xamarin.KeyboardHelper.Platform.iOS.Effects.Init();
+            this.InitExternModule();
 
             LoadApplication(new App());
 
@@ -41,6 +41,22 @@ namespace PoseSportsPredict.iOS
         public override void WillEnterForeground(UIApplication uiApplication)
         {
             Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
+        }
+
+        private void InitExternModule()
+        {
+            global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+            Xamarin.KeyboardHelper.Platform.iOS.Effects.Init();
+            XF.Material.iOS.Material.Init();
+            ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
+            Sharpnado.Presentation.Forms.iOS.SharpnadoInitializer.Initialize();
+            FFImageLoading.FormsHandler.Init(debug: false);
+        }
+
+        private void InitShiny()
+        {
+            Shiny.iOSShinyHost.ValidateScopes = false;
+            Shiny.iOSShinyHost.Init(new ShinyAppStartup());
         }
     }
 }

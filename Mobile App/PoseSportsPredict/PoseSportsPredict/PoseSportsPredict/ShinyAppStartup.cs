@@ -44,12 +44,13 @@ namespace PoseSportsPredict
             services.AddSingleton<AppMasterMenuViewModel>();
 
             // Football
-            services.AddSingleton<FootballTabbedPage>();
-            services.AddSingleton<FootballTabbedViewModel>();
-            services.AddSingleton<FootballMatchesPage>();
-            services.AddSingleton<FootballMatchesViewModel>();
+            services.AddSingleton<FootballMainPage>();
+            services.AddSingleton<FootballMainViewModel>();
+            services.AddSingleton<FootballMatchesTabViewModel>();
             services.AddSingleton<FootballLeaguesPage>();
             services.AddSingleton<FootballLeaguesViewModel>();
+            services.AddTransient<FootballMatchesPage>();
+            services.AddTransient<FootballMatchesViewModel>();
 
             // Test
             services.AddSingleton<AppShellPage>();

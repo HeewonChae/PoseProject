@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Flurl.Http;
+﻿using Flurl.Http;
 using Plugin.Connectivity;
 using PosePacket;
 using PosePacket.Header;
@@ -9,13 +8,13 @@ using PosePacket.WebError;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities;
-using PoseSportsPredict.Utilities.LocalStorage;
 using Shiny;
 using System;
 using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Services
 {
@@ -33,17 +32,17 @@ namespace PoseSportsPredict.Services
 
         #region Exception Handler
 
-        private async void ExceptionHandler(Exception exception)
+        private async Task ExceptionHandler(Exception exception)
         {
             if (exception is FlurlHttpException flurlException)
             {
                 if (flurlException.Call.Response == null)
                 {
                     // 서버에 연결할 수 없음
-                    await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
+                    await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
 
                     // 로그인 화면으로 이동
-                    await ShinyHost.Resolve<IOAuthService>().Logout();
+                    ShinyHost.Resolve<IOAuthService>().Logout();
                     return;
                 }
                 else if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
@@ -54,30 +53,31 @@ namespace PoseSportsPredict.Services
 
                         if (error.ErrorCode == (ServiceErrorCode.Authenticate.Credentials + 1))
                         {
-                            await UserDialogs.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials);
+                            await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials);
 
                             // 로그인 화면으로 이동
-                            await ShinyHost.Resolve<IOAuthService>().Logout();
+                            ShinyHost.Resolve<IOAuthService>().Logout();
                             return;
                         }
                         else
                         {
-                            await UserDialogs.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
+                            await MaterialDialog.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
                         }
                     }
                     catch
                     {
-                        await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
+                        await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
                     }
                 }
                 else
                 {
 #if DEBUG
-                    await UserDialogs.Instance.AlertAsync(flurlException.Message
-                    , $"ErrorCode: {((int)flurlException.Call.Response.StatusCode).ToString()}");
+
+                    await MaterialDialog.Instance.AlertAsync(flurlException.Message
+                    , $"ErrorCode: {flurlException.Call.Response.StatusCode}");
 #else
 					await UserDialogs.Instance.AlertAsync(httpEx.Call.Response.StatusCode.ToString()
-					, $"Service ErrorCode: {((int)flurlException.Call.Response.StatusCode).ToString()}");
+					, $"Service ErrorCode: {flurlException.Call.Response.StatusCode}");
 #endif
                 }
             }
@@ -85,32 +85,22 @@ namespace PoseSportsPredict.Services
 
         #endregion Exception Handler
 
-        public async Task<TOut> RequestAsync<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true)
+        public async Task<TOut> RequestAsync<TOut>(WebRequestContext reqContext)
         {
             TOut result = default;
 
             if (!await CheckInternetConnection())
             {
-                await UserDialogs.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
                 return result;
             }
 
-            if (isIndicateLoading)
-            {
-                using (UserDialogs.Instance.Loading())
-                {
-                    result = await WebClient.RequestAsync<TOut>(reqContext);
-                }
-            }
-            else
-            {
-                result = await WebClient.RequestAsync<TOut>(reqContext);
-            }
+            result = await WebClient.RequestAsync<TOut>(reqContext);
 
             return result;
         }
 
-        public async Task<TOut> RequestAsyncWithToken<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true)
+        public async Task<TOut> RequestAsyncWithToken<TOut>(WebRequestContext reqContext)
         {
             TOut result = default;
 
@@ -140,28 +130,18 @@ namespace PoseSportsPredict.Services
                 ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
             }
 
-            if (isIndicateLoading)
-            {
-                using (UserDialogs.Instance.Loading())
-                {
-                    result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-                }
-            }
-            else
-            {
-                result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-            }
+            result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
 
             return result;
         }
 
-        public async Task<TOut> EncryptRequestAsync<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true)
+        public async Task<TOut> EncryptRequestAsync<TOut>(WebRequestContext reqContext)
         {
             TOut result = default;
 
             if (!await CheckInternetConnection())
             {
-                await UserDialogs.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
                 return result;
             }
 
@@ -171,18 +151,7 @@ namespace PoseSportsPredict.Services
                 reqContext.PostData = _cryptoService.Encrypt_AES(reqContext.JsonSerialize());
             }
 
-            string eResult;
-            if (isIndicateLoading)
-            {
-                using (UserDialogs.Instance.Loading())
-                {
-                    eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-                }
-            }
-            else
-            {
-                eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-            }
+            string eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
 
             // Decrpyt output
             if (!string.IsNullOrEmpty(eResult))
@@ -194,7 +163,7 @@ namespace PoseSportsPredict.Services
             return result;
         }
 
-        public async Task<TOut> EncrpytRequestAsyncWithToken<TOut>(WebRequestContext reqContext, bool isIndicateLoading = true)
+        public async Task<TOut> EncrpytRequestAsyncWithToken<TOut>(WebRequestContext reqContext)
         {
             TOut result = default;
 
@@ -230,18 +199,7 @@ namespace PoseSportsPredict.Services
                 ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
             }
 
-            string eResult;
-            if (isIndicateLoading)
-            {
-                using (UserDialogs.Instance.Loading())
-                {
-                    eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-                }
-            }
-            else
-            {
-                eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-            }
+            string eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
 
             // Decrpyt output
             if (!string.IsNullOrEmpty(eResult))
@@ -257,7 +215,7 @@ namespace PoseSportsPredict.Services
         {
             if (CrossConnectivity.IsSupported && !CrossConnectivity.Current.IsConnected)
             {
-                await UserDialogs.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
                 return false;
             }
 

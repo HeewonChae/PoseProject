@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PoseSportsPredict.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace PoseSportsPredict.Views.Football
         public FootballLeaguesPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnAppearing();
+            var bindingCtx = this.BindingContext as BaseViewModel;
+            bindingCtx.OnPrepareView();
         }
     }
 }

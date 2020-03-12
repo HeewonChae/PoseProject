@@ -18,8 +18,8 @@
             <Image
                 Grid.Row="2"
                 VerticalOptions="Start"
-                HorizontalOptions="Center"
-                Source="facegbook_login"
+                HorizontalOptions="Fill"
+                Source="facegbook_login.png"
                 HeightRequest="70">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding LoginFacebookCommand}" />

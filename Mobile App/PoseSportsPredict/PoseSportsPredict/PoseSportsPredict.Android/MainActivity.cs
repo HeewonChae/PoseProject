@@ -6,7 +6,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Acr.UserDialogs;
 using Shiny;
 using Plugin.LocalNotification;
 using Android.Content;
@@ -28,22 +27,36 @@ namespace PoseSportsPredict.Droid
             base.OnCreate(savedInstanceState);
 
             //Initialize shiny
-            Shiny.AndroidShinyHost.ValidateScopes = false;
-            Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
+            this.InitShiny();
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            XF.Material.Droid.Material.Init(this, savedInstanceState);
+
             // Initialize extern module
-            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
-            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest());
-            Xamarin.KeyboardHelper.Platform.Droid.Effects.Init(this);
-            UserDialogs.Init(this);
+            this.InitExternModule(savedInstanceState);
 
             LoadApplication(new App());
 
             NotificationCenter.NotifyNotificationTapped(Intent);
+        }
+
+        private void InitExternModule(Bundle savedInstanceState)
+        {
+            Android.Glide.Forms.Init(this, debug: true);
+            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest());
+            Xamarin.KeyboardHelper.Platform.Droid.Effects.Init(this);
+            Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
+            ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
+        }
+
+        private void InitShiny()
+        {
+            Shiny.AndroidShinyHost.ValidateScopes = false;
+            Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
         }
 
         protected override void OnNewIntent(Intent intent)

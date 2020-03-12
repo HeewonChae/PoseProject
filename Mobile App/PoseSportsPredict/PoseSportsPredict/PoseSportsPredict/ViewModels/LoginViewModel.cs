@@ -4,6 +4,7 @@ using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Utilities.LocalStorage;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
 using Shiny;
 using System;
@@ -15,17 +16,8 @@ using WebServiceShare.WebServiceClient;
 
 namespace PoseSportsPredict.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : NavigableViewModel
     {
-        #region BaseViewModel
-
-        public override async Task<bool> PrepareView(params object[] data)
-        {
-            return await Task.FromResult(true);
-        }
-
-        #endregion BaseViewModel
-
         #region Services
 
         private IOAuthService _OAuthService;
@@ -54,7 +46,7 @@ namespace PoseSportsPredict.ViewModels
             if (IsBusy)
                 return;
 
-            SetBusy(true);
+            SetIsBusy(true);
 
             if (!_OAuthService.IsAuthenticated
                 || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Facebook)
@@ -70,7 +62,7 @@ namespace PoseSportsPredict.ViewModels
             if (IsBusy)
                 return;
 
-            SetBusy(true);
+            SetIsBusy(true);
 
             if (!_OAuthService.IsAuthenticated
                 || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Google)
@@ -85,7 +77,7 @@ namespace PoseSportsPredict.ViewModels
 
         public async Task<bool> PoseLogin()
         {
-            SetBusy(true);
+            SetIsBusy(true);
 
             var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
             {
@@ -97,12 +89,12 @@ namespace PoseSportsPredict.ViewModels
                 {
                     PlatformId = _OAuthService.AuthenticatedUser.Id,
                 }
-            }, false);
+            });
 
             if (loginResult == null)
             {
-                await _OAuthService.Logout();
-                SetBusy(false);
+                _OAuthService.Logout();
+                SetIsBusy(false);
                 return false;
             }
 
@@ -110,9 +102,9 @@ namespace PoseSportsPredict.ViewModels
             ClientContext.SetCredentialsFrom(loginResult.PoseToken);
             ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
 
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
+            PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
 
-            SetBusy(false);
+            SetIsBusy(false);
             return true;
         }
 

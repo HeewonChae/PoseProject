@@ -1,18 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:test="clr-namespace:PoseSportsPredict.Views.Test"
-             mc:Ignorable="d"
-             x:Class="PoseSportsPredict.Views.Football.FootballMatchesPage"
-             Title="Matches"
-             IconImageSource="tab_feed">
-    <test:ItemsPage Title="day-3" />
-    <test:ItemsPage Title="day-2" />
-    <test:ItemsPage  Title="yester" />
-    <test:ItemsPage Title="today" x:Name="today" />
-    <test:ItemsPage Title="tomorrow" />
-    <test:ItemsPage  Title="day+2" />
-    <test:ItemsPage Title="day+3" />
-</TabbedPage>
+             x:Class="PoseSportsPredict.Views.Football.FootballMatchesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

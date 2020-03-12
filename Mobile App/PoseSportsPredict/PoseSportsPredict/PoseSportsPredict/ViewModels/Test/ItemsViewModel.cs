@@ -2,6 +2,7 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Test;
 using Shiny;
 using SlideOverKit;
@@ -16,11 +17,11 @@ using Xamarin.KeyboardHelper;
 
 namespace PoseSportsPredict.ViewModels.Test
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel : NavigableViewModel
     {
         #region BaseViewModel
 
-        public override async Task<bool> PrepareView(params object[] data)
+        public override bool OnPrepareView(params object[] data)
         {
             if (IsBusy)
                 return false;
@@ -34,7 +35,7 @@ namespace PoseSportsPredict.ViewModels.Test
             {
                 _itemList = new List<Item>();
 
-                var items = await DataStore.GetItemsAsync(true);
+                var items = DataStore.GetItemsAsync(true).Result;
                 foreach (var item in items)
                 {
                     _itemList.Add(item);
@@ -74,8 +75,6 @@ namespace PoseSportsPredict.ViewModels.Test
 
         public ItemsViewModel(ItemsPage page) : base(page)
         {
-            Title = "Browse";
-
             MessagingCenter.Subscribe<NewItemViewModel, Item>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item as Item;

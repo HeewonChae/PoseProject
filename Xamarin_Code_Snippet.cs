@@ -1,13 +1,11 @@
 // 1. 디펜던시 클래스 등록
 [assembly: Dependency(typeof(customClass))] // Android, IOS 프로젝트 경우
 DependencyService.Register<MockDataStore>(); // 공유 프로젝트 경우
-
-// 2. 커스텀 렌더러 등록
 [assembly: ExportRenderer(typeof(CustomView), typeof(CustomRenderer_AOS))] // CustomView의 렌더러로 CustomRenderer_UWP를 사용하겠다.. 라는 뜻
 
 // 3. Extern module
-// Acr.UserDialogs
-UserDialogs.Instance
+// MaterialDialog
+MaterialDialog.Instance
 // Shiny
 ShinyHost.Resolve
 
@@ -57,20 +55,20 @@ var request = new NotificationRequest
 
 NotificationCenter.Current.Show(request);
 
-//7. BaseViewModel
-#region BaseViewModel
-
-public override async Task<bool> PrepareView(params object[] data)
+// 7. OnBindingContextChanged, OnAppearing
+protected override void OnBindingContextChanged()
 {
-    return true;
+    base.OnAppearing();
+    var bindingCtx = this.BindingContext as BaseViewModel;
+    bindingCtx.OnPrepareView();
+}
+protected override void OnAppearing()
+{
+    base.OnAppearing();
+    var bindingCtx = this.BindingContext as BaseViewModel;
+    bindingCtx.OnApearing();
 }
 
-#endregion BaseViewModel
-
-#region Constructors
-
-public AppMasterViewModel(AppMasterPage page) : base(page)
-{
-}
-
-#endregion Constructors
+// 8. Localize
+xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+Title="{x:Static localize:LocalizeString.}"

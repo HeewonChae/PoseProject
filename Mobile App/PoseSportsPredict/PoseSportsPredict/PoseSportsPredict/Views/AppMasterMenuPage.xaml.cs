@@ -1,4 +1,8 @@
-﻿using System;
+﻿using PoseSportsPredict.ViewModels;
+using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football;
+using Shiny;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,6 +22,14 @@ namespace PoseSportsPredict.Views
         public AppMasterMenuPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            var bindingCtx = this.BindingContext as BaseViewModel;
+            bindingCtx.OnPrepareView(ShinyHost.Resolve<FootballMainViewModel>());
         }
     }
 }

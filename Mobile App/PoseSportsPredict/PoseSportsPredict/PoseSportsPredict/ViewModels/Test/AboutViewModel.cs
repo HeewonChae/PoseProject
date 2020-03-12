@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Test;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,12 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Test
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutViewModel : NavigableViewModel
     {
-        #region BaseViewModel
-
-        public override async Task<bool> PrepareView(params object[] data)
-        {
-            return await Task.FromResult(true);
-        }
-
-        #endregion BaseViewModel
-
         #region Constructors
 
         public AboutViewModel(AboutPage page) : base(page)
         {
-            Title = "About";
         }
 
         public AboutViewModel() : base(null)

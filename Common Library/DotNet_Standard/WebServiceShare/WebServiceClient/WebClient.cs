@@ -15,7 +15,7 @@ namespace WebServiceShare.WebServiceClient
     {
         #region Exception Handle Delegate
 
-        public delegate void ExceptionHandlerDelegate(Exception exception);
+        public delegate Task ExceptionHandlerDelegate(Exception exception);
 
         private static ExceptionHandlerDelegate _exceptionHandler = null;
 
@@ -35,7 +35,7 @@ namespace WebServiceShare.WebServiceClient
 
         public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, params (string name, object value)[] headers)
         {
-            var endPointAddr = new Url(requestContext?.BaseUrl ?? "").AppendPathSegment(requestContext?.ServiceUrl ?? "");
+            var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
             var flurlReqeust = new FlurlClient(endPointAddr).Request();
             if (headers != null)
             {
@@ -81,11 +81,11 @@ namespace WebServiceShare.WebServiceClient
                 if (requestContext.AttemptCnt < WebConfig.ReTryCount)
                     result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
                 else
-                    _exceptionHandler?.Invoke(flurlException);
+                    await _exceptionHandler?.Invoke(flurlException);
             }
             catch (Exception ex)
             {
-                _exceptionHandler?.Invoke(ex);
+                await _exceptionHandler?.Invoke(ex);
             }
 
             return result;

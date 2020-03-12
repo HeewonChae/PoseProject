@@ -1,5 +1,6 @@
 ﻿using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Test;
 using System;
 using System.Collections.Generic;
@@ -9,19 +10,21 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Test
 {
-    public class ItemDetailViewModel : BaseViewModel
+    public class ItemDetailViewModel : NavigableViewModel
     {
         #region BaseViewModel
 
-        public override Task<bool> PrepareView(params object[] data)
+        public override bool OnPrepareView(params object[] datas)
         {
-            if (data[0] != null && data[0] is Item item)
+            base.OnPrepareView(datas);
+
+            if (datas[0] != null && datas[0] is Item item)
             {
                 Item = item;
-                return Task.FromResult(true);
+                return true;
             }
 
-            return Task.FromResult(false);
+            return false;
         }
 
         #endregion BaseViewModel

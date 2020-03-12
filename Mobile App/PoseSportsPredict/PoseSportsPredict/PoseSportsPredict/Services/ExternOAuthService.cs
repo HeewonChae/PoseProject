@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using PosePacket.Proxy;
+﻿using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
@@ -13,6 +12,7 @@ using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 using Xamarin.Auth;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Services
 {
@@ -87,7 +87,7 @@ namespace PoseSportsPredict.Services
                 // Error
                 authenticator.Error += async (sender, eventArgs) =>
                 {
-                    await UserDialogs.Instance.AlertAsync($"OAuth error: {eventArgs.Message}");
+                    await MaterialDialog.Instance.AlertAsync($"OAuth error: {eventArgs.Message}");
                 };
 
                 var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
@@ -96,12 +96,12 @@ namespace PoseSportsPredict.Services
                 // 로그인 폼 닫힘
                 presenter.Completed += (sender, eventArgs) =>
                 {
-                    ShinyHost.Resolve<LoginViewModel>().SetBusy(false);
+                    ShinyHost.Resolve<LoginViewModel>().SetIsBusy(false);
                 };
             }
             catch (Exception ex)
             {
-                await UserDialogs.Instance.AlertAsync($"OAuth exception: {ex.Message}");
+                await MaterialDialog.Instance.AlertAsync($"OAuth exception: {ex.Message}");
             }
         }
 
@@ -121,23 +121,23 @@ namespace PoseSportsPredict.Services
 
             var oAuth = OAuthProviderFactory.CreateProvider(_authenticatedUser.SNSProvider);
             var authUser = await oAuth.GetUserInfoAsync(_authenticatedUser.Token);
+            // 유저데이터 받아오기 실패
+            if (authUser == null)
+                return _isAuthenticated;
+
             authUser.ExpiresIn = _authenticatedUser.ExpiresIn;
             _authenticatedUser = authUser;
-
-            // 유저데이터 받아오기 실패
-            if (_authenticatedUser == null)
-                return _isAuthenticated;
 
             return _isAuthenticated = true;
         }
 
-        public async Task Logout()
+        public void Logout()
         {
             _isAuthenticated = false;
             _authenticatedUser = null;
             LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
 
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>());
+            PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>());
         }
     }
 }

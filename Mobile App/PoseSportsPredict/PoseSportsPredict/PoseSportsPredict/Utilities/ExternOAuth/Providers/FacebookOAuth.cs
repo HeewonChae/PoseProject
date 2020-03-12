@@ -43,8 +43,7 @@ namespace PoseSportsPredict.Utilities.ExternOAuth.Providers
                 BaseUrl = UserInfoUrl,
                 QueryParamGroup = "fields={fields}&access_token={access_token}",
                 QueryParamData = new { fields = "email,picture,first_name,last_name", access_token = token },
-            },
-            false);
+            });
 
             if (facebookUser == null)
                 return null;

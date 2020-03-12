@@ -1,33 +1,45 @@
 ﻿using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.ViewModels.Base;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.Logics.Common
 {
     public static class PageSwitcher
     {
-        public static async Task SwitchMainPageAsync(BaseViewModel viewModel, bool isNavPage = false, params object[] prepareData)
+        public static bool SwitchMainPageAsync(NavigableViewModel viewModel, bool isNavPage = false, params object[] prepareData)
         {
-            if (!await viewModel.PrepareView(prepareData))
+            if (!viewModel.OnPrepareView(prepareData))
                 throw new Exception("[Fail] Prepare main page");
 
-            if (isNavPage)
-                Application.Current.MainPage = new NavigationPage(viewModel.CoupledPage);
+            if (Application.Current.MainPage is MasterDetailPage masterPage)
+            {
+                if (isNavPage)
+                    masterPage.Detail = new MaterialNavigationPage(viewModel.CoupledPage);
+                else
+                    masterPage.Detail = viewModel.CoupledPage;
+            }
             else
-                Application.Current.MainPage = viewModel.CoupledPage;
+            {
+                if (isNavPage)
+                    Application.Current.MainPage = new MaterialNavigationPage(viewModel.CoupledPage);
+                else
+                    Application.Current.MainPage = viewModel.CoupledPage;
+            }
 
-            await viewModel.ShowedView();
+            return viewModel.OnApearing();
         }
 
-        public static async Task PushNavPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
+        public static async Task<bool> PushNavPageAsync(NavigableViewModel viewModel, Page errorPage = null, params object[] prepareData)
         {
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (masterPage.Detail.Navigation == null)
                     throw new Exception("Root page is not navigation page");
 
-                if (!await viewModel.PrepareView(prepareData))
+                if (!viewModel.OnPrepareView(prepareData))
                     await masterPage.Detail.Navigation.PushAsync(errorPage);
 
                 await masterPage.Detail.Navigation.PushAsync(viewModel.CoupledPage);
@@ -37,39 +49,39 @@ namespace PoseSportsPredict.Logics.Common
                 if (Application.Current.MainPage.Navigation == null)
                     throw new Exception("Root page is not navigation page");
 
-                if (!await viewModel.PrepareView(prepareData))
+                if (!viewModel.OnPrepareView(prepareData))
                     await Application.Current.MainPage.Navigation.PushAsync(errorPage);
 
                 await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
             }
 
-            await viewModel.ShowedView();
+            return viewModel.OnApearing();
         }
 
-        public static async Task PushModalPageAsync(BaseViewModel viewModel, Page errorPage = null, params object[] prepareData)
+        public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, Page errorPage = null, params object[] prepareData)
         {
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (masterPage.Detail.Navigation == null)
                     throw new Exception("Root page is not navigation page");
 
-                if (!await viewModel.PrepareView(prepareData))
+                if (!viewModel.OnPrepareView(prepareData))
                     await masterPage.Detail.Navigation.PushAsync(errorPage);
 
-                await masterPage.Detail.Navigation.PushModalAsync(new NavigationPage(viewModel.CoupledPage));
+                await masterPage.Detail.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
             }
             else
             {
                 if (Application.Current.MainPage.Navigation == null)
                     throw new Exception("Root page is not navigation page");
 
-                if (!await viewModel.PrepareView(prepareData))
+                if (!viewModel.OnPrepareView(prepareData))
                     await Application.Current.MainPage.Navigation.PushAsync(errorPage);
 
-                await Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(viewModel.CoupledPage));
+                await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
             }
 
-            await viewModel.ShowedView();
+            return viewModel.OnApearing();
         }
 
         public static async Task PopModalAsync()

@@ -1,5 +1,6 @@
 ﻿using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {
-    public class AppMasterMenuViewModel : BaseViewModel
+    public class AppMasterMenuViewModel : NavigableViewModel
     {
         #region BaseViewModel
 
-        public override async Task<bool> PrepareView(params object[] datas)
+        public override bool OnPrepareView(params object[] datas)
         {
             if (datas == null)
                 return true;
@@ -22,8 +23,7 @@ namespace PoseSportsPredict.ViewModels
             var sportsCategories = new List<MasterMenuItem>();
             foreach (var data in datas)
             {
-                if (data is BaseViewModel viewModel
-                    && await viewModel.PrepareView())
+                if (data is NavigableViewModel viewModel)
                 {
                     sportsCategories.Add(new MasterMenuItem
                     {

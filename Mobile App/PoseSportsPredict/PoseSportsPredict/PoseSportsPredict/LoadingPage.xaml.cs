@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using PosePacket.Proxy;
+﻿using PosePacket.Proxy;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Resources;
@@ -12,6 +11,7 @@ using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict
 {
@@ -65,12 +65,11 @@ namespace PoseSportsPredict
                 BaseUrl = AppConfig.PoseWebBaseUrl,
                 ServiceUrl = AuthProxy.ServiceUrl,
                 SegmentGroup = AuthProxy.P_PUBLISHKEY,
-            },
-            false);
+            });
 
             if (string.IsNullOrEmpty(serverPubKey))
             {
-                await UserDialogs.Instance.AlertAsync(LocalizeString.Service_Not_Available);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
                 return _isLoaded;
             }
 
@@ -80,11 +79,11 @@ namespace PoseSportsPredict
 
             if (!await _OAuthService.IsAuthenticatedAndValid())
             {
-                await _OAuthService.Logout();
+                _OAuthService.Logout();
                 return _isLoaded;
             }
 
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
+            PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
             _isLoaded = true;
 
             return _isLoaded;
