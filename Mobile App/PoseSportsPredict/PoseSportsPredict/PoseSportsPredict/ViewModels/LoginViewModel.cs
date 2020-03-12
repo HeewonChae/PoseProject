@@ -33,6 +33,11 @@ namespace PoseSportsPredict.ViewModels
         {
             _OAuthService = OAuthService;
             _webApiService = webApiService;
+
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => OnAppearing();
+            }
         }
 
         #endregion Constructors

@@ -45,7 +45,7 @@ namespace PoseSportsPredict.Droid
 
         private void InitExternModule(Bundle savedInstanceState)
         {
-            Android.Glide.Forms.Init(this, debug: true);
+            Android.Glide.Forms.Init(this, debug: false);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
             NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest());
             Xamarin.KeyboardHelper.Platform.Droid.Effects.Init(this);

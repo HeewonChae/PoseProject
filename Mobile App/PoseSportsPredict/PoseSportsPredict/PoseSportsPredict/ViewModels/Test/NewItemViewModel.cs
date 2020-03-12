@@ -14,11 +14,11 @@ namespace PoseSportsPredict.ViewModels.Test
     {
         #region BaseViewModel
 
-        public override bool OnPrepareView(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
         {
             Item = new Item();
 
-            return base.OnPrepareView(datas);
+            return base.OnInitializeView(datas);
         }
 
         #endregion BaseViewModel

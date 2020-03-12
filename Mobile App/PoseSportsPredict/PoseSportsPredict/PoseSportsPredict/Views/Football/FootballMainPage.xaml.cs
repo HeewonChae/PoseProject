@@ -15,12 +15,5 @@ namespace PoseSportsPredict.Views.Football
             On<Android>().SetIsSwipePagingEnabled(false);
             On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
         }
-
-        protected override void OnBindingContextChanged()
-        {
-            base.OnAppearing();
-            var bindingCtx = this.BindingContext as BaseViewModel;
-            bindingCtx.OnPrepareView();
-        }
     }
 }

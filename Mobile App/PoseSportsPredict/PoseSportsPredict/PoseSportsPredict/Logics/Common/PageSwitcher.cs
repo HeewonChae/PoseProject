@@ -11,9 +11,6 @@ namespace PoseSportsPredict.Logics.Common
     {
         public static bool SwitchMainPageAsync(NavigableViewModel viewModel, bool isNavPage = false, params object[] prepareData)
         {
-            if (!viewModel.OnPrepareView(prepareData))
-                throw new Exception("[Fail] Prepare main page");
-
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (isNavPage)
@@ -29,18 +26,15 @@ namespace PoseSportsPredict.Logics.Common
                     Application.Current.MainPage = viewModel.CoupledPage;
             }
 
-            return viewModel.OnApearing();
+            return true;
         }
 
-        public static async Task<bool> PushNavPageAsync(NavigableViewModel viewModel, Page errorPage = null, params object[] prepareData)
+        public static async Task<bool> PushNavPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (masterPage.Detail.Navigation == null)
                     throw new Exception("Root page is not navigation page");
-
-                if (!viewModel.OnPrepareView(prepareData))
-                    await masterPage.Detail.Navigation.PushAsync(errorPage);
 
                 await masterPage.Detail.Navigation.PushAsync(viewModel.CoupledPage);
             }
@@ -49,24 +43,18 @@ namespace PoseSportsPredict.Logics.Common
                 if (Application.Current.MainPage.Navigation == null)
                     throw new Exception("Root page is not navigation page");
 
-                if (!viewModel.OnPrepareView(prepareData))
-                    await Application.Current.MainPage.Navigation.PushAsync(errorPage);
-
                 await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
             }
 
-            return viewModel.OnApearing();
+            return true;
         }
 
-        public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, Page errorPage = null, params object[] prepareData)
+        public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (masterPage.Detail.Navigation == null)
                     throw new Exception("Root page is not navigation page");
-
-                if (!viewModel.OnPrepareView(prepareData))
-                    await masterPage.Detail.Navigation.PushAsync(errorPage);
 
                 await masterPage.Detail.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
             }
@@ -75,13 +63,10 @@ namespace PoseSportsPredict.Logics.Common
                 if (Application.Current.MainPage.Navigation == null)
                     throw new Exception("Root page is not navigation page");
 
-                if (!viewModel.OnPrepareView(prepareData))
-                    await Application.Current.MainPage.Navigation.PushAsync(errorPage);
-
                 await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
             }
 
-            return viewModel.OnApearing();
+            return true;
         }
 
         public static async Task PopModalAsync()

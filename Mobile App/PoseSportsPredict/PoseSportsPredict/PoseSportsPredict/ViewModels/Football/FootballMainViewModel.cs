@@ -12,9 +12,12 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region NavigableViewModel
 
-        public override bool OnPrepareView(params object[] datas)
+        public override bool OnAppearing(params object[] datas)
         {
             var mainPage = this.CoupledPage as FootballMainPage;
+
+            if (mainPage.Children.Count > 0)
+                return true;
 
             var matchesPage = ShinyHost.Resolve<FootballMatchesTabViewModel>().CoupledPage;
             var matchesNavPage = new MaterialNavigationPage(matchesPage)
@@ -40,6 +43,21 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public FootballMainViewModel(FootballMainPage page) : base(page)
         {
+            // Workaround NavigationPage OnAppearing bug
+            page.CurrentPageChanged += (s, e) =>
+            {
+                if (s is TabbedPage tabbedPage
+                && tabbedPage.CurrentPage is NavigationPage navPage)
+                {
+                    var bindingCtx = navPage.CurrentPage.BindingContext as BaseViewModel;
+                    bindingCtx.OnAppearing();
+                }
+            };
+
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => OnAppearing();
+            }
         }
 
         #endregion Constructors

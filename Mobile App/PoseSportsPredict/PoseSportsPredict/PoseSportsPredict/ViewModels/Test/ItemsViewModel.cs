@@ -21,7 +21,7 @@ namespace PoseSportsPredict.ViewModels.Test
     {
         #region BaseViewModel
 
-        public override bool OnPrepareView(params object[] data)
+        public override bool OnInitializeView(params object[] data)
         {
             if (IsBusy)
                 return false;

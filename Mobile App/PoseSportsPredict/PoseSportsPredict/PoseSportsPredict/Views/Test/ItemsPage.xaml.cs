@@ -28,9 +28,9 @@ namespace PoseSportsPredict.Views.Test
             base.OnAppearing();
 
             if (_viewModel.Items == null)
-                _viewModel.OnPrepareView();
+                _viewModel.OnInitializeView();
 
-            _viewModel.OnApearing();
+            _viewModel.OnAppearing();
         }
     }
 }

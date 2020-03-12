@@ -1,7 +1,9 @@
 ﻿using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
+using Shiny;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +17,7 @@ namespace PoseSportsPredict.ViewModels
     {
         #region BaseViewModel
 
-        public override bool OnPrepareView(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
         {
             if (datas == null)
                 return true;
@@ -56,6 +58,10 @@ namespace PoseSportsPredict.ViewModels
 
         public AppMasterMenuViewModel(AppMasterMenuPage page) : base(page)
         {
+            if (OnInitializeView(ShinyHost.Resolve<FootballMainViewModel>()))
+            {
+                CoupledPage.Appearing += (s, e) => OnAppearing();
+            }
         }
 
         #endregion Constructors

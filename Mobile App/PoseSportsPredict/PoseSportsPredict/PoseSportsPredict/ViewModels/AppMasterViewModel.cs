@@ -15,31 +15,26 @@ namespace PoseSportsPredict.ViewModels
     {
         #region NavigableViewModel
 
-        public override bool OnPrepareView(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
         {
             var masterPage = this.CoupledPage as AppMasterPage;
 
-            masterPage.Master = _masterMenuViewModel.CoupledPage;
-            masterPage.Detail = _defaultDetailViewModel.CoupledPage;
+            masterPage.Master = ShinyHost.Resolve<AppMasterMenuViewModel>().CoupledPage;
+            masterPage.Detail = ShinyHost.Resolve<FootballMainViewModel>().CoupledPage;
 
             return true;
         }
 
         #endregion NavigableViewModel
 
-        #region Fields
-
-        private AppMasterMenuViewModel _masterMenuViewModel;
-        private NavigableViewModel _defaultDetailViewModel;
-
-        #endregion Fields
-
         #region Constructors
 
         public AppMasterViewModel(AppMasterPage page) : base(page)
         {
-            _masterMenuViewModel = ShinyHost.Resolve<AppMasterMenuViewModel>();
-            _defaultDetailViewModel = ShinyHost.Resolve<FootballMainViewModel>();
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => OnAppearing();
+            }
         }
 
         #endregion Constructors

@@ -19,7 +19,7 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region NavigableViewModel
 
-        public override bool OnApearing(params object[] datas)
+        public override bool OnAppearing(params object[] datas)
         {
             var tabbedPage = this.CoupledPage as TabbedPage;
 
@@ -31,7 +31,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
             for (int i = -3; i <= 3; i++)
             {
-                var matchesPage = ShinyHost.Resolve<FootballMatchesViewModel>().CoupledPage;
+                var matchesPage = ShinyHost.Resolve<FootballMatchesViewModel>().SetMatchDate(_curDate.AddDays(i)).CoupledPage;
                 if (i == -1)
                 {
                     matchesPage.Title = LocalizeString.Yesterday;
@@ -58,11 +58,11 @@ namespace PoseSportsPredict.ViewModels.Football
 
         #endregion NavigableViewModel
 
-        #region Field
+        #region Fields
 
         private DateTime _curDate;
 
-        #endregion Field
+        #endregion Fields
 
         #region Constructors
 
@@ -78,6 +78,8 @@ namespace PoseSportsPredict.ViewModels.Football
                     SetCoupledPage(new FootballMatchesTabPage());
                     break;
             }
+
+            OnInitializeView();
         }
 
         #endregion Constructors

@@ -55,18 +55,10 @@ var request = new NotificationRequest
 
 NotificationCenter.Current.Show(request);
 
-// 7. OnBindingContextChanged, OnAppearing
-protected override void OnBindingContextChanged()
+// 7. OnAppearing
+ if (OnInitializeView(null))
 {
-    base.OnAppearing();
-    var bindingCtx = this.BindingContext as BaseViewModel;
-    bindingCtx.OnPrepareView();
-}
-protected override void OnAppearing()
-{
-    base.OnAppearing();
-    var bindingCtx = this.BindingContext as BaseViewModel;
-    bindingCtx.OnApearing();
+    CoupledPage.Appearing += (s, e) => OnApearing(s, e);
 }
 
 // 8. Localize

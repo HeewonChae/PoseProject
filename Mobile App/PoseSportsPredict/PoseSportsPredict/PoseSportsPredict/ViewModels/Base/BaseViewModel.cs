@@ -45,7 +45,7 @@ namespace PoseSportsPredict.ViewModels.Base
         /// </summary>
         /// <param name="datas"></param>
         /// <returns></returns>
-        public virtual bool OnPrepareView(params object[] datas)
+        public virtual bool OnInitializeView(params object[] datas)
         {
             return true;
         }
@@ -55,7 +55,7 @@ namespace PoseSportsPredict.ViewModels.Base
         /// </summary>
         /// <param name="datas"></param>
         /// <returns></returns>
-        public virtual bool OnApearing(params object[] datas)
+        public virtual bool OnAppearing(params object[] datas)
         {
             return true;
         }

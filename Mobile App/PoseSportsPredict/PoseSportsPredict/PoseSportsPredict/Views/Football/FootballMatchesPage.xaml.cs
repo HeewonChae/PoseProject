@@ -17,12 +17,5 @@ namespace PoseSportsPredict.Views.Football
         {
             InitializeComponent();
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            var bindingCtx = this.BindingContext as BaseViewModel;
-            bindingCtx.OnApearing();
-        }
     }
 }
