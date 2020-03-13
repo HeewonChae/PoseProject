@@ -156,4 +156,7 @@
   <data name="No_Matche_datas" xml:space="preserve">
     <value>예측된 경기가 없습니다.</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>환영합니다 !</value>
+  </data>
 </root>

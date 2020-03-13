@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              x:Class="PoseSportsPredict.Views.AppMasterMenuPage"
              Title="MasterMenu">
     <StackLayout>
@@ -13,7 +13,7 @@
             HasUnevenRows="true"
             ItemsSource="{Binding SportsCategories}">
             <ListView.Header>
-                <Grid BackgroundColor="#03A9F4">
+                <Grid BackgroundColor="{StaticResource PrimaryColor}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="*" />
@@ -28,8 +28,7 @@
                     <Label
                         Grid.Column="1"
                         Grid.Row="2"
-                        Text="AppName"
-                        Style="{DynamicResource SubtitleStyle}" />
+                        Text="AppName"/>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -40,14 +39,14 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="0.75*" />
                             </Grid.ColumnDefinitions>
-                            <Image
+                            <materialui:MaterialIcon
                                 Source="{Binding IconSource}"
-                                HeightRequest="35"
-                                Margin="20,0,0,0" />
+                                HeightRequest="30"
+                                Margin="20,0,0,0"
+                                TintColor="{StaticResource PrimaryColor_L}"/>
                             <Label
                                 Grid.Column="1"
                                 Text="{Binding Title}"
-                                TextColor="Black"
                                 VerticalTextAlignment="Center">
                             </Label>
                         </Grid>

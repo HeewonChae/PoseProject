@@ -9,6 +9,12 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="PoseSportsPredict.Views.Football.FootballMatchesPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  Text="관심 경기" Order="Secondary" Priority="1" />
+        <ToolbarItem  Text="시간으로 정렬" Order="Secondary" Priority="2" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ExceptionToErrorMessageConverter x:Key="ExceptionToErrorMessageConverter" />
@@ -22,6 +28,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
             <loader:TaskLoaderView
@@ -40,11 +47,11 @@
                                 <materialui:MaterialCard
                                     CornerRadius="5"
                                     Elevation="5"
-                                    Margin="7"
+                                    Margin="15, 5"
                                     Padding="0">
                                     <Grid
                                         HeightRequest="45"
-                                        Padding="35,10"
+                                        Padding="30,10"
                                         effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                                         effects:TapCommandEffect.TapParameter="{Binding .}"
                                         effects:ViewEffect.TouchFeedbackColor="Accent">
@@ -70,6 +77,9 @@
                                             Margin="3"
                                             Aspect="AspectFit"
                                             WidthRequest="35"
+                                            DownsampleHeight="100"
+                                            DownsampleWidth="100"
+                                            DownsampleToViewSize="True"
                                             LoadingPlaceholder="tab_about.png"
                                             ErrorPlaceholder="tab_about.png"
                                             Source="{Binding HomeTeam.Logo}">
@@ -94,7 +104,7 @@
                                                 HeightRequest="20"
                                                 Text="{Binding MatchStatus}"
                                                 TextColor="White"
-                                                BackgroundColor="#008ba3">
+                                                BackgroundColor="{StaticResource PrimaryColor_D}">
                                             </materialui:MaterialChip>
                                         </StackLayout>
                                         <ffimageloading:CachedImage
@@ -102,6 +112,9 @@
                                             Margin="3"
                                             Aspect="AspectFit"
                                             WidthRequest="35"
+                                            DownsampleHeight="100"
+                                            DownsampleWidth="100"
+                                            DownsampleToViewSize="True"
                                             LoadingPlaceholder="tab_about.png"
                                             ErrorPlaceholder="tab_about.png"
                                             Source="{Binding AwayTeam.Logo}">

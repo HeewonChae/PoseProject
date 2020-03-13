@@ -86,7 +86,7 @@ namespace PoseSportsPredict.ViewModels
         {
             SetIsBusy(true);
 
-            using (await MaterialDialog.Instance.LoadingDialogAsync(LocalizeString.Loginning))
+            using (await MaterialDialog.Instance.LoadingSnackbarAsync(LocalizeString.Welcome))
             {
                 var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
                 {

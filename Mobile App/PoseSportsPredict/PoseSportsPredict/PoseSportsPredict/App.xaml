@@ -5,5 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="PoseSportsPredict.App">
     <Application.Resources>
+        <Color x:Key="PrimaryColor">#0097a7</Color>
+        <Color x:Key="PrimaryColor_L">#56c8d8</Color>
+        <Color x:Key="PrimaryColor_D">#006978</Color>
+        <Color x:Key="SecondaryColor">#0288d1</Color>
+        <Color x:Key="SecondaryColor_L">#5eb8ff</Color>
+        <Color x:Key="SecondaryColor_D">#005b9f</Color>
     </Application.Resources>
 </Application>

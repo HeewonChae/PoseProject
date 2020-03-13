@@ -29,10 +29,11 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public override void OnAppearing(params object[] datas)
         {
-            if (!MatchesTaskLoaderNotifier.IsNotStarted)
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+            if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
                 return;
 
-            MatchesTaskLoaderNotifier.Load(async () => await GetMatchesAsync());
+            MatchesTaskLoaderNotifier.Load(GetMatchesAsync);
         }
 
         #endregion NavigableViewModel
@@ -49,6 +50,7 @@ namespace PoseSportsPredict.ViewModels.Football
         private List<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matcheList;
         private ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matches;
         private DateTime _matchDate;
+        private DateTime _lastUpdateTime;
 
         #endregion Fields
 
@@ -95,6 +97,8 @@ namespace PoseSportsPredict.ViewModels.Football
 
         private async Task<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> GetMatchesAsync()
         {
+            await Task.Delay(1000);
+
             var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
             {
                 MethodType = WebMethodType.POST,
@@ -115,12 +119,13 @@ namespace PoseSportsPredict.ViewModels.Football
             foreach (var fixture in result.Fixtures)
             {
                 fixture.MatchTime = fixture.MatchTime.ToLocalTime();
-                // TODO logo 없는 나라, 리그, 팀은 기본 이미지로 셋팅하기
             }
 
             // Binding Matche datas
             _matcheList = result.Fixtures;
             Matches = new ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>(_matcheList);
+
+            _lastUpdateTime = DateTime.UtcNow;
 
             return result.Fixtures;
         }

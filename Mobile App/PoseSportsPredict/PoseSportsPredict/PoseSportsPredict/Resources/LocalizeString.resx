@@ -136,4 +136,7 @@
   <data name="No_Matche_datas" xml:space="preserve">
     <value>No matches were predicted.</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome !</value>
+  </data>
 </root>

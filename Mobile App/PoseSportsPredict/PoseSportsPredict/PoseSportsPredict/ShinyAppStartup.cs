@@ -53,12 +53,12 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchesViewModel>();
 
             // Test
-            services.AddSingleton<AppShellPage>();
-            services.AddSingleton<AppShellViewModel>();
-            services.AddSingleton<NewItemPage>();
-            services.AddSingleton<NewItemViewModel>();
-            services.AddTransient<ItemDetailPage>();
-            services.AddTransient<ItemDetailViewModel>();
+            //services.AddSingleton<AppShellPage>();
+            //services.AddSingleton<AppShellViewModel>();
+            //services.AddSingleton<NewItemPage>();
+            //services.AddSingleton<NewItemViewModel>();
+            //services.AddTransient<ItemDetailPage>();
+            //services.AddTransient<ItemDetailViewModel>();
         }
     }
 }
