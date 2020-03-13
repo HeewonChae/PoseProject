@@ -25,7 +25,7 @@ namespace SportsAdminTool.Logic.Football.Alarm
 		{
 			CancelReservation();
 
-			_reservation = Singleton.Get<AlarmClass>().Set(deltaTime, (logicTime, payload) => this.Execute(logicTime));
+			Singleton.Get<AlarmClass>().Set(deltaTime, (logicTime, payload) => this.Execute(logicTime), handler: this);
 		}
 
 		public void Execute(long time)

@@ -12,38 +12,38 @@ using LogicCore.Debug;
 
 namespace SportsAdminTool.Logic.Football.Alarm
 {
-	public class InitializeDatabase : Reservation.IHandle, Singleton.INode
-	{
-		private Reservation _reservation;
-		public Reservation Reservation { get => _reservation; set => _reservation = value; }
+    public class InitializeDatabase : Reservation.IHandle, Singleton.INode
+    {
+        private Reservation _reservation;
+        public Reservation Reservation { get => _reservation; set => _reservation = value; }
 
-		public void CancelReservation()
-		{
-			if(_reservation != null)
-				Singleton.Get<AlarmClass>().Cancel(ref _reservation);
-		}
+        public void CancelReservation()
+        {
+            if (_reservation != null)
+                Singleton.Get<AlarmClass>().Cancel(ref _reservation);
+        }
 
-		public void SetAlarm(long deltaTime)
-		{
-			CancelReservation();
+        public void SetAlarm(long deltaTime)
+        {
+            CancelReservation();
 
-			_reservation = Singleton.Get<AlarmClass>().Set(deltaTime, (logicTime, payload) => this.Execute(logicTime));
-		}
+            Singleton.Get<AlarmClass>().Set(deltaTime, (logicTime, payload) => this.Execute(logicTime), handler: this);
+        }
 
-		public void Execute(long time)
-		{
-			var mainWindow = Singleton.Get<MainWindow>();
+        public void Execute(long time)
+        {
+            var mainWindow = Singleton.Get<MainWindow>();
 
-			mainWindow.Dispatcher.Invoke(() =>
-			{
-				mainWindow.Fv_item_initialize_footballdb_Click(null, null);
-			});
+            mainWindow.Dispatcher.Invoke(() =>
+            {
+                mainWindow.Fv_item_initialize_footballdb_Click(null, null);
+            });
 
-			// 정상작동 안함..
-			//mainWindow.Dispatcher.InvokeAsync(() =>
-			//{
-			//	mainWindow.Fv_item_initialize_footballdb_Click(null, null);
-			//}).Completed += (sender, event_arg)=> { Dev.DebugString("Complete"); };
-		}
-	}
+            // 정상작동 안함..
+            //mainWindow.Dispatcher.InvokeAsync(() =>
+            //{
+            //	mainWindow.Fv_item_initialize_footballdb_Click(null, null);
+            //}).Completed += (sender, event_arg)=> { Dev.DebugString("Complete"); };
+        }
+    }
 }

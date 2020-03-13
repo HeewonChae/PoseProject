@@ -349,7 +349,7 @@ namespace SportsAdminTool.Logic.Football
                     // Call API
                     var api_fixture = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByFixtureID(db_fixture.id);
 
-                    if (!Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status))
+                    if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status))
                     {
                         Database.FootballDBFacade.DeleteFixtures(db_fixture.id);
                         continue;
@@ -365,18 +365,25 @@ namespace SportsAdminTool.Logic.Football
                         continue;
                     }
 
-                    // Update statistics
-                    if (api_fixture.Statistic != null)
+                    // 종료된 경기 처리
+                    if (api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.FT // 종료
+                        || api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
+                        || api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.PEN)// 승부차기 후 종료
                     {
-                        // Convert data for db model
-                        DataConverter.CovertAppModelToDbModel(api_fixture.FixtureID, (short)api_fixture.HomeTeam.TeamID, (short)api_fixture.AwayTeam.TeamID, api_fixture.Statistic,
-                            out FootballDB.Tables.FixtureStatistic[] coverted_fixtureStatistics);
+                        // Update statistics
+                        if (api_fixture.Statistic != null)
+                        {
+                            // Convert data for db model
+                            DataConverter.CovertAppModelToDbModel(api_fixture.FixtureID, (short)api_fixture.HomeTeam.TeamID, (short)api_fixture.AwayTeam.TeamID, api_fixture.Statistic,
+                                out FootballDB.Tables.FixtureStatistic[] coverted_fixtureStatistics);
 
-                        Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
+                            Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
+                        }
+
+                        // DB Save
+                        db_fixture.is_completed = true;
                     }
 
-                    // DB Save
-                    db_fixture.is_completed = true;
                     db_fixture.status = api_fixture.Status.ToString();
                     Database.FootballDBFacade.UpdateFixture(db_fixture);
                 }

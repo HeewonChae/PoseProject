@@ -36,6 +36,8 @@ namespace Repository.Mysql.FootballDB.Tables
         [Index("IDX_LEAGUE_DATE", Order = 2, IsUnique = false)]
         [Index("IDX_HOME_DATE", Order = 2, IsUnique = false)]
         [Index("IDX_AWAY_DATE", Order = 2, IsUnique = false)]
+        [Index("IDX_PREDICTED_DATE", Order = 2, IsUnique = false)]
+        [Index("IDX_EVENT_DATE", Order = 1, IsUnique = false)]
         public DateTime event_date { get; set; }
 
         [Column(TypeName = "VARCHAR")]
@@ -59,7 +61,7 @@ namespace Repository.Mysql.FootballDB.Tables
         public short away_score { get; set; }
 
         [Required]
-        [Index("IDX_PREDICTED", IsUnique = false)]
+        [Index("IDX_PREDICTED_DATE", Order = 1, IsUnique = false)]
         public bool is_predicted { get; set; }
 
         [Required]

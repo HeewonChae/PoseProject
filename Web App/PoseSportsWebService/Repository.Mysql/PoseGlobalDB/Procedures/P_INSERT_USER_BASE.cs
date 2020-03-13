@@ -10,7 +10,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
 {
     public class P_INSERT_USER_BASE : MysqlQuery<P_INSERT_USER_BASE.Input, bool>
     {
-        public class Input
+        public struct Input
         {
             public string PlatformId { get; set; }
             public short PlatformType { get; set; }

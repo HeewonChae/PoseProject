@@ -10,7 +10,7 @@ namespace Repository.Mysql.FootballDB.Procedures
 {
     public class P_SELECT_FIXTURES_DETAIL : MysqlQuery<P_SELECT_FIXTURES_DETAIL.Input, IEnumerable<P_SELECT_FIXTURES_DETAIL.Output>>
     {
-        public class Input
+        public struct Input
         {
             public DateTime StartTime { get; set; }
             public DateTime EndTime { get; set; }

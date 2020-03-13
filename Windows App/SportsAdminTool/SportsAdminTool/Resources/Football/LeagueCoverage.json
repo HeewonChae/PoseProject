@@ -3429,6 +3429,13 @@
       "LeagueType": "Cup",
       "Country": "Argentina",
       "IsCoverage": false
+    },
+    {
+      "Index": 491,
+      "LeagueName": "1. Liga Promotion",
+      "LeagueType": "League",
+      "Country": "Switzerland",
+      "IsCoverage": false
     }
   ]
 }
