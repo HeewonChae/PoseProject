@@ -118,8 +118,8 @@
   <data name="Football" xml:space="preserve">
     <value>Football</value>
   </data>
-  <data name="Matche" xml:space="preserve">
-    <value>Matche</value>
+  <data name="Match" xml:space="preserve">
+    <value>Match</value>
   </data>
   <data name="League" xml:space="preserve">
     <value>League</value>
@@ -133,7 +133,7 @@
   <data name="Retry" xml:space="preserve">
     <value>Retry</value>
   </data>
-  <data name="No_Matche_datas" xml:space="preserve">
+  <data name="No_Match_datas" xml:space="preserve">
     <value>No matches were predicted.</value>
   </data>
   <data name="Welcome" xml:space="preserve">

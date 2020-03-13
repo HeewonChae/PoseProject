@@ -11,6 +11,6 @@
              material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Football.FootballMatchesTabPage"
-             Title="{x:Static localize:LocalizeString.Matche}"
+             Title="{x:Static localize:LocalizeString.Match}"
              IconImageSource="tab_feed">
 </TabbedPage>

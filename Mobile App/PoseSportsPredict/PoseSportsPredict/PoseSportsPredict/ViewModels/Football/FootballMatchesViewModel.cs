@@ -47,7 +47,7 @@ namespace PoseSportsPredict.ViewModels.Football
         #region Fields
 
         private TaskLoaderNotifier<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> _MatchesTaskLoaderNotifier;
-        private List<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matcheList;
+        private List<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matchList;
         private ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matches;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
@@ -121,9 +121,9 @@ namespace PoseSportsPredict.ViewModels.Football
                 fixture.MatchTime = fixture.MatchTime.ToLocalTime();
             }
 
-            // Binding Matche datas
-            _matcheList = result.Fixtures;
-            Matches = new ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>(_matcheList);
+            // Binding Match datas
+            _matchList = result.Fixtures;
+            Matches = new ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>(_matchList);
 
             _lastUpdateTime = DateTime.UtcNow;
 

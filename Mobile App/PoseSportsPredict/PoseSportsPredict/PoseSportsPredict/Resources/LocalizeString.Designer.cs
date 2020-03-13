@@ -97,20 +97,20 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Matche.
+        ///   Looks up a localized string similar to Match.
         /// </summary>
-        public static string Matche {
+        public static string Match {
             get {
-                return ResourceManager.GetString("Matche", resourceCulture);
+                return ResourceManager.GetString("Match", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to No matches were predicted..
         /// </summary>
-        public static string No_Matche_datas {
+        public static string No_Match_datas {
             get {
-                return ResourceManager.GetString("No_Matche_datas", resourceCulture);
+                return ResourceManager.GetString("No_Match_datas", resourceCulture);
             }
         }
         

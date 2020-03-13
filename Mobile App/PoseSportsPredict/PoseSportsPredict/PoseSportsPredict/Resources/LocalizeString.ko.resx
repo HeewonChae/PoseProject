@@ -138,7 +138,7 @@
   <data name="Football" xml:space="preserve">
     <value>축구</value>
   </data>
-  <data name="Matche" xml:space="preserve">
+  <data name="Match" xml:space="preserve">
     <value>경기</value>
   </data>
   <data name="League" xml:space="preserve">
@@ -153,7 +153,7 @@
   <data name="Retry" xml:space="preserve">
     <value>재시도</value>
   </data>
-  <data name="No_Matche_datas" xml:space="preserve">
+  <data name="No_Match_datas" xml:space="preserve">
     <value>예측된 경기가 없습니다.</value>
   </data>
   <data name="Welcome" xml:space="preserve">
