@@ -51,6 +51,7 @@ namespace PoseSportsPredict.Droid
             Xamarin.KeyboardHelper.Platform.Droid.Effects.Init(this);
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
             ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
         }
 
         private void InitShiny()

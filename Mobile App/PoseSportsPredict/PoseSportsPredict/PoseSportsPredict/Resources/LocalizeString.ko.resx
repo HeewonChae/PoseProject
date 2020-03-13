@@ -144,4 +144,16 @@
   <data name="League" xml:space="preserve">
     <value>리그</value>
   </data>
+  <data name="Occur_Error" xml:space="preserve">
+    <value>오류가 발생 했습니다.</value>
+  </data>
+  <data name="Loginning" xml:space="preserve">
+    <value>로그인중...</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>재시도</value>
+  </data>
+  <data name="No_Matche_datas" xml:space="preserve">
+    <value>예측된 경기가 없습니다.</value>
+  </data>
 </root>

@@ -90,6 +90,7 @@
     <Compile Include="FootballDB\Procedures\P_EXECUTE_QUERY.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_COVERAGE.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_ODDS.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_STANDINGS.cs" />

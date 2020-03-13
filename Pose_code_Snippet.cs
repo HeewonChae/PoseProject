@@ -8,6 +8,9 @@ enable-Migrations -ProjectName Repository.Mysql -ContextTypeName Repository.Mysq
 Add-Migration -Name ******** -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.PoseGlobalDBMigrations.Configuration -Verbose
 Update-database -ProjectName Repository.Mysql -ConfigurationTypeName Repository.Mysql.PoseGlobalDBMigrations.Configuration -Verbose
 
+// DB Safe update
+SET SQL_SAFE_UPDATES =0;
+
 // DB Procedure
 public class P_EXECUTE_QUERY : MysqlQuery<T_in, T_out>
 {
@@ -54,14 +57,14 @@ public static class P_Command
 {
     public static class RowCode
     {
-        [Description("Invalid input value")]
-        public const int Invalid_InputValue = ServiceErrorCode.WebMethod.P_Command + 1;
+        [Description("Invalid input")]
+        public const int Invalid_Input = ServiceErrorCode.WebMethod.P_Command + 1;
     }
 
     public static output Execute(input input)
     {
         if (input == null)
-            ErrorHandler.OccurException(RowCode.Invalid_Command);
+            ErrorHandler.OccurException(Invalid_Input);
         return outpout;
     }
 }

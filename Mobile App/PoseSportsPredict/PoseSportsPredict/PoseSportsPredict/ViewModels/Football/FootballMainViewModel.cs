@@ -12,12 +12,12 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region NavigableViewModel
 
-        public override bool OnAppearing(params object[] datas)
+        public override void OnAppearing(params object[] datas)
         {
             var mainPage = this.CoupledPage as FootballMainPage;
 
             if (mainPage.Children.Count > 0)
-                return true;
+                return;
 
             var matchesPage = ShinyHost.Resolve<FootballMatchesTabViewModel>().CoupledPage;
             var matchesNavPage = new MaterialNavigationPage(matchesPage)
@@ -34,7 +34,6 @@ namespace PoseSportsPredict.ViewModels.Football
                 IconImageSource = leaugesPage.IconImageSource,
             };
             mainPage.Children.Add(leaguesNavPage);
-            return true;
         }
 
         #endregion NavigableViewModel

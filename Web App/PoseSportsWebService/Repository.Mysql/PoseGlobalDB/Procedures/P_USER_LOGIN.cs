@@ -1,4 +1,5 @@
 ﻿using Repository.Mysql.Dapper;
+using Repository.Mysql.PoseGlobalDB.Tables;
 using Repository.Request;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,10 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
 {
     public class P_USER_LOGIN : MysqlQuery<string, P_USER_LOGIN.Output> // input = flatform_id
     {
-        public struct Output
+        public class Output
         {
-            public bool Success;
-            public long UserNo;
-            public int RoleType;
+            public long UserNo { get; set; }
+            public int RoleType { get; set; }
         }
 
         public override void OnAlloc()
@@ -40,16 +40,13 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                     null,
                      (Contexts.PoseGlobalDB pose_globalDB) =>
                      {
-                         var (user_no, role_type) = pose_globalDB.QuerySQL<(long? user_no, int? role_type)>("SELECT user_no, role_type FROM user_base WHERE platform_id = @platform_id",
+                         _output = pose_globalDB.QuerySQL<Output>("SELECT user_no as UserNo, role_type as RoleType FROM user_base WHERE platform_id = @platform_id",
                                                                                new { platform_id = _input }).FirstOrDefault();
 
-                         if (user_no.HasValue)
+                         if (_output != null)
                          {
                              pose_globalDB.ExecuteSQL("UPDATE user_base SET last_login_date = @last_login_date WHERE platform_id = @platform_id",
                                                                                 new { last_login_date = DateTime.UtcNow, platform_id = _input });
-                             _output.Success = true;
-                             _output.UserNo = user_no.Value;
-                             _output.RoleType = role_type.Value;
                          }
                      },
                     this.OnError);

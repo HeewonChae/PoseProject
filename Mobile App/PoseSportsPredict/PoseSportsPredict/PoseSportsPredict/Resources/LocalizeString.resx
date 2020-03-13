@@ -124,4 +124,16 @@
   <data name="League" xml:space="preserve">
     <value>League</value>
   </data>
+  <data name="Occur_Error" xml:space="preserve">
+    <value>An error has occurred.</value>
+  </data>
+  <data name="Loginning" xml:space="preserve">
+    <value>Login...</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="No_Matche_datas" xml:space="preserve">
+    <value>No matches were predicted.</value>
+  </data>
 </root>

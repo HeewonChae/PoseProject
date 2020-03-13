@@ -377,6 +377,7 @@ namespace SportsAdminTool.Logic.Football
 
                     // DB Save
                     db_fixture.is_completed = true;
+                    db_fixture.status = api_fixture.Status.ToString();
                     Database.FootballDBFacade.UpdateFixture(db_fixture);
                 }
 

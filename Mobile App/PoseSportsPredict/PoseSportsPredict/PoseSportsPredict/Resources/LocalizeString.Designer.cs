@@ -88,6 +88,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login....
+        /// </summary>
+        public static string Loginning {
+            get {
+                return ResourceManager.GetString("Loginning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Matche.
         /// </summary>
         public static string Matche {
@@ -97,11 +106,38 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No matches were predicted..
+        /// </summary>
+        public static string No_Matche_datas {
+            get {
+                return ResourceManager.GetString("No_Matche_datas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not authenticated User..
         /// </summary>
         public static string Not_Authenticated_Credencials {
             get {
                 return ResourceManager.GetString("Not_Authenticated_Credencials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error has occurred..
+        /// </summary>
+        public static string Occur_Error {
+            get {
+                return ResourceManager.GetString("Occur_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retry.
+        /// </summary>
+        public static string Retry {
+            get {
+                return ResourceManager.GetString("Retry", resourceCulture);
             }
         }
         

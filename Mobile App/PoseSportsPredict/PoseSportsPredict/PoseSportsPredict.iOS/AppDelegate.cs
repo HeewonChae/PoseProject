@@ -51,6 +51,7 @@ namespace PoseSportsPredict.iOS
             ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
             Sharpnado.Presentation.Forms.iOS.SharpnadoInitializer.Initialize();
             FFImageLoading.FormsHandler.Init(debug: false);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
         }
 
         private void InitShiny()

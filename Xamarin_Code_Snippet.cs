@@ -56,11 +56,18 @@ var request = new NotificationRequest
 NotificationCenter.Current.Show(request);
 
 // 7. OnAppearing
- if (OnInitializeView(null))
+if (OnInitializeView())
 {
-    CoupledPage.Appearing += (s, e) => OnApearing(s, e);
+    CoupledPage.Appearing += (s, e) => OnAppearing();
 }
 
-// 8. Localize
+// 8. Xml namespace
 xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-Title="{x:Static localize:LocalizeString.}"
+xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+
+//9. ref binding
+{Binding Path=BindingContext.SelectCountryCommand,
+Source={x:Reference list_country}}

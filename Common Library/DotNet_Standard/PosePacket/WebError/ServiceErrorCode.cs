@@ -22,6 +22,7 @@
         {
             public const int HelloWorld = Root.WebService + 01000000;
             public const int Auth = Root.WebService + 02000000;
+            public const int Football = Root.WebService + 03000000;
 
             public const int Max = Root.Max + 99000000;
         };
@@ -44,6 +45,11 @@
             public const int P_E_Login = WebService.Auth + 0002000;
 
             public const int P_E_TokenRefresh = WebService.Auth + 0003000;
+        }
+
+        public static class WebMethod_Football
+        {
+            public const int P_GET_FIXTURES_BY_DATE = WebService.Football + 0001000;
         }
 
         public static class WebMethod_HelloWorld

@@ -28,7 +28,6 @@ namespace PoseSportsPredict.ViewModels.Base
         #region Attributes
 
         private bool _isBusy;
-        private IMaterialModalPage _loadingDialog;
 
         #endregion Attributes
 
@@ -55,9 +54,8 @@ namespace PoseSportsPredict.ViewModels.Base
         /// </summary>
         /// <param name="datas"></param>
         /// <returns></returns>
-        public virtual bool OnAppearing(params object[] datas)
+        public virtual void OnAppearing(params object[] datas)
         {
-            return true;
         }
 
         #endregion Abstract Method
@@ -77,17 +75,9 @@ namespace PoseSportsPredict.ViewModels.Base
             return true;
         }
 
-        public virtual async void SetIsBusy(bool isBusy)
+        public virtual void SetIsBusy(bool isBusy)
         {
             IsBusy = isBusy;
-
-            if (IsBusy)
-                _loadingDialog = await MaterialDialog.Instance.LoadingDialogAsync("Loading...");
-            else if (!IsBusy && _loadingDialog != null)
-            {
-                await _loadingDialog.DismissAsync();
-                _loadingDialog = null;
-            }
         }
 
         #endregion Methods

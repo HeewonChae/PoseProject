@@ -10,12 +10,12 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
 {
     public class P_INSERT_USER_BASE : MysqlQuery<P_INSERT_USER_BASE.Input, bool>
     {
-        public struct Input
+        public class Input
         {
-            public string PlatformId;
-            public short PlatformType;
-            public int RoleType;
-            public DateTime InsertTime;
+            public string PlatformId { get; set; }
+            public short PlatformType { get; set; }
+            public int RoleType { get; set; }
+            public DateTime InsertTime { get; set; }
         }
 
         public override void OnAlloc()
@@ -41,8 +41,8 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                     null,
                     (Contexts.PoseGlobalDB pose_globalDB) =>
                     {
-                        var isExist = pose_globalDB.ExecuteScalar<bool>("SELECT IF (EXISTS (SELECT * FROM user_base WHERE platform_id = @platform_id), 1, 0)",
-                                                                                new { platform_id = _input.PlatformId });
+                        var isExist = pose_globalDB.ExecuteScalar<bool>("SELECT IF (EXISTS (SELECT * FROM user_base WHERE platform_id = @PlatformId), 1, 0)",
+                                                                                new { _input.PlatformId });
 
                         if (isExist)
                         {
@@ -50,8 +50,8 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                         }
                         else
                         {
-                            var affectedRows = pose_globalDB.ExecuteSQL("INSERT INTO user_base(platform_id, platform_type, role_type, last_login_date, ipt_date)VALUE(@platform_id, @platform_type, @role_type, @last_login_date, @ipt_date);",
-                                                                            new { platform_id = _input.PlatformId, platform_type = _input.PlatformType, role_type = _input.RoleType, last_login_date = _input.InsertTime, ipt_date = _input.InsertTime });
+                            var affectedRows = pose_globalDB.ExecuteSQL("INSERT INTO user_base(platform_id, platform_type, role_type, last_login_date, ipt_date)VALUE(@PlatformId, @PlatformType, @RoleType, @InsertTime, @InsertTime);",
+                                                                            _input);
 
                             if (affectedRows == 1)
                                 _output = true;

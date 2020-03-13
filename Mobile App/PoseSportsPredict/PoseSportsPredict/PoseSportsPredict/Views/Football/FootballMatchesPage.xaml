@@ -1,14 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:converters="clr-namespace:PoseSportsPredict.Utilities.Converters"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="PoseSportsPredict.Views.Football.FootballMatchesPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ExceptionToErrorMessageConverter x:Key="ExceptionToErrorMessageConverter" />
+
+            <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
+                <Setter Property="AccentColor" Value="Accent" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="EmptyStateMessage" Value="{x:Static localize:LocalizeString.No_Matche_datas}" />
+                <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
+                <Setter Property="ErrorMessageConverter" Value="{StaticResource ExceptionToErrorMessageConverter}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <loader:TaskLoaderView
                 VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+                Style="{StaticResource PoseTaskLoader}"
+                TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}">
+                <ListView
+                    x:Name="lv_matches"
+                    ItemsSource="{Binding Matches}"
+                    HasUnevenRows="True"
+                    IsPullToRefreshEnabled="False"
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <materialui:MaterialCard
+                                    CornerRadius="5"
+                                    Elevation="5"
+                                    Margin="7"
+                                    Padding="0">
+                                    <Grid
+                                        HeightRequest="45"
+                                        Padding="35,10"
+                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
+                                        effects:TapCommandEffect.TapParameter="{Binding .}"
+                                        effects:ViewEffect.TouchFeedbackColor="Accent">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <materialui:MaterialLabel
+                                            Grid.Column="0"
+                                            HorizontalOptions="EndAndExpand"
+                                            VerticalOptions="Center"
+                                            LineBreakMode="WordWrap"
+                                            HorizontalTextAlignment="End"
+                                            MaxLines="2"
+                                            TypeScale="Caption"
+                                            Text="{Binding HomeTeam.Name}">
+                                        </materialui:MaterialLabel>
+                                        <ffimageloading:CachedImage
+                                            Grid.Column="1"
+                                            Margin="3"
+                                            Aspect="AspectFit"
+                                            WidthRequest="35"
+                                            LoadingPlaceholder="tab_about.png"
+                                            ErrorPlaceholder="tab_about.png"
+                                            Source="{Binding HomeTeam.Logo}">
+                                        </ffimageloading:CachedImage>
+                                        <StackLayout
+                                            Grid.Column="2"
+                                            Padding="0"
+                                            Margin="0"
+                                            Spacing="0"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                            <materialui:MaterialLabel
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                TypeScale="Caption"
+                                                Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
+                                            </materialui:MaterialLabel>
+                                            <materialui:MaterialChip
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                FontSize="12"
+                                                HeightRequest="20"
+                                                Text="{Binding MatchStatus}"
+                                                TextColor="White"
+                                                BackgroundColor="#008ba3">
+                                            </materialui:MaterialChip>
+                                        </StackLayout>
+                                        <ffimageloading:CachedImage
+                                            Grid.Column="3"
+                                            Margin="3"
+                                            Aspect="AspectFit"
+                                            WidthRequest="35"
+                                            LoadingPlaceholder="tab_about.png"
+                                            ErrorPlaceholder="tab_about.png"
+                                            Source="{Binding AwayTeam.Logo}">
+                                        </ffimageloading:CachedImage>
+                                        <materialui:MaterialLabel
+                                            Grid.Column="4"
+                                            HorizontalOptions="StartAndExpand"
+                                            VerticalOptions="Center"
+                                            LineBreakMode="WordWrap"
+                                            HorizontalTextAlignment="Start"
+                                            MaxLines="2"
+                                            TypeScale="Caption"
+                                            Text="{Binding AwayTeam.Name}">
+                                        </materialui:MaterialLabel>
+                                    </Grid>
+                                </materialui:MaterialCard>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

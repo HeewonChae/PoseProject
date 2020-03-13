@@ -3,6 +3,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -84,28 +86,30 @@ namespace PoseSportsPredict.ViewModels
         {
             SetIsBusy(true);
 
-            var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+            using (await MaterialDialog.Instance.LoadingDialogAsync(LocalizeString.Loginning))
             {
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = AuthProxy.ServiceUrl,
-                SegmentGroup = AuthProxy.P_E_Login,
-                PostData = new I_Login
+                var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
                 {
-                    PlatformId = _OAuthService.AuthenticatedUser.Id,
+                    MethodType = WebMethodType.POST,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = AuthProxy.ServiceUrl,
+                    SegmentGroup = AuthProxy.P_E_Login,
+                    PostData = new I_Login
+                    {
+                        PlatformId = _OAuthService.AuthenticatedUser.Id,
+                    }
+                });
+
+                if (loginResult == null)
+                {
+                    SetIsBusy(false);
+                    return false;
                 }
-            });
 
-            if (loginResult == null)
-            {
-                _OAuthService.Logout();
-                SetIsBusy(false);
-                return false;
+                // Update PoseToken, Update ExpireTime
+                ClientContext.SetCredentialsFrom(loginResult.PoseToken);
+                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
             }
-
-            // Update PoseToken, Update ExpireTime
-            ClientContext.SetCredentialsFrom(loginResult.PoseToken);
-            ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
 
             PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
 

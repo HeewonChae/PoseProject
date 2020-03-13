@@ -26,12 +26,6 @@ namespace PoseSportsPredict
 
         #endregion Services
 
-        #region Fields
-
-        private bool _isLoaded;
-
-        #endregion Fields
-
         #region Constructors
 
         public LoadingPage(
@@ -51,11 +45,8 @@ namespace PoseSportsPredict
 
         #region Methods
 
-        public async Task<bool> LoadingAsync()
+        public async Task LoadingAsync()
         {
-            if (_isLoaded)
-                return _isLoaded;
-
             while (!await WebApiService.CheckInternetConnection())
             { }
 
@@ -70,23 +61,19 @@ namespace PoseSportsPredict
             if (string.IsNullOrEmpty(serverPubKey))
             {
                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
-                return _isLoaded;
+                return;
             }
 
             _cryptoService.RSA_FromXmlString(serverPubKey);
             ClientContext.eSignature = _cryptoService.GetEncryptedSignature();
             ClientContext.eSignatureIV = _cryptoService.GetEncryptedSignatureIV();
 
-            if (!await _OAuthService.IsAuthenticatedAndValid())
+            if (!await _OAuthService.IsAuthenticatedAndValid()
+                || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
             {
                 _OAuthService.Logout();
-                return _isLoaded;
+                return;
             }
-
-            PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
-            _isLoaded = true;
-
-            return _isLoaded;
         }
 
         #endregion Methods

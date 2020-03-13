@@ -12,9 +12,8 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region NavigableViewModel
 
-        public override bool OnAppearing(params object[] datas)
+        public override void OnAppearing(params object[] datas)
         {
-            return true;
         }
 
         #endregion NavigableViewModel

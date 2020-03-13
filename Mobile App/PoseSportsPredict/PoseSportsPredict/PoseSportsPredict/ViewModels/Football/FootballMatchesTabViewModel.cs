@@ -19,12 +19,12 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region NavigableViewModel
 
-        public override bool OnAppearing(params object[] datas)
+        public override void OnAppearing(params object[] datas)
         {
             var tabbedPage = this.CoupledPage as TabbedPage;
 
             if (tabbedPage.Children.Count > 0 && _curDate == DateTime.Now.Date)
-                return true;
+                return;
 
             _curDate = DateTime.Now.Date;
             tabbedPage.Children.Clear();
@@ -52,8 +52,6 @@ namespace PoseSportsPredict.ViewModels.Football
             }
 
             tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today
-
-            return true;
         }
 
         #endregion NavigableViewModel

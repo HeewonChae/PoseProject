@@ -3408,6 +3408,27 @@
       "LeagueType": "Cup",
       "Country": "Saudi-Arabia",
       "IsCoverage": false
+    },
+    {
+      "Index": 488,
+      "LeagueName": "Liga Alef",
+      "LeagueType": "League",
+      "Country": "Israel",
+      "IsCoverage": false
+    },
+    {
+      "Index": 489,
+      "LeagueName": "2. liga",
+      "LeagueType": "League",
+      "Country": "Slovakia",
+      "IsCoverage": false
+    },
+    {
+      "Index": 490,
+      "LeagueName": "Copa de la Superliga",
+      "LeagueType": "Cup",
+      "Country": "Argentina",
+      "IsCoverage": false
     }
   ]
 }
