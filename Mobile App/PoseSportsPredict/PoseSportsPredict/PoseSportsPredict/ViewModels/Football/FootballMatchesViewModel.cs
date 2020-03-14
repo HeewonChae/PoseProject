@@ -2,6 +2,7 @@
 using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Models;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ServiceContext;
@@ -48,7 +50,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
         private TaskLoaderNotifier<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> _MatchesTaskLoaderNotifier;
         private List<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matchList;
-        private ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matches;
+        private ObservableCollection<MatchGroup> _matchGroups;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
 
@@ -57,7 +59,7 @@ namespace PoseSportsPredict.ViewModels.Football
         #region Properties
 
         public TaskLoaderNotifier<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> MatchesTaskLoaderNotifier { get => _MatchesTaskLoaderNotifier; set => SetValue(ref _MatchesTaskLoaderNotifier, value); }
-        public ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo> Matches { get => _matches; set => SetValue(ref _matches, value); }
+        public ObservableCollection<MatchGroup> MatchGroups { get => _matchGroups; set => SetValue(ref _matchGroups, value); }
 
         #endregion Properties
 
@@ -97,7 +99,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
         private async Task<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> GetMatchesAsync()
         {
-            await Task.Delay(1000);
+            await Task.Delay(500);
 
             var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
             {
@@ -121,13 +123,36 @@ namespace PoseSportsPredict.ViewModels.Football
                 fixture.MatchTime = fixture.MatchTime.ToLocalTime();
             }
 
-            // Binding Match datas
-            _matchList = result.Fixtures;
-            Matches = new ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>(_matchList);
-
             _lastUpdateTime = DateTime.UtcNow;
 
+            UpdateMatches(result.Fixtures);
+
             return result.Fixtures;
+        }
+
+        private void UpdateMatches(List<O_GET_FIXTURES_BY_DATE.FixtureInfo> matchList)
+        {
+            _matchList = matchList;
+
+            if (_matchList.Count == 0)
+                return;
+
+            var matchGroupCollection = new ObservableCollection<MatchGroup>();
+
+            var grouppingMatchs = _matchList.GroupBy(elem => $"{elem.Country.Name} - {elem.League.Name}");
+            foreach (var grouppingMatch in grouppingMatchs)
+            {
+                var firstItem = grouppingMatch.First();
+                var matchGroup = new MatchGroup(grouppingMatch.Key, firstItem.Country.Logo);
+                foreach (var match in grouppingMatch)
+                {
+                    matchGroup.Add(match);
+                }
+
+                matchGroupCollection.Add(matchGroup);
+            }
+
+            MatchGroups = matchGroupCollection;
         }
 
         #endregion Methods

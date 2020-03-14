@@ -37,21 +37,47 @@
                 TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}">
                 <ListView
                     x:Name="lv_matches"
-                    ItemsSource="{Binding Matches}"
+                    ItemsSource="{Binding MatchGroups}"
                     HasUnevenRows="True"
                     IsPullToRefreshEnabled="False"
-                    SeparatorVisibility="None">
+                    SeparatorVisibility="None"
+                    IsGroupingEnabled="True">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <materialui:MaterialCard
+                                    CornerRadius="0"
+                                    Elevation="0"
+                                    Margin="10, 10, 10, 0"
+                                    Padding="10, 5">
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
+                                            Text="{Binding Title}"
+                                            TypeScale="Caption"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="Center">
+                                        </materialui:MaterialLabel>
+                                        <BoxView
+                                            HeightRequest="0.1"
+                                            Color="Gray">
+                                        </BoxView>
+                                    </StackLayout>
+                                </materialui:MaterialCard>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <materialui:MaterialCard
-                                    CornerRadius="5"
-                                    Elevation="5"
-                                    Margin="15, 5"
+                                    CornerRadius="0"
+                                    Elevation="0"
+                                    Margin="10, 0"
                                     Padding="0">
                                     <Grid
                                         HeightRequest="45"
-                                        Padding="30,10"
+                                        Padding="20, 5"
                                         effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                                         effects:TapCommandEffect.TapParameter="{Binding .}"
                                         effects:ViewEffect.TouchFeedbackColor="Accent">
@@ -70,13 +96,14 @@
                                             HorizontalTextAlignment="End"
                                             MaxLines="2"
                                             TypeScale="Caption"
+                                            TextColor="Black"
                                             Text="{Binding HomeTeam.Name}">
                                         </materialui:MaterialLabel>
                                         <ffimageloading:CachedImage
                                             Grid.Column="1"
                                             Margin="3"
                                             Aspect="AspectFit"
-                                            WidthRequest="35"
+                                            WidthRequest="33"
                                             DownsampleHeight="100"
                                             DownsampleWidth="100"
                                             DownsampleToViewSize="True"
@@ -95,23 +122,24 @@
                                                 HorizontalOptions="Center"
                                                 VerticalOptions="Center"
                                                 TypeScale="Caption"
+                                                TextColor="Gray"
                                                 Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                             </materialui:MaterialLabel>
                                             <materialui:MaterialChip
                                                 HorizontalOptions="Center"
                                                 VerticalOptions="Center"
-                                                FontSize="12"
-                                                HeightRequest="20"
+                                                FontSize="11"
+                                                HeightRequest="18"
                                                 Text="{Binding MatchStatus}"
                                                 TextColor="White"
-                                                BackgroundColor="{StaticResource PrimaryColor_D}">
+                                                BackgroundColor="{StaticResource PrimaryColor}">
                                             </materialui:MaterialChip>
                                         </StackLayout>
                                         <ffimageloading:CachedImage
                                             Grid.Column="3"
                                             Margin="3"
                                             Aspect="AspectFit"
-                                            WidthRequest="35"
+                                            WidthRequest="33"
                                             DownsampleHeight="100"
                                             DownsampleWidth="100"
                                             DownsampleToViewSize="True"
@@ -127,6 +155,7 @@
                                             HorizontalTextAlignment="Start"
                                             MaxLines="2"
                                             TypeScale="Caption"
+                                            TextColor="Black"
                                             Text="{Binding AwayTeam.Name}">
                                         </materialui:MaterialLabel>
                                     </Grid>

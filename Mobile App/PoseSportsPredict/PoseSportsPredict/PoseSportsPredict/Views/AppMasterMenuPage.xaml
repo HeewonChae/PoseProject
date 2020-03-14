@@ -43,7 +43,7 @@
                                 Source="{Binding IconSource}"
                                 HeightRequest="30"
                                 Margin="20,0,0,0"
-                                TintColor="{StaticResource PrimaryColor_L}"/>
+                                TintColor="Red"/>
                             <Label
                                 Grid.Column="1"
                                 Text="{Binding Title}"

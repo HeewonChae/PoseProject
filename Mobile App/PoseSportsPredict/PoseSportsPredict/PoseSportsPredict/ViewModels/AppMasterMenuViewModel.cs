@@ -22,12 +22,12 @@ namespace PoseSportsPredict.ViewModels
             if (datas == null)
                 return true;
 
-            var sportsCategories = new List<MasterMenuItem>();
+            var sportsCategories = new List<Models.AppMenuItem>();
             foreach (var data in datas)
             {
                 if (data is NavigableViewModel viewModel)
                 {
-                    sportsCategories.Add(new MasterMenuItem
+                    sportsCategories.Add(new Models.AppMenuItem
                     {
                         Title = viewModel.CoupledPage.Title,
                         IconSource = viewModel.CoupledPage.IconImageSource.ToString().Replace("File: ", ""),
@@ -44,13 +44,13 @@ namespace PoseSportsPredict.ViewModels
 
         #region Fields
 
-        private List<MasterMenuItem> _sportsCategories;
+        private List<Models.AppMenuItem> _sportsCategories;
 
         #endregion Fields
 
         #region Properties
 
-        public List<MasterMenuItem> SportsCategories { get => _sportsCategories; set => SetValue(ref _sportsCategories, value); }
+        public List<Models.AppMenuItem> SportsCategories { get => _sportsCategories; set => SetValue(ref _sportsCategories, value); }
 
         #endregion Properties
 
