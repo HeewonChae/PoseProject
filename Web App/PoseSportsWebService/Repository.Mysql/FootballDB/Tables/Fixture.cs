@@ -20,16 +20,20 @@ namespace Repository.Mysql.FootballDB.Tables
         [Required]
         [Column(TypeName = "MEDIUMINT")]
         [Index("IDX_LEAGUE_DATE", Order = 1, IsUnique = false)]
+        [Index("IDX_LEAGUE_HOME", Order = 1, IsUnique = false)]
+        [Index("IDX_LEAGUE_AWAY", Order = 1, IsUnique = false)]
         public short league_id { get; set; }
 
         [Required]
         [Column(TypeName = "MEDIUMINT")]
         [Index("IDX_HOME_DATE", Order = 1, IsUnique = false)]
+        [Index("IDX_LEAGUE_HOME", Order = 2, IsUnique = false)]
         public short home_team_id { get; set; }
 
         [Required]
         [Column(TypeName = "MEDIUMINT")]
         [Index("IDX_AWAY_DATE", Order = 1, IsUnique = false)]
+        [Index("IDX_LEAGUE_AWAY", Order = 2, IsUnique = false)]
         public short away_team_id { get; set; }
 
         [Required]

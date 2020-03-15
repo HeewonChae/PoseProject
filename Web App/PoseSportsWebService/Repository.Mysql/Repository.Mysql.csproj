@@ -90,6 +90,10 @@
     <Compile Include="FootballDBMigrations\202003131836358_FixtureIdxDefine.designer.cs">
       <DependentUpon>202003131836358_FixtureIdxDefine.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202003151111291_AlterFixtureIndex.cs" />
+    <Compile Include="FootballDBMigrations\202003151111291_AlterFixtureIndex.designer.cs">
+      <DependentUpon>202003151111291_AlterFixtureIndex.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\Procedures\P_EXECUTE_QUERY.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_COVERAGE.cs" />
@@ -140,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FootballDBMigrations\202003131836358_FixtureIdxDefine.resx">
       <DependentUpon>202003131836358_FixtureIdxDefine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202003151111291_AlterFixtureIndex.resx">
+      <DependentUpon>202003151111291_AlterFixtureIndex.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.resx">
       <DependentUpon>202003022333493_InitUserBase.cs</DependentUpon>

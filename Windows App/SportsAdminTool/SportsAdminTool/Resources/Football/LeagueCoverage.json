@@ -3443,6 +3443,13 @@
       "LeagueType": "League",
       "Country": "Japan",
       "IsCoverage": false
+    },
+    {
+      "Index": 493,
+      "LeagueName": "Cup",
+      "LeagueType": "Cup",
+      "Country": "Kazakhstan",
+      "IsCoverage": false
     }
   ]
 }
