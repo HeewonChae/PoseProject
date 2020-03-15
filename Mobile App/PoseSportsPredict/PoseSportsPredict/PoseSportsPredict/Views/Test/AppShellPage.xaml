@@ -6,7 +6,7 @@
        mc:Ignorable="d"
        xmlns:test="clr-namespace:PoseSportsPredict.Views.Test"
        x:Class="PoseSportsPredict.Views.Test.AppShellPage"
-       xmlns:controls="clr-namespace:PoseSportsPredict.Logics.Common"
+       xmlns:controls="clr-namespace:PoseSportsPredict.Logics.Common.TempleteSelectors"
        FlyoutHeaderBehavior="Fixed"
        ItemTemplate="{StaticResource FlyoutTemplateSelector}">
 

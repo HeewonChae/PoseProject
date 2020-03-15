@@ -71,3 +71,14 @@ xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading
 //9. ref binding
 {Binding Path=BindingContext.SelectCountryCommand,
 Source={x:Reference list_country}}
+
+// draw star
+<skiaRate:RatingView Grid.Row="3"
+WidthRequest="100"
+HeightRequest="30"
+HorizontalOptions="Start"
+ColorOn="{StaticResource Accent}"
+Count="5"
+OutlineOffColor="Transparent"
+RatingType="Floating"
+Value="{Binding SillyDudeLoaderNotifier.Result.SillinessDegree}" />

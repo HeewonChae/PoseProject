@@ -3436,6 +3436,13 @@
       "LeagueType": "League",
       "Country": "Switzerland",
       "IsCoverage": false
+    },
+    {
+      "Index": 492,
+      "LeagueName": "Japan Football League",
+      "LeagueType": "League",
+      "Country": "Japan",
+      "IsCoverage": false
     }
   ]
 }

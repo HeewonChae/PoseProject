@@ -6,12 +6,18 @@
              mc:Ignorable="d"
              x:Class="PoseSportsPredict.LoadingPage">
     <ContentPage.Content>
-        <StackLayout Margin="0, 30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <ActivityIndicator
+                Grid.Row="2"
                 IsRunning="True"
                 HorizontalOptions="Center"
-                VerticalOptions="EndAndExpand">
+                VerticalOptions="Start">
             </ActivityIndicator>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

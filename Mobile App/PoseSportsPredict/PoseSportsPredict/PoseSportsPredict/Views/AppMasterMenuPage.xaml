@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              x:Class="PoseSportsPredict.Views.AppMasterMenuPage"
              Title="MasterMenu">
     <StackLayout>
@@ -39,11 +40,12 @@
                                 <ColumnDefinition Width="0.25*" />
                                 <ColumnDefinition Width="0.75*" />
                             </Grid.ColumnDefinitions>
-                            <materialui:MaterialIcon
+                            <Image
                                 Source="{Binding IconSource}"
                                 HeightRequest="30"
                                 Margin="20,0,0,0"
-                                TintColor="Red"/>
+                                effects:ImageEffect.TintColor="Red">
+                            </Image>
                             <Label
                                 Grid.Column="1"
                                 Text="{Binding Title}"

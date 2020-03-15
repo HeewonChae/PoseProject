@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
+             x:Class="PoseSportsPredict.Views.Football.FootballMatchDetailPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="FillAndExpand">
+            <Grid
+                BackgroundColor="{StaticResource SecondaryColor}">
+                <Grid.RowDefinitions>
+                    <!--Toolbar-->
+                    <RowDefinition Height="Auto"/>
+                    <!--Header-->
+                    <RowDefinition Height="Auto"/>
+                    <!--TabbedView-->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    HeightRequest="30"
+                    Orientation="Horizontal">
+                    
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    HeightRequest="75"
+                    Orientation="Horizontal">
+
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="2"
+                    HeightRequest="30"
+                    Orientation="Horizontal">
+
+                </StackLayout>
+            </Grid>
+            
+            <!--ContentView-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

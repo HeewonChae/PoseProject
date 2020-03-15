@@ -32,9 +32,13 @@ namespace PoseSportsPredict.ViewModels.Football
         public override void OnAppearing(params object[] datas)
         {
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+#if DEBUG
+            if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalSeconds < 30) // 30초 마다 갱신
+                return;
+#else
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
                 return;
-
+#endif
             MatchesTaskLoaderNotifier.Load(GetMatchesAsync);
         }
 
@@ -65,10 +69,13 @@ namespace PoseSportsPredict.ViewModels.Football
 
         #region Commands
 
-        public ICommand SelectMatchCommand { get => new RelayCommand<O_GET_FIXTURES_BY_DATE.FixtureInfo>((e) => SelectMatch(e)); }
+        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<MatchGroup>((e) => SelectGroupHeader(e)); }
 
-        private void SelectMatch(O_GET_FIXTURES_BY_DATE.FixtureInfo matchInfo)
+        private void SelectGroupHeader(MatchGroup groupInfo)
         {
+            groupInfo.Expanded = !groupInfo.Expanded;
+            //OnPropertyChanged("MatchGroups");
+            UpdateMatches(_matchList);
         }
 
         #endregion Commands
@@ -114,6 +121,9 @@ namespace PoseSportsPredict.ViewModels.Football
                 }
             });
 
+            if (result.Fixtures.Count == 0)
+                throw new Exception(LocalizeString.Occur_Error);
+
             if (result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
@@ -133,7 +143,6 @@ namespace PoseSportsPredict.ViewModels.Football
         private void UpdateMatches(List<O_GET_FIXTURES_BY_DATE.FixtureInfo> matchList)
         {
             _matchList = matchList;
-
             if (_matchList.Count == 0)
                 return;
 
@@ -142,12 +151,17 @@ namespace PoseSportsPredict.ViewModels.Football
             var grouppingMatchs = _matchList.GroupBy(elem => $"{elem.Country.Name} - {elem.League.Name}");
             foreach (var grouppingMatch in grouppingMatchs)
             {
+                // 기존 데이터 있는지.. 있으면 Expanded값은 유지
+                var foundExistData = MatchGroups?.Where(elem => elem.Title == grouppingMatch.Key).FirstOrDefault();
+
                 var firstItem = grouppingMatch.First();
-                var matchGroup = new MatchGroup(grouppingMatch.Key, firstItem.Country.Logo);
-                foreach (var match in grouppingMatch)
+                var matchGroup = new MatchGroup(grouppingMatch.Key, firstItem.Country.Logo, foundExistData?.Expanded ?? true)
                 {
-                    matchGroup.Add(match);
-                }
+                    FootballMatchListViewModel = new FootballMatchListViewModel
+                    {
+                        Matches = new ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>(grouppingMatch.ToArray())
+                    }
+                };
 
                 matchGroupCollection.Add(matchGroup);
             }

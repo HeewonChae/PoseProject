@@ -51,6 +51,8 @@ namespace PoseSportsPredict
             services.AddSingleton<FootballLeaguesViewModel>();
             services.AddTransient<FootballMatchesPage>();
             services.AddTransient<FootballMatchesViewModel>();
+            services.AddTransient<FootballMatchDetailPage>();
+            services.AddTransient<FootballMatchDetailViewModel>();
 
             // Test
             //services.AddSingleton<AppShellPage>();
