@@ -50,7 +50,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                         }
                         else
                         {
-                            var affectedRows = pose_globalDB.ExecuteSQL("INSERT INTO user_base(platform_id, platform_type, role_type, last_login_date, ipt_date)VALUE(@PlatformId, @PlatformType, @RoleType, @InsertTime, @InsertTime);",
+                            var affectedRows = pose_globalDB.Execute("INSERT INTO user_base(platform_id, platform_type, role_type, last_login_date, ipt_date)VALUE(@PlatformId, @PlatformType, @RoleType, @InsertTime, @InsertTime);",
                                                                             _input);
 
                             if (affectedRows == 1)

@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:PoseSportsPredict.Logics.Common.Converters"
              x:Class="PoseSportsPredict.App">
     <Application.Resources>
+        <converters:ExceptionToErrorMessageConverter x:Key="exceptionToErrorMessageConverter" />
+        <converters:BoolToDoubleConverter x:Key="boolToDoubleConverter" />
+        <converters:DateToStringConverter x:Key="dateToStringConverter" />
+        <converters:IsMatchStartedConverter x:Key="isMatchStartedConverter" />
+        <converters:MatchStatusToStringConverter x:Key="matchStatusToStringConverter" />
+
         <Color x:Key="PrimaryColor">#0288d1</Color>
         <Color x:Key="PrimaryColor_L">#5eb8ff</Color>
         <Color x:Key="PrimaryColor_D">#005b9f</Color>

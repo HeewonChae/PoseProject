@@ -42,7 +42,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                     null,
                     (Contexts.FootballDB footballDB) =>
                     {
-                        _output = footballDB.QuerySQL<Tables.Team>($"SELECT * FROM team {_input.Where} {_input.GroupBy} {_input.OrderBy}");
+                        _output = footballDB.Query<Tables.Team>($"SELECT * FROM team {_input.Where} {_input.GroupBy} {_input.OrderBy}");
                     },
                     this.OnError);
 

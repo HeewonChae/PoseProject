@@ -31,7 +31,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                     null,
                     (Contexts.FootballDB footballDB) =>
                     {
-                        _output = footballDB.QuerySQL<Tables.Coverage>($"SELECT * FROM coverage where league_id = {_input}").FirstOrDefault();
+                        _output = footballDB.Query<Tables.Coverage>($"SELECT * FROM coverage where league_id = {_input}").FirstOrDefault();
                     },
                     this.OnError);
 

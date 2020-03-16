@@ -4,26 +4,23 @@ using System.Globalization;
 using System.Text;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.Utilities.Converters
+namespace PoseSportsPredict.Logics.Common.Converters
 {
-    public class ExceptionToErrorMessageConverter : IValueConverter
+    public class IsMatchStartedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var exception = value as Exception;
+            var matchStatus = value.ToString();
 
-            if (value == null)
-            {
-                return null;
-            }
+            if (matchStatus.Equals("NS"))
+                return false;
 
-            return exception.Message;
+            return true;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            // One-Way converter only
-            throw new NotImplementedException();
+            return "";
         }
     }
 }

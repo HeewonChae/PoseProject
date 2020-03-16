@@ -40,12 +40,12 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                     null,
                      (Contexts.PoseGlobalDB pose_globalDB) =>
                      {
-                         _output = pose_globalDB.QuerySQL<Output>("SELECT user_no as UserNo, role_type as RoleType FROM user_base WHERE platform_id = @platform_id",
+                         _output = pose_globalDB.Query<Output>("SELECT user_no as UserNo, role_type as RoleType FROM user_base WHERE platform_id = @platform_id",
                                                                                new { platform_id = _input }).FirstOrDefault();
 
                          if (_output != null)
                          {
-                             pose_globalDB.ExecuteSQL("UPDATE user_base SET last_login_date = @last_login_date WHERE platform_id = @platform_id",
+                             pose_globalDB.Execute("UPDATE user_base SET last_login_date = @last_login_date WHERE platform_id = @platform_id",
                                                                                 new { last_login_date = DateTime.UtcNow, platform_id = _input });
                          }
                      },

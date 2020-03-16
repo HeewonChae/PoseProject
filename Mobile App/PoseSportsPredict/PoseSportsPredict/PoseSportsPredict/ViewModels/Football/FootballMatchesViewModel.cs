@@ -17,6 +17,8 @@ using System.Windows.Input;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 
+using PacketModels = PosePacket.Service.Football.Models;
+
 namespace PoseSportsPredict.ViewModels.Football
 {
     public class FootballMatchesViewModel : NavigableViewModel
@@ -25,7 +27,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public override bool OnInitializeView(params object[] datas)
         {
-            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>>();
+            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>>();
             return true;
         }
 
@@ -33,7 +35,7 @@ namespace PoseSportsPredict.ViewModels.Football
         {
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
 #if DEBUG
-            if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalSeconds < 30) // 30초 마다 갱신
+            if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 1) // 1분 마다 갱신
                 return;
 #else
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
@@ -52,8 +54,8 @@ namespace PoseSportsPredict.ViewModels.Football
 
         #region Fields
 
-        private TaskLoaderNotifier<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> _MatchesTaskLoaderNotifier;
-        private List<O_GET_FIXTURES_BY_DATE.FixtureInfo> _matchList;
+        private TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> _MatchesTaskLoaderNotifier;
+        private List<PacketModels.FixtureDetail> _matchList;
         private ObservableCollection<MatchGroup> _matchGroups;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
@@ -62,7 +64,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
         #region Properties
 
-        public TaskLoaderNotifier<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> MatchesTaskLoaderNotifier { get => _MatchesTaskLoaderNotifier; set => SetValue(ref _MatchesTaskLoaderNotifier, value); }
+        public TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> MatchesTaskLoaderNotifier { get => _MatchesTaskLoaderNotifier; set => SetValue(ref _MatchesTaskLoaderNotifier, value); }
         public ObservableCollection<MatchGroup> MatchGroups { get => _matchGroups; set => SetValue(ref _matchGroups, value); }
 
         #endregion Properties
@@ -104,7 +106,7 @@ namespace PoseSportsPredict.ViewModels.Football
             return this;
         }
 
-        private async Task<IReadOnlyCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>> GetMatchesAsync()
+        private async Task<IReadOnlyCollection<PacketModels.FixtureDetail>> GetMatchesAsync()
         {
             await Task.Delay(500);
 
@@ -120,9 +122,6 @@ namespace PoseSportsPredict.ViewModels.Football
                     EndTime = _matchDate.AddDays(1).ToUniversalTime(),
                 }
             });
-
-            if (result.Fixtures.Count == 0)
-                throw new Exception(LocalizeString.Occur_Error);
 
             if (result == null)
                 throw new Exception(LocalizeString.Occur_Error);
@@ -140,7 +139,7 @@ namespace PoseSportsPredict.ViewModels.Football
             return result.Fixtures;
         }
 
-        private void UpdateMatches(List<O_GET_FIXTURES_BY_DATE.FixtureInfo> matchList)
+        private void UpdateMatches(List<PacketModels.FixtureDetail> matchList)
         {
             _matchList = matchList;
             if (_matchList.Count == 0)
@@ -159,7 +158,7 @@ namespace PoseSportsPredict.ViewModels.Football
                 {
                     FootballMatchListViewModel = new FootballMatchListViewModel
                     {
-                        Matches = new ObservableCollection<O_GET_FIXTURES_BY_DATE.FixtureInfo>(grouppingMatch.ToArray())
+                        Matches = new ObservableCollection<PacketModels.FixtureDetail>(grouppingMatch.ToArray())
                     }
                 };
 

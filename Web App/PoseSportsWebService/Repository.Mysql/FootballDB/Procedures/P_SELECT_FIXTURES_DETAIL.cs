@@ -1,4 +1,5 @@
 ﻿using Repository.Mysql.Dapper;
+using Repository.Mysql.FootballDB.Tables;
 using Repository.Request;
 using System;
 using System.Collections.Generic;
@@ -12,20 +13,22 @@ namespace Repository.Mysql.FootballDB.Procedures
     {
         public struct Input
         {
-            public DateTime StartTime { get; set; }
-            public DateTime EndTime { get; set; }
+            public string WHERE { get; set; }
         }
 
         public class Output
         {
+            public int FixtureId { get; set; }
             public string CountryName { get; set; }
             public string CountryLogo { get; set; }
             public string LeagueName { get; set; }
             public string LeagueLogo { get; set; }
             public string HomeTeamName { get; set; }
             public string HomeTeamLogo { get; set; }
+            public short HomeTeamScore { get; set; }
             public string AwayTeamName { get; set; }
             public string AwayTeamLogo { get; set; }
+            public short AwayTeamScore { get; set; }
             public string MatchStatus { get; set; }
             public DateTime MatchTime { get; set; }
         }
@@ -48,20 +51,24 @@ namespace Repository.Mysql.FootballDB.Procedures
         public override IEnumerable<Output> OnQuery()
         {
             var sb = new StringBuilder();
-            sb.Append("SELECT c.name as CountryName, c.flag as CountryLogo, l.name as LeagueName, l.logo as LeagueLogo, ");
-            sb.Append("ht.name as HomeTeamName, ht.logo as HomeTeamLogo, at.name as AwayTeamName, at.logo as AwayTeamLogo, ");
-            sb.Append("f.status as MatchStatus, f.event_date as MatchTime FROM fixture as f ");
-            sb.Append("INNER JOIN league as l on f.league_id = l.id ");
-            sb.Append("INNER JOIN country as c on l.country_name = c.name ");
-            sb.Append("INNER JOIN team as ht on f.home_team_id = ht.id ");
-            sb.Append("INNER JOIN team as at on f.away_team_id = at.id ");
-            sb.Append("WHERE f.event_date BETWEEN @StartTime AND @EndTime;");
+            sb.Append($"SELECT c.{nameof(Country.name)} as {nameof(Output.CountryName)}, c.{nameof(Country.flag)} as {nameof(Output.CountryLogo)}, ");
+            sb.Append($"l.{nameof(League.name)} as {nameof(Output.LeagueName)}, l.{nameof(League.logo)} as {nameof(Output.LeagueLogo)}, ");
+            sb.Append($"ht.{nameof(Team.name)} as {nameof(Output.HomeTeamName)}, ht.{nameof(Team.logo)} as {nameof(Output.HomeTeamLogo)}, ");
+            sb.Append($"at.{nameof(Team.name)} as {nameof(Output.AwayTeamName)}, at.{nameof(Team.logo)} as {nameof(Output.AwayTeamLogo)}, ");
+            sb.Append($"f.{nameof(Fixture.home_score)} as {nameof(Output.HomeTeamScore)}, f.{nameof(Fixture.away_score)} as {nameof(Output.AwayTeamScore)}, ");
+            sb.Append($"f.{nameof(Fixture.id)} as {nameof(Output.FixtureId)}, f.{nameof(Fixture.status)} as {nameof(Output.MatchStatus)}, f.{nameof(Fixture.event_date)} as {nameof(Output.MatchTime)} ");
+            sb.Append("FROM fixture as f ");
+            sb.Append($"INNER JOIN league as l on f.{nameof(Fixture.league_id)} = l.{nameof(League.id)} ");
+            sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");
+            sb.Append($"INNER JOIN team as ht on f.{nameof(Fixture.home_team_id)} = ht.{nameof(Team.id)} ");
+            sb.Append($"INNER JOIN team as at on f.{nameof(Fixture.away_team_id)} = at.{nameof(Team.id)} ");
+            sb.Append($"WHERE {_input.WHERE};");
 
             DapperFacade.DoWithDBContext(
                     null,
                     (Contexts.FootballDB footballDB) =>
                     {
-                        _output = footballDB.QuerySQL<Output>(sb.ToString(), _input);
+                        _output = footballDB.Query<Output>(sb.ToString());
                     },
                     this.OnError);
 

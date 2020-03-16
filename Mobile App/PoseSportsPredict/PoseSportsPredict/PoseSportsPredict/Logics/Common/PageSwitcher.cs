@@ -11,6 +11,9 @@ namespace PoseSportsPredict.Logics.Common
     {
         public static bool SwitchMainPageAsync(NavigableViewModel viewModel, bool isNavPage = false, params object[] prepareData)
         {
+            if (!viewModel.OnInitializeView(prepareData))
+                throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
+
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (isNavPage)
@@ -31,6 +34,9 @@ namespace PoseSportsPredict.Logics.Common
 
         public static async Task<bool> PushNavPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
+            if (!viewModel.OnInitializeView(prepareData))
+                throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
+
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (masterPage.Detail.Navigation == null)
@@ -51,6 +57,9 @@ namespace PoseSportsPredict.Logics.Common
 
         public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
+            if (!viewModel.OnInitializeView(prepareData))
+                throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
+
             if (Application.Current.MainPage is MasterDetailPage masterPage)
             {
                 if (masterPage.Detail.Navigation == null)

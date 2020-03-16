@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 
 using FootballDB = Repository.Mysql.FootballDB;
+using PacketModels = PosePacket.Service.Football.Models;
 
 namespace SportsWebService.Commands.Football
 {
@@ -21,7 +22,7 @@ namespace SportsWebService.Commands.Football
             public const int Invalid_Input = ServiceErrorCode.WebMethod_Football.P_GET_FIXTURES_BY_DATE + 1;
 
             [Description("Failed db error")]
-            public const int Failed_DB_Error = ServiceErrorCode.WebMethod_Football.P_GET_FIXTURES_BY_DATE + 2;
+            public const int DB_Failed_Error = ServiceErrorCode.StoredProcedure_Football.P_GET_FIXTURES_BY_DATE + 1;
         }
 
         public static O_GET_FIXTURES_BY_DATE Execute(I_GET_FIXTURES_BY_DATE input)
@@ -34,52 +35,56 @@ namespace SportsWebService.Commands.Football
             {
                 P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Input
                 {
-                    StartTime = input.StartTime,
-                    EndTime = input.EndTime,
+                    WHERE = $"f.{nameof(FootballDB.Tables.Fixture.event_date)} BETWEEN \"{input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{input.EndTime.ToString("yyyyMMddTHHmmss")}\"",
                 });
 
                 db_output = P_SELECT_FIXTURES_BY_DATE.OnQuery();
 
                 if (P_SELECT_FIXTURES_BY_DATE.EntityStatus != null || db_output == null)
-                    ErrorHandler.OccurException(RowCode.Failed_DB_Error);
+                    ErrorHandler.OccurException(RowCode.DB_Failed_Error);
             }
 
-            var output = new O_GET_FIXTURES_BY_DATE();
-            output.Fixtures = new List<O_GET_FIXTURES_BY_DATE.FixtureInfo>();
+            var output = new O_GET_FIXTURES_BY_DATE
+            {
+                Fixtures = new List<PacketModels.FixtureDetail>()
+            };
 
             foreach (var dbFixtureDetail in db_output)
             {
-                output.Fixtures.Add(DBFixtureDetailConverter(dbFixtureDetail));
+                output.Fixtures.Add(FixtureDetailConverter(dbFixtureDetail));
             }
 
             return output;
         }
 
-        private static readonly Converter<FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Output, O_GET_FIXTURES_BY_DATE.FixtureInfo> DBFixtureDetailConverter =
+        private static readonly Converter<FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Output, PacketModels.FixtureDetail> FixtureDetailConverter =
         (input) =>
         {
-            var output = new O_GET_FIXTURES_BY_DATE.FixtureInfo
+            var output = new PacketModels.FixtureDetail
             {
-                Country = new O_GET_FIXTURES_BY_DATE.FixtureInfo.DataInfo
+                Country = new PacketModels.FixtureDetail.DataInfo
                 {
                     Name = input.CountryName,
                     Logo = input.CountryLogo,
                 },
-                League = new O_GET_FIXTURES_BY_DATE.FixtureInfo.DataInfo
+                League = new PacketModels.FixtureDetail.DataInfo
                 {
                     Name = input.LeagueName,
                     Logo = input.LeagueLogo,
                 },
-                HomeTeam = new O_GET_FIXTURES_BY_DATE.FixtureInfo.DataInfo
+                HomeTeam = new PacketModels.FixtureDetail.TeamInfo
                 {
                     Name = input.HomeTeamName,
                     Logo = input.HomeTeamLogo,
+                    Score = input.HomeTeamScore,
                 },
-                AwayTeam = new O_GET_FIXTURES_BY_DATE.FixtureInfo.DataInfo
+                AwayTeam = new PacketModels.FixtureDetail.TeamInfo
                 {
                     Name = input.AwayTeamName,
                     Logo = input.AwayTeamLogo,
+                    Score = input.AwayTeamScore
                 },
+                FixtureId = input.FixtureId,
                 MatchStatus = input.MatchStatus,
                 MatchTime = input.MatchTime,
             };

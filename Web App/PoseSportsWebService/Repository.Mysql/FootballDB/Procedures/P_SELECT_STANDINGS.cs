@@ -31,7 +31,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                     null,
                     (Contexts.FootballDB footballDB) =>
                     {
-                        _output = footballDB.QuerySQL<Tables.Standing>($"SELECT * FROM standing WHERE league_id = {_input}");
+                        _output = footballDB.Query<Tables.Standing>($"SELECT * FROM standing WHERE league_id = {_input}");
                     },
                     this.OnError);
 

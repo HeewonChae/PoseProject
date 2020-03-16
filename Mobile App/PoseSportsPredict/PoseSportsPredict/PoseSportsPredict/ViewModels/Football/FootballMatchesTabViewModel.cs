@@ -64,7 +64,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
         #region Constructors
 
-        public FootballMatchesTabViewModel()
+        public FootballMatchesTabViewModel() : base(null)
         {
             switch (Device.RuntimePlatform)
             {

@@ -32,7 +32,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                     (Contexts.FootballDB footballDB) =>
                     {
                         if (!string.IsNullOrEmpty(_input))
-                            _output = footballDB.ExecuteSQL(_input);
+                            _output = footballDB.Execute(_input);
                     },
                     this.OnError);
 

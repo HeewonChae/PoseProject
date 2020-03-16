@@ -10,7 +10,7 @@ namespace Repository.Mysql
 {
     public static class Extensions
     {
-        public static IEnumerable<T> QuerySQL<T>(this DbContext dbcontext, string sql, object param = null)
+        public static IEnumerable<T> Query<T>(this DbContext dbcontext, string sql, object param = null)
         {
             return dbcontext.Database.Connection.Query<T>(sql, param: param, transaction: dbcontext.Database.CurrentTransaction?.UnderlyingTransaction);
         }
@@ -36,7 +36,7 @@ namespace Repository.Mysql
             return await dbcontext.Database.Connection.QueryAsync(sql, param: param, transaction: dbcontext.Database.CurrentTransaction?.UnderlyingTransaction);
         }
 
-        public static int ExecuteSQL(this DbContext dbcontext, string sql, object param = null)
+        public static int Execute(this DbContext dbcontext, string sql, object param = null)
         {
             return dbcontext.Database.Connection.Execute(sql, param: param, transaction: dbcontext.Database.CurrentTransaction?.UnderlyingTransaction);
         }

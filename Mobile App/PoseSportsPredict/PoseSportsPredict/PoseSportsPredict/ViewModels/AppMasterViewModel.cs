@@ -31,10 +31,7 @@ namespace PoseSportsPredict.ViewModels
 
         public AppMasterViewModel(AppMasterPage page) : base(page)
         {
-            if (OnInitializeView())
-            {
-                CoupledPage.Appearing += (s, e) => OnAppearing();
-            }
+            CoupledPage.Appearing += (s, e) => OnAppearing();
         }
 
         #endregion Constructors

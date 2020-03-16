@@ -1,5 +1,6 @@
 ﻿using PosePacket;
 using PosePacket.Service.Auth;
+using PosePacket.Service.Auth.Models;
 using SportsWebService.Authentication;
 using SportsWebService.Authentication.ExternOAuth;
 using SportsWebService.Infrastructure;
@@ -27,7 +28,7 @@ namespace SportsWebService.Commands.Auth
             public const int Failed_OAuth = ServiceErrorCode.WebMethod_Auth.P_E_CheckVaildOAuthUser + 3;
 
             [Description("Failed save database")]
-            public const int Failed_Save_DB = ServiceErrorCode.WebMethod_Auth.P_E_CheckVaildOAuthUser + 4;
+            public const int DB_Failed_Save = ServiceErrorCode.StoredProcedure_Global.P_E_CheckVaildOAuthUser + 1;
         }
 
         public static async Task<ExternAuthUser> Execute(I_CheckVaildOAuthUser input)
@@ -58,7 +59,7 @@ namespace SportsWebService.Commands.Auth
                 bool queryResult = P_INSERT_USER_BASE.OnQuery();
 
                 if (P_INSERT_USER_BASE.EntityStatus != null || !queryResult)
-                    ErrorHandler.OccurException(RowCode.Failed_Save_DB);
+                    ErrorHandler.OccurException(RowCode.DB_Failed_Save);
             }
 
             return externAuthUser;

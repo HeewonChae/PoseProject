@@ -23,7 +23,7 @@ namespace SportsWebService.Commands.Auth
             public const int Invalid_PlatformId = ServiceErrorCode.WebMethod_Auth.P_E_Login + 2;
 
             [Description("Failed user login")]
-            public const int Failed_User_Login = ServiceErrorCode.WebMethod_Auth.P_E_Login + 3;
+            public const int DB_Failed_User_Login = ServiceErrorCode.StoredProcedure_Global.P_E_Login + 1;
         }
 
         public static O_Login Execute(I_Login input)
@@ -43,7 +43,7 @@ namespace SportsWebService.Commands.Auth
                 db_output = P_USER_LOGIN.OnQuery();
 
                 if (P_USER_LOGIN.EntityStatus != null || db_output == null)
-                    ErrorHandler.OccurException(RowCode.Failed_User_Login);
+                    ErrorHandler.OccurException(RowCode.DB_Failed_User_Login);
             }
 
             var credentials = new PoseCredentials();

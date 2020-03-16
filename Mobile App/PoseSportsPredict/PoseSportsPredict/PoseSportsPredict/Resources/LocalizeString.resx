@@ -139,4 +139,37 @@
   <data name="Welcome" xml:space="preserve">
     <value>Welcome !</value>
   </data>
+  <data name="Set_Alarm" xml:space="preserve">
+    <value>The alarm has been set.</value>
+  </data>
+  <data name="Set_Bookmark" xml:space="preserve">
+    <value>It's been saved in the bookmark.</value>
+  </data>
+  <data name="Cancle_Alarm" xml:space="preserve">
+    <value>The alarm has been canceled.</value>
+  </data>
+  <data name="Delete_Bookmark" xml:space="preserve">
+    <value>Bookmark have been deleted.</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="H2H" xml:space="preserve">
+    <value>H2H</value>
+  </data>
+  <data name="Predictions" xml:space="preserve">
+    <value>Predictions</value>
+  </data>
+  <data name="Odds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="Match_Not_Start" xml:space="preserve">
+    <value>Not start</value>
+  </data>
+  <data name="Match_Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Match_Ongoing" xml:space="preserve">
+    <value>Ongoing</value>
+  </data>
 </root>

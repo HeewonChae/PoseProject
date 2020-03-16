@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
-             xmlns:converters="clr-namespace:PoseSportsPredict.Utilities.Converters"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
@@ -22,14 +21,13 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ffimageloadingsvg:SvgImageSourceConverter x:Key="SvgImageSourceConverter" />
-            <converters:ExceptionToErrorMessageConverter x:Key="ExceptionToErrorMessageConverter" />
 
             <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
                 <Setter Property="AccentColor" Value="Accent" />
                 <Setter Property="TextColor" Value="Gray" />
                 <Setter Property="EmptyStateMessage" Value="{x:Static localize:LocalizeString.No_Match_datas}" />
                 <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
-                <Setter Property="ErrorMessageConverter" Value="{StaticResource ExceptionToErrorMessageConverter}" />
+                <Setter Property="ErrorMessageConverter" Value="{StaticResource exceptionToErrorMessageConverter}" />
             </Style>
 
             <!--Listview ItemTemplete Selector-->
@@ -53,9 +51,6 @@
                                 Grid.Column="1"
                                 Aspect="AspectFit"
                                 HeightRequest="16"
-                                DownsampleHeight="100"
-                                DownsampleWidth="100"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="tab_about.png"
                                 ErrorPlaceholder="tab_about.png"
                                 VerticalOptions="Center"
@@ -165,7 +160,7 @@
                                 <BoxView
                                     Margin="10, 0"
                                     HeightRequest="0.1"
-                                    Color="Gray">
+                                    Color="{StaticResource CustomGrey_L}">
                                 </BoxView>
                             </StackLayout>
                             <!--Inner List-->

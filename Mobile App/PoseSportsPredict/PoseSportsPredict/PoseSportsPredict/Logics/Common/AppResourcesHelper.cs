@@ -37,6 +37,16 @@ namespace PoseSportsPredict.Logics.Common
             Application.Current.Resources[targetResourceName] = value;
         }
 
+        public static void SetDynamicResource(this Page page, string targetResourceName, string sourceResourceName)
+        {
+            if (!page.Resources.TryGetValue(sourceResourceName, out var value))
+            {
+                throw new InvalidOperationException($"key {sourceResourceName} not found in the resource dictionary");
+            }
+
+            Application.Current.Resources[targetResourceName] = value;
+        }
+
         public static void SetDynamicResource<T>(string targetResourceName, T value)
         {
             Application.Current.Resources[targetResourceName] = value;

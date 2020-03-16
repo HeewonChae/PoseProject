@@ -43,7 +43,7 @@
                                 MaxLines="2"
                                 TypeScale="Caption"
                                 TextColor="Black"
-                                LetterSpacing="0.1"
+                                LetterSpacing="0.3"
                                 Text="{Binding HomeTeam.Name}">
                             </materialui:MaterialLabel>
                             <ffimageloading:CachedImage
@@ -51,9 +51,6 @@
                                 Margin="3,0"
                                 Aspect="AspectFit"
                                 WidthRequest="32"
-                                DownsampleHeight="100"
-                                DownsampleWidth="100"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="tab_about.png"
                                 ErrorPlaceholder="tab_about.png"
                                 Source="{Binding HomeTeam.Logo}">
@@ -105,7 +102,7 @@
                                 MaxLines="2"
                                 TypeScale="Caption"
                                 TextColor="Black"
-                                LetterSpacing="0.1"
+                                LetterSpacing="0.3"
                                 Text="{Binding AwayTeam.Name}">
                             </materialui:MaterialLabel>
                         </Grid>

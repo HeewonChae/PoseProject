@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
+using PosePacket.Service.Auth.Models;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Resources;
@@ -36,10 +37,7 @@ namespace PoseSportsPredict.ViewModels
             _OAuthService = OAuthService;
             _webApiService = webApiService;
 
-            if (OnInitializeView())
-            {
-                CoupledPage.Appearing += (s, e) => OnAppearing();
-            }
+            CoupledPage.Appearing += (s, e) => OnAppearing();
         }
 
         #endregion Constructors

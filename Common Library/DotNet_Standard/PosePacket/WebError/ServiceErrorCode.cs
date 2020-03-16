@@ -29,7 +29,8 @@
 
         public static class Database
         {
-            public const int FootballDB = Root.Mysql + 10000000;
+            public const int GlobalDB = Root.Mysql + 01000000;
+            public const int FootballDB = Root.Mysql + 02000000;
 
             public const int Max = Root.Max + 90000000;
         }
@@ -40,21 +41,30 @@
 
         public static class WebMethod_Auth
         {
-            public const int P_E_CheckVaildOAuthUser = WebService.Auth + 0001000;
-
-            public const int P_E_Login = WebService.Auth + 0002000;
-
-            public const int P_E_TokenRefresh = WebService.Auth + 0003000;
+            public const int P_E_CheckVaildOAuthUser = WebService.Auth + 001000;
+            public const int P_E_Login = WebService.Auth + 002000;
+            public const int P_E_TokenRefresh = WebService.Auth + 003000;
         }
 
         public static class WebMethod_Football
         {
-            public const int P_GET_FIXTURES_BY_DATE = WebService.Football + 0001000;
+            public const int P_GET_FIXTURES_BY_DATE = WebService.Football + 001000;
         }
 
         public static class WebMethod_HelloWorld
         {
-            public const int P_Hello = WebService.HelloWorld + 0001000;
+            public const int P_Hello = WebService.HelloWorld + 001000;
+        }
+
+        public static class StoredProcedure_Global
+        {
+            public const int P_E_CheckVaildOAuthUser = Database.GlobalDB + 001000;
+            public const int P_E_Login = Database.GlobalDB + 002000;
+        }
+
+        public static class StoredProcedure_Football
+        {
+            public const int P_GET_FIXTURES_BY_DATE = Database.FootballDB + 002000;
         }
 
         public static class Procedure

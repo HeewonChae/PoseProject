@@ -10,7 +10,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.Logics.Common.CustomView
+namespace PoseSportsPredict.Logics.Common.CustomViews
 {
     public static class MaterialColors
     {
@@ -125,6 +125,13 @@ namespace PoseSportsPredict.Logics.Common.CustomView
             RatingType.Floating,
             propertyChanged: OnPropertyChanged);
 
+        public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(
+            nameof(StrokeWidth),
+            typeof(float),
+            typeof(RatingView),
+            0.5f,
+            propertyChanged: OnStrokeWidthChanged);
+
         public double Value
         {
             get => (double)GetValue(ValueProperty);
@@ -167,6 +174,12 @@ namespace PoseSportsPredict.Logics.Common.CustomView
             set => SetValue(RatingTypeProperty, value);
         }
 
+        public float StrokeWidth
+        {
+            get => (float)GetValue(StrokeWidthProperty);
+            set => SetValue(StrokeWidthProperty, value);
+        }
+
         private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as RatingView;
@@ -201,6 +214,13 @@ namespace PoseSportsPredict.Logics.Common.CustomView
             OnPropertyChanged(bindable, oldValue, newValue);
         }
 
+        private static void OnStrokeWidthChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var view = bindable as RatingView;
+            view.StrokeWidth = (float)newValue;
+            OnPropertyChanged(bindable, oldValue, newValue);
+        }
+
         private SKPoint ConvertToPixel(Point pt)
         {
             return new SKPoint((float)(CanvasSize.Width * pt.X / Width), (float)(CanvasSize.Height * pt.Y / Height));
@@ -218,12 +238,6 @@ namespace PoseSportsPredict.Logics.Common.CustomView
         /// </summary>
         /// <value>The color of the canvas background.</value>
         public SKColor CanvasBackgroundColor { get; set; } = SKColors.Transparent;
-
-        /// <summary>
-        ///     Gets or sets the width of the stroke.
-        /// </summary>
-        /// <value>The width of the stroke.</value>
-        public float StrokeWidth { get; set; } = 0.1f;
 
         #endregion
 

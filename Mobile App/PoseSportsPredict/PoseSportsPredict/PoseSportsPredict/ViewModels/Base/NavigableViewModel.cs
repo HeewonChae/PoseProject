@@ -13,10 +13,6 @@ namespace PoseSportsPredict.ViewModels.Base
         private Page _coupledPage;
         public Page CoupledPage => _coupledPage;
 
-        protected NavigableViewModel()
-        {
-        }
-
         protected NavigableViewModel(Page coupledPage)
         {
             _coupledPage = coupledPage;

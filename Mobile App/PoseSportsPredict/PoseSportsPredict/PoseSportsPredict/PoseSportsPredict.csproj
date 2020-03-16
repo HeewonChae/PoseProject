@@ -53,6 +53,9 @@
     <Compile Update="Views\Football\FootballMatchesTabPage.xaml.cs">
       <DependentUpon>FootballMatchesTabPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Football\FootballMatchDetailPredictionsView.xaml.cs">
+      <DependentUpon>FootballMatchDetailPredictionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Test\AppShellPage.xaml.cs">
       <DependentUpon>AppShellPage.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,15 @@
     <EmbeddedResource Update="Views\Football\FootballMainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballMatchDetailH2HView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballMatchDetailOddsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballMatchDetailOverview.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\FootballMatchDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -85,6 +97,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\FootballMatchListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\FootballMatchDetailPredictionsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Test\TabbedPage1.xaml">
@@ -118,8 +133,8 @@
 
   <ItemGroup>
     <Folder Include="Logics\Common\Behaviors\" />
-    <Folder Include="Models\Football\" />
     <Folder Include="CustomViews\" />
+    <Folder Include="Models\Football\SQLite\" />
     <Folder Include="ViewModels\Common\" />
   </ItemGroup>
 </Project>

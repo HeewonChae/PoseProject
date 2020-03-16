@@ -61,6 +61,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The alarm has been canceled..
+        /// </summary>
+        public static string Cancle_Alarm {
+            get {
+                return ResourceManager.GetString("Cancle_Alarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please check your internet connection..
         /// </summary>
         public static string Check_Internet_Connection {
@@ -70,11 +79,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bookmark have been deleted..
+        /// </summary>
+        public static string Delete_Bookmark {
+            get {
+                return ResourceManager.GetString("Delete_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Football.
         /// </summary>
         public static string Football {
             get {
                 return ResourceManager.GetString("Football", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H2H.
+        /// </summary>
+        public static string H2H {
+            get {
+                return ResourceManager.GetString("H2H", resourceCulture);
             }
         }
         
@@ -106,6 +133,33 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished.
+        /// </summary>
+        public static string Match_Finished {
+            get {
+                return ResourceManager.GetString("Match_Finished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not start.
+        /// </summary>
+        public static string Match_Not_Start {
+            get {
+                return ResourceManager.GetString("Match_Not_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ongoing.
+        /// </summary>
+        public static string Match_Ongoing {
+            get {
+                return ResourceManager.GetString("Match_Ongoing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No matches were predicted..
         /// </summary>
         public static string No_Match_datas {
@@ -133,6 +187,33 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Odds.
+        /// </summary>
+        public static string Odds {
+            get {
+                return ResourceManager.GetString("Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        public static string Overview {
+            get {
+                return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Predictions.
+        /// </summary>
+        public static string Predictions {
+            get {
+                return ResourceManager.GetString("Predictions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retry.
         /// </summary>
         public static string Retry {
@@ -147,6 +228,24 @@ namespace PoseSportsPredict.Resources {
         public static string Service_Not_Available {
             get {
                 return ResourceManager.GetString("Service_Not_Available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The alarm has been set..
+        /// </summary>
+        public static string Set_Alarm {
+            get {
+                return ResourceManager.GetString("Set_Alarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It&apos;s been saved in the bookmark..
+        /// </summary>
+        public static string Set_Bookmark {
+            get {
+                return ResourceManager.GetString("Set_Bookmark", resourceCulture);
             }
         }
         

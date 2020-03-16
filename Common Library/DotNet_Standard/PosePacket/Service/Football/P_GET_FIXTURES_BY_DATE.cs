@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosePacket.Service.Football.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,22 +13,6 @@ namespace PosePacket.Service.Football
 
     public class O_GET_FIXTURES_BY_DATE
     {
-        public class FixtureInfo
-        {
-            public class DataInfo
-            {
-                public string Name { get; set; }
-                public string Logo { get; set; }
-            }
-
-            public DataInfo Country { get; set; }
-            public DataInfo League { get; set; }
-            public DataInfo HomeTeam { get; set; }
-            public DataInfo AwayTeam { get; set; }
-            public string MatchStatus { get; set; }
-            public DateTime MatchTime { get; set; }
-        }
-
-        public List<FixtureInfo> Fixtures { get; set; }
+        public List<FixtureDetail> Fixtures { get; set; }
     }
 }

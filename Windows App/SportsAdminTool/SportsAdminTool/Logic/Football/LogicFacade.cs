@@ -381,6 +381,8 @@ namespace SportsAdminTool.Logic.Football
                         }
 
                         // DB Save
+                        db_fixture.home_score = (short)api_fixture.GoalsHomeTeam;
+                        db_fixture.away_score = (short)api_fixture.GoalsAwayTeam;
                         db_fixture.is_completed = true;
                     }
 
