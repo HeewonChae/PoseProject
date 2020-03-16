@@ -172,4 +172,10 @@
   <data name="Match_Ongoing" xml:space="preserve">
     <value>Ongoing</value>
   </data>
+  <data name="Match_Sort_By_Bookmark" xml:space="preserve">
+    <value>My Game</value>
+  </data>
+  <data name="Match_Sort_By_Time" xml:space="preserve">
+    <value>Arrange by Time</value>
+  </data>
 </root>

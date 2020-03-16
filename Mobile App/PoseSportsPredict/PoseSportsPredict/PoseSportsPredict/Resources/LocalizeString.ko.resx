@@ -192,4 +192,10 @@
   <data name="Match_Ongoing" xml:space="preserve">
     <value>진행중</value>
   </data>
+  <data name="Match_Sort_By_Bookmark" xml:space="preserve">
+    <value>나의 경기</value>
+  </data>
+  <data name="Match_Sort_By_Time" xml:space="preserve">
+    <value>시간으로 정렬</value>
+  </data>
 </root>

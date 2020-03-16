@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.Common.Triggers"
+             x:Class="PoseSportsPredict.Views.Football.FootballMatchListView">
+    <ContentView.Content>
+        <StackLayout
+            x:Name="lv_matches"
+            BindableLayout.ItemsSource="{Binding Matches}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Grid
+                        HeightRequest="45"
+                        Padding="35, 5"
+                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
+                        effects:TapCommandEffect.TapParameter="{Binding .}"
+                        effects:ViewEffect.TouchFeedbackColor="Accent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialui:MaterialLabel
+                            Grid.Column="0"
+                            LineHeight="0.9"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            HorizontalTextAlignment="End"
+                            MaxLines="2"
+                            TypeScale="Caption"
+                            TextColor="Black"
+                            LetterSpacing="0.3"
+                            Text="{Binding HomeTeam.Name}">
+                        </materialui:MaterialLabel>
+                        <ffimageloading:CachedImage
+                            Grid.Column="1"
+                            Margin="3,0"
+                            Aspect="AspectFit"
+                            WidthRequest="32"
+                            LoadingPlaceholder="tab_about.png"
+                            ErrorPlaceholder="tab_about.png"
+                            Source="{Binding HomeTeam.Logo}">
+                        </ffimageloading:CachedImage>
+                        <StackLayout
+                            Grid.Column="2"
+                            Spacing="0"
+                            VerticalOptions="FillAndExpand">
+                            <materialui:MaterialLabel
+                                HorizontalOptions="Center"
+                                VerticalOptions="EndAndExpand"
+                                FontSize="12"
+                                TextColor="{StaticResource CustomGrey}"
+                                Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialChip
+                                HorizontalOptions="Center"
+                                VerticalOptions="StartAndExpand"
+                                FontSize="11"
+                                HeightRequest="15"
+                                Text="{Binding MatchStatus}"
+                                TextColor="White">
+                                <materialui:MaterialChip.Triggers>
+                                    <EventTrigger Event="BindingContextChanged">
+                                        <triggers:MatchStatusColorTrigger />
+                                    </EventTrigger>
+                                </materialui:MaterialChip.Triggers>
+                            </materialui:MaterialChip>
+                        </StackLayout>
+                        <ffimageloading:CachedImage
+                            Grid.Column="3"
+                            Margin="3,0"
+                            Aspect="AspectFit"
+                            WidthRequest="32"
+                            DownsampleHeight="100"
+                            DownsampleWidth="100"
+                            DownsampleToViewSize="True"
+                            LoadingPlaceholder="tab_about.png"
+                            ErrorPlaceholder="tab_about.png"
+                            Source="{Binding AwayTeam.Logo}">
+                        </ffimageloading:CachedImage>
+                        <materialui:MaterialLabel
+                            Grid.Column="4"
+                            LineHeight="0.9"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="Center"
+                            LineBreakMode="WordWrap"
+                            HorizontalTextAlignment="Start"
+                            MaxLines="2"
+                            TypeScale="Caption"
+                            TextColor="Black"
+                            LetterSpacing="0.3"
+                            Text="{Binding AwayTeam.Name}">
+                        </materialui:MaterialLabel>
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

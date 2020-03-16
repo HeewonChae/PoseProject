@@ -47,13 +47,13 @@
     <Compile Update="Views\Football\FootballMainPage.xaml.cs">
       <DependentUpon>FootballMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Football\FootballMatchesTabPage_IOS.xaml.cs">
+    <Compile Update="Views\Football\Match\FootballMatchesTabPage_IOS.xaml.cs">
       <DependentUpon>FootballMatchesTabPage_IOS.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Football\FootballMatchesTabPage.xaml.cs">
+    <Compile Update="Views\Football\Match\FootballMatchesTabPage.xaml.cs">
       <DependentUpon>FootballMatchesTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Football\FootballMatchDetailPredictionsView.xaml.cs">
+    <Compile Update="Views\Football\Match\Detail\FootballMatchDetailPredictionsView.xaml.cs">
       <DependentUpon>FootballMatchDetailPredictionsView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Test\AppShellPage.xaml.cs">
@@ -78,28 +78,28 @@
     <EmbeddedResource Update="Views\Football\FootballMainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchDetailH2HView.xaml">
+    <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailH2HView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchDetailOddsView.xaml">
+    <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailOddsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchDetailOverview.xaml">
+    <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailOverview.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchDetailPage.xaml">
+    <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchesPage.xaml">
+    <EmbeddedResource Update="Views\Football\Match\FootballMatchesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchesTabPage.xaml">
+    <EmbeddedResource Update="Views\Football\Match\FootballMatchesTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchListView.xaml">
+    <EmbeddedResource Update="Views\Football\Match\FootballMatchListView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballMatchDetailPredictionsView.xaml">
+    <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailPredictionsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Test\TabbedPage1.xaml">
@@ -136,5 +136,12 @@
     <Folder Include="CustomViews\" />
     <Folder Include="Models\Football\SQLite\" />
     <Folder Include="ViewModels\Common\" />
+    <Folder Include="ViewModels\Football\League\" />
+    <Folder Include="ViewModels\Football\Bookmark\" />
+    <Folder Include="ViewModels\Football\Team\" />
+    <Folder Include="Views\Football\League\" />
+    <Folder Include="Views\Football\Bookmark\" />
+    <Folder Include="Views\Football\Team\" />
+    <Folder Include="Views\Common\" />
   </ItemGroup>
 </Project>

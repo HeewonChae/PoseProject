@@ -160,6 +160,24 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Game.
+        /// </summary>
+        public static string Match_Sort_By_Bookmark {
+            get {
+                return ResourceManager.GetString("Match_Sort_By_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrange by Time.
+        /// </summary>
+        public static string Match_Sort_By_Time {
+            get {
+                return ResourceManager.GetString("Match_Sort_By_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No matches were predicted..
         /// </summary>
         public static string No_Match_datas {
