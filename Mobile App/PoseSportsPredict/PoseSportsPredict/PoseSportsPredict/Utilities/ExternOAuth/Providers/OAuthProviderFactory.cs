@@ -1,8 +1,4 @@
-﻿using PosePacket.Service.Auth;
-using PosePacket.Service.Auth.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PosePacket.Service.Auth.Models;
 using WebServiceShare.ExternAuthentication.Providers;
 
 namespace PoseSportsPredict.Utilities.ExternOAuth.Providers

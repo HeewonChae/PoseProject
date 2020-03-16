@@ -1,6 +1,4 @@
-﻿using PoseSportsPredict.ViewModels.Base;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
+﻿using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 

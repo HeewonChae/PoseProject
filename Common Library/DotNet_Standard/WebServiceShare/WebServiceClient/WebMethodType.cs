@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WebServiceShare.WebServiceClient
+﻿namespace WebServiceShare.WebServiceClient
 {
-	public enum WebMethodType
-	{
-		GET,
-		POST,
-	}
+    public enum WebMethodType
+    {
+        GET,
+        POST,
+    }
 }

@@ -1,10 +1,7 @@
-﻿using PosePacket.Service.Auth;
-using PosePacket.Service.Auth.Models;
+﻿using PosePacket.Service.Auth.Models;
 using PoseSportsPredict.InfraStructure;
 using Shiny;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication.Providers;
 using WebServiceShare.ExternAuthentication.Users;

@@ -29,7 +29,7 @@
                     <Label
                         Grid.Column="1"
                         Grid.Row="2"
-                        Text="AppName"/>
+                        Text="AppName" />
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>

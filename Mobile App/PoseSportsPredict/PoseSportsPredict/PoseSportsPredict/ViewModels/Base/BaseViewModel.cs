@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Base
 {

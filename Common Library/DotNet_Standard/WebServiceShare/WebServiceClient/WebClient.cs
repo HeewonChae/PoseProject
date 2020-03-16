@@ -1,9 +1,5 @@
 ﻿using Flurl;
 using Flurl.Http;
-using PosePacket;
-using PosePacket.Header;
-using PosePacket.Proxy;
-using PosePacket.WebError;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

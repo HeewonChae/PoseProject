@@ -1,15 +1,8 @@
-﻿using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Models;
-using PoseSportsPredict.ViewModels.Base;
+﻿using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
 using Shiny;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {

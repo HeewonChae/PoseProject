@@ -1,17 +1,14 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using PosePacket.Service.Football;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 
 using PacketModels = PosePacket.Service.Football.Models;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Football.Match
 {
     public class FootballMatchListViewModel : BaseViewModel
     {

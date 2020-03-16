@@ -1,19 +1,11 @@
-﻿using GalaSoft.MvvmLight.Command;
-using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Resources;
+﻿using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.Views.Football;
+using PoseSportsPredict.Views.Football.Match;
 using Shiny;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
-using XF.Material.Forms.UI.Dialogs;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Football.Match
 {
     public class FootballMatchesTabViewModel : NavigableViewModel
     {

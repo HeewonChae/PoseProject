@@ -5,21 +5,19 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.Views.Football;
+using PoseSportsPredict.Views.Football.Match;
 using Sharpnado.Presentation.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
-
 using PacketModels = PosePacket.Service.Football.Models;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Football.Match
 {
     public class FootballMatchesViewModel : NavigableViewModel
     {

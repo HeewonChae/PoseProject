@@ -1,6 +1,5 @@
 ﻿using PosePacket.Proxy;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels;

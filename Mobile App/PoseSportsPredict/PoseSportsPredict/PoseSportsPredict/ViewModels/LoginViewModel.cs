@@ -5,7 +5,6 @@ using PosePacket.Service.Auth.Models;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
 using Shiny;

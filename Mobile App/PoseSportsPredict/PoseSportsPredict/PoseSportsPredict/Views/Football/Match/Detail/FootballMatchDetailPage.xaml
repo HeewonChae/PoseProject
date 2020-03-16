@@ -10,10 +10,10 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:footballviews="clr-namespace:PoseSportsPredict.Views.Football"
+             xmlns:footballmatchdetailviews="clr-namespace:PoseSportsPredict.Views.Football.Match.Detail"
              xmlns:customs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.Presentation.Forms"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
-             x:Class="PoseSportsPredict.Views.Football.FootballMatchDetailPage"
+             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPage"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
@@ -277,10 +277,10 @@
                     <SwipeGestureRecognizer Threshold="80" Direction="Right" Command="{Binding SwipeRightViewSwitcherCommad}" />
                 </tabs:ViewSwitcher.GestureRecognizers>
 
-                <customs:LazyView x:TypeArguments="footballviews:FootballMatchDetailOverview" BindingContext="{Binding OverviewModel}" />
-                <customs:LazyView x:TypeArguments="footballviews:FootballMatchDetailH2HView" BindingContext="{Binding H2HViewModel}" />
-                <customs:LazyView x:TypeArguments="footballviews:FootballMatchDetailPredictionsView" BindingContext="{Binding PredictionsViewModel}" />
-                <customs:LazyView x:TypeArguments="footballviews:FootballMatchDetailOddsView" BindingContext="{Binding OddsViewModel}" />
+                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOverview" BindingContext="{Binding OverviewModel}" />
+                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailH2HView" BindingContext="{Binding H2HViewModel}" />
+                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailPredictionsView" BindingContext="{Binding PredictionsViewModel}" />
+                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOddsView" BindingContext="{Binding OddsViewModel}" />
             </tabs:ViewSwitcher>
         </StackLayout>
     </ContentPage.Content>

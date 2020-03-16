@@ -1,10 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Test;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.Content;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
-using Android.Views;
-using Android.Widget;
 using PoseSportsPredict.Droid.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

@@ -1,5 +1,4 @@
-﻿using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.ViewModels.Base;
+﻿using PoseSportsPredict.ViewModels.Base;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;

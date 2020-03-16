@@ -7,7 +7,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.Common.Triggers"
-             x:Class="PoseSportsPredict.Views.Football.FootballMatchListView">
+             x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchListView">
     <ContentView.Content>
         <StackLayout
             x:Name="lv_matches"

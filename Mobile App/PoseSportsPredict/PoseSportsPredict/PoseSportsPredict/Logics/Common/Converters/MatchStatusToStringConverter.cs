@@ -1,8 +1,6 @@
 ﻿using PoseSportsPredict.Resources;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.Logics.Common.Converters

@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Plugin.Settings;
-using PoseSportsPredict.InfraStructure;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PoseSportsPredict.Utilities.LocalStorage
 {

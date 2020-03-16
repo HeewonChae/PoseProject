@@ -1,7 +1,6 @@
 ﻿using PosePacket.Service.Football.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PosePacket.Service.Football
 {

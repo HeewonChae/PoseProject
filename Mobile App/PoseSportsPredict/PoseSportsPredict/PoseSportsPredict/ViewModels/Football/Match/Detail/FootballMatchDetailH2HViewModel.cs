@@ -1,9 +1,6 @@
 ﻿using PoseSportsPredict.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
     public class FootballMatchDetailH2HViewModel : BaseViewModel
     {

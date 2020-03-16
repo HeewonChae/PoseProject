@@ -1,14 +1,9 @@
-﻿using PoseSportsPredict.ViewModels.Football;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PoseSportsPredict.ViewModels.Base;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PoseSportsPredict.Views.Football
+namespace PoseSportsPredict.Views.Football.Match.Detail
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FootballMatchDetailOddsView : ContentView
@@ -22,7 +17,7 @@ namespace PoseSportsPredict.Views.Football
         {
             base.OnBindingContextChanged();
 
-            var bindingCtx = this.BindingContext as FootballMatchDetailOddsViewModel;
+            var bindingCtx = this.BindingContext as BaseViewModel;
             bindingCtx.OnAppearing();
         }
     }

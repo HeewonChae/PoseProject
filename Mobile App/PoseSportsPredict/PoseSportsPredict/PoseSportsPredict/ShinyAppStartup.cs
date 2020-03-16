@@ -4,10 +4,12 @@ using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Football;
-using PoseSportsPredict.ViewModels.Test;
+using PoseSportsPredict.ViewModels.Football.Match;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views;
 using PoseSportsPredict.Views.Football;
-using PoseSportsPredict.Views.Test;
+using PoseSportsPredict.Views.Football.Match;
+using PoseSportsPredict.Views.Football.Match.Detail;
 using Shiny;
 using WebServiceShare.ExternAuthentication;
 

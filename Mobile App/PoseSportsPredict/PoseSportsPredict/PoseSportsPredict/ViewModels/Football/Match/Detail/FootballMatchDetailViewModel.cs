@@ -2,19 +2,14 @@
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.Views.Football;
-using Sharpnado.Presentation.Forms.CustomViews.Tabs;
+using PoseSportsPredict.Views.Football.Match.Detail;
 using Shiny;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 using PacketModels = PosePacket.Service.Football.Models;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
     public class FootballMatchDetailViewModel : NavigableViewModel
     {

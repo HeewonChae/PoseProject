@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PosePacket.Service.Auth
+﻿namespace PosePacket.Service.Auth
 {
     public class O_TokenRefresh
     {

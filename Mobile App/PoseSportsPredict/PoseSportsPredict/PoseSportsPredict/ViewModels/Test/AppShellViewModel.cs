@@ -3,12 +3,10 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.Views;
 using PoseSportsPredict.Views.Test;
 using Shiny;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 

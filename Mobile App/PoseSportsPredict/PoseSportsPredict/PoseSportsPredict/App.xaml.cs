@@ -1,12 +1,6 @@
-﻿using PoseSportsPredict.Logics.Common;
-using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services;
-using PoseSportsPredict.ViewModels;
+﻿using PoseSportsPredict.Services;
 using Shiny;
-using System.Globalization;
 using Xamarin.Forms;
-using XF.Material.Forms.Resources;
-using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict
 {

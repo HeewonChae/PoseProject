@@ -1,8 +1,7 @@
-﻿using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.ViewModels.Base;
+﻿using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.Views.Football;
 using Shiny;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 

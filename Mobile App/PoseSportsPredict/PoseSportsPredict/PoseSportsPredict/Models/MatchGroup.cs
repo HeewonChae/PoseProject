@@ -1,10 +1,5 @@
-﻿using PosePacket.Service.Football;
-using PoseSportsPredict.ViewModels.Football;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using PoseSportsPredict.ViewModels.Football.Match;
 using System.ComponentModel;
-using System.Text;
 
 namespace PoseSportsPredict.Models
 {

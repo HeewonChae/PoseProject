@@ -1,12 +1,6 @@
-﻿using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Models;
+﻿using PoseSportsPredict.Models;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Test;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Test
 {

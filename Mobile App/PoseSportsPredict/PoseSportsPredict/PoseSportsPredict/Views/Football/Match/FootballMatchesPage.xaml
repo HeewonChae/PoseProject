@@ -7,11 +7,11 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:footballview="clr-namespace:PoseSportsPredict.Views.Football"
+             xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.Common.TempleteSelectors"
-             x:Class="PoseSportsPredict.Views.Football.FootballMatchesPage">
+             x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem  Text="{x:Static localize:LocalizeString.Match_Sort_By_Bookmark}" Order="Secondary" Priority="1" />
@@ -163,10 +163,10 @@
                                 </BoxView>
                             </StackLayout>
                             <!--Inner List-->
-                            <footballview:FootballMatchListView
+                            <footballmatchview:FootballMatchListView
                                 Grid.Row="1"
                                 BindingContext="{Binding FootballMatchListViewModel}">
-                            </footballview:FootballMatchListView>
+                            </footballmatchview:FootballMatchListView>
                         </Grid>
                     </materialui:MaterialCard>
                 </ViewCell>

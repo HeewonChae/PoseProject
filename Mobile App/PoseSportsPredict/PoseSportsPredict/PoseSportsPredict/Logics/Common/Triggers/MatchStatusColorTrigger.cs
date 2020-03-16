@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.Logics.Common.Triggers
