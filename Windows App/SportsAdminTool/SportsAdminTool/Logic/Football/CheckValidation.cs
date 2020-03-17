@@ -54,9 +54,10 @@ namespace SportsAdminTool.Logic.Football
 
         #region Check validation
 
-        public bool IsValidLeague(short leagueId, string leagueName, string countryName)
+        public bool IsValidLeague(short leagueId, string leagueName, string countryName, out FootballDB.Tables.League league)
         {
-            bool db_result = DatabaseLogic.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault() != null;
+            league = DatabaseLogic.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault();
+            bool db_result = league != null;
             if (!db_result)
             {
                 AddInvalidLeague(new InvalidLeague()
@@ -108,8 +109,8 @@ namespace SportsAdminTool.Logic.Football
 
         public bool IsValidFixtureStatus(ApiModel.Football.Enums.FixtureStatusType status, DateTime matchTime)
         {
-            // 6시간이 지났는데 아직 경기가 안끝났으면 삭제
-            if (matchTime < DateTime.UtcNow.AddHours(-6)
+            // 12시간이 지났는데 아직 경기가 안끝났으면 삭제
+            if (matchTime < DateTime.UtcNow.AddHours(-12)
                 && (status != ApiModel.Football.Enums.FixtureStatusType.FT // 종료
                 && status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
                 && status != ApiModel.Football.Enums.FixtureStatusType.PEN)) // 승부차기 후 종료

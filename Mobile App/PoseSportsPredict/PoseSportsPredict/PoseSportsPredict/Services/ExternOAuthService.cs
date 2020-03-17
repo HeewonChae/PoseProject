@@ -1,6 +1,7 @@
 ﻿using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.Service.Auth.Models;
+using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Common;
 using PoseSportsPredict.Utilities.ExternOAuth.Providers;

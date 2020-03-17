@@ -104,7 +104,7 @@
                     <StackLayout Grid.Column="0"
                         Spacing="0"
                         HorizontalOptions="End"
-                        effects:ViewEffect.TouchFeedbackColor="Accent">
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
                             HeightRequest="45"
@@ -146,7 +146,8 @@
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey}"
-                            Text="{Binding League.Name}">
+                            Text="{Binding League.Name}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             HorizontalTextAlignment="Center"
@@ -180,7 +181,8 @@
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey}"
-                            Text="{Binding League.Name}">
+                            Text="{Binding League.Name}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         </materialui:MaterialLabel>
                         <StackLayout
                             Spacing="0"
@@ -218,7 +220,7 @@
                     <StackLayout Grid.Column="2"
                         Spacing="0"
                         HorizontalOptions="Start"
-                        effects:ViewEffect.TouchFeedbackColor="Accent">
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
                             HeightRequest="45"

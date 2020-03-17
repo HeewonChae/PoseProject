@@ -12,7 +12,7 @@ namespace PosePacket.Service.Football.Models.Enums
         _MAX_,
     }
 
-    public enum FootballFixtureStatusType
+    public enum FootballMatchStatusType
     {
         _NONE_,
         TBD, // Time To Be Defined

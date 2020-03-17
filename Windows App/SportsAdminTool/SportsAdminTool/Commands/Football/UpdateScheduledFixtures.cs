@@ -1,5 +1,6 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility;
+using Repository.Mysql.FootballDB.Tables;
 using SportsAdminTool.Logic.Football;
 using System;
 using System.Collections.Generic;
@@ -40,8 +41,8 @@ namespace SportsAdminTool.Commands.Football
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled leagues ({loop}/{api_groupingbyLeague.Count()})");
 
-                    var db_league = Logic.Database.FootballDBFacade.SelectLeagues(where: $"id = {api_groupingFixtures.Key}").FirstOrDefault();
-                    Dev.Assert(db_league != null);
+                    if (!Singleton.Get<CheckValidation>().IsValidLeague((short)api_groupingFixtures.Key, null, null, out League db_league))
+                        continue;
 
                     // Check Already Updated
                     if (db_league.upt_time.Date == DateTime.UtcNow.Date)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PosePacket.Service.Football.Models.Enums;
+using PoseSportsPredict.Utilities;
+using System;
 using System.Globalization;
 using Xamarin.Forms;
 
@@ -10,7 +12,9 @@ namespace PoseSportsPredict.Logics.Common.Converters
         {
             var matchStatus = value.ToString();
 
-            if (matchStatus.Equals("NS"))
+            matchStatus.TryParseEnum(out FootballMatchStatusType statusType);
+
+            if (statusType == FootballMatchStatusType.NS)
                 return false;
 
             return true;

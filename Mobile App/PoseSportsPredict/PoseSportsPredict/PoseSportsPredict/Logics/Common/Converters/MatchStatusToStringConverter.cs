@@ -1,4 +1,6 @@
-﻿using PoseSportsPredict.Resources;
+﻿using PosePacket.Service.Football.Models.Enums;
+using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities;
 using System;
 using System.Globalization;
 using Xamarin.Forms;
@@ -11,11 +13,13 @@ namespace PoseSportsPredict.Logics.Common.Converters
         {
             var matchStatus = value.ToString();
 
-            if (matchStatus.Equals("NS"))
+            matchStatus.TryParseEnum(out FootballMatchStatusType statusType);
+
+            if (statusType == FootballMatchStatusType.NS)
                 return LocalizeString.Match_Not_Start;
-            else if (matchStatus.Equals("FT")
-                || matchStatus.Equals("AET")
-                || matchStatus.Equals("PEN"))
+            else if (statusType == FootballMatchStatusType.FT
+                || statusType == FootballMatchStatusType.AET
+                || statusType == FootballMatchStatusType.PEN)
                 return LocalizeString.Match_Finished;
 
             return LocalizeString.Match_Ongoing;

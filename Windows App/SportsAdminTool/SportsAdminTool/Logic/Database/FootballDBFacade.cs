@@ -283,9 +283,11 @@ namespace SportsAdminTool.Logic.Database
                 // TeamId 컨버트 가능한지..
                 if (standing.TeamId == 0)
                 {
-                    ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, leagueId, standing.TeamName, out short convertedteamId, out string convertedTeamName);
-                    standing.TeamId = convertedteamId;
-                    standing.TeamName = convertedTeamName;
+                    if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, leagueId, standing.TeamName, out short convertedteamId, out string convertedTeamName))
+                    {
+                        standing.TeamId = convertedteamId;
+                        standing.TeamName = convertedTeamName;
+                    }
                 }
 
                 if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)standing.TeamId, standing.TeamName, leagueId, countryName, true))
@@ -358,8 +360,8 @@ namespace SportsAdminTool.Logic.Database
 
                 var fixture = fixtures[i];
 
-                Dev.Assert(fixture.HomeTeam.TeamId != 0);
-                Dev.Assert(fixture.AwayTeam.TeamId != 0);
+                Dev.Assert(fixture.HomeTeam.TeamId != 0, $"fixture.HomeTeam.TeamId is zero FixtureId: {fixture.FixtureId}");
+                Dev.Assert(fixture.AwayTeam.TeamId != 0, $"fixture.AwayTeam.TeamId is zero FixtureId: {fixture.FixtureId}");
 
                 bool isCompleted = false;
                 if (fixture.Status == ApiModel.Football.Enums.FixtureStatusType.FT // 종료

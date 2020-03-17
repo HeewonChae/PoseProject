@@ -62,7 +62,7 @@ namespace SportsWebService.Commands.Football
         private static readonly Converter<FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Output, PacketModels.FixtureDetail> FixtureDetailConverter =
         (input) =>
         {
-            input.MatchStatus.TryParseEnum(out FootballFixtureStatusType statusType);
+            input.MatchStatus.TryParseEnum(out FootballMatchStatusType statusType);
             input.LeagueType.TryParseEnum(out FootballLeagueType leagueType);
 
             var output = new PacketModels.FixtureDetail

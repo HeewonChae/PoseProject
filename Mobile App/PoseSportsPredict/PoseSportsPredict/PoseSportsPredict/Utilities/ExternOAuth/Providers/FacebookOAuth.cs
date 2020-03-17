@@ -1,4 +1,5 @@
 ﻿using PosePacket.Service.Auth.Models;
+using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using Shiny;
 using System;

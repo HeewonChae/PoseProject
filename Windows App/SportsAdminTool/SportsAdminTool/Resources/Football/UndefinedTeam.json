@@ -71,6 +71,30 @@
       "CountryName": "Romania",
       "ConvertTeamId": 2589,
       "ConvertTeamName": "Uta Arad"
+    },
+    {
+      "Index": 11,
+      "LeagueId": 785,
+      "TeamName": "Municipal Jalapa",
+      "CountryName": "Nicaragua",
+      "ConvertTeamId": 10160,
+      "ConvertTeamName": "Jalapa"
+    },
+    {
+      "Index": 12,
+      "LeagueId": 777,
+      "TeamName": "Municipal Garabito",
+      "CountryName": "Costa-Rica",
+      "ConvertTeamId": 2049,
+      "ConvertTeamName": "AS Puma Generalena"
+    },
+    {
+      "Index": 13,
+      "LeagueId": 777,
+      "TeamName": "Cartagena",
+      "CountryName": "Costa-Rica",
+      "ConvertTeamId": 2046,
+      "ConvertTeamName": "Deportivo Cartagena"
     }
   ]
 }
