@@ -25,7 +25,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private async void SelectMatch(PacketModels.FixtureDetail matchInfo)
         {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
             await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
+
+            SetIsBusy(false);
         }
 
         #endregion Commands

@@ -51,7 +51,7 @@ namespace SportsWebService.Commands.Auth
                 P_INSERT_USER_BASE.SetInput(new PoseGlobalDB.Procedures.P_INSERT_USER_BASE.Input
                 {
                     PlatformId = externAuthUser.Id,
-                    PlatformType = (short)externAuthUser.SNSProvider,
+                    PlatformType = externAuthUser.SNSProvider.ToString(),
                     RoleType = (int)ServiceRoleType.User,
                     InsertTime = DateTime.UtcNow,
                 });

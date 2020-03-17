@@ -1,1 +1,15 @@
-[{"ErrorCode":201001001,"Description":"Invalid name value"},{"ErrorCode":203001001,"Description":"Invalid input"},{"ErrorCode":302002001,"Description":"Failed db error"},{"ErrorCode":202001001,"Description":"Invalid input value"},{"ErrorCode":202001002,"Description":"Invalid access token"},{"ErrorCode":202001003,"Description":"Failed OAuth"},{"ErrorCode":301001001,"Description":"Failed save database"},{"ErrorCode":202002001,"Description":"Invalid input value"},{"ErrorCode":202002002,"Description":"Invalid platform Id"},{"ErrorCode":301002001,"Description":"Failed user login"},{"ErrorCode":202003001,"Description":"Invalid credentials"},{"ErrorCode":102000001,"Description":"Don't have permission to use the service"},{"ErrorCode":101000001,"Description":"Not authenticated credentials"}]
+{
+  "201001001": "Invalid name value",
+  "203001001": "Invalid input",
+  "302002001": "Failed db error",
+  "202001001": "Invalid input value",
+  "202001002": "Invalid access token",
+  "202001003": "Failed OAuth",
+  "301001001": "Failed save database",
+  "202002001": "Invalid input value",
+  "202002002": "Invalid platform Id",
+  "301002001": "Failed user login",
+  "202003001": "Invalid credentials",
+  "102000001": "Don't have permission to use the service",
+  "101000001": "Not authenticated credentials"
+}

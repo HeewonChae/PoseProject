@@ -52,14 +52,11 @@ namespace LogicCore.Utility
 
         private readonly MinHeap<long, Reservation> _reservations = new MinHeap<long, Reservation>();
         private readonly LightPool<Reservation> _reservationPool = new LightPool<Reservation>(() => new Reservation());
-        private readonly object _blocker = new object();
 
         public Reservation Set(long time, OnTime onTime, OnCancel onCancel = null,
             Reservation.IHandle handler = null, IAlarmPayload payload = null)
         {
             Dev.Assert(onTime != null, "Cannot set timer with null onTime delegate");
-
-            Monitor.Enter(_blocker);
 
             if (handler?.Reservation != null)
                 return null;
@@ -79,15 +76,11 @@ namespace LogicCore.Utility
 
             _reservations.Add(reservation.Time, reservation);
 
-            Monitor.Exit(_blocker);
-
             return reservation;
         }
 
         public void Cancel(ref Reservation reservation)
         {
-            Monitor.Enter(_blocker);
-
             if (reservation == null || reservation.IsCalled)
                 return;
 
@@ -98,16 +91,12 @@ namespace LogicCore.Utility
                 reservation.Handler = null;
                 reservation = null;
             }
-
-            Monitor.Exit(_blocker);
         }
 
         public void Update(long time)
         {
             if (_reservations.Count <= 0)
                 return;
-
-            Monitor.Enter(_blocker);
 
             var pair = _reservations.PeekFirst();
             while (pair.Key <= time)
@@ -131,8 +120,6 @@ namespace LogicCore.Utility
 
                 pair = _reservations.PeekFirst();
             }
-
-            Monitor.Exit(_blocker);
         }
     }
 }

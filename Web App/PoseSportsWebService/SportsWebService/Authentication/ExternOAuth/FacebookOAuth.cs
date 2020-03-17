@@ -1,5 +1,5 @@
-﻿using PosePacket.Service.Auth;
-using PosePacket.Service.Auth.Models;
+﻿using PosePacket.Service.Auth.Models;
+using PosePacket.Service.Auth.Models.Enums;
 using System;
 using System.Configuration;
 using System.Threading.Tasks;

@@ -6,9 +6,6 @@ namespace SportsWebService.App_Config
 {
     public sealed class ErrorCodeDescription : IRecord
     {
-        public int ErrorCode;
-        public string Description;
-
         public static Dictionary<int, string> Errors = new Dictionary<int, string>();
 
         public static string GetErrorDesc(int errorCode)

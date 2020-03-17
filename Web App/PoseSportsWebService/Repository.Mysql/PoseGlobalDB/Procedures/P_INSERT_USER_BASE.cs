@@ -13,7 +13,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
         public struct Input
         {
             public string PlatformId { get; set; }
-            public short PlatformType { get; set; }
+            public string PlatformType { get; set; }
             public int RoleType { get; set; }
             public DateTime InsertTime { get; set; }
         }

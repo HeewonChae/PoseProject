@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosePacket.Service.Auth.Models.Enums;
+using System;
 
 namespace PosePacket.Service.Auth.Models
 {

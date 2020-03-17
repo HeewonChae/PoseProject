@@ -1,6 +1,7 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility;
 using RapidAPI;
+using RapidAPI.Models.Football.Enums;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,182 +14,206 @@ using AppModel = SportsAdminTool.Model;
 
 namespace SportsAdminTool.Logic.WebAPI
 {
-	public class FootballWebAPI :Singleton.INode
-	{
-		private readonly FootballAPI _api = null;
-		public FootballWebAPI()
-		{
-			string football_url = ConfigurationManager.AppSettings["football_api_url"];
-			string football_host = ConfigurationManager.AppSettings["football_api_host"];
-			string football_key = ConfigurationManager.AppSettings["football_api_key"];
+    public class FootballWebAPI : Singleton.INode
+    {
+        private readonly FootballAPI _api = null;
 
-			_api = new FootballAPI();
-			_api.Init(football_url, football_host, football_key);
-		}
+        public FootballWebAPI()
+        {
+            string football_url = ConfigurationManager.AppSettings["football_api_url"];
+            string football_host = ConfigurationManager.AppSettings["football_api_host"];
+            string football_key = ConfigurationManager.AppSettings["football_api_key"];
 
-		#region Country
-		public IList<AppModel.Football.Country> GetAllCountries()
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetAllCountries");
+            _api = new FootballAPI();
+            _api.Init(football_url, football_host, football_key);
+        }
 
-			_api.RequestEx(_api.FootballAllCountries, out IList<AppModel.Football.Country> countries);
+        #region Country
 
-			Dev.DebugString($"Country Count: {countries.Count}");
+        public IList<AppModel.Football.Country> GetAllCountries()
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetAllCountries");
 
-			return countries;
-		}
-		#endregion
+            _api.RequestEx(_api.FootballAllCountries, out IList<AppModel.Football.Country> countries);
 
-		#region League
-		public IList<AppModel.Football.League> GetAllAvailableLeauges()
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetAllAvailableLeauges");
+            Dev.DebugString($"Country Count: {countries.Count}");
 
-			_api.RequestEx(_api.FootballAllAvailableLeauges, out IList<AppModel.Football.League> leagues);
+            return countries;
+        }
 
-			Dev.DebugString($"League Count: {leagues.Count}");
+        #endregion Country
 
-			return leagues;
-		}
+        #region League
 
-		public AppModel.Football.League GetLeagueByLeagueID(short LeaugeID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetLeagueByLeagueID");
+        public IList<AppModel.Football.League> GetAllAvailableLeauges()
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetAllAvailableLeauges");
 
-			_api.RequestEx(_api.FootballLeagueByLeagueID, (int)LeaugeID,out IList<AppModel.Football.League> leagues);
+            _api.RequestEx(_api.FootballAllAvailableLeauges, out IList<AppModel.Football.League> leagues);
 
-			Dev.DebugString($"League Count: {leagues.Count}");
+            Dev.DebugString($"League Count: {leagues.Count}");
 
-			return leagues.FirstOrDefault();
-		}
-		#endregion
+            return leagues;
+        }
 
-		#region Team
-		public IList<AppModel.Football.Team> GetAllTeamsByCountryName(string countryName)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetAllTeamsByCountryName");
+        public AppModel.Football.League GetLeagueByLeagueId(short LeaugeId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetLeagueByLeagueId");
 
-			_api.RequestEx(_api.FootballTeamsByCountryName, countryName, out IList<AppModel.Football.Team> teams);
+            _api.RequestEx(_api.FootballLeagueByLeagueId, (int)LeaugeId, out IList<AppModel.Football.League> leagues);
 
-			Dev.DebugString($"Teams Count: {teams.Count}");
+            Dev.DebugString($"League Count: {leagues.Count}");
 
-			return teams;
-		}
+            return leagues.FirstOrDefault();
+        }
 
-		public IList<AppModel.Football.Team> GetAllTeamsByLeagueID(short leagueID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetAllTeamsByLeagueID");
+        #endregion League
 
-			_api.RequestEx(_api.FootballTeamsByLeagueID, (int)leagueID, out IList<AppModel.Football.Team> teams);
+        #region Team
 
-			Dev.DebugString($"Teams Count: {teams.Count}");
+        public IList<AppModel.Football.Team> GetAllTeamsByCountryName(string countryName)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetAllTeamsByCountryName");
 
-			return teams;
-		}
+            _api.RequestEx(_api.FootballTeamsByCountryName, countryName, out IList<AppModel.Football.Team> teams);
 
-		public AppModel.Football.Team GetTeamByTeamID(short teamID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetTeamByTeamID");
+            Dev.DebugString($"Teams Count: {teams.Count}");
 
-			_api.RequestEx(_api.FootballTeamsByTeamID, (int)teamID, out IList<AppModel.Football.Team> teams);
+            return teams;
+        }
 
-			Dev.DebugString($"Teams Count: {teams.Count}");
+        public IList<AppModel.Football.Team> GetAllTeamsByLeagueId(short leagueId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetAllTeamsByLeagueId");
 
-			return teams.FirstOrDefault();
-		}
-		#endregion
+            _api.RequestEx(_api.FootballTeamsByLeagueId, (int)leagueId, out IList<AppModel.Football.Team> teams);
 
-		#region Standings
-		public IList<AppModel.Football.Standing> GetStandingsByLeagueID(short leagueID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetStandingsByLeagueID");
+            Dev.DebugString($"Teams Count: {teams.Count}");
 
-			_api.RequestEx(_api.StandingsByLeagueID, (int)leagueID, out IList<AppModel.Football.Standing> standings);
+            return teams;
+        }
 
-			Dev.DebugString($"Standing Teams Count: {standings.Count}");
+        public AppModel.Football.Team GetTeamByTeamId(short teamId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetTeamByTeamId");
 
-			return standings;
-		}
-		#endregion
+            _api.RequestEx(_api.FootballTeamsByTeamId, (int)teamId, out IList<AppModel.Football.Team> teams);
 
-		#region Fixture
-		public IList<AppModel.Football.Fixture> GetFixturesByDate(params DateTime[] dates)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetFixturesByDate");
+            Dev.DebugString($"Teams Count: {teams.Count}");
 
-			var fixtureList = new List<AppModel.Football.Fixture>();
-			foreach(var date in dates)
-			{
-				_api.RequestEx(_api.FootballFixturesByDate, date, out IList<AppModel.Football.Fixture> fixtures);
-				fixtureList.AddRange(fixtures);
-			}
+            return teams.FirstOrDefault();
+        }
 
-			Dev.DebugString($"Fixtures Count: {fixtureList.Count}");
+        #endregion Team
 
-			return fixtureList;
-		}
+        #region Standings
 
-		public IList<AppModel.Football.Fixture> GetLastFixturesByTeamID(short teamID, int count)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetLastFixturesByTeamID");
+        public IList<AppModel.Football.Standing> GetStandingsByLeagueId(short leagueId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetStandingsByLeagueId");
 
-			_api.RequestEx(_api.FootballLastFixturesByTeamID, (int)teamID, count, out IList <AppModel.Football.Fixture> fixtures);
+            _api.RequestEx(_api.StandingsByLeagueId, (int)leagueId, out IList<AppModel.Football.Standing> standings);
 
-			Dev.DebugString($"Fixtures Count: {fixtures.Count}");
+            Dev.DebugString($"Standing Teams Count: {standings.Count}");
 
-			return fixtures;
-		}
+            return standings;
+        }
 
-		public IList<AppModel.Football.Fixture> GetH2HFixtures(short teamID1, short teamID2)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetH2HFixtures");
+        #endregion Standings
 
-			_api.RequestEx(_api.FootballH2HFixtureByTeamID, (int)teamID1, (int)teamID2, out IList<AppModel.Football.Fixture> fixtures);
+        #region Fixture
 
-			Dev.DebugString($"Fixtures Count: {fixtures.Count}");
+        public IList<AppModel.Football.Fixture> GetFixturesByDate(params DateTime[] dates)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetFixturesByDate");
 
-			return fixtures;
-		}
+            var fixtureList = new List<AppModel.Football.Fixture>();
+            foreach (var date in dates)
+            {
+                _api.RequestEx(_api.FootballFixturesByDate, date, out IList<AppModel.Football.Fixture> fixtures);
+                fixtureList.AddRange(fixtures);
+            }
 
-		public AppModel.Football.Fixture GetFixturesByFixtureID(int fixtureID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetFixturesByFixtureID");
+            Dev.DebugString($"Fixtures Count: {fixtureList.Count}");
 
-			_api.RequestEx(_api.FootballFixturesByID, fixtureID, out AppModel.Football.Fixture fixtures);
+            return fixtureList;
+        }
 
-			bool isExistData = fixtures != null;
-			Dev.DebugString($"Fixtures Exist: {isExistData}");
+        public IList<AppModel.Football.Fixture> GetLastFixturesByTeamId(short teamId, int count)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetLastFixturesByTeamId");
 
-			return fixtures;
-		}
-		#endregion
+            _api.RequestEx(_api.FootballLastFixturesByTeamId, (int)teamId, count, out IList<AppModel.Football.Fixture> fixtures);
 
-		#region Fixture Statistics
-		public AppModel.Football.FixtureStatistic GetFixtureStatisticByFixtureID(int fixtureID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetFixtureStatisticByFixtureID");
+            Dev.DebugString($"Fixtures Count: {fixtures.Count}");
 
-			_api.RequestEx(_api.FootballFixtureStatisticByFixtureID, fixtureID, out AppModel.Football.FixtureStatistic fixtureStatistic);
+            return fixtures;
+        }
 
-			bool isExistData = fixtureStatistic != null;
-			Dev.DebugString($"Is exist fixture statistic : {isExistData}");
+        public IList<AppModel.Football.Fixture> GetH2HFixtures(short teamId1, short teamId2)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetH2HFixtures");
 
-			return fixtureStatistic;
-		}
-		#endregion
+            _api.RequestEx(_api.FootballH2HFixtureByTeamId, (int)teamId1, (int)teamId2, out IList<AppModel.Football.Fixture> fixtures);
 
-		#region Odds
-		public AppModel.Football.Odds GetOddsByFixtureID(int fixtureID)
-		{
-			Dev.DebugString("Call API - FootballWebAPI.GetFixtureStatisticByFixtureID");
+            Dev.DebugString($"Fixtures Count: {fixtures.Count}");
 
-			_api.RequestEx(_api.OddsByFixtureID, fixtureID, out AppModel.Football.Odds Odds);
+            return fixtures;
+        }
 
-			bool isExistData = Odds != null;
-			Dev.DebugString($"Is exist odds : {isExistData}");
+        public AppModel.Football.Fixture GetFixturesByFixtureId(int fixtureId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetFixturesByFixtureId");
 
-			return Odds;
-		}
-		#endregion
-	}
+            _api.RequestEx(_api.FootballFixturesById, fixtureId, out AppModel.Football.Fixture fixture);
+
+            Dev.DebugString($"Fixtures Exist: {fixture != null}");
+
+            return fixture;
+        }
+
+        public IList<AppModel.Football.Fixture> GetFixturesByLeagueId(short leagueId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetFixturesByLeagueId");
+
+            _api.RequestEx(_api.FootballFixturesByLeagueId, (int)leagueId, out IList<AppModel.Football.Fixture> fixtures);
+
+            Dev.DebugString($"Fixtures Count: {fixtures.Count}");
+
+            return fixtures;
+        }
+
+        #endregion Fixture
+
+        #region Fixture Statistics
+
+        public AppModel.Football.FixtureStatistic GetFixtureStatisticByFixtureId(int fixtureId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetFixtureStatisticByFixtureId");
+
+            _api.RequestEx(_api.FootballFixtureStatisticByFixtureId, fixtureId, out AppModel.Football.FixtureStatistic fixtureStatistic);
+
+            bool isExistData = fixtureStatistic != null;
+            Dev.DebugString($"Is exist fixture statistic : {isExistData}");
+
+            return fixtureStatistic;
+        }
+
+        #endregion Fixture Statistics
+
+        #region Odds
+
+        public AppModel.Football.Odds GetOddsByFixtureId(int fixtureId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetOddsByFixtureId");
+
+            _api.RequestEx(_api.OddsByFixtureId, fixtureId, out AppModel.Football.Odds Odds);
+
+            Dev.DebugString($"Is exist odds : {Odds != null}");
+
+            return Odds;
+        }
+
+        #endregion Odds
+    }
 }

@@ -8,7 +8,7 @@ namespace SportsAdminTool.Model.Football
 {
 	public class Team
 	{
-		public int ID { get; set; }
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public string CountryName { get; set; }
 		public string Logo { get; set; }

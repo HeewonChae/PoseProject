@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using LogicCore.Debug;
 using LogicCore.Thread;
+using LogicCore.Utility.ThirdPartyLog;
 using Repository.Mysql;
 using System;
 using System.Collections.Generic;
@@ -10,86 +11,84 @@ using System.Threading.Tasks;
 
 namespace Repository.Request
 {
-	/// <summary>
-	/// 사용후 Dispose 해줄것
-	/// </summary>
-	/// <typeparam name="Tout"></typeparam>
-	public abstract class Query<T_in, T_out> : IDisposable
-	{
-		protected T_in _input;
-		protected T_out _output;
+    /// <summary>
+    /// 사용후 Dispose 해줄것
+    /// </summary>
+    /// <typeparam name="Tout"></typeparam>
+    public abstract class Query<T_in, T_out> : IDisposable
+    {
+        protected T_in _input;
+        protected T_out _output;
 
-		public Query()
-		{
-			OnAlloc();
-		}
+        public Query()
+        {
+            OnAlloc();
+        }
 
-		public abstract void OnAlloc();
+        public abstract void OnAlloc();
 
-		public virtual void OnFree()
-		{
-			_input = default;
-			_output = default;
-		}
+        public virtual void OnFree()
+        {
+            _input = default;
+            _output = default;
+        }
 
-		public virtual void SetInput(T_in input) => _input = input;
+        public virtual void SetInput(T_in input) => _input = input;
 
-		public abstract T_out OnQuery();
+        public abstract T_out OnQuery();
 
-		public Task<T_out> OnQueryAsync()
-		{
-			return AsyncHelper.Async(OnQuery);
-		}
+        public Task<T_out> OnQueryAsync()
+        {
+            return AsyncHelper.Async(OnQuery);
+        }
 
-		public void Dispose()
-		{
-			OnFree();
-		}
-	}
+        public void Dispose()
+        {
+            OnFree();
+        }
+    }
 
-	public abstract class MysqlQuery<T_in, T_out> : Query<T_in, T_out>
-	{
-		public DynamicParameters Parmeters { get; private set; }
-		public EntityStatus EntityStatus { get; private set; }
+    public abstract class MysqlQuery<T_in, T_out> : Query<T_in, T_out>
+    {
+        public DynamicParameters Parmeters { get; private set; }
+        public EntityStatus EntityStatus { get; private set; }
 
-		public override void OnAlloc()
-		{
-			Parmeters = new DynamicParameters();
+        public override void OnAlloc()
+        {
+            Parmeters = new DynamicParameters();
 
-			Dev.Assert(EntityStatus == null);
-		}
+            Dev.Assert(EntityStatus == null);
+        }
 
-		public override void OnFree()
-		{
-			base.OnFree();
+        public override void OnFree()
+        {
+            base.OnFree();
 
-			Parmeters = null;
-			EntityStatus = null;
-		}
+            Parmeters = null;
+            EntityStatus = null;
+        }
 
-		public override void SetInput(T_in input)
-		{
-			base.SetInput(input);
+        public override void SetInput(T_in input)
+        {
+            base.SetInput(input);
 
-			BindParameters();
-		}
+            BindParameters();
+        }
 
-		public abstract void BindParameters();
+        public abstract void BindParameters();
 
-		public virtual void OnError(EntityStatus entityStatus)
-		{
-			EntityStatus = entityStatus;
+        public virtual void OnError(EntityStatus entityStatus)
+        {
+            EntityStatus = entityStatus;
 
-			// TODO: Write log
+            foreach (var error in entityStatus.Errors)
+            {
+                Log4Net.WriteLog($"Error: {error.ErrorMessage} - Member: {error.MemberNames}", Log4Net.Level.ERROR);
+            }
+        }
+    }
 
-			foreach (var error in entityStatus.Errors)
-			{
-				Dev.DebugString($"Error: {error.ErrorMessage} - Member: {error.MemberNames}", ConsoleColor.Red);
-			}
-		}
-	}
-
-	public abstract class RedisQuery<T_in, T_out> : Query<T_in, T_out>
-	{
-	}
+    public abstract class RedisQuery<T_in, T_out> : Query<T_in, T_out>
+    {
+    }
 }

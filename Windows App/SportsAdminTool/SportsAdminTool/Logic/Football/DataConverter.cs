@@ -11,19 +11,19 @@ namespace SportsAdminTool.Logic.Football
 {
     public static class DataConverter
     {
-        public static bool CovertAppModelToDbModel(int fixtureID, short homeTeamID, short awayTeamID, AppModel.Football.FixtureStatistic appModel, out FootballDB.Tables.FixtureStatistic[] dbModel)
+        public static bool CovertApiModelToDbModel(int fixtureId, short homeTeamId, short awayTeamId, AppModel.Football.FixtureStatistic appModel, out FootballDB.Tables.FixtureStatistics[] dbModel)
         {
-            dbModel = new FootballDB.Tables.FixtureStatistic[2]
+            dbModel = new FootballDB.Tables.FixtureStatistics[2]
                 {
-                    new FootballDB.Tables.FixtureStatistic(),
-                    new FootballDB.Tables.FixtureStatistic()
+                    new FootballDB.Tables.FixtureStatistics(),
+                    new FootballDB.Tables.FixtureStatistics()
                 };
 
-            dbModel[0].fixture_id = fixtureID;
-            dbModel[1].fixture_id = fixtureID;
+            dbModel[0].fixture_id = fixtureId;
+            dbModel[1].fixture_id = fixtureId;
 
-            dbModel[0].team_id = homeTeamID;
-            dbModel[1].team_id = awayTeamID;
+            dbModel[0].team_id = homeTeamId;
+            dbModel[1].team_id = awayTeamId;
 
             dbModel[0].shots_total = string.IsNullOrEmpty(appModel.TotalShorts?.Home) ? (short)0 : short.Parse(appModel.TotalShorts?.Home);
             dbModel[1].shots_total = string.IsNullOrEmpty(appModel.TotalShorts?.Away) ? (short)0 : short.Parse(appModel.TotalShorts?.Away);

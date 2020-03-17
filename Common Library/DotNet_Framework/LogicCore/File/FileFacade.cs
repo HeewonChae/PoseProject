@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicCore.Utility.ThirdPartyLog;
+using System;
 using System.IO;
 using System.Text;
 
@@ -30,6 +31,8 @@ namespace LogicCore.File
             Directory.CreateDirectory(filePath);
 
             System.IO.File.AppendAllText($"{filePath}\\{fileNameWithFormat}", contents, Encoding.UTF8);
+
+            Log4Net.WriteLog($"MakeSimpleTextFile path: {filePath}, fileName: {fileNameWithFormat}", Log4Net.Level.INFO);
         }
 
         public static string ReadAllText(string filePath)

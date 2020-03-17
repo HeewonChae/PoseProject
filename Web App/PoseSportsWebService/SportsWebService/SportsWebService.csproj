@@ -226,7 +226,7 @@
     <Compile Include="Services\Contract\IFootball.cs" />
     <Compile Include="Utilities\CryptoFacade.cs" />
     <Compile Include="Utilities\ErrorHandler.cs" />
-    <Compile Include="Utilities\TableLoader.cs" />
+    <Compile Include="Logics\TableLoader.cs" />
     <Compile Include="Infrastructure\WebModelTypeAttribute.cs" />
     <Compile Include="WebBehavior\Common\HeaderProcess\HeaderMessageBahavior.cs" />
     <Compile Include="WebBehavior\Common\HeaderProcess\HeaderMessageBehaviorSection.cs" />
@@ -266,7 +266,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ErrorCodeDescription.json" />
+    <Content Include="App_Data\ErrorCodeDescription.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </Content>
@@ -279,7 +281,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Logics\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,4 @@
-﻿namespace PosePacket.Service.Auth.Models
+﻿namespace PosePacket.Service.Auth.Models.Enums
 {
     public enum SNSProviderType
     {

@@ -1,9 +1,11 @@
 ﻿using GameKernel;
 using LogicCore.Debug;
 using LogicCore.Utility;
+using LogicCore.Utility.ThirdPartyLog;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace LogicCore.File
 {
@@ -245,9 +247,11 @@ namespace LogicCore.File
                 return;
 
             foreach (var msg in _loadingErrorMessages)
-                Dev.DebugString(msg, ConsoleColor.Red);
+                Log4Net.WriteLog(msg, Log4Net.Level.FATAL);
 
             _loadingErrorMessages.Clear();
+
+            Dev.Assert(false, "Json Perser - PrintErrorMessage");
         }
 
         #endregion Utility

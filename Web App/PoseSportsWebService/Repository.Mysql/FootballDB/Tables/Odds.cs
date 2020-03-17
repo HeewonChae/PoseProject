@@ -18,18 +18,20 @@ namespace Repository.Mysql.FootballDB.Tables
         public long seq { get; set; }
 
         [Required]
-        [Column(TypeName = "INT")]
         [Index("IDX_FIXTURE_LABEL", Order = 1, IsUnique = false)]
+        [Column(TypeName = "INT")]
         public int fixture_id { get; set; }
 
         [Required]
-        [Column(TypeName = "MEDIUMINT")]
-        public short bookmaker_id { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(32)]
+        public string bookmaker_type { get; set; }
 
         [Required]
-        [Column(TypeName = "MEDIUMINT")]
         [Index("IDX_FIXTURE_LABEL", Order = 2, IsUnique = false)]
-        public short label_id { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(32)]
+        public string label_type { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]

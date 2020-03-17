@@ -1,5 +1,7 @@
-﻿using PosePacket;
+﻿using LogicCore.Converter;
+using PosePacket;
 using PosePacket.Service.Football;
+using PosePacket.Service.Football.Models.Enums;
 using SportsWebService.Infrastructure;
 using SportsWebService.Utilities;
 using System;
@@ -35,7 +37,7 @@ namespace SportsWebService.Commands.Football
             {
                 P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Input
                 {
-                    WHERE = $"f.{nameof(FootballDB.Tables.Fixture.event_date)} BETWEEN \"{input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{input.EndTime.ToString("yyyyMMddTHHmmss")}\"",
+                    WHERE = $"f.{nameof(FootballDB.Tables.Fixture.match_time)} BETWEEN \"{input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{input.EndTime.ToString("yyyyMMddTHHmmss")}\"",
                 });
 
                 db_output = P_SELECT_FIXTURES_BY_DATE.OnQuery();
@@ -60,6 +62,9 @@ namespace SportsWebService.Commands.Football
         private static readonly Converter<FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Output, PacketModels.FixtureDetail> FixtureDetailConverter =
         (input) =>
         {
+            input.MatchStatus.TryParseEnum(out FootballFixtureStatusType statusType);
+            input.LeagueType.TryParseEnum(out FootballLeagueType leagueType);
+
             var output = new PacketModels.FixtureDetail
             {
                 Country = new PacketModels.FixtureDetail.DataInfo
@@ -85,8 +90,9 @@ namespace SportsWebService.Commands.Football
                     Score = input.AwayTeamScore
                 },
                 FixtureId = input.FixtureId,
-                MatchStatus = input.MatchStatus,
+                MatchStatus = statusType,
                 MatchTime = input.MatchTime,
+                LeagueType = leagueType,
             };
 
             return output;

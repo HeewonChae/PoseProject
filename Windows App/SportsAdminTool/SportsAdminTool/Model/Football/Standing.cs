@@ -19,7 +19,7 @@ namespace SportsAdminTool.Model.Football
 		}
 
 		public int Rank { get; set; }
-		public int TeamID { get; set; }
+		public int TeamId { get; set; }
 		public string TeamName { get; set; }
 		public string Logo { get; set; }
 		public string Group { get; set; }

@@ -13,431 +13,99 @@ using AppModel = SportsAdminTool.Model;
 using ApiModel = RapidAPI.Models;
 using System.Windows.Controls;
 using SportsAdminTool.Model.Resource.Football;
+using LogicCore.Debug;
 
 namespace SportsAdminTool.Logic.Football
 {
     public static class LogicFacade
     {
-        /// <summary>
-        /// Update country, league, team
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<bool> InitializeFootballDB(CancellationToken cancellationToken)
+        public static void UpdateLeagueAllFixtures(short leagueId)
         {
-            return Task.Run(() =>
-            {
-                var mainWindow = Singleton.Get<MainWindow>();
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                // Update country
-                {
-                    mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update countries");
-                    var api_countries = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllCountries();
-                    Database.FootballDBFacade.UpdateCountry(api_countries.ToArray());
-                }
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                // Update league
-                {
-                    mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update leagues");
-                    var api_leagues = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllAvailableLeauges();
-                    Database.FootballDBFacade.UpdateLeague(api_leagues.ToArray());
-                    Database.FootballDBFacade.UpdateCoverage(api_leagues.ToArray());
-                }
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                // Update team
-                {
-                    mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update teams");
-                    var onGoingLeauges = Database.FootballDBFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
-                    {
-                        Where = "is_current = 1",
-                    });
-
-                    var leagueCnt = onGoingLeauges.Count();
-                    int loop = 0;
-                    foreach (var league in onGoingLeauges)
-                    {
-                        loop++;
-                        mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, $"Update Teams ({loop}/{leagueCnt})");
-
-                        if (cancellationToken.IsCancellationRequested)
-                            return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                        var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueID(league.id);
-                        Database.FootballDBFacade.UpdateTeam(league.id, api_teams.ToArray());
-                    }
-                }
-
-                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-            });
-        }
-
-        /// <summary>
-        /// update scheduled fixture, odds, standings
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<bool> UpdateScheduledFixtures(CancellationToken cancellationToken)
-        {
-            return Task.Run(() =>
-            {
-                var mainWindow = Singleton.Get<MainWindow>();
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                // Update scheduled fixtrues
-                {
-                    mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update scheduled fixtrues");
-
-                    // Call API
-                    var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByDate(DateTime.UtcNow, DateTime.UtcNow.AddDays(1));
-
-                    // 취소, 연기된 경기 필터링
-                    var api_filteredFixture = api_fixtures.Where(elem =>
-                         Singleton.Get<CheckValidation>().IsValidLeague((short)elem.LeagueID, elem.League.Name, elem.League.Country, true)
-                         && Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
-
-                    // 예측할때 사용할 데이터들 수집
-                    int fixtureCnt = api_filteredFixture.Count();
-                    int loop = 0;
-                    foreach (var api_fixture in api_filteredFixture)
-                    {
-                        loop++;
-                        mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled fixtrues ({loop}/{fixtureCnt})");
-
-                        if (cancellationToken.IsCancellationRequested)
-                            return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                        // Check exist in db
-                        if (Database.FootballDBFacade.IsExistFixture(api_fixture.FixtureID))
-                            continue;
-
-                        // Updte home & away last fixtrues, H2H (컵 경기 포함)
-                        var api_homeLastFixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetLastFixturesByTeamID((short)api_fixture.HomeTeam.TeamID, 10);
-                        var filtered_homeLastFixture = api_homeLastFixtures.Where(elem => elem.FixtureID != api_fixture.FixtureID
-                                                    && Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
-
-                        var api_awayLastFixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetLastFixturesByTeamID((short)api_fixture.AwayTeam.TeamID, 10);
-                        var filtered_awayLastFixture = api_awayLastFixtures.Where(elem => elem.FixtureID != api_fixture.FixtureID
-                                                    && Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
-
-                        var api_h2h = Singleton.Get<ApiLogic.FootballWebAPI>().GetH2HFixtures((short)api_fixture.HomeTeam.TeamID, (short)api_fixture.AwayTeam.TeamID);
-                        var filtered_h2h = api_h2h.Where(elem => elem.EventDate < DateTime.Now.Date
-                                            && elem.EventDate > new DateTime(DateTime.Now.AddYears(-3).Year, 1, 1)
-                                            && elem.FixtureID != api_fixture.FixtureID
-                                            && Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
-
-                        // Merge api fixtures
-                        var api_allFixtures = new HashSet<AppModel.Football.Fixture>(new Comparer.AppFootballFixtureComparer());
-                        api_allFixtures.UnionWith(filtered_homeLastFixture);
-                        api_allFixtures.UnionWith(filtered_awayLastFixture);
-                        api_allFixtures.UnionWith(filtered_h2h);
-
-                        // Update last fixture, fixture statistic
-                        int lastFixturesCnt = api_allFixtures.Count();
-                        int innerLoop = 0;
-                        bool isLastFixturesUpdateSuccess = true;
-                        foreach (var api_lastFixture in api_allFixtures)
-                        {
-                            if (cancellationToken.IsCancellationRequested)
-                                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                            innerLoop++;
-                            mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update last fixtrues ({innerLoop}/{lastFixturesCnt})");
-
-                            // Check exist in db
-                            if (Database.FootballDBFacade.IsExistFixture(api_lastFixture.FixtureID))
-                                continue;
-
-                            var api_fixtureStatistic = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixtureStatisticByFixtureID(api_lastFixture.FixtureID);
-                            if (api_fixtureStatistic != null)
-                            {
-                                // Convert data for db model
-                                DataConverter.CovertAppModelToDbModel(api_lastFixture.FixtureID, (short)api_lastFixture.HomeTeam.TeamID, (short)api_lastFixture.AwayTeam.TeamID, api_fixtureStatistic,
-                                    out FootballDB.Tables.FixtureStatistic[] coverted_fixtureStatistics);
-
-                                Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
-                            }
-
-                            // Call DB
-                            isLastFixturesUpdateSuccess = isLastFixturesUpdateSuccess && Database.FootballDBFacade.UpdateFixture(true, true, api_lastFixture) > 0;
-                        }
-
-                        // Update standing
-                        // grouping by leagueID
-                        var api_groupingLastFixturesByLeague = api_allFixtures.GroupBy(elem => elem.LeagueID);
-                        int groupintCnt = api_groupingLastFixturesByLeague.Count();
-                        innerLoop = 0;
-                        bool isStandingsUpdateSuccess = true;
-                        foreach (var api_groupingLastFixtures in api_groupingLastFixturesByLeague)
-                        {
-                            if (cancellationToken.IsCancellationRequested)
-                                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                            innerLoop++;
-                            mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update last league standings ({innerLoop}/{groupintCnt})");
-
-                            var tempFirstFixture = api_groupingLastFixtures.First();
-
-                            isStandingsUpdateSuccess = isStandingsUpdateSuccess && UpdateStandings((short)tempFirstFixture.LeagueID, tempFirstFixture.League.Name, tempFirstFixture.League.Country);
-                        }
-
-                        if (!isStandingsUpdateSuccess || !isLastFixturesUpdateSuccess)
-                            continue;
-
-                        // Call DB
-                        Database.FootballDBFacade.UpdateFixture(false, false, api_fixture);
-                    }
-                }
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                // Update standings
-                bool standingsUpdateSuccess = true;
-                {
-                    mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update standings");
-
-                    // Call DB
-                    var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
-                    {
-                        Where = $"is_predicted = 0",
-                    });
-
-                    // grouping by league_id
-                    var db_groupingFixtures = db_fixtures.GroupBy(elem => elem.league_id);
-
-                    int groupCnt = db_groupingFixtures.Count();
-                    int loop = 0;
-                    foreach (var db_groupingFixture in db_groupingFixtures)
-                    {
-                        loop++;
-                        mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update Standings ({loop}/{groupCnt})");
-
-                        var db_leauge = Database.FootballDBFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
-                        {
-                            Where = $"id = {db_groupingFixture.Key}",
-                        }).FirstOrDefault();
-
-                        standingsUpdateSuccess = UpdateStandings(db_groupingFixture.Key, db_leauge.name, db_leauge.country_name);
-                    }
-                }
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB) && standingsUpdateSuccess;
-
-                // Update odds
-                bool oddsUpdateSuccess = true;
-                {
-                    mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update odds");
-
-                    // Call DB
-                    var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
-                    {
-                        Where = $"is_predicted = 0",
-                    });
-
-                    int fixtureCnt = db_fixtures.Count();
-                    int loop = 0;
-                    foreach (var db_fixture in db_fixtures)
-                    {
-                        loop++;
-                        mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update odds ({loop}/{fixtureCnt})");
-
-                        // Check already updated odds
-                        if (Database.FootballDBFacade.IsAlreadyUpdatedOdds(db_fixture.id))
-                            continue;
-
-                        // Call API
-                        var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByFixtureID(db_fixture.id);
-
-                        // DB Save
-                        int dbSaveResult = 0;
-                        if (api_odds != null)
-                            dbSaveResult = Database.FootballDBFacade.UpdateOdds(db_fixture.id, api_odds.Bookmakers);
-
-                        if (api_odds != null && dbSaveResult == 0)
-                            oddsUpdateSuccess = false;
-                    }
-                }
-
-                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB) && standingsUpdateSuccess && oddsUpdateSuccess;
-            });
-        }
-
-        /// <summary>
-        /// Predict fixture
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<bool> PredictFixtures(CancellationToken cancellationToken)
-        {
-            return Task.Run(() =>
-            {
-                var mainWindow = Singleton.Get<MainWindow>();
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Predict fixtrues");
-
-                var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
-                {
-                    Where = $"is_predicted = 0",
-                });
-
-                int fixtureCnt = db_fixtures.Count();
-                int loop = 0;
-                foreach (var db_fixture in db_fixtures)
-                {
-                    loop++;
-                    mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Predict fixtrues ({loop}/{fixtureCnt})");
-
-                    if (cancellationToken.IsCancellationRequested)
-                        return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                    db_fixture.is_predicted = true;
-
-                    // DB Save
-                    Database.FootballDBFacade.UpdateFixture(db_fixture);
-                }
-
-                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-            });
-        }
-
-        /// <summary>
-        /// Check completed fixtures
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<bool> CheckCompletedFixtures(CancellationToken cancellationToken)
-        {
-            return Task.Run(() =>
-            {
-                var mainWindow = Singleton.Get<MainWindow>();
-
-                if (cancellationToken.IsCancellationRequested)
-                    return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                mainWindow.Set_Lable(mainWindow._lbl_check_completed_fixtures, "Check completed fixtures");
-
-                var db_fixtures = Database.FootballDBFacade.SelectFixtures(new FootballDB.Procedures.P_SELECT_FIXTURES.Input()
-                {
-                    Where = $"is_completed = 0 AND event_date < '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}'",
-                });
-
-                int fixtureCnt = db_fixtures.Count();
-                int loop = 0;
-                foreach (var db_fixture in db_fixtures)
-                {
-                    loop++;
-                    mainWindow.Set_Lable(mainWindow._lbl_check_completed_fixtures, $"Check completed fixtures ({loop}/{fixtureCnt})");
-
-                    if (cancellationToken.IsCancellationRequested)
-                        return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-
-                    // Call API
-                    var api_fixture = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByFixtureID(db_fixture.id);
-
-                    if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status))
-                    {
-                        Database.FootballDBFacade.DeleteFixtures(db_fixture.id);
-                        continue;
-                    }
-
-                    // 6시간이 지났는데 아직 경기가 안끝났으면 삭제
-                    if (api_fixture.EventDate < DateTime.UtcNow.AddHours(-6)
-                        && (api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.FT // 종료
-                        && api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
-                        && api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.PEN)) // 승부차기 후 종료
-                    {
-                        Database.FootballDBFacade.DeleteFixtures(db_fixture.id);
-                        continue;
-                    }
-
-                    // 종료된 경기 처리
-                    if (api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.FT // 종료
-                        || api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
-                        || api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.PEN)// 승부차기 후 종료
-                    {
-                        // Update statistics
-                        if (api_fixture.Statistic != null)
-                        {
-                            // Convert data for db model
-                            DataConverter.CovertAppModelToDbModel(api_fixture.FixtureID, (short)api_fixture.HomeTeam.TeamID, (short)api_fixture.AwayTeam.TeamID, api_fixture.Statistic,
-                                out FootballDB.Tables.FixtureStatistic[] coverted_fixtureStatistics);
-
-                            Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
-                        }
-
-                        // DB Save
-                        db_fixture.home_score = (short)api_fixture.GoalsHomeTeam;
-                        db_fixture.away_score = (short)api_fixture.GoalsAwayTeam;
-                        db_fixture.is_completed = true;
-                    }
-
-                    db_fixture.status = api_fixture.Status.ToString();
-                    Database.FootballDBFacade.UpdateFixture(db_fixture);
-                }
-
-                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
-            });
-        }
-
-        public static bool UpdateStandings(short leagueID, string leagueName, string countryName)
-        {
-            // Check already updated standings
-            if (Database.FootballDBFacade.IsAlreadyUpdatedStandings(leagueID))
-                return true;
-
-            // Check league type
-            var api_league = Database.FootballDBFacade.SelectLeagues(new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
-            {
-                Where = $"id = {leagueID}",
-            }).FirstOrDefault();
-
-            if (api_league?.type.Equals("Cup") ?? false)
-                return true;
+            // Check already updated
+            if (IsAlreadyUpdatedLeague(leagueId))
+                return;
 
             // Call API
-            var api_standings = Singleton.Get<ApiLogic.FootballWebAPI>().GetStandingsByLeagueID(leagueID);
+            var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
+            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
 
-            // Check Standings validation
-            if (!Singleton.Get<CheckValidation>().IsValidStandings(api_standings, leagueID, leagueName, countryName, true))
-                return false;
+            // 지금 시각 이후의 경기들 일단 삭제 (취소, 연기된 경기가 있을지도 모르니)
+            Database.FootballDBFacade.DeleteFixtures(
+                where: $"league_id = {leagueId} AND match_time > \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND is_predicted = 0");
 
-            if (api_standings.Count == 0)
-                return true;
-
-            // Call DB
-            return Database.FootballDBFacade.UpdateStanding(leagueID, countryName, api_standings.ToArray()) > 0;
+            // DB Save
+            Database.FootballDBFacade.UpdateFixture(false, false, api_filteredFixtures.ToArray());
         }
 
-        /// <summary>
-        /// Solve Errors
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<bool> SolveErrors(CancellationToken cancellationToken, Label lbl)
+        public static void UpdateOdds(int fixtureId)
+        {
+            // Call API
+            var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByFixtureId(fixtureId);
+
+            // DB Save
+            Database.FootballDBFacade.UpdateOdds(fixtureId, api_odds.Bookmakers);
+        }
+
+        public static void UpdateFixtureStatistics(int fixtureId)
+        {
+            // Call API
+            var api_fixtureStatistic = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixtureStatisticByFixtureId(fixtureId);
+            if (api_fixtureStatistic == null)
+                return;
+
+            var db_fixtures = Database.FootballDBFacade.SelectFixtures(where: $"id = {fixtureId}").FirstOrDefault();
+            Dev.Assert(db_fixtures != null, $"UpdateFixtureStatistics db_fixtures is null FixtureId: {fixtureId}");
+
+            // Convert api model to db model
+            DataConverter.CovertApiModelToDbModel(fixtureId, db_fixtures.home_team_id, db_fixtures.away_team_id, api_fixtureStatistic,
+                out FootballDB.Tables.FixtureStatistics[] coverted_fixtureStatistics);
+
+            // DB Save
+            Database.FootballDBFacade.UpdateFixtureStatistics(coverted_fixtureStatistics);
+        }
+
+        public static void UpdateH2H(short teamId1, short teamId2)
+        {
+            // Call API
+            var api_h2h = Singleton.Get<ApiLogic.FootballWebAPI>().GetH2HFixtures(teamId1, teamId2);
+
+            foreach (var api_fixture in api_h2h)
+            {
+                if (IsAlreadyUpdatedOdds(api_fixture.FixtureId))
+                    continue;
+
+                UpdateFixtureStatistics(api_fixture.FixtureId);
+                UpdateOdds(api_fixture.FixtureId);
+
+                // DB Save
+                Database.FootballDBFacade.UpdateFixture(true, false, api_fixture);
+            }
+        }
+
+        public static void UpdateTeamLastFixtures(short teamId, byte count)
+        {
+            // Call API
+            var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetLastFixturesByTeamId(teamId, count);
+            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
+
+            foreach (var api_fixture in api_filteredFixtures)
+            {
+                if (IsAlreadyUpdatedOdds(api_fixture.FixtureId))
+                    continue;
+
+                UpdateFixtureStatistics(api_fixture.FixtureId);
+                UpdateOdds(api_fixture.FixtureId);
+
+                // DB Save
+                Database.FootballDBFacade.UpdateFixture(true, false, api_fixture);
+            }
+        }
+
+        public static Task SolveErrors(Label lbl)
         {
             return Task.Run(() =>
             {
                 var mainWindow = Singleton.Get<MainWindow>();
-
-                if (cancellationToken.IsCancellationRequested)
-                    return false;
-
-                mainWindow.Set_Lable(lbl, "Solve Errors");
 
                 var leagueErrors = Singleton.Get<CheckValidation>().GetErrorLeauges(InvalidType.NotExistInDB, false);
                 int errorLeagueCnt = leagueErrors.Length;
@@ -447,22 +115,14 @@ namespace SportsAdminTool.Logic.Football
                     loop++;
                     mainWindow.Set_Lable(lbl, $"Solve League Errors ({loop}/{errorLeagueCnt})");
 
-                    if (cancellationToken.IsCancellationRequested)
-                        return false;
-
                     // Call API
-                    var api_league = Singleton.Get<ApiLogic.FootballWebAPI>().GetLeagueByLeagueID(errorLeague.LeagueID);
+                    var api_league = Singleton.Get<ApiLogic.FootballWebAPI>().GetLeagueByLeagueId(errorLeague.LeagueId);
+                    Dev.Assert(api_league != null, $"api_league is null leagueId: {errorLeague.LeagueId}");
 
                     // DB Save
-                    Database.FootballDBFacade.UpdateLeague(api_league); // league
-                    Database.FootballDBFacade.UpdateCoverage(api_league); // coverage
-
-                    var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueID((short)api_league.LeagueID);
-                    Database.FootballDBFacade.UpdateTeam((short)api_league.LeagueID, api_teams.ToArray());
+                    Database.FootballDBFacade.UpdateLeague(api_league);
+                    Database.FootballDBFacade.UpdateCoverage(api_league);
                 }
-
-                if (cancellationToken.IsCancellationRequested)
-                    return false;
 
                 var teamErrors = Singleton.Get<CheckValidation>().GetErrorTeams(InvalidType.NotExistInDB, false);
                 int errorTeamCnt = teamErrors.Length;
@@ -472,19 +132,50 @@ namespace SportsAdminTool.Logic.Football
                     loop++;
                     mainWindow.Set_Lable(lbl, $"Solve Team Errors ({loop}/{errorTeamCnt})");
 
-                    if (cancellationToken.IsCancellationRequested)
-                        return false;
-
                     // Call API
-                    var api_team = Singleton.Get<ApiLogic.FootballWebAPI>().GetTeamByTeamID(errorTeam.TeamsID);
+                    var api_team = Singleton.Get<ApiLogic.FootballWebAPI>().GetTeamByTeamId(errorTeam.TeamsId);
+                    Dev.Assert(api_team != null, $"api_team is null teamId: {errorTeam.TeamsId}");
 
                     // DB Save
-                    if (api_team != null)
-                        Database.FootballDBFacade.UpdateTeam(errorTeam.LeagueID, api_team);
+                    Database.FootballDBFacade.UpdateTeam(errorTeam.LeagueId, api_team);
                 }
-
-                return true;
             });
+        }
+
+        public static bool UpdateStandings(short leagueId)
+        {
+            // Check already updated standings
+            if (IsAlreadyUpdatedLeague(leagueId))
+                return true;
+
+            var db_league = Database.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault();
+            //if (db_league?.type.Equals("Cup") ?? false)
+            //    return true;
+
+            // Call API
+            var api_standings = Singleton.Get<ApiLogic.FootballWebAPI>().GetStandingsByLeagueId(leagueId);
+            if (api_standings.Count == 0)
+                return true;
+
+            // Call DB
+            return Database.FootballDBFacade.UpdateStanding(leagueId, db_league.country_name, api_standings.ToArray());
+        }
+
+        public static bool IsAlreadyUpdatedLeague(short leagueId)
+        {
+            var firstData = Database.FootballDBFacade.SelectStandings(where: $"league_id = {leagueId}").FirstOrDefault();
+
+            return firstData != null && firstData.upt_time.Date == DateTime.UtcNow.Date;
+        }
+
+        public static bool IsAlreadyUpdatedOdds(int fixtureId)
+        {
+            return Database.FootballDBFacade.SelectOdds(where: $"fixture_id = {fixtureId}").FirstOrDefault() == null;
+        }
+
+        public static bool IsExistFixture(int fixtureId)
+        {
+            return Database.FootballDBFacade.SelectFixtures(where: $"id = {fixtureId}").FirstOrDefault() == null;
         }
     }
 }

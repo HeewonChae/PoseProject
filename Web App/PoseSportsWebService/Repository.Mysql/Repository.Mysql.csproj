@@ -70,50 +70,26 @@
   <ItemGroup>
     <Compile Include="Contexts\FootballDB.cs" />
     <Compile Include="Contexts\PoseGlobalDB.cs" />
-    <Compile Include="FootballDBMigrations\202002010334239_Initialize.cs" />
-    <Compile Include="FootballDBMigrations\202002010334239_Initialize.designer.cs">
-      <DependentUpon>202002010334239_Initialize.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202002030659366_CreateFixtureTable.cs" />
-    <Compile Include="FootballDBMigrations\202002030659366_CreateFixtureTable.designer.cs">
-      <DependentUpon>202002030659366_CreateFixtureTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202002031300535_CreateFixtureTable1.cs" />
-    <Compile Include="FootballDBMigrations\202002031300535_CreateFixtureTable1.designer.cs">
-      <DependentUpon>202002031300535_CreateFixtureTable1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.cs" />
-    <Compile Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.designer.cs">
-      <DependentUpon>202002201810534_AlterLogoStringLength.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202003131836358_FixtureIdxDefine.cs" />
-    <Compile Include="FootballDBMigrations\202003131836358_FixtureIdxDefine.designer.cs">
-      <DependentUpon>202003131836358_FixtureIdxDefine.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202003151111291_AlterFixtureIndex.cs" />
-    <Compile Include="FootballDBMigrations\202003151111291_AlterFixtureIndex.designer.cs">
-      <DependentUpon>202003151111291_AlterFixtureIndex.cs</DependentUpon>
+    <Compile Include="FootballDBMigrations\202003170331490_Initialize.cs" />
+    <Compile Include="FootballDBMigrations\202003170331490_Initialize.designer.cs">
+      <DependentUpon>202003170331490_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
-    <Compile Include="FootballDB\Procedures\P_EXECUTE_QUERY.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_COVERAGE.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES.cs" />
+    <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
+    <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
+    <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_LEAGUES.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_ODDS.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_STANDINGS.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_TEAMS.cs" />
     <Compile Include="FootballDB\Tables\Country.cs" />
-    <Compile Include="FootballDB\Tables\Coverage.cs" />
+    <Compile Include="FootballDB\Tables\LeagueCoverage.cs" />
     <Compile Include="FootballDB\Tables\Fixture.cs" />
-    <Compile Include="FootballDB\Tables\FixtureStatistic.cs" />
+    <Compile Include="FootballDB\Tables\FixtureStatistics.cs" />
     <Compile Include="FootballDB\Tables\League.cs" />
     <Compile Include="FootballDB\Tables\Odds.cs" />
     <Compile Include="FootballDB\Tables\Standing.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.designer.cs">
-      <DependentUpon>202003022333493_InitUserBase.cs</DependentUpon>
+    <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.cs" />
+    <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.designer.cs">
+      <DependentUpon>202003170333152_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="PoseGlobalDBMigrations\Configuration.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_INSERT_USER_BASE.cs" />
@@ -130,29 +106,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FootballDBMigrations\202002010334239_Initialize.resx">
-      <DependentUpon>202002010334239_Initialize.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202002030659366_CreateFixtureTable.resx">
-      <DependentUpon>202002030659366_CreateFixtureTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202002031300535_CreateFixtureTable1.resx">
-      <DependentUpon>202002031300535_CreateFixtureTable1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202002201810534_AlterLogoStringLength.resx">
-      <DependentUpon>202002201810534_AlterLogoStringLength.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202003131836358_FixtureIdxDefine.resx">
-      <DependentUpon>202003131836358_FixtureIdxDefine.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202003151111291_AlterFixtureIndex.resx">
-      <DependentUpon>202003151111291_AlterFixtureIndex.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PoseGlobalDBMigrations\202003022333493_InitUserBase.resx">
-      <DependentUpon>202003022333493_InitUserBase.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +114,14 @@
       <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="FootballDBMigrations\202003170331490_Initialize.resx">
+      <DependentUpon>202003170331490_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
+      <DependentUpon>202003170333152_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

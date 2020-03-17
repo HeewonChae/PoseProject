@@ -1,4 +1,4 @@
-﻿using PosePacket.Service.Auth.Models;
+﻿using PosePacket.Service.Auth.Models.Enums;
 
 namespace WebServiceShare.ExternAuthentication.Providers
 {

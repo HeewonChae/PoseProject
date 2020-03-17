@@ -22,7 +22,7 @@ namespace Repository.Mysql.FootballDB.Tables
         [Column(TypeName = "VARCHAR")]
         [StringLength(100)]
         [SqlDefaultValue(DefaultValue = "")]
-        public string flag { get; set; }
+        public string logo { get; set; }
 
         [Required]
         public DateTime upt_time { get; set; }

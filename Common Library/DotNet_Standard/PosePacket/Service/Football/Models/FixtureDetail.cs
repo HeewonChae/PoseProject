@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PosePacket.Service.Football.Models.Enums;
+using System;
 
 namespace PosePacket.Service.Football.Models
 {
@@ -22,7 +23,8 @@ namespace PosePacket.Service.Football.Models
         public DataInfo League { get; set; }
         public TeamInfo HomeTeam { get; set; }
         public TeamInfo AwayTeam { get; set; }
-        public string MatchStatus { get; set; }
+        public FootballFixtureStatusType MatchStatus { get; set; }
+        public FootballLeagueType LeagueType { get; set; }
         public DateTime MatchTime { get; set; }
     }
 }

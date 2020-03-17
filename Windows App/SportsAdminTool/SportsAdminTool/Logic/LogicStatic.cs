@@ -14,53 +14,60 @@ using FootballAlarm = SportsAdminTool.Logic.Football.Alarm;
 
 namespace SportsAdminTool.Logic
 {
-	public static class LogicStatic
-	{
-		public static void Init()
-		{
-			// DB init
-			Repository.RepositoryStatic.Init_Mysql();
+    public static class LogicStatic
+    {
+        public static void Init()
+        {
+            // DB init
+            Repository.RepositoryStatic.Init_Mysql();
 
-			// Register singleton
-			Singleton.Register(new ApiLogic.FootballWebAPI());
-			Singleton.Register(new FootballLogic.CheckValidation());
-			Singleton.Register(new LogicThread.Message.Consumer.Singular());
-			Singleton.Register(new LogicThread.Timeout());
-			Singleton.Register(new Alarm());
-			Singleton.Register(new Ticker());
-			Singleton.Register(new FootballAlarm.InitializeDatabase());
-			Singleton.Register(new FootballAlarm.CollectDatasAndPredict());
-			Singleton.Register(new FootballAlarm.CheckCompletedFixtures());
-		}
+            // Log4Net Init
+            LogicCore.Utility.ThirdPartyLog.Log4Net.Initialize();
 
-		/// <summary>
-		/// Called when main window is launched
-		/// </summary>
-		public static void StartWindow()
-		{
-			// Start singular logic thread
-			var singular = Singleton.Get<LogicThread.Message.Consumer.Singular>();
-			singular.Start();
+            // Register singleton
+            Singleton.Register(new ApiLogic.FootballWebAPI());
+            Singleton.Register(new FootballLogic.CheckValidation());
+            Singleton.Register(new LogicThread.Message.Consumer.Singular());
+            Singleton.Register(new LogicThread.Timeout());
+            Singleton.Register(new Alarm());
+            Singleton.Register(new Ticker());
+            Singleton.Register(new FootballAlarm.InitializeDatabase());
+            Singleton.Register(new FootballAlarm.CollectDatasAndPredict());
+            Singleton.Register(new FootballAlarm.CheckCompletedFixtures());
 
-			// Start timeout thread
-			var heartBeat = new LogicThread.Timeout.Heartbeat();
-			heartBeat.TimeHandler += (time) =>
-			{
-				// running at logic thread
-				Singleton.Get<Alarm>().Update(time);
-				Singleton.Get<Ticker>().Update(time);
-			};
-			Singleton.Get<LogicThread.Timeout>().Start(singular, heartBeat);
+            // Load Table
+            string tableRootPath = string.Concat(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+            TableLoader.Init(tableRootPath);
+        }
 
-			// Register logic alarm
-			TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후
-			Singleton.Get<FootballAlarm.InitializeDatabase>().SetAlarm((long)ts.TotalMilliseconds);
+        /// <summary>
+        /// Called when main window is launched
+        /// </summary>
+        public static void StartWindow()
+        {
+            // Start singular logic thread
+            var singular = Singleton.Get<LogicThread.Message.Consumer.Singular>();
+            singular.Start();
 
-			ts = DateTime.Now.AddHours(6) - DateTime.Now; // 6시간 후
-			Singleton.Get<FootballAlarm.CollectDatasAndPredict>().SetAlarm((long)ts.TotalMilliseconds);
+            // Start timeout thread
+            var heartBeat = new LogicThread.Timeout.Heartbeat();
+            heartBeat.TimeHandler += (time) =>
+            {
+                // running at logic thread
+                Singleton.Get<Alarm>().Update(time);
+                Singleton.Get<Ticker>().Update(time);
+            };
+            Singleton.Get<LogicThread.Timeout>().Start(singular, heartBeat);
 
-			ts = DateTime.Now.AddHours(1) - DateTime.Now; // 1시간 후
-			Singleton.Get<FootballAlarm.CheckCompletedFixtures>().SetAlarm((long)ts.TotalMilliseconds);
-		}
-	}
+            //// Register logic alarm
+            //TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후
+            //Singleton.Get<FootballAlarm.InitializeDatabase>().SetAlarm((long)ts.TotalMilliseconds);
+
+            //ts = DateTime.Now.AddHours(6) - DateTime.Now; // 6시간 후
+            //Singleton.Get<FootballAlarm.CollectDatasAndPredict>().SetAlarm((long)ts.TotalMilliseconds);
+
+            //ts = DateTime.Now.AddHours(1) - DateTime.Now; // 1시간 후
+            //Singleton.Get<FootballAlarm.CheckCompletedFixtures>().SetAlarm((long)ts.TotalMilliseconds);
+        }
+    }
 }

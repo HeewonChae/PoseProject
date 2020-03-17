@@ -23,7 +23,7 @@ namespace SportsAdminTool.Model.Football
 			public FixtureCoverageInfo FixtureCoverage { get; set; }
 		}
 
-		public int LeagueID { get; set; }
+		public int LeagueId { get; set; }
 		public string Name { get; set; }
 		public string Type { get; set; }
 		public string Country { get; set; }

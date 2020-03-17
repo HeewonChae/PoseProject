@@ -59,7 +59,7 @@ namespace PosePacket.Proxy
         
         // MethodType: POST, Segment: CheckVaildOAuthUser 
         // InputType: PosePacket.Service.Auth.I_CheckVaildOAuthUser 
-        // OutputType: PosePacket.Service.Auth.ExternAuthUser
+        // OutputType: PosePacket.Service.Auth.Models.ExternAuthUser
         public static string P_E_CheckVaildOAuthUser
         {
             get

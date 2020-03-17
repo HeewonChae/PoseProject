@@ -14,6 +14,8 @@ using AppModel = SportsAdminTool.Model;
 using DatabaseLogic = SportsAdminTool.Logic.Database;
 using ApiModel = RapidAPI.Models;
 using System.Collections.Concurrent;
+using LogicCore.Utility.ThirdPartyLog;
+using SportsAdminTool.Model.Resource.Football;
 
 namespace SportsAdminTool.Logic.Football
 {
@@ -29,16 +31,16 @@ namespace SportsAdminTool.Logic.Football
 
     public struct InvalidTeam
     {
-        public short TeamsID;
+        public short TeamsId;
         public string TeamName;
-        public short LeagueID;
+        public short LeagueId;
         public string CountryName;
         public int ReasonType;
     }
 
     public struct InvalidLeague
     {
-        public short LeagueID;
+        public short LeagueId;
         public string LeagueName;
         public string CountryName;
         public int ReasonType;
@@ -52,157 +54,56 @@ namespace SportsAdminTool.Logic.Football
 
         #region Check validation
 
-        public bool IsValidLeague(short leagueID, string leagueName, string countryName, bool isDB_check)
+        public bool IsValidLeague(short leagueId, string leagueName, string countryName)
         {
-            if (leagueID == 0)
+            bool db_result = DatabaseLogic.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault() != null;
+            if (!db_result)
             {
                 AddInvalidLeague(new InvalidLeague()
                 {
-                    LeagueID = leagueID,
+                    LeagueId = (short)leagueId,
                     LeagueName = leagueName,
+                    CountryName = countryName,
+                    ReasonType = (int)InvalidType.NotExistInDB,
+                });
+            }
+
+            return db_result;
+        }
+
+        public bool IsValidTeam(short teamId, string teamName, short leagueId, string countryName, bool isDB_check)
+        {
+            bool isValidTeamId = teamId != 0;
+            if (!isValidTeamId)
+            {
+                AddInvalidTeam(new InvalidTeam()
+                {
+                    TeamsId = teamId,
+                    TeamName = teamName,
+                    LeagueId = leagueId,
                     CountryName = countryName,
                     ReasonType = (int)InvalidType.Zero,
                 });
-
-                return false;
-            }
-
-            var key = ResourceModel.Football.LeagueCoverage.MakeLeagueCoverageKey(leagueName, countryName);
-
-            bool result;
-            if (!ResourceModel.Football.LeagueCoverage.Dic_leagueCoverage.ContainsKey(key))
-            {
-                AddInvalidLeague(new InvalidLeague()
-                {
-                    LeagueID = leagueID,
-                    LeagueName = leagueName,
-                    CountryName = countryName,
-                    ReasonType = (int)InvalidType.Undefined,
-                });
-
-                result = false;
-            }
-            else
-            {
-                result = ResourceModel.Football.LeagueCoverage.Dic_leagueCoverage[key].IsCoverage;
             }
 
             bool db_result = true;
             if (isDB_check)
             {
-                db_result = DatabaseLogic.FootballDBFacade.SelectLeagues(
-                    new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
-                    {
-                        Where = $"id = {leagueID}"
-                    })
-                    .FirstOrDefault() != null;
-
+                db_result = DatabaseLogic.FootballDBFacade.SelectTeams(where: $"id = {teamId}").FirstOrDefault() != null;
                 if (!db_result)
-                {
-                    AddInvalidLeague(new InvalidLeague()
-                    {
-                        LeagueID = (short)leagueID,
-                        LeagueName = leagueName,
-                        CountryName = countryName,
-                        ReasonType = (int)InvalidType.NotExistInDB,
-                    });
-                }
-            }
-
-            return result && db_result;
-        }
-
-        public bool IsValidTeam(short teamID, string teamName, short leagueID, string countryName, bool isDB_check)
-        {
-            bool result = teamID != 0;
-
-            if (!result)
-            {
-                AddInvalidTeam(new InvalidTeam()
-                {
-                    TeamsID = teamID,
-                    TeamName = teamName,
-                    LeagueID = leagueID,
-                    CountryName = countryName,
-                    ReasonType = (int)InvalidType.Zero,
-                });
-            }
-
-            if (result && isDB_check)
-            {
-                result = DatabaseLogic.FootballDBFacade.SelectTeams(new FootballDB.Procedures.P_SELECT_TEAMS.Input()
-                {
-                    Where = $"id = {teamID}",
-                })
-                    .FirstOrDefault() != null;
-
-                if (!result)
                 {
                     AddInvalidTeam(new InvalidTeam()
                     {
-                        TeamsID = teamID,
+                        TeamsId = teamId,
                         TeamName = teamName,
-                        LeagueID = leagueID,
+                        LeagueId = leagueId,
                         CountryName = countryName,
                         ReasonType = (int)InvalidType.NotExistInDB,
                     });
                 }
             }
 
-            return result;
-        }
-
-        public bool IsValidStandings(IList<AppModel.Football.Standing> standings,
-            short leagueID, string leagueName, string countryName, bool checkExistLeagueInDB)
-        {
-            if (standings.Count == 0)
-            {
-                AddInvalidLeague(new InvalidLeague()
-                {
-                    LeagueID = leagueID,
-                    LeagueName = leagueName,
-                    CountryName = countryName,
-                    ReasonType = (int)InvalidType.NULL,
-                });
-            }
-
-            if (checkExistLeagueInDB)
-            {
-                bool result = DatabaseLogic.FootballDBFacade.SelectLeagues(
-                        new FootballDB.Procedures.P_SELECT_LEAGUES.Input()
-                        {
-                            Where = $"id = {leagueID}"
-                        })
-                        .FirstOrDefault() != null;
-
-                if (!result)
-                {
-                    AddInvalidLeague(new InvalidLeague()
-                    {
-                        LeagueID = leagueID,
-                        LeagueName = leagueName,
-                        CountryName = countryName,
-                        ReasonType = (int)InvalidType.NotExistInDB,
-                    });
-                }
-
-                return result;
-            }
-
-            //if (standings.Count > 1 && standings[0][0].Group.Equals(standings[1][0].Group))
-            //{
-            //	AddInvalidLeague(new InvalidLeague()
-            //	{
-            //		LeagueID = (short)leagueID,
-            //		LeagueName = leagueName,
-            //		CountryName = countryName,
-            //		Reason = "Standings data is invalidation",
-            //	});
-
-            //	return false;
-            //}
-
-            return true;
+            return isValidTeamId && db_result;
         }
 
         public bool IsValidFixtureStatus(ApiModel.Football.Enums.FixtureStatusType status)
@@ -232,13 +133,13 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                // TODO: Log
                 _invalidLeauges.Add(invalidLeague);
-                Dev.DebugString($"Invalid League {nameof(InvalidLeague.LeagueID)}: {invalidLeague.LeagueID}" +
+
+                Log4Net.WriteLog($"Invalid League {nameof(InvalidLeague.LeagueId)}: {invalidLeague.LeagueId}" +
                                 $", {nameof(InvalidLeague.LeagueName)}: {invalidLeague.LeagueName}" +
                                 $", {nameof(InvalidLeague.CountryName)}: {invalidLeague.CountryName}" +
                                 $", {nameof(InvalidLeague.ReasonType)}: {invalidLeague.ReasonType}"
-                                , ConsoleColor.Red);
+                                , Log4Net.Level.ERROR);
             }
         }
 
@@ -246,14 +147,13 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                // TODO: Log
                 _invalidTeams.Add(invalidTeam);
 
-                Dev.DebugString($"Invalid League {nameof(InvalidTeam.TeamsID)}: {invalidTeam.TeamsID}" +
+                Log4Net.WriteLog($"Invalid League {nameof(InvalidTeam.TeamsId)}: {invalidTeam.TeamsId}" +
                                 $", {nameof(InvalidTeam.TeamName)}: {invalidTeam.TeamName}" +
                                 $", {nameof(InvalidTeam.CountryName)}: {invalidTeam.CountryName}" +
                                 $", {nameof(InvalidTeam.ReasonType)}: {invalidTeam.ReasonType}"
-                                , ConsoleColor.Red);
+                                , Log4Net.Level.ERROR);
             }
         }
 
@@ -299,7 +199,8 @@ namespace SportsAdminTool.Logic.Football
 
         public bool IsExistError(InvalidType invalidType)
         {
-            return GetErrorLeauges(invalidType, false).Length > 0 || GetErrorTeams(invalidType, false).Length > 0;
+            return GetErrorLeauges(invalidType, false).Length > 0
+                || GetErrorTeams(invalidType, false).Length > 0;
         }
 
         #endregion GetError

@@ -48,6 +48,10 @@ namespace Repository.Mysql.FootballDB.Tables
         public string logo { get; set; }
 
         [Required]
+        [Index("IDX_PREDICT_COVERAGE", IsUnique = false)]
+        public bool is_predict_coverage { get; set; }
+
+        [Required]
         public DateTime upt_time { get; set; }
     }
 }

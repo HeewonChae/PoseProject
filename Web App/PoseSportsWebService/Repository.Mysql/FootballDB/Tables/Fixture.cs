@@ -28,12 +28,14 @@ namespace Repository.Mysql.FootballDB.Tables
         [Column(TypeName = "MEDIUMINT")]
         [Index("IDX_HOME_DATE", Order = 1, IsUnique = false)]
         [Index("IDX_LEAGUE_HOME", Order = 2, IsUnique = false)]
+        [Index("IDX_HOME_AWAY_DATE", Order = 1, IsUnique = false)]
         public short home_team_id { get; set; }
 
         [Required]
         [Column(TypeName = "MEDIUMINT")]
         [Index("IDX_AWAY_DATE", Order = 1, IsUnique = false)]
         [Index("IDX_LEAGUE_AWAY", Order = 2, IsUnique = false)]
+        [Index("IDX_HOME_AWAY_DATE", Order = 2, IsUnique = false)]
         public short away_team_id { get; set; }
 
         [Required]
@@ -41,8 +43,10 @@ namespace Repository.Mysql.FootballDB.Tables
         [Index("IDX_HOME_DATE", Order = 2, IsUnique = false)]
         [Index("IDX_AWAY_DATE", Order = 2, IsUnique = false)]
         [Index("IDX_PREDICTED_DATE", Order = 2, IsUnique = false)]
-        [Index("IDX_EVENT_DATE", Order = 1, IsUnique = false)]
-        public DateTime event_date { get; set; }
+        [Index("IDX_COMPLETED_DATE", Order = 2, IsUnique = false)]
+        [Index("IDX_HOME_AWAY_DATE", Order = 3, IsUnique = false)]
+        [Index("IDX_MATCH_TIME", Order = 1, IsUnique = false)]
+        public DateTime match_time { get; set; }
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(64)]
@@ -69,7 +73,7 @@ namespace Repository.Mysql.FootballDB.Tables
         public bool is_predicted { get; set; }
 
         [Required]
-        [Index("IDX_COMPLETED", IsUnique = false)]
+        [Index("IDX_COMPLETED_DATE", Order = 1, IsUnique = false)]
         public bool is_completed { get; set; }
 
         [Required]

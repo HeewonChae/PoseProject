@@ -15,7 +15,7 @@ namespace PacketBuilder.CodeDom
 
     public class CodeJsonRoot
     {
-        public List<CodeJsonDescription> Items;
+        public Dictionary<int, string> Items;
     }
 
     public class ErrorCodeDescriptionBuilder
@@ -28,7 +28,7 @@ namespace PacketBuilder.CodeDom
         public ErrorCodeDescriptionBuilder(Assembly assambly)
         {
             _assambly = assambly;
-            _codeJsonRoot.Items = new List<CodeJsonDescription>();
+            _codeJsonRoot.Items = new Dictionary<int, string>();
         }
 
         public void ParseErrorCode()
@@ -37,12 +37,12 @@ namespace PacketBuilder.CodeDom
             {
                 foreach (var codeJsonDesc in GetErrorCodeDesc(declareType))
                 {
-                    if (_codeJsonRoot.Items.Find(elem => elem.ErrorCode == codeJsonDesc.ErrorCode) != null)
+                    if (_codeJsonRoot.Items.ContainsKey(codeJsonDesc.ErrorCode))
                     {
                         throw new Exception($"Alread Exist ErrorCode ErrorCode: {codeJsonDesc.ErrorCode}, Description: {codeJsonDesc.Description}");
                     }
 
-                    _codeJsonRoot.Items.Add(codeJsonDesc);
+                    _codeJsonRoot.Items.Add(codeJsonDesc.ErrorCode, codeJsonDesc.Description);
                 }
             }
         }
@@ -82,9 +82,11 @@ namespace PacketBuilder.CodeDom
                     continue;
                 }
 
-                CodeJsonDescription result = new CodeJsonDescription();
-                result.ErrorCode = (int)fieldInfo.GetValue(null);
-                result.Description = attributes[0].Description;
+                CodeJsonDescription result = new CodeJsonDescription
+                {
+                    ErrorCode = (int)fieldInfo.GetValue(null),
+                    Description = attributes[0].Description
+                };
 
                 yield return result;
             }

@@ -23,8 +23,9 @@ namespace Repository.Mysql.PoseGlobalDB.Tables
         public string platform_id { get; set; }
 
         [Required]
-        [Column(TypeName = "MEDIUMINT")]
-        public short platform_type { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(16)]
+        public string platform_type { get; set; }
 
         [Required]
         [Column(TypeName = "INT")]

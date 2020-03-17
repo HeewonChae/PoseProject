@@ -13,12 +13,12 @@ namespace SportsAdminTool.Logic.Comparer
 	{
 		public bool Equals(Fixture x, Fixture y)
 		{
-			return x.FixtureID == y.FixtureID;
+			return x.FixtureId == y.FixtureId;
 		}
 
 		public int GetHashCode(Fixture obj)
 		{
-			return obj.FixtureID;
+			return obj.FixtureId;
 		}
 	}
 }

@@ -50,6 +50,9 @@
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -165,11 +168,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\Football\CheckCompletedFixtures.cs" />
+    <Compile Include="Commands\Football\InitializeFootballDB.cs" />
+    <Compile Include="Commands\Football\PredictFixtures.cs" />
+    <Compile Include="Commands\Football\UpdateScheduledFixtures.cs" />
     <Compile Include="Logic\Comparer\AppFootballFixtureComparer.cs" />
     <Compile Include="Logic\Database\FootballDBFacade.cs" />
     <Compile Include="Logic\Football\Alarm\CheckCompletedFixtures.cs" />
     <Compile Include="Logic\Football\Alarm\CollectDatasAndPredict.cs" />
     <Compile Include="Logic\Football\Alarm\InitializeDatabase.cs" />
+    <Compile Include="Logic\LogicAlarmBase.cs" />
     <Compile Include="Logic\Football\CheckValidation.cs" />
     <Compile Include="Logic\Football\DataConverter.cs" />
     <Compile Include="Logic\Football\LogicFacade.cs" />
@@ -184,16 +192,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Football\Country.cs" />
+    <Compile Include="Model\Football\Enums.cs" />
     <Compile Include="Model\Football\Fixture.cs" />
     <Compile Include="Model\Football\FixtureStatistic.cs" />
     <Compile Include="Model\Football\Odds.cs" />
     <Compile Include="Model\Football\Standing.cs" />
     <Compile Include="Model\Football\Team.cs" />
     <Compile Include="Model\ModelStatic.cs" />
-    <Compile Include="Model\Resource\Football\Enums.cs" />
+    <Compile Include="Model\Resource\Football\CoverageLeague.cs" />
     <Compile Include="Model\Football\Mapper\FootballMapper.cs" />
     <Compile Include="Model\Football\League.cs" />
-    <Compile Include="Model\Resource\Football\LeagueCoverage.cs" />
     <Compile Include="Model\Resource\Football\UndefinedTeam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -248,5 +256,6 @@
       <Name>Repository.Mysql</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

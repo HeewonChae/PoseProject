@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SportsAdminTool.Model.Football
 {
-	public class Country
-	{
-		public string Name { get; set; }
-		public string Code { get; set; }
-		public string Flag { get; set; }
-	}
+    public class Country
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string Logo { get; set; }
+    }
 }
