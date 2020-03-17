@@ -1,4 +1,5 @@
-﻿using LogicCore.Utility;
+﻿using LogicCore.Debug;
+using LogicCore.Utility;
 using SportsAdminTool.Logic.Football;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,7 @@ namespace SportsAdminTool.Commands.Football
                     , DateTime.UtcNow.AddDays(4));
 
                 // 취소, 연기된 경기 필터링
-                var api_filteredFixtures = api_fixtures.Where(elem =>
-                     Singleton.Get<CheckValidation>().IsValidLeague((short)elem.LeagueId, elem.League.Name, elem.League.Country)
-                     && Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
+                var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
 
                 // grouping by leagueID
                 var api_groupingbyLeague = api_filteredFixtures.GroupBy(elem => elem.LeagueId);
@@ -41,15 +40,17 @@ namespace SportsAdminTool.Commands.Football
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled leagues ({loop}/{api_groupingbyLeague.Count()})");
 
+                    var db_league = Logic.Database.FootballDBFacade.SelectLeagues(where: $"id = {api_groupingFixtures.Key}").FirstOrDefault();
+                    Dev.Assert(db_league != null);
+
                     // Check Already Updated
-                    if (LogicFacade.IsAlreadyUpdatedLeague((short)api_groupingFixtures.Key))
-                        return true;
+                    if (db_league.upt_time.Date == DateTime.UtcNow.Date)
+                        continue;
 
                     // Update League All Fixtures
                     LogicFacade.UpdateLeagueAllFixtures((short)api_groupingFixtures.Key);
 
                     // is_predict_coverage 참인 리그만 업데이트
-                    var db_league = Logic.Database.FootballDBFacade.SelectLeagues(where: $"id = {api_groupingFixtures.Key}").FirstOrDefault();
                     if (db_league.is_predict_coverage)
                     {
                         // Update Fixtures, Odds, Statistics,
@@ -67,7 +68,11 @@ namespace SportsAdminTool.Commands.Football
                     }
 
                     // Update League Standings
-                    LogicFacade.UpdateStandings((short)api_groupingFixtures.Key);
+                    if (!LogicFacade.UpdateStandings((short)api_groupingFixtures.Key))
+                        continue;
+
+                    db_league.upt_time = DateTime.UtcNow;
+                    Logic.Database.FootballDBFacade.UpdateLeague(db_league);
                 }
 
                 return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);

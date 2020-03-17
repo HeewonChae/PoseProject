@@ -33,17 +33,7 @@ namespace SportsAdminTool.Commands.Football
 
                     // Call API
                     var api_fixture = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByFixtureId(db_fixture.id);
-                    if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status))
-                    {
-                        Logic.Database.FootballDBFacade.DeleteFixtures(where: $"id = {db_fixture.id}");
-                        continue;
-                    }
-
-                    // 6시간이 지났는데 아직 경기가 안끝났으면 삭제
-                    if (api_fixture.MatchTime < DateTime.UtcNow.AddHours(-6)
-                        && (api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.FT // 종료
-                        && api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
-                        && api_fixture.Status != ApiModel.Football.Enums.FixtureStatusType.PEN)) // 승부차기 후 종료
+                    if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status, api_fixture.MatchTime))
                     {
                         Logic.Database.FootballDBFacade.DeleteFixtures(where: $"id = {db_fixture.id}");
                         continue;
@@ -63,6 +53,7 @@ namespace SportsAdminTool.Commands.Football
                     // DB Save
                     db_fixture.home_score = (short)api_fixture.GoalsHomeTeam;
                     db_fixture.away_score = (short)api_fixture.GoalsAwayTeam;
+                    db_fixture.match_time = api_fixture.MatchTime;
                     db_fixture.status = api_fixture.Status.ToString();
                     Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
                 }

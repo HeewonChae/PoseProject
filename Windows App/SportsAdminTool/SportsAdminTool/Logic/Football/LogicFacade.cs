@@ -21,26 +21,24 @@ namespace SportsAdminTool.Logic.Football
     {
         public static void UpdateLeagueAllFixtures(short leagueId)
         {
-            // Check already updated
-            if (IsAlreadyUpdatedLeague(leagueId))
-                return;
-
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
-            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
+            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
 
             // 지금 시각 이후의 경기들 일단 삭제 (취소, 연기된 경기가 있을지도 모르니)
             Database.FootballDBFacade.DeleteFixtures(
                 where: $"league_id = {leagueId} AND match_time > \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND is_predicted = 0");
 
             // DB Save
-            Database.FootballDBFacade.UpdateFixture(false, false, api_filteredFixtures.ToArray());
+            Database.FootballDBFacade.UpdateFixture(api_filteredFixtures.ToArray());
         }
 
         public static void UpdateOdds(int fixtureId)
         {
             // Call API
             var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByFixtureId(fixtureId);
+            if (api_odds == null)
+                return;
 
             // DB Save
             Database.FootballDBFacade.UpdateOdds(fixtureId, api_odds.Bookmakers);
@@ -74,11 +72,11 @@ namespace SportsAdminTool.Logic.Football
                 if (IsAlreadyUpdatedOdds(api_fixture.FixtureId))
                     continue;
 
+                // DB Save
+                Database.FootballDBFacade.UpdateFixture(api_fixture);
+
                 UpdateFixtureStatistics(api_fixture.FixtureId);
                 UpdateOdds(api_fixture.FixtureId);
-
-                // DB Save
-                Database.FootballDBFacade.UpdateFixture(true, false, api_fixture);
             }
         }
 
@@ -86,18 +84,18 @@ namespace SportsAdminTool.Logic.Football
         {
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetLastFixturesByTeamId(teamId, count);
-            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status));
+            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
 
             foreach (var api_fixture in api_filteredFixtures)
             {
                 if (IsAlreadyUpdatedOdds(api_fixture.FixtureId))
                     continue;
 
+                // DB Save
+                Database.FootballDBFacade.UpdateFixture(api_fixture);
+
                 UpdateFixtureStatistics(api_fixture.FixtureId);
                 UpdateOdds(api_fixture.FixtureId);
-
-                // DB Save
-                Database.FootballDBFacade.UpdateFixture(true, false, api_fixture);
             }
         }
 
@@ -120,7 +118,7 @@ namespace SportsAdminTool.Logic.Football
                     Dev.Assert(api_league != null, $"api_league is null leagueId: {errorLeague.LeagueId}");
 
                     // DB Save
-                    Database.FootballDBFacade.UpdateLeague(api_league);
+                    Database.FootballDBFacade.UpdateLeague(true, api_league);
                     Database.FootballDBFacade.UpdateCoverage(api_league);
                 }
 
@@ -144,10 +142,6 @@ namespace SportsAdminTool.Logic.Football
 
         public static bool UpdateStandings(short leagueId)
         {
-            // Check already updated standings
-            if (IsAlreadyUpdatedLeague(leagueId))
-                return true;
-
             var db_league = Database.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault();
             //if (db_league?.type.Equals("Cup") ?? false)
             //    return true;
@@ -161,21 +155,14 @@ namespace SportsAdminTool.Logic.Football
             return Database.FootballDBFacade.UpdateStanding(leagueId, db_league.country_name, api_standings.ToArray());
         }
 
-        public static bool IsAlreadyUpdatedLeague(short leagueId)
-        {
-            var firstData = Database.FootballDBFacade.SelectStandings(where: $"league_id = {leagueId}").FirstOrDefault();
-
-            return firstData != null && firstData.upt_time.Date == DateTime.UtcNow.Date;
-        }
-
         public static bool IsAlreadyUpdatedOdds(int fixtureId)
         {
-            return Database.FootballDBFacade.SelectOdds(where: $"fixture_id = {fixtureId}").FirstOrDefault() == null;
+            return Database.FootballDBFacade.SelectOdds(where: $"fixture_id = {fixtureId}").FirstOrDefault() != null;
         }
 
         public static bool IsExistFixture(int fixtureId)
         {
-            return Database.FootballDBFacade.SelectFixtures(where: $"id = {fixtureId}").FirstOrDefault() == null;
+            return Database.FootballDBFacade.SelectFixtures(where: $"id = {fixtureId}").FirstOrDefault() != null;
         }
     }
 }

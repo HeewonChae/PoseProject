@@ -25,7 +25,7 @@ namespace SportsAdminTool.Commands.Football
                 // Update all league
                 mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update leagues");
                 var api_leagues = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllAvailableLeauges();
-                Logic.Database.FootballDBFacade.UpdateLeague(api_leagues.ToArray());
+                Logic.Database.FootballDBFacade.UpdateLeague(true, api_leagues.ToArray());
                 Logic.Database.FootballDBFacade.UpdateCoverage(api_leagues.ToArray());
 
                 // Update all team

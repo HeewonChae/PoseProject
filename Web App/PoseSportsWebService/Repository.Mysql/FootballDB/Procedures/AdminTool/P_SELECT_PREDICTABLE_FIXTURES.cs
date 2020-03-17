@@ -34,7 +34,7 @@ namespace Repository.Mysql.FootballDB.Procedures
         public override IEnumerable<Fixture> OnQuery()
         {
             var sb = new StringBuilder();
-            sb.Append($"SELECT * ");
+            sb.Append($"SELECT f.* ");
             sb.Append("FROM fixture as f ");
             sb.Append($"INNER JOIN league as l on f.{nameof(Fixture.league_id)} = l.{nameof(League.id)} ");
             sb.Append($"WHERE {_input.WHERE};");

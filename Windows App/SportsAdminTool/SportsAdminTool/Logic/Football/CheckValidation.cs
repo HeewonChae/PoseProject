@@ -87,7 +87,7 @@ namespace SportsAdminTool.Logic.Football
             }
 
             bool db_result = true;
-            if (isDB_check)
+            if (isValidTeamId && isDB_check)
             {
                 db_result = DatabaseLogic.FootballDBFacade.SelectTeams(where: $"id = {teamId}").FirstOrDefault() != null;
                 if (!db_result)
@@ -106,8 +106,15 @@ namespace SportsAdminTool.Logic.Football
             return isValidTeamId && db_result;
         }
 
-        public bool IsValidFixtureStatus(ApiModel.Football.Enums.FixtureStatusType status)
+        public bool IsValidFixtureStatus(ApiModel.Football.Enums.FixtureStatusType status, DateTime matchTime)
         {
+            // 6시간이 지났는데 아직 경기가 안끝났으면 삭제
+            if (matchTime < DateTime.UtcNow.AddHours(-6)
+                && (status != ApiModel.Football.Enums.FixtureStatusType.FT // 종료
+                && status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
+                && status != ApiModel.Football.Enums.FixtureStatusType.PEN)) // 승부차기 후 종료
+                return false;
+
             if (status == ApiModel.Football.Enums.FixtureStatusType.NS // 경기전
                 || status == ApiModel.Football.Enums.FixtureStatusType.FH // 전반
                 || status == ApiModel.Football.Enums.FixtureStatusType.HT // 하프타임
@@ -149,7 +156,7 @@ namespace SportsAdminTool.Logic.Football
             {
                 _invalidTeams.Add(invalidTeam);
 
-                Log4Net.WriteLog($"Invalid League {nameof(InvalidTeam.TeamsId)}: {invalidTeam.TeamsId}" +
+                Log4Net.WriteLog($"Invalid Team {nameof(InvalidTeam.TeamsId)}: {invalidTeam.TeamsId}" +
                                 $", {nameof(InvalidTeam.TeamName)}: {invalidTeam.TeamName}" +
                                 $", {nameof(InvalidTeam.CountryName)}: {invalidTeam.CountryName}" +
                                 $", {nameof(InvalidTeam.ReasonType)}: {invalidTeam.ReasonType}"

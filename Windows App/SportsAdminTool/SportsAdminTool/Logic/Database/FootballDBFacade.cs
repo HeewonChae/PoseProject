@@ -10,6 +10,7 @@ using AppModel = SportsAdminTool.Model;
 using FootballDB = Repository.Mysql.FootballDB;
 using ResourceModel = SportsAdminTool.Model.Resource;
 using FootballLogic = SportsAdminTool.Logic.Football;
+using ApiModel = RapidAPI.Models;
 
 namespace SportsAdminTool.Logic.Database
 {
@@ -55,14 +56,14 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
-        public static bool UpdateLeague(params AppModel.Football.League[] leagues)
+        public static bool UpdateLeague(bool is_Init, params AppModel.Football.League[] leagues)
         {
             if (leagues.Length == 0)
                 return false;
 
             Dev.DebugString("Call DB - FootballFacade.UpdateLeague");
 
-            DateTime upt_time = DateTime.Now.ToUniversalTime();
+            DateTime upt_time = is_Init ? DateTime.MinValue : DateTime.Now.ToUniversalTime();
 
             StringBuilder sb = new StringBuilder();
             sb.Append(" INSERT INTO league");
@@ -85,6 +86,7 @@ namespace SportsAdminTool.Logic.Database
 
                 var league = leagues[i];
 
+                // TODO: 나중에 테이블로 교체해아함.
                 bool isCoverageLeage = league.Coverage != null && league.Coverage.FixtureCoverage.Statistics;
 
                 sb.Append($"({league.LeagueId}, " +
@@ -99,8 +101,56 @@ namespace SportsAdminTool.Logic.Database
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
-            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.League.logo)} = VALUES({nameof(FootballDB.Tables.League.logo)}), " +
+            sb.Append($"ON DUPLICATE KEY UPDATE " +
+                $"{nameof(FootballDB.Tables.League.logo)} = VALUES({nameof(FootballDB.Tables.League.logo)}), " +
                 $"{nameof(FootballDB.Tables.League.is_current)} = VALUES({nameof(FootballDB.Tables.League.is_current)}), " +
+                $"{nameof(FootballDB.Tables.League.upt_time)} = VALUES({nameof(FootballDB.Tables.League.upt_time)});");
+
+            return ExecuteQuery(sb.ToString());
+        }
+
+        public static bool UpdateLeague(params FootballDB.Tables.League[] leagues)
+        {
+            if (leagues.Length == 0)
+                return false;
+
+            Dev.DebugString("Call DB - FootballFacade.UpdateLeague");
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" INSERT INTO league");
+            sb.Append($" (`{nameof(FootballDB.Tables.League.id)}`, " +
+                $"`{nameof(FootballDB.Tables.League.name)}`, " +
+                $"`{nameof(FootballDB.Tables.League.type)}`, " +
+                $"`{nameof(FootballDB.Tables.League.country_name)}`, " +
+                $"`{nameof(FootballDB.Tables.League.is_current)}`, " +
+                $"`{nameof(FootballDB.Tables.League.season_start)}`, " +
+                $"`{nameof(FootballDB.Tables.League.season_end)}`, " +
+                $"`{nameof(FootballDB.Tables.League.logo)}`, " +
+                $"`{nameof(FootballDB.Tables.League.is_predict_coverage)}`, " +
+                $"`{nameof(FootballDB.Tables.League.upt_time)}`)");
+            sb.Append("VALUES");
+
+            for (int i = 0; i < leagues.Length; i++)
+            {
+                if (i != 0)
+                    sb.Append(", ");
+
+                var league = leagues[i];
+
+                sb.Append($"({league.id}, " +
+                    $"\"{league.name}\", " +
+                    $"\"{league.type}\", " +
+                    $"\"{league.country_name}\", " +
+                    $"{league.is_current}, " +
+                    $"\"{league.season_start.ToString("yyyyMMddTHHmmss")}\", " +
+                    $"\"{league.season_end.ToString("yyyyMMddTHHmmss")}\", " +
+                    $"\"{league.logo}\", " +
+                    $"{league.is_predict_coverage}, " +
+                    $"\"{league.upt_time.ToString("yyyyMMddTHHmmss")}\")");
+            }
+
+            sb.Append($"ON DUPLICATE KEY UPDATE " +
+                $"{nameof(FootballDB.Tables.League.is_predict_coverage)} = VALUES({nameof(FootballDB.Tables.League.is_predict_coverage)}), " +
                 $"{nameof(FootballDB.Tables.League.upt_time)} = VALUES({nameof(FootballDB.Tables.League.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
@@ -239,9 +289,7 @@ namespace SportsAdminTool.Logic.Database
                 }
 
                 if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)standing.TeamId, standing.TeamName, leagueId, countryName, true))
-                {
                     errorTeamCnt++;
-                }
 
                 sb.Append($"({leagueId}, " +
                     $"{standing.TeamId}, " +
@@ -278,7 +326,7 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
-        public static bool UpdateFixture(bool is_completed, bool is_predicted, params AppModel.Football.Fixture[] fixtures)
+        public static bool UpdateFixture(params AppModel.Football.Fixture[] fixtures)
         {
             if (fixtures.Length == 0)
                 return false;
@@ -311,25 +359,33 @@ namespace SportsAdminTool.Logic.Database
                 var fixture = fixtures[i];
 
                 Dev.Assert(fixture.HomeTeam.TeamId != 0);
+                Dev.Assert(fixture.AwayTeam.TeamId != 0);
+
+                bool isCompleted = false;
+                if (fixture.Status == ApiModel.Football.Enums.FixtureStatusType.FT // 종료
+                    || fixture.Status == ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
+                    || fixture.Status == ApiModel.Football.Enums.FixtureStatusType.PEN)// 승부차기 후 종료
+                    isCompleted = true;
 
                 sb.Append($"({fixture.FixtureId}, " +
-                    $"{fixture.LeagueId}, " +
-                    $"{fixture.HomeTeam.TeamId}, " +
-                    $"{fixture.AwayTeam.TeamId}, " +
-                    $"\"{fixture.MatchTime.ToString("yyyyMMddTHHmmss")}\", " +
-                    $"\"{fixture.Round}\", " +
-                    $"\"{fixture.Status}\", " +
-                    $"{fixture.GoalsHomeTeam}, " +
-                    $"{fixture.GoalsAwayTeam}, " +
-                    $"{is_completed}, " +
-                    $"{is_predicted}, " +
-                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                $"{fixture.LeagueId}, " +
+                $"{fixture.HomeTeam.TeamId}, " +
+                $"{fixture.AwayTeam.TeamId}, " +
+                $"\"{fixture.MatchTime.ToString("yyyyMMddTHHmmss")}\", " +
+                $"\"{fixture.Round}\", " +
+                $"\"{fixture.Status}\", " +
+                $"{fixture.GoalsHomeTeam}, " +
+                $"{fixture.GoalsAwayTeam}, " +
+                $"{isCompleted}, " +
+                $"{false}, " +
+                $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
             sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Fixture.status)} = VALUES({nameof(FootballDB.Tables.Fixture.status)}), " +
-                $"{nameof(FootballDB.Tables.Fixture.home_score)} = VALUES({nameof(FootballDB.Tables.Fixture.home_score)}), " +
-                $"{nameof(FootballDB.Tables.Fixture.away_score)} = VALUES({nameof(FootballDB.Tables.Fixture.away_score)}), " +
-                $"{nameof(FootballDB.Tables.Fixture.upt_time)} = VALUES({nameof(FootballDB.Tables.Fixture.upt_time)});");
+                    $"{nameof(FootballDB.Tables.Fixture.home_score)} = VALUES({nameof(FootballDB.Tables.Fixture.home_score)}), " +
+                    $"{nameof(FootballDB.Tables.Fixture.away_score)} = VALUES({nameof(FootballDB.Tables.Fixture.away_score)}), " +
+                    $"{nameof(FootballDB.Tables.Fixture.is_completed)} = VALUES({nameof(FootballDB.Tables.Fixture.is_completed)}), " +
+                    $"{nameof(FootballDB.Tables.Fixture.upt_time)} = VALUES({nameof(FootballDB.Tables.Fixture.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
         }
