@@ -70,12 +70,13 @@
   <ItemGroup>
     <Compile Include="Contexts\FootballDB.cs" />
     <Compile Include="Contexts\PoseGlobalDB.cs" />
-    <Compile Include="FootballDBMigrations\202003170331490_Initialize.cs" />
-    <Compile Include="FootballDBMigrations\202003170331490_Initialize.designer.cs">
-      <DependentUpon>202003170331490_Initialize.cs</DependentUpon>
+    <Compile Include="FootballDBMigrations\202003172109245_Initialize.cs" />
+    <Compile Include="FootballDBMigrations\202003172109245_Initialize.designer.cs">
+      <DependentUpon>202003172109245_Initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
+    <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL.cs" />
@@ -115,8 +116,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FootballDBMigrations\202003170331490_Initialize.resx">
-      <DependentUpon>202003170331490_Initialize.cs</DependentUpon>
+    <EmbeddedResource Include="FootballDBMigrations\202003172109245_Initialize.resx">
+      <DependentUpon>202003172109245_Initialize.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

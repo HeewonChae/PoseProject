@@ -56,14 +56,12 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
-        public static bool UpdateLeague(bool is_Init, params AppModel.Football.League[] leagues)
+        public static bool UpdateLeague(bool isPredictCoverage, params AppModel.Football.League[] leagues)
         {
             if (leagues.Length == 0)
                 return false;
 
             Dev.DebugString("Call DB - FootballFacade.UpdateLeague");
-
-            DateTime upt_time = is_Init ? DateTime.MinValue : DateTime.Now.ToUniversalTime();
 
             StringBuilder sb = new StringBuilder();
             sb.Append(" INSERT INTO league");
@@ -86,8 +84,9 @@ namespace SportsAdminTool.Logic.Database
 
                 var league = leagues[i];
 
-                // TODO: 나중에 테이블로 교체해아함.
-                bool isCoverageLeage = league.Coverage != null && league.Coverage.FixtureCoverage.Statistics;
+                // CoverageLeagues.json 테이블 없을 때 사용할것...
+                //bool isCoverageLeage = league.Coverage != null
+                //    && (league.Coverage.FixtureCoverage.Statistics || league.Coverage.Odds || !string.IsNullOrEmpty(league.Logo));
 
                 sb.Append($"({league.LeagueId}, " +
                     $"\"{league.Name}\", " +
@@ -97,14 +96,16 @@ namespace SportsAdminTool.Logic.Database
                     $"\"{league.SeasonStart.ToString("yyyyMMddTHHmmss")}\", " +
                     $"\"{league.SeasonEnd.ToString("yyyyMMddTHHmmss")}\", " +
                     $"\"{league.Logo}\", " +
-                    $"{isCoverageLeage}, " +
-                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                    $"{isPredictCoverage}, " +
+                    $"\"{DateTime.MinValue.ToString("yyyyMMddTHHmmss")}\")");
             }
 
             sb.Append($"ON DUPLICATE KEY UPDATE " +
                 $"{nameof(FootballDB.Tables.League.logo)} = VALUES({nameof(FootballDB.Tables.League.logo)}), " +
-                $"{nameof(FootballDB.Tables.League.is_current)} = VALUES({nameof(FootballDB.Tables.League.is_current)}), " +
-                $"{nameof(FootballDB.Tables.League.upt_time)} = VALUES({nameof(FootballDB.Tables.League.upt_time)});");
+                $"{nameof(FootballDB.Tables.League.season_start)} = VALUES({nameof(FootballDB.Tables.League.season_start)}), " +
+                $"{nameof(FootballDB.Tables.League.season_end)} = VALUES({nameof(FootballDB.Tables.League.season_end)}), " +
+                $"{nameof(FootballDB.Tables.League.is_predict_coverage)} = VALUES({nameof(FootballDB.Tables.League.is_predict_coverage)}), " +
+                $"{nameof(FootballDB.Tables.League.is_current)} = VALUES({nameof(FootballDB.Tables.League.is_current)});");
 
             return ExecuteQuery(sb.ToString());
         }
@@ -150,7 +151,7 @@ namespace SportsAdminTool.Logic.Database
             }
 
             sb.Append($"ON DUPLICATE KEY UPDATE " +
-                $"{nameof(FootballDB.Tables.League.is_predict_coverage)} = VALUES({nameof(FootballDB.Tables.League.is_predict_coverage)}), " +
+                //$"{nameof(FootballDB.Tables.League.is_predict_coverage)} = VALUES({nameof(FootballDB.Tables.League.is_predict_coverage)}), " +
                 $"{nameof(FootballDB.Tables.League.upt_time)} = VALUES({nameof(FootballDB.Tables.League.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
@@ -239,7 +240,10 @@ namespace SportsAdminTool.Logic.Database
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
-            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Team.logo)} = VALUES({nameof(FootballDB.Tables.Team.logo)}), " +
+            sb.Append($"ON DUPLICATE KEY UPDATE " +
+                $"{nameof(FootballDB.Tables.Team.name)} = VALUES({nameof(FootballDB.Tables.Team.name)}), " +
+                $"{nameof(FootballDB.Tables.Team.country_name)} = VALUES({nameof(FootballDB.Tables.Team.country_name)}), " +
+                $"{nameof(FootballDB.Tables.Team.logo)} = VALUES({nameof(FootballDB.Tables.Team.logo)}), " +
                 $"{nameof(FootballDB.Tables.Team.upt_time)} = VALUES({nameof(FootballDB.Tables.Team.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
@@ -605,6 +609,79 @@ namespace SportsAdminTool.Logic.Database
                 }
             }
 
+            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
+
+            return ExecuteQuery(sb.ToString());
+        }
+
+        public static bool UpdateOdds(params AppModel.Football.Odds[] oddsList)
+        {
+            if (oddsList.Length == 0)
+                return false;
+
+            Dev.DebugString("Call DB - FootballFacade.UpdateOdds");
+
+            DateTime upt_time = DateTime.Now.ToUniversalTime();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" INSERT INTO odds");
+            sb.Append($" (`{nameof(FootballDB.Tables.Odds.fixture_id)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.bookmaker_type)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.label_type)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.subtitle_1)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.odds_1)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.subtitle_2)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.odds_2)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.subtitle_3)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.odds_3)}`, " +
+                $"`{nameof(FootballDB.Tables.Odds.upt_time)}`) ");
+            sb.Append("VALUES");
+
+            for (int h = 0; h < oddsList.Count(); h++)
+            {
+                if (h != 0)
+                    sb.Append(", ");
+
+                var odds = oddsList[h];
+
+                for (int k = 0; k < odds.Bookmakers.Length; k++)
+                {
+                    if (k != 0)
+                        sb.Append(", ");
+
+                    var bookMaker = odds.Bookmakers[k];
+                    for (int i = 0; i < bookMaker.BetInfos.Length && bookMaker.BetInfos[i].BetValues.Length > 0; i++)
+                    {
+                        if (i != 0)
+                        {
+                            sb.Append(", ");
+                        }
+
+                        var betInfo = bookMaker.BetInfos[i];
+                        sb.Append($"({odds.FixtureMini.FixtureId}, " +
+                               $"\"{bookMaker.BookmakerType}\", " +
+                               $"\"{betInfo.LabelType}\", ");
+
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (betInfo.BetValues.Length > j)
+                            {
+                                sb.Append($"\"{betInfo.BetValues[j].Name}\", " +
+                                $"{betInfo.BetValues[j].Odds}, ");
+                            }
+                            else
+                            {
+                                sb.Append($"\"\", 0, ");
+                            }
+                        }
+
+                        sb.Append($"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                    }
+                }
+            }
+
+            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
+
             return ExecuteQuery(sb.ToString());
         }
 
@@ -684,6 +761,19 @@ namespace SportsAdminTool.Logic.Database
             return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Odds>.Input
             {
                 Query = "SELECT * FROM odds",
+                Where = where,
+                GroupBy = groupBy,
+                OrderBy = orderBy,
+            });
+        }
+
+        public static IEnumerable<FootballDB.Tables.FixtureStatistics> SelectStatistics(string where = null, string groupBy = null, string orderBy = null)
+        {
+            Dev.DebugString("Call DB - FootballFacade.SelectStatistics");
+
+            return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.FixtureStatistics>.Input
+            {
+                Query = "SELECT * FROM fixture_statistics",
                 Where = where,
                 GroupBy = groupBy,
                 OrderBy = orderBy,

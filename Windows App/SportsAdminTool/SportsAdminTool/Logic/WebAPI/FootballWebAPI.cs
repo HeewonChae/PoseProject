@@ -214,6 +214,28 @@ namespace SportsAdminTool.Logic.WebAPI
             return Odds;
         }
 
+        public IList<AppModel.Football.Odds> GetOddsByLeagueId(short leagueId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetOddsByLeagueId");
+
+            _api.RequestEx(_api.OddsByLeagueId, (int)leagueId, out IList<AppModel.Football.Odds> OddsList);
+
+            Dev.DebugString($"Odds Count : {OddsList.Count}");
+
+            return OddsList;
+        }
+
+        public IList<AppModel.Football.Odds> GetOddsByLeagueIdAndLabelId(short leagueId, int labelId)
+        {
+            Dev.DebugString("Call API - FootballWebAPI.GetOddsByLeagueId");
+
+            _api.RequestEx(_api.OddsByLeagueIdAndLableId, (int)leagueId, (int)labelId, out IList<AppModel.Football.Odds> OddsList);
+
+            Dev.DebugString($"Odds Count : {OddsList.Count}");
+
+            return OddsList;
+        }
+
         #endregion Odds
     }
 }

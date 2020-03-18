@@ -1,0 +1,100 @@
+﻿{
+  "Teams": [
+    {
+      "Index": 1,
+      "LeagueId": 1326,
+      "TeamName": "Independiente Santa Fe",
+      "CountryName": "Colombia",
+      "ConvertTeamId": 1139,
+      "ConvertTeamName": "Santa Fe"
+    },
+    {
+      "Index": 2,
+      "LeagueId": 536,
+      "TeamName": "Grobina",
+      "CountryName": "Latvia",
+      "ConvertTeamId": 4138,
+      "ConvertTeamName": "Grobiņa"
+    },
+    {
+      "Index": 3,
+      "LeagueId": 975,
+      "TeamName": "Muaither",
+      "CountryName": "Qatar",
+      "ConvertTeamId": 2902,
+      "ConvertTeamName": "Muaither SC"
+    },
+    {
+      "Index": 4,
+      "LeagueId": 351,
+      "TeamName": "Sydney II",
+      "CountryName": "Romania",
+      "ConvertTeamId": 2583,
+      "ConvertTeamName": "Politehnica Iasi"
+    },
+    {
+      "Index": 5,
+      "LeagueId": 113,
+      "TeamName": "Sydney II",
+      "CountryName": "Turkey",
+      "ConvertTeamId": 997,
+      "ConvertTeamName": "Genclerbirligi"
+    },
+    {
+      "Index": 7,
+      "LeagueId": 262,
+      "TeamName": "Academy Platamona",
+      "CountryName": "Greece",
+      "ConvertTeamId": 2100,
+      "ConvertTeamName": "Aiginiakos"
+    },
+    {
+      "Index": 8,
+      "LeagueId": 300,
+      "TeamName": "Sydney II",
+      "CountryName": "Mexico",
+      "ConvertTeamId": 2310,
+      "ConvertTeamName": "Tapachula"
+    },
+    {
+      "Index": 9,
+      "LeagueId": 112,
+      "TeamName": "Sydney II",
+      "CountryName": "Turkey",
+      "ConvertTeamId": 997,
+      "ConvertTeamName": "Genclerbirligi"
+    },
+    {
+      "Index": 10,
+      "LeagueId": 355,
+      "TeamName": "UTA Batrana Doamna",
+      "CountryName": "Romania",
+      "ConvertTeamId": 2589,
+      "ConvertTeamName": "Uta Arad"
+    },
+    {
+      "Index": 11,
+      "LeagueId": 785,
+      "TeamName": "Municipal Jalapa",
+      "CountryName": "Nicaragua",
+      "ConvertTeamId": 10160,
+      "ConvertTeamName": "Jalapa"
+    },
+    {
+      "Index": 12,
+      "LeagueId": 777,
+      "TeamName": "Municipal Garabito",
+      "CountryName": "Costa-Rica",
+      "ConvertTeamId": 2049,
+      "ConvertTeamName": "AS Puma Generalena"
+    },
+    {
+      "Index": 13,
+      "LeagueId": 777,
+      "TeamName": "Cartagena",
+      "CountryName": "Costa-Rica",
+      "ConvertTeamId": 2046,
+      "ConvertTeamName": "Deportivo Cartagena"
+    }
+  ]
+}

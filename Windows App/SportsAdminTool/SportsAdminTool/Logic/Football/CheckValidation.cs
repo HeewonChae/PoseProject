@@ -48,7 +48,7 @@ namespace SportsAdminTool.Logic.Football
 
     public class CheckValidation : Singleton.INode
     {
-        private readonly string rootDir = "C:\\Users\\korma\\Desktop\\FootballError";
+        private readonly string rootDir = ".\\Errors\\";
         private readonly List<InvalidLeague> _invalidLeauges = new List<InvalidLeague>();
         private readonly List<InvalidTeam> _invalidTeams = new List<InvalidTeam>();
 

@@ -9,78 +9,86 @@ using ApiModel = RapidAPI.Models;
 
 namespace SportsAdminTool.Model.Football
 {
-	public class Odds
-	{
-		public class BookmakerInfo
-		{
-			public class BetInfo
-			{
-				public class BetValue
-				{
-					public string Name;
-					public float Odds;
-				}
+    public class Odds
+    {
+        public class FixtureInfoMini
+        {
+            public int LeagueId { get; set; }
+            public int FixtureId { get; set; }
+            public long UpdateAt { get; set; }
+        }
 
-				public ApiModel.Football.Enums.OddsLabelType LabelType { get; set; }
-				public BetValue[] BetValues { get; set; }
+        public class BookmakerInfo
+        {
+            public class BetInfo
+            {
+                public class BetValue
+                {
+                    public string Name;
+                    public float Odds;
+                }
 
-				public void SetBetValues(ApiModel.Football.Odds.BookmakerInfo.BetInfo.BetValue[] api_betValues)
-				{
-					List<BetValue> items = new List<BetValue>();
+                public ApiModel.Football.Enums.OddsLabelType LabelType { get; set; }
+                public BetValue[] BetValues { get; set; }
 
-					foreach (var api_betValue in api_betValues)
-					{
-						var item = new BetValue
-						{
-							Name = api_betValue.Name,
-							Odds = api_betValue.Odds
-						};
+                public void SetBetValues(ApiModel.Football.Odds.BookmakerInfo.BetInfo.BetValue[] api_betValues)
+                {
+                    List<BetValue> items = new List<BetValue>();
 
-						items.Add(item);
-					}
+                    foreach (var api_betValue in api_betValues)
+                    {
+                        var item = new BetValue
+                        {
+                            Name = api_betValue.Name,
+                            Odds = api_betValue.Odds
+                        };
 
-					BetValues = items.ToArray();
-				}
-			}
+                        items.Add(item);
+                    }
 
-			public ApiModel.Football.Enums.BookmakerType BookmakerType { get; set; }
-			public BetInfo[] BetInfos { get; set; }
+                    BetValues = items.ToArray();
+                }
+            }
 
-			public void SetBetInfos(ApiModel.Football.Odds.BookmakerInfo.BetInfo[] api_betInfos)
-			{
-				var items = new List<BetInfo>();
+            public ApiModel.Football.Enums.BookmakerType BookmakerType { get; set; }
+            public BetInfo[] BetInfos { get; set; }
 
-				foreach (var api_betInfo in api_betInfos)
-				{
-					var item = (BetInfo)DataMapper.Map(api_betInfo, typeof(BetInfo));
-					items.Add(item);
-				}
+            public void SetBetInfos(ApiModel.Football.Odds.BookmakerInfo.BetInfo[] api_betInfos)
+            {
+                var items = new List<BetInfo>();
 
-				BetInfos = items.ToArray();
-			}
-		}
+                foreach (var api_betInfo in api_betInfos)
+                {
+                    var item = (BetInfo)DataMapper.Map(api_betInfo, typeof(BetInfo));
+                    items.Add(item);
+                }
 
-		public BookmakerInfo[] Bookmakers { get; set; }
+                BetInfos = items.ToArray();
+            }
+        }
 
-		public void SetBookmakers(ApiModel.Football.Odds.BookmakerInfo[] api_bookMakerInfos)
-		{
-			List<BookmakerInfo> items = new List<BookmakerInfo>();
+        public FixtureInfoMini FixtureMini { get; set; }
+        public BookmakerInfo[] Bookmakers { get; set; }
 
-			foreach (var api_bookMaker in api_bookMakerInfos)
-			{ 
-				if (api_bookMaker.BookmakerType == ApiModel.Football.Enums.BookmakerType._NONE_
-					|| api_bookMaker.BookmakerType == ApiModel.Football.Enums.BookmakerType._MAX_)
-					continue;
+        public void SetBookmakers(ApiModel.Football.Odds.BookmakerInfo[] api_bookMakerInfos)
+        {
+            List<BookmakerInfo> items = new List<BookmakerInfo>();
 
-				var item = (BookmakerInfo)DataMapper.Map(api_bookMaker, typeof(BookmakerInfo));
-				
-				if (item.BetInfos.Length == 0)
-					continue;
+            foreach (var api_bookMaker in api_bookMakerInfos)
+            {
+                if (api_bookMaker.BookmakerType == ApiModel.Football.Enums.BookmakerType._NONE_
+                    || api_bookMaker.BookmakerType == ApiModel.Football.Enums.BookmakerType._MAX_)
+                    continue;
 
-				items.Add(item);
-			}
+                var item = (BookmakerInfo)DataMapper.Map(api_bookMaker, typeof(BookmakerInfo));
 
-			Bookmakers = items.ToArray();
-		}
-	}
+                if (item.BetInfos.Length == 0)
+                    continue;
+
+                items.Add(item);
+            }
+
+            Bookmakers = items.ToArray();
+        }
+    }
 }

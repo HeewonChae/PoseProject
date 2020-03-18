@@ -38,7 +38,8 @@ namespace RapidAPI.Converter
                         //	betInfo.BetValues = filteredValues.ToArray();
                         //}
 
-                        if (betInfo.BetValues.Length != 0)
+                        // home, away, draw 모두 있는 것만..
+                        if (betInfo.BetValues.Length == 3)
                             betInfos.Add(betInfo);
                     }
                 }

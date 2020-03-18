@@ -14,6 +14,7 @@ using ApiModel = RapidAPI.Models;
 using System.Windows.Controls;
 using SportsAdminTool.Model.Resource.Football;
 using LogicCore.Debug;
+using RapidAPI.Models.Football.Enums;
 
 namespace SportsAdminTool.Logic.Football
 {
@@ -24,6 +25,7 @@ namespace SportsAdminTool.Logic.Football
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
             var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
+            var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByLeagueIdAndLabelId(leagueId, (int)OddsLabelType.Match_Winner);
 
             // 지금 시각 이후의 경기들 일단 삭제 (취소, 연기된 경기가 있을지도 모르니)
             Database.FootballDBFacade.DeleteFixtures(
@@ -31,10 +33,14 @@ namespace SportsAdminTool.Logic.Football
 
             // DB Save
             Database.FootballDBFacade.UpdateFixture(api_filteredFixtures.ToArray());
+            Database.FootballDBFacade.UpdateOdds(api_odds.ToArray());
         }
 
         public static void UpdateOdds(int fixtureId)
         {
+            if (IsAlreadyUpdatedOdds(fixtureId))
+                return;
+
             // Call API
             var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByFixtureId(fixtureId);
             if (api_odds == null)
@@ -46,6 +52,9 @@ namespace SportsAdminTool.Logic.Football
 
         public static void UpdateFixtureStatistics(int fixtureId)
         {
+            if (IsAlreadyUpdatedStatistics(fixtureId))
+                return;
+
             // Call API
             var api_fixtureStatistic = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixtureStatisticByFixtureId(fixtureId);
             if (api_fixtureStatistic == null)
@@ -66,12 +75,10 @@ namespace SportsAdminTool.Logic.Football
         {
             // Call API
             var api_h2h = Singleton.Get<ApiLogic.FootballWebAPI>().GetH2HFixtures(teamId1, teamId2);
+            var api_filteredFixtures = api_h2h.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
 
-            foreach (var api_fixture in api_h2h)
+            foreach (var api_fixture in api_filteredFixtures)
             {
-                if (IsAlreadyUpdatedOdds(api_fixture.FixtureId))
-                    continue;
-
                 // DB Save
                 Database.FootballDBFacade.UpdateFixture(api_fixture);
 
@@ -88,9 +95,6 @@ namespace SportsAdminTool.Logic.Football
 
             foreach (var api_fixture in api_filteredFixtures)
             {
-                if (IsAlreadyUpdatedOdds(api_fixture.FixtureId))
-                    continue;
-
                 // DB Save
                 Database.FootballDBFacade.UpdateFixture(api_fixture);
 
@@ -118,7 +122,7 @@ namespace SportsAdminTool.Logic.Football
                     Dev.Assert(api_league != null, $"api_league is null leagueId: {errorLeague.LeagueId}");
 
                     // DB Save
-                    Database.FootballDBFacade.UpdateLeague(true, api_league);
+                    Database.FootballDBFacade.UpdateLeague(false, api_league);
                     Database.FootballDBFacade.UpdateCoverage(api_league);
                 }
 
@@ -158,6 +162,11 @@ namespace SportsAdminTool.Logic.Football
         public static bool IsAlreadyUpdatedOdds(int fixtureId)
         {
             return Database.FootballDBFacade.SelectOdds(where: $"fixture_id = {fixtureId}").FirstOrDefault() != null;
+        }
+
+        public static bool IsAlreadyUpdatedStatistics(int fixtureId)
+        {
+            return Database.FootballDBFacade.SelectStatistics(where: $"fixture_id = {fixtureId}").FirstOrDefault() != null;
         }
 
         public static bool IsExistFixture(int fixtureId)

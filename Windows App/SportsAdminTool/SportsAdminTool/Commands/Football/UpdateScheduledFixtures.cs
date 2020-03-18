@@ -2,6 +2,7 @@
 using LogicCore.Utility;
 using Repository.Mysql.FootballDB.Tables;
 using SportsAdminTool.Logic.Football;
+using SportsAdminTool.Model.Resource.Football;
 using System;
 using System.Collections.Generic;
 using System.Linq;

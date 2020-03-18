@@ -13,29 +13,22 @@ namespace Repository.Mysql.FootballDB.Tables
     public class Odds
     {
         [Key]
-        [Column(TypeName = "BIGINT")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long seq { get; set; }
-
-        [Required]
-        [Index("IDX_FIXTURE_LABEL", Order = 1, IsUnique = false)]
-        [Column(TypeName = "INT")]
+        [Column(Order = 1, TypeName = "INT")]
         public int fixture_id { get; set; }
 
-        [Required]
-        [Column(TypeName = "VARCHAR")]
+        [Key]
+        [Column(Order = 2, TypeName = "VARCHAR")]
         [StringLength(32)]
         public string bookmaker_type { get; set; }
 
-        [Required]
-        [Index("IDX_FIXTURE_LABEL", Order = 2, IsUnique = false)]
-        [Column(TypeName = "VARCHAR")]
-        [StringLength(32)]
+        [Key]
+        [Column(Order = 3, TypeName = "VARCHAR")]
+        [StringLength(16)]
         public string label_type { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(16)]
+        [StringLength(8)]
         [SqlDefaultValue(DefaultValue = "")]
         public string subtitle_1 { get; set; }
 
@@ -46,7 +39,7 @@ namespace Repository.Mysql.FootballDB.Tables
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(16)]
+        [StringLength(8)]
         [SqlDefaultValue(DefaultValue = "")]
         public string subtitle_2 { get; set; }
 
@@ -57,7 +50,7 @@ namespace Repository.Mysql.FootballDB.Tables
 
         [Required]
         [Column(TypeName = "VARCHAR")]
-        [StringLength(16)]
+        [StringLength(8)]
         [SqlDefaultValue(DefaultValue = "")]
         public string subtitle_3 { get; set; }
 

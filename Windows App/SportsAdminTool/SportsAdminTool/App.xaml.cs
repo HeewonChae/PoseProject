@@ -1,4 +1,7 @@
-﻿using LogicCore.Utility.ThirdPartyLog;
+﻿using LogicCore.Thread;
+using LogicCore.Utility;
+using LogicCore.Utility.ThirdPartyLog;
+using SportsAdminTool.Logic.Football;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +25,8 @@ namespace SportsAdminTool
             {
                 Log4Net.WriteLog(eArgs.ExceptionObject.ToString(), Log4Net.Level.FATAL);
                 Trace.Assert(false, eArgs.ExceptionObject.ToString());
+
+                Singleton.Get<CheckValidation>().OutputErrorToJsonFile();
             };
 
             base.OnStartup(e);

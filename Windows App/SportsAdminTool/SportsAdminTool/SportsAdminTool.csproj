@@ -37,6 +37,9 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mahapps.metro.logo_.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -169,6 +172,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\Football\CheckCompletedFixtures.cs" />
+    <Compile Include="Commands\Football\ExportCoverageLeagues.cs" />
     <Compile Include="Commands\Football\InitializeFootballDB.cs" />
     <Compile Include="Commands\Football\PredictFixtures.cs" />
     <Compile Include="Commands\Football\UpdateScheduledFixtures.cs" />
@@ -220,15 +224,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Resources\Football\LeagueCoverage.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\Football\UndefinedTeam.json">
+    <None Include="Resources\Football\CoverageLeagues.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Football\UndefinedTeams.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -256,6 +260,8 @@
       <Name>Repository.Mysql</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="mahapps.metro.logo_.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -140,7 +140,7 @@ namespace LogicCore.File
         /// <param name="indexField"></param>
         /// <returns></returns>
         public bool TryLoadJsonSingleRow(string tableName, Type recordType, byte[] buffer,
-            IList<(Type, string)> supportTypes, string indexField = "Index")
+            IList<(Type, string)> supportTypes = null, string indexField = "Index")
         {
             try
             {

@@ -12,28 +12,23 @@ using System.Threading.Tasks;
 
 namespace SportsAdminTool.Model.Resource.Football
 {
-    public class CoverageLeague : IRecord, TableParser.IPostLoading
+    public class CoverageLeague
     {
-        public readonly int Index = 0;
-        public readonly short LeagueId = 0;
-        public readonly string LeagueName = string.Empty;
-        public readonly string LeagueLogo = string.Empty;
-
-        [JsonConverter(typeof(StringEnumConverter))]
-        public readonly FootballLeagueType LeagueType = FootballLeagueType._NONE_;
-
-        public readonly string CountryName = string.Empty;
-        public readonly string CountryLogo = string.Empty;
+        public int Index { get; set; }
+        public string LeagueName { get; set; }
+        public string LeagueLogo { get; set; }
+        public FootballLeagueType LeagueType { get; set; }
+        public string CountryName { get; set; }
+        public string CountryLogo { get; set; }
 
         public CoverageLeague()
         {
         }
 
-        public CoverageLeague(int index, short leagueId, string leaugeName, string leagueLogo,
+        public CoverageLeague(int index, string leaugeName, string leagueLogo,
             FootballLeagueType leagueType, string countryName, string countryLogo)
         {
             Index = index;
-            LeagueId = leagueId;
             LeagueName = leaugeName;
             LeagueLogo = leagueLogo;
             LeagueType = leagueType;
@@ -43,23 +38,26 @@ namespace SportsAdminTool.Model.Resource.Football
 
         public static Dictionary<string, CoverageLeague> CoverageLeagues { get; } = new Dictionary<string, CoverageLeague>();
 
-        void TableParser.IPostLoading.Process()
+        public static void Load(params CoverageLeague[] coverageLeagues)
         {
-            string key = MakeCoverageLeagueKey(this.CountryName, this.LeagueName);
+            foreach (var covaerageLeague in coverageLeagues)
+            {
+                string key = MakeCoverageLeagueKey(covaerageLeague.CountryName, covaerageLeague.LeagueName, covaerageLeague.LeagueType.ToString());
 
-            Dev.Assert(!CoverageLeagues.ContainsKey(key), $"Alread exist key in Dic_leagueCoverage key: {key}");
+                Dev.Assert(!CoverageLeagues.ContainsKey(key), $"Alread exist key in Dic_leagueCoverage key: {key}");
 
-            CoverageLeagues.Add(key, this);
+                CoverageLeagues.Add(key, covaerageLeague);
+            }
         }
 
-        public static string MakeCoverageLeagueKey(string CountryName, string leaugeName)
+        public static string MakeCoverageLeagueKey(string CountryName, string leaugeName, string leagueType)
         {
-            return $"{CountryName}:{leaugeName}";
+            return $"{CountryName}:{leaugeName}:{leagueType}";
         }
 
-        public static CoverageLeague FindLeauge(string CountryName, string leaugeName)
+        public static CoverageLeague FindLeauge(string CountryName, string leaugeName, string leagueType)
         {
-            var key = MakeCoverageLeagueKey(CountryName, leaugeName);
+            var key = MakeCoverageLeagueKey(CountryName, leaugeName, leagueType);
 
             if (CoverageLeagues.ContainsKey(key))
             {
@@ -67,6 +65,13 @@ namespace SportsAdminTool.Model.Resource.Football
             }
 
             return null;
+        }
+
+        public static bool HasLeague(string CountryName, string leaugeName, string leagueType)
+        {
+            var key = MakeCoverageLeagueKey(CountryName, leaugeName, leagueType);
+
+            return CoverageLeagues.ContainsKey(key);
         }
     }
 }

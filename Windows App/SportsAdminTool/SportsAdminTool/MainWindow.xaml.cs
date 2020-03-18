@@ -54,6 +54,24 @@ namespace SportsAdminTool
             }
         }
 
+        #region Thread Safe Change UI Element
+
+        /// <summary>
+        /// Set Label Content
+        /// </summary>
+        /// <param name="str"></param>
+        public void Set_Lable(Label e, string str)
+        {
+            Dev.DebugString($"Set_Lable: {nameof(e)} - {str}");
+
+            this.Dispatcher.Invoke(() =>
+            {
+                e.Content = str;
+            });
+        }
+
+        #endregion Thread Safe Change UI Element
+
         /// <summary>
         /// Initialize footballdb
         /// </summary>
@@ -63,21 +81,20 @@ namespace SportsAdminTool
                 return;
 
             // 해당 로직에 알람이 이미 설정되 있는 상황이면 삭제
-            Singleton.Get<FootballAlarm.InitializeDatabase>().CancelReservation();
+            //Singleton.Get<FootballAlarm.InitializeDatabase>().CancelReservation();
 
             string org_bannerText = this._lbl_initialize_footballdb.Content.ToString();
             this._progRing_initialize_footballdb.IsActive = true;
 
             await FootballCommands.InitializeFootballDB.Execute();
-            await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile);
 
             // 텍스트 원래대로 변경
             this._lbl_initialize_footballdb.Content = org_bannerText;
             this._progRing_initialize_footballdb.IsActive = false;
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후
-            Singleton.Get<FootballAlarm.InitializeDatabase>().SetAlarm((long)ts.TotalMilliseconds);
+            //TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후
+            //Singleton.Get<FootballAlarm.InitializeDatabase>().SetAlarm((long)ts.TotalMilliseconds);
         }
 
         /// <summary>
@@ -141,22 +158,14 @@ namespace SportsAdminTool
             Singleton.Get<FootballAlarm.CheckCompletedFixtures>().SetAlarm((long)ts.TotalMilliseconds);
         }
 
-        #region Thread Safe Change UI Element
-
         /// <summary>
-        /// Set Label Content
+        /// Export CoverageLeague Json File
         /// </summary>
-        /// <param name="str"></param>
-        public void Set_Lable(Label e, string str)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_export_coverageLeague_Click(object sender, RoutedEventArgs e)
         {
-            Dev.DebugString($"Set_Lable: {nameof(e)} - {str}");
-
-            this.Dispatcher.Invoke(() =>
-            {
-                e.Content = str;
-            });
+            FootballCommands.ExportCoverageLeagues.Execute();
         }
-
-        #endregion Thread Safe Change UI Element
     }
 }

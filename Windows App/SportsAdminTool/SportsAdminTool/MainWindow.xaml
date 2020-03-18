@@ -8,7 +8,7 @@
                       xmlns:local="clr-namespace:SportsAdminTool"
                       mc:Ignorable="d"
                       Title="Pose Sports" Height="900" Width="1200"
-                      ShowIconOnTitleBar="True" 
+                      ShowIconOnTitleBar="True"
                       Icon="mahapps.metro.logo.png"
                       GlowBrush="{DynamicResource AccentColorBrush}"
                       WindowStartupLocation="CenterScreen"
@@ -18,21 +18,29 @@
         <Controls:WindowCommands>
             <Button Click="TitleBar_ListIcon_Click">
                 <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconModern Width="24" 
-                                              Height="24" 
-                                              Kind="BookList" />
+                    <iconPacks:PackIconModern Width="24"
+                                              Height="24"
+                                              Kind="ListGear" />
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.Flyouts>
-        <Controls:FlyoutsControl >
-            <Controls:Flyout x:Name="_globalFlyout" 
-                             Header="Flyout" 
-                             Position="Right" 
-                             Width="200">
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="_globalFlyout"
+                             Header="Flyout"
+                             Position="Right"
+                             Width="300">
                 <!-- Your custom content here -->
+                <StackPanel>
+                    <Button
+                        x:Name="btn_export_coverageLeague"
+                        Margin="30 15"
+                        Content="Export - Coverage League"
+                        Click="btn_export_coverageLeague_Click">
+                    </Button>
+                </StackPanel>
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
@@ -47,7 +55,7 @@
 
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="225"/>
+                <RowDefinition Height="225" />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -58,7 +66,7 @@
                                Grid.Row="0"
                                SelectionChanged="Fv_football_SelectionChanged">
                 <Controls:FlipView.Items>
-                    <Grid Background="LightSeaGreen" 
+                    <Grid Background="LightSeaGreen"
                           MouseLeftButtonUp="Fv_item_initialize_footballdb_Click">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -66,27 +74,27 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label x:Name="_lbl_initialize_footballdb" 
-                               Grid.Row="0" 
-                               Content="Ready (country, league, team)" 
-                               Foreground="Black" 
-                               FontSize="14"/>
+                        <Label x:Name="_lbl_initialize_footballdb"
+                               Grid.Row="0"
+                               Content="Ready (country, league, team)"
+                               Foreground="Black"
+                               FontSize="14" />
                         <iconPacks:PackIconModern Width="80"
                                                   Height="80"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   Kind="SportFootball"
                                                   Grid.Row="1"
-                                                  Grid.RowSpan="2"/>
-                        <Controls:ProgressRing x:Name="_progRing_initialize_footballdb" 
+                                                  Grid.RowSpan="2" />
+                        <Controls:ProgressRing x:Name="_progRing_initialize_footballdb"
                                                Width="80"
                                                Height="80"
-                                               Foreground="Black" 
+                                               Foreground="Black"
                                                IsActive="False"
                                                Grid.Row="1"
-                                               Grid.RowSpan="2"/>
+                                               Grid.RowSpan="2" />
                     </Grid>
-                    <Grid Background="DodgerBlue" 
+                    <Grid Background="DodgerBlue"
                           MouseLeftButtonUp="Fv_item_collectDatas_and_predict_Click">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -94,27 +102,27 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label x:Name="_lbl_collectDatasAndPredict" 
-                               Grid.Row="0" 
-                               Content="Ready (fixtures, odds, standings)" 
-                               Foreground="Black" 
-                               FontSize="14"/>
+                        <Label x:Name="_lbl_collectDatasAndPredict"
+                               Grid.Row="0"
+                               Content="Ready (fixtures, odds, standings)"
+                               Foreground="Black"
+                               FontSize="14" />
                         <iconPacks:PackIconModern Width="80"
                                                   Height="80"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   Kind="SportFootball"
                                                   Grid.Row="1"
-                                                  Grid.RowSpan="2"/>
-                        <Controls:ProgressRing x:Name="_progRing_collectDatasAndPredict" 
+                                                  Grid.RowSpan="2" />
+                        <Controls:ProgressRing x:Name="_progRing_collectDatasAndPredict"
                                                Width="80"
                                                Height="80"
-                                               Foreground="Black" 
+                                               Foreground="Black"
                                                IsActive="False"
                                                Grid.Row="1"
-                                               Grid.RowSpan="2"/>
+                                               Grid.RowSpan="2" />
                     </Grid>
-                    <Grid Background="DarkOrange" 
+                    <Grid Background="DarkOrange"
                           MouseLeftButtonUp="Fv_item_check_completed_fixtures_Click">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -122,25 +130,25 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label x:Name="_lbl_check_completed_fixtures" 
-                               Grid.Row="0" 
-                               Content="Ready (last fixtures, H2H, statistics)" 
-                               Foreground="Black" 
-                               FontSize="14"/>
+                        <Label x:Name="_lbl_check_completed_fixtures"
+                               Grid.Row="0"
+                               Content="Ready (last fixtures, H2H, statistics)"
+                               Foreground="Black"
+                               FontSize="14" />
                         <iconPacks:PackIconModern Width="80"
                                                   Height="80"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   Kind="SportFootball"
                                                   Grid.Row="1"
-                                                  Grid.RowSpan="2"/>
-                        <Controls:ProgressRing x:Name="_progRing_check_completed_fixtures" 
+                                                  Grid.RowSpan="2" />
+                        <Controls:ProgressRing x:Name="_progRing_check_completed_fixtures"
                                                Width="80"
                                                Height="80"
-                                               Foreground="Black" 
+                                               Foreground="Black"
                                                IsActive="False"
                                                Grid.Row="1"
-                                               Grid.RowSpan="2"/>
+                                               Grid.RowSpan="2" />
                     </Grid>
                 </Controls:FlipView.Items>
             </Controls:FlipView>

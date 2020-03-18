@@ -468,6 +468,25 @@ namespace RapidAPI
             return response.Api.OddsList.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Get all available odds from one {league_id}
+        /// </summary>
+        /// <param name="fixtureId"></param>
+        /// <returns></returns>
+        public IList<Odds> OddsByLeagueId(int leagueId)
+        {
+            var apiClient = new RestClient(_end_point);
+
+            var request = _requestBuilder.Build(
+                "odds/league/{leagueId}",
+                Method.GET,
+                new { leagueId });
+
+            var response = apiClient.ExecuteEx<FootballApiResponse<OddsResponse>>(request);
+
+            return response.Api.OddsList;
+        }
+
         #endregion Odds
 
         #region Prediction
