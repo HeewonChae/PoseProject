@@ -138,6 +138,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.35</Version>
+    </PackageReference>
     <PackageReference Include="FFImageLoading.ImageSourceHandler">
       <Version>1.0.0</Version>
     </PackageReference>

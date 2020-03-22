@@ -37,7 +37,8 @@ namespace SportsWebService.Commands.Football
             {
                 P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Input
                 {
-                    WHERE = $"f.{nameof(FootballDB.Tables.Fixture.match_time)} BETWEEN \"{input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{input.EndTime.ToString("yyyyMMddTHHmmss")}\"",
+                    WHERE = $"f.{nameof(FootballDB.Tables.Fixture.is_predicted)} = 1 AND " +
+                    $"f.{nameof(FootballDB.Tables.Fixture.match_time)} BETWEEN \"{input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{input.EndTime.ToString("yyyyMMddTHHmmss")}\"",
                 });
 
                 db_output = P_SELECT_FIXTURES_BY_DATE.OnQuery();

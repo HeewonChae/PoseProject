@@ -31,13 +31,11 @@ namespace SportsAdminTool.Commands.Football
 
                 List<footballRes.CoverageLeague> coverageLeagueList = new List<footballRes.CoverageLeague>();
 
-                int increaseIndex = 1;
                 foreach (var coverageLeague in db_coverageLeagues)
                 {
                     Dev.Assert(coverageLeague.LeagueType.TryParseEnum(out FootballLeagueType leagueType));
 
                     coverageLeagueList.Add(new footballRes.CoverageLeague(
-                        increaseIndex,
                         coverageLeague.LeagueName,
                         coverageLeague.LeagueLogo,
                         leagueType,

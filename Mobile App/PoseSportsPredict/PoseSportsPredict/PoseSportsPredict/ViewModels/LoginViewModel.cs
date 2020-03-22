@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.Service.Auth.Models;
@@ -113,6 +114,16 @@ namespace PoseSportsPredict.ViewModels
 
             SetIsBusy(false);
             return true;
+        }
+
+        public override void SetIsBusy(bool isBusy)
+        {
+            base.SetIsBusy(isBusy);
+
+            if (isBusy)
+                UserDialogs.Instance.ShowLoading(LocalizeString.Loginning);
+            else
+                UserDialogs.Instance.HideLoading();
         }
 
         #endregion Methods

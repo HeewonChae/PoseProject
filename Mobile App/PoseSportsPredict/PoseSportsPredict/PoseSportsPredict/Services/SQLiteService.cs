@@ -25,9 +25,22 @@ namespace PoseSportsPredict.Services
             }
         }
 
-        public Task DeleteAsync<T>(int pk) where T : ISQLiteStorable, new()
+        public async Task DeleteAsync<T>(string pk) where T : ISQLiteStorable, new()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var con = new SQLiteContext<T>())
+                {
+                    var found = await con.SelectAsync(pk);
+                    if (found != null)
+                        await con.DeleteAsync(found);
+                }
+            }
+            catch (Exception ex)
+            {
+                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                throw;
+            }
         }
 
         public async Task InsertOrUpdateAsync<T>(T model) where T : ISQLiteStorable, new()
@@ -54,12 +67,27 @@ namespace PoseSportsPredict.Services
             }
         }
 
-        public Task<List<T>> SelectAllAsync<T>() where T : ISQLiteStorable, new()
+        public async Task<List<T>> SelectAllAsync<T>() where T : ISQLiteStorable, new()
         {
-            throw new NotImplementedException();
+            List<T> result = default;
+
+            try
+            {
+                using (var con = new SQLiteContext<T>())
+                {
+                    result = await con.SelectAllAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                throw;
+            }
+
+            return result;
         }
 
-        public async Task<T> SelectAsync<T>(int pk) where T : ISQLiteStorable, new()
+        public async Task<T> SelectAsync<T>(string pk) where T : ISQLiteStorable, new()
         {
             T result = default;
 

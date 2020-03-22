@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
+             material:MaterialNavigationPage.AppBarTitleTextFontSize="20"
+             material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
+             material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
+             material:MaterialNavigationPage.HasShadow="False"
+             x:Class="PoseSportsPredict.Views.Common.SettingsPage"
+             Title="{x:Static localize:LocalizeString.Settings}"
+             IconImageSource="tab_about">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

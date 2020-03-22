@@ -118,11 +118,11 @@
   <data name="Football" xml:space="preserve">
     <value>Football</value>
   </data>
-  <data name="Match" xml:space="preserve">
-    <value>Match</value>
+  <data name="Matches" xml:space="preserve">
+    <value>Matches</value>
   </data>
-  <data name="League" xml:space="preserve">
-    <value>League</value>
+  <data name="Leagues" xml:space="preserve">
+    <value>Leagues</value>
   </data>
   <data name="Occur_Error" xml:space="preserve">
     <value>An error has occurred.</value>
@@ -177,5 +177,14 @@
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
     <value>Arrange by Time</value>
+  </data>
+  <data name="Bookmarks" xml:space="preserve">
+    <value>Bookmarks</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="PressBack_Twice_To_Exit" xml:space="preserve">
+    <value>Please click 'BACK' again to exit.</value>
   </data>
 </root>

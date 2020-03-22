@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Football\CoverageLeagues.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Football\CoverageLeagues.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.35" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naxam.TopTabbedPage.Forms" Version="0.0.3.5" />
     <PackageReference Include="Plugin.LocalNotification" Version="4.1.4" />
@@ -44,6 +55,9 @@
     <Compile Update="Views\AppMasterMenuPage.xaml.cs">
       <DependentUpon>AppMasterMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Football\Bookmark\FootballBookmarksPage.xaml.cs">
+      <DependentUpon>FootballBookmarksPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Football\FootballMainPage.xaml.cs">
       <DependentUpon>FootballMainPage.xaml</DependentUpon>
     </Compile>
@@ -56,12 +70,6 @@
     <Compile Update="Views\Football\Match\Detail\FootballMatchDetailPredictionsView.xaml.cs">
       <DependentUpon>FootballMatchDetailPredictionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Test\AppShellPage.xaml.cs">
-      <DependentUpon>AppShellPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Test\TopTabbedPage1.xaml.cs">
-      <DependentUpon>TopTabbedPage1.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -72,7 +80,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizeString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\FootballLeaguesPage.xaml">
+    <EmbeddedResource Update="Views\Common\SettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarksPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\League\FootballLeagueListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\League\FootballLeaguesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\FootballMainPage.xaml">
@@ -102,46 +119,15 @@
     <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailPredictionsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\TabbedPage1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\AboutPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\AppShellPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\ItemDetailPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\ItemsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\NewItemPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\TopTabbedPage1.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Test\TempPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logics\Common\Behaviors\" />
+    <Folder Include="Logics\View\Behaviors\" />
     <Folder Include="CustomViews\" />
-    <Folder Include="Models\Football\SQLite\" />
-    <Folder Include="ViewModels\Common\" />
-    <Folder Include="ViewModels\Football\League\" />
-    <Folder Include="ViewModels\Football\Bookmark\" />
     <Folder Include="ViewModels\Football\Team\" />
-    <Folder Include="Views\Football\League\" />
-    <Folder Include="Views\Football\Bookmark\" />
     <Folder Include="Views\Football\Team\" />
-    <Folder Include="Views\Common\" />
   </ItemGroup>
 </Project>

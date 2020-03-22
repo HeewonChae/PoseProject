@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Logics.Football.Converters;
+using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
@@ -23,14 +25,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public ICommand SelectMatchCommand { get => new RelayCommand<PacketModels.FixtureDetail>((e) => SelectMatch(e)); }
 
-        private async void SelectMatch(PacketModels.FixtureDetail matchInfo)
+        private async void SelectMatch(PacketModels.FixtureDetail fixtureDetail)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
+            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>()
+                , ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixtureDetail, null, null, null));
 
             SetIsBusy(false);
         }

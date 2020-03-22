@@ -9,64 +9,64 @@ using System.Threading.Tasks;
 
 namespace RapidAPI.Converter
 {
-	public class StandingsConverter : JsonConverter<Standing[]>
-	{
-		public override Standing[] ReadJson(JsonReader reader, Type objectType, Standing[] existingValue, bool hasExistingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.StartObject)
-			{
-				List<Standing> standings = new List<Standing>();
+    public class StandingsConverter : JsonConverter<Standing[]>
+    {
+        public override Standing[] ReadJson(JsonReader reader, Type objectType, Standing[] existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.StartObject)
+            {
+                List<Standing> standings = new List<Standing>();
 
-				JObject item = JObject.Load(reader);
+                JObject item = JObject.Load(reader);
 
-				Standing[] tempStandings = new Standing[0];
-				JToken standingObject;
-				for (int i = 0; i < 100; i++)
-				{
-					string propertyName = $"{i}";
-					standingObject = item[propertyName];
-					if(standingObject != null)
-					{
-						tempStandings = standingObject.ToObject<Standing[]>(serializer);
-						break;
-					}
-				}
+                Standing[] tempStandings = new Standing[0];
+                JToken standingObject;
+                for (int i = 0; i < 100; i++)
+                {
+                    string propertyName = $"{i}";
+                    standingObject = item[propertyName];
+                    if (standingObject != null)
+                    {
+                        tempStandings = standingObject.ToObject<Standing[]>(serializer);
+                        break;
+                    }
+                }
 
-				foreach (var tempStanding in tempStandings)
-				{
-					tempStanding.Group = $"Group-{1} {tempStanding.Group}";
-					standings.Add(tempStanding);
-				}
+                foreach (var tempStanding in tempStandings)
+                {
+                    tempStanding.Group = $"Group-{1} {tempStanding.Group}";
+                    standings.Add(tempStanding);
+                }
 
-				return standings.ToArray();
-			}
-			else if(reader.TokenType == JsonToken.StartArray)
-			{
-				List<Standing> standings = new List<Standing>();
+                return standings.ToArray();
+            }
+            else if (reader.TokenType == JsonToken.StartArray)
+            {
+                List<Standing> standings = new List<Standing>();
 
-				JArray items = JArray.Load(reader);
-				var tempStandingsGroup = items.ToObject<IEnumerable<Standing[]>>(serializer);
+                JArray items = JArray.Load(reader);
+                var tempStandingsGroup = items.ToObject<IEnumerable<Standing[]>>(serializer);
 
-				foreach(var tempStandings in tempStandingsGroup)
-				{
-					int group = 1;
-					foreach(var tempStanding in tempStandings)
-					{
-						tempStanding.Group = $"Group-{group} {tempStanding.Group}";
-						standings.Add(tempStanding);
-					}
-					group++;
-				}
+                int group = 1;
+                foreach (var tempStandings in tempStandingsGroup)
+                {
+                    foreach (var tempStanding in tempStandings)
+                    {
+                        tempStanding.Group = $"Group-{group} {tempStanding.Group}";
+                        standings.Add(tempStanding);
+                    }
+                    group++;
+                }
 
-				return standings.ToArray();
-			}
+                return standings.ToArray();
+            }
 
-			return hasExistingValue ? existingValue : new Standing[0];
-		}
+            return hasExistingValue ? existingValue : new Standing[0];
+        }
 
-		public override void WriteJson(JsonWriter writer, Standing[] value, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public override void WriteJson(JsonWriter writer, Standing[] value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

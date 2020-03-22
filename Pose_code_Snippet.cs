@@ -68,3 +68,10 @@ public static class P_Command
         return outpout;
     }
 }
+
+// Find Invalid Team
+https://rapidapi.com/api-sports/api/api-football
+SELECT l.id, l.country_name, l.name, f.home_team_id, t.name FROM footballdb.fixture as f
+INNER JOIN footballdb.league as l ON f.league_id = l.id
+INNER JOIN footballdb.team as t ON f.home_team_id = t.id
+where league_id=777 group by home_team_id;

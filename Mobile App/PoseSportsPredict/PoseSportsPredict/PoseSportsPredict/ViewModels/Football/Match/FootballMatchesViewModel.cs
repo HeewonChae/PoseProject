@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Forms;
 using PacketModels = PosePacket.Service.Football.Models;
 
 namespace PoseSportsPredict.ViewModels.Football.Match
@@ -52,9 +53,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Fields
 
-        private TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> _MatchesTaskLoaderNotifier;
-        private List<PacketModels.FixtureDetail> _matchList;
-        private ObservableCollection<MatchGroup> _matchGroups;
+        private TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> _matchesTaskLoaderNotifier;
+        private ObservableCollection<FootballMatchGroup> _matchGroups;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
 
@@ -62,20 +62,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Properties
 
-        public TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> MatchesTaskLoaderNotifier { get => _MatchesTaskLoaderNotifier; set => SetValue(ref _MatchesTaskLoaderNotifier, value); }
-        public ObservableCollection<MatchGroup> MatchGroups { get => _matchGroups; set => SetValue(ref _matchGroups, value); }
+        public TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
+        public ObservableCollection<FootballMatchGroup> MatchGroups { get => _matchGroups; set => SetValue(ref _matchGroups, value); }
 
         #endregion Properties
 
         #region Commands
 
-        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<MatchGroup>((e) => SelectGroupHeader(e)); }
+        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<FootballMatchGroup>((e) => SelectGroupHeader(e)); }
 
-        private void SelectGroupHeader(MatchGroup groupInfo)
+        private void SelectGroupHeader(FootballMatchGroup groupInfo)
         {
             groupInfo.Expanded = !groupInfo.Expanded;
-            //OnPropertyChanged("MatchGroups");
-            UpdateMatches(_matchList);
+
+            MatchGroups = new ObservableCollection<FootballMatchGroup>(MatchGroups);
         }
 
         #endregion Commands
@@ -106,7 +106,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private async Task<IReadOnlyCollection<PacketModels.FixtureDetail>> GetMatchesAsync()
         {
-            await Task.Delay(500);
+            await Task.Delay(300);
 
             var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
             {
@@ -132,35 +132,28 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             _lastUpdateTime = DateTime.UtcNow;
 
-            UpdateMatches(result.Fixtures);
+            InitializeMatcheGroups(result.Fixtures);
 
             return result.Fixtures;
         }
 
-        private void UpdateMatches(List<PacketModels.FixtureDetail> matchList)
+        private void InitializeMatcheGroups(List<PacketModels.FixtureDetail> matchList)
         {
-            _matchList = matchList;
-            if (_matchList.Count == 0)
-                return;
+            ObservableCollection<FootballMatchGroup> matchGroupCollection;
+            matchGroupCollection = new ObservableCollection<FootballMatchGroup>();
 
-            var matchGroupCollection = new ObservableCollection<MatchGroup>();
-
-            var grouppingMatchs = _matchList.GroupBy(elem => $"{elem.Country.Name} - {elem.League.Name}");
-            foreach (var grouppingMatch in grouppingMatchs)
+            var grouppingMatches = matchList.GroupBy(elem => $"{elem.Country.Name} - {elem.League.Name}");
+            foreach (var grouppingMatch in grouppingMatches)
             {
                 // 기존 데이터 있는지.. 있으면 Expanded값은 유지
                 var foundExistData = MatchGroups?.Where(elem => elem.Title == grouppingMatch.Key).FirstOrDefault();
-
-                var firstItem = grouppingMatch.First();
-                var matchGroup = new MatchGroup(grouppingMatch.Key, firstItem.Country.Logo, foundExistData?.Expanded ?? true)
+                matchGroupCollection.Add(new FootballMatchGroup(grouppingMatch.Key, grouppingMatch.First().Country.Logo, foundExistData?.Expanded ?? true)
                 {
                     FootballMatchListViewModel = new FootballMatchListViewModel
                     {
                         Matches = new ObservableCollection<PacketModels.FixtureDetail>(grouppingMatch.ToArray())
                     }
-                };
-
-                matchGroupCollection.Add(matchGroup);
+                });
             }
 
             MatchGroups = matchGroupCollection;

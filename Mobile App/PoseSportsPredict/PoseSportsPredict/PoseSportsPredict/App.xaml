@@ -3,14 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              xmlns:converters="clr-namespace:PoseSportsPredict.Logics.Common.Converters"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              x:Class="PoseSportsPredict.App">
     <Application.Resources>
+        <ffimageloadingsvg:SvgImageSourceConverter x:Key="svgImageSourceConverter" />
         <converters:ExceptionToErrorMessageConverter x:Key="exceptionToErrorMessageConverter" />
         <converters:BoolToDoubleConverter x:Key="boolToDoubleConverter" />
         <converters:DateToStringConverter x:Key="dateToStringConverter" />
-        <converters:IsMatchStartedConverter x:Key="isMatchStartedConverter" />
-        <converters:MatchStatusToStringConverter x:Key="matchStatusToStringConverter" />
+        <converters:IsFootballMatchStartedConverter x:Key="isFootballMatchStartedConverter" />
+        <converters:FootballMatchStatusToStringConverter x:Key="footballMatchStatusToStringConverter" />
 
         <Color x:Key="PrimaryColor">#0288d1</Color>
         <Color x:Key="PrimaryColor_L">#5eb8ff</Color>
@@ -21,5 +25,13 @@
         <Color x:Key="CustomGrey">#37474f</Color>
         <Color x:Key="CustomGrey_L">#62727b</Color>
         <Color x:Key="CustomGrey_D">#102027</Color>
+
+        <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
+            <Setter Property="AccentColor" Value="Accent" />
+            <Setter Property="TextColor" Value="Gray" />
+            <Setter Property="EmptyStateMessage" Value="{x:Static localize:LocalizeString.No_Match_datas}" />
+            <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
+            <Setter Property="ErrorMessageConverter" Value="{StaticResource exceptionToErrorMessageConverter}" />
+        </Style>
     </Application.Resources>
 </Application>

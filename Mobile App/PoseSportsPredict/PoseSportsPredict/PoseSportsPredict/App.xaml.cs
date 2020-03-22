@@ -18,7 +18,7 @@ namespace PoseSportsPredict
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
 
-            DependencyService.Register<MockDataStore>();
+            // DependencyService.Register<MockDataStore>();
             MainPage = ShinyHost.Resolve<LoadingPage>();
         }
 

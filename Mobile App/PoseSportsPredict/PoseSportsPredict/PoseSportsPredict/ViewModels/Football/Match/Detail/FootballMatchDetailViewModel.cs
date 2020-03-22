@@ -1,9 +1,12 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Shiny;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
@@ -20,10 +23,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (datas == null)
                 return false;
 
-            if (!(datas[0] is PacketModels.FixtureDetail fixtureDetail))
+            if (!(datas[0] is FootballMatchInfo matchInfo))
                 return false;
 
-            MatchDetail = fixtureDetail;
+            MatchInfo = matchInfo;
 
             OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>();
             H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
@@ -43,9 +46,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Fields
 
-        private bool _isAlarmed;
-        private bool _isBookmarked;
-        private PacketModels.FixtureDetail _matchDetail;
+        private FootballMatchInfo _matchInfo;
         private int _selectedViewIndex;
         private FootballMatchDetailOverviewModel _overviewModel;
         private FootballMatchDetailH2HViewModel _h2hViewModel;
@@ -56,9 +57,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Properties
 
-        public bool IsBookmarked { get => _isBookmarked; set => SetValue(ref _isBookmarked, value); }
-        public Color IsAlarmed => _isAlarmed ? Color.White : AppResourcesHelper.GetResourceColor("CustomGrey");
-        public PacketModels.FixtureDetail MatchDetail { get => _matchDetail; set => SetValue(ref _matchDetail, value); }
+        public Color IsAlarmed => (MatchInfo?.IsAlarmed ?? false) ? Color.White : AppResourcesHelper.GetResourceColor("CustomGrey");
+        public FootballMatchInfo MatchInfo { get => _matchInfo; set => SetValue(ref _matchInfo, value); }
         public int SelectedViewIndex { get => _selectedViewIndex; set => SetValue(ref _selectedViewIndex, value); }
         public FootballMatchDetailOverviewModel OverviewModel { get => _overviewModel; set => SetValue(ref _overviewModel, value); }
         public FootballMatchDetailH2HViewModel H2HViewModel { get => _h2hViewModel; set => SetValue(ref _h2hViewModel, value); }
@@ -85,35 +85,36 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public ICommand TouchAlarmButtonCommand { get => new RelayCommand(TouchAlarmButton); }
 
-        private async void TouchAlarmButton()
+        private void TouchAlarmButton()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            var message = _isAlarmed ? LocalizeString.Cancle_Alarm : LocalizeString.Set_Alarm;
-            await MaterialDialog.Instance.SnackbarAsync(message, 1500);
-
-            _isAlarmed = !_isAlarmed;
+            MatchInfo.IsAlarmed = !MatchInfo.IsAlarmed;
             OnPropertyChanged("IsAlarmed");
+
+            var message = MatchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
+            UserDialogs.Instance.Toast(message);
 
             SetIsBusy(false);
         }
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand(TouchBookmarkButton); }
 
-        private async void TouchBookmarkButton()
+        private void TouchBookmarkButton()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            var message = IsBookmarked ? LocalizeString.Delete_Bookmark : LocalizeString.Set_Bookmark;
-            await MaterialDialog.Instance.SnackbarAsync(message, 1500);
+            MatchInfo.IsBookmarked = !MatchInfo.IsBookmarked;
+            MatchInfo.OnPropertyChanged("IsBookmarked");
 
-            IsBookmarked = !IsBookmarked;
+            var message = MatchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
+            UserDialogs.Instance.Toast(message);
 
             SetIsBusy(false);
         }

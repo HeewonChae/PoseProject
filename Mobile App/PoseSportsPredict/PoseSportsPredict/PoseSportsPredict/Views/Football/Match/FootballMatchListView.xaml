@@ -45,9 +45,13 @@
                             Margin="3,0"
                             Aspect="AspectFit"
                             WidthRequest="32"
+                            HeightRequest="32"
+                            DownsampleHeight="150"
+                            DownsampleWidth="150"
+                            DownsampleToViewSize="True"
                             LoadingPlaceholder="tab_about.png"
                             ErrorPlaceholder="tab_about.png"
-                            Source="{Binding HomeTeam.Logo}">
+                            Source="{Binding HomeTeam.Logo , Converter={StaticResource svgImageSourceConverter}}">
                         </ffimageloading:CachedImage>
                         <StackLayout
                             Grid.Column="2"
@@ -79,12 +83,13 @@
                             Margin="3,0"
                             Aspect="AspectFit"
                             WidthRequest="32"
-                            DownsampleHeight="100"
-                            DownsampleWidth="100"
+                            HeightRequest="32"
+                            DownsampleHeight="150"
+                            DownsampleWidth="150"
                             DownsampleToViewSize="True"
                             LoadingPlaceholder="tab_about.png"
                             ErrorPlaceholder="tab_about.png"
-                            Source="{Binding AwayTeam.Logo}">
+                            Source="{Binding AwayTeam.Logo, Converter={StaticResource svgImageSourceConverter}}">
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             Grid.Column="4"

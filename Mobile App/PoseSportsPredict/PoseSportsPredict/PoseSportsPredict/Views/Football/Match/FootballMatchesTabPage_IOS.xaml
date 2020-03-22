@@ -8,5 +8,5 @@
                      BarIndicatorColor="#00b9e1"
                      BarBackgroundColor="#ffffff"
                      SwipeEnabled="True"
-                     Title="{x:Static localize:LocalizeString.Match}">
+                     Title="{x:Static localize:LocalizeString.Matches}">
 </forms:TopTabbedPage>

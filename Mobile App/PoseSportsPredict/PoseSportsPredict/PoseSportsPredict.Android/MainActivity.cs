@@ -1,9 +1,12 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Widget;
 using Plugin.LocalNotification;
+using PoseSportsPredict.Resources;
 using Shiny;
 
 namespace PoseSportsPredict.Droid
@@ -15,6 +18,8 @@ namespace PoseSportsPredict.Droid
         ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        //private bool doubleBackToExitPressedOnce = false;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -48,11 +53,11 @@ namespace PoseSportsPredict.Droid
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
             ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+            UserDialogs.Init(this);
         }
 
         private void InitShiny()
         {
-            Shiny.AndroidShinyHost.ValidateScopes = false;
             Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
         }
 
@@ -69,5 +74,24 @@ namespace PoseSportsPredict.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        //public override void OnBackPressed()
+        //{
+        //    if (doubleBackToExitPressedOnce)
+        //    {
+        //        base.OnBackPressed();
+        //        Java.Lang.JavaSystem.Exit(0);
+        //        return;
+        //    }
+
+        //    this.doubleBackToExitPressedOnce = true;
+        //    string message = LocalizeString.PressBack_Twice_To_Exit;
+        //    Toast.MakeText(this, message, ToastLength.Short).Show();
+
+        //    new Handler().PostDelayed(() =>
+        //    {
+        //        doubleBackToExitPressedOnce = false;
+        //    }, 2000);
+        //}
     }
 }

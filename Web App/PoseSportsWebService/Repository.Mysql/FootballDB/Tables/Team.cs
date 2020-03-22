@@ -19,12 +19,13 @@ namespace Repository.Mysql.FootballDB.Tables
 
         [Column(TypeName = "VARCHAR")]
         [StringLength(64)]
-        [Index("IDX_TEAM_NAME", IsUnique = false)]
+        [Index("IDX_NAME_COUNTRY", Order = 1, IsUnique = false)]
         public string name { get; set; }
 
         [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(32)]
+        [Index("IDX_NAME_COUNTRY", Order = 2, IsUnique = false)]
         [Index("IDX_COUNTRY_NAME", IsUnique = false)]
         public string country_name { get; set; }
 

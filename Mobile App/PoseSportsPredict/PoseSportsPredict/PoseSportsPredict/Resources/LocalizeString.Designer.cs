@@ -61,6 +61,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bookmarks.
+        /// </summary>
+        public static string Bookmarks {
+            get {
+                return ResourceManager.GetString("Bookmarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The alarm has been canceled..
         /// </summary>
         public static string Cancle_Alarm {
@@ -106,11 +115,11 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to League.
+        ///   Looks up a localized string similar to Leagues.
         /// </summary>
-        public static string League {
+        public static string Leagues {
             get {
-                return ResourceManager.GetString("League", resourceCulture);
+                return ResourceManager.GetString("Leagues", resourceCulture);
             }
         }
         
@@ -120,15 +129,6 @@ namespace PoseSportsPredict.Resources {
         public static string Loginning {
             get {
                 return ResourceManager.GetString("Loginning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Match.
-        /// </summary>
-        public static string Match {
-            get {
-                return ResourceManager.GetString("Match", resourceCulture);
             }
         }
         
@@ -174,6 +174,15 @@ namespace PoseSportsPredict.Resources {
         public static string Match_Sort_By_Time {
             get {
                 return ResourceManager.GetString("Match_Sort_By_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches.
+        /// </summary>
+        public static string Matches {
+            get {
+                return ResourceManager.GetString("Matches", resourceCulture);
             }
         }
         
@@ -232,6 +241,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please click &apos;BACK&apos; again to exit..
+        /// </summary>
+        public static string PressBack_Twice_To_Exit {
+            get {
+                return ResourceManager.GetString("PressBack_Twice_To_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retry.
         /// </summary>
         public static string Retry {
@@ -264,6 +282,15 @@ namespace PoseSportsPredict.Resources {
         public static string Set_Bookmark {
             get {
                 return ResourceManager.GetString("Set_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

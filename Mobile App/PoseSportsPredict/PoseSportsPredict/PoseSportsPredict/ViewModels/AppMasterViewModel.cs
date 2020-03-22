@@ -19,6 +19,10 @@ namespace PoseSportsPredict.ViewModels
             return true;
         }
 
+        public override void OnAppearing(params object[] datas)
+        {
+        }
+
         #endregion NavigableViewModel
 
         #region Constructors

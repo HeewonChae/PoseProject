@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.Common.CustomViews"
+             BackgroundColor="White"
+             x:Class="PoseSportsPredict.Views.Football.League.FootballLeagueListView">
+    <ContentView.Content>
+        <StackLayout
+            x:Name="lv_leagues"
+            BindableLayout.ItemsSource="{Binding Leagues}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout
+                        Padding="17,0"
+                        Orientation="Horizontal">
+                        <StackLayout
+                            Spacing="15"
+                            Padding="38,7,0,7"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal"
+                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_leagues}}"
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="Accent">
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFill"
+                                HeightRequest="20"
+                                WidthRequest="20"
+                                DownsampleHeight="150"
+                                DownsampleWidth="150"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="tab_about.png"
+                                ErrorPlaceholder="tab_about.png"
+                                Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                LineBreakMode="TailTruncation"
+                                VerticalOptions="Center"
+                                TypeScale="Body2"
+                                TextColor="Black"
+                                Text="{Binding LeagueName}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                        <ContentView
+                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_leagues}}"
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource PrimaryColor}">
+                            <customviews:RatingView
+                                Margin="9.3"
+                                WidthRequest="17"
+                                HeightRequest="17"
+                                VerticalOptions="Center"
+                                StrokeWidth="1.2"
+                                RatingType="Full"
+                                ColorOn="Gold"
+                                OutlineOnColor="Gold"
+                                OutlineOffColor="{StaticResource CustomGrey_L}"
+                                Path="{x:Static customviews:PathConstants.Star}"
+                                Count="1"
+                                Value="{Binding IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
+                            </customviews:RatingView>
+                        </ContentView>
+                    </StackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

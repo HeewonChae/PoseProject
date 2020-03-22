@@ -14,7 +14,6 @@ namespace SportsAdminTool.Model.Resource.Football
 {
     public class CoverageLeague
     {
-        public int Index { get; set; }
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }
         public FootballLeagueType LeagueType { get; set; }
@@ -25,10 +24,9 @@ namespace SportsAdminTool.Model.Resource.Football
         {
         }
 
-        public CoverageLeague(int index, string leaugeName, string leagueLogo,
+        public CoverageLeague(string leaugeName, string leagueLogo,
             FootballLeagueType leagueType, string countryName, string countryLogo)
         {
-            Index = index;
             LeagueName = leaugeName;
             LeagueLogo = leagueLogo;
             LeagueType = leagueType;

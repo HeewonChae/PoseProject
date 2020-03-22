@@ -1,9 +1,11 @@
 ﻿using PosePacket.Proxy;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels;
 using Shiny;
+using System;
 using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
@@ -48,6 +50,9 @@ namespace PoseSportsPredict
         {
             while (!await WebApiService.CheckInternetConnection())
             { }
+
+            // Table Loader
+            await TableLoader.Init(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
             string serverPubKey = await _webApiService.RequestAsync<string>(new WebRequestContext
             {

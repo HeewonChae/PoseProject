@@ -6,6 +6,7 @@ DependencyService.Register<MockDataStore>(); // 공유 프로젝트 경우
 // 3. Extern module
 // MaterialDialog
 MaterialDialog.Instance
+UserDialogs.Instance
 // Shiny
 ShinyHost.Resolve
 
@@ -63,10 +64,14 @@ if (OnInitializeView())
 
 // 8. Xml namespace
 xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
 xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
 xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.Common.CustomViews"
+xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+xmlns:keyboard="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHelper" 
 
 //9. ref binding
 {Binding Path=BindingContext.SelectCountryCommand,

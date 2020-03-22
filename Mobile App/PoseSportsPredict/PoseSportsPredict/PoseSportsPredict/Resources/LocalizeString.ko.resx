@@ -138,10 +138,10 @@
   <data name="Football" xml:space="preserve">
     <value>축구</value>
   </data>
-  <data name="Match" xml:space="preserve">
+  <data name="Matches" xml:space="preserve">
     <value>경기</value>
   </data>
-  <data name="League" xml:space="preserve">
+  <data name="Leagues" xml:space="preserve">
     <value>리그</value>
   </data>
   <data name="Occur_Error" xml:space="preserve">
@@ -197,5 +197,14 @@
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
     <value>시간으로 정렬</value>
+  </data>
+  <data name="Bookmarks" xml:space="preserve">
+    <value>북마크</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="PressBack_Twice_To_Exit" xml:space="preserve">
+    <value>'뒤로' 버튼을 한번 더 누르시면 종료됩니다.</value>
   </data>
 </root>

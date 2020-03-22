@@ -1,4 +1,6 @@
 ﻿using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common;
+using PoseSportsPredict.ViewModels.Football.Bookmark;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.Views.Football;
 using Shiny;
@@ -11,12 +13,9 @@ namespace PoseSportsPredict.ViewModels.Football
     {
         #region NavigableViewModel
 
-        public override void OnAppearing(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
         {
             var mainPage = this.CoupledPage as FootballMainPage;
-
-            if (mainPage.Children.Count > 0)
-                return;
 
             var matchesPage = ShinyHost.Resolve<FootballMatchesTabViewModel>().CoupledPage;
             var matchesNavPage = new MaterialNavigationPage(matchesPage)
@@ -33,6 +32,28 @@ namespace PoseSportsPredict.ViewModels.Football
                 IconImageSource = leaugesPage.IconImageSource,
             };
             mainPage.Children.Add(leaguesNavPage);
+
+            var bookmarksPage = ShinyHost.Resolve<FootballBookmarksViewModel>().CoupledPage;
+            var bookmarksNavPage = new MaterialNavigationPage(bookmarksPage)
+            {
+                Title = bookmarksPage.Title,
+                IconImageSource = bookmarksPage.IconImageSource,
+            };
+            mainPage.Children.Add(bookmarksNavPage);
+
+            var settingsPage = ShinyHost.Resolve<SettingsViewModel>().CoupledPage;
+            var settingsNavPage = new MaterialNavigationPage(settingsPage)
+            {
+                Title = settingsPage.Title,
+                IconImageSource = settingsPage.IconImageSource,
+            };
+            mainPage.Children.Add(settingsNavPage);
+
+            return true;
+        }
+
+        public override void OnAppearing(params object[] datas)
+        {
         }
 
         #endregion NavigableViewModel
@@ -52,10 +73,7 @@ namespace PoseSportsPredict.ViewModels.Football
                 }
             };
 
-            if (OnInitializeView())
-            {
-                CoupledPage.Appearing += (s, e) => OnAppearing();
-            }
+            OnInitializeView();
         }
 
         #endregion Constructors

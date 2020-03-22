@@ -39,10 +39,9 @@
                 <!--Toolbar-->
                 <StackLayout
                     Grid.Row="0"
-                    Margin="15,0"
+                    Margin="20,0"
                     HeightRequest="35"
-                    Orientation="Horizontal"
-                    Spacing="15">
+                    Orientation="Horizontal">
                     <ContentView
                         VerticalOptions="End"
                         HeightRequest="25"
@@ -56,35 +55,49 @@
                             effects:ImageEffect.TintColor="White">
                         </Image>
                     </ContentView>
-                    <ContentView
-                        VerticalOptions="End"
+                    <!--Toolbar button-->
+                    <StackLayout
+                        Orientation="Horizontal"
                         HorizontalOptions="EndAndExpand"
-                        HeightRequest="25"
-                        WidthRequest="25"
-                        BackgroundColor="Transparent"
-                        effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
-                        <Image
-                            Source="ic_alarm_add"
-                            Aspect="AspectFit"
-                            effects:ImageEffect.TintColor="{Binding IsAlarmed}">
-                        </Image>
-                    </ContentView>
-                    <customviews:RatingView
-                        VerticalOptions="End"
-                        Margin="1"
-                        WidthRequest="23"
-                        HeightRequest="23"
-                        StrokeWidth="1.2"
-                        RatingType="Full"
-                        ColorOn="White"
-                        OutlineOffColor="{StaticResource CustomGrey}"
-                        Path="{x:Static customviews:PathConstants.Star}"
-                        Count="1"
-                        Value="{Binding IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}"
-                        effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
-                    </customviews:RatingView>
+                        Spacing="15">
+                        <ContentView
+                            VerticalOptions="End"
+                            HeightRequest="25"
+                            WidthRequest="25"
+                            BackgroundColor="Transparent"
+                            effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
+                            <Image
+                                Source="ic_alarm_add2"
+                                Aspect="AspectFit"
+                                effects:ImageEffect.TintColor="{Binding IsAlarmed}">
+                            </Image>
+                            <ContentView.Triggers>
+                                <DataTrigger
+                                    TargetType="ContentView"
+                                    Binding="{Binding MatchInfo.MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                    Value="True">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </ContentView.Triggers>
+                        </ContentView>
+                        <customviews:RatingView
+                            VerticalOptions="End"
+                            Margin="1"
+                            WidthRequest="23"
+                            HeightRequest="23"
+                            StrokeWidth="1.2"
+                            RatingType="Full"
+                            ColorOn="White"
+                            OutlineOnColor="White"
+                            OutlineOffColor="{StaticResource CustomGrey}"
+                            Path="{x:Static customviews:PathConstants.Star}"
+                            Count="1"
+                            Value="{Binding MatchInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}"
+                            effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
+                        </customviews:RatingView>
+                    </StackLayout>
                 </StackLayout>
 
                 <!--Header-->
@@ -108,9 +121,12 @@
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
                             HeightRequest="45"
+                            DownsampleHeight="150"
+                            DownsampleWidth="150"
+                            DownsampleToViewSize="True"
                             LoadingPlaceholder="tab_about.png"
                             ErrorPlaceholder="tab_about.png"
-                            Source="{Binding MatchDetail.HomeTeam.Logo}">
+                            Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             WidthRequest="90"
@@ -123,7 +139,7 @@
                             MaxLines="2"
                             LetterSpacing="0.3"
                             TextColor="White"
-                            Text="{Binding MatchDetail.HomeTeam.Name}">
+                            Text="{Binding MatchInfo.HomeName}">
                         </materialui:MaterialLabel>
                     </StackLayout>
 
@@ -131,11 +147,11 @@
                     <!--For NS Match-->
                     <StackLayout Grid.Column="1"
                         Spacing="0"
-                        BindingContext="{Binding MatchDetail}">
+                        BindingContext="{Binding MatchInfo}">
                         <StackLayout.Triggers>
                             <DataTrigger
                                 TargetType="StackLayout"
-                                Binding="{Binding MatchStatus, Converter={StaticResource isMatchStartedConverter}}"
+                                Binding="{Binding MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
                                 Value="True">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
@@ -146,7 +162,7 @@
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey}"
-                            Text="{Binding League.Name}"
+                            Text="{Binding LeagueName}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
@@ -166,11 +182,11 @@
                     <!--For Started Match-->
                     <StackLayout Grid.Column="1"
                         Spacing="0"
-                        BindingContext="{Binding MatchDetail}">
+                        BindingContext="{Binding MatchInfo}">
                         <StackLayout.Triggers>
                             <DataTrigger
                                 TargetType="StackLayout"
-                                Binding="{Binding MatchStatus, Converter={StaticResource isMatchStartedConverter}}"
+                                Binding="{Binding MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
                                 Value="False">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
@@ -181,7 +197,7 @@
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey}"
-                            Text="{Binding League.Name}"
+                            Text="{Binding LeagueName}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         </materialui:MaterialLabel>
                         <StackLayout
@@ -191,7 +207,7 @@
                                 HorizontalOptions="EndAndExpand"
                                 TypeScale="H5"
                                 TextColor="White"
-                                Text="{Binding HomeTeam.Score}">
+                                Text="{Binding HomeScore}">
                             </materialui:MaterialLabel>
                             <materialui:MaterialLabel
                                 HorizontalOptions="CenterAndExpand"
@@ -204,7 +220,7 @@
                                 HorizontalOptions="StartAndExpand"
                                 TypeScale="H5"
                                 TextColor="White"
-                                Text="{Binding AwayTeam.Score}">
+                                Text="{Binding AwayScore}">
                             </materialui:MaterialLabel>
                         </StackLayout>
                         <materialui:MaterialLabel
@@ -212,7 +228,7 @@
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
                             TextColor="White"
-                            Text="{Binding MatchStatus, Converter={StaticResource matchStatusToStringConverter}}">
+                            Text="{Binding MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
                         </materialui:MaterialLabel>
                     </StackLayout>
 
@@ -224,9 +240,12 @@
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
                             HeightRequest="45"
+                            DownsampleHeight="150"
+                            DownsampleWidth="150"
+                            DownsampleToViewSize="True"
                             LoadingPlaceholder="tab_about.png"
                             ErrorPlaceholder="tab_about.png"
-                            Source="{Binding MatchDetail.AwayTeam.Logo}">
+                            Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             Margin="0,-3"
@@ -239,7 +258,7 @@
                             MaxLines="2"
                             LetterSpacing="0.3"
                             TextColor="White"
-                            Text="{Binding MatchDetail.AwayTeam.Name}">
+                            Text="{Binding MatchInfo.AwayName}">
                         </materialui:MaterialLabel>
                     </StackLayout>
                     <BoxView
