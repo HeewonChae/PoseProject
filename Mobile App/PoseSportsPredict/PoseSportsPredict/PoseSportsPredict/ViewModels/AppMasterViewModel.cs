@@ -2,6 +2,7 @@
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
 using Shiny;
+using System.Threading.Tasks;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -9,14 +10,14 @@ namespace PoseSportsPredict.ViewModels
     {
         #region NavigableViewModel
 
-        public override bool OnInitializeView(params object[] datas)
+        public override Task<bool> OnInitializeViewAsync(params object[] datas)
         {
             var masterPage = this.CoupledPage as AppMasterPage;
 
             masterPage.Master = ShinyHost.Resolve<AppMasterMenuViewModel>().CoupledPage;
             masterPage.Detail = ShinyHost.Resolve<FootballMainViewModel>().CoupledPage;
 
-            return true;
+            return Task.FromResult(true);
         }
 
         public override void OnAppearing(params object[] datas)

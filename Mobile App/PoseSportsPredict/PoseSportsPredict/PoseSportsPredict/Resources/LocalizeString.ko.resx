@@ -207,4 +207,19 @@
   <data name="PressBack_Twice_To_Exit" xml:space="preserve">
     <value>'뒤로' 버튼을 한번 더 누르시면 종료됩니다.</value>
   </data>
+  <data name="Scheduled_Matches" xml:space="preserve">
+    <value>예정된 경기</value>
+  </data>
+  <data name="Finished_Matches" xml:space="preserve">
+    <value>종료된 경기</value>
+  </data>
+  <data name="Standings" xml:space="preserve">
+    <value>순위</value>
+  </data>
+  <data name="Match_Sort_By_League" xml:space="preserve">
+    <value>리그별로 정렬</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>팀</value>
+  </data>
 </root>

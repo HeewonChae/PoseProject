@@ -35,7 +35,7 @@ namespace PoseSportsPredict.Models.Resources.Football
                 var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfoConverter>().Convert(
                     covaerageLeague, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture) as FootballLeagueInfo;
 
-                var bookmarkedLeauge = bookmarkedLeagues.Find(elem => elem.GetPrimaryKey() == leagueInfo.GetPrimaryKey());
+                var bookmarkedLeauge = bookmarkedLeagues.Find(elem => elem.PrimaryKey == leagueInfo.PrimaryKey);
                 if (bookmarkedLeauge != null)
                 {
                     leagueInfo = bookmarkedLeauge;

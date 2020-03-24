@@ -176,7 +176,7 @@
     <value>My Game</value>
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
-    <value>Arrange by Time</value>
+    <value>Sort by Time</value>
   </data>
   <data name="Bookmarks" xml:space="preserve">
     <value>Bookmarks</value>
@@ -186,5 +186,20 @@
   </data>
   <data name="PressBack_Twice_To_Exit" xml:space="preserve">
     <value>Please click 'BACK' again to exit.</value>
+  </data>
+  <data name="Scheduled_Matches" xml:space="preserve">
+    <value>Scheduled Matches</value>
+  </data>
+  <data name="Finished_Matches" xml:space="preserve">
+    <value>Finished Matches</value>
+  </data>
+  <data name="Standings" xml:space="preserve">
+    <value>Standings</value>
+  </data>
+  <data name="Match_Sort_By_League" xml:space="preserve">
+    <value>Sort by league</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Teams</value>
   </data>
 </root>

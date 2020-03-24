@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
-namespace PoseSportsPredict.Logics.Common
+namespace PoseSportsPredict.Logics
 {
     public static class PageSwitcher
     {
-        public static bool SwitchMainPageAsync(NavigableViewModel viewModel, bool isNavPage = false, params object[] prepareData)
+        public static async Task<bool> SwitchMainPageAsync(NavigableViewModel viewModel, bool isNavPage = false, params object[] prepareData)
         {
-            if (!viewModel.OnInitializeView(prepareData))
+            if (!await viewModel.OnInitializeViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             if (Application.Current.MainPage is MasterDetailPage masterPage)
@@ -33,7 +33,7 @@ namespace PoseSportsPredict.Logics.Common
 
         public static async Task<bool> PushNavPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
-            if (!viewModel.OnInitializeView(prepareData))
+            if (!await viewModel.OnInitializeViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             if (Application.Current.MainPage is MasterDetailPage masterPage)
@@ -56,7 +56,7 @@ namespace PoseSportsPredict.Logics.Common
 
         public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
-            if (!viewModel.OnInitializeView(prepareData))
+            if (!await viewModel.OnInitializeViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             if (Application.Current.MainPage is MasterDetailPage masterPage)

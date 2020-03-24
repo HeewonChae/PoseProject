@@ -5,7 +5,7 @@ using PosePacket.Service.Auth;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
@@ -110,7 +110,7 @@ namespace PoseSportsPredict.ViewModels
                 ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
             }
 
-            PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
 
             SetIsBusy(false);
             return true;

@@ -2,7 +2,7 @@
 using PoseSportsPredict.Models;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.Logics.Common.TempleteSelectors
+namespace PoseSportsPredict.Logics.View.TempleteSelectors
 {
     public class GroupListTempleteSelector : DataTemplateSelector
     {

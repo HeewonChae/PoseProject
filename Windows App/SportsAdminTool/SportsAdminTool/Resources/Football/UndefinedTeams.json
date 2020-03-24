@@ -95,6 +95,14 @@
       "CountryName": "Costa-Rica",
       "ConvertTeamId": 2046,
       "ConvertTeamName": "Deportivo Cartagena"
+    },
+    {
+      "Index": 14,
+      "LeagueId": 1383,
+      "TeamName": "Energetyk-BGU",
+      "CountryName": "Belarus",
+      "ConvertTeamId": 2433,
+      "ConvertTeamName": "FC Energetik-Bgu Minsk"
     }
   ]
 }

@@ -49,7 +49,7 @@ namespace PoseSportsPredict.Services
             {
                 using (var con = new SQLiteContext<T>())
                 {
-                    var foundRecord = await con.SelectAsync(model.GetPrimaryKey());
+                    var foundRecord = await con.SelectAsync(model.PrimaryKey);
                     if (foundRecord != null)
                     {
                         await con.UpdateAsync(model);

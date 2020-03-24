@@ -7,7 +7,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.Common.CustomViews"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.View.CustomViews"
              BackgroundColor="White"
              x:Class="PoseSportsPredict.Views.Football.League.FootballLeagueListView">
     <ContentView.Content>
@@ -28,7 +28,7 @@
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="Accent">
                             <ffimageloading:CachedImage
-                                Aspect="AspectFill"
+                                Aspect="AspectFit"
                                 HeightRequest="20"
                                 WidthRequest="20"
                                 DownsampleHeight="150"

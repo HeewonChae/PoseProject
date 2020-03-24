@@ -108,11 +108,11 @@ namespace SportsAdminTool.Logic.WebAPI
 
         #region Standings
 
-        public IList<AppModel.Football.Standing> GetStandingsByLeagueId(short leagueId)
+        public IList<AppModel.Football.Standings> GetStandingsByLeagueId(short leagueId)
         {
             Dev.DebugString("Call API - FootballWebAPI.GetStandingsByLeagueId");
 
-            _api.RequestEx(_api.StandingsByLeagueId, (int)leagueId, out IList<AppModel.Football.Standing> standings);
+            _api.RequestEx(_api.StandingsByLeagueId, (int)leagueId, out IList<AppModel.Football.Standings> standings);
 
             Dev.DebugString($"Standing Teams Count: {standings.Count}");
 

@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.Logics.Common.Converters
+namespace PoseSportsPredict.Logics.View.Converters
 {
     public class FootballMatchStatusToStringConverter : IValueConverter
     {

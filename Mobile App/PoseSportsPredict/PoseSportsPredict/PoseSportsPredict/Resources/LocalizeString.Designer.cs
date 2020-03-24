@@ -97,6 +97,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finished Matches.
+        /// </summary>
+        public static string Finished_Matches {
+            get {
+                return ResourceManager.GetString("Finished_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Football.
         /// </summary>
         public static string Football {
@@ -169,7 +178,16 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arrange by Time.
+        ///   Looks up a localized string similar to Sort by league.
+        /// </summary>
+        public static string Match_Sort_By_League {
+            get {
+                return ResourceManager.GetString("Match_Sort_By_League", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by Time.
         /// </summary>
         public static string Match_Sort_By_Time {
             get {
@@ -259,6 +277,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scheduled Matches.
+        /// </summary>
+        public static string Scheduled_Matches {
+            get {
+                return ResourceManager.GetString("Scheduled_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Service is not available..
         /// </summary>
         public static string Service_Not_Available {
@@ -291,6 +318,24 @@ namespace PoseSportsPredict.Resources {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Standings.
+        /// </summary>
+        public static string Standings {
+            get {
+                return ResourceManager.GetString("Standings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teams.
+        /// </summary>
+        public static string Teams {
+            get {
+                return ResourceManager.GetString("Teams", resourceCulture);
             }
         }
         

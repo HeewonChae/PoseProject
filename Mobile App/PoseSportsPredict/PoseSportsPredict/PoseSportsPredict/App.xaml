@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
-             xmlns:converters="clr-namespace:PoseSportsPredict.Logics.Common.Converters"
+             xmlns:converters="clr-namespace:PoseSportsPredict.Logics.View.Converters"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              x:Class="PoseSportsPredict.App">

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.Logics.Common
+namespace PoseSportsPredict.Logics
 {
     public static class AppResourcesHelper
     {

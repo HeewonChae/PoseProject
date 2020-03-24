@@ -3,6 +3,8 @@ using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
 using Shiny;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -12,20 +14,19 @@ namespace PoseSportsPredict.ViewModels
 
         public override bool OnInitializeView(params object[] datas)
         {
-            if (datas == null)
-                return true;
+            var sportsPageList = new List<Page>
+            {
+                ShinyHost.Resolve<FootballMainViewModel>().CoupledPage,
+            };
 
             var sportsCategories = new List<Models.AppMenuItem>();
-            foreach (var data in datas)
+            foreach (var sportsPage in sportsPageList)
             {
-                if (data is NavigableViewModel viewModel)
+                sportsCategories.Add(new Models.AppMenuItem
                 {
-                    sportsCategories.Add(new Models.AppMenuItem
-                    {
-                        Title = viewModel.CoupledPage.Title,
-                        IconSource = viewModel.CoupledPage.IconImageSource.ToString().Replace("File: ", ""),
-                    });
-                }
+                    Title = sportsPage.Title,
+                    IconSource = sportsPage.IconImageSource.ToString().Replace("File: ", ""),
+                });
             }
 
             SportsCategories = sportsCategories;
@@ -51,7 +52,7 @@ namespace PoseSportsPredict.ViewModels
 
         public AppMasterMenuViewModel(AppMasterMenuPage page) : base(page)
         {
-            if (OnInitializeView(ShinyHost.Resolve<FootballMainViewModel>()))
+            if (OnInitializeView())
             {
                 CoupledPage.Appearing += (s, e) => OnAppearing();
             }

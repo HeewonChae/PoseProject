@@ -10,7 +10,7 @@ using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
-namespace PoseSportsPredict.Logics.Common.CustomViews
+namespace PoseSportsPredict.Logics.View.CustomViews
 {
     public static class MaterialColors
     {

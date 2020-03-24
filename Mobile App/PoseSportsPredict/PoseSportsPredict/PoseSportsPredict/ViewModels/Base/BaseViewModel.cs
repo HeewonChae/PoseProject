@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace PoseSportsPredict.ViewModels.Base
 {
@@ -35,6 +36,16 @@ namespace PoseSportsPredict.ViewModels.Base
         #endregion Proterties
 
         #region Abstract Method
+
+        /// <summary>
+        /// 컨텍스트가 바인딩 될때 한번 호출
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        public virtual Task<bool> OnInitializeViewAsync(params object[] datas)
+        {
+            return Task.FromResult(true);
+        }
 
         /// <summary>
         /// 컨텍스트가 바인딩 될때 한번 호출

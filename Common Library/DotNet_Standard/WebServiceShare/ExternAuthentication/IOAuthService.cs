@@ -14,6 +14,6 @@ namespace WebServiceShare.ExternAuthentication
 
         Task<bool> IsAuthenticatedAndValid();
 
-        void Logout();
+        Task Logout();
     }
 }

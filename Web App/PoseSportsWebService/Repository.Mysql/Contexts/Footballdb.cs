@@ -45,7 +45,7 @@ namespace Repository.Mysql.Contexts
         public virtual DbSet<League> League { get; set; }
         public virtual DbSet<LeagueCoverage> Coverage { get; set; }
         public virtual DbSet<Team> Team { get; set; }
-        public virtual DbSet<Standing> Standing { get; set; }
+        public virtual DbSet<Standings> Standing { get; set; }
         public virtual DbSet<Fixture> Fixture { get; set; }
         public virtual DbSet<FixtureStatistics> FixtureStatistic { get; set; }
         public virtual DbSet<Odds> Odds { get; set; }

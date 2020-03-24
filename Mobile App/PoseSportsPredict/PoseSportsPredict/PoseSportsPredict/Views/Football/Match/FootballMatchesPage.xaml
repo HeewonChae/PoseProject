@@ -10,7 +10,7 @@
              xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.Common.TempleteSelectors"
+             xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesPage">
 
     <ContentPage.ToolbarItems>
@@ -25,8 +25,8 @@
                 <ViewCell>
                     <materialui:MaterialCard
                         CornerRadius="5"
-                        Elevation="5"
-                        Margin="10, 7"
+                        Elevation="3"
+                        Margin="10,5"
                         Padding="0">
                         <StackLayout
                             VerticalOptions="CenterAndExpand"
@@ -39,7 +39,8 @@
                             effects:ViewEffect.TouchFeedbackColor="Accent">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="18"
+                                HeightRequest="19"
+                                WidthRequest="19"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
@@ -88,8 +89,8 @@
                 <ViewCell>
                     <materialui:MaterialCard
                         CornerRadius="5"
-                        Elevation="5"
-                        Margin="10, 7"
+                        Elevation="3"
+                        Margin="10,5"
                         Padding="0">
                         <Grid
                             Padding="0"
@@ -111,7 +112,8 @@
                                     HeightRequest="{Binding GroupHeaderHeight}">
                                     <ffimageloading:CachedImage
                                         Aspect="AspectFit"
-                                        HeightRequest="18"
+                                        HeightRequest="19"
+                                        WidthRequest="19"
                                         DownsampleHeight="150"
                                         DownsampleWidth="150"
                                         DownsampleToViewSize="True"

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace RapidAPI.Models.Football.Response
 {
-	internal class StandingsResponse : ResponseBase
-	{
-		[JsonProperty("standings")]
-		[JsonConverter(typeof(StandingsConverter))]
-		public Standing[] Standings { get; set; }
-	}
+    internal class StandingsResponse : ResponseBase
+    {
+        [JsonProperty("standings")]
+        [JsonConverter(typeof(StandingsConverter))]
+        public Standings[] Standingsies { get; set; }
+    }
 }

@@ -36,7 +36,7 @@ namespace PoseSportsPredict.ViewModels.Football
         {
             var searchBar = CoupledPage.FindByName<SearchBar>("_searchBar");
             if (string.IsNullOrEmpty(searchBar.Text)
-                && !object.ReferenceEquals(LeagueGroups, _orgLeagueGroups))
+                && _orgLeagueGroups == null)
             {
                 UpdateLeagueGroups(_leagueList, false);
                 _orgLeagueGroups = LeagueGroups;
@@ -99,8 +99,10 @@ namespace PoseSportsPredict.ViewModels.Football
             FootballLeaguesPage page
             , ISQLiteService sqliteService) : base(page)
         {
-            _sqliteService = sqliteService;
-            OnInitializeView();
+            if (OnInitializeView())
+            {
+                _sqliteService = sqliteService;
+            }
         }
 
         #endregion Constructors

@@ -263,7 +263,7 @@ namespace RapidAPI
         /// </summary>
         /// <param name="leagueId"></param>
         /// <returns></returns>
-        public IList<Standing> StandingsByLeagueId(int leagueId)
+        public IList<Standings> StandingsByLeagueId(int leagueId)
         {
             var apiClient = new RestClient(_end_point);
 
@@ -274,7 +274,7 @@ namespace RapidAPI
 
             var response = apiClient.ExecuteEx<FootballApiResponse<StandingsResponse>>(request);
 
-            return response.Api.Standings;
+            return response.Api.Standingsies;
         }
 
         #endregion Standings

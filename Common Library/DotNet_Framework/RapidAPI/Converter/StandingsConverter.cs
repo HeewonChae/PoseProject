@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace RapidAPI.Converter
 {
-    public class StandingsConverter : JsonConverter<Standing[]>
+    public class StandingsConverter : JsonConverter<Standings[]>
     {
-        public override Standing[] ReadJson(JsonReader reader, Type objectType, Standing[] existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override Standings[] ReadJson(JsonReader reader, Type objectType, Standings[] existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.StartObject)
             {
-                List<Standing> standings = new List<Standing>();
+                List<Standings> standings = new List<Standings>();
 
                 JObject item = JObject.Load(reader);
 
-                Standing[] tempStandings = new Standing[0];
+                Standings[] tempStandings = new Standings[0];
                 JToken standingObject;
                 for (int i = 0; i < 100; i++)
                 {
@@ -27,7 +27,7 @@ namespace RapidAPI.Converter
                     standingObject = item[propertyName];
                     if (standingObject != null)
                     {
-                        tempStandings = standingObject.ToObject<Standing[]>(serializer);
+                        tempStandings = standingObject.ToObject<Standings[]>(serializer);
                         break;
                     }
                 }
@@ -42,10 +42,10 @@ namespace RapidAPI.Converter
             }
             else if (reader.TokenType == JsonToken.StartArray)
             {
-                List<Standing> standings = new List<Standing>();
+                List<Standings> standings = new List<Standings>();
 
                 JArray items = JArray.Load(reader);
-                var tempStandingsGroup = items.ToObject<IEnumerable<Standing[]>>(serializer);
+                var tempStandingsGroup = items.ToObject<IEnumerable<Standings[]>>(serializer);
 
                 int group = 1;
                 foreach (var tempStandings in tempStandingsGroup)
@@ -61,10 +61,10 @@ namespace RapidAPI.Converter
                 return standings.ToArray();
             }
 
-            return hasExistingValue ? existingValue : new Standing[0];
+            return hasExistingValue ? existingValue : new Standings[0];
         }
 
-        public override void WriteJson(JsonWriter writer, Standing[] value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, Standings[] value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }

@@ -1,11 +1,16 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
-using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football.Converters;
+using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.League.Detail;
+using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Shiny;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,13 +23,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
     {
         #region NavigableViewModel
 
-        public override bool OnInitializeView(params object[] datas)
+        public override Task<bool> OnInitializeViewAsync(params object[] datas)
         {
             if (datas == null)
-                return false;
+                return Task.FromResult(false);
 
             if (!(datas[0] is FootballMatchInfo matchInfo))
-                return false;
+                return Task.FromResult(false);
 
             MatchInfo = matchInfo;
 
@@ -35,7 +40,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SelectedViewIndex = 0;
 
-            return true;
+            return Task.FromResult(true);
         }
 
         public override void OnAppearing(params object[] datas)
@@ -115,6 +120,48 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             var message = MatchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand LeagueNameClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => LeagueNameClick(e)); }
+
+        private async void LeagueNameClick(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>()
+                , ShinyHost.Resolve<MatchInfoToLeagueInfoConverter>().Convert(matchInfo, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture));
+
+            SetIsBusy(false);
+        }
+
+        public ICommand HomeTeamLogoClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => HomeTeamLogoClick(e)); }
+
+        private async void HomeTeamLogoClick(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
+                , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Home, CultureInfo.CurrentUICulture));
+
+            SetIsBusy(false);
+        }
+
+        public ICommand AwayTeamLogoClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => AwayTeamLogoClick(e)); }
+
+        private async void AwayTeamLogoClick(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
+                , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Away, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);
         }

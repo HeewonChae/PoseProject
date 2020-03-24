@@ -2,6 +2,6 @@
 {
     public interface ISQLiteStorable
     {
-        string GetPrimaryKey();
+        string PrimaryKey { get; }
     }
 }

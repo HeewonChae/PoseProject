@@ -156,7 +156,7 @@ namespace SportsAdminTool.Logic.Football
                 return true;
 
             // Call DB
-            return Database.FootballDBFacade.UpdateStanding(leagueId, db_league.country_name, api_standings.ToArray());
+            return Database.FootballDBFacade.UpdateStandings(leagueId, db_league.country_name, api_standings.ToArray());
         }
 
         public static bool IsAlreadyUpdatedOdds(int fixtureId)

@@ -1,8 +1,11 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.League.Detail;
+using Shiny;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using XF.Material.Forms.UI.Dialogs;
@@ -21,14 +24,14 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         public ICommand SelectLeagueCommand { get => new RelayCommand<FootballLeagueInfo>((e) => SelectLeague(e)); }
 
-        private void SelectLeague(FootballLeagueInfo leagueInfo)
+        private async void SelectLeague(FootballLeagueInfo leagueInfo)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            //await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>(), leagueInfo);
+            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>(), leagueInfo);
 
             SetIsBusy(false);
         }

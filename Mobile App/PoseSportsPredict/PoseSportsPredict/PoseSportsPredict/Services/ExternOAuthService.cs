@@ -3,7 +3,7 @@ using PosePacket.Service.Auth;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Utilities.ExternOAuth.Providers;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels;
@@ -133,13 +133,13 @@ namespace PoseSportsPredict.Services
             return _isAuthenticated = true;
         }
 
-        public void Logout()
+        public async Task Logout()
         {
             _isAuthenticated = false;
             _authenticatedUser = null;
             LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
 
-            PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>());
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>());
         }
     }
 }

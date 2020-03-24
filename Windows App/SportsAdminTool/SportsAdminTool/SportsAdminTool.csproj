@@ -200,7 +200,7 @@
     <Compile Include="Model\Football\Fixture.cs" />
     <Compile Include="Model\Football\FixtureStatistic.cs" />
     <Compile Include="Model\Football\Odds.cs" />
-    <Compile Include="Model\Football\Standing.cs" />
+    <Compile Include="Model\Football\Standings.cs" />
     <Compile Include="Model\Football\Team.cs" />
     <Compile Include="Model\ModelStatic.cs" />
     <Compile Include="Model\Resource\Football\CoverageLeague.cs" />

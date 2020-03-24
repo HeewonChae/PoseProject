@@ -63,7 +63,7 @@ namespace PoseSportsPredict.Utilities.SQLiteConnection
 
         public async Task<T> SelectAsync(string primaryKey)
         {
-            return await _connection.Table<T>().Where(m => m.GetPrimaryKey() == primaryKey).FirstOrDefaultAsync();
+            return await _connection.Table<T>().Where(m => m.PrimaryKey == primaryKey).FirstOrDefaultAsync();
         }
 
         public void Dispose()

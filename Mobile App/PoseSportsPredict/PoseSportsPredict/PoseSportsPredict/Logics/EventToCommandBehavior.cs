@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.Logics
 {
-    public class EventToCommandBehavior : BindableBehavior<View>
+    public class EventToCommandBehavior : BindableBehavior<Xamarin.Forms.View>
     {
         public static readonly BindableProperty EventNameProperty = BindableProperty.Create("EventName", typeof(string), typeof(EventToCommandBehavior), null);
         public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior), null);
@@ -52,7 +52,7 @@ namespace PoseSportsPredict.Logics
             set { SetValue(EventArgsConverterParameterProperty, value); }
         }
 
-        protected override void OnAttachedTo(View visualElement)
+        protected override void OnAttachedTo(Xamarin.Forms.View visualElement)
         {
             base.OnAttachedTo(visualElement);
 
@@ -67,7 +67,7 @@ namespace PoseSportsPredict.Logics
             }
         }
 
-        protected override void OnDetachingFrom(View view)
+        protected override void OnDetachingFrom(Xamarin.Forms.View view)
         {
             if (_handler != null)
                 _eventInfo.RemoveEventHandler(AssociatedObject, _handler);

@@ -75,7 +75,7 @@ namespace PoseSportsPredict
             if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
             {
-                _OAuthService.Logout();
+                await _OAuthService.Logout();
                 return;
             }
         }

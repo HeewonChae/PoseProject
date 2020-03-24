@@ -55,11 +55,23 @@
     <Compile Update="Views\AppMasterMenuPage.xaml.cs">
       <DependentUpon>AppMasterMenuPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Football\Bookmark\FootballBookmarksPage.xaml.cs">
-      <DependentUpon>FootballBookmarksPage.xaml</DependentUpon>
+    <Compile Update="Views\Football\Bookmark\FootballBookmarkMatchesPage.xaml.cs">
+      <DependentUpon>FootballBookmarkMatchesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Football\Bookmark\FootballBookmarksTabPage.xaml.cs">
+      <DependentUpon>FootballBookmarksTabPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Football\Bookmark\FootballBookmarksTabPage_IOS.xaml.cs">
+      <DependentUpon>FootballBookmarksTabPage_IOS.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Football\Bookmark\FootballBookmarkTeamsPage.xaml.cs">
+      <DependentUpon>FootballBookmarkTeamsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Football\FootballMainPage.xaml.cs">
       <DependentUpon>FootballMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Football\League\Detail\FootballLeagueDetailPage.xaml.cs">
+      <DependentUpon>FootballLeagueDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Football\Match\FootballMatchesTabPage_IOS.xaml.cs">
       <DependentUpon>FootballMatchesTabPage_IOS.xaml</DependentUpon>
@@ -83,7 +95,19 @@
     <EmbeddedResource Update="Views\Common\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarksPage.xaml">
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarkLeaguesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarkMatchesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarksTabPage_IOS.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarksTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarkTeamsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\League\FootballLeagueListView.xaml">
@@ -93,6 +117,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\FootballMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\League\Detail\FootballLeagueDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailH2HView.xaml">
@@ -119,15 +146,15 @@
     <EmbeddedResource Update="Views\Football\Match\Detail\FootballMatchDetailPredictionsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Team\FootballTeamDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logics\View\Behaviors\" />
     <Folder Include="CustomViews\" />
-    <Folder Include="ViewModels\Football\Team\" />
-    <Folder Include="Views\Football\Team\" />
   </ItemGroup>
 </Project>

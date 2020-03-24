@@ -4,4 +4,10 @@
     {
         Football,
     }
+
+    public enum TeamType
+    {
+        Home,
+        Away,
+    }
 }

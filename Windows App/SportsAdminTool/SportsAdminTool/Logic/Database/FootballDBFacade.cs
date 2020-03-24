@@ -249,9 +249,9 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
-        public static bool UpdateStanding(short leagueId, string countryName, params AppModel.Football.Standing[] standings)
+        public static bool UpdateStandings(short leagueId, string countryName, params AppModel.Football.Standings[] standingsies)
         {
-            if (standings.Length == 0)
+            if (standingsies.Length == 0)
                 return false;
 
             Dev.DebugString("Call DB - FootballFacade.UpdateStanding");
@@ -259,72 +259,72 @@ namespace SportsAdminTool.Logic.Database
             DateTime upt_time = DateTime.Now.ToUniversalTime();
 
             StringBuilder sb = new StringBuilder();
-            sb.Append(" INSERT INTO standing");
-            sb.Append($" (`{nameof(FootballDB.Tables.Standing.league_id)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.team_id)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.rank)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.group)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.forme)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.points)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.description)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.played)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.win)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.draw)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.lose)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.goals_for)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.goals_against)}`, " +
-                $"`{nameof(FootballDB.Tables.Standing.upt_time)}`)");
+            sb.Append(" INSERT INTO standings");
+            sb.Append($" (`{nameof(FootballDB.Tables.Standings.league_id)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.team_id)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.rank)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.group)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.forme)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.points)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.description)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.played)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.win)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.draw)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.lose)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.goals_for)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.goals_against)}`, " +
+                $"`{nameof(FootballDB.Tables.Standings.upt_time)}`)");
             sb.Append("VALUES");
 
             int errorTeamCnt = 0;
-            for (int i = 0; i < standings.Length; i++)
+            for (int i = 0; i < standingsies.Length; i++)
             {
                 if (i != 0)
                     sb.Append(", ");
 
-                var standing = standings[i];
+                var Standings = standingsies[i];
 
                 // TeamId 컨버트 가능한지..
-                if (standing.TeamId == 0)
+                if (Standings.TeamId == 0)
                 {
-                    if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, leagueId, standing.TeamName, out short convertedteamId, out string convertedTeamName))
+                    if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, leagueId, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
                     {
-                        standing.TeamId = convertedteamId;
-                        standing.TeamName = convertedTeamName;
+                        Standings.TeamId = convertedteamId;
+                        Standings.TeamName = convertedTeamName;
                     }
                 }
 
-                if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)standing.TeamId, standing.TeamName, leagueId, countryName, true))
+                if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)Standings.TeamId, Standings.TeamName, leagueId, countryName, true))
                     errorTeamCnt++;
 
                 sb.Append($"({leagueId}, " +
-                    $"{standing.TeamId}, " +
-                    $"{standing.Rank}, " +
-                    $"\"{standing.Group}\", " +
-                    $"\"{standing.Forme}\", " +
-                    $"{standing.Points}, " +
-                    $"\"{standing.Description}\", " +
-                    $"{standing.AllPlayedInfo.Played}, " +
-                    $"{standing.AllPlayedInfo.Win}, " +
-                    $"{standing.AllPlayedInfo.Draw}, " +
-                    $"{standing.AllPlayedInfo.Lose}, " +
-                    $"{standing.AllPlayedInfo.GoalsFor}, " +
-                    $"{standing.AllPlayedInfo.GoalsAgainst}, " +
+                    $"{Standings.TeamId}, " +
+                    $"{Standings.Rank}, " +
+                    $"\"{Standings.Group}\", " +
+                    $"\"{Standings.Forme}\", " +
+                    $"{Standings.Points}, " +
+                    $"\"{Standings.Description}\", " +
+                    $"{Standings.AllPlayedInfo.Played}, " +
+                    $"{Standings.AllPlayedInfo.Win}, " +
+                    $"{Standings.AllPlayedInfo.Draw}, " +
+                    $"{Standings.AllPlayedInfo.Lose}, " +
+                    $"{Standings.AllPlayedInfo.GoalsFor}, " +
+                    $"{Standings.AllPlayedInfo.GoalsAgainst}, " +
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
-            sb.Append($"ON DUPLICATE KEY UPDATE `{nameof(FootballDB.Tables.Standing.rank)}` = VALUES(`{nameof(FootballDB.Tables.Standing.rank)}`), " +
-                $"`{nameof(FootballDB.Tables.Standing.group)}` = VALUES(`{nameof(FootballDB.Tables.Standing.group)}`), " +
-                $"{nameof(FootballDB.Tables.Standing.forme)} = VALUES({nameof(FootballDB.Tables.Standing.forme)}), " +
-                $"{nameof(FootballDB.Tables.Standing.points)} = VALUES({nameof(FootballDB.Tables.Standing.points)}), " +
-                $"{nameof(FootballDB.Tables.Standing.description)} = VALUES({nameof(FootballDB.Tables.Standing.description)}), " +
-                $"{nameof(FootballDB.Tables.Standing.played)} = VALUES({nameof(FootballDB.Tables.Standing.played)}), " +
-                $"{nameof(FootballDB.Tables.Standing.win)} = VALUES({nameof(FootballDB.Tables.Standing.win)}), " +
-                $"{nameof(FootballDB.Tables.Standing.draw)} = VALUES({nameof(FootballDB.Tables.Standing.draw)}), " +
-                $"{nameof(FootballDB.Tables.Standing.lose)} = VALUES({nameof(FootballDB.Tables.Standing.lose)}), " +
-                $"{nameof(FootballDB.Tables.Standing.goals_for)} = VALUES({nameof(FootballDB.Tables.Standing.goals_for)}), " +
-                $"{nameof(FootballDB.Tables.Standing.goals_against)} = VALUES({nameof(FootballDB.Tables.Standing.goals_against)}), " +
-                $"{nameof(FootballDB.Tables.Standing.upt_time)} = VALUES({nameof(FootballDB.Tables.Standing.upt_time)});");
+            sb.Append($"ON DUPLICATE KEY UPDATE `{nameof(FootballDB.Tables.Standings.rank)}` = VALUES(`{nameof(FootballDB.Tables.Standings.rank)}`), " +
+                $"`{nameof(FootballDB.Tables.Standings.group)}` = VALUES(`{nameof(FootballDB.Tables.Standings.group)}`), " +
+                $"{nameof(FootballDB.Tables.Standings.forme)} = VALUES({nameof(FootballDB.Tables.Standings.forme)}), " +
+                $"{nameof(FootballDB.Tables.Standings.points)} = VALUES({nameof(FootballDB.Tables.Standings.points)}), " +
+                $"{nameof(FootballDB.Tables.Standings.description)} = VALUES({nameof(FootballDB.Tables.Standings.description)}), " +
+                $"{nameof(FootballDB.Tables.Standings.played)} = VALUES({nameof(FootballDB.Tables.Standings.played)}), " +
+                $"{nameof(FootballDB.Tables.Standings.win)} = VALUES({nameof(FootballDB.Tables.Standings.win)}), " +
+                $"{nameof(FootballDB.Tables.Standings.draw)} = VALUES({nameof(FootballDB.Tables.Standings.draw)}), " +
+                $"{nameof(FootballDB.Tables.Standings.lose)} = VALUES({nameof(FootballDB.Tables.Standings.lose)}), " +
+                $"{nameof(FootballDB.Tables.Standings.goals_for)} = VALUES({nameof(FootballDB.Tables.Standings.goals_for)}), " +
+                $"{nameof(FootballDB.Tables.Standings.goals_against)} = VALUES({nameof(FootballDB.Tables.Standings.goals_against)}), " +
+                $"{nameof(FootballDB.Tables.Standings.upt_time)} = VALUES({nameof(FootballDB.Tables.Standings.upt_time)});");
 
             if (errorTeamCnt > 0)
                 return false;
@@ -743,13 +743,13 @@ namespace SportsAdminTool.Logic.Database
             });
         }
 
-        public static IEnumerable<FootballDB.Tables.Standing> SelectStandings(string where = null, string groupBy = null, string orderBy = null)
+        public static IEnumerable<FootballDB.Tables.Standings> SelectStandings(string where = null, string groupBy = null, string orderBy = null)
         {
             Dev.DebugString("Call DB - FootballFacade.SelectStandings");
 
-            return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Standing>.Input
+            return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Standings>.Input
             {
-                Query = "SELECT * FROM standing",
+                Query = "SELECT * FROM standings",
                 Where = where,
                 GroupBy = groupBy,
                 OrderBy = orderBy,

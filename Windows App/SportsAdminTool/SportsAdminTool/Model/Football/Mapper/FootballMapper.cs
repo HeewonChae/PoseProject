@@ -26,8 +26,8 @@ namespace SportsAdminTool.Model.Football.Mapper
             DataMapper.Resolve<ApiModel.Football.Team, Team>();
 
             // Standing
-            var standingMapper = DataMapper.Resolve<ApiModel.Football.Standing, Standing>();
-            standingMapper.Complex<ApiModel.Football.Standing, Standing>(source => source.AllPlayedInfo, dest => dest.AllPlayedInfo);
+            var standingMapper = DataMapper.Resolve<ApiModel.Football.Standings, Standings>();
+            standingMapper.Complex<ApiModel.Football.Standings, Standings>(source => source.AllPlayedInfo, dest => dest.AllPlayedInfo);
 
             // Fixture
             var fixtureMapper = DataMapper.Resolve<ApiModel.Football.Fixture, Fixture>();

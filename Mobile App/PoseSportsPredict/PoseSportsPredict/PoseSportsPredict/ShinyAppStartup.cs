@@ -7,15 +7,19 @@ using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.ViewModels.Football.Bookmark;
+using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
+using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views;
 using PoseSportsPredict.Views.Common;
 using PoseSportsPredict.Views.Football;
 using PoseSportsPredict.Views.Football.Bookmark;
 using PoseSportsPredict.Views.Football.League;
+using PoseSportsPredict.Views.Football.League.Detail;
 using PoseSportsPredict.Views.Football.Match;
 using PoseSportsPredict.Views.Football.Match.Detail;
+using PoseSportsPredict.Views.Football.Team;
 using Shiny;
 using System;
 using WebServiceShare.ExternAuthentication;
@@ -45,6 +49,8 @@ namespace PoseSportsPredict
         {
             services.AddSingleton<FixtureDetailToMatchInfoConverter>();
             services.AddSingleton<CoverageLeagueToLeagueInfoConverter>();
+            services.AddSingleton<MatchInfoToLeagueInfoConverter>();
+            services.AddSingleton<MatchInfoToTeamInfoConverter>();
         }
 
         private void MatchViewModels(IServiceCollection services)
@@ -59,13 +65,14 @@ namespace PoseSportsPredict
             services.AddSingleton<AppMasterMenuPage>();
             services.AddSingleton<AppMasterMenuViewModel>();
 
-            // Settings
+            // Common - Settings
             services.AddSingleton<SettingsPage>();
             services.AddSingleton<SettingsViewModel>();
 
             // Football
             services.AddSingleton<FootballMainPage>();
             services.AddSingleton<FootballMainViewModel>();
+            // Football - Match
             services.AddSingleton<FootballMatchesTabViewModel>();
             services.AddTransient<FootballMatchesPage>();
             services.AddTransient<FootballMatchesViewModel>();
@@ -75,12 +82,22 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchDetailH2HViewModel>();
             services.AddTransient<FootballMatchDetailPredictionsViewModel>();
             services.AddTransient<FootballMatchDetailOddsViewModel>();
-
+            // Football - League
             services.AddSingleton<FootballLeaguesPage>();
             services.AddSingleton<FootballLeaguesViewModel>();
-
-            services.AddSingleton<FootballBookmarksPage>();
-            services.AddSingleton<FootballBookmarksViewModel>();
+            services.AddTransient<FootballLeagueDetailPage>();
+            services.AddTransient<FootballLeagueDetailViewModel>();
+            //Football - Team
+            services.AddTransient<FootballTeamDetailPage>();
+            services.AddTransient<FootballTeamDetailViewModel>();
+            // Football - Bookmark
+            services.AddSingleton<FootballBookmarksTabViewModel>();
+            services.AddSingleton<FootballBookmarkMatchesPage>();
+            services.AddSingleton<FootballBookmarkMatchesViewModel>();
+            services.AddSingleton<FootballBookmarkLeaguesPage>();
+            services.AddSingleton<FootballBookmarkLeaguesViewModel>();
+            services.AddSingleton<FootballBookmarkTeamsPage>();
+            services.AddSingleton<FootballBookmarkTeamsViewModel>();
         }
     }
 }

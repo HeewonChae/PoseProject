@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RapidAPI.Models.Football
 {
-    public class Standing
+    public class Standings
     {
         public class MatchsPlayedInfo
         {

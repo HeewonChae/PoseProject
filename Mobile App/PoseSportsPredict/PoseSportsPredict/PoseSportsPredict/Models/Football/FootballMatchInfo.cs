@@ -1,5 +1,6 @@
 ﻿using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure.SQLite;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,13 @@ namespace PoseSportsPredict.Models.Football
 
         #endregion INotifyPropertyChanged
 
+        #region ISQLiteStorable
+
+        [PrimaryKey]
+        public string PrimaryKey { get => this.Id.ToString(); }
+
+        #endregion ISQLiteStorable
+
         public int Id { get; set; }
         public string CountryName { get; set; }
         public string CountryLogo { get; set; }
@@ -36,10 +44,5 @@ namespace PoseSportsPredict.Models.Football
         public DateTime MatchTime { get; set; }
         public bool IsBookmarked { get; set; }
         public bool IsAlarmed { get; set; }
-
-        public string GetPrimaryKey()
-        {
-            return this.Id.ToString();
-        }
     }
 }

@@ -42,7 +42,7 @@ namespace PoseSportsPredict.Services
                     await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
 
                     // 로그인 화면으로 이동
-                    ShinyHost.Resolve<IOAuthService>().Logout();
+                    await ShinyHost.Resolve<IOAuthService>().Logout();
                     return;
                 }
                 else if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
@@ -56,7 +56,7 @@ namespace PoseSportsPredict.Services
                             await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials);
 
                             // 로그인 화면으로 이동
-                            ShinyHost.Resolve<IOAuthService>().Logout();
+                            await ShinyHost.Resolve<IOAuthService>().Logout();
                             return;
                         }
                         else

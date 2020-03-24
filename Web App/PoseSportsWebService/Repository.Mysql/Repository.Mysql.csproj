@@ -78,6 +78,10 @@
     <Compile Include="FootballDBMigrations\202003200126126_AlterIndex.designer.cs">
       <DependentUpon>202003200126126_AlterIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202003231332564_ChangeStandingsTableName.cs" />
+    <Compile Include="FootballDBMigrations\202003231332564_ChangeStandingsTableName.designer.cs">
+      <DependentUpon>202003231332564_ChangeStandingsTableName.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
@@ -90,7 +94,7 @@
     <Compile Include="FootballDB\Tables\FixtureStatistics.cs" />
     <Compile Include="FootballDB\Tables\League.cs" />
     <Compile Include="FootballDB\Tables\Odds.cs" />
-    <Compile Include="FootballDB\Tables\Standing.cs" />
+    <Compile Include="FootballDB\Tables\Standings.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
     <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.cs" />
     <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.designer.cs">
@@ -125,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FootballDBMigrations\202003200126126_AlterIndex.resx">
       <DependentUpon>202003200126126_AlterIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202003231332564_ChangeStandingsTableName.resx">
+      <DependentUpon>202003231332564_ChangeStandingsTableName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

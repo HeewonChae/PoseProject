@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
-namespace PoseSportsPredict.Logics.Common.Triggers
+namespace PoseSportsPredict.Logics.View.Triggers
 {
     internal class MatchStatusColorTrigger : TriggerAction<XF.Material.Forms.UI.MaterialChip>
     {

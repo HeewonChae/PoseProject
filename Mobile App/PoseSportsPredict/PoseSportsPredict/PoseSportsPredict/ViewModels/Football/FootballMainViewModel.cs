@@ -4,6 +4,8 @@ using PoseSportsPredict.ViewModels.Football.Bookmark;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.Views.Football;
 using Shiny;
+using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
@@ -33,7 +35,7 @@ namespace PoseSportsPredict.ViewModels.Football
             };
             mainPage.Children.Add(leaguesNavPage);
 
-            var bookmarksPage = ShinyHost.Resolve<FootballBookmarksViewModel>().CoupledPage;
+            var bookmarksPage = ShinyHost.Resolve<FootballBookmarksTabViewModel>().CoupledPage;
             var bookmarksNavPage = new MaterialNavigationPage(bookmarksPage)
             {
                 Title = bookmarksPage.Title,

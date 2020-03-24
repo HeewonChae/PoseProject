@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using PoseSportsPredict.Logics.Common;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.ViewModels.Base;
