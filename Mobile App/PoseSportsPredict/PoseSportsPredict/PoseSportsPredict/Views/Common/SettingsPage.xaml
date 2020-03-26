@@ -11,8 +11,7 @@
              material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Common.SettingsPage"
-             Title="{x:Static localize:LocalizeString.Settings}"
-             IconImageSource="tab_about">
+             Title="{x:Static localize:LocalizeString.Settings}">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"

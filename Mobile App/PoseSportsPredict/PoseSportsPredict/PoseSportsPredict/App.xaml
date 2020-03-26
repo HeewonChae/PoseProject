@@ -29,7 +29,6 @@
         <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
             <Setter Property="AccentColor" Value="Accent" />
             <Setter Property="TextColor" Value="Gray" />
-            <Setter Property="EmptyStateMessage" Value="{x:Static localize:LocalizeString.No_Match_datas}" />
             <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
             <Setter Property="ErrorMessageConverter" Value="{StaticResource exceptionToErrorMessageConverter}" />
         </Style>

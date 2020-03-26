@@ -276,12 +276,8 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.Standings.upt_time)}`)");
             sb.Append("VALUES");
 
-            int errorTeamCnt = 0;
             for (int i = 0; i < standingsies.Length; i++)
             {
-                if (i != 0)
-                    sb.Append(", ");
-
                 var Standings = standingsies[i];
 
                 // TeamId 컨버트 가능한지..
@@ -295,7 +291,7 @@ namespace SportsAdminTool.Logic.Database
                 }
 
                 if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)Standings.TeamId, Standings.TeamName, leagueId, countryName, true))
-                    errorTeamCnt++;
+                    continue;
 
                 sb.Append($"({leagueId}, " +
                     $"{Standings.TeamId}, " +
@@ -310,8 +306,11 @@ namespace SportsAdminTool.Logic.Database
                     $"{Standings.AllPlayedInfo.Lose}, " +
                     $"{Standings.AllPlayedInfo.GoalsFor}, " +
                     $"{Standings.AllPlayedInfo.GoalsAgainst}, " +
-                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\"),");
             }
+
+            // 마지막 콤마 삭제
+            sb.Remove(sb.Length - 1, 1);
 
             sb.Append($"ON DUPLICATE KEY UPDATE `{nameof(FootballDB.Tables.Standings.rank)}` = VALUES(`{nameof(FootballDB.Tables.Standings.rank)}`), " +
                 $"`{nameof(FootballDB.Tables.Standings.group)}` = VALUES(`{nameof(FootballDB.Tables.Standings.group)}`), " +
@@ -325,9 +324,6 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.Standings.goals_for)} = VALUES({nameof(FootballDB.Tables.Standings.goals_for)}), " +
                 $"{nameof(FootballDB.Tables.Standings.goals_against)} = VALUES({nameof(FootballDB.Tables.Standings.goals_against)}), " +
                 $"{nameof(FootballDB.Tables.Standings.upt_time)} = VALUES({nameof(FootballDB.Tables.Standings.upt_time)});");
-
-            if (errorTeamCnt > 0)
-                return false;
 
             return ExecuteQuery(sb.ToString());
         }

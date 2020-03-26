@@ -222,4 +222,16 @@
   <data name="Teams" xml:space="preserve">
     <value>팀</value>
   </data>
+  <data name="No_Bookmarked_Leagues" xml:space="preserve">
+    <value>북마크된 리그가 없습니다.</value>
+  </data>
+  <data name="No_Bookmarked_Teams" xml:space="preserve">
+    <value>북마크된 팀이 없습니다.</value>
+  </data>
+  <data name="No_Bookmarked_Matches" xml:space="preserve">
+    <value>북마크된 경기가 없습니다.</value>
+  </data>
+  <data name="Search_League" xml:space="preserve">
+    <value>리그 검색...</value>
+  </data>
 </root>

@@ -3,7 +3,7 @@ using System;
 
 namespace PosePacket.Service.Football.Models
 {
-    public class FixtureDetail
+    public class FootballFixtureDetail
     {
         public class DataInfo
         {
@@ -13,6 +13,7 @@ namespace PosePacket.Service.Football.Models
 
         public class TeamInfo
         {
+            public short Id { get; set; }
             public string Name { get; set; }
             public string Logo { get; set; }
             public short Score { get; set; }

@@ -32,9 +32,16 @@ namespace PoseSportsPredict
         {
             // this is where you'll load things like BLE, GPS, etc - those are covered in other sections
             // things like the jobs, environment, power, are all installed automatically
+
+            RegisterComparer(services);
             RegisterServices(services);
             RegisterConverters(services);
             MatchViewModels(services);
+        }
+
+        private void RegisterComparer(IServiceCollection services)
+        {
+            services.AddSingleton<StoredDataComparer>();
         }
 
         private void RegisterServices(IServiceCollection services)

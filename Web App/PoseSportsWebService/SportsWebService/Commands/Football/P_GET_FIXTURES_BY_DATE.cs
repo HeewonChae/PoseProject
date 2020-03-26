@@ -80,12 +80,14 @@ namespace SportsWebService.Commands.Football
                 },
                 HomeTeam = new PacketModels.FixtureDetail.TeamInfo
                 {
+                    Id = input.HomeTeamId,
                     Name = input.HomeTeamName,
                     Logo = input.HomeTeamLogo,
                     Score = input.HomeTeamScore,
                 },
                 AwayTeam = new PacketModels.FixtureDetail.TeamInfo
                 {
+                    Id = input.AwayTeamId,
                     Name = input.AwayTeamName,
                     Logo = input.AwayTeamLogo,
                     Score = input.AwayTeamScore

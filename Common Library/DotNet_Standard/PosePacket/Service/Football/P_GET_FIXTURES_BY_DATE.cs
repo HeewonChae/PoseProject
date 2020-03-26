@@ -12,6 +12,6 @@ namespace PosePacket.Service.Football
 
     public class O_GET_FIXTURES_BY_DATE
     {
-        public List<FixtureDetail> Fixtures { get; set; }
+        public List<FootballFixtureDetail> Fixtures { get; set; }
     }
 }

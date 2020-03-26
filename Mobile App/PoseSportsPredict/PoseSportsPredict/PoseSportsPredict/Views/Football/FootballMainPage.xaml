@@ -6,5 +6,5 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              x:Class="PoseSportsPredict.Views.Football.FootballMainPage"
              Title="{x:Static localize:LocalizeString.Football}"
-             IconImageSource="tab_feed">
+             IconImageSource="img_football">
 </TabbedPage>

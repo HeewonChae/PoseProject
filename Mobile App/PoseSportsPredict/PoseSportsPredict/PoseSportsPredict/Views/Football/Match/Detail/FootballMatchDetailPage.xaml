@@ -12,6 +12,7 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:footballmatchdetailviews="clr-namespace:PoseSportsPredict.Views.Football.Match.Detail"
              xmlns:customs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.Presentation.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPage"
              NavigationPage.HasNavigationBar="False">
@@ -127,9 +128,12 @@
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
-                            LoadingPlaceholder="tab_about.png"
-                            ErrorPlaceholder="tab_about.png"
+                            LoadingPlaceholder="img_football.png"
+                            ErrorPlaceholder="img_football.png"
                             Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             WidthRequest="90"
@@ -254,9 +258,12 @@
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
-                            LoadingPlaceholder="tab_about.png"
-                            ErrorPlaceholder="tab_about.png"
+                            LoadingPlaceholder="img_football.png"
+                            ErrorPlaceholder="img_football.png"
                             Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             Margin="0,-3"

@@ -17,15 +17,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Properties
 
         public int MatchCount => Matches?.Count ?? 0;
-        public ObservableCollection<PacketModels.FixtureDetail> Matches { get; set; }
+        public ObservableCollection<PacketModels.FootballFixtureDetail> Matches { get; set; }
 
         #endregion Properties
 
         #region Commands
 
-        public ICommand SelectMatchCommand { get => new RelayCommand<PacketModels.FixtureDetail>((e) => SelectMatch(e)); }
+        public ICommand SelectMatchCommand { get => new RelayCommand<PacketModels.FootballFixtureDetail>((e) => SelectMatch(e)); }
 
-        private async void SelectMatch(PacketModels.FixtureDetail fixtureDetail)
+        private async void SelectMatch(PacketModels.FootballFixtureDetail fixtureDetail)
         {
             if (IsBusy)
                 return;

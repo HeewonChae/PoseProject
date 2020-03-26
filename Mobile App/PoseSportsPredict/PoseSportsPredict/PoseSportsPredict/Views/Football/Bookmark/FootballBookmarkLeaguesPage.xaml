@@ -4,6 +4,68 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarkLeaguesPage"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              Title="{x:Static localize:LocalizeString.Leagues}">
+    <ContentPage.Content>
+        <loader:TaskLoaderView
+                VerticalOptions="CenterAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                TaskLoaderNotifier="{Binding BookmarkedLeaguesTaskLoaderNotifier}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Bookmarked_Leagues}">
+            <ListView
+                x:Name="lv_bookmarkedLeagues"
+                ItemsSource="{Binding BookmarkedLeagues}"
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="False"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <materialui:MaterialCard
+                                CornerRadius="5"
+                                Elevation="3"
+                                Margin="10, 5"
+                                Padding="0">
+                                <StackLayout
+                                    VerticalOptions="CenterAndExpand"
+                                    Orientation="Horizontal"
+                                    Spacing="10"
+                                    Padding="15,13"
+                                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_bookmarkedLeagues}}"
+                                    effects:TapCommandEffect.TapParameter="{Binding .}"
+                                    effects:ViewEffect.TouchFeedbackColor="Accent">
+                                    <ffimageloading:CachedImage
+                                        Aspect="AspectFit"
+                                        HeightRequest="25"
+                                        WidthRequest="25"
+                                        DownsampleHeight="150"
+                                        DownsampleWidth="150"
+                                        DownsampleToViewSize="True"
+                                        LoadingPlaceholder="img_world.png"
+                                        ErrorPlaceholder="img_world.png"
+                                        Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                        <ffimageloading:CachedImage.Transformations>
+                                            <fftransformations:CircleTransformation />
+                                        </ffimageloading:CachedImage.Transformations>
+                                    </ffimageloading:CachedImage>
+                                    <materialui:MaterialLabel
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding LeagueName}"
+                                        TypeScale="Body2"
+                                        TextColor="Black"
+                                        VerticalOptions="CenterAndExpand">
+                                    </materialui:MaterialLabel>
+                                </StackLayout>
+                            </materialui:MaterialCard>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </loader:TaskLoaderView>
+    </ContentPage.Content>
 </ContentPage>

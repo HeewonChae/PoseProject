@@ -82,6 +82,10 @@
     <Compile Include="FootballDBMigrations\202003231332564_ChangeStandingsTableName.designer.cs">
       <DependentUpon>202003231332564_ChangeStandingsTableName.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202003250048585_AlterTeamTableNullCheck.cs" />
+    <Compile Include="FootballDBMigrations\202003250048585_AlterTeamTableNullCheck.designer.cs">
+      <DependentUpon>202003250048585_AlterTeamTableNullCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
@@ -132,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FootballDBMigrations\202003231332564_ChangeStandingsTableName.resx">
       <DependentUpon>202003231332564_ChangeStandingsTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202003250048585_AlterTeamTableNullCheck.resx">
+      <DependentUpon>202003250048585_AlterTeamTableNullCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

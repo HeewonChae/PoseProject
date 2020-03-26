@@ -1,15 +1,18 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Shiny;
+using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -23,15 +26,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
     {
         #region NavigableViewModel
 
-        public override Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override async Task<bool> OnInitializeViewAsync(params object[] datas)
         {
             if (datas == null)
-                return Task.FromResult(false);
+                return false;
 
             if (!(datas[0] is FootballMatchInfo matchInfo))
-                return Task.FromResult(false);
+                return false;
 
-            MatchInfo = matchInfo;
+            // Check Bookmark
+            var bookmarkedMatch = await _sqliteService.SelectAsync<FootballMatchInfo>(matchInfo.PrimaryKey);
+            MatchInfo = bookmarkedMatch ?? matchInfo;
 
             OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>();
             H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
@@ -40,7 +45,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SelectedViewIndex = 0;
 
-            return Task.FromResult(true);
+            return true;
         }
 
         public override void OnAppearing(params object[] datas)
@@ -48,6 +53,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         }
 
         #endregion NavigableViewModel
+
+        #region Services
+
+        private ISQLiteService _sqliteService;
+
+        #endregion Services
 
         #region Fields
 
@@ -108,18 +119,29 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand(TouchBookmarkButton); }
 
-        private void TouchBookmarkButton()
+        private async void TouchBookmarkButton()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
+            MatchInfo.Order = 0;
+            MatchInfo.StoredTime = DateTime.Now;
             MatchInfo.IsBookmarked = !MatchInfo.IsBookmarked;
-            MatchInfo.OnPropertyChanged("IsBookmarked");
+
+            // Add Bookmark
+            if (MatchInfo.IsBookmarked)
+                await _sqliteService.InsertOrUpdateAsync<FootballMatchInfo>(MatchInfo);
+            else
+                await _sqliteService.DeleteAsync<FootballMatchInfo>(MatchInfo.PrimaryKey);
+
+            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Match.ToString(), MatchInfo);
 
             var message = MatchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
+
+            MatchInfo.OnPropertyChanged("IsBookmarked");
 
             SetIsBusy(false);
         }
@@ -186,7 +208,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Constructors
 
-        public FootballMatchDetailViewModel(FootballMatchDetailPage page) : base(page)
+        public FootballMatchDetailViewModel(
+            FootballMatchDetailPage page
+            , ISQLiteService sqliteService) : base(page)
         {
             //var tabHost = page.FindByName<TabHostView>("_tabHost");
             //var viewSwitcher = page.FindByName<ViewSwitcher>("_switcher");
@@ -197,6 +221,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             //    var bindingCtx = viewSwitcher.Children[viewSwitcher.SelectedIndex].BindingContext as BaseViewModel;
             //    bindingCtx.OnAppearing();
             //};
+
+            _sqliteService = sqliteService;
 
             CoupledPage.Appearing += (s, e) => OnAppearing();
         }

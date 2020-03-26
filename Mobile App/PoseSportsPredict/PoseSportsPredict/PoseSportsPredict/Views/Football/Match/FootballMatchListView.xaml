@@ -7,6 +7,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchListView">
     <ContentView.Content>
         <StackLayout
@@ -15,8 +16,8 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Grid
-                        HeightRequest="45"
-                        Padding="35, 5"
+                        HeightRequest="46"
+                        Padding="25, 5"
                         effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                         effects:TapCommandEffect.TapParameter="{Binding .}"
                         effects:ViewEffect.TouchFeedbackColor="Accent">
@@ -44,14 +45,17 @@
                             Grid.Column="1"
                             Margin="3,0"
                             Aspect="AspectFit"
-                            WidthRequest="32"
-                            HeightRequest="32"
+                            WidthRequest="28"
+                            HeightRequest="28"
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
-                            LoadingPlaceholder="tab_about.png"
-                            ErrorPlaceholder="tab_about.png"
+                            LoadingPlaceholder="img_football.png"
+                            ErrorPlaceholder="img_football.png"
                             Source="{Binding HomeTeam.Logo , Converter={StaticResource svgImageSourceConverter}}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <StackLayout
                             Grid.Column="2"
@@ -68,12 +72,11 @@
                                 HorizontalOptions="Center"
                                 VerticalOptions="StartAndExpand"
                                 FontSize="11"
-                                HeightRequest="15"
-                                Text="{Binding MatchStatus}"
-                                TextColor="White">
+                                TextColor="White"
+                                HeightRequest="15">
                                 <materialui:MaterialChip.Triggers>
                                     <EventTrigger Event="BindingContextChanged">
-                                        <triggers:MatchStatusColorTrigger />
+                                        <triggers:MatchStatusCtxChangeTrigger />
                                     </EventTrigger>
                                 </materialui:MaterialChip.Triggers>
                             </materialui:MaterialChip>
@@ -82,14 +85,17 @@
                             Grid.Column="3"
                             Margin="3,0"
                             Aspect="AspectFit"
-                            WidthRequest="32"
-                            HeightRequest="32"
+                            WidthRequest="28"
+                            HeightRequest="28"
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
-                            LoadingPlaceholder="tab_about.png"
-                            ErrorPlaceholder="tab_about.png"
+                            LoadingPlaceholder="img_football.png"
+                            ErrorPlaceholder="img_football.png"
                             Source="{Binding AwayTeam.Logo, Converter={StaticResource svgImageSourceConverter}}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             Grid.Column="4"

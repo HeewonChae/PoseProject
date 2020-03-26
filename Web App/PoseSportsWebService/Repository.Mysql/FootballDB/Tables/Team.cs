@@ -17,6 +17,7 @@ namespace Repository.Mysql.FootballDB.Tables
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public short id { get; set; }
 
+        [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(64)]
         [Index("IDX_NAME_COUNTRY", Order = 1, IsUnique = false)]
@@ -29,6 +30,7 @@ namespace Repository.Mysql.FootballDB.Tables
         [Index("IDX_COUNTRY_NAME", IsUnique = false)]
         public string country_name { get; set; }
 
+        [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(100)]
         [SqlDefaultValue(DefaultValue = "")]

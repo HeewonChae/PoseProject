@@ -18,7 +18,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
         {
             FootballMatchInfo returnValue = null;
 
-            var fixtureDetail = value as FixtureDetail;
+            var fixtureDetail = value as FootballFixtureDetail;
             if (fixtureDetail != null)
             {
                 returnValue = new FootballMatchInfo
@@ -28,15 +28,21 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     CountryLogo = fixtureDetail.Country.Logo,
                     LeagueName = fixtureDetail.League.Name,
                     LeagueLogo = fixtureDetail.League.Logo,
+
+                    HomeTeamId = fixtureDetail.HomeTeam.Id,
                     HomeName = fixtureDetail.HomeTeam.Name,
                     HomeLogo = fixtureDetail.HomeTeam.Logo,
                     HomeScore = fixtureDetail.HomeTeam.Score,
+
+                    AwayTeamId = fixtureDetail.AwayTeam.Id,
                     AwayName = fixtureDetail.AwayTeam.Name,
                     AwayLogo = fixtureDetail.AwayTeam.Logo,
                     AwayScore = fixtureDetail.AwayTeam.Score,
+
                     MatchStatus = fixtureDetail.MatchStatus,
                     MatchTime = fixtureDetail.MatchTime,
                     LeagueType = fixtureDetail.LeagueType,
+
                     IsAlarmed = false,
                     IsBookmarked = false,
                 };

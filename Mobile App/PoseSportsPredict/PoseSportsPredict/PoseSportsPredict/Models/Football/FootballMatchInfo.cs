@@ -23,8 +23,13 @@ namespace PoseSportsPredict.Models.Football
 
         #region ISQLiteStorable
 
+        public string _primaryKey;
+
         [PrimaryKey]
-        public string PrimaryKey { get => this.Id.ToString(); }
+        public string PrimaryKey { get => this.Id.ToString(); set => _primaryKey = value; }
+
+        public int Order { get; set; }
+        public DateTime StoredTime { get; set; }
 
         #endregion ISQLiteStorable
 
@@ -33,9 +38,11 @@ namespace PoseSportsPredict.Models.Football
         public string CountryLogo { get; set; }
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }
+        public short HomeTeamId { get; set; }
         public string HomeName { get; set; }
         public string HomeLogo { get; set; }
         public short HomeScore { get; set; }
+        public short AwayTeamId { get; set; }
         public string AwayName { get; set; }
         public string AwayLogo { get; set; }
         public short AwayScore { get; set; }

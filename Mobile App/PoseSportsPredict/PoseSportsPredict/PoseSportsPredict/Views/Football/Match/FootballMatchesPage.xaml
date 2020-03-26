@@ -8,7 +8,6 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesPage">
@@ -44,8 +43,8 @@
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
-                                LoadingPlaceholder="tab_about.png"
-                                ErrorPlaceholder="tab_about.png"
+                                LoadingPlaceholder="img_world.png"
+                                ErrorPlaceholder="img_world.png"
                                 Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
                                 <ffimageloading:CachedImage.Transformations>
                                     <fftransformations:CircleTransformation />
@@ -117,8 +116,8 @@
                                         DownsampleHeight="150"
                                         DownsampleWidth="150"
                                         DownsampleToViewSize="True"
-                                        LoadingPlaceholder="tab_about.png"
-                                        ErrorPlaceholder="tab_about.png"
+                                        LoadingPlaceholder="img_world.png"
+                                        ErrorPlaceholder="img_world.png"
                                         Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
                                         <ffimageloading:CachedImage.Transformations>
                                             <fftransformations:CircleTransformation />
@@ -168,7 +167,8 @@
             <loader:TaskLoaderView
                 VerticalOptions="CenterAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
-                TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}">
+                TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Match_datas}">
                 <ListView
                     x:Name="lv_matches"
                     ItemsSource="{Binding MatchGroups}"

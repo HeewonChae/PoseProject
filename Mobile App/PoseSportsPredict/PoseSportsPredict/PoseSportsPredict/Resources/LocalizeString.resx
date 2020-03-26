@@ -202,4 +202,16 @@
   <data name="Teams" xml:space="preserve">
     <value>Teams</value>
   </data>
+  <data name="No_Bookmarked_Leagues" xml:space="preserve">
+    <value>There are no bookmarked leagues.</value>
+  </data>
+  <data name="No_Bookmarked_Teams" xml:space="preserve">
+    <value>There are no bookmarked Teams.</value>
+  </data>
+  <data name="No_Bookmarked_Matches" xml:space="preserve">
+    <value>There are no bookmarked Matches.</value>
+  </data>
+  <data name="Search_League" xml:space="preserve">
+    <value>Search League...</value>
+  </data>
 </root>

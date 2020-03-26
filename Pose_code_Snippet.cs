@@ -74,4 +74,11 @@ https://rapidapi.com/api-sports/api/api-football
 SELECT l.id, l.country_name, l.name, f.home_team_id, t.name FROM footballdb.fixture as f
 INNER JOIN footballdb.league as l ON f.league_id = l.id
 INNER JOIN footballdb.team as t ON f.home_team_id = t.id
-where league_id=777 group by home_team_id;
+where league_id= group by home_team_id;
+SELECT * FROM footballdb.league where country_name="";
+SELECT f.id as fixtureId, f.league_id as league_id, f.home_team_id as home_team_id, ht.name as home_team_name
+, f.away_team_id as away_team_id, at.name as away_team_name, ht.country_name
+FROM footballdb.fixture as f
+inner join footballdb.team as ht on f.home_team_id = ht.id
+inner join footballdb.team as at on f.away_team_id = at.id
+where f.league_id=;

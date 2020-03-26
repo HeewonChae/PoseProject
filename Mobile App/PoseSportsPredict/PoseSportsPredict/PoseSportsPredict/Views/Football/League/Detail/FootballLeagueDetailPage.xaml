@@ -8,9 +8,9 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.View.CustomViews"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:customs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.Presentation.Forms"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailPage"
              NavigationPage.HasNavigationBar="False">
@@ -105,9 +105,12 @@
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
-                            LoadingPlaceholder="tab_about.png"
-                            ErrorPlaceholder="tab_about.png"
+                            LoadingPlaceholder="img_world.png"
+                            ErrorPlaceholder="img_world.png"
                             Source="{Binding LeagueInfo.LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                     </StackLayout>
 

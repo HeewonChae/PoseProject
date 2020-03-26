@@ -21,7 +21,6 @@
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Football.League.FootballLeaguesPage"
              Title="{x:Static localize:LocalizeString.Leagues}"
-             IconImageSource="tab_about"
              BackgroundColor="White">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -44,8 +43,8 @@
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
-                            LoadingPlaceholder="tab_about.png"
-                            ErrorPlaceholder="tab_about.png"
+                            LoadingPlaceholder="img_world.png"
+                            ErrorPlaceholder="img_world.png"
                             Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
                             <ffimageloading:CachedImage.Transformations>
                                 <fftransformations:CircleTransformation />
@@ -91,8 +90,8 @@
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
-                                LoadingPlaceholder="tab_about.png"
-                                ErrorPlaceholder="tab_about.png"
+                                LoadingPlaceholder="img_world.png"
+                                ErrorPlaceholder="img_world.png"
                                 Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
                                 <ffimageloading:CachedImage.Transformations>
                                     <fftransformations:CircleTransformation />
@@ -138,7 +137,9 @@
                 Elevation="5">
                 <SearchBar
                     x:Name="_searchBar"
-                    HeightRequest="30">
+                    HeightRequest="30"
+                    FontSize="Body"
+                    Placeholder="{x:Static localize:LocalizeString.Search_League}">
                     <SearchBar.Behaviors>
                         <logics:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchBarTextChangedCommand}">
                         </logics:EventToCommandBehavior>

@@ -12,6 +12,5 @@
              material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarksTabPage_IOS"
-             Title="{x:Static localize:LocalizeString.Bookmarks}"
-             IconImageSource="tab_feed">
+             Title="{x:Static localize:LocalizeString.Bookmarks}">
 </forms:TopTabbedPage>

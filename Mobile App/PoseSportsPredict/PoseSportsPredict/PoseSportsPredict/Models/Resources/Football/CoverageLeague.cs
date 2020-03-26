@@ -32,6 +32,12 @@ namespace PoseSportsPredict.Models.Resources.Football
 
                 Debug.Assert(!CoverageLeagues.ContainsKey(key), $"Alread exist key in Dic_leagueCoverage key: {key}");
 
+                // 기본 이미지 설정
+                if (string.IsNullOrEmpty(covaerageLeague.CountryLogo))
+                    covaerageLeague.CountryLogo = "img_world.png";
+                if (string.IsNullOrEmpty(covaerageLeague.LeagueLogo))
+                    covaerageLeague.LeagueLogo = covaerageLeague.CountryLogo;
+
                 var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfoConverter>().Convert(
                     covaerageLeague, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture) as FootballLeagueInfo;
 

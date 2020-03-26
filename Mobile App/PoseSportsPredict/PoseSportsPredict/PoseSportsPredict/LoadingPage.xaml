@@ -13,6 +13,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ActivityIndicator
+                x:Name="_loadingIndicator"
                 Grid.Row="2"
                 IsRunning="True"
                 HorizontalOptions="Center"

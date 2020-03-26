@@ -205,6 +205,33 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no bookmarked leagues..
+        /// </summary>
+        public static string No_Bookmarked_Leagues {
+            get {
+                return ResourceManager.GetString("No_Bookmarked_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no bookmarked Matches..
+        /// </summary>
+        public static string No_Bookmarked_Matches {
+            get {
+                return ResourceManager.GetString("No_Bookmarked_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no bookmarked Teams..
+        /// </summary>
+        public static string No_Bookmarked_Teams {
+            get {
+                return ResourceManager.GetString("No_Bookmarked_Teams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No matches were predicted..
         /// </summary>
         public static string No_Match_datas {
@@ -282,6 +309,15 @@ namespace PoseSportsPredict.Resources {
         public static string Scheduled_Matches {
             get {
                 return ResourceManager.GetString("Scheduled_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search League....
+        /// </summary>
+        public static string Search_League {
+            get {
+                return ResourceManager.GetString("Search_League", resourceCulture);
             }
         }
         

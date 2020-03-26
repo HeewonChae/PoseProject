@@ -1,13 +1,17 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using Shiny;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Football.League
@@ -38,17 +42,28 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand<FootballLeagueInfo>((e) => TouchBookmarkButton(e)); }
 
-        private void TouchBookmarkButton(FootballLeagueInfo leagueInfo)
+        private async void TouchBookmarkButton(FootballLeagueInfo leagueInfo)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            var message = leagueInfo.IsBookmarked ? LocalizeString.Delete_Bookmark : LocalizeString.Set_Bookmark;
+            leagueInfo.Order = 0;
+            leagueInfo.StoredTime = DateTime.Now;
+            leagueInfo.IsBookmarked = !leagueInfo.IsBookmarked;
+
+            // Add Bookmark
+            if (leagueInfo.IsBookmarked)
+                await ShinyHost.Resolve<ISQLiteService>().InsertOrUpdateAsync<FootballLeagueInfo>(leagueInfo);
+            else
+                await ShinyHost.Resolve<ISQLiteService>().DeleteAsync<FootballLeagueInfo>(leagueInfo.PrimaryKey);
+
+            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_League.ToString(), leagueInfo);
+
+            var message = leagueInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
 
-            leagueInfo.IsBookmarked = !leagueInfo.IsBookmarked;
             leagueInfo.OnPropertyChanged("IsBookmarked");
 
             SetIsBusy(false);

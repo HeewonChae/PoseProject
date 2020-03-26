@@ -1,8 +1,10 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Team;
 using System;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Team
 {
@@ -17,17 +20,19 @@ namespace PoseSportsPredict.ViewModels.Football.Team
     {
         #region NavigableViewModel
 
-        public override Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override async Task<bool> OnInitializeViewAsync(params object[] datas)
         {
             if (datas == null)
-                return Task.FromResult(false);
+                return false;
 
             if (!(datas[0] is FootballTeamInfo teamInfo))
-                return Task.FromResult(false);
+                return false;
 
-            TeamInfo = teamInfo;
+            // Check Bookmark
+            var bookmarkedTeam = await _sqliteService.SelectAsync<FootballTeamInfo>(teamInfo.PrimaryKey);
+            TeamInfo = bookmarkedTeam ?? teamInfo;
 
-            return Task.FromResult(true);
+            return true;
         }
 
         public override void OnAppearing(params object[] datas)
@@ -35,6 +40,12 @@ namespace PoseSportsPredict.ViewModels.Football.Team
         }
 
         #endregion NavigableViewModel
+
+        #region Services
+
+        private ISQLiteService _sqliteService;
+
+        #endregion Services
 
         #region Fields
 
@@ -68,18 +79,29 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand(TouchBookmarkButton); }
 
-        private void TouchBookmarkButton()
+        private async void TouchBookmarkButton()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
+            TeamInfo.Order = 0;
+            TeamInfo.StoredTime = DateTime.Now;
             TeamInfo.IsBookmarked = !TeamInfo.IsBookmarked;
-            TeamInfo.OnPropertyChanged("IsBookmarked");
+
+            // Add Bookmark
+            if (TeamInfo.IsBookmarked)
+                await _sqliteService.InsertOrUpdateAsync<FootballTeamInfo>(TeamInfo);
+            else
+                await _sqliteService.DeleteAsync<FootballTeamInfo>(TeamInfo.PrimaryKey);
+
+            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Team.ToString(), TeamInfo);
 
             var message = TeamInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
+
+            TeamInfo.OnPropertyChanged("IsBookmarked");
 
             SetIsBusy(false);
         }
@@ -104,8 +126,12 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         #region Constructors
 
-        public FootballTeamDetailViewModel(FootballTeamDetailPage page) : base(page)
+        public FootballTeamDetailViewModel(
+            FootballTeamDetailPage page
+            , ISQLiteService sqliteService) : base(page)
         {
+            _sqliteService = sqliteService;
+
             CoupledPage.Appearing += (s, e) => OnAppearing();
         }
 

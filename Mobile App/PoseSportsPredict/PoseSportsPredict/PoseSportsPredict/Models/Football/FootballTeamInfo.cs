@@ -22,11 +22,17 @@ namespace PoseSportsPredict.Models.Football
 
         #region ISQLiteStorable
 
+        public string _primaryKey;
+
         [PrimaryKey]
-        public string PrimaryKey { get => $"{CountryName}:{LeagueName}:{TeamName}"; }
+        public string PrimaryKey { get => $"{CountryName}:{LeagueName}:{TeamName}"; set => _primaryKey = value; }
+
+        public int Order { get; set; }
+        public DateTime StoredTime { get; set; }
 
         #endregion ISQLiteStorable
 
+        public short TeamId { get; set; }
         public string TeamName { get; set; }
         public string TeamLogo { get; set; }
         public string LeagueName { get; set; }

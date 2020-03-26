@@ -1,8 +1,10 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.League.Detail;
 using System;
@@ -18,17 +20,19 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
     {
         #region NavigableViewModel
 
-        public override Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override async Task<bool> OnInitializeViewAsync(params object[] datas)
         {
             if (datas == null)
-                return Task.FromResult(false);
+                return false;
 
             if (!(datas[0] is FootballLeagueInfo leagueInfo))
-                return Task.FromResult(false);
+                return false;
 
-            LeagueInfo = leagueInfo;
+            // Check Bookmark
+            var bookmarkedLeague = await _sqliteService.SelectAsync<FootballLeagueInfo>(leagueInfo.PrimaryKey);
+            LeagueInfo = bookmarkedLeague ?? leagueInfo;
 
-            return Task.FromResult(true);
+            return true;
         }
 
         public override void OnAppearing(params object[] datas)
@@ -36,6 +40,12 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         }
 
         #endregion NavigableViewModel
+
+        #region Services
+
+        private ISQLiteService _sqliteService;
+
+        #endregion Services
 
         #region Fields
 
@@ -69,18 +79,29 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand(TouchBookmarkButton); }
 
-        private void TouchBookmarkButton()
+        private async void TouchBookmarkButton()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
+            LeagueInfo.Order = 0;
+            LeagueInfo.StoredTime = DateTime.Now;
             LeagueInfo.IsBookmarked = !LeagueInfo.IsBookmarked;
-            LeagueInfo.OnPropertyChanged("IsBookmarked");
+
+            // Add Bookmark
+            if (LeagueInfo.IsBookmarked)
+                await _sqliteService.InsertOrUpdateAsync<FootballLeagueInfo>(LeagueInfo);
+            else
+                await _sqliteService.DeleteAsync<FootballLeagueInfo>(LeagueInfo.PrimaryKey);
+
+            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_League.ToString(), LeagueInfo);
 
             var message = LeagueInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
+
+            LeagueInfo.OnPropertyChanged("IsBookmarked");
 
             SetIsBusy(false);
         }
@@ -105,8 +126,12 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Constructors
 
-        public FootballLeagueDetailViewModel(FootballLeagueDetailPage page) : base(page)
+        public FootballLeagueDetailViewModel(
+            FootballLeagueDetailPage page
+            , ISQLiteService sqliteService) : base(page)
         {
+            _sqliteService = sqliteService;
+
             CoupledPage.Appearing += (s, e) => OnAppearing();
         }
 

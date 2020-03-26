@@ -24,6 +24,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
             {
                 returnValue = new FootballTeamInfo
                 {
+                    TeamId = teamType == TeamType.Home ? matchInfo.HomeTeamId : matchInfo.AwayTeamId,
                     TeamName = teamType == TeamType.Home ? matchInfo.HomeName : matchInfo.AwayName,
                     TeamLogo = teamType == TeamType.Home ? matchInfo.HomeLogo : matchInfo.AwayLogo,
                     CountryName = matchInfo.CountryName,

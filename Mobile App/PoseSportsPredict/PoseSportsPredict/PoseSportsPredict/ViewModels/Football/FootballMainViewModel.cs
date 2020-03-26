@@ -23,7 +23,7 @@ namespace PoseSportsPredict.ViewModels.Football
             var matchesNavPage = new MaterialNavigationPage(matchesPage)
             {
                 Title = matchesPage.Title,
-                IconImageSource = matchesPage.IconImageSource,
+                IconImageSource = "ic_stadium.png",
             };
             mainPage.Children.Add(matchesNavPage);
 
@@ -31,7 +31,7 @@ namespace PoseSportsPredict.ViewModels.Football
             var leaguesNavPage = new MaterialNavigationPage(leaugesPage)
             {
                 Title = leaugesPage.Title,
-                IconImageSource = leaugesPage.IconImageSource,
+                IconImageSource = "ic_trophy.png",
             };
             mainPage.Children.Add(leaguesNavPage);
 
@@ -39,7 +39,7 @@ namespace PoseSportsPredict.ViewModels.Football
             var bookmarksNavPage = new MaterialNavigationPage(bookmarksPage)
             {
                 Title = bookmarksPage.Title,
-                IconImageSource = bookmarksPage.IconImageSource,
+                IconImageSource = "ic_bookmark.png",
             };
             mainPage.Children.Add(bookmarksNavPage);
 
@@ -47,7 +47,7 @@ namespace PoseSportsPredict.ViewModels.Football
             var settingsNavPage = new MaterialNavigationPage(settingsPage)
             {
                 Title = settingsPage.Title,
-                IconImageSource = settingsPage.IconImageSource,
+                IconImageSource = "ic_setting.png",
             };
             mainPage.Children.Add(settingsNavPage);
 

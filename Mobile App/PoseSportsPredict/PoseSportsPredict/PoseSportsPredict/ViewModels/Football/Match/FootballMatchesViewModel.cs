@@ -26,7 +26,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override bool OnInitializeView(params object[] datas)
         {
-            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>>();
+            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FootballFixtureDetail>>(GetMatchesAsync);
             return true;
         }
 
@@ -40,7 +40,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
                 return;
 #endif
-            MatchesTaskLoaderNotifier.Load(GetMatchesAsync);
+            MatchesTaskLoaderNotifier.Load();
         }
 
         #endregion NavigableViewModel
@@ -53,7 +53,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Fields
 
-        private TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> _matchesTaskLoaderNotifier;
+        private TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FootballFixtureDetail>> _matchesTaskLoaderNotifier;
         private ObservableCollection<FootballMatchGroup> _matchGroups;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
@@ -62,7 +62,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Properties
 
-        public TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FixtureDetail>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
+        public TaskLoaderNotifier<IReadOnlyCollection<PacketModels.FootballFixtureDetail>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
         public ObservableCollection<FootballMatchGroup> MatchGroups { get => _matchGroups; set => SetValue(ref _matchGroups, value); }
 
         #endregion Properties
@@ -104,7 +104,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             return this;
         }
 
-        private async Task<IReadOnlyCollection<PacketModels.FixtureDetail>> GetMatchesAsync()
+        private async Task<IReadOnlyCollection<PacketModels.FootballFixtureDetail>> GetMatchesAsync()
         {
             await Task.Delay(300);
 
@@ -124,10 +124,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
-            // Utc to Local
+            // Utc to Local, Check Image
             foreach (var fixture in result.Fixtures)
             {
                 fixture.MatchTime = fixture.MatchTime.ToLocalTime();
+
+                // 기본 이미지 설정
+                if (string.IsNullOrEmpty(fixture.Country.Logo))
+                    fixture.Country.Logo = "img_world.png";
+                if (string.IsNullOrEmpty(fixture.League.Logo))
+                    fixture.League.Logo = fixture.Country.Logo;
+                if (string.IsNullOrEmpty(fixture.HomeTeam.Logo))
+                    fixture.HomeTeam.Logo = "img_football.png";
+                if (string.IsNullOrEmpty(fixture.AwayTeam.Logo))
+                    fixture.AwayTeam.Logo = "img_football.png";
             }
 
             _lastUpdateTime = DateTime.UtcNow;
@@ -137,7 +147,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             return result.Fixtures;
         }
 
-        private void InitializeMatcheGroups(List<PacketModels.FixtureDetail> matchList)
+        private void InitializeMatcheGroups(List<PacketModels.FootballFixtureDetail> matchList)
         {
             ObservableCollection<FootballMatchGroup> matchGroupCollection;
             matchGroupCollection = new ObservableCollection<FootballMatchGroup>();
@@ -151,7 +161,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 {
                     FootballMatchListViewModel = new FootballMatchListViewModel
                     {
-                        Matches = new ObservableCollection<PacketModels.FixtureDetail>(grouppingMatch.ToArray())
+                        Matches = new ObservableCollection<PacketModels.FootballFixtureDetail>(grouppingMatch.ToArray())
                     }
                 });
             }

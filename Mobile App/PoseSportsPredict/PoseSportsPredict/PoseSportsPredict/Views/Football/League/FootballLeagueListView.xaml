@@ -17,7 +17,8 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <StackLayout
-                        Padding="17,0"
+                        Spacing="0"
+                        Padding="17,1.5"
                         Orientation="Horizontal">
                         <StackLayout
                             Spacing="15"
@@ -34,8 +35,8 @@
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
-                                LoadingPlaceholder="tab_about.png"
-                                ErrorPlaceholder="tab_about.png"
+                                LoadingPlaceholder="img_world.png"
+                                ErrorPlaceholder="img_world.png"
                                 Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
                                 <ffimageloading:CachedImage.Transformations>
                                     <fftransformations:CircleTransformation />
@@ -55,8 +56,8 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource PrimaryColor}">
                             <customviews:RatingView
                                 Margin="9.3"
-                                WidthRequest="17"
-                                HeightRequest="17"
+                                WidthRequest="18"
+                                HeightRequest="18"
                                 VerticalOptions="Center"
                                 StrokeWidth="1.2"
                                 RatingType="Full"

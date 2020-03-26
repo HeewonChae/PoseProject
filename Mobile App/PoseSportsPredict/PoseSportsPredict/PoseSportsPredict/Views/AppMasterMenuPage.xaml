@@ -43,8 +43,7 @@
                             <Image
                                 Source="{Binding IconSource}"
                                 HeightRequest="30"
-                                Margin="20,0,0,0"
-                                effects:ImageEffect.TintColor="Red">
+                                Margin="20,2,0,0">
                             </Image>
                             <Label
                                 Grid.Column="1"

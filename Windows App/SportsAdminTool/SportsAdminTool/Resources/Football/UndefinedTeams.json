@@ -103,6 +103,38 @@
       "CountryName": "Belarus",
       "ConvertTeamId": 2433,
       "ConvertTeamName": "FC Energetik-Bgu Minsk"
+    },
+    {
+      "Index": 15,
+      "LeagueId": 1287,
+      "TeamName": "Real",
+      "CountryName": "Portugal",
+      "ConvertTeamId": 10149,
+      "ConvertTeamName": "Real"
+    },
+    {
+      "Index": 16,
+      "LeagueId": 1288,
+      "TeamName": "Real",
+      "CountryName": "Portugal",
+      "ConvertTeamId": 10149,
+      "ConvertTeamName": "Real"
+    },
+    {
+      "Index": 17,
+      "LeagueId": 1289,
+      "TeamName": "Real",
+      "CountryName": "Portugal",
+      "ConvertTeamId": 10149,
+      "ConvertTeamName": "Real"
+    },
+    {
+      "Index": 18,
+      "LeagueId": 1290,
+      "TeamName": "Real",
+      "CountryName": "Portugal",
+      "ConvertTeamId": 10149,
+      "ConvertTeamName": "Real"
     }
   ]
 }

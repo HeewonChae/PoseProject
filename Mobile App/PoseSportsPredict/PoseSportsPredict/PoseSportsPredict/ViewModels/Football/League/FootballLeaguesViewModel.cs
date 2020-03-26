@@ -4,8 +4,10 @@ using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Football;
+using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League;
+using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.Views.Football;
 using PoseSportsPredict.Views.Football.League;
 using Sharpnado.Presentation.Forms;
@@ -28,6 +30,8 @@ namespace PoseSportsPredict.ViewModels.Football
         public override bool OnInitializeView(params object[] datas)
         {
             _leagueList = CoverageLeague.CoverageLeagues.Values.ToList();
+
+            MessagingCenter.Subscribe<FootballLeagueDetailViewModel, FootballLeagueInfo>(this, FootballMessageType.Update_Bookmark_League.ToString(), (s, e) => this.BookmarkMessageHandler(s, e));
 
             return true;
         }
@@ -147,6 +151,18 @@ namespace PoseSportsPredict.ViewModels.Football
             }
 
             LeagueGroups = leagueGroupsCollection;
+        }
+
+        private void BookmarkMessageHandler(BaseViewModel sender, FootballLeagueInfo item)
+        {
+            var foundLeague = _leagueList.Where(elem => elem.PrimaryKey == item.PrimaryKey).FirstOrDefault();
+            if (foundLeague != null)
+            {
+                foundLeague.Order = item.Order;
+                foundLeague.StoredTime = item.StoredTime;
+                foundLeague.IsBookmarked = item.IsBookmarked;
+                foundLeague.OnPropertyChanged("IsBookmarked");
+            }
         }
 
         #endregion Methods
