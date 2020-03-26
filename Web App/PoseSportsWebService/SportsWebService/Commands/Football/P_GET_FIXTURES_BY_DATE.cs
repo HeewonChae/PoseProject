@@ -1,8 +1,10 @@
 ﻿using LogicCore.Converter;
+using LogicCore.Utility;
 using PosePacket;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using SportsWebService.Infrastructure;
+using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
 using System.Collections.Generic;
@@ -32,13 +34,13 @@ namespace SportsWebService.Commands.Football
             if (input == null)
                 ErrorHandler.OccurException(RowCode.Invalid_Input);
 
-            IEnumerable<FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Output> db_output;
-            using (var P_SELECT_FIXTURES_BY_DATE = new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL())
+            IEnumerable<FootballDB.OutputModels.DB_FootballFixtureDetail> db_output;
+            using (var P_SELECT_FIXTURES_BY_DATE = new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_DATE())
             {
-                P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Input
+                P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_DATE.Input
                 {
-                    WHERE = $"f.{nameof(FootballDB.Tables.Fixture.is_predicted)} = 1 AND " +
-                    $"f.{nameof(FootballDB.Tables.Fixture.match_time)} BETWEEN \"{input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{input.EndTime.ToString("yyyyMMddTHHmmss")}\"",
+                    StartTime = input.StartTime,
+                    EndTime = input.EndTime,
                 });
 
                 db_output = P_SELECT_FIXTURES_BY_DATE.OnQuery();
@@ -49,56 +51,16 @@ namespace SportsWebService.Commands.Football
 
             var output = new O_GET_FIXTURES_BY_DATE
             {
-                Fixtures = new List<PacketModels.FixtureDetail>()
+                Fixtures = new List<PacketModels.FootballFixtureDetail>()
             };
 
             foreach (var dbFixtureDetail in db_output)
             {
-                output.Fixtures.Add(FixtureDetailConverter(dbFixtureDetail));
+                var fixtureDetail = Singleton.Get<FootballFixtureDetailConverter>().Convert(dbFixtureDetail);
+                output.Fixtures.Add(fixtureDetail);
             }
 
             return output;
         }
-
-        private static readonly Converter<FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL.Output, PacketModels.FixtureDetail> FixtureDetailConverter =
-        (input) =>
-        {
-            input.MatchStatus.TryParseEnum(out FootballMatchStatusType statusType);
-            input.LeagueType.TryParseEnum(out FootballLeagueType leagueType);
-
-            var output = new PacketModels.FixtureDetail
-            {
-                Country = new PacketModels.FixtureDetail.DataInfo
-                {
-                    Name = input.CountryName,
-                    Logo = input.CountryLogo,
-                },
-                League = new PacketModels.FixtureDetail.DataInfo
-                {
-                    Name = input.LeagueName,
-                    Logo = input.LeagueLogo,
-                },
-                HomeTeam = new PacketModels.FixtureDetail.TeamInfo
-                {
-                    Id = input.HomeTeamId,
-                    Name = input.HomeTeamName,
-                    Logo = input.HomeTeamLogo,
-                    Score = input.HomeTeamScore,
-                },
-                AwayTeam = new PacketModels.FixtureDetail.TeamInfo
-                {
-                    Id = input.AwayTeamId,
-                    Name = input.AwayTeamName,
-                    Logo = input.AwayTeamLogo,
-                    Score = input.AwayTeamScore
-                },
-                FixtureId = input.FixtureId,
-                MatchStatus = statusType,
-                MatchTime = input.MatchTime,
-                LeagueType = leagueType,
-            };
-
-            return output;
-        };
     }
 }

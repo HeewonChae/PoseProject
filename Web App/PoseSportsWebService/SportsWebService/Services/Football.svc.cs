@@ -22,5 +22,11 @@ namespace SportsWebService.Services
 
             return Commands.Football.P_GET_FIXTURES_BY_DATE.Execute(input);
         }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public O_GET_FIXTURES_BY_DATE P_GET_FIXTURES_BY_INDEX(string i_json)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

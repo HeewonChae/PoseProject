@@ -87,11 +87,13 @@
       <DependentUpon>202003250048585_AlterTeamTableNullCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
+    <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_DATE.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_INDEX.cs" />
     <Compile Include="FootballDB\Tables\Country.cs" />
     <Compile Include="FootballDB\Tables\LeagueCoverage.cs" />
     <Compile Include="FootballDB\Tables\Fixture.cs" />

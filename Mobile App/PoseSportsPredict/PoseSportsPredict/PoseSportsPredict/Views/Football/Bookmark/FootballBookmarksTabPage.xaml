@@ -12,4 +12,8 @@
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarksTabPage"
              Title="{x:Static localize:LocalizeString.Bookmarks}">
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_search.png" />
+    </TabbedPage.ToolbarItems>
 </TabbedPage>

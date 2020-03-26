@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PosePacket.Service.Football.Models;
+using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
@@ -35,8 +37,15 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override void OnAppearing(params object[] datas)
         {
-            if (_matchList?.Count > 0)
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+
+#if DEBUG
+            if (_matchList?.Count > 0 && timeSpan.TotalMinutes < 1) // 1분 마다 갱신
                 return;
+#else
+            if (_matchList?.Count > 0 && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
+                return;
+#endif
 
             BookmarkedMatchesTaskLoaderNotifier.Load();
         }
@@ -54,6 +63,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _bookmarkedMatchesTaskLoaderNotifier;
         private List<FootballMatchInfo> _matchList;
         private ObservableCollection<FootballMatchInfo> _bookmarkedMatches;
+        private DateTime _lastUpdateTime;
 
         #endregion Fields
 
@@ -105,9 +115,47 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             await Task.Delay(300);
 
             _matchList = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
-            _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
 
+            // Need Refrash MatchInfo
+            var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
+                && elem.MatchStatus != FootballMatchStatusType.FT
+                && elem.MatchStatus != FootballMatchStatusType.AET
+                && elem.MatchStatus != FootballMatchStatusType.PEN)
+                .Select(elem => elem.Id).ToList();
+
+            //if (needRefrashMatchIndexes.Count > 0)
+            //{
+            //    // call server
+            //    List<FootballFixtureDetail> fixtureDetails = new List<FootballFixtureDetail>();
+
+            //    // Update Matches
+            //    foreach (var fixtureDetail in fixtureDetails)
+            //    {
+            //        var foundMatchInfo = _matchList.Find(elem => elem.Id == fixtureDetail.FixtureId);
+
+            //        foundMatchInfo.MatchStatus = fixtureDetail.MatchStatus;
+            //        foundMatchInfo.MatchTime = fixtureDetail.MatchTime;
+            //        foundMatchInfo.HomeScore = fixtureDetail.HomeTeam.Score;
+            //        foundMatchInfo.AwayScore = fixtureDetail.AwayTeam.Score;
+
+            //        await _sqliteService.InsertOrUpdateAsync<FootballMatchInfo>(foundMatchInfo);
+            //        needRefrashMatchIndexes.Remove(foundMatchInfo.Id);
+            //    }
+
+            //    // Delete Invalid Matches
+            //    foreach (var deletedIndex in needRefrashMatchIndexes)
+            //    {
+            //        var foundMatchInfo = _matchList.Find(elem => elem.Id == deletedIndex);
+
+            //        await _sqliteService.DeleteAsync<FootballMatchInfo>(foundMatchInfo.PrimaryKey);
+            //        _matchList.Remove(foundMatchInfo);
+            //    }
+            //}
+
+            _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
+
+            _lastUpdateTime = DateTime.UtcNow;
 
             return _matchList;
         }

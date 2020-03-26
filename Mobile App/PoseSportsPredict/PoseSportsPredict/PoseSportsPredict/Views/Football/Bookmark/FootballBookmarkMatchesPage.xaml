@@ -12,6 +12,11 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
              Title="{x:Static localize:LocalizeString.Matches}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_edit.png" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <loader:TaskLoaderView
                 VerticalOptions="CenterAndExpand"
@@ -34,42 +39,56 @@
                                 Padding="0">
                                 <StackLayout
                                     VerticalOptions="CenterAndExpand"
-                                    Padding="15, 10"
+                                    Padding="15,10"
                                     effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
                                     effects:TapCommandEffect.TapParameter="{Binding .}"
                                     effects:ViewEffect.TouchFeedbackColor="Accent">
-                                    <materialui:MaterialLabel
-                                                FontSize="12"
-                                                TextColor="{StaticResource CustomGrey}"
-                                                Text="{Binding MatchTime, StringFormat='{0:dddd MM/dd}'}">
-                                    </materialui:MaterialLabel>
-                                    <StackLayout
-                                        Orientation="Horizontal"
-                                        Spacing="10">
-                                        <ffimageloading:CachedImage
-                                            Aspect="AspectFit"
-                                            HeightRequest="17"
-                                            WidthRequest="17"
-                                            DownsampleHeight="150"
-                                            DownsampleWidth="150"
-                                            DownsampleToViewSize="True"
-                                            LoadingPlaceholder="img_world.png"
-                                            ErrorPlaceholder="img_world.png"
-                                            Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                            <ffimageloading:CachedImage.Transformations>
-                                                <fftransformations:CircleTransformation />
-                                            </ffimageloading:CachedImage.Transformations>
-                                        </ffimageloading:CachedImage>
-                                        <materialui:MaterialLabel
-                                            LineBreakMode="TailTruncation"
-                                            Text="{Binding LeagueName}"
-                                            TextColor="{StaticResource CustomGrey}"
-                                            TypeScale="Caption"
-                                            VerticalOptions="CenterAndExpand">
-                                        </materialui:MaterialLabel>
-                                    </StackLayout>
                                     <Grid
-                                        Padding="25, 0">
+                                        RowSpacing="0"
+                                        Margin="0,0,0,3">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <materialui:MaterialLabel
+                                            Grid.Row="0"
+                                            FontSize="12"
+                                            TextColor="{StaticResource CustomGrey}"
+                                            Text="{Binding MatchTime, StringFormat='{0:dddd MM/dd}'}">
+                                        </materialui:MaterialLabel>
+                                        <StackLayout
+                                           Grid.Row="1"
+                                            Orientation="Horizontal"
+                                            Spacing="10">
+                                            <ffimageloading:CachedImage
+                                                Aspect="AspectFit"
+                                                HeightRequest="15"
+                                                WidthRequest="15"
+                                                DownsampleHeight="150"
+                                                DownsampleWidth="150"
+                                                DownsampleToViewSize="True"
+                                                LoadingPlaceholder="img_world.png"
+                                                ErrorPlaceholder="img_world.png"
+                                                Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                <ffimageloading:CachedImage.Transformations>
+                                                    <fftransformations:CircleTransformation />
+                                                </ffimageloading:CachedImage.Transformations>
+                                            </ffimageloading:CachedImage>
+                                            <materialui:MaterialLabel
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding LeagueName}"
+                                                TextColor="{StaticResource CustomGrey}"
+                                                TypeScale="Caption"
+                                                VerticalOptions="CenterAndExpand">
+                                            </materialui:MaterialLabel>
+                                        </StackLayout>
+                                    </Grid>
+                                    <Grid
+                                        Padding="25,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />

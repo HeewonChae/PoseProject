@@ -207,6 +207,7 @@
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_DATE.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
+    <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
     <Compile Include="ServerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

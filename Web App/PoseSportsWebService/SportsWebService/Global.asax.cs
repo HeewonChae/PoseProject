@@ -1,5 +1,6 @@
 ﻿using LogicCore.Utility;
 using SportsWebService.Logics;
+using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
 using System.IO;
@@ -15,6 +16,7 @@ namespace SportsWebService
 
             // Register Singleton
             Singleton.Register<CryptoFacade>();
+            Singleton.Register<FootballFixtureDetailConverter>();
 
             // Load Table
             string tableRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data");

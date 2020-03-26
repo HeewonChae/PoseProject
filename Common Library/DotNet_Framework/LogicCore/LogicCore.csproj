@@ -70,6 +70,7 @@
     <Compile Include="AIBehaviour\Nodes\Decorators\Waiter.cs" />
     <Compile Include="ConfigProvider\ConfigurationProvider.cs" />
     <Compile Include="Converter\EnumConverter.cs" />
+    <Compile Include="Converter\IValueConverter.cs" />
     <Compile Include="DataMapping\ConversionResolver.cs" />
     <Compile Include="DataMapping\DataMapper.cs" />
     <Compile Include="DataMapping\IMap.cs" />
