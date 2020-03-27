@@ -6,7 +6,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.View.CustomViews"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
@@ -44,9 +44,8 @@
                     HeightRequest="35"
                     Orientation="Horizontal">
                     <ContentView
-                        VerticalOptions="End"
-                        HeightRequest="25"
-                        WidthRequest="25"
+                        HeightRequest="27"
+                        WidthRequest="27"
                         BackgroundColor="Transparent"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
@@ -62,9 +61,9 @@
                         HorizontalOptions="EndAndExpand"
                         Spacing="15">
                         <ContentView
-                            VerticalOptions="End"
-                            HeightRequest="25"
-                            WidthRequest="25"
+                            Padding="2,0"
+                            HeightRequest="21"
+                            WidthRequest="21"
                             BackgroundColor="Transparent"
                             effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
@@ -83,8 +82,8 @@
                             </ContentView.Triggers>
                         </ContentView>
                         <customviews:RatingView
-                            VerticalOptions="End"
                             Margin="1"
+                            VerticalOptions="Center"
                             WidthRequest="23"
                             HeightRequest="23"
                             StrokeWidth="1.2"

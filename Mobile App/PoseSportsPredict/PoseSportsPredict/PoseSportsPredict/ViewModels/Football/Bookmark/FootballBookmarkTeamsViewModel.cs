@@ -26,7 +26,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override bool OnInitializeView(params object[] datas)
         {
-            BookmarkedTeamsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballTeamInfo>>(GetBookmarkedTeamsAsync);
+            BookmarkedTeamsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballTeamInfo>>();
 
             MessagingCenter.Subscribe<FootballTeamDetailViewModel, FootballTeamInfo>(this, FootballMessageType.Update_Bookmark_Team.ToString(), (s, e) => BookmarkMessageHandler(s, e));
 
@@ -38,7 +38,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (_teamList?.Count > 0)
                 return;
 
-            BookmarkedTeamsTaskLoaderNotifier.Load();
+            BookmarkedTeamsTaskLoaderNotifier.Load(GetBookmarkedTeamsAsync);
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
+            CancelButton();
         }
 
         #endregion NavigableViewModel
@@ -54,6 +59,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         private TaskLoaderNotifier<IReadOnlyCollection<FootballTeamInfo>> _bookmarkedTeamsTaskLoaderNotifier;
         private List<FootballTeamInfo> _teamList;
         private ObservableCollection<FootballTeamInfo> _bookmarkedteams;
+        private bool _IsEditMode;
+        private readonly List<FootballTeamInfo> _DeleteTeamList = new List<FootballTeamInfo>();
 
         #endregion Fields
 
@@ -61,6 +68,21 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballTeamInfo>> BookmarkedTeamsTaskLoaderNotifier { get => _bookmarkedTeamsTaskLoaderNotifier; set => SetValue(ref _bookmarkedTeamsTaskLoaderNotifier, value); }
         public ObservableCollection<FootballTeamInfo> BookmarkedTeams { get => _bookmarkedteams; set => SetValue(ref _bookmarkedteams, value); }
+
+        public bool IsEditMode
+        {
+            get => _IsEditMode;
+
+            set
+            {
+                if (CoupledPage.Parent?.BindingContext is FootballBookmarksTabViewModel tabViewModel)
+                {
+                    tabViewModel.IsSearchIconVisible = !value;
+                }
+
+                SetValue(ref _IsEditMode, value);
+            }
+        }
 
         #endregion Properties
 
@@ -70,7 +92,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private async void SelectTeam(FootballTeamInfo teamInfo)
         {
-            if (IsBusy)
+            if (IsBusy || IsEditMode)
                 return;
 
             SetIsBusy(true);
@@ -78,6 +100,51 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>(), teamInfo);
 
             SetIsBusy(false);
+        }
+
+        public ICommand EditButtonClickCommand { get => new RelayCommand(EditButtonClick); }
+
+        private void EditButtonClick()
+        {
+            if (IsBusy)
+                return;
+
+            _DeleteTeamList.Clear();
+            IsEditMode = true;
+        }
+
+        public ICommand CancelButtonClickCommand { get => new RelayCommand(CancelButton); }
+
+        private void CancelButton()
+        {
+            if (IsBusy || !IsEditMode)
+                return;
+
+            _DeleteTeamList.Clear();
+            BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
+            IsEditMode = false;
+        }
+
+        public ICommand SaveButtonClickCommand { get => new RelayCommand(SaveButtonClick); }
+
+        private void SaveButtonClick()
+        {
+            if (IsBusy)
+                return;
+
+            IsEditMode = false;
+            BookmarkedTeamsTaskLoaderNotifier.Load(UpdateBookmarkedTeamsAsync);
+        }
+
+        public ICommand DeleteTeamCommand { get => new RelayCommand<FootballTeamInfo>((e) => DeleteTeam(e)); }
+
+        private void DeleteTeam(FootballTeamInfo teamInfo)
+        {
+            if (IsBusy)
+                return;
+
+            _DeleteTeamList.Add(teamInfo);
+            BookmarkedTeams.Remove(teamInfo);
         }
 
         #endregion Commands
@@ -93,6 +160,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (OnInitializeView())
             {
                 coupledPage.Appearing += (s, e) => this.OnAppearing();
+                coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
 
@@ -108,6 +176,43 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             _teamList.Sort(ShinyHost.Resolve<StoredDataComparer>());
 
             BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
+
+            IsEditMode = false;
+            return _teamList;
+        }
+
+        private async Task<IReadOnlyCollection<FootballTeamInfo>> UpdateBookmarkedTeamsAsync()
+        {
+            SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            // Delete Leauge
+            foreach (var deleteTeamInfo in _DeleteTeamList)
+            {
+                await _sqliteService.DeleteAsync<FootballTeamInfo>(deleteTeamInfo.PrimaryKey);
+            }
+
+            _DeleteTeamList.Clear();
+
+            // Update Order
+            int order = BookmarkedTeams.Count;
+            foreach (var BookmarkedLeague in BookmarkedTeams)
+            {
+                BookmarkedLeague.Order = order;
+                await _sqliteService.InsertOrUpdateAsync<FootballTeamInfo>(BookmarkedLeague);
+
+                order--;
+            }
+
+            _teamList = await _sqliteService.SelectAllAsync<FootballTeamInfo>();
+            _teamList.Sort(ShinyHost.Resolve<StoredDataComparer>());
+
+            BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
+
+            IsEditMode = false;
+
+            SetIsBusy(false);
 
             return _teamList;
         }

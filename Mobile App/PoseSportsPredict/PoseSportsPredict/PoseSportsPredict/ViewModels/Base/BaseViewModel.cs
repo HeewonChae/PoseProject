@@ -66,6 +66,15 @@ namespace PoseSportsPredict.ViewModels.Base
         {
         }
 
+        /// <summary>
+        /// 페이지가 변경될때 마다 매번 호출
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        public virtual void OnDisAppearing(params object[] datas)
+        {
+        }
+
         #endregion Abstract Method
 
         #region Methods

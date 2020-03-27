@@ -40,8 +40,6 @@ namespace PoseSportsPredict.Droid
             this.InitExternModule(savedInstanceState);
 
             LoadApplication(new App());
-
-            NotificationCenter.NotifyNotificationTapped(Intent);
         }
 
         private void InitExternModule(Bundle savedInstanceState)
@@ -64,7 +62,6 @@ namespace PoseSportsPredict.Droid
         protected override void OnNewIntent(Intent intent)
         {
             NotificationCenter.NotifyNotificationTapped(intent);
-            base.OnNewIntent(intent);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

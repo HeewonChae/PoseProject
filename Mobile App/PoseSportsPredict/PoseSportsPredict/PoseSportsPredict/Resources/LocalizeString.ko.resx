@@ -234,4 +234,13 @@
   <data name="Search_League" xml:space="preserve">
     <value>리그 검색...</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>되돌리기</value>
+  </data>
 </root>

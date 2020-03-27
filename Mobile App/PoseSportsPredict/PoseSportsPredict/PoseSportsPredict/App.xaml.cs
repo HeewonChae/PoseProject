@@ -1,4 +1,9 @@
-﻿using PoseSportsPredict.Services;
+﻿using Plugin.LocalNotification;
+using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Services;
+using PoseSportsPredict.Utilities;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
 using Xamarin.Forms;
 
@@ -18,7 +23,9 @@ namespace PoseSportsPredict
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
 
-            // DependencyService.Register<MockDataStore>();
+            // Local Notification tap event listener
+            NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
+
             MainPage = ShinyHost.Resolve<LoadingPage>();
         }
 
@@ -34,6 +41,16 @@ namespace PoseSportsPredict
 
         protected override void OnResume()
         {
+        }
+
+        private async void OnLocalNotificationTapped(NotificationTappedEventArgs e)
+        {
+            // your code goes here
+            if (Application.Current.MainPage is MasterDetailPage)
+            {
+                await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>()
+                , e.Data.JsonDeserialize<FootballMatchInfo>());
+            }
         }
     }
 }

@@ -9,5 +9,6 @@ namespace PoseSportsPredict.Services.MessagingCenterMessageType
         Update_Bookmark_Match,
         Update_Bookmark_League,
         Update_Bookmark_Team,
+        Update_Match_Alarm,
     }
 }

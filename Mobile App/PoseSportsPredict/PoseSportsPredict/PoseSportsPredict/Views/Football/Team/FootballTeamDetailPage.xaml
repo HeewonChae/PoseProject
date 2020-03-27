@@ -6,7 +6,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             xmlns:customviews="clr-namespace:PoseSportsPredict.Logics.View.CustomViews"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
@@ -42,9 +42,8 @@
                     HeightRequest="35"
                     Orientation="Horizontal">
                     <ContentView
-                        VerticalOptions="End"
-                        HeightRequest="25"
-                        WidthRequest="25"
+                        HeightRequest="27"
+                        WidthRequest="27"
                         BackgroundColor="Transparent"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
@@ -60,7 +59,7 @@
                         HorizontalOptions="EndAndExpand"
                         Spacing="15">
                         <customviews:RatingView
-                            VerticalOptions="End"
+                            VerticalOptions="Center"
                             Margin="1"
                             WidthRequest="23"
                             HeightRequest="23"

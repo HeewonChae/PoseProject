@@ -4,66 +4,117 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarkTeamsPage"
+             xmlns:renderedviews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             Title="{x:Static localize:LocalizeString.Teams}">
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             Title="{x:Static localize:LocalizeString.Teams}"
+             BackgroundColor="{StaticResource BackgroundColor_Default}">
+
+    <ContentPage.ToolbarItems>
+        <customviews:HideableToolbarItem IconImageSource="ic_edit.png"  Priority="1"
+                                         IsVisible="{Binding IsEditMode, Converter={StaticResource reverseBoolConverter}}"
+                                         Command="{Binding EditButtonClickCommand}" />
+
+        <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Cancel}"  Priority="3"
+                                         IsVisible="{Binding IsEditMode}"
+                                         Command="{Binding CancelButtonClickCommand}" />
+        <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Save}" Priority="4"
+                                         IsVisible="{Binding IsEditMode}"
+                                         Command="{Binding SaveButtonClickCommand}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <loader:TaskLoaderView
-                VerticalOptions="CenterAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
                 TaskLoaderNotifier="{Binding BookmarkedTeamsTaskLoaderNotifier}"
                 EmptyStateMessage="{x:Static localize:LocalizeString.No_Bookmarked_Teams}">
-            <ListView
+            <renderedviews:HorizontalListView
                 x:Name="lv_bookmarkedTeams"
+                EnableDragAndDrop="True"
+                ColumnCount="1"
+                ItemHeight="58"
+                ItemSpacing="0"
+                ListLayout="Grid"
                 ItemsSource="{Binding BookmarkedTeams}"
-                HasUnevenRows="True"
-                IsPullToRefreshEnabled="False"
-                SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+                TapCommand="{Binding SelectTeamCommand}">
+                <renderedviews:HorizontalListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <materialui:MaterialCard
-                                CornerRadius="5"
-                                Elevation="3"
-                                Margin="10, 5"
-                                Padding="0">
-                                <StackLayout
-                                    VerticalOptions="CenterAndExpand"
-                                    Orientation="Horizontal"
-                                    Spacing="10"
-                                    Padding="15,13"
-                                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectTeamCommand, Source={x:Reference lv_bookmarkedTeams}}"
-                                    effects:TapCommandEffect.TapParameter="{Binding .}"
-                                    effects:ViewEffect.TouchFeedbackColor="Accent">
-                                    <ffimageloading:CachedImage
-                                        Aspect="AspectFit"
-                                        HeightRequest="25"
-                                        WidthRequest="25"
-                                        DownsampleHeight="150"
-                                        DownsampleWidth="150"
-                                        DownsampleToViewSize="True"
-                                        LoadingPlaceholder="img_football.png"
-                                        ErrorPlaceholder="img_football.png"
-                                        Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                    </ffimageloading:CachedImage>
-                                    <materialui:MaterialLabel
-                                        LineBreakMode="TailTruncation"
-                                        Text="{Binding TeamName}"
-                                        TypeScale="Body2"
-                                        TextColor="Black"
-                                        VerticalOptions="CenterAndExpand">
-                                    </materialui:MaterialLabel>
-                                </StackLayout>
-                            </materialui:MaterialCard>
-                        </ViewCell>
+                        <renderedviews:DraggableViewCell
+                            x:Name="_draggableViewCell"
+                            IsDraggable="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedTeams}}">
+                            <ContentView
+                                BackgroundColor="{StaticResource BackgroundColor_Default}">
+                                <materialui:MaterialCard
+                                    BackgroundColor="White"
+                                    CornerRadius="5"
+                                    Elevation="3"
+                                    Margin="7,3"
+                                    Padding="0">
+                                    <materialui:MaterialCard.Triggers>
+                                        <DataTrigger Binding="{Binding Source={x:Reference _draggableViewCell}, Path=IsDragAndDropping}"
+                                             TargetType="materialui:MaterialCard"
+                                             Value="True">
+                                            <Setter Property="BorderColor" Value="{StaticResource PrimaryColor_L}" />
+                                        </DataTrigger>
+                                    </materialui:MaterialCard.Triggers>
+                                    <StackLayout
+                                        VerticalOptions="CenterAndExpand"
+                                        Orientation="Horizontal"
+                                        Spacing="10"
+                                        Padding="15,13">
+                                        <ffimageloading:CachedImage
+                                            Aspect="AspectFit"
+                                            HeightRequest="25"
+                                            WidthRequest="25"
+                                            DownsampleHeight="150"
+                                            DownsampleWidth="150"
+                                            DownsampleToViewSize="True"
+                                            LoadingPlaceholder="img_world.png"
+                                            ErrorPlaceholder="img_world.png"
+                                            Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                        </ffimageloading:CachedImage>
+                                        <materialui:MaterialLabel
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding TeamName}"
+                                            TypeScale="Body2"
+                                            TextColor="Black"
+                                            VerticalOptions="CenterAndExpand">
+                                        </materialui:MaterialLabel>
+                                        <ContentView
+                                            Padding="3"
+                                            HorizontalOptions="EndAndExpand"
+                                            IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedTeams}}"
+                                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteTeamCommand, Source={x:Reference lv_bookmarkedTeams}}"
+                                            effects:TapCommandEffect.TapParameter="{Binding .}">
+                                            <Image
+                                                HeightRequest="20"
+                                                Aspect="AspectFit"
+                                                Source="ic_delete.png"
+                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
+                                            </Image>
+                                        </ContentView>
+                                        <ContentView
+                                            Padding="3"
+                                            IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedTeams}}">
+                                            <Image
+                                                HeightRequest="20"
+                                                Aspect="AspectFit"
+                                                Source="ic_sort.png"
+                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
+                                            </Image>
+                                        </ContentView>
+                                    </StackLayout>
+                                </materialui:MaterialCard>
+                            </ContentView>
+                        </renderedviews:DraggableViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </renderedviews:HorizontalListView.ItemTemplate>
+            </renderedviews:HorizontalListView>
         </loader:TaskLoaderView>
     </ContentPage.Content>
 </ContentPage>

@@ -59,7 +59,8 @@ NotificationCenter.Current.Show(request);
 // 7. OnAppearing
 if (OnInitializeView())
 {
-    CoupledPage.Appearing += (s, e) => OnAppearing();
+    CoupledPage.Appearing += (s, e) => this.OnAppearing();
+    coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
 }
 
 // 8. Xml namespace
@@ -74,16 +75,7 @@ xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sh
 xmlns:keyboard="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHelper" 
 
 //9. ref binding
-{Binding Path=BindingContext.SelectCountryCommand,
-Source={x:Reference list_country}}
+{Binding Path=BindingContext.SelectCountryCommand, Source={x:Reference list_country}}
 
-// draw star
-<skiaRate:RatingView Grid.Row="3"
-WidthRequest="100"
-HeightRequest="30"
-HorizontalOptions="Start"
-ColorOn="{StaticResource Accent}"
-Count="5"
-OutlineOffColor="Transparent"
-RatingType="Floating"
-Value="{Binding SillyDudeLoaderNotifier.Result.SillinessDegree}" />
+
+TouchFeedbackColor

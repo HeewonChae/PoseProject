@@ -15,6 +15,7 @@
         <converters:DateToStringConverter x:Key="dateToStringConverter" />
         <converters:IsFootballMatchStartedConverter x:Key="isFootballMatchStartedConverter" />
         <converters:FootballMatchStatusToStringConverter x:Key="footballMatchStatusToStringConverter" />
+        <converters:ReverseBoolConverter x:Key="reverseBoolConverter" />
 
         <Color x:Key="PrimaryColor">#0288d1</Color>
         <Color x:Key="PrimaryColor_L">#5eb8ff</Color>
@@ -25,6 +26,7 @@
         <Color x:Key="CustomGrey">#37474f</Color>
         <Color x:Key="CustomGrey_L">#62727b</Color>
         <Color x:Key="CustomGrey_D">#102027</Color>
+        <Color x:Key="BackgroundColor_Default">#f5f5f5</Color>
 
         <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
             <Setter Property="AccentColor" Value="Accent" />

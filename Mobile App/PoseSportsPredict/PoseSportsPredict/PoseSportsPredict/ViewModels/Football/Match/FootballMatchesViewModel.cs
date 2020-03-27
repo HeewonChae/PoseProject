@@ -117,7 +117,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 PostData = new I_GET_FIXTURES_BY_DATE
                 {
                     StartTime = _matchDate.ToUniversalTime(),
-                    EndTime = _matchDate.AddDays(1).ToUniversalTime(),
+                    EndTime = _matchDate.ToUniversalTime().AddDays(1).AddSeconds(-1),
                 }
             });
 

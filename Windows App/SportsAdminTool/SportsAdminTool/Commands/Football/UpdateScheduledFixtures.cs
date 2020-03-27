@@ -62,8 +62,8 @@ namespace SportsAdminTool.Commands.Football
                             innerloop++;
                             mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled fixtures ({innerloop}/{api_groupingFixtures.Count()})");
 
-                            LogicFacade.UpdateTeamLastFixtures((short)fixture.HomeTeam.TeamId, 20);
-                            LogicFacade.UpdateTeamLastFixtures((short)fixture.AwayTeam.TeamId, 20);
+                            LogicFacade.UpdateTeamLastFixtures((short)fixture.HomeTeam.TeamId, 30);
+                            LogicFacade.UpdateTeamLastFixtures((short)fixture.AwayTeam.TeamId, 30);
                             LogicFacade.UpdateH2H((short)fixture.HomeTeam.TeamId, (short)fixture.AwayTeam.TeamId);
                             LogicFacade.UpdateOdds(fixture.FixtureId);
                         }

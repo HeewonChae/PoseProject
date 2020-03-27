@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -7,6 +8,7 @@ using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services.MessagingCenterMessageType;
+using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Team;
@@ -110,6 +112,21 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             MatchInfo.IsAlarmed = !MatchInfo.IsAlarmed;
             OnPropertyChanged("IsAlarmed");
+
+            var notification = new NotificationRequest
+            {
+                NotificationId = 100,
+                Title = "App Alarm",
+                Description = "Test Description",
+                ReturningData = MatchInfo.JsonSerialize(),
+                NotifyTime = DateTime.Now.AddSeconds(10),
+                Android = new AndroidOptions
+                {
+                    IconName = "ic_soccer_alarm",
+                },
+            };
+
+            NotificationCenter.Current.Show(notification);
 
             var message = MatchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
             UserDialogs.Instance.Toast(message);

@@ -11,15 +11,26 @@
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
-             Title="{x:Static localize:LocalizeString.Matches}">
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             Title="{x:Static localize:LocalizeString.Matches}"
+             BackgroundColor="{StaticResource BackgroundColor_Default}"
+             x:Name="_page">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_edit.png" />
+        <customviews:HideableToolbarItem IconImageSource="ic_edit.png"  Priority="1"
+                                         IsVisible="{Binding IsEditMode, Converter={StaticResource reverseBoolConverter}}"
+                                         Command="{Binding EditButtonClickCommand}" />
+
+        <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Cancel}"  Priority="3"
+                                         IsVisible="{Binding IsEditMode}"
+                                         Command="{Binding CancelButtonClickCommand}" />
+        <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Save}" Priority="4"
+                                         IsVisible="{Binding IsEditMode}"
+                                         Command="{Binding SaveButtonClickCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <loader:TaskLoaderView
-                VerticalOptions="CenterAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
                 TaskLoaderNotifier="{Binding BookmarkedMatchesTaskLoaderNotifier}"
                 EmptyStateMessage="{x:Static localize:LocalizeString.No_Bookmarked_Matches}">
@@ -35,17 +46,13 @@
                             <materialui:MaterialCard
                                 CornerRadius="5"
                                 Elevation="3"
-                                Margin="10, 5"
+                                Margin="7, 5"
                                 Padding="0">
                                 <StackLayout
                                     VerticalOptions="CenterAndExpand"
-                                    Padding="15,10"
-                                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
-                                    effects:TapCommandEffect.TapParameter="{Binding .}"
-                                    effects:ViewEffect.TouchFeedbackColor="Accent">
+                                    Padding="15,4">
                                     <Grid
-                                        RowSpacing="0"
-                                        Margin="0,0,0,3">
+                                        RowSpacing="0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
                                             <RowDefinition />
@@ -56,12 +63,12 @@
                                         </Grid.ColumnDefinitions>
                                         <materialui:MaterialLabel
                                             Grid.Row="0"
-                                            FontSize="12"
                                             TextColor="{StaticResource CustomGrey}"
+                                            TypeScale="Caption"
                                             Text="{Binding MatchTime, StringFormat='{0:dddd MM/dd}'}">
                                         </materialui:MaterialLabel>
                                         <StackLayout
-                                           Grid.Row="1"
+                                            Grid.Row="1"
                                             Orientation="Horizontal"
                                             Spacing="10">
                                             <ffimageloading:CachedImage
@@ -86,9 +93,29 @@
                                                 VerticalOptions="CenterAndExpand">
                                             </materialui:MaterialLabel>
                                         </StackLayout>
+                                        <ContentView
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Grid.RowSpan="2"
+                                            Padding="3"
+                                            HorizontalOptions="EndAndExpand"
+                                            VerticalOptions="CenterAndExpand"
+                                            IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedMatches}}"
+                                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
+                                            effects:TapCommandEffect.TapParameter="{Binding .}">
+                                            <Image
+                                                HeightRequest="20"
+                                                Aspect="AspectFit"
+                                                Source="ic_delete.png"
+                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
+                                            </Image>
+                                        </ContentView>
                                     </Grid>
                                     <Grid
-                                        Padding="25,0">
+                                        Padding="25,5"
+                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
+                                        effects:TapCommandEffect.TapParameter="{Binding .}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />

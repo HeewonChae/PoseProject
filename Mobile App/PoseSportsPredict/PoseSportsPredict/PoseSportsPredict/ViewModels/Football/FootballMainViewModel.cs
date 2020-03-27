@@ -24,6 +24,8 @@ namespace PoseSportsPredict.ViewModels.Football
             {
                 Title = matchesPage.Title,
                 IconImageSource = "ic_stadium.png",
+                BarBackgroundColor = Color.FromHex("#1FBED6"),
+                BarTextColor = Color.FromHex("#000000")
             };
             mainPage.Children.Add(matchesNavPage);
 

@@ -1,9 +1,11 @@
-﻿using PoseSportsPredict.ViewModels.Base;
+﻿using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Bookmark;
 using Shiny;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Bookmark
@@ -18,9 +20,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             tabbedPage.Children.Clear();
 
-            tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkMatchesViewModel>().CoupledPage);
-            tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkTeamsViewModel>().CoupledPage);
             tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkLeaguesViewModel>().CoupledPage);
+            tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkTeamsViewModel>().CoupledPage);
+            tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkMatchesViewModel>().CoupledPage);
 
             return true;
         }
@@ -31,6 +33,28 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         }
 
         #endregion NavigableViewModel
+
+        #region Fields
+
+        public bool _isSearchIconVisible;
+
+        #endregion Fields
+
+        #region Properties
+
+        public bool IsSearchIconVisible { get => _isSearchIconVisible; set => SetValue(ref _isSearchIconVisible, value); }
+
+        #endregion Properties
+
+        #region Commands
+
+        public ICommand SearchButtonClickCommand { get => new RelayCommand(SearchButtonClick); }
+
+        private void SearchButtonClick()
+        {
+        }
+
+        #endregion Commands
 
         #region Constructors
 

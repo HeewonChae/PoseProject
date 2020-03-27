@@ -1,9 +1,11 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
 using PosePacket.Service.Football.Models;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -19,6 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Football.Bookmark
 {
@@ -28,7 +31,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override bool OnInitializeView(params object[] datas)
         {
-            BookmarkedMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>(GetBookmarkedMatchesAsync);
+            BookmarkedMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
             MessagingCenter.Subscribe<FootballMatchDetailViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
 
@@ -47,7 +50,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 return;
 #endif
 
-            BookmarkedMatchesTaskLoaderNotifier.Load();
+            BookmarkedMatchesTaskLoaderNotifier.Load(InitBookmarkedMatchesAsync);
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
+            CancelButton();
         }
 
         #endregion NavigableViewModel
@@ -64,6 +72,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         private List<FootballMatchInfo> _matchList;
         private ObservableCollection<FootballMatchInfo> _bookmarkedMatches;
         private DateTime _lastUpdateTime;
+        private bool _IsEditMode;
+        private readonly List<FootballMatchInfo> _DeleteMatchList = new List<FootballMatchInfo>();
 
         #endregion Fields
 
@@ -71,6 +81,21 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> BookmarkedMatchesTaskLoaderNotifier { get => _bookmarkedMatchesTaskLoaderNotifier; set => SetValue(ref _bookmarkedMatchesTaskLoaderNotifier, value); }
         public ObservableCollection<FootballMatchInfo> BookmarkedMatches { get => _bookmarkedMatches; set => SetValue(ref _bookmarkedMatches, value); }
+
+        public bool IsEditMode
+        {
+            get => _IsEditMode;
+
+            set
+            {
+                if (CoupledPage.Parent?.BindingContext is FootballBookmarksTabViewModel tabViewModel)
+                {
+                    tabViewModel.IsSearchIconVisible = !value;
+                }
+
+                SetValue(ref _IsEditMode, value);
+            }
+        }
 
         #endregion Properties
 
@@ -80,7 +105,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private async void SelectMatch(FootballMatchInfo matchInfo)
         {
-            if (IsBusy)
+            if (IsBusy || IsEditMode)
                 return;
 
             SetIsBusy(true);
@@ -88,6 +113,51 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
 
             SetIsBusy(false);
+        }
+
+        public ICommand EditButtonClickCommand { get => new RelayCommand(EditButtonClick); }
+
+        private void EditButtonClick()
+        {
+            if (IsBusy)
+                return;
+
+            _DeleteMatchList.Clear();
+            IsEditMode = true;
+        }
+
+        public ICommand CancelButtonClickCommand { get => new RelayCommand(CancelButton); }
+
+        private void CancelButton()
+        {
+            if (IsBusy || !IsEditMode)
+                return;
+
+            _DeleteMatchList.Clear();
+            BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
+            IsEditMode = false;
+        }
+
+        public ICommand SaveButtonClickCommand { get => new RelayCommand(SaveButtonClick); }
+
+        private void SaveButtonClick()
+        {
+            if (IsBusy)
+                return;
+
+            IsEditMode = false;
+            BookmarkedMatchesTaskLoaderNotifier.Load(UpdateBookmarkedMatchesAsync);
+        }
+
+        public ICommand DeleteMatchCommand { get => new RelayCommand<FootballMatchInfo>((e) => DeleteMatch(e)); }
+
+        private void DeleteMatch(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            _DeleteMatchList.Add(matchInfo);
+            BookmarkedMatches.Remove(matchInfo);
         }
 
         #endregion Commands
@@ -103,6 +173,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (OnInitializeView())
             {
                 coupledPage.Appearing += (s, e) => this.OnAppearing();
+                coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
 
@@ -110,8 +181,10 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         #region Methods
 
-        private async Task<IReadOnlyCollection<FootballMatchInfo>> GetBookmarkedMatchesAsync()
+        private async Task<IReadOnlyCollection<FootballMatchInfo>> InitBookmarkedMatchesAsync()
         {
+            SetIsBusy(true);
+
             await Task.Delay(300);
 
             _matchList = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
@@ -157,11 +230,43 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             _lastUpdateTime = DateTime.UtcNow;
 
+            IsEditMode = false;
+
+            SetIsBusy(false);
+            return _matchList;
+        }
+
+        private async Task<IReadOnlyCollection<FootballMatchInfo>> UpdateBookmarkedMatchesAsync()
+        {
+            SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            foreach (var deleteMatchInfo in _DeleteMatchList)
+            {
+                deleteMatchInfo.IsBookmarked = false;
+                await _sqliteService.DeleteAsync<FootballMatchInfo>(deleteMatchInfo.PrimaryKey);
+                MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Match.ToString(), deleteMatchInfo);
+            }
+
+            _DeleteMatchList.Clear();
+
+            _matchList = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
+            _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
+
+            BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
+
+            IsEditMode = false;
+
+            SetIsBusy(false);
+
             return _matchList;
         }
 
         private void BookmarkMessageHandler(BaseViewModel sender, FootballMatchInfo item)
         {
+            SetIsBusy(true);
+
             if (_matchList?.Count > 0)
             {
                 if (item.IsBookmarked)
@@ -180,6 +285,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                     BookmarkedMatches.Remove(foundItem);
                 }
             }
+
+            SetIsBusy(false);
         }
 
         #endregion Methods

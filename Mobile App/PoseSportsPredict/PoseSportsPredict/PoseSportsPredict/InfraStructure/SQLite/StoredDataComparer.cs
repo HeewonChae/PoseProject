@@ -13,7 +13,7 @@ namespace PoseSportsPredict.InfraStructure.SQLite
                 return x.StoredTime.CompareTo(y.StoredTime);
             }
 
-            return x.Order.CompareTo(y.Order);
+            return x.Order.CompareTo(y.Order) * -1;
         }
     }
 }

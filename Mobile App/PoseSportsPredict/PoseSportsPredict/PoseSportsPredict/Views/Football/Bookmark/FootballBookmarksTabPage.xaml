@@ -10,10 +10,13 @@
              material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
              material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              material:MaterialNavigationPage.HasShadow="False"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarksTabPage"
              Title="{x:Static localize:LocalizeString.Bookmarks}">
 
     <TabbedPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_search.png" />
+        <customviews:HideableToolbarItem IconImageSource="ic_search.png" Priority="2"
+                                         IsVisible="{Binding IsSearchIconVisible}"
+                                         Command="{Binding SearchButtonClickCommand}" />
     </TabbedPage.ToolbarItems>
 </TabbedPage>
