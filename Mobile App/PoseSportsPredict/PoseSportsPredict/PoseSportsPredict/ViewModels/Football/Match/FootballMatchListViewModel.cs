@@ -17,23 +17,22 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Properties
 
         public int MatchCount => Matches?.Count ?? 0;
-        public ObservableCollection<PacketModels.FootballFixtureDetail> Matches { get; set; }
+        public ObservableCollection<FootballMatchInfo> Matches { get; set; }
 
         #endregion Properties
 
         #region Commands
 
-        public ICommand SelectMatchCommand { get => new RelayCommand<PacketModels.FootballFixtureDetail>((e) => SelectMatch(e)); }
+        public ICommand SelectMatchCommand { get => new RelayCommand<FootballMatchInfo>((e) => SelectMatch(e)); }
 
-        private async void SelectMatch(PacketModels.FootballFixtureDetail fixtureDetail)
+        private async void SelectMatch(FootballMatchInfo matchInfo)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>()
-                , ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixtureDetail, null, null, null));
+            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
 
             SetIsBusy(false);
         }

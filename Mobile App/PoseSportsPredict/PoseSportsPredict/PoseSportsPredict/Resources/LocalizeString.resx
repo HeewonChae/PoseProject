@@ -172,8 +172,8 @@
   <data name="Match_Ongoing" xml:space="preserve">
     <value>Ongoing</value>
   </data>
-  <data name="Match_Sort_By_Bookmark" xml:space="preserve">
-    <value>My Game</value>
+  <data name="Match_Filter_By_Bookmark" xml:space="preserve">
+    <value>My matches</value>
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
     <value>Sort by Time</value>
@@ -222,5 +222,23 @@
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>
+  </data>
+  <data name="Expand_All_Leagues" xml:space="preserve">
+    <value>Expand all leagues</value>
+  </data>
+  <data name="Collapse_All_Leagues" xml:space="preserve">
+    <value>Collapse all leagues</value>
+  </data>
+  <data name="Add_Delete_Matches_Alarm" xml:space="preserve">
+    <value>Add/Delete a match alarm</value>
+  </data>
+  <data name="Ongoing_matches" xml:space="preserve">
+    <value>Ongoing matches</value>
+  </data>
+  <data name="Matches_Filtering" xml:space="preserve">
+    <value>Matches Filtering</value>
+  </data>
+  <data name="Match_Begin_Soon" xml:space="preserve">
+    <value>The match will begin soon.</value>
   </data>
 </root>

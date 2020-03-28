@@ -61,6 +61,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add/Delete a match alarm.
+        /// </summary>
+        public static string Add_Delete_Matches_Alarm {
+            get {
+                return ResourceManager.GetString("Add_Delete_Matches_Alarm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmarks.
         /// </summary>
         public static string Bookmarks {
@@ -97,11 +106,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Collapse all leagues.
+        /// </summary>
+        public static string Collapse_All_Leagues {
+            get {
+                return ResourceManager.GetString("Collapse_All_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmark have been deleted..
         /// </summary>
         public static string Delete_Bookmark {
             get {
                 return ResourceManager.GetString("Delete_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand all leagues.
+        /// </summary>
+        public static string Expand_All_Leagues {
+            get {
+                return ResourceManager.GetString("Expand_All_Leagues", resourceCulture);
             }
         }
         
@@ -151,6 +178,24 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The match will begin soon..
+        /// </summary>
+        public static string Match_Begin_Soon {
+            get {
+                return ResourceManager.GetString("Match_Begin_Soon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My matches.
+        /// </summary>
+        public static string Match_Filter_By_Bookmark {
+            get {
+                return ResourceManager.GetString("Match_Filter_By_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finished.
         /// </summary>
         public static string Match_Finished {
@@ -178,15 +223,6 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Game.
-        /// </summary>
-        public static string Match_Sort_By_Bookmark {
-            get {
-                return ResourceManager.GetString("Match_Sort_By_Bookmark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Sort by league.
         /// </summary>
         public static string Match_Sort_By_League {
@@ -210,6 +246,15 @@ namespace PoseSportsPredict.Resources {
         public static string Matches {
             get {
                 return ResourceManager.GetString("Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches Filtering.
+        /// </summary>
+        public static string Matches_Filtering {
+            get {
+                return ResourceManager.GetString("Matches_Filtering", resourceCulture);
             }
         }
         
@@ -273,6 +318,15 @@ namespace PoseSportsPredict.Resources {
         public static string Odds {
             get {
                 return ResourceManager.GetString("Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ongoing matches.
+        /// </summary>
+        public static string Ongoing_matches {
+            get {
+                return ResourceManager.GetString("Ongoing_matches", resourceCulture);
             }
         }
         

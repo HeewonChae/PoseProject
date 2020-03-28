@@ -101,6 +101,9 @@
     <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarkMatchesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarkSearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Bookmark\FootballBookmarksTabPage_IOS.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

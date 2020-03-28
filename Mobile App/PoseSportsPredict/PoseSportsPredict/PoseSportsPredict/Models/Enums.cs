@@ -10,4 +10,12 @@
         Home,
         Away,
     }
+
+    public enum MatchFilterType
+    {
+        Bookmark,
+        Ongoing,
+        SortByTime,
+        SortByLeague,
+    }
 }

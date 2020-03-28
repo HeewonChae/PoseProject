@@ -40,6 +40,8 @@ namespace PoseSportsPredict.Droid
             this.InitExternModule(savedInstanceState);
 
             LoadApplication(new App());
+
+            NotificationCenter.NotifyNotificationTapped(this.Intent);
         }
 
         private void InitExternModule(Bundle savedInstanceState)
@@ -57,11 +59,6 @@ namespace PoseSportsPredict.Droid
         private void InitShiny()
         {
             Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
-        }
-
-        protected override void OnNewIntent(Intent intent)
-        {
-            NotificationCenter.NotifyNotificationTapped(intent);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

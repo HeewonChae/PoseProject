@@ -105,6 +105,8 @@ namespace PoseSportsPredict
             services.AddSingleton<FootballBookmarkLeaguesViewModel>();
             services.AddSingleton<FootballBookmarkTeamsPage>();
             services.AddSingleton<FootballBookmarkTeamsViewModel>();
+            services.AddSingleton<FootballBookmarkSearchPage>();
+            services.AddSingleton<FootballBookmarkSearchViewModel>();
         }
     }
 }

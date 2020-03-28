@@ -110,16 +110,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
+            DateTime notifyTime = MatchInfo.MatchTime.AddMinutes(-5);
+            if (notifyTime < DateTime.Now)
+                notifyTime = DateTime.Now.AddSeconds(5);
+
             MatchInfo.IsAlarmed = !MatchInfo.IsAlarmed;
             OnPropertyChanged("IsAlarmed");
 
             var notification = new NotificationRequest
             {
-                NotificationId = 100,
-                Title = "App Alarm",
-                Description = "Test Description",
+                NotificationId = MatchInfo.Id,
+                Title = LocalizeString.Match_Begin_Soon,
+                Description = $"{MatchInfo.HomeName} vs {MatchInfo.AwayName}",
                 ReturningData = MatchInfo.JsonSerialize(),
-                NotifyTime = DateTime.Now.AddSeconds(10),
+                NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
                 Android = new AndroidOptions
                 {
                     IconName = "ic_soccer_alarm",

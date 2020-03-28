@@ -14,9 +14,10 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_filter.png" />
-        <ToolbarItem Text="{x:Static localize:LocalizeString.Match_Sort_By_Bookmark}" Order="Secondary" Priority="1" />
-        <ToolbarItem Text="{x:Static localize:LocalizeString.Match_Sort_By_Time}" Order="Secondary" Priority="2" />
+        <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}"/>
+        <ToolbarItem Text="{x:Static localize:LocalizeString.Add_Delete_Matches_Alarm}" Order="Secondary" Priority="1" />
+        <ToolbarItem Text="{x:Static localize:LocalizeString.Expand_All_Leagues}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
+        <ToolbarItem Text="{x:Static localize:LocalizeString.Collapse_All_Leagues}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -63,6 +64,7 @@
                                 Padding="0"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
+                                MinimumWidthRequest="19"
                                 HeightRequest="19"
                                 WidthRequest="19"
                                 CornerRadius="19"

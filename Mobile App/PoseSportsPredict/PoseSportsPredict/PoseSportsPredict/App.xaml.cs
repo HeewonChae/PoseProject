@@ -45,12 +45,12 @@ namespace PoseSportsPredict
 
         private async void OnLocalNotificationTapped(NotificationTappedEventArgs e)
         {
-            // your code goes here
-            if (Application.Current.MainPage is MasterDetailPage)
-            {
-                await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>()
-                , e.Data.JsonDeserialize<FootballMatchInfo>());
-            }
+            //// your code goes here
+            //if (Application.Current.MainPage is MasterDetailPage)
+            //{
+            //    await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>()
+            //    , e.Data.JsonDeserialize<FootballMatchInfo>());
+            //}
         }
     }
 }

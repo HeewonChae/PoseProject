@@ -192,11 +192,11 @@
   <data name="Match_Ongoing" xml:space="preserve">
     <value>진행중</value>
   </data>
-  <data name="Match_Sort_By_Bookmark" xml:space="preserve">
+  <data name="Match_Filter_By_Bookmark" xml:space="preserve">
     <value>나의 경기</value>
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
-    <value>시간으로 정렬</value>
+    <value>시간순으로 정렬</value>
   </data>
   <data name="Bookmarks" xml:space="preserve">
     <value>북마크</value>
@@ -217,7 +217,7 @@
     <value>순위</value>
   </data>
   <data name="Match_Sort_By_League" xml:space="preserve">
-    <value>리그별로 정렬</value>
+    <value>리그순으로 정렬</value>
   </data>
   <data name="Teams" xml:space="preserve">
     <value>팀</value>
@@ -242,5 +242,23 @@
   </data>
   <data name="Undo" xml:space="preserve">
     <value>되돌리기</value>
+  </data>
+  <data name="Expand_All_Leagues" xml:space="preserve">
+    <value>모든 리그 확대</value>
+  </data>
+  <data name="Collapse_All_Leagues" xml:space="preserve">
+    <value>모든 리그 축소</value>
+  </data>
+  <data name="Add_Delete_Matches_Alarm" xml:space="preserve">
+    <value>경기 알람 추가/삭제</value>
+  </data>
+  <data name="Ongoing_matches" xml:space="preserve">
+    <value>진행중인 경기</value>
+  </data>
+  <data name="Matches_Filtering" xml:space="preserve">
+    <value>경기 필터링</value>
+  </data>
+  <data name="Match_Begin_Soon" xml:space="preserve">
+    <value>경기가 곧 시작합니다.</value>
   </data>
 </root>

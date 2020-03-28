@@ -192,7 +192,7 @@
   <data name="Match_Ongoing" xml:space="preserve">
     <value>進行中</value>
   </data>
-  <data name="Match_Sort_By_Bookmark" xml:space="preserve">
+  <data name="Match_Filter_By_Bookmark" xml:space="preserve">
     <value>私の試合</value>
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
