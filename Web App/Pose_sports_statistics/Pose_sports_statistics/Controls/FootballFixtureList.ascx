@@ -45,7 +45,7 @@
                                 <Columns>
                                     <asp:TemplateField HeaderText="SelectFixture" ItemStyle-Width="50" ItemStyle-Height="30" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chk_interestedFixture" runat="server" OnCheckedChanged="chk_fixture_InterestedIndexChanged" AutoPostBack="true" ToolTip="<%# Item.FixtureID %>" />
+                                            <asp:CheckBox ID="chk_interestedFixture" runat="server" OnCheckedChanged="chk_fixture_InterestedIndexChanged" AutoPostBack="true" ToolTip="<%# Item.FixtureId %>" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="HomeTeam" ItemStyle-Width="250" ItemStyle-Height="30" ItemStyle-HorizontalAlign="Center">
@@ -68,7 +68,7 @@
                                     <asp:BoundField HeaderText="Status" DataField="Status" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center" />
                                     <asp:TemplateField HeaderText="Detail" ItemStyle-Width="50">
                                         <ItemTemplate>
-                                            <a href="<%#: GetRouteUrl("FootballFixtureByID", new {FixtureID = Item.FixtureID}) %>">Detail
+                                            <a href="<%#: GetRouteUrl("FootballFixtureById", new {FixtureId = Item.FixtureId}) %>">Detail
                                             </a>
                                         </ItemTemplate>
                                     </asp:TemplateField>

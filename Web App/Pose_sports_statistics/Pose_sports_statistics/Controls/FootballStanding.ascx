@@ -4,7 +4,7 @@
     <h4><b>리그 순위</b></h4>
     <asp:GridView GridLines="Horizontal" BorderStyle="None" ID="gv_standings" 
         AutoGenerateColumns="false" runat="server" SelectMethod="GetStandings" 
-        ItemType="Pose_sports_statistics.Models.FootballStanding"
+        ItemType="Pose_sports_statistics.Models.FootballStandings"
         OnRowDataBound="GV_Standings_RowDataBound">
         <Columns>
             <asp:BoundField HeaderText="Rank" DataField="Rank" ItemStyle-Height="25" ItemStyle-Width="40" ItemStyle-HorizontalAlign="Center"/>

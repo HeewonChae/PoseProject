@@ -13,152 +13,152 @@ using WebFormModel = Pose_sports_statistics.Models;
 
 namespace Pose_sports_statistics.Controls
 {
-	public partial class InterestedEventList : System.Web.UI.UserControl
-	{
-		protected void Page_Load(object sender, EventArgs e)
-		{
-			if (IsPostBack)
-				return;
-		}
+    public partial class InterestedEventList : System.Web.UI.UserControl
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+                return;
+        }
 
-		public IQueryable<dynamic> GetFixtures()
-		{
-			// 관심 경기 데이터 가져오기
-			var interestedFixtures = Singleton.Get<RedisCacheManager>()
-				.GetNullable<IList<WebFormModel.FootballFixture>>
-				(
-					RedisKeyMaker.FootballInterestedFixture()
-				);
+        public IQueryable<dynamic> GetFixtures()
+        {
+            // 관심 경기 데이터 가져오기
+            var interestedFixtures = Singleton.Get<RedisCacheManager>()
+                .GetNullable<IList<WebFormModel.FootballFixture>>
+                (
+                    RedisKeyMaker.FootballInterestedFixture()
+                );
 
-			// step1. 시간 순으로 정렬
-			var sortedByStartDate = interestedFixtures.OrderBy(elem => elem.EventDate);
+            // step1. 시간 순으로 정렬
+            var sortedByStartDate = interestedFixtures.OrderBy(elem => elem.MatchTime);
 
-			// step2. 데이터를 리그, 시작시간으로 그룹화
-			var group_query = sortedByStartDate.GroupBy(elem => new { League = elem.LeagueID, StartTime = elem.EventDate });
+            // step2. 데이터를 리그, 시작시간으로 그룹화
+            var group_query = sortedByStartDate.GroupBy(elem => new { League = elem.LeagueId, StartTime = elem.MatchTime });
 
-			var result_query = from queryData in group_query
-							   select new
-							   {
-								   League = queryData.FirstOrDefault().League.Name,
-								   queryData.Key.StartTime,
-								   queryData.FirstOrDefault()?.League.Flag,
-								   Fixtures = queryData.ToArray()
-							   };
+            var result_query = from queryData in group_query
+                               select new
+                               {
+                                   League = queryData.FirstOrDefault().League.Name,
+                                   queryData.Key.StartTime,
+                                   queryData.FirstOrDefault()?.League.Flag,
+                                   Fixtures = queryData.ToArray()
+                               };
 
-			return result_query.AsQueryable();
-		}
+            return result_query.AsQueryable();
+        }
 
-		protected void lv_footballFixtureList_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
-		{
-			//set current page startindex, max rows and rebind to false
-			this.lv_DataPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
-		}
+        protected void lv_footballFixtureList_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            //set current page startindex, max rows and rebind to false
+            this.lv_DataPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+        }
 
-		protected void GV_FootballFixtures_RowDataBound(object sender, GridViewRowEventArgs e)
-		{
-			if (e.Row.RowType == DataControlRowType.DataRow)
-			{
-				var dataItem = e.Row.DataItem as WebFormModel.FootballFixture;
+        protected void GV_FootballFixtures_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var dataItem = e.Row.DataItem as WebFormModel.FootballFixture;
 
-				var chk_interestedFixture = e.Row.FindControl("chk_interestedFixture") as CheckBox;
+                var chk_interestedFixture = e.Row.FindControl("chk_interestedFixture") as CheckBox;
 
-				var homeHyperLink = e.Row.FindControl("hl_homeTeamLink") as HyperLink;
-				var awayHyperLink = e.Row.FindControl("hl_awayTeamLink") as HyperLink;
+                var homeHyperLink = e.Row.FindControl("hl_homeTeamLink") as HyperLink;
+                var awayHyperLink = e.Row.FindControl("hl_awayTeamLink") as HyperLink;
 
-				homeHyperLink.NavigateUrl = GetRouteUrl("FootballTeamByID", new { TeamID = dataItem.AwayTeam.TeamID });
-				awayHyperLink.NavigateUrl = GetRouteUrl("FootballTeamByID", new { TeamID = dataItem.AwayTeam.TeamID });
+                homeHyperLink.NavigateUrl = GetRouteUrl("FootballTeamById", new { TeamId = dataItem.AwayTeam.TeamId });
+                awayHyperLink.NavigateUrl = GetRouteUrl("FootballTeamById", new { TeamId = dataItem.AwayTeam.TeamId });
 
-				if (dataItem != null)
-				{
-					chk_interestedFixture.Checked = true;
+                if (dataItem != null)
+                {
+                    chk_interestedFixture.Checked = true;
 
-					// 리그 5위 이상 팀 Bold체
-					var leaugeStandings = Singleton.Get<RedisCacheManager>()
-					.Get<IList<WebFormModel.FootballStanding>>
-					(
-						() => RequestLoader.FootballStandingsByLeagueID(dataItem.LeagueID),
-						RequestLoader.Locker_FootballStandingsByLeagueID,
-						DateTime.Now.AddHours(4),
-						RedisKeyMaker.FootballStandingsByLeagueID(dataItem.LeagueID)
-					);
+                    // 리그 5위 이상 팀 Bold체
+                    var leaugeStandings = Singleton.Get<RedisCacheManager>()
+                    .Get<IList<WebFormModel.FootballStandings>>
+                    (
+                        () => RequestLoader.FootballStandingsByLeagueId(dataItem.LeagueId),
+                        RequestLoader.Locker_FootballStandingsByLeagueId,
+                        DateTime.Now.AddHours(4),
+                        RedisKeyMaker.FootballStandingsByLeagueId(dataItem.LeagueId)
+                    );
 
-					var homeStandingInfo = leaugeStandings.Where(elem => elem.TeamID == dataItem.HomeTeam.TeamID).FirstOrDefault();
-					var awayStandingInfo = leaugeStandings.Where(elem => elem.TeamID == dataItem.AwayTeam.TeamID).FirstOrDefault();
+                    var homeStandingInfo = leaugeStandings.Where(elem => elem.TeamId == dataItem.HomeTeam.TeamId).FirstOrDefault();
+                    var awayStandingInfo = leaugeStandings.Where(elem => elem.TeamId == dataItem.AwayTeam.TeamId).FirstOrDefault();
 
-					if (homeStandingInfo?.Rank <= 5)
-					{
-						homeHyperLink.Font.Bold = true;
-					}
+                    if (homeStandingInfo?.Rank <= 5)
+                    {
+                        homeHyperLink.Font.Bold = true;
+                    }
 
-					if (awayStandingInfo?.Rank <= 5)
-					{
-						awayHyperLink.Font.Bold = true;
-					}
-				}
+                    if (awayStandingInfo?.Rank <= 5)
+                    {
+                        awayHyperLink.Font.Bold = true;
+                    }
+                }
 
-				// 단폴픽 체크
-				var prediction = Singleton.Get<RedisCacheManager>()
-					.Get<IList<WebFormModel.FootballPrediction>>
-					(
-						() => RequestLoader.FootballPredictionByFixtureID(dataItem.FixtureID),
-						RequestLoader.Locker_FootballPredictionByFixtureID,
-						DateTime.Now.AddDays(1),
-						RedisKeyMaker.FootballPredictionByFixtureID(dataItem.FixtureID)
-					).FirstOrDefault();
+                // 단폴픽 체크
+                var prediction = Singleton.Get<RedisCacheManager>()
+                    .Get<IList<WebFormModel.FootballPrediction>>
+                    (
+                        () => RequestLoader.FootballPredictionByFixtureId(dataItem.FixtureId),
+                        RequestLoader.Locker_FootballPredictionByFixtureId,
+                        DateTime.Now.AddDays(1),
+                        RedisKeyMaker.FootballPredictionByFixtureId(dataItem.FixtureId)
+                    ).FirstOrDefault();
 
-				if (prediction?.MatchWinner?.Trim(' ').Length == 1)
-				{
-					e.Row.BackColor = Color.LightGreen;
-				}
-			}
-		}
+                if (prediction?.MatchWinner?.Trim(' ').Length == 1)
+                {
+                    e.Row.BackColor = Color.LightGreen;
+                }
+            }
+        }
 
-		/// <summary>
-		/// 관심 경기 체크
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		protected void chk_fixture_InterestedIndexChanged(Object sender, EventArgs e)
-		{
-			CheckBox chkbox = sender as CheckBox;
+        /// <summary>
+        /// 관심 경기 체크
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void chk_fixture_InterestedIndexChanged(Object sender, EventArgs e)
+        {
+            CheckBox chkbox = sender as CheckBox;
 
-			if (chkbox == null)
-				return;
+            if (chkbox == null)
+                return;
 
-			// 관심 경기 데이터 가져오기
-			var interestedFixtures = Singleton.Get<RedisCacheManager>()
-				.GetNullable<IList<WebFormModel.FootballFixture>>
-				(
-					RedisKeyMaker.FootballInterestedFixture()
-				);
+            // 관심 경기 데이터 가져오기
+            var interestedFixtures = Singleton.Get<RedisCacheManager>()
+                .GetNullable<IList<WebFormModel.FootballFixture>>
+                (
+                    RedisKeyMaker.FootballInterestedFixture()
+                );
 
-			// 제거할 경기
-			int interestedFixtureID = int.Parse(chkbox.ToolTip);
-			var interestedFixture = interestedFixtures.Where(elem => elem.FixtureID == interestedFixtureID).FirstOrDefault();
+            // 제거할 경기
+            int interestedFixtureID = int.Parse(chkbox.ToolTip);
+            var interestedFixture = interestedFixtures.Where(elem => elem.FixtureId == interestedFixtureID).FirstOrDefault();
 
-			if (interestedFixture == null)
-			{
-				// 이미 제거된 경기
+            if (interestedFixture == null)
+            {
+                // 이미 제거된 경기
 
-				// refrash
-				Page.Response.Redirect(Page.Request.Url.ToString(), true);
-				return;
-			}
+                // refrash
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+                return;
+            }
 
-			// 관심 경기에서 제거
-			interestedFixtures.Remove(interestedFixture);
+            // 관심 경기에서 제거
+            interestedFixtures.Remove(interestedFixture);
 
-			// 레디스에 저장
-			Singleton.Get<RedisCacheManager>().Set
-				(
-					JsonConvert.SerializeObject(interestedFixtures),
-					RequestLoader.Locker_FootballInterestedFixture,
-					new DateTime(9999, 12, 31),
-					RedisKeyMaker.FootballInterestedFixture()
-				);
+            // 레디스에 저장
+            Singleton.Get<RedisCacheManager>().Set
+                (
+                    JsonConvert.SerializeObject(interestedFixtures),
+                    RequestLoader.Locker_FootballInterestedFixture,
+                    new DateTime(9999, 12, 31),
+                    RedisKeyMaker.FootballInterestedFixture()
+                );
 
-			// refrash
-			Page.Response.Redirect(Page.Request.Url.ToString(), true);
-		}
-	}
+            // refrash
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        }
+    }
 }

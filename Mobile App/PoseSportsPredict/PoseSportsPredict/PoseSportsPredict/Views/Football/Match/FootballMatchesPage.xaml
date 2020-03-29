@@ -14,8 +14,8 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}"/>
-        <ToolbarItem Text="{x:Static localize:LocalizeString.Add_Delete_Matches_Alarm}" Order="Secondary" Priority="1" />
+        <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" />
+        <ToolbarItem Text="{x:Static localize:LocalizeString.Add_Delete_Matches_Alarm}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
         <ToolbarItem Text="{x:Static localize:LocalizeString.Expand_All_Leagues}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
         <ToolbarItem Text="{x:Static localize:LocalizeString.Collapse_All_Leagues}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
     </ContentPage.ToolbarItems>
@@ -38,7 +38,7 @@
                             HeightRequest="{Binding GroupHeaderHeight}"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
-                            effects:ViewEffect.TouchFeedbackColor="Accent">
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
                                 HeightRequest="19"
@@ -106,7 +106,7 @@
                                 Grid.Row="0"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
-                                effects:ViewEffect.TouchFeedbackColor="Accent">
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <StackLayout
                                     VerticalOptions="CenterAndExpand"
                                     Orientation="Horizontal"

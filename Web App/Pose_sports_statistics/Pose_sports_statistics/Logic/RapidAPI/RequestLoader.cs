@@ -13,257 +13,263 @@ using WebFormModel = Pose_sports_statistics.Models;
 
 namespace Pose_sports_statistics.Logic.RapidAPI
 {
-	public static class RequestLoader
-	{
-		// 관심경기 데이터 저장용..
-		public static object Locker_FootballInterestedFixture = new object();
+    public static class RequestLoader
+    {
+        // 관심경기 데이터 저장용..
+        public static object Locker_FootballInterestedFixture = new object();
 
-		private static readonly FootballAPI FootballAPI;
+        private static readonly FootballAPI FootballAPI;
 
-		static RequestLoader()
-		{
-			var endPoint = ConfigurationManager.AppSettings["football_api_url"];
-			var host = ConfigurationManager.AppSettings["football_api_host"];
-			var key = ConfigurationManager.AppSettings["football_api_key"];
+        static RequestLoader()
+        {
+            var endPoint = ConfigurationManager.AppSettings["football_api_url"];
+            var host = ConfigurationManager.AppSettings["football_api_host"];
+            var key = ConfigurationManager.AppSettings["football_api_key"];
 
-			FootballAPI = new FootballAPI();
-			FootballAPI.Init(endPoint, host, key);
-		}
+            FootballAPI = new FootballAPI();
+            FootballAPI.Init(endPoint, host, key);
+        }
 
-		public static object Locker_FootballFixtureByID = new object();
+        public static object Locker_FootballFixtureById = new object();
 
-		public static Func<int, string> FootballFixtureByID = (fixtureId) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.FootballFixturesByID
-				, fixtureId
-				, out WebFormModel.FootballFixture fixture);
+        public static Func<int, string> FootballFixtureById = (fixtureId) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.FootballFixturesById
+                , fixtureId
+                , out WebFormModel.FootballFixture fixture);
 
-			return JsonConvert.SerializeObject(fixture);
-		};
+            return JsonConvert.SerializeObject(fixture);
+        };
 
-		public static object Locker_FootballFixturesByDate = new object();
+        public static object Locker_FootballFixturesByDate = new object();
 
-		public static Func<DateTime, string> FootballFixturesByDate = (date) =>
-		{
-			// fixtureList 얻어오기
-			FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
-				, date.AddDays(-1)
-				, out IList<WebFormModel.FootballFixture> fixtures_yester);
+        public static Func<DateTime, string> FootballFixturesByDate = (date) =>
+        {
+            // fixtureList 얻어오기
+            FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
+                , date.AddDays(-1)
+                , out IList<WebFormModel.FootballFixture> fixtures_yester);
 
-			FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
-				, date
-				, out IList<WebFormModel.FootballFixture> fixtures_today);
+            FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
+                , date
+                , out IList<WebFormModel.FootballFixture> fixtures_today);
 
-			FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
-				, date.AddDays(1)
-				, out IList<WebFormModel.FootballFixture> fixtures_DayAdd1);
+            FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
+                , date.AddDays(1)
+                , out IList<WebFormModel.FootballFixture> fixtures_DayAdd1);
 
-			FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
-				, date.AddDays(2)
-				, out IList<WebFormModel.FootballFixture> fixtures_DayAdd2);
+            FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
+                , date.AddDays(2)
+                , out IList<WebFormModel.FootballFixture> fixtures_DayAdd2);
 
-			FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
-				, date.AddDays(3)
-				, out IList<WebFormModel.FootballFixture> fixtures_DayAdd3);
+            FootballAPI.RequestEx(FootballAPI.FootballFixturesByDate
+                , date.AddDays(3)
+                , out IList<WebFormModel.FootballFixture> fixtures_DayAdd3);
 
-			// step1. 픽스처 합침
-			var fixtures = fixtures_yester.ToList();
-			fixtures.AddRange(fixtures_today);
-			fixtures.AddRange(fixtures_DayAdd1);
-			fixtures.AddRange(fixtures_DayAdd2);
-			fixtures.AddRange(fixtures_DayAdd3);
+            // step1. 픽스처 합침
+            var fixtures = fixtures_yester.ToList();
+            fixtures.AddRange(fixtures_today);
+            fixtures.AddRange(fixtures_DayAdd1);
+            fixtures.AddRange(fixtures_DayAdd2);
+            fixtures.AddRange(fixtures_DayAdd3);
 
-			IList<WebFormModel.FootballFixture> dateOrderedFixtures = null;
-			// step2. 정보가 부족한 경기 필터링
-			if (fixtures.Count > 0)
-			{
-				var fixturesGroupByLeagueID = fixtures.GroupBy(elem => elem.LeagueID).ToList();
+            // Utc => local
+            foreach (var fixture in fixtures)
+            {
+                fixture.MatchTime = fixture.MatchTime.ToLocalTime();
+            }
 
-				List<Task<IList<WebFormModel.FootballFixture>>> taskList = new List<Task<IList<WebFormModel.FootballFixture>>>();
-				foreach (var groupingFixtures in fixturesGroupByLeagueID)
-				{
-					taskList.Add(Task.Run(() =>
-					{
-						IList<WebFormModel.FootballFixture> result = new List<WebFormModel.FootballFixture>();
+            IList<WebFormModel.FootballFixture> dateOrderedFixtures = null;
+            // step2. 정보가 부족한 경기 필터링
+            if (fixtures.Count > 0)
+            {
+                var fixturesGroupByLeagueId = fixtures.GroupBy(elem => elem.LeagueId).ToList();
 
-						FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueID
-						, groupingFixtures.Key
-						, out IList<WebFormModel.FootballLeague> leagues);
-						var curSeasonLeague = leagues.Where(elem => elem.IsCurrent == 1).FirstOrDefault();
+                List<Task<IList<WebFormModel.FootballFixture>>> taskList = new List<Task<IList<WebFormModel.FootballFixture>>>();
+                foreach (var groupingFixtures in fixturesGroupByLeagueId)
+                {
+                    taskList.Add(Task.Run(() =>
+                    {
+                        IList<WebFormModel.FootballFixture> result = new List<WebFormModel.FootballFixture>();
 
-						// 정보 부족 리그는 무시
-						if (curSeasonLeague == null
-						|| !curSeasonLeague.Coverage.Odds
-						//|| !curSeasonLeague.Coverage.Standings
-						//|| !curSeasonLeague.Coverage.Players
-						//|| !curSeasonLeague.Coverage.TopScorers
-						)
-							return result;
+                        FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueId
+                        , groupingFixtures.Key
+                        , out IList<WebFormModel.FootballLeague> leagues);
+                        var curSeasonLeague = leagues.Where(elem => elem.IsCurrent == 1).FirstOrDefault();
 
-						// load oddsInfo
-						//var OddsList = FootballAPI.OddsByLeagueIDAndLableID(groupingFixtures.Key, (int)BetLabelType._Match_Winner);
+                        // 정보 부족 리그는 무시
+                        if (curSeasonLeague == null
+                        || !curSeasonLeague.Coverage.Odds
+                        //|| !curSeasonLeague.Coverage.Standings
+                        //|| !curSeasonLeague.Coverage.Players
+                        //|| !curSeasonLeague.Coverage.TopScorers
+                        )
+                            return result;
 
-						//if (OddsList.Count > 0)
-						//{
-						//	foreach (var fixture in groupingFixtures)
-						//	{
-						//		var Betvalues = OddsList.Where(oddsInfo => oddsInfo.FixtureMini.FixtureID == fixture.FixtureID).FirstOrDefault()?
-						//		.Bookmakers.SelectMany(bookmaker => bookmaker.BetInfos[0].BetValues).ToList();
+                        // load oddsInfo
+                        //var OddsList = FootballAPI.OddsByLeagueIDAndLableID(groupingFixtures.Key, (int)BetLabelType._Match_Winner);
 
-						//		if (Betvalues != null)
-						//		{
-						//			var homeOddsList = Betvalues
-						//			.Where(value => value.Name.Equals(BetValueNameType.Home.ToString()))
-						//			.Select(value => value.Odds);
-						//			fixture.HomeOdds = $"{homeOddsList.Min()} - {homeOddsList.Max()}";
+                        //if (OddsList.Count > 0)
+                        //{
+                        //	foreach (var fixture in groupingFixtures)
+                        //	{
+                        //		var Betvalues = OddsList.Where(oddsInfo => oddsInfo.FixtureMini.FixtureID == fixture.FixtureID).FirstOrDefault()?
+                        //		.Bookmakers.SelectMany(bookmaker => bookmaker.BetInfos[0].BetValues).ToList();
 
-						//			var DrawOddsList = Betvalues
-						//			.Where(value => value.Name.Equals(BetValueNameType.Draw.ToString()))
-						//			.Select(value => value.Odds);
-						//			fixture.DrawOdds = $"{DrawOddsList.Min()} - {DrawOddsList.Max()}";
+                        //		if (Betvalues != null)
+                        //		{
+                        //			var homeOddsList = Betvalues
+                        //			.Where(value => value.Name.Equals(BetValueNameType.Home.ToString()))
+                        //			.Select(value => value.Odds);
+                        //			fixture.HomeOdds = $"{homeOddsList.Min()} - {homeOddsList.Max()}";
 
-						//			var awayOddsList = Betvalues
-						//			.Where(value => value.Name.Equals(BetValueNameType.Away.ToString()))
-						//			.Select(value => value.Odds);
-						//			fixture.AwayOdds = $"{awayOddsList.Min()} - {awayOddsList.Max()}";
-						//		}
+                        //			var DrawOddsList = Betvalues
+                        //			.Where(value => value.Name.Equals(BetValueNameType.Draw.ToString()))
+                        //			.Select(value => value.Odds);
+                        //			fixture.DrawOdds = $"{DrawOddsList.Min()} - {DrawOddsList.Max()}";
 
-						//		result.Add(fixture);
-						//	}
-						//}
+                        //			var awayOddsList = Betvalues
+                        //			.Where(value => value.Name.Equals(BetValueNameType.Away.ToString()))
+                        //			.Select(value => value.Odds);
+                        //			fixture.AwayOdds = $"{awayOddsList.Min()} - {awayOddsList.Max()}";
+                        //		}
 
-						return groupingFixtures.ToList();
-					}));
-				}
+                        //		result.Add(fixture);
+                        //	}
+                        //}
 
-				Task.WaitAll(taskList.ToArray());
+                        return groupingFixtures.ToList();
+                    }));
+                }
 
-				var filteredFixtures = new List<WebFormModel.FootballFixture>();
-				foreach (var completeTask in taskList)
-				{
-					filteredFixtures.AddRange(completeTask.Result);
-				}
+                Task.WaitAll(taskList.ToArray());
 
-				dateOrderedFixtures = filteredFixtures.OrderBy(elem => elem.EventDate).ToArray();
-			}
+                var filteredFixtures = new List<WebFormModel.FootballFixture>();
+                foreach (var completeTask in taskList)
+                {
+                    filteredFixtures.AddRange(completeTask.Result);
+                }
 
-			//dateOrderedFixtures = fixtures.OrderBy(elem => elem.EventDate).ToArray();
+                dateOrderedFixtures = filteredFixtures.OrderBy(elem => elem.MatchTime).ToArray();
+            }
 
-			return JsonConvert.SerializeObject(dateOrderedFixtures);
-		};
+            //dateOrderedFixtures = fixtures.OrderBy(elem => elem.EventDate).ToArray();
 
-		public static object Locker_FootballStandingsByLeagueID = new object();
+            return JsonConvert.SerializeObject(dateOrderedFixtures);
+        };
 
-		public static Func<int, string> FootballStandingsByLeagueID = (leagueID) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.StandingsByLeagueID
-				, leagueID
-				, out IList<WebFormModel.FootballStanding> standings);
+        public static object Locker_FootballStandingsByLeagueId = new object();
 
-			return JsonConvert.SerializeObject(standings);
-		};
+        public static Func<int, string> FootballStandingsByLeagueId = (leagueId) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.StandingsByLeagueId
+                , leagueId
+                , out IList<WebFormModel.FootballStandings> standings);
 
-		public static object Locker_FootballTeamStatisticsByLeagueIDAndTeamID = new object();
+            return JsonConvert.SerializeObject(standings);
+        };
 
-		public static Func<int, int, string> FootballTeamStatisticsByLeagueIDAndTeamID = (leagueID, teamID) =>
-	   {
-		   FootballAPI.RequestEx(FootballAPI.TeamStatisticsByLeagueIDAndTeamID
-			   , leagueID
-			   , teamID
-			   , out WebFormModel.FootballTeamStatistics standings);
+        public static object Locker_FootballTeamStatisticsByLeagueIDAndTeamId = new object();
 
-		   return JsonConvert.SerializeObject(standings);
-	   };
+        public static Func<int, int, string> FootballTeamStatisticsByLeagueIDAndTeamId = (leagueId, teamId) =>
+       {
+           FootballAPI.RequestEx(FootballAPI.TeamStatisticsByLeagueIdAndTeamId
+               , leagueId
+               , teamId
+               , out WebFormModel.FootballTeamStatistics standings);
 
-		public static object Locker_FootballFixtureByTeamID = new object();
+           return JsonConvert.SerializeObject(standings);
+       };
 
-		public static Func<int, string> FootballFixtureByTeamID = (teamID) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.TeamFixturesByTeamID
-				, teamID
-				, out IList<WebFormModel.FootballFixture> teamFixtures);
+        public static object Locker_FootballFixtureByTeamId = new object();
 
-			var fixturesGroupByLeagueID = teamFixtures.GroupBy(elem => elem.LeagueID).ToList();
+        public static Func<int, string> FootballFixtureByTeamId = (teamId) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.TeamFixturesByTeamId
+                , teamId
+                , out IList<WebFormModel.FootballFixture> teamFixtures);
 
-			// 현재 시즌경기들만 필터링
-			var filteredTeamFixture = new List<WebFormModel.FootballFixture>();
-			foreach (var groupingFixtures in fixturesGroupByLeagueID)
-			{
-				FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueID
-						, groupingFixtures.Key
-						, out IList<WebFormModel.FootballLeague> leagues);
+            var fixturesGroupByLeagueId = teamFixtures.GroupBy(elem => elem.LeagueId).ToList();
 
-				var curSeasonLeague = leagues.Where(elem => elem.IsCurrent == 1).FirstOrDefault();
-				filteredTeamFixture.AddRange(groupingFixtures.Where(elem => elem.EventDate > curSeasonLeague.SeasonStart));
-			}
+            // 현재 시즌경기들만 필터링
+            var filteredTeamFixture = new List<WebFormModel.FootballFixture>();
+            foreach (var groupingFixtures in fixturesGroupByLeagueId)
+            {
+                FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueId
+                        , groupingFixtures.Key
+                        , out IList<WebFormModel.FootballLeague> leagues);
 
-			return JsonConvert.SerializeObject(filteredTeamFixture);
-		};
+                var curSeasonLeague = leagues.Where(elem => elem.IsCurrent == 1).FirstOrDefault();
+                filteredTeamFixture.AddRange(groupingFixtures.Where(elem => elem.MatchTime > curSeasonLeague.SeasonStart));
+            }
 
-		public static object Locker_FootballH2HFixtureByTeamID = new object();
+            return JsonConvert.SerializeObject(filteredTeamFixture);
+        };
 
-		public static Func<int, int, string> FootballH2HFixtureByTeamID = (teamID1, teamID2) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.FootballH2HFixtureByTeamID
-				, teamID1
-				, teamID2
-				, out IList<WebFormModel.FootballFixture> fixtures);
+        public static object Locker_FootballH2HFixtureByTeamId = new object();
 
-			return JsonConvert.SerializeObject(fixtures);
-		};
+        public static Func<int, int, string> FootballH2HFixtureByTeamId = (teamId1, teamId2) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.FootballH2HFixtureByTeamId
+                , teamId1
+                , teamId2
+                , out IList<WebFormModel.FootballFixture> fixtures);
 
-		public static object Locker_FootballSeasonsByLeagueID = new object();
+            return JsonConvert.SerializeObject(fixtures);
+        };
 
-		public static Func<int, string> FootballSeasonsByLeagueID = (leagueID) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueID
-				, leagueID
-				, out IList<WebFormModel.FootballLeague> leagues);
+        public static object Locker_FootballSeasonsByLeagueId = new object();
 
-			var curSeasonLeague = leagues.Where(elem => elem.IsCurrent == 1).FirstOrDefault();
+        public static Func<int, string> FootballSeasonsByLeagueId = (leagueId) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.FootballSeasonsByLeagueId
+                , leagueId
+                , out IList<WebFormModel.FootballLeague> leagues);
 
-			return JsonConvert.SerializeObject(curSeasonLeague);
-		};
+            var curSeasonLeague = leagues.Where(elem => elem.IsCurrent == 1).FirstOrDefault();
 
-		public static object Locker_FootballPlayersByTeamIDAndSeason = new object();
+            return JsonConvert.SerializeObject(curSeasonLeague);
+        };
 
-		public static Func<int, string, string> FootballPlayersByTeamIDAndSeason = (teamID, season) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.FootballPlayersByTeamIDAndSeason
-				, teamID
-				, season
-				, out IList<WebFormModel.FootballPlayer> players);
+        public static object Locker_FootballPlayersByTeamIdAndSeason = new object();
 
-			return JsonConvert.SerializeObject(players);
-		};
+        public static Func<int, string, string> FootballPlayersByTeamIdAndSeason = (teamId, season) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.FootballPlayersByTeamIdAndSeason
+                , teamId
+                , season
+                , out IList<WebFormModel.FootballPlayer> players);
 
-		public static object Locker_FootballPredictionByFixtureID = new object();
+            return JsonConvert.SerializeObject(players);
+        };
 
-		public static Func<int, string> FootballPredictionByFixtureID = (fixtureID) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.FootballPredictionByFixtureID
-				, fixtureID
-				, out IList<WebFormModel.FootballPrediction> predictions);
+        public static object Locker_FootballPredictionByFixtureId = new object();
 
-			return JsonConvert.SerializeObject(predictions);
-		};
+        public static Func<int, string> FootballPredictionByFixtureId = (fixtureId) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.FootballPredictionByFixtureId
+                , fixtureId
+                , out IList<WebFormModel.FootballPrediction> predictions);
 
-		public static object Locker_FootballTopScorerByLeagueID = new object();
+            return JsonConvert.SerializeObject(predictions);
+        };
 
-		public static Func<int, string> FootballTopScorerByLeagueID = (leagueID) =>
-		{
-			FootballAPI.RequestEx(FootballAPI.FootballTopScorerByLeagueID
-				, leagueID
-				, out IList<WebFormModel.FootballPlayer> players);
+        public static object Locker_FootballTopScorerByLeagueId = new object();
 
-			return JsonConvert.SerializeObject(players);
-		};
+        public static Func<int, string> FootballTopScorerByLeagueId = (leagueId) =>
+        {
+            FootballAPI.RequestEx(FootballAPI.FootballTopScorerByLeagueId
+                , leagueId
+                , out IList<WebFormModel.FootballPlayer> players);
 
-		public static Func<int, APIModel.Odds> FootballOddsByFixtureID = (fixtureID) =>
-		{
-			var oddsInfo = FootballAPI.OddsByFixtureID(fixtureID);
+            return JsonConvert.SerializeObject(players);
+        };
 
-			return oddsInfo;
-		};
-	}
+        public static Func<int, APIModel.Odds> FootballOddsByFixtureId = (fixtureId) =>
+        {
+            var oddsInfo = FootballAPI.OddsByFixtureId(fixtureId);
+
+            return oddsInfo;
+        };
+    }
 }

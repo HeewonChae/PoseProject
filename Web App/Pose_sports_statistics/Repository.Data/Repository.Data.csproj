@@ -90,12 +90,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\LogicCore\LogicCore.csproj">
-      <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
+      <Project>{4375D35A-CCB4-4714-BE12-7828A548C543}</Project>
       <Name>LogicCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\Repository\Repository.csproj">
-      <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\Repository\Repository.csproj">
+      <Project>{E798B808-207E-48F7-A509-6473FB43EAE2}</Project>
       <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>

@@ -8,14 +8,17 @@ using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Match;
 using Sharpnado.Presentation.Forms;
 using Shiny;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +38,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public override bool OnInitializeView(params object[] datas)
         {
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>(GetMatchesAsync);
+            _alarmEditMode = false;
+
+            MessagingCenter.Subscribe<FootballMatchDetailViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
+            MessagingCenter.Subscribe<FootballMatchListViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
             return true;
         }
 
@@ -67,6 +74,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private List<FootballMatchInfo> _matchList;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
+        private bool _alarmEditMode;
 
         #endregion Fields
 
@@ -119,6 +127,18 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 default:
                     break;
+            }
+        }
+
+        public ICommand AlarmEditModeCommand { get => new RelayCommand(AlarmEditMode); }
+
+        private void AlarmEditMode()
+        {
+            _alarmEditMode = !_alarmEditMode;
+
+            foreach (var matchGroup in MatchGroups)
+            {
+                matchGroup.FootballMatchListViewModel.AlarmEditMode = _alarmEditMode;
             }
         }
 
@@ -241,16 +261,35 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             {
                 // 기존 데이터 있는지.. 있으면 Expanded값은 유지
                 var foundExistData = MatchGroups?.Where(elem => elem.Title == grouppingMatch.Key).FirstOrDefault();
-                matchGroupCollection.Add(new FootballMatchGroup(grouppingMatch.Key, grouppingMatch.First().CountryLogo, foundExistData?.Expanded ?? true)
-                {
-                    FootballMatchListViewModel = new FootballMatchListViewModel
-                    {
-                        Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.ToArray())
-                    }
-                });
+                var footballMatchGroup = new FootballMatchGroup(grouppingMatch.Key, grouppingMatch.First().CountryLogo, foundExistData?.Expanded ?? true);
+
+                var footballMatchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
+                footballMatchListViewModel.AlarmEditMode = _alarmEditMode;
+                footballMatchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.ToArray());
+
+                footballMatchGroup.FootballMatchListViewModel = footballMatchListViewModel;
+
+                matchGroupCollection.Add(footballMatchGroup);
             }
 
             MatchGroups = matchGroupCollection;
+        }
+
+        private void BookmarkMessageHandler(BaseViewModel sender, FootballMatchInfo item)
+        {
+            SetIsBusy(true);
+
+            if (_matchList?.Count > 0)
+            {
+                var foundItem = _matchList.Where(elem => elem.PrimaryKey == item.PrimaryKey).FirstOrDefault();
+                if (foundItem != null)
+                {
+                    foundItem.IsBookmarked = item.IsBookmarked;
+                    foundItem.OnPropertyChanged("IsBookmarked");
+                }
+            }
+
+            SetIsBusy(false);
         }
 
         #endregion Methods

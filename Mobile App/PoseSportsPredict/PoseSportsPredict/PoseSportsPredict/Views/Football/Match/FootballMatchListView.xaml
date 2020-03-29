@@ -30,18 +30,20 @@
                             Margin="0"
                             Padding="0"
                             Spacing="15"
-                            IsVisible="False">
+                            IsVisible="{Binding Path=BindingContext.AlarmEditMode, Source={x:Reference lv_matches}}">
                             <ContentView
+                                VerticalOptions="Center"
                                 MinimumWidthRequest="17"
                                 HeightRequest="17"
                                 WidthRequest="17"
                                 BackgroundColor="Transparent"
-                                effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}">
+                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchAlarmButtonCommand, Source={x:Reference lv_matches}}"
+                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
                                     Source="ic_alarm_add2"
                                     Aspect="AspectFit"
-                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
-                                    <!--effects:ImageEffect.TintColor="{Binding IsAlarmed}">-->
+                                    effects:ImageEffect.TintColor="{Binding IsAlarmed, Converter={StaticResource matchAlarmColorConverter}}">
                                 </Image>
                                 <ContentView.Triggers>
                                     <DataTrigger
@@ -64,13 +66,15 @@
                                 OutlineOffColor="{StaticResource CustomGrey_L}"
                                 Path="{x:Static customviews:PathConstants.Star}"
                                 Count="1"
-                                Value="{Binding MatchInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}"
-                                effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}">
+                                Value="{Binding IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}"
+                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_matches}}"
+                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             </customviews:RatingView>
                         </StackLayout>
                         <Grid
                             Grid.Column="1"
-                            Padding="5,0"
+                            Margin="0,0,8,0"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}">
                             <Grid.ColumnDefinitions>

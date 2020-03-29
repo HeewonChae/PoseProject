@@ -120,16 +120,17 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (IsBusy || !IsEditMode)
                 return;
 
+            IsEditMode = false;
+
             _DeleteTeamList.Clear();
             BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
-            IsEditMode = false;
         }
 
         public ICommand SaveButtonClickCommand { get => new RelayCommand(SaveButtonClick); }
 
         private void SaveButtonClick()
         {
-            if (IsBusy)
+            if (IsBusy || !IsEditMode)
                 return;
 
             IsEditMode = false;
@@ -140,7 +141,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private void DeleteTeam(FootballTeamInfo teamInfo)
         {
-            if (IsBusy)
+            if (IsBusy || teamInfo == null)
                 return;
 
             _DeleteTeamList.Add(teamInfo);

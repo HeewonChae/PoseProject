@@ -273,7 +273,7 @@
     <Compile Include="Models\FootballOddsInfo.cs" />
     <Compile Include="Models\FootballPlayer.cs" />
     <Compile Include="Models\FootballPrediction.cs" />
-    <Compile Include="Models\FootballStanding.cs" />
+    <Compile Include="Models\FootballStandings.cs" />
     <Compile Include="Models\FootballTeamStatistics.cs" />
     <Compile Include="Pages\Basketball.aspx.cs">
       <DependentUpon>Basketball.aspx</DependentUpon>
@@ -355,15 +355,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\LogicCore\LogicCore.csproj">
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
       <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
       <Name>LogicCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\RapidAPI\RapidAPI.csproj">
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\RapidAPI\RapidAPI.csproj">
       <Project>{0310e278-ebfc-4dd8-8a36-27321a01c52f}</Project>
       <Name>RapidAPI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common Library\CommonLibrary\Repository\Repository.csproj">
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\Repository\Repository.csproj">
       <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
       <Name>Repository</Name>
     </ProjectReference>
@@ -371,6 +371,9 @@
       <Project>{FAC723CC-C977-4808-99CA-0914A9366765}</Project>
       <Name>Repository.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

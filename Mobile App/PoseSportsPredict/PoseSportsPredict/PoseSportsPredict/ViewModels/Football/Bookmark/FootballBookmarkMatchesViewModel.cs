@@ -8,6 +8,7 @@ using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Bookmark;
 using Sharpnado.Presentation.Forms;
@@ -34,6 +35,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             BookmarkedMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
             MessagingCenter.Subscribe<FootballMatchDetailViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
+            MessagingCenter.Subscribe<FootballMatchListViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
 
             return true;
         }
@@ -133,16 +135,17 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (IsBusy || !IsEditMode)
                 return;
 
+            IsEditMode = false;
+
             _DeleteMatchList.Clear();
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
-            IsEditMode = false;
         }
 
         public ICommand SaveButtonClickCommand { get => new RelayCommand(SaveButtonClick); }
 
         private void SaveButtonClick()
         {
-            if (IsBusy)
+            if (IsBusy || !IsEditMode)
                 return;
 
             IsEditMode = false;
@@ -153,11 +156,11 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private void DeleteMatch(FootballMatchInfo matchInfo)
         {
-            if (IsBusy)
+            if (IsBusy || matchInfo == null)
                 return;
 
             _DeleteMatchList.Add(matchInfo);
-            BookmarkedMatches.Remove(matchInfo);
+            _bookmarkedMatches.Remove(matchInfo);
         }
 
         #endregion Commands

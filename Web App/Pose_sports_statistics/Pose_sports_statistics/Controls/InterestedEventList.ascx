@@ -1,19 +1,19 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="InterestedEventList.ascx.cs" Inherits="Pose_sports_statistics.Controls.InterestedEventList" %>
 
 <asp:Panel ID="pnl_InterestedEventList" runat="server">
-    <br/>
+    <br />
     <table>
         <tr>
             <td>
                 <asp:ListView ID="lv_footballFixtureList" runat="server"
-                    SelectMethod="GetFixtures" 
+                    SelectMethod="GetFixtures"
                     OnPagePropertiesChanging="lv_footballFixtureList_PagePropertiesChanging">
                     <LayoutTemplate>
                         <table>
                             <tr>
                                 <td>
-                                    <table style="width:100%; padding:15px" runat="server">
-                                        <tr id="groupPlaceholder" runat="server"/>
+                                    <table style="width: 100%; padding: 15px" runat="server">
+                                        <tr id="groupPlaceholder" runat="server" />
                                     </table>
                                 </td>
                             </tr>
@@ -29,42 +29,41 @@
                             <h5>
                                 <b><%# Eval("StartTime", "{0:MM/dd HH:mm}") %> </b>
                                 <img src="<%# Eval("Flag") %>" height="12" width="16"></img>
-                                <b>  <%# Eval("League") %></b>
+                                <b><%# Eval("League") %></b>
                             </h5>
-                
-                            <asp:GridView GridLines="Horizontal" BorderStyle="None" ID="gv_footballFixtures" 
-                                AutoGenerateColumns="false" runat="server" DataSource = '<%# Eval("Fixtures") %>'
+
+                            <asp:GridView GridLines="Horizontal" BorderStyle="None" ID="gv_footballFixtures"
+                                AutoGenerateColumns="false" runat="server" DataSource='<%# Eval("Fixtures") %>'
                                 ItemType="Pose_sports_statistics.Models.FootballFixture"
                                 OnRowDataBound="GV_FootballFixtures_RowDataBound"
                                 ShowHeader="false">
                                 <Columns>
                                     <asp:TemplateField HeaderText="SelectFixture" ItemStyle-Width="50" ItemStyle-Height="30" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chk_interestedFixture" runat="server" OnCheckedChanged="chk_fixture_InterestedIndexChanged" AutoPostBack="true" ToolTip="<%# Item.FixtureID %>"/>
+                                            <asp:CheckBox ID="chk_interestedFixture" runat="server" OnCheckedChanged="chk_fixture_InterestedIndexChanged" AutoPostBack="true" ToolTip="<%# Item.FixtureId %>" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="HomeTeam" ItemStyle-Width="250" ItemStyle-Height="30" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <img src="<%# Item.HomeTeam.Logo %>" height="12" width="16">
-                                            <asp:HyperLink id="hl_homeTeamLink" ForeColor="Black"
-                                                Text="<%# Item.HomeTeam.TeamName %>" runat="server"/> 
+                                            <asp:HyperLink ID="hl_homeTeamLink" ForeColor="Black"
+                                                Text="<%# Item.HomeTeam.TeamName %>" runat="server" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <%--<asp:BoundField HeaderText ="HomeOdds" DataField="HomeOdds" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>
-                                    <asp:BoundField HeaderText ="DrawOdds" DataField="DrawOdds" ItemStyle-Width="80"  ItemStyle-HorizontalAlign="Center"/>
-                                    <asp:BoundField HeaderText ="AwayOdds" DataField="AwayOdds" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center"/>--%>
+                                    <%--<asp:BoundField HeaderText ="HomeOdds" DataField="HomeOdds" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center" />
+                                    <asp:BoundField HeaderText ="DrawOdds" DataField="DrawOdds" ItemStyle-Width="80"  ItemStyle-HorizontalAlign="Center" />
+                                    <asp:BoundField HeaderText ="AwayOdds" DataField="AwayOdds" ItemStyle-Width="80" ItemStyle-HorizontalAlign="Center" />--%>
                                     <asp:TemplateField HeaderText="AwayTeam" ItemStyle-Width="250" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:HyperLink id="hl_awayTeamLink" ForeColor="Black"
-                                                Text="<%# Item.AwayTeam.TeamName %>" runat="server"/> 
+                                            <asp:HyperLink ID="hl_awayTeamLink" ForeColor="Black"
+                                                Text="<%# Item.AwayTeam.TeamName %>" runat="server" />
                                             <img src="<%# Item.AwayTeam.Logo %>" height="12" width="16">
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField HeaderText ="Status" DataField="Status" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center"/>
+                                    <asp:BoundField HeaderText="Status" DataField="Status" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center" />
                                     <asp:TemplateField HeaderText="Detail" ItemStyle-Width="50">
                                         <ItemTemplate>
-                                            <a href="<%#: GetRouteUrl("FootballFixtureByID", new {FixtureID = Item.FixtureID}) %>">
-                                                Detail
+                                            <a href="<%#: GetRouteUrl("FootballFixtureById", new {FixtureId = Item.FixtureId}) %>">Detail
                                             </a>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -82,9 +81,9 @@
                     </EmptyDataTemplate>
                 </asp:ListView>
                 <asp:DataPager ID="lv_DataPager" runat="server" PagedControlID="lv_footballFixtureList" PageSize="10">
-                        <Fields>
-                            <asp:NumericPagerField ButtonType="Link" />
-                        </Fields>
+                    <Fields>
+                        <asp:NumericPagerField ButtonType="Link" />
+                    </Fields>
                 </asp:DataPager>
             </td>
         </tr>

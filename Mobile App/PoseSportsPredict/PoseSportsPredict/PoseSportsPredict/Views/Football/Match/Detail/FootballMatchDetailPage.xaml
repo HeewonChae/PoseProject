@@ -117,7 +117,6 @@
                     <StackLayout Grid.Column="0"
                         Spacing="0"
                         HorizontalOptions="End"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}"
                         effects:TapCommandEffect.Tap="{Binding HomeTeamLogoClickCommand}"
                         effects:TapCommandEffect.TapParameter="{Binding MatchInfo}">
                         <ffimageloading:CachedImage
@@ -169,7 +168,6 @@
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey}"
                             Text="{Binding MatchInfo.LeagueName}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}"
                             effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
                             effects:TapCommandEffect.TapParameter="{Binding MatchInfo}">
                         </materialui:MaterialLabel>
@@ -206,7 +204,6 @@
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey}"
                             Text="{Binding MatchInfo.LeagueName}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}"
                             effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
                             effects:TapCommandEffect.TapParameter="{Binding MatchInfo}">
                         </materialui:MaterialLabel>
@@ -247,7 +244,6 @@
                         Grid.Column="2"
                         Spacing="0"
                         HorizontalOptions="Start"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}"
                         effects:TapCommandEffect.Tap="{Binding AwayTeamLogoClickCommand}"
                         effects:TapCommandEffect.TapParameter="{Binding MatchInfo}">
                         <ffimageloading:CachedImage

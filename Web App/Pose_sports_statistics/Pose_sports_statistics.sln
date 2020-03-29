@@ -9,11 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Data", "Reposito
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{964A8597-299F-4ECD-B1DE-CD2364141780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicCore", "..\..\Common Library\CommonLibrary\LogicCore\LogicCore.csproj", "{4375D35A-CCB4-4714-BE12-7828A548C543}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicCore", "..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj", "{4375D35A-CCB4-4714-BE12-7828A548C543}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\..\Common Library\CommonLibrary\Repository\Repository.csproj", "{E798B808-207E-48F7-A509-6473FB43EAE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "..\..\Common Library\DotNet_Framework\Repository\Repository.csproj", "{E798B808-207E-48F7-A509-6473FB43EAE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidAPI", "..\..\Common Library\CommonLibrary\RapidAPI\RapidAPI.csproj", "{0310E278-EBFC-4DD8-8A36-27321A01C52F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidAPI", "..\..\Common Library\DotNet_Framework\RapidAPI\RapidAPI.csproj", "{0310E278-EBFC-4DD8-8A36-27321A01C52F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

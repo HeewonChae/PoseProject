@@ -20,9 +20,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             tabbedPage.Children.Clear();
 
+            tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkMatchesViewModel>().CoupledPage);
             tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkLeaguesViewModel>().CoupledPage);
             tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkTeamsViewModel>().CoupledPage);
-            tabbedPage.Children.Add(ShinyHost.Resolve<FootballBookmarkMatchesViewModel>().CoupledPage);
 
             return true;
         }

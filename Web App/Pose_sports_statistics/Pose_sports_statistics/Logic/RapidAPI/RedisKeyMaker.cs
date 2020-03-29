@@ -5,62 +5,70 @@ using System.Web;
 
 namespace Pose_sports_statistics.Logic.RapidAPI
 {
-	public static class RedisKeyMaker
-	{
-		static readonly string rootDirectoryName = "FootBallAPI";
+    public static class RedisKeyMaker
+    {
+        private static readonly string rootDirectoryName = "FootBallAPI";
 
-		public static string FootballFixtureByID(int fixtureID)
-		{
-			return $"{rootDirectoryName}:FixtureByID:{fixtureID}";
-		}
+        public static string FootballFixtureById(int fixtureId)
+        {
+            return $"{rootDirectoryName}:FixtureById:{fixtureId}";
+        }
 
-		public static string FootballFixtureByTeamID(int teamID)
-		{
-			return $"{rootDirectoryName}:FixtureByTeamID:{teamID}";
-		}
-		public static string FootballFixturesByDate(DateTime date)
-		{
-			return $"{rootDirectoryName}:FixturesByDate:{date.ToString("yyyy_MM_dd")}";
-		}
+        public static string FootballFixtureByTeamId(int teamId)
+        {
+            return $"{rootDirectoryName}:FixtureByTeamId:{teamId}";
+        }
 
-		public static string FootballStandingsByLeagueID(int leagueID)
-		{
-			return $"{rootDirectoryName}:StandingsByLeagueID:{leagueID}";
-		}
+        public static string FootballFixturesByDate(DateTime date)
+        {
+            return $"{rootDirectoryName}:FixturesByDate:{date.ToString("yyyy_MM_dd")}";
+        }
 
-		public static string FootballTeamStatisticsByLeagueIDAndTeamID(int leagueID, int teamID)
-		{
-			return $"{rootDirectoryName}:TeamStatisticsByLeagueIDAndTeamID:{leagueID}:{teamID}";
-		}
+        public static string FootballStandingsByLeagueId(int leagueId)
+        {
+            return $"{rootDirectoryName}:StandingsByLeagueId:{leagueId}";
+        }
 
-		public static string FootballH2HFixtureByTeamID(int teamID1, int teamID2)
-		{
-			return $"{rootDirectoryName}:FootballH2HFixtureByTeamID:{teamID1}:{teamID2}";
-		}
+        public static string FootballTeamStatisticsByLeagueIdAndTeamId(int leagueId, int teamId)
+        {
+            return $"{rootDirectoryName}:TeamStatisticsByLeagueIDAndTeamId:{leagueId}:{teamId}";
+        }
 
-		public static string FootballSeasonsByLeagueID(int leagueID)
-		{
-			return $"{rootDirectoryName}:FootballSeasonsByLeagueID:{leagueID}";
-		}
+        public static string FootballH2HFixtureByTeamId(int teamId1, int teamId2)
+        {
+            if (teamId1 > teamId2)
+            {
+                int temp = teamId1;
+                teamId2 = teamId1;
+                teamId1 = temp;
+            }
 
-		public static string FootballPlayersByTeamIDAndSeason(int teamID, string season)
-		{
-			return $"{rootDirectoryName}:FootballPlayersByTeamIDAndSeason:{teamID}:{season}";
-		}
+            return $"{rootDirectoryName}:FootballH2HFixtureByTeamId:{teamId1}:{teamId2}";
+        }
 
-		public static string FootballPredictionByFixtureID(int fixtureID)
-		{
-			return $"{rootDirectoryName}:FootballPredictionByFixtureID:{fixtureID}";
-		}
+        public static string FootballSeasonsByLeagueId(int leagueId)
+        {
+            return $"{rootDirectoryName}:FootballSeasonsByLeagueId:{leagueId}";
+        }
 
-		public static string FootballTopScorerByLeagueID(int leagueID)
-		{
-			return $"{rootDirectoryName}:FootballTopScorerByLeagueID:{leagueID}";
-		}
+        public static string FootballPlayersByTeamIdAndSeason(int teamId, string season)
+        {
+            return $"{rootDirectoryName}:FootballPlayersByTeamIdAndSeason:{teamId}:{season}";
+        }
 
-		public static string FootballInterestedFixture()
-		{
-			return $"{rootDirectoryName}:FootballInterestedFixture";
-		}
-	}
+        public static string FootballPredictionByFixtureId(int fixtureId)
+        {
+            return $"{rootDirectoryName}:FootballPredictionByFixtureId:{fixtureId}";
+        }
+
+        public static string FootballTopScorerByLeagueId(int leagueId)
+        {
+            return $"{rootDirectoryName}:FootballTopScorerByLeagueId:{leagueId}";
+        }
+
+        public static string FootballInterestedFixture()
+        {
+            return $"{rootDirectoryName}:FootballInterestedFixture";
+        }
+    }
 }

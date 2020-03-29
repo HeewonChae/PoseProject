@@ -292,7 +292,7 @@ namespace RapidAPI
             var apiClient = new RestClient(_end_point);
 
             var request = _requestBuilder.Build(
-                "statistics/{leagueID}/{teamID}",
+                "statistics/{leagueId}/{teamId}",
                 Method.GET,
                 new { leagueId, teamId });
 

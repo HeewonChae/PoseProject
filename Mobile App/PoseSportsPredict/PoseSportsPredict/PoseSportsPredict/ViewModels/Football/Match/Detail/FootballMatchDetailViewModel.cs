@@ -121,7 +121,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             {
                 NotificationId = MatchInfo.Id,
                 Title = LocalizeString.Match_Begin_Soon,
-                Description = $"{MatchInfo.HomeName} vs {MatchInfo.AwayName}",
+                Description = $"{MatchInfo.LeagueName}  -  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
                 ReturningData = MatchInfo.JsonSerialize(),
                 NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
                 Android = new AndroidOptions
