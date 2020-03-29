@@ -261,4 +261,10 @@
   <data name="Match_Begin_Soon" xml:space="preserve">
     <value>경기가 곧 시작합니다.</value>
   </data>
+  <data name="Selected" xml:space="preserve">
+    <value>선택됨</value>
+  </data>
+  <data name="Applying" xml:space="preserve">
+    <value>적용중</value>
+  </data>
 </root>

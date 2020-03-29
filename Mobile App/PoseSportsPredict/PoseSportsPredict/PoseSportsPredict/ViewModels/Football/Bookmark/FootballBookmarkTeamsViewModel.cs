@@ -171,6 +171,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private async Task<IReadOnlyCollection<FootballTeamInfo>> GetBookmarkedTeamsAsync()
         {
+            SetIsBusy(true);
+
             await Task.Delay(300);
 
             _teamList = await _sqliteService.SelectAllAsync<FootballTeamInfo>();
@@ -179,6 +181,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
 
             IsEditMode = false;
+
+            SetIsBusy(false);
             return _teamList;
         }
 
@@ -220,6 +224,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private void BookmarkMessageHandler(BaseViewModel sender, FootballTeamInfo item)
         {
+            SetIsBusy(true);
+
             if (_teamList?.Count > 0)
             {
                 if (item.IsBookmarked)
@@ -236,6 +242,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                     BookmarkedTeams.Remove(foundItem);
                 }
             }
+
+            SetIsBusy(false);
         }
 
         #endregion Methods

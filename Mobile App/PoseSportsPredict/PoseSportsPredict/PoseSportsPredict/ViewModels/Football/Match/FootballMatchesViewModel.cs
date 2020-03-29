@@ -37,7 +37,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override bool OnInitializeView(params object[] datas)
         {
-            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>(GetMatchesAsync);
+            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
             _alarmEditMode = false;
 
             MessagingCenter.Subscribe<FootballMatchDetailViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
@@ -50,12 +50,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
 #if DEBUG
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 1) // 1분 마다 갱신
+            {
                 return;
+            }
 #else
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
+            {
                 return;
+            }
 #endif
-            MatchesTaskLoaderNotifier.Load();
+            _curMatchFilterType = MatchFilterType.SortByLeague;
+            MatchesTaskLoaderNotifier.Load(InitMatchesAsync);
         }
 
         #endregion NavigableViewModel
@@ -75,6 +80,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
         private bool _alarmEditMode;
+        private MatchFilterType _curMatchFilterType;
 
         #endregion Fields
 
@@ -91,6 +97,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private void SelectGroupHeader(FootballMatchGroup groupInfo)
         {
+            if (IsBusy)
+                return;
+
             groupInfo.Expanded = !groupInfo.Expanded;
 
             MatchGroups = new ObservableCollection<FootballMatchGroup>(MatchGroups);
@@ -100,10 +109,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private async void MatchFilter()
         {
-            if (!MatchesTaskLoaderNotifier.IsCompleted)
+            if (IsBusy)
                 return;
 
-            var actions = new string[] { LocalizeString.Match_Filter_By_Bookmark, LocalizeString.Ongoing_matches, LocalizeString.Match_Sort_By_Time, LocalizeString.Match_Sort_By_League };
+            string isBookmarkFilter = _curMatchFilterType == MatchFilterType.Bookmark ? $"({LocalizeString.Applying})" : "";
+            string isOngoingFilter = _curMatchFilterType == MatchFilterType.Ongoing ? $"({LocalizeString.Applying})" : "";
+            string isTimeFilter = _curMatchFilterType == MatchFilterType.SortByTime ? $"({LocalizeString.Applying})" : "";
+            string isLeagueFilter = _curMatchFilterType == MatchFilterType.SortByLeague ? $"({LocalizeString.Applying})" : "";
+            var actions = new string[]
+            {
+                $"{LocalizeString.Match_Filter_By_Bookmark} {isBookmarkFilter}",
+                $"{LocalizeString.Ongoing_matches} {isOngoingFilter}",
+                $"{LocalizeString.Match_Sort_By_Time} {isTimeFilter}",
+                $"{LocalizeString.Match_Sort_By_League} {isLeagueFilter}",
+            };
 
             int intResult = await MaterialDialog.Instance.SelectActionAsync(actions);
             if (intResult == -1)
@@ -111,29 +130,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             intResult.TryParseEnum<MatchFilterType>(out MatchFilterType filterType);
 
-            switch (filterType)
-            {
-                case MatchFilterType.Bookmark:
-                    break;
-
-                case MatchFilterType.Ongoing:
-                    break;
-
-                case MatchFilterType.SortByTime:
-                    break;
-
-                case MatchFilterType.SortByLeague:
-                    break;
-
-                default:
-                    break;
-            }
+            _curMatchFilterType = filterType;
+            MatchesTaskLoaderNotifier.Load(UpdateFilteredMatchesAsync);
         }
 
         public ICommand AlarmEditModeCommand { get => new RelayCommand(AlarmEditMode); }
 
         private void AlarmEditMode()
         {
+            if (IsBusy)
+                return;
+
             _alarmEditMode = !_alarmEditMode;
 
             foreach (var matchGroup in MatchGroups)
@@ -146,6 +153,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private void ExpandAllLeagues()
         {
+            if (IsBusy)
+                return;
+
             foreach (var matchGroup in MatchGroups)
             {
                 matchGroup.Expanded = true;
@@ -158,6 +168,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private void CollapseAllLeagues()
         {
+            if (IsBusy)
+                return;
+
             foreach (var matchGroup in MatchGroups)
             {
                 matchGroup.Expanded = false;
@@ -194,9 +207,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             return this;
         }
 
-        private async Task<IReadOnlyCollection<FootballMatchInfo>> GetMatchesAsync()
+        private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchesAsync()
         {
-            await Task.Delay(300);
+            this.SetIsBusy(true);
 
             var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
             {
@@ -246,9 +259,94 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             _lastUpdateTime = DateTime.UtcNow;
 
-            InitializeMatcheGroups(_matchList);
+            var filteredMatch = await UpdateFilteredMatchesAsync();
 
-            return _matchList;
+            this.SetIsBusy(false);
+
+            return filteredMatch;
+        }
+
+        private async Task<IReadOnlyCollection<FootballMatchInfo>> UpdateFilteredMatchesAsync()
+        {
+            this.SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            List<FootballMatchInfo> matchList = null;
+
+            switch (_curMatchFilterType)
+            {
+                case MatchFilterType.Bookmark:
+                    {
+                        matchList = new List<FootballMatchInfo>();
+
+                        // Match
+                        var bookmarkedMatches = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
+                        foreach (var bookmarkedMatch in bookmarkedMatches)
+                        {
+                            var match = _matchList.Where(elem => elem.PrimaryKey.Equals(bookmarkedMatch.PrimaryKey)).FirstOrDefault();
+                            if (match != null)
+                                matchList.Add(match);
+                        }
+
+                        // League
+                        var bookmarkedLeagues = await _sqliteService.SelectAllAsync<FootballLeagueInfo>();
+                        foreach (var bookmarkedLeague in bookmarkedLeagues)
+                        {
+                            var matches = _matchList.Where(elem =>
+                                elem.CountryName.Equals(bookmarkedLeague.CountryName)
+                                && elem.LeagueName.Equals(bookmarkedLeague.LeagueName)).ToArray();
+
+                            if (matches.Length > 0)
+                            {
+                                matchList.AddRange(matches);
+                            }
+                        }
+
+                        // Team
+                        var bookmarkedTeams = await _sqliteService.SelectAllAsync<FootballTeamInfo>();
+                        foreach (var bookmarkedTeam in bookmarkedTeams)
+                        {
+                            var matches = _matchList.Where(elem =>
+                                elem.CountryName.Equals(bookmarkedTeam.CountryName)
+                                && (elem.HomeName.Equals(bookmarkedTeam.TeamName)
+                                || elem.AwayName.Equals(bookmarkedTeam.TeamName))).ToArray();
+
+                            if (matches.Length > 0)
+                            {
+                                matchList.AddRange(matches);
+                            }
+                        }
+
+                        matchList = matchList.Distinct().OrderBy(elem => elem.MatchTime).ToList();
+                    }
+                    break;
+
+                case MatchFilterType.Ongoing:
+                    matchList = _matchList.Where(elem =>
+                        elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.NS
+                        && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.FT
+                        && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.AET
+                        && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.PEN)
+                        .ToList();
+                    break;
+
+                case MatchFilterType.SortByTime:
+                    matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
+                    break;
+
+                case MatchFilterType.SortByLeague:
+                    matchList = _matchList;
+                    break;
+            }
+
+            Debug.Assert(matchList != null);
+
+            InitializeMatcheGroups(matchList);
+
+            this.SetIsBusy(false);
+
+            return matchList;
         }
 
         private void InitializeMatcheGroups(List<FootballMatchInfo> matchList)
@@ -256,16 +354,19 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             ObservableCollection<FootballMatchGroup> matchGroupCollection;
             matchGroupCollection = new ObservableCollection<FootballMatchGroup>();
 
-            var grouppingMatches = matchList.GroupBy(elem => $"{elem.CountryName} - {elem.LeagueName}");
+            var grouppingMatches = MatchGroupingByFilterType(matchList, out string logo);
             foreach (var grouppingMatch in grouppingMatches)
             {
                 // 기존 데이터 있는지.. 있으면 Expanded값은 유지
                 var foundExistData = MatchGroups?.Where(elem => elem.Title == grouppingMatch.Key).FirstOrDefault();
-                var footballMatchGroup = new FootballMatchGroup(grouppingMatch.Key, grouppingMatch.First().CountryLogo, foundExistData?.Expanded ?? true);
+                var footballMatchGroup = new FootballMatchGroup(
+                    grouppingMatch.Key,
+                    string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.CountryLogo : logo,
+                    foundExistData?.Expanded ?? true);
 
                 var footballMatchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
                 footballMatchListViewModel.AlarmEditMode = _alarmEditMode;
-                footballMatchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.ToArray());
+                footballMatchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
 
                 footballMatchGroup.FootballMatchListViewModel = footballMatchListViewModel;
 
@@ -273,6 +374,36 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             }
 
             MatchGroups = matchGroupCollection;
+        }
+
+        private Dictionary<string, FootballMatchInfo[]> MatchGroupingByFilterType(List<FootballMatchInfo> matchList, out string logo)
+        {
+            logo = string.Empty;
+            var result = new Dictionary<string, FootballMatchInfo[]>();
+
+            switch (_curMatchFilterType)
+            {
+                case MatchFilterType.Bookmark:
+                case MatchFilterType.Ongoing:
+                case MatchFilterType.SortByLeague:
+                    var grouping = matchList.GroupBy(elem => $"{elem.CountryName} - {elem.LeagueName}");
+                    foreach (var data in grouping)
+                    {
+                        result.Add(data.Key, data.ToArray());
+                    }
+                    break;
+
+                case MatchFilterType.SortByTime:
+                    logo = "img_world.png";
+                    result.Add(LocalizeString.Match_Sort_By_Time, matchList.OrderBy(elem => elem.MatchTime).ToArray());
+                    break;
+
+                default:
+                    Debug.Assert(false);
+                    break;
+            }
+
+            return result;
         }
 
         private void BookmarkMessageHandler(BaseViewModel sender, FootballMatchInfo item)

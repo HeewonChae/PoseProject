@@ -74,7 +74,7 @@
                         </StackLayout>
                         <Grid
                             Grid.Column="1"
-                            Margin="0,0,8,0"
+                            Margin="0,0,6,0"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}">
                             <Grid.ColumnDefinitions>

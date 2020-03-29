@@ -70,6 +70,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Applying.
+        /// </summary>
+        public static string Applying {
+            get {
+                return ResourceManager.GetString("Applying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmarks.
         /// </summary>
         public static string Bookmarks {
@@ -390,6 +399,15 @@ namespace PoseSportsPredict.Resources {
         public static string Search_League {
             get {
                 return ResourceManager.GetString("Search_League", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected.
+        /// </summary>
+        public static string Selected {
+            get {
+                return ResourceManager.GetString("Selected", resourceCulture);
             }
         }
         

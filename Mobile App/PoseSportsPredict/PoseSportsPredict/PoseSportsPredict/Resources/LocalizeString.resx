@@ -241,4 +241,10 @@
   <data name="Match_Begin_Soon" xml:space="preserve">
     <value>The match will begin soon.</value>
   </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="Applying" xml:space="preserve">
+    <value>Applying</value>
+  </data>
 </root>
