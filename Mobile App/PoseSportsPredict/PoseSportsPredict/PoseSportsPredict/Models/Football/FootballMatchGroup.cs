@@ -1,5 +1,8 @@
 ﻿using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.ViewModels.Football.Match;
+using Shiny;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace PoseSportsPredict.Models
@@ -52,12 +55,16 @@ namespace PoseSportsPredict.Models
 
         #region Constructors
 
-        public FootballMatchGroup(string title, string countryLogo, bool expanded = true)
+        public FootballMatchGroup(string title, string countryLogo, bool isAlarmEditMode, FootballMatchInfo[] matches, bool expanded = true)
         {
             _title = title;
             _expanded = expanded;
             _countryLogo = countryLogo;
             _expanded = expanded;
+
+            FootballMatchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
+            FootballMatchListViewModel.AlarmEditMode = isAlarmEditMode;
+            FootballMatchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(matches);
         }
 
         #endregion Constructors

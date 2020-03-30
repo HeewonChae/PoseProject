@@ -1,6 +1,6 @@
 ﻿namespace PoseSportsPredict.Models
 {
-    public enum SportsCategoryType
+    public enum SportsType
     {
         Football,
     }
@@ -17,5 +17,12 @@
         Ongoing,
         SortByTime,
         SortByLeague,
+    }
+
+    public enum BookMarkType
+    {
+        Bookmark_Match,
+        Bookmark_League,
+        Bookmark_Team,
     }
 }

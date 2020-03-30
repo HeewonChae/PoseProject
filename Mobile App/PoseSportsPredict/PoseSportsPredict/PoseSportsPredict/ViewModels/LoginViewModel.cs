@@ -85,32 +85,27 @@ namespace PoseSportsPredict.ViewModels
         {
             SetIsBusy(true);
 
-            using (await MaterialDialog.Instance.LoadingSnackbarAsync(LocalizeString.Welcome))
+            var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
             {
-                var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+                MethodType = WebMethodType.POST,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = AuthProxy.ServiceUrl,
+                SegmentGroup = AuthProxy.P_E_Login,
+                PostData = new I_Login
                 {
-                    MethodType = WebMethodType.POST,
-                    BaseUrl = AppConfig.PoseWebBaseUrl,
-                    ServiceUrl = AuthProxy.ServiceUrl,
-                    SegmentGroup = AuthProxy.P_E_Login,
-                    PostData = new I_Login
-                    {
-                        PlatformId = _OAuthService.AuthenticatedUser.Id,
-                    }
-                });
-
-                if (loginResult == null)
-                {
-                    SetIsBusy(false);
-                    return false;
+                    PlatformId = _OAuthService.AuthenticatedUser.Id,
                 }
+            });
 
-                // Update PoseToken, Update ExpireTime
-                ClientContext.SetCredentialsFrom(loginResult.PoseToken);
-                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
+            if (loginResult == null)
+            {
+                SetIsBusy(false);
+                return false;
             }
 
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
+            // Update PoseToken, Update ExpireTime
+            ClientContext.SetCredentialsFrom(loginResult.PoseToken);
+            ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
 
             SetIsBusy(false);
             return true;

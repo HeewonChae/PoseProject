@@ -18,9 +18,20 @@ namespace PoseSportsPredict.Logics.Football.Converters
         {
             FootballMatchInfo returnValue = null;
 
-            var fixtureDetail = value as FootballFixtureDetail;
-            if (fixtureDetail != null)
+            if (value is FootballFixtureDetail fixtureDetail)
             {
+                fixtureDetail.MatchTime = fixtureDetail.MatchTime.ToLocalTime();
+
+                // 기본 이미지 설정
+                if (string.IsNullOrEmpty(fixtureDetail.Country.Logo))
+                    fixtureDetail.Country.Logo = "img_world.png";
+                if (string.IsNullOrEmpty(fixtureDetail.League.Logo))
+                    fixtureDetail.League.Logo = fixtureDetail.Country.Logo;
+                if (string.IsNullOrEmpty(fixtureDetail.HomeTeam.Logo))
+                    fixtureDetail.HomeTeam.Logo = "img_football.png";
+                if (string.IsNullOrEmpty(fixtureDetail.AwayTeam.Logo))
+                    fixtureDetail.AwayTeam.Logo = "img_football.png";
+
                 returnValue = new FootballMatchInfo
                 {
                     Id = fixtureDetail.FixtureId,

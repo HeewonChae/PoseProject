@@ -1,11 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
-using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.ViewModels.Football.League;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.Views.Football.Bookmark;
 using Sharpnado.Presentation.Forms;
@@ -17,7 +16,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Football.Bookmark
 {
@@ -29,8 +27,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedLeaguesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>>();
 
-            MessagingCenter.Subscribe<FootballLeagueDetailViewModel, FootballLeagueInfo>(this, FootballMessageType.Update_Bookmark_League.ToString(), (s, e) => BookmarkMessageHandler(s, e));
-            MessagingCenter.Subscribe<FootballLeagueListViewModel, FootballLeagueInfo>(this, FootballMessageType.Update_Bookmark_League.ToString(), (s, e) => BookmarkMessageHandler(s, e));
+            string message = _bookmarkService.BuildBookmarkMessage(Models.SportsType.Football, Models.BookMarkType.Bookmark_League);
+            MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
         }
@@ -52,7 +50,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         #region Services
 
-        private ISQLiteService _sqliteService;
+        private IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -111,7 +109,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (IsBusy)
                 return;
 
-            _DeleteLeagueList.Clear();
+            Debug.Assert(_DeleteLeagueList.Count == 0);
             IsEditMode = true;
         }
 
@@ -156,13 +154,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public FootballBookmarkLeaguesViewModel(
             FootballBookmarkLeaguesPage coupledPage
-            , ISQLiteService sqliteService) : base(coupledPage)
+            , IBookmarkService bookmarkService) : base(coupledPage)
         {
-            _sqliteService = sqliteService;
+            _bookmarkService = bookmarkService;
 
             if (OnInitializeView())
             {
-                coupledPage.Appearing += (s, e) => this.OnAppearing();
                 coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
@@ -177,7 +174,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             await Task.Delay(300);
 
-            _leagueList = await _sqliteService.SelectAllAsync<FootballLeagueInfo>();
+            _leagueList = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
             _leagueList.Sort(ShinyHost.Resolve<StoredDataComparer>());
 
             BookmarkedLeagues = new ObservableCollection<FootballLeagueInfo>(_leagueList);
@@ -199,8 +196,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deleteLeagueInfo in _DeleteLeagueList)
             {
                 deleteLeagueInfo.IsBookmarked = false;
-                await _sqliteService.DeleteAsync<FootballLeagueInfo>(deleteLeagueInfo.PrimaryKey);
-                MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_League.ToString(), deleteLeagueInfo);
+
+                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(deleteLeagueInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_League);
             }
 
             _DeleteLeagueList.Clear();
@@ -210,12 +207,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var BookmarkedLeague in BookmarkedLeagues)
             {
                 BookmarkedLeague.Order = order;
-                await _sqliteService.InsertOrUpdateAsync<FootballLeagueInfo>(BookmarkedLeague);
-
                 order--;
+
+                await _bookmarkService.UpdateBookmark<FootballLeagueInfo>(BookmarkedLeague);
             }
 
-            _leagueList = await _sqliteService.SelectAllAsync<FootballLeagueInfo>();
+            _leagueList = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
             _leagueList.Sort(ShinyHost.Resolve<StoredDataComparer>());
 
             BookmarkedLeagues = new ObservableCollection<FootballLeagueInfo>(_leagueList);
@@ -227,7 +224,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             return _leagueList;
         }
 
-        private void BookmarkMessageHandler(BaseViewModel sender, FootballLeagueInfo item)
+        private void BookmarkMessageHandler(FootballLeagueInfo item)
         {
             SetIsBusy(true);
 
@@ -240,7 +237,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 }
                 else
                 {
-                    var foundItem = _leagueList.Where(elem => elem.PrimaryKey == item.PrimaryKey).FirstOrDefault();
+                    var foundItem = _leagueList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
                     Debug.Assert(foundItem != null);
 
                     _leagueList.Remove(foundItem);

@@ -4,11 +4,12 @@ using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -38,10 +39,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public override bool OnInitializeView(params object[] datas)
         {
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
+
+            string message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Bookmark_Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
+
             _alarmEditMode = false;
 
-            MessagingCenter.Subscribe<FootballMatchDetailViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
-            MessagingCenter.Subscribe<FootballMatchListViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
             return true;
         }
 
@@ -50,16 +53,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
 #if DEBUG
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 1) // 1분 마다 갱신
-            {
                 return;
-            }
 #else
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
-            {
                 return;
-            }
 #endif
-            _curMatchFilterType = MatchFilterType.SortByLeague;
             MatchesTaskLoaderNotifier.Load(InitMatchesAsync);
         }
 
@@ -68,7 +66,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Services
 
         private IWebApiService _webApiService;
-        private ISQLiteService _sqliteService;
+        private IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -186,10 +184,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public FootballMatchesViewModel(
             FootballMatchesPage page,
             IWebApiService webApiService,
-            ISQLiteService sqliteService) : base(page)
+            IBookmarkService bookmarkService) : base(page)
         {
             _webApiService = webApiService;
-            _sqliteService = sqliteService;
+            _bookmarkService = bookmarkService;
 
             if (OnInitializeView())
             {
@@ -229,37 +227,26 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             _matchList = new List<FootballMatchInfo>();
 
-            // Utc to Local, Check Image
+            var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
             foreach (var fixture in result.Fixtures)
             {
-                fixture.MatchTime = fixture.MatchTime.ToLocalTime();
-
-                // 기본 이미지 설정
-                if (string.IsNullOrEmpty(fixture.Country.Logo))
-                    fixture.Country.Logo = "img_world.png";
-                if (string.IsNullOrEmpty(fixture.League.Logo))
-                    fixture.League.Logo = fixture.Country.Logo;
-                if (string.IsNullOrEmpty(fixture.HomeTeam.Logo))
-                    fixture.HomeTeam.Logo = "img_football.png";
-                if (string.IsNullOrEmpty(fixture.AwayTeam.Logo))
-                    fixture.AwayTeam.Logo = "img_football.png";
-
-                var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(
+                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(
                                     fixture,
                                     typeof(FootballMatchInfo),
                                     null,
                                     CultureInfo.CurrentCulture) as FootballMatchInfo;
 
-                var bookmarkedMatch = await _sqliteService.SelectAsync<FootballMatchInfo>(matchInfo.PrimaryKey);
+                var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
 
-                matchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+                convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
 
-                _matchList.Add(matchInfo);
+                _matchList.Add(convertedMatchInfo);
             }
 
-            _lastUpdateTime = DateTime.UtcNow;
-
+            _curMatchFilterType = MatchFilterType.SortByLeague;
             var filteredMatch = await UpdateFilteredMatchesAsync();
+
+            _lastUpdateTime = DateTime.UtcNow;
 
             this.SetIsBusy(false);
 
@@ -281,16 +268,16 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         matchList = new List<FootballMatchInfo>();
 
                         // Match
-                        var bookmarkedMatches = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
+                        var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
                         foreach (var bookmarkedMatch in bookmarkedMatches)
                         {
-                            var match = _matchList.Where(elem => elem.PrimaryKey.Equals(bookmarkedMatch.PrimaryKey)).FirstOrDefault();
+                            var match = _matchList.FirstOrDefault(elem => elem.PrimaryKey.Equals(bookmarkedMatch.PrimaryKey));
                             if (match != null)
                                 matchList.Add(match);
                         }
 
                         // League
-                        var bookmarkedLeagues = await _sqliteService.SelectAllAsync<FootballLeagueInfo>();
+                        var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
                         foreach (var bookmarkedLeague in bookmarkedLeagues)
                         {
                             var matches = _matchList.Where(elem =>
@@ -304,7 +291,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         }
 
                         // Team
-                        var bookmarkedTeams = await _sqliteService.SelectAllAsync<FootballTeamInfo>();
+                        var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
                         foreach (var bookmarkedTeam in bookmarkedTeams)
                         {
                             var matches = _matchList.Where(elem =>
@@ -342,14 +329,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             Debug.Assert(matchList != null);
 
-            InitializeMatcheGroups(matchList);
+            UpdateMatcheGroups(matchList);
 
             this.SetIsBusy(false);
 
             return matchList;
         }
 
-        private void InitializeMatcheGroups(List<FootballMatchInfo> matchList)
+        private void UpdateMatcheGroups(List<FootballMatchInfo> matchList)
         {
             ObservableCollection<FootballMatchGroup> matchGroupCollection;
             matchGroupCollection = new ObservableCollection<FootballMatchGroup>();
@@ -358,19 +345,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             foreach (var grouppingMatch in grouppingMatches)
             {
                 // 기존 데이터 있는지.. 있으면 Expanded값은 유지
-                var foundExistData = MatchGroups?.Where(elem => elem.Title == grouppingMatch.Key).FirstOrDefault();
-                var footballMatchGroup = new FootballMatchGroup(
+                var foundExistData = MatchGroups?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
+                matchGroupCollection.Add(new FootballMatchGroup(
                     grouppingMatch.Key,
                     string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.CountryLogo : logo,
-                    foundExistData?.Expanded ?? true);
-
-                var footballMatchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
-                footballMatchListViewModel.AlarmEditMode = _alarmEditMode;
-                footballMatchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
-
-                footballMatchGroup.FootballMatchListViewModel = footballMatchListViewModel;
-
-                matchGroupCollection.Add(footballMatchGroup);
+                    _alarmEditMode,
+                    grouppingMatch.Value,
+                    foundExistData?.Expanded ?? true));
             }
 
             MatchGroups = matchGroupCollection;
@@ -406,13 +387,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             return result;
         }
 
-        private void BookmarkMessageHandler(BaseViewModel sender, FootballMatchInfo item)
+        private void BookmarkMessageHandler(FootballMatchInfo item)
         {
             SetIsBusy(true);
 
             if (_matchList?.Count > 0)
             {
-                var foundItem = _matchList.Where(elem => elem.PrimaryKey == item.PrimaryKey).FirstOrDefault();
+                var foundItem = _matchList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
                 if (foundItem != null)
                 {
                     foundItem.IsBookmarked = item.IsBookmarked;

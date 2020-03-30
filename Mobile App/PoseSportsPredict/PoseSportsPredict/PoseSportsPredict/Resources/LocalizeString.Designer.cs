@@ -304,6 +304,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No search results found..
+        /// </summary>
+        public static string No_Search_Results {
+            get {
+                return ResourceManager.GetString("No_Search_Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not authenticated User..
         /// </summary>
         public static string Not_Authenticated_Credencials {
@@ -394,11 +403,11 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search League....
+        ///   Looks up a localized string similar to Search Country, League....
         /// </summary>
-        public static string Search_League {
+        public static string Search_League_Country {
             get {
-                return ResourceManager.GetString("Search_League", resourceCulture);
+                return ResourceManager.GetString("Search_League_Country", resourceCulture);
             }
         }
         

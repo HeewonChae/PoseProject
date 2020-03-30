@@ -1,10 +1,10 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using Shiny;
@@ -18,6 +18,12 @@ namespace PoseSportsPredict.ViewModels.Football.League
 {
     public class FootballLeagueListViewModel : BaseViewModel
     {
+        #region Fields
+
+        private IBookmarkService _bookmarkService;
+
+        #endregion Fields
+
         #region Properties
 
         public ObservableCollection<FootballLeagueInfo> Leagues { get; set; }
@@ -55,11 +61,9 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
             // Add Bookmark
             if (leagueInfo.IsBookmarked)
-                await ShinyHost.Resolve<ISQLiteService>().InsertOrUpdateAsync<FootballLeagueInfo>(leagueInfo);
+                await _bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_League);
             else
-                await ShinyHost.Resolve<ISQLiteService>().DeleteAsync<FootballLeagueInfo>(leagueInfo.PrimaryKey);
-
-            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_League.ToString(), leagueInfo);
+                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(leagueInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_League);
 
             var message = leagueInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
@@ -70,5 +74,14 @@ namespace PoseSportsPredict.ViewModels.Football.League
         }
 
         #endregion Commands
+
+        #region Constructors
+
+        public FootballLeagueListViewModel(IBookmarkService bookmarkService)
+        {
+            _bookmarkService = bookmarkService;
+        }
+
+        #endregion Constructors
     }
 }

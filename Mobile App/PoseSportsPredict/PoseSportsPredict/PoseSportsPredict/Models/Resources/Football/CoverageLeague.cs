@@ -1,5 +1,5 @@
 ﻿using PosePacket.Service.Football.Models.Enums;
-using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
 using Shiny;
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace PoseSportsPredict.Models.Resources.Football
 
         public static async Task Load(params CoverageLeague[] coverageLeagues)
         {
-            var bookmarkedLeagues = await ShinyHost.Resolve<ISQLiteService>().SelectAllAsync<FootballLeagueInfo>();
+            var bookmarkedLeagues = await ShinyHost.Resolve<IBookmarkService>().GetAllBookmark<FootballLeagueInfo>();
 
             foreach (var covaerageLeague in coverageLeagues)
             {
@@ -41,7 +42,7 @@ namespace PoseSportsPredict.Models.Resources.Football
                 var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfoConverter>().Convert(
                     covaerageLeague, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture) as FootballLeagueInfo;
 
-                var bookmarkedLeauge = bookmarkedLeagues.Find(elem => elem.PrimaryKey == leagueInfo.PrimaryKey);
+                var bookmarkedLeauge = bookmarkedLeagues.FirstOrDefault(elem => elem.PrimaryKey == leagueInfo.PrimaryKey);
                 if (bookmarkedLeauge != null)
                 {
                     leagueInfo = bookmarkedLeauge;

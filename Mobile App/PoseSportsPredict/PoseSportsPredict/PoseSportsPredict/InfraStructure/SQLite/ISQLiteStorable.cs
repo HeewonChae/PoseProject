@@ -6,7 +6,6 @@ namespace PoseSportsPredict.InfraStructure.SQLite
     {
         string PrimaryKey { get; set; }
         int Order { get; set; }
-
         DateTime StoredTime { get; set; }
     }
 }

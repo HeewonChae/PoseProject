@@ -1,13 +1,12 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
 using Plugin.LocalNotification;
-using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
@@ -19,8 +18,6 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using XF.Material.Forms.UI.Dialogs;
-using PacketModels = PosePacket.Service.Football.Models;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
@@ -37,7 +34,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 return false;
 
             // Check Bookmark
-            var bookmarkedMatch = await _sqliteService.SelectAsync<FootballMatchInfo>(matchInfo.PrimaryKey);
+            var bookmarkedMatch = await _bookmarkService.GetBookmark<FootballMatchInfo>(matchInfo.PrimaryKey);
             MatchInfo = bookmarkedMatch ?? matchInfo;
 
             OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>();
@@ -58,7 +55,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Services
 
-        private ISQLiteService _sqliteService;
+        private IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -153,11 +150,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             // Add Bookmark
             if (MatchInfo.IsBookmarked)
-                await _sqliteService.InsertOrUpdateAsync<FootballMatchInfo>(MatchInfo);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
             else
-                await _sqliteService.DeleteAsync<FootballMatchInfo>(MatchInfo.PrimaryKey);
-
-            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Match.ToString(), MatchInfo);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
 
             var message = MatchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
@@ -231,19 +226,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public FootballMatchDetailViewModel(
             FootballMatchDetailPage page
-            , ISQLiteService sqliteService) : base(page)
+            , IBookmarkService bookmarkService) : base(page)
         {
-            //var tabHost = page.FindByName<TabHostView>("_tabHost");
-            //var viewSwitcher = page.FindByName<ViewSwitcher>("_switcher");
-            //tabHost.SelectedIndex = -1;
-
-            //tabHost.SelectedTabIndexChanged += (s, e) =>
-            //{
-            //    var bindingCtx = viewSwitcher.Children[viewSwitcher.SelectedIndex].BindingContext as BaseViewModel;
-            //    bindingCtx.OnAppearing();
-            //};
-
-            _sqliteService = sqliteService;
+            _bookmarkService = bookmarkService;
 
             CoupledPage.Appearing += (s, e) => OnAppearing();
         }

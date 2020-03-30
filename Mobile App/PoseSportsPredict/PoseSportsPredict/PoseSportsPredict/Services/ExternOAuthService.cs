@@ -4,6 +4,7 @@ using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.ExternOAuth.Providers;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels;
@@ -81,6 +82,9 @@ namespace PoseSportsPredict.Services
                             {
                                 LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
                                 _isAuthenticated = true;
+
+                                await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
+                                await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
                             }
                         }
                     }

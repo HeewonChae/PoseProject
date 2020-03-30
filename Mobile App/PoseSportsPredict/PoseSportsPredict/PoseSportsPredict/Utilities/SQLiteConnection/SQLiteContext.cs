@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PoseSportsPredict.Utilities.SQLiteConnection
 {
-    public class SQLiteContext<T> : IDisposable where T : ISQLiteStorable, new()
+    public class SQLiteContext : IDisposable
     {
         private static readonly SQLiteAsyncConnection Connection;
 
@@ -29,49 +29,49 @@ namespace PoseSportsPredict.Utilities.SQLiteConnection
         {
         }
 
-        public async Task<int> InsertAsync(T model)
+        public async Task<int> InsertAsync<T>(T model) where T : ISQLiteStorable, new()
         {
             return await Connection.InsertAsync(model);
         }
 
-        public async Task<int> InsertAllAsync(IEnumerable<T> models)
+        public async Task<int> InsertAllAsync<T>(IEnumerable<T> models) where T : ISQLiteStorable, new()
         {
             return await Connection.InsertAllAsync(models);
         }
 
-        public async Task<int> UpdateAsync(T model)
+        public async Task<int> UpdateAsync<T>(T model) where T : ISQLiteStorable, new()
         {
             return await Connection.UpdateAsync(model);
         }
 
-        public async Task<int> UpdateAllAsync(IEnumerable<T> models)
+        public async Task<int> UpdateAllAsync<T>(IEnumerable<T> models) where T : ISQLiteStorable, new()
         {
             return await Connection.UpdateAllAsync(models);
         }
 
-        public async Task<int> DeleteAsync(T model)
+        public async Task<int> DeleteAsync<T>(string pk) where T : ISQLiteStorable, new()
         {
-            return await Connection.DeleteAsync(model);
+            return await Connection.DeleteAsync<T>(pk);
         }
 
-        public async Task<int> DeleteAllAsync()
+        public async Task<int> DeleteAllAsync<T>() where T : ISQLiteStorable, new()
         {
             return await Connection.DeleteAllAsync<T>();
         }
 
-        public async Task<T> FirstAsync()
+        public async Task<T> FirstAsync<T>() where T : ISQLiteStorable, new()
         {
             return await Connection.Table<T>().FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> SelectAllAsync()
+        public async Task<List<T>> SelectAllAsync<T>() where T : ISQLiteStorable, new()
         {
             return await Connection.Table<T>().ToListAsync();
         }
 
-        public async Task<T> SelectAsync(string primaryKey)
+        public async Task<T> SelectAsync<T>(string primaryKey) where T : ISQLiteStorable, new()
         {
-            return await Connection.Table<T>().Where(m => m.PrimaryKey == primaryKey).FirstOrDefaultAsync();
+            return await Connection.Table<T>().FirstOrDefaultAsync(m => m.PrimaryKey == primaryKey);
         }
 
         public void Dispose()

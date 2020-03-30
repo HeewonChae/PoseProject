@@ -1,19 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure.SQLite;
-using PoseSportsPredict.Logics.Football.Converters;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Football;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.ViewModels.Football.Bookmark;
-using PoseSportsPredict.ViewModels.Football.League;
-using PoseSportsPredict.ViewModels.Football.League.Detail;
-using PoseSportsPredict.Views.Football;
 using PoseSportsPredict.Views.Football.League;
 using Sharpnado.Presentation.Forms;
-using Shiny;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -30,43 +24,38 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public override bool OnInitializeView(params object[] datas)
         {
-            _leagueList = CoverageLeague.CoverageLeagues.Values.ToList();
+            LeaguesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>>();
 
-            MessagingCenter.Subscribe<FootballLeagueDetailViewModel, FootballLeagueInfo>(this, FootballMessageType.Update_Bookmark_League.ToString(), (s, e) => this.BookmarkMessageHandler(s, e));
-            MessagingCenter.Subscribe<FootballBookmarkLeaguesViewModel, FootballLeagueInfo>(this, FootballMessageType.Update_Bookmark_League.ToString(), (s, e) => this.BookmarkMessageHandler(s, e));
+            string message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Bookmark_League);
+            MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.BookmarkMessageHandler(e));
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
-            var searchBar = CoupledPage.FindByName<SearchBar>("_searchBar");
-            if (string.IsNullOrEmpty(searchBar.Text)
-                && _orgLeagueGroups == null)
-            {
-                UpdateLeagueGroups(_leagueList, false);
-                _orgLeagueGroups = LeagueGroups;
-            }
+            if (!LeaguesTaskLoaderNotifier.IsNotStarted)
+                return;
+
+            LeaguesTaskLoaderNotifier.Load(InitLeaguesAsync);
         }
 
         #endregion NavigableViewModel
 
-        #region Services
-
-        private ISQLiteService _sqliteService;
-
-        #endregion Services
-
         #region Fields
 
+        private TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> _leaguesTaskLoaderNotifier;
         private List<FootballLeagueInfo> _leagueList;
         private ObservableCollection<FootballLeagueGroup> _orgLeagueGroups;
         private ObservableCollection<FootballLeagueGroup> _leagueGroups;
+        private string _searchText;
 
         #endregion Fields
 
         #region Properties
 
+        public bool IsSearchEnable { get => _leagueList?.Count > 0; set => OnPropertyChanged("IsSearchEnable"); }
+        public TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> LeaguesTaskLoaderNotifier { get => _leaguesTaskLoaderNotifier; set => SetValue(ref _leaguesTaskLoaderNotifier, value); }
         public ObservableCollection<FootballLeagueGroup> LeagueGroups { get => _leagueGroups; set => SetValue(ref _leagueGroups, value); }
 
         #endregion Properties
@@ -85,16 +74,17 @@ namespace PoseSportsPredict.ViewModels.Football
 
         private void SearchBarTextChanged(TextChangedEventArgs eventArgs)
         {
+            _searchText = eventArgs.NewTextValue;
+
             if (eventArgs.NewTextValue == string.Empty)
-            {
-                LeagueGroups = new ObservableCollection<FootballLeagueGroup>(_orgLeagueGroups);
-                return;
-            }
+                LeaguesTaskLoaderNotifier.Load(SearchLeaguesAsync);
+        }
 
-            var searchedLeague = _leagueList.Where(elem => elem.LeagueName.ToLower().Contains(eventArgs.NewTextValue.ToLower())
-                            || elem.CountryName.ToLower().Contains(eventArgs.NewTextValue.ToLower())).ToList();
+        public ICommand SearchCommand { get => new RelayCommand(Search); }
 
-            UpdateLeagueGroups(searchedLeague, true);
+        private void Search()
+        {
+            LeaguesTaskLoaderNotifier.Load(SearchLeaguesAsync);
         }
 
         #endregion Commands
@@ -102,18 +92,50 @@ namespace PoseSportsPredict.ViewModels.Football
         #region Constructors
 
         public FootballLeaguesViewModel(
-            FootballLeaguesPage page
-            , ISQLiteService sqliteService) : base(page)
+            FootballLeaguesPage page) : base(page)
         {
-            if (OnInitializeView())
-            {
-                _sqliteService = sqliteService;
-            }
+            OnInitializeView();
         }
 
         #endregion Constructors
 
         #region Methods
+
+        private async Task<IReadOnlyCollection<FootballLeagueInfo>> InitLeaguesAsync()
+        {
+            await Task.Delay(300);
+
+            _leagueList = CoverageLeague.CoverageLeagues.Values.ToList();
+
+            UpdateLeagueGroups(_leagueList, false);
+
+            _orgLeagueGroups = LeagueGroups;
+
+            IsSearchEnable = true;
+
+            return _leagueList;
+        }
+
+        private async Task<IReadOnlyCollection<FootballLeagueInfo>> SearchLeaguesAsync()
+        {
+            await Task.Delay(300);
+
+            List<FootballLeagueInfo> searchedLeague = _leagueList;
+
+            if (_searchText == string.Empty)
+            {
+                LeagueGroups = new ObservableCollection<FootballLeagueGroup>(_orgLeagueGroups);
+            }
+            else
+            {
+                searchedLeague = _leagueList.Where(elem => elem.LeagueName.ToLower().Contains(_searchText.ToLower())
+                            || elem.CountryName.ToLower().Contains(_searchText.ToLower())).ToList();
+
+                UpdateLeagueGroups(searchedLeague, true);
+            }
+
+            return searchedLeague;
+        }
 
         private void UpdateLeagueGroups(List<FootballLeagueInfo> leagueList, bool isAllExpanded)
         {
@@ -126,16 +148,14 @@ namespace PoseSportsPredict.ViewModels.Football
             var leaguesGroupByCountry = leagueList.GroupBy(elem => elem.CountryName);
 
             // World 데이터는 1순위로 등록
-            var InternationalLeagues = leaguesGroupByCountry.Where(elem => elem.Key == "World").FirstOrDefault();
+            var InternationalLeagues = leaguesGroupByCountry.FirstOrDefault(elem => elem.Key == "World");
             if (InternationalLeagues != null)
             {
-                leagueGroupsCollection.Add(new FootballLeagueGroup(InternationalLeagues.Key, InternationalLeagues.First().CountryLogo, isAllExpanded)
-                {
-                    FootballLeagueListViewModel = new FootballLeagueListViewModel
-                    {
-                        Leagues = new ObservableCollection<FootballLeagueInfo>(InternationalLeagues.ToArray())
-                    }
-                });
+                leagueGroupsCollection.Add(new FootballLeagueGroup(
+                    InternationalLeagues.Key,
+                    InternationalLeagues.First().CountryLogo,
+                    InternationalLeagues.ToArray(),
+                    isAllExpanded));
             }
 
             foreach (var grouppingLeague in leaguesGroupByCountry)
@@ -143,21 +163,19 @@ namespace PoseSportsPredict.ViewModels.Football
                 if (grouppingLeague.Key == "World")
                     continue;
 
-                leagueGroupsCollection.Add(new FootballLeagueGroup(grouppingLeague.Key, grouppingLeague.First().CountryLogo, isAllExpanded)
-                {
-                    FootballLeagueListViewModel = new FootballLeagueListViewModel
-                    {
-                        Leagues = new ObservableCollection<FootballLeagueInfo>(grouppingLeague.ToArray())
-                    }
-                });
+                leagueGroupsCollection.Add(new FootballLeagueGroup(
+                    grouppingLeague.Key,
+                    grouppingLeague.First().CountryLogo,
+                    grouppingLeague.ToArray(),
+                    isAllExpanded));
             }
 
             LeagueGroups = leagueGroupsCollection;
         }
 
-        private void BookmarkMessageHandler(BaseViewModel sender, FootballLeagueInfo item)
+        private void BookmarkMessageHandler(FootballLeagueInfo item)
         {
-            var foundLeague = _leagueList.Where(elem => elem.PrimaryKey == item.PrimaryKey).FirstOrDefault();
+            var foundLeague = _leagueList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
             if (foundLeague != null)
             {
                 foundLeague.IsBookmarked = item.IsBookmarked;

@@ -2,11 +2,12 @@
 using GalaSoft.MvvmLight.Command;
 using PosePacket.Service.Football.Models;
 using PosePacket.Service.Football.Models.Enums;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -34,8 +35,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
-            MessagingCenter.Subscribe<FootballMatchDetailViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
-            MessagingCenter.Subscribe<FootballMatchListViewModel, FootballMatchInfo>(this, FootballMessageType.Update_Bookmark_Match.ToString(), (s, e) => BookmarkMessageHandler(s, e));
+            string message = _bookmarkService.BuildBookmarkMessage(Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
         }
@@ -64,7 +65,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         #region Services
 
-        private ISQLiteService _sqliteService;
+        private IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -124,7 +125,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             if (IsBusy)
                 return;
 
-            _DeleteMatchList.Clear();
+            Debug.Assert(_DeleteMatchList.Count == 0);
             IsEditMode = true;
         }
 
@@ -169,13 +170,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public FootballBookmarkMatchesViewModel(
             FootballBookmarkMatchesPage coupledPage
-            , ISQLiteService sqliteService) : base(coupledPage)
+            , IBookmarkService bookmarkService) : base(coupledPage)
         {
-            _sqliteService = sqliteService;
+            _bookmarkService = bookmarkService;
 
             if (OnInitializeView())
             {
-                coupledPage.Appearing += (s, e) => this.OnAppearing();
                 coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
@@ -190,7 +190,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             await Task.Delay(300);
 
-            _matchList = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
+            _matchList = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
 
             // Need Refrash MatchInfo
             var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
@@ -248,13 +248,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deleteMatchInfo in _DeleteMatchList)
             {
                 deleteMatchInfo.IsBookmarked = false;
-                await _sqliteService.DeleteAsync<FootballMatchInfo>(deleteMatchInfo.PrimaryKey);
-                MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Match.ToString(), deleteMatchInfo);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
             }
 
             _DeleteMatchList.Clear();
 
-            _matchList = await _sqliteService.SelectAllAsync<FootballMatchInfo>();
+            _matchList = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
             _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
 
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
@@ -266,7 +265,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             return _matchList;
         }
 
-        private void BookmarkMessageHandler(BaseViewModel sender, FootballMatchInfo item)
+        private void BookmarkMessageHandler(FootballMatchInfo item)
         {
             SetIsBusy(true);
 
@@ -281,7 +280,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 }
                 else
                 {
-                    var foundItem = _matchList.Where(elem => elem.PrimaryKey == item.PrimaryKey).FirstOrDefault();
+                    var foundItem = _matchList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
                     Debug.Assert(foundItem != null);
 
                     _matchList.Remove(foundItem);

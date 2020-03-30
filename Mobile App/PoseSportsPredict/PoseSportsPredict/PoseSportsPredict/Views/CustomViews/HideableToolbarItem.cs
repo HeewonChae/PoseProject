@@ -11,12 +11,6 @@ namespace PoseSportsPredict.Views.CustomViews
     {
         public HideableToolbarItem() : base()
         {
-            this.InitVisibility();
-        }
-
-        private async void InitVisibility()
-        {
-            await Task.Delay(100);
             OnIsVisibleChanged(this, false, IsVisible);
         }
 

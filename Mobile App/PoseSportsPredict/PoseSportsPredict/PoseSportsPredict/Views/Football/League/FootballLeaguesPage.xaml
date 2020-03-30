@@ -139,25 +139,29 @@
                     x:Name="_searchBar"
                     HeightRequest="30"
                     FontSize="Body"
-                    Placeholder="{x:Static localize:LocalizeString.Search_League}">
+                    IsVisible="{Binding IsSearchEnable}"
+                    Placeholder="{x:Static localize:LocalizeString.Search_League_Country}"
+                    SearchCommand="{Binding SearchCommand}">
                     <SearchBar.Behaviors>
                         <logics:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchBarTextChangedCommand}">
                         </logics:EventToCommandBehavior>
                     </SearchBar.Behaviors>
-                    <SearchBar.Effects>
-                        <keyboard:KeyboardEnableEffect />
-                    </SearchBar.Effects>
                 </SearchBar>
             </materialui:MaterialCard>
-            <ListView
-                x:Name="lv_matches"
-                Scrolled="lv_matches_Scrolled"
-                ItemsSource="{Binding LeagueGroups}"
-                HasUnevenRows="True"
-                IsPullToRefreshEnabled="False"
-                SeparatorVisibility="None"
-                ItemTemplate="{StaticResource leagueGroupTempleteSelector}">
-            </ListView>
+            <loader:TaskLoaderView
+                Style="{StaticResource PoseTaskLoader}"
+                TaskLoaderNotifier="{Binding LeaguesTaskLoaderNotifier}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Search_Results}">
+                <ListView
+                    x:Name="lv_matches"
+                    Scrolled="lv_matches_Scrolled"
+                    ItemsSource="{Binding LeagueGroups}"
+                    HasUnevenRows="True"
+                    IsPullToRefreshEnabled="False"
+                    SeparatorVisibility="None"
+                    ItemTemplate="{StaticResource leagueGroupTempleteSelector}">
+                </ListView>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

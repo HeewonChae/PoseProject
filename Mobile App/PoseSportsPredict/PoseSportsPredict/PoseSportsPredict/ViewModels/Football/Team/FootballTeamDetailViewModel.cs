@@ -1,18 +1,14 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
-using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Team;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Team
 {
@@ -29,7 +25,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                 return false;
 
             // Check Bookmark
-            var bookmarkedTeam = await _sqliteService.SelectAsync<FootballTeamInfo>(teamInfo.PrimaryKey);
+            var bookmarkedTeam = await _bookmarkService.GetBookmark<FootballTeamInfo>(teamInfo.PrimaryKey);
             TeamInfo = bookmarkedTeam ?? teamInfo;
 
             return true;
@@ -43,7 +39,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         #region Services
 
-        private ISQLiteService _sqliteService;
+        private IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -92,11 +88,9 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
             // Add Bookmark
             if (TeamInfo.IsBookmarked)
-                await _sqliteService.InsertOrUpdateAsync<FootballTeamInfo>(TeamInfo);
+                await _bookmarkService.AddBookmark<FootballTeamInfo>(TeamInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Team);
             else
-                await _sqliteService.DeleteAsync<FootballTeamInfo>(TeamInfo.PrimaryKey);
-
-            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Team.ToString(), TeamInfo);
+                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(TeamInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Team);
 
             var message = TeamInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
@@ -128,9 +122,9 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public FootballTeamDetailViewModel(
             FootballTeamDetailPage page
-            , ISQLiteService sqliteService) : base(page)
+            , IBookmarkService bookmarkService) : base(page)
         {
-            _sqliteService = sqliteService;
+            _bookmarkService = bookmarkService;
 
             CoupledPage.Appearing += (s, e) => OnAppearing();
         }

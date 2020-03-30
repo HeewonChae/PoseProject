@@ -211,8 +211,8 @@
   <data name="No_Bookmarked_Matches" xml:space="preserve">
     <value>There are no bookmarked Matches.</value>
   </data>
-  <data name="Search_League" xml:space="preserve">
-    <value>Search League...</value>
+  <data name="Search_League_Country" xml:space="preserve">
+    <value>Search Country, League...</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -246,5 +246,8 @@
   </data>
   <data name="Applying" xml:space="preserve">
     <value>Applying</value>
+  </data>
+  <data name="No_Search_Results" xml:space="preserve">
+    <value>No search results found.</value>
   </data>
 </root>

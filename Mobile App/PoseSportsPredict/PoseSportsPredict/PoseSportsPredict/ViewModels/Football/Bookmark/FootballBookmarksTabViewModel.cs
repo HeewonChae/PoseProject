@@ -29,7 +29,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override void OnAppearing(params object[] datas)
         {
-            base.OnAppearing(datas);
+            var tabbedPage = this.CoupledPage as TabbedPage;
+            var bindingCtx = tabbedPage.CurrentPage.BindingContext as NavigableViewModel;
+            bindingCtx.OnAppearing();
         }
 
         #endregion NavigableViewModel
@@ -72,6 +74,16 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             }
 
             OnInitializeView();
+
+            // Workaround NavigationPage OnAppearing bug
+            ((TabbedPage)this.CoupledPage).CurrentPageChanged += (s, e) =>
+            {
+                if (s is TabbedPage tabbedPage)
+                {
+                    var bindingCtx = tabbedPage.CurrentPage.BindingContext as BaseViewModel;
+                    bindingCtx.OnAppearing();
+                }
+            };
         }
 
         #endregion Constructors

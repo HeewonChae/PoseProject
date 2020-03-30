@@ -60,7 +60,7 @@ NotificationCenter.Current.Show(request);
 if (OnInitializeView())
 {
     CoupledPage.Appearing += (s, e) => this.OnAppearing();
-    coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
+    CoupledPage.Disappearing += (s, e) => this.OnDisAppearing();
 }
 
 // 8. Xml namespace

@@ -1,22 +1,19 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
 using Plugin.LocalNotification;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
-using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Services.MessagingCenterMessageType;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
 using System;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Windows.Input;
 using Xamarin.Forms;
-using PacketModels = PosePacket.Service.Football.Models;
 
 namespace PoseSportsPredict.ViewModels.Football.Match
 {
@@ -24,7 +21,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
     {
         #region Services
 
-        public ISQLiteService _sqliteService;
+        public IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -111,11 +108,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             // Add Bookmark
             if (matchInfo.IsBookmarked)
-                await _sqliteService.InsertOrUpdateAsync<FootballMatchInfo>(matchInfo);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
             else
-                await _sqliteService.DeleteAsync<FootballMatchInfo>(matchInfo.PrimaryKey);
-
-            MessagingCenter.Send(this, FootballMessageType.Update_Bookmark_Match.ToString(), matchInfo);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
 
             var message = matchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
@@ -129,9 +124,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Constructors
 
-        public FootballMatchListViewModel(ISQLiteService sqliteService)
+        public FootballMatchListViewModel(IBookmarkService bookmarkService)
         {
-            _sqliteService = sqliteService;
+            _bookmarkService = bookmarkService;
         }
 
         #endregion Constructors

@@ -3,6 +3,7 @@ using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities;
+using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
 using Xamarin.Forms;
@@ -24,15 +25,13 @@ namespace PoseSportsPredict
             XF.Material.Forms.Material.Init(this);
 
             // Local Notification tap event listener
-            NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
+            //NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
 
-            MainPage = ShinyHost.Resolve<LoadingPage>();
+            MainPage = ShinyHost.Resolve<LoadingViewModel>().CoupledPage;
         }
 
-        protected override async void OnStart()
+        protected override void OnStart()
         {
-            if (MainPage is LoadingPage loadingPage)
-                await loadingPage.LoadingAsync();
         }
 
         protected override void OnSleep()
@@ -43,7 +42,7 @@ namespace PoseSportsPredict
         {
         }
 
-        private async void OnLocalNotificationTapped(NotificationTappedEventArgs e)
+        private void OnLocalNotificationTapped(NotificationTappedEventArgs e)
         {
             //// your code goes here
             //if (Application.Current.MainPage is MasterDetailPage)

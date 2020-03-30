@@ -1,7 +1,11 @@
-﻿using PoseSportsPredict.InfraStructure.SQLite;
+﻿using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Utilities.SQLiteConnection;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -9,14 +13,18 @@ namespace PoseSportsPredict.Services
 {
     public class SQLiteService : ISQLiteService
     {
+        private readonly SQLiteContext _sqliteContext;
+
+        public SQLiteService()
+        {
+            _sqliteContext = new SQLiteContext();
+        }
+
         public async Task DeleteAllAsync<T>() where T : ISQLiteStorable, new()
         {
             try
             {
-                using (var con = new SQLiteContext<T>())
-                {
-                    await con.DeleteAllAsync();
-                }
+                await _sqliteContext.DeleteAllAsync<T>();
             }
             catch (Exception ex)
             {
@@ -25,16 +33,11 @@ namespace PoseSportsPredict.Services
             }
         }
 
-        public async Task DeleteAsync<T>(string pk) where T : ISQLiteStorable, new()
+        public async Task<int> DeleteAsync<T>(string pk) where T : ISQLiteStorable, new()
         {
             try
             {
-                using (var con = new SQLiteContext<T>())
-                {
-                    var found = await con.SelectAsync(pk);
-                    if (found != null)
-                        await con.DeleteAsync(found);
-                }
+                return await _sqliteContext.DeleteAsync<T>(pk);
             }
             catch (Exception ex)
             {
@@ -43,21 +46,18 @@ namespace PoseSportsPredict.Services
             }
         }
 
-        public async Task InsertOrUpdateAsync<T>(T model) where T : ISQLiteStorable, new()
+        public async Task<int> InsertOrUpdateAsync<T>(T model) where T : ISQLiteStorable, new()
         {
             try
             {
-                using (var con = new SQLiteContext<T>())
+                var found = await _sqliteContext.SelectAsync<T>(model.PrimaryKey);
+                if (found != null)
                 {
-                    var foundRecord = await con.SelectAsync(model.PrimaryKey);
-                    if (foundRecord != null)
-                    {
-                        await con.UpdateAsync(model);
-                    }
-                    else
-                    {
-                        await con.InsertAsync(model);
-                    }
+                    return await _sqliteContext.UpdateAsync(model);
+                }
+                else
+                {
+                    return await _sqliteContext.InsertAsync(model);
                 }
             }
             catch (Exception ex)
@@ -69,62 +69,28 @@ namespace PoseSportsPredict.Services
 
         public async Task<List<T>> SelectAllAsync<T>() where T : ISQLiteStorable, new()
         {
-            List<T> result = default;
-
             try
             {
-                using (var con = new SQLiteContext<T>())
-                {
-                    result = await con.SelectAllAsync();
-                }
+                return await _sqliteContext.SelectAllAsync<T>();
             }
             catch (Exception ex)
             {
                 await MaterialDialog.Instance.AlertAsync(ex.Message);
                 throw;
             }
-
-            return result;
         }
 
         public async Task<T> SelectAsync<T>(string pk) where T : ISQLiteStorable, new()
         {
-            T result = default;
-
             try
             {
-                using (var con = new SQLiteContext<T>())
-                {
-                    result = await con.SelectAsync(pk);
-                }
+                return await _sqliteContext.SelectAsync<T>(pk);
             }
             catch (Exception ex)
             {
                 await MaterialDialog.Instance.AlertAsync(ex.Message);
                 throw;
             }
-
-            return result;
-        }
-
-        public async Task<T> SelectFirstAsync<T>() where T : ISQLiteStorable, new()
-        {
-            T result = default;
-
-            try
-            {
-                using (var con = new SQLiteContext<T>())
-                {
-                    result = await con.FirstAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                await MaterialDialog.Instance.AlertAsync(ex.Message);
-                throw;
-            }
-
-            return result;
         }
     }
 }

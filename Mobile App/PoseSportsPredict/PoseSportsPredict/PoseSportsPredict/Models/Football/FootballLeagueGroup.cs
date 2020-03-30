@@ -1,7 +1,10 @@
 ﻿using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.ViewModels.Football.League;
+using Shiny;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
 
@@ -54,11 +57,14 @@ namespace PoseSportsPredict.Models
 
         #region Constructors
 
-        public FootballLeagueGroup(string title, string countryLogo, bool expanded = false)
+        public FootballLeagueGroup(string title, string countryLogo, FootballLeagueInfo[] leagues, bool expanded = false)
         {
             _title = title;
             _countryLogo = countryLogo;
             _expanded = expanded;
+
+            FootballLeagueListViewModel = ShinyHost.Resolve<FootballLeagueListViewModel>();
+            FootballLeagueListViewModel.Leagues = new ObservableCollection<FootballLeagueInfo>(leagues);
         }
 
         #endregion Constructors

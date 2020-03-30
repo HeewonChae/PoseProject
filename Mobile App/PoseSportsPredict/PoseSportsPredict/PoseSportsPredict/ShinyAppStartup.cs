@@ -7,6 +7,7 @@ using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.ViewModels.Football.Bookmark;
+using PoseSportsPredict.ViewModels.Football.League;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -50,6 +51,7 @@ namespace PoseSportsPredict
             services.AddSingleton<IWebApiService, WebApiService>();
             services.AddSingleton<ISQLiteService, SQLiteService>();
             services.AddSingleton<IOAuthService, ExternOAuthService>();
+            services.AddSingleton<IBookmarkService, BookmarkService>();
         }
 
         private void RegisterConverters(IServiceCollection services)
@@ -63,24 +65,25 @@ namespace PoseSportsPredict
         private void MatchViewModels(IServiceCollection services)
         {
             services.AddSingleton<LoadingPage>();
+            services.AddSingleton<LoadingViewModel>();
             services.AddSingleton<LoginPage>();
             services.AddSingleton<LoginViewModel>();
 
             // MasterPage
             services.AddSingleton<AppMasterPage>();
             services.AddSingleton<AppMasterViewModel>();
-            services.AddSingleton<AppMasterMenuPage>();
-            services.AddSingleton<AppMasterMenuViewModel>();
+            services.AddTransient<AppMasterMenuPage>();
+            services.AddTransient<AppMasterMenuViewModel>();
 
             // Common - Settings
-            services.AddSingleton<SettingsPage>();
-            services.AddSingleton<SettingsViewModel>();
+            services.AddTransient<SettingsPage>();
+            services.AddTransient<SettingsViewModel>();
 
             // Football
             services.AddSingleton<FootballMainPage>();
             services.AddSingleton<FootballMainViewModel>();
             // Football - Match
-            services.AddSingleton<FootballMatchesTabViewModel>();
+            services.AddTransient<FootballMatchesTabViewModel>();
             services.AddTransient<FootballMatchesPage>();
             services.AddTransient<FootballMatchesViewModel>();
             services.AddTransient<FootballMatchListViewModel>();
@@ -91,21 +94,22 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchDetailPredictionsViewModel>();
             services.AddTransient<FootballMatchDetailOddsViewModel>();
             // Football - League
-            services.AddSingleton<FootballLeaguesPage>();
-            services.AddSingleton<FootballLeaguesViewModel>();
+            services.AddTransient<FootballLeaguesPage>();
+            services.AddTransient<FootballLeaguesViewModel>();
+            services.AddTransient<FootballLeagueListViewModel>();
             services.AddTransient<FootballLeagueDetailPage>();
             services.AddTransient<FootballLeagueDetailViewModel>();
             //Football - Team
             services.AddTransient<FootballTeamDetailPage>();
             services.AddTransient<FootballTeamDetailViewModel>();
             // Football - Bookmark
-            services.AddSingleton<FootballBookmarksTabViewModel>();
-            services.AddSingleton<FootballBookmarkMatchesPage>();
-            services.AddSingleton<FootballBookmarkMatchesViewModel>();
-            services.AddSingleton<FootballBookmarkLeaguesPage>();
-            services.AddSingleton<FootballBookmarkLeaguesViewModel>();
-            services.AddSingleton<FootballBookmarkTeamsPage>();
-            services.AddSingleton<FootballBookmarkTeamsViewModel>();
+            services.AddTransient<FootballBookmarksTabViewModel>();
+            services.AddTransient<FootballBookmarkMatchesPage>();
+            services.AddTransient<FootballBookmarkMatchesViewModel>();
+            services.AddTransient<FootballBookmarkLeaguesPage>();
+            services.AddTransient<FootballBookmarkLeaguesViewModel>();
+            services.AddTransient<FootballBookmarkTeamsPage>();
+            services.AddTransient<FootballBookmarkTeamsViewModel>();
             services.AddSingleton<FootballBookmarkSearchPage>();
             services.AddSingleton<FootballBookmarkSearchViewModel>();
         }

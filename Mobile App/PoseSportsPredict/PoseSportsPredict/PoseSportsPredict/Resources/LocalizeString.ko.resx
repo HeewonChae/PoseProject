@@ -231,8 +231,8 @@
   <data name="No_Bookmarked_Matches" xml:space="preserve">
     <value>북마크된 경기가 없습니다.</value>
   </data>
-  <data name="Search_League" xml:space="preserve">
-    <value>리그 검색...</value>
+  <data name="Search_League_Country" xml:space="preserve">
+    <value>국가, 리그 검색...</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>저장</value>
@@ -266,5 +266,8 @@
   </data>
   <data name="Applying" xml:space="preserve">
     <value>적용중</value>
+  </data>
+  <data name="No_Search_Results" xml:space="preserve">
+    <value>검색 결과가 없습니다.</value>
   </data>
 </root>
