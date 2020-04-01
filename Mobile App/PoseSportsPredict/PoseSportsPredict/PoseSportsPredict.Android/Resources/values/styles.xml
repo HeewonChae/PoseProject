@@ -2,7 +2,6 @@
 <resources>
 
   <style name="MainTheme" parent="MainTheme.Base">
-    <item name="android:windowBackground">@layout/splash_screen</item>
   </style>
   <!-- Base theme applied no matter what API -->
   <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -32,5 +31,13 @@
   <style name="AppToolbarTheme" parent="Theme.AppCompat.NoActionBar">
     <item name="android:colorBackground">#f5f5f5</item>
     <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@layout/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="android:windowActionBar">true</item>
   </style>
 </resources>

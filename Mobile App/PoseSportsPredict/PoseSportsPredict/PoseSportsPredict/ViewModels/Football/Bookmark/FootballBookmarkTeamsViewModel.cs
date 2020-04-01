@@ -97,7 +97,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>(), teamInfo);
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>(), teamInfo);
 
             SetIsBusy(false);
         }
@@ -175,7 +175,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             await Task.Delay(300);
 
             _teamList = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
-            _teamList.Sort(ShinyHost.Resolve<StoredDataComparer>());
+            _teamList.Sort(ShinyHost.Resolve<StoredData_BasicComparer>());
 
             BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
 
@@ -210,7 +210,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             }
 
             _teamList = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
-            _teamList.Sort(ShinyHost.Resolve<StoredDataComparer>());
+            _teamList.Sort(ShinyHost.Resolve<StoredData_BasicComparer>());
 
             BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
 

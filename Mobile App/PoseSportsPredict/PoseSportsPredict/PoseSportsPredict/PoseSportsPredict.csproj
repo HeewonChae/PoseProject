@@ -20,6 +20,7 @@
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naxam.TopTabbedPage.Forms" Version="0.0.3.5" />
     <PackageReference Include="Plugin.LocalNotification" Version="4.1.4" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.2.0.223" />
     <PackageReference Include="Sharpnado.Presentation.Forms" Version="1.4.0" />
     <PackageReference Include="Shiny.Core" Version="1.0.0.1182" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />

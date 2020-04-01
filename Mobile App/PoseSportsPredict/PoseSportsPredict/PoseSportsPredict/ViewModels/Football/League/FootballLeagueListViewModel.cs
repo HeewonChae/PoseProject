@@ -41,7 +41,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>(), leagueInfo);
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>(), leagueInfo);
 
             SetIsBusy(false);
         }
@@ -56,7 +56,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
             SetIsBusy(true);
 
             leagueInfo.Order = 0;
-            leagueInfo.StoredTime = DateTime.Now;
+            leagueInfo.StoredTime = DateTime.UtcNow;
             leagueInfo.IsBookmarked = !leagueInfo.IsBookmarked;
 
             // Add Bookmark

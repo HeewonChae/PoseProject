@@ -376,6 +376,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent search.
+        /// </summary>
+        public static string Recent_Search {
+            get {
+                return ResourceManager.GetString("Recent_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retry.
         /// </summary>
         public static string Retry {
@@ -403,11 +412,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search bookmark....
+        /// </summary>
+        public static string Search_Bookmark {
+            get {
+                return ResourceManager.GetString("Search_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Country, League....
         /// </summary>
         public static string Search_League_Country {
             get {
                 return ResourceManager.GetString("Search_League_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search results.
+        /// </summary>
+        public static string Search_Results {
+            get {
+                return ResourceManager.GetString("Search_Results", resourceCulture);
             }
         }
         

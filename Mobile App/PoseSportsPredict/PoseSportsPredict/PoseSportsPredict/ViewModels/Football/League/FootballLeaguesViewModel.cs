@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
@@ -26,7 +27,7 @@ namespace PoseSportsPredict.ViewModels.Football
         {
             LeaguesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>>();
 
-            string message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Bookmark_League);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.BookmarkMessageHandler(e));
 
             return true;
@@ -41,6 +42,12 @@ namespace PoseSportsPredict.ViewModels.Football
         }
 
         #endregion NavigableViewModel
+
+        #region Services
+
+        private IBookmarkService _bookmarkService;
+
+        #endregion Services
 
         #region Fields
 
@@ -72,19 +79,20 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public ICommand SearchBarTextChangedCommand { get => new RelayCommand<TextChangedEventArgs>((e) => SearchBarTextChanged(e)); }
 
-        private void SearchBarTextChanged(TextChangedEventArgs eventArgs)
+        private async void SearchBarTextChanged(TextChangedEventArgs eventArgs)
         {
             _searchText = eventArgs.NewTextValue;
 
-            if (eventArgs.NewTextValue == string.Empty)
-                LeaguesTaskLoaderNotifier.Load(SearchLeaguesAsync);
+            await Task.Delay(700);
+
+            if (_searchText == eventArgs.NewTextValue)
+                LeaguesTaskLoaderNotifier.Load(() => SearchLeaguesAsync(_searchText));
         }
 
         public ICommand SearchCommand { get => new RelayCommand(Search); }
 
         private void Search()
         {
-            LeaguesTaskLoaderNotifier.Load(SearchLeaguesAsync);
         }
 
         #endregion Commands
@@ -92,8 +100,11 @@ namespace PoseSportsPredict.ViewModels.Football
         #region Constructors
 
         public FootballLeaguesViewModel(
-            FootballLeaguesPage page) : base(page)
+            FootballLeaguesPage page,
+            IBookmarkService bookmarkService) : base(page)
         {
+            _bookmarkService = bookmarkService;
+
             OnInitializeView();
         }
 
@@ -107,6 +118,14 @@ namespace PoseSportsPredict.ViewModels.Football
 
             _leagueList = CoverageLeague.CoverageLeagues.Values.ToList();
 
+            var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
+            foreach (var league in _leagueList)
+            {
+                var bookmarkedLeague = bookmarkedLeagues.Find(elem => elem.PrimaryKey == league.PrimaryKey);
+
+                league.IsBookmarked = bookmarkedLeague?.IsBookmarked ?? false;
+            }
+
             UpdateLeagueGroups(_leagueList, false);
 
             _orgLeagueGroups = LeagueGroups;
@@ -116,20 +135,20 @@ namespace PoseSportsPredict.ViewModels.Football
             return _leagueList;
         }
 
-        private async Task<IReadOnlyCollection<FootballLeagueInfo>> SearchLeaguesAsync()
+        private async Task<IReadOnlyCollection<FootballLeagueInfo>> SearchLeaguesAsync(string searchText)
         {
             await Task.Delay(300);
 
             List<FootballLeagueInfo> searchedLeague = _leagueList;
 
-            if (_searchText == string.Empty)
+            if (searchText == string.Empty)
             {
                 LeagueGroups = new ObservableCollection<FootballLeagueGroup>(_orgLeagueGroups);
             }
             else
             {
-                searchedLeague = _leagueList.Where(elem => elem.LeagueName.ToLower().Contains(_searchText.ToLower())
-                            || elem.CountryName.ToLower().Contains(_searchText.ToLower())).ToList();
+                searchedLeague = _leagueList.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())
+                            || elem.CountryName.ToLower().Contains(searchText.ToLower())).ToList();
 
                 UpdateLeagueGroups(searchedLeague, true);
             }
@@ -175,7 +194,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
         private void BookmarkMessageHandler(FootballLeagueInfo item)
         {
-            var foundLeague = _leagueList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
+            var foundLeague = _leagueList?.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
             if (foundLeague != null)
             {
                 foundLeague.IsBookmarked = item.IsBookmarked;

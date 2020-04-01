@@ -14,22 +14,22 @@ namespace PoseSportsPredict.ViewModels
 
         public override bool OnInitializeView(params object[] datas)
         {
-            var sportsPageList = new List<Page>
-            {
-                ShinyHost.Resolve<FootballMainViewModel>().CoupledPage,
-            };
+            //var sportsPageList = new List<Page>
+            //{
+            //    ShinyHost.Resolve<FootballMainViewModel>().CoupledPage,
+            //};
 
-            var sportsCategories = new List<Models.AppMenuItem>();
-            foreach (var sportsPage in sportsPageList)
-            {
-                sportsCategories.Add(new Models.AppMenuItem
-                {
-                    Title = sportsPage.Title,
-                    IconSource = sportsPage.IconImageSource.ToString().Replace("File: ", ""),
-                });
-            }
+            //var sportsCategories = new List<Models.AppMenuItem>();
+            //foreach (var sportsPage in sportsPageList)
+            //{
+            //    sportsCategories.Add(new Models.AppMenuItem
+            //    {
+            //        Title = sportsPage.Title,
+            //        IconSource = sportsPage.IconImageSource.ToString().Replace("File: ", ""),
+            //    });
+            //}
 
-            SportsCategories = sportsCategories;
+            //SportsCategories = sportsCategories;
 
             return true;
         }

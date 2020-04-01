@@ -32,7 +32,7 @@ namespace PoseSportsPredict.ViewModels
             { }
 
             // Table Loader
-            await TableLoader.Init(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+            TableLoader.Init(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
             string serverPubKey = await _webApiService.RequestAsync<string>(new WebRequestContext
             {
@@ -62,9 +62,10 @@ namespace PoseSportsPredict.ViewModels
             _isLoaded = true;
             OnPropertyChanged("IsLoaded");
 
-            await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
             await Task.Delay(300);
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
+
+            await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
         }
 
         #endregion BaseViewModel

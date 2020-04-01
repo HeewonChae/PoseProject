@@ -26,8 +26,7 @@
                             HorizontalOptions="FillAndExpand"
                             Orientation="Horizontal"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_leagues}}"
-                            effects:TapCommandEffect.TapParameter="{Binding .}"
-                            effects:ViewEffect.TouchFeedbackColor="Accent">
+                            effects:TapCommandEffect.TapParameter="{Binding .}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
                                 HeightRequest="20"
@@ -38,9 +37,6 @@
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
                                 Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                <ffimageloading:CachedImage.Transformations>
-                                    <fftransformations:CircleTransformation />
-                                </ffimageloading:CachedImage.Transformations>
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
                                 LineBreakMode="TailTruncation"
@@ -53,7 +49,7 @@
                         <ContentView
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_leagues}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource PrimaryColor}">
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <customviews:RatingView
                                 Margin="9.3"
                                 WidthRequest="18"

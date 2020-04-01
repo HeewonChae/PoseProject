@@ -16,7 +16,10 @@ namespace SportsAdminTool.Model.Resource.Football
     {
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public FootballLeagueType LeagueType { get; set; }
+
         public string CountryName { get; set; }
         public string CountryLogo { get; set; }
 

@@ -35,7 +35,7 @@
                         Padding="27,7"
                         effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                         effects:TapCommandEffect.TapParameter="{Binding .}"
-                        effects:ViewEffect.TouchFeedbackColor="Accent">
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
                             HeightRequest="20"
@@ -83,7 +83,7 @@
                             HeightRequest="{Binding GroupHeaderHeight}"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
-                            effects:ViewEffect.TouchFeedbackColor="Accent">
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
                                 HeightRequest="20"

@@ -250,4 +250,13 @@
   <data name="No_Search_Results" xml:space="preserve">
     <value>No search results found.</value>
   </data>
+  <data name="Search_Bookmark" xml:space="preserve">
+    <value>Search bookmark...</value>
+  </data>
+  <data name="Recent_Search" xml:space="preserve">
+    <value>Recent search</value>
+  </data>
+  <data name="Search_Results" xml:space="preserve">
+    <value>Search results</value>
+  </data>
 </root>

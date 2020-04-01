@@ -270,4 +270,13 @@
   <data name="No_Search_Results" xml:space="preserve">
     <value>검색 결과가 없습니다.</value>
   </data>
+  <data name="Search_Bookmark" xml:space="preserve">
+    <value>북마크 검색...</value>
+  </data>
+  <data name="Recent_Search" xml:space="preserve">
+    <value>최근 검색</value>
+  </data>
+  <data name="Search_Results" xml:space="preserve">
+    <value>검색 결과</value>
+  </data>
 </root>

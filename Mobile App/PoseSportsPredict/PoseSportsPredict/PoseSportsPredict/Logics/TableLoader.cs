@@ -18,7 +18,7 @@ namespace PoseSportsPredict.Logics
         private static Assembly _assembly;
         private static bool IsLoaded = false;
 
-        public static async Task Init(string rootPath)
+        public static void Init(string rootPath)
         {
             if (IsLoaded)
                 return;
@@ -31,12 +31,12 @@ namespace PoseSportsPredict.Logics
 
             _assembly = IntrospectionExtensions.GetTypeInfo(typeof(LoadingPage)).Assembly;
 
-            await LoadTable(rootPath);
+            LoadTable(rootPath);
 
             IsLoaded = true;
         }
 
-        private static async Task LoadTable(string rootPath)
+        private static void LoadTable(string rootPath)
         {
 #if DEBUG
             foreach (var res in _assembly.GetManifestResourceNames())
@@ -45,16 +45,16 @@ namespace PoseSportsPredict.Logics
             }
 #endif
             // Football
-            await Load_Football_CoverageLeagues(rootPath);
+            Load_Football_CoverageLeagues(rootPath);
         }
 
-        private static async Task Load_Football_CoverageLeagues(string rootPath)
+        private static void Load_Football_CoverageLeagues(string rootPath)
         {
             var CoverageLeagues = LoadJson<CoverageLeague[]>("Resources.Football.CoverageLeagues.json");
 
             Debug.Assert(CoverageLeagues.Length != 0);
 
-            await CoverageLeague.Load(CoverageLeagues);
+            CoverageLeague.Load(CoverageLeagues);
         }
 
         #region JsonLoader

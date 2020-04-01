@@ -15,7 +15,7 @@
         <converters:DateToStringConverter x:Key="dateToStringConverter" />
         <converters:IsFootballMatchStartedConverter x:Key="isFootballMatchStartedConverter" />
         <converters:FootballMatchStatusToStringConverter x:Key="footballMatchStatusToStringConverter" />
-        <converters:ReverseBoolConverter x:Key="reverseBoolConverter" />
+        <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
         <converters:MatchAlarmColorConverter x:Key="matchAlarmColorConverter" />
 
         <Color x:Key="PrimaryColor">#0288d1</Color>

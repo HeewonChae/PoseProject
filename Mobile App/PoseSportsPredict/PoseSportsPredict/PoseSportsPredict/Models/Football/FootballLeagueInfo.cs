@@ -26,7 +26,7 @@ namespace PoseSportsPredict.Models.Football
         public string _primaryKey;
 
         [PrimaryKey]
-        public string PrimaryKey { get => $"{CountryName}:{LeagueName}:{LeagueType}"; set => _primaryKey = value; }
+        public string PrimaryKey { get => $"{CountryName}:{LeagueName}"; set => _primaryKey = value; }
 
         public int Order { get; set; }
         public DateTime StoredTime { get; set; }

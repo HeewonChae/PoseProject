@@ -19,6 +19,7 @@ namespace PoseSportsPredict.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Naxam.Controls.Platform.iOS.TopTabbedRenderer.Init();
+            Rg.Plugins.Popup.Popup.Init();
 
             // Initialize Shiny
             this.InitShiny();

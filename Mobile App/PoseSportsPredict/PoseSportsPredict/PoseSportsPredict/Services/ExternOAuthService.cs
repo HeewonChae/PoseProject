@@ -84,7 +84,7 @@ namespace PoseSportsPredict.Services
                                 _isAuthenticated = true;
 
                                 await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
-                                await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>());
+                                await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
                             }
                         }
                     }

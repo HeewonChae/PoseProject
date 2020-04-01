@@ -68,7 +68,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             SetIsBusy(true);
 
-            await PageSwitcher.PopModalAsync();
+            await PageSwitcher.PopNavPageAsync();
 
             SetIsBusy(false);
         }
@@ -83,7 +83,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             SetIsBusy(true);
 
             LeagueInfo.Order = 0;
-            LeagueInfo.StoredTime = DateTime.Now;
+            LeagueInfo.StoredTime = DateTime.UtcNow;
             LeagueInfo.IsBookmarked = !LeagueInfo.IsBookmarked;
 
             // Add Bookmark

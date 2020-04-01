@@ -38,12 +38,13 @@
                 <!--Toolbar-->
                 <StackLayout
                     Grid.Row="0"
-                    Margin="20,0"
+                    Margin="15,0"
                     HeightRequest="35"
                     Orientation="Horizontal">
                     <ContentView
                         HeightRequest="27"
                         WidthRequest="27"
+                        VerticalOptions="End"
                         BackgroundColor="Transparent"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
@@ -57,6 +58,7 @@
                     <StackLayout
                         Orientation="Horizontal"
                         HorizontalOptions="EndAndExpand"
+                        VerticalOptions="End"
                         Spacing="15">
                         <customviews:RatingView
                             VerticalOptions="Center"

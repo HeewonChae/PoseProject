@@ -11,7 +11,6 @@ namespace SportsAdminTool.Model.Resource.Football
     public class UndefinedTeam : IRecord, TableParser.IPostLoading
     {
         public readonly int Index = 0; // 팀 인덱스랑 상관없는 그냥 테이블 인덱스
-        public readonly short LeagueId = 0;
         public readonly string TeamName = string.Empty;
         public readonly string CountryName = string.Empty;
         public readonly short ConvertTeamId = 0;
@@ -21,20 +20,20 @@ namespace SportsAdminTool.Model.Resource.Football
 
         void TableParser.IPostLoading.Process()
         {
-            Dic_undefinedTeam.Add(MakeTeamConvertKey(this.CountryName, this.LeagueId, this.TeamName), this);
+            Dic_undefinedTeam.Add(MakeTeamConvertKey(this.CountryName, this.TeamName), this);
         }
 
-        private static string MakeTeamConvertKey(string CountryName, short LeagueId, string TeamName)
+        private static string MakeTeamConvertKey(string CountryName, string TeamName)
         {
-            return $"{CountryName}:{LeagueId}:{TeamName}";
+            return $"{CountryName}:{TeamName}";
         }
 
-        public static bool TryConvertTeamId(string CountryName, short LeagueId, string TeamName, out short convertedTeamId, out string convertedTeamName)
+        public static bool TryConvertTeamId(string CountryName, string TeamName, out short convertedTeamId, out string convertedTeamName)
         {
             convertedTeamId = 0;
             convertedTeamName = string.Empty;
 
-            var key = MakeTeamConvertKey(CountryName, LeagueId, TeamName);
+            var key = MakeTeamConvertKey(CountryName, TeamName);
             if (!Dic_undefinedTeam.ContainsKey(key))
                 return false;
 

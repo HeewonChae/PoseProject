@@ -276,6 +276,7 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.Standings.upt_time)}`)");
             sb.Append("VALUES");
 
+            int rowCnt = 0;
             for (int i = 0; i < standingsies.Length; i++)
             {
                 var Standings = standingsies[i];
@@ -283,7 +284,7 @@ namespace SportsAdminTool.Logic.Database
                 // TeamId 컨버트 가능한지..
                 if (Standings.TeamId == 0)
                 {
-                    if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, leagueId, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
+                    if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
                     {
                         Standings.TeamId = convertedteamId;
                         Standings.TeamName = convertedTeamName;
@@ -307,12 +308,16 @@ namespace SportsAdminTool.Logic.Database
                     $"{Standings.AllPlayedInfo.GoalsFor}, " +
                     $"{Standings.AllPlayedInfo.GoalsAgainst}, " +
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\"),");
+
+                rowCnt++;
             }
 
-            // 마지막 콤마 삭제
+            if (rowCnt == 0)
+                return false;
+
             sb.Remove(sb.Length - 1, 1);
 
-            sb.Append($"ON DUPLICATE KEY UPDATE `{nameof(FootballDB.Tables.Standings.rank)}` = VALUES(`{nameof(FootballDB.Tables.Standings.rank)}`), " +
+            sb.Append($" ON DUPLICATE KEY UPDATE `{nameof(FootballDB.Tables.Standings.rank)}` = VALUES(`{nameof(FootballDB.Tables.Standings.rank)}`), " +
                 $"`{nameof(FootballDB.Tables.Standings.group)}` = VALUES(`{nameof(FootballDB.Tables.Standings.group)}`), " +
                 $"{nameof(FootballDB.Tables.Standings.forme)} = VALUES({nameof(FootballDB.Tables.Standings.forme)}), " +
                 $"{nameof(FootballDB.Tables.Standings.points)} = VALUES({nameof(FootballDB.Tables.Standings.points)}), " +
@@ -614,7 +619,8 @@ namespace SportsAdminTool.Logic.Database
 
         public static bool UpdateOdds(params AppModel.Football.Odds[] oddsList)
         {
-            if (oddsList.Length == 0)
+            if (oddsList.Length == 0
+                || oddsList.First().Bookmakers.Length == 0)
                 return false;
 
             Dev.DebugString("Call DB - FootballFacade.UpdateOdds");
@@ -678,7 +684,7 @@ namespace SportsAdminTool.Logic.Database
                 }
             }
 
-            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
         }

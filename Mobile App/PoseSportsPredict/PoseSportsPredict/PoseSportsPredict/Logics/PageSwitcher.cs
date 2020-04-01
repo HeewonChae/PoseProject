@@ -3,6 +3,8 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
+using Rg.Plugins.Popup.Extensions;
+using Rg.Plugins.Popup.Pages;
 
 namespace PoseSportsPredict.Logics
 {
@@ -36,22 +38,14 @@ namespace PoseSportsPredict.Logics
             if (!await viewModel.OnInitializeViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
-            if (Application.Current.MainPage is MasterDetailPage masterPage)
-            {
-                if (masterPage.Detail.Navigation == null)
-                    throw new Exception("Root page is not navigation page");
-
-                await masterPage.Detail.Navigation.PushAsync(viewModel.CoupledPage);
-            }
-            else
-            {
-                if (Application.Current.MainPage.Navigation == null)
-                    throw new Exception("Root page is not navigation page");
-
-                await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
-            }
+            await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
 
             return true;
+        }
+
+        public static async Task PopNavPageAsync()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
 
         public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
@@ -59,40 +53,32 @@ namespace PoseSportsPredict.Logics
             if (!await viewModel.OnInitializeViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
-            if (Application.Current.MainPage is MasterDetailPage masterPage)
-            {
-                if (masterPage.Detail.Navigation == null)
-                    throw new Exception("Root page is not navigation page");
-
-                await masterPage.Detail.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
-            }
-            else
-            {
-                if (Application.Current.MainPage.Navigation == null)
-                    throw new Exception("Root page is not navigation page");
-
-                await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
-            }
+            await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
 
             return true;
         }
 
-        public static async Task PopModalAsync()
+        public static async Task PopModalPageAsync()
         {
-            if (Application.Current.MainPage is MasterDetailPage masterPage)
-            {
-                if (masterPage.Detail.Navigation == null)
-                    throw new Exception("Root page is not navigation page");
+            await Application.Current.MainPage.Navigation.PopModalAsync();
+        }
 
-                await masterPage.Detail.Navigation.PopModalAsync();
-            }
+        public static async Task<bool> PushPopupAsync(NavigableViewModel viewModel, params object[] prepareData)
+        {
+            if (!await viewModel.OnInitializeViewAsync(prepareData))
+                throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
+
+            if (viewModel.CoupledPage is PopupPage popupPage)
+                await Application.Current.MainPage.Navigation.PushPopupAsync(popupPage);
             else
-            {
-                if (Application.Current.MainPage.Navigation == null)
-                    throw new Exception("Root page is not navigation page");
+                return false;
 
-                await Application.Current.MainPage.Navigation.PopModalAsync();
-            }
+            return true;
+        }
+
+        public static async Task PopPopupAsync()
+        {
+            await Application.Current.MainPage.Navigation.PopPopupAsync();
         }
     }
 }

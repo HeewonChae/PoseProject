@@ -1,4 +1,6 @@
-﻿using PosePacket.Service.Football.Models.Enums;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
@@ -17,19 +19,20 @@ namespace PoseSportsPredict.Models.Resources.Football
     {
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public FootballLeagueType LeagueType { get; set; }
+
         public string CountryName { get; set; }
         public string CountryLogo { get; set; }
 
         public static Dictionary<string, FootballLeagueInfo> CoverageLeagues { get; } = new Dictionary<string, FootballLeagueInfo>();
 
-        public static async Task Load(params CoverageLeague[] coverageLeagues)
+        public static void Load(params CoverageLeague[] coverageLeagues)
         {
-            var bookmarkedLeagues = await ShinyHost.Resolve<IBookmarkService>().GetAllBookmark<FootballLeagueInfo>();
-
             foreach (var covaerageLeague in coverageLeagues)
             {
-                string key = MakeCoverageLeagueKey(covaerageLeague.CountryName, covaerageLeague.LeagueName, covaerageLeague.LeagueType.ToString());
+                string key = MakeCoverageLeagueKey(covaerageLeague.CountryName, covaerageLeague.LeagueName);
 
                 Debug.Assert(!CoverageLeagues.ContainsKey(key), $"Alread exist key in Dic_leagueCoverage key: {key}");
 
@@ -42,24 +45,18 @@ namespace PoseSportsPredict.Models.Resources.Football
                 var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfoConverter>().Convert(
                     covaerageLeague, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture) as FootballLeagueInfo;
 
-                var bookmarkedLeauge = bookmarkedLeagues.FirstOrDefault(elem => elem.PrimaryKey == leagueInfo.PrimaryKey);
-                if (bookmarkedLeauge != null)
-                {
-                    leagueInfo = bookmarkedLeauge;
-                }
-
                 CoverageLeagues.Add(key, leagueInfo);
             }
         }
 
-        public static string MakeCoverageLeagueKey(string CountryName, string leaugeName, string leagueType)
+        public static string MakeCoverageLeagueKey(string CountryName, string leaugeName)
         {
-            return $"{CountryName}:{leaugeName}:{leagueType}";
+            return $"{CountryName}:{leaugeName}";
         }
 
-        public static FootballLeagueInfo FindLeauge(string CountryName, string leaugeName, string leagueType)
+        public static FootballLeagueInfo FindLeauge(string CountryName, string leaugeName)
         {
-            var key = MakeCoverageLeagueKey(CountryName, leaugeName, leagueType);
+            var key = MakeCoverageLeagueKey(CountryName, leaugeName);
 
             if (CoverageLeagues.ContainsKey(key))
             {
@@ -69,9 +66,9 @@ namespace PoseSportsPredict.Models.Resources.Football
             return null;
         }
 
-        public static bool HasLeague(string CountryName, string leaugeName, string leagueType)
+        public static bool HasLeague(string CountryName, string leaugeName)
         {
-            var key = MakeCoverageLeagueKey(CountryName, leaugeName, leagueType);
+            var key = MakeCoverageLeagueKey(CountryName, leaugeName);
 
             return CoverageLeagues.ContainsKey(key);
         }

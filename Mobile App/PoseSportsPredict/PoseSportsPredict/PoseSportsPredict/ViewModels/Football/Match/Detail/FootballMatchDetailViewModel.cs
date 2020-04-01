@@ -93,7 +93,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            await PageSwitcher.PopModalAsync();
+            //await PageSwitcher.PopModalPageAsync();
+            await PageSwitcher.PopNavPageAsync();
 
             SetIsBusy(false);
         }
@@ -170,7 +171,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 return;
 
             SetIsBusy(true);
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>()
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>()
                 , ShinyHost.Resolve<MatchInfoToLeagueInfoConverter>().Convert(matchInfo, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);
@@ -184,7 +185,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 return;
 
             SetIsBusy(true);
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
                 , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Home, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);
@@ -198,7 +199,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 return;
 
             SetIsBusy(true);
-            await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
                 , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Away, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);

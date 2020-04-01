@@ -2,7 +2,6 @@
   "Teams": [
     {
       "Index": 1,
-      "LeagueId": 1326,
       "TeamName": "Independiente Santa Fe",
       "CountryName": "Colombia",
       "ConvertTeamId": 1139,
@@ -10,7 +9,6 @@
     },
     {
       "Index": 2,
-      "LeagueId": 536,
       "TeamName": "Grobina",
       "CountryName": "Latvia",
       "ConvertTeamId": 4138,
@@ -18,7 +16,6 @@
     },
     {
       "Index": 3,
-      "LeagueId": 975,
       "TeamName": "Muaither",
       "CountryName": "Qatar",
       "ConvertTeamId": 2902,
@@ -26,7 +23,6 @@
     },
     {
       "Index": 4,
-      "LeagueId": 351,
       "TeamName": "Sydney II",
       "CountryName": "Romania",
       "ConvertTeamId": 2583,
@@ -34,7 +30,6 @@
     },
     {
       "Index": 5,
-      "LeagueId": 113,
       "TeamName": "Sydney II",
       "CountryName": "Turkey",
       "ConvertTeamId": 997,
@@ -42,7 +37,6 @@
     },
     {
       "Index": 7,
-      "LeagueId": 262,
       "TeamName": "Academy Platamona",
       "CountryName": "Greece",
       "ConvertTeamId": 2100,
@@ -50,23 +44,13 @@
     },
     {
       "Index": 8,
-      "LeagueId": 300,
       "TeamName": "Sydney II",
       "CountryName": "Mexico",
       "ConvertTeamId": 2310,
       "ConvertTeamName": "Tapachula"
     },
     {
-      "Index": 9,
-      "LeagueId": 112,
-      "TeamName": "Sydney II",
-      "CountryName": "Turkey",
-      "ConvertTeamId": 997,
-      "ConvertTeamName": "Genclerbirligi"
-    },
-    {
       "Index": 10,
-      "LeagueId": 355,
       "TeamName": "UTA Batrana Doamna",
       "CountryName": "Romania",
       "ConvertTeamId": 2589,
@@ -74,7 +58,6 @@
     },
     {
       "Index": 11,
-      "LeagueId": 785,
       "TeamName": "Municipal Jalapa",
       "CountryName": "Nicaragua",
       "ConvertTeamId": 10160,
@@ -82,7 +65,6 @@
     },
     {
       "Index": 12,
-      "LeagueId": 777,
       "TeamName": "Municipal Garabito",
       "CountryName": "Costa-Rica",
       "ConvertTeamId": 2049,
@@ -90,7 +72,6 @@
     },
     {
       "Index": 13,
-      "LeagueId": 777,
       "TeamName": "Cartagena",
       "CountryName": "Costa-Rica",
       "ConvertTeamId": 2046,
@@ -98,7 +79,6 @@
     },
     {
       "Index": 14,
-      "LeagueId": 1383,
       "TeamName": "Energetyk-BGU",
       "CountryName": "Belarus",
       "ConvertTeamId": 2433,
@@ -106,31 +86,6 @@
     },
     {
       "Index": 15,
-      "LeagueId": 1287,
-      "TeamName": "Real",
-      "CountryName": "Portugal",
-      "ConvertTeamId": 10149,
-      "ConvertTeamName": "Real"
-    },
-    {
-      "Index": 16,
-      "LeagueId": 1288,
-      "TeamName": "Real",
-      "CountryName": "Portugal",
-      "ConvertTeamId": 10149,
-      "ConvertTeamName": "Real"
-    },
-    {
-      "Index": 17,
-      "LeagueId": 1289,
-      "TeamName": "Real",
-      "CountryName": "Portugal",
-      "ConvertTeamId": 10149,
-      "ConvertTeamName": "Real"
-    },
-    {
-      "Index": 18,
-      "LeagueId": 1290,
       "TeamName": "Real",
       "CountryName": "Portugal",
       "ConvertTeamId": 10149,

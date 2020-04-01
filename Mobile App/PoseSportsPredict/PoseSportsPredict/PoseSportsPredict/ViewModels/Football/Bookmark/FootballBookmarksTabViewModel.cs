@@ -1,5 +1,8 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.Views.CustomViews;
 using PoseSportsPredict.Views.Football.Bookmark;
 using Shiny;
 using System;
@@ -52,8 +55,16 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public ICommand SearchButtonClickCommand { get => new RelayCommand(SearchButtonClick); }
 
-        private void SearchButtonClick()
+        private async void SearchButtonClick()
         {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballBookmarkSearchViewModel>());
+
+            SetIsBusy(false);
         }
 
         #endregion Commands

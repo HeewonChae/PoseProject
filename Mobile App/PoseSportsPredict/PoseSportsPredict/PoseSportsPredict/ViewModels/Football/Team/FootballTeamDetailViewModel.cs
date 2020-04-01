@@ -68,7 +68,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
             SetIsBusy(true);
 
-            await PageSwitcher.PopModalAsync();
+            await PageSwitcher.PopNavPageAsync();
 
             SetIsBusy(false);
         }
@@ -83,7 +83,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             SetIsBusy(true);
 
             TeamInfo.Order = 0;
-            TeamInfo.StoredTime = DateTime.Now;
+            TeamInfo.StoredTime = DateTime.UtcNow;
             TeamInfo.IsBookmarked = !TeamInfo.IsBookmarked;
 
             // Add Bookmark

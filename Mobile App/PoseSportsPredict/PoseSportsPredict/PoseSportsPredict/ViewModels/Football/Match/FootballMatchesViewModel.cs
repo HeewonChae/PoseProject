@@ -40,7 +40,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         {
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
-            string message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Bookmark_Match);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             _alarmEditMode = false;
@@ -260,6 +260,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             await Task.Delay(300);
 
             List<FootballMatchInfo> matchList = null;
+            bool? isAllExpand = null;
 
             switch (_curMatchFilterType)
             {
@@ -306,6 +307,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         }
 
                         matchList = matchList.Distinct().OrderBy(elem => elem.MatchTime).ToList();
+                        isAllExpand = true;
                     }
                     break;
 
@@ -316,10 +318,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.AET
                         && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.PEN)
                         .ToList();
+
+                    isAllExpand = true;
                     break;
 
                 case MatchFilterType.SortByTime:
                     matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
+                    isAllExpand = true;
                     break;
 
                 case MatchFilterType.SortByLeague:
@@ -329,14 +334,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             Debug.Assert(matchList != null);
 
-            UpdateMatcheGroups(matchList);
+            UpdateMatcheGroups(matchList, isAllExpand);
 
             this.SetIsBusy(false);
 
             return matchList;
         }
 
-        private void UpdateMatcheGroups(List<FootballMatchInfo> matchList)
+        private void UpdateMatcheGroups(List<FootballMatchInfo> matchList, bool? isAllExpand = null)
         {
             ObservableCollection<FootballMatchGroup> matchGroupCollection;
             matchGroupCollection = new ObservableCollection<FootballMatchGroup>();
@@ -344,14 +349,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var grouppingMatches = MatchGroupingByFilterType(matchList, out string logo);
             foreach (var grouppingMatch in grouppingMatches)
             {
-                // 기존 데이터 있는지.. 있으면 Expanded값은 유지
-                var foundExistData = MatchGroups?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
+                // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
+                bool isExpand = isAllExpand == null ? MatchGroups?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? true : isAllExpand.Value;
+
                 matchGroupCollection.Add(new FootballMatchGroup(
                     grouppingMatch.Key,
                     string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.CountryLogo : logo,
                     _alarmEditMode,
                     grouppingMatch.Value,
-                    foundExistData?.Expanded ?? true));
+                    isExpand));
             }
 
             MatchGroups = matchGroupCollection;

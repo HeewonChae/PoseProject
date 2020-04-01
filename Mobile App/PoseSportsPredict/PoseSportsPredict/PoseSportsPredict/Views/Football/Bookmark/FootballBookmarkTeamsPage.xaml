@@ -9,6 +9,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              Title="{x:Static localize:LocalizeString.Teams}"
@@ -16,7 +17,7 @@
 
     <ContentPage.ToolbarItems>
         <customviews:HideableToolbarItem IconImageSource="ic_edit.png"  Priority="1"
-                                         IsVisible="{Binding IsEditMode, Converter={StaticResource reverseBoolConverter}}"
+                                         IsVisible="{Binding IsEditMode, Converter={StaticResource inverseBoolConverter}}"
                                          Command="{Binding EditButtonClickCommand}" />
 
         <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Cancel}"  Priority="3"
@@ -68,8 +69,8 @@
                                         Padding="15,13">
                                         <ffimageloading:CachedImage
                                             Aspect="AspectFit"
-                                            HeightRequest="25"
-                                            WidthRequest="25"
+                                            HeightRequest="28"
+                                            WidthRequest="28"
                                             DownsampleHeight="150"
                                             DownsampleWidth="150"
                                             DownsampleToViewSize="True"

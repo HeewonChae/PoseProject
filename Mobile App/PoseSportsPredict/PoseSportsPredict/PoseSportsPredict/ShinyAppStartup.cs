@@ -42,7 +42,8 @@ namespace PoseSportsPredict
 
         private void RegisterComparer(IServiceCollection services)
         {
-            services.AddSingleton<StoredDataComparer>();
+            services.AddSingleton<StoredData_BasicComparer>();
+            services.AddSingleton<StoredData_InverseDateComparer>();
         }
 
         private void RegisterServices(IServiceCollection services)

@@ -19,7 +19,7 @@
 
     <ContentPage.ToolbarItems>
         <customviews:HideableToolbarItem IconImageSource="ic_edit.png"  Priority="1"
-                                         IsVisible="{Binding IsEditMode, Converter={StaticResource reverseBoolConverter}}"
+                                         IsVisible="{Binding IsEditMode, Converter={StaticResource inverseBoolConverter}}"
                                          Command="{Binding EditButtonClickCommand}" />
 
         <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Cancel}"  Priority="3"
@@ -52,7 +52,7 @@
                                 <materialui:MaterialCard
                                     CornerRadius="5"
                                     Elevation="3"
-                                    Margin="7, 5"
+                                    Margin="7, 3"
                                     Padding="0">
                                     <StackLayout
                                         VerticalOptions="CenterAndExpand"
@@ -79,17 +79,14 @@
                                                 Spacing="10">
                                                 <ffimageloading:CachedImage
                                                     Aspect="AspectFit"
-                                                    HeightRequest="15"
-                                                    WidthRequest="15"
+                                                    HeightRequest="17"
+                                                    WidthRequest="17"
                                                     DownsampleHeight="150"
                                                     DownsampleWidth="150"
                                                     DownsampleToViewSize="True"
                                                     LoadingPlaceholder="img_world.png"
                                                     ErrorPlaceholder="img_world.png"
                                                     Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                                    <ffimageloading:CachedImage.Transformations>
-                                                        <fftransformations:CircleTransformation />
-                                                    </ffimageloading:CachedImage.Transformations>
                                                 </ffimageloading:CachedImage>
                                                 <materialui:MaterialLabel
                                                     LineBreakMode="TailTruncation"
@@ -118,9 +115,7 @@
                                             </ContentView>
                                         </Grid>
                                         <Grid
-                                            Padding="25,5"
-                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
-                                            effects:TapCommandEffect.TapParameter="{Binding .}">
+                                            Padding="25,5">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />

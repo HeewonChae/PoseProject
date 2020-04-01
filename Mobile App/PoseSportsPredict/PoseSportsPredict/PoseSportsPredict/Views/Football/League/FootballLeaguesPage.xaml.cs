@@ -14,8 +14,6 @@ namespace PoseSportsPredict.Views.Football.League
         public FootballLeaguesPage()
         {
             InitializeComponent();
-
-            Xamarin.Forms.Application.Current.On<Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
         private void lv_matches_Scrolled(object sender, ScrolledEventArgs e)

@@ -17,7 +17,7 @@
 
     <ContentPage.ToolbarItems>
         <customviews:HideableToolbarItem IconImageSource="ic_edit.png"  Priority="1"
-                                         IsVisible="{Binding IsEditMode, Converter={StaticResource reverseBoolConverter}}"
+                                         IsVisible="{Binding IsEditMode, Converter={StaticResource inverseBoolConverter}}"
                                          Command="{Binding EditButtonClickCommand}" />
 
         <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Cancel}"  Priority="3"
@@ -69,17 +69,14 @@
                                         Padding="15,13">
                                         <ffimageloading:CachedImage
                                             Aspect="AspectFit"
-                                            HeightRequest="25"
-                                            WidthRequest="25"
+                                            HeightRequest="28"
+                                            WidthRequest="28"
                                             DownsampleHeight="150"
                                             DownsampleWidth="150"
                                             DownsampleToViewSize="True"
                                             LoadingPlaceholder="img_world.png"
                                             ErrorPlaceholder="img_world.png"
                                             Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                            <ffimageloading:CachedImage.Transformations>
-                                                <fftransformations:CircleTransformation />
-                                            </ffimageloading:CachedImage.Transformations>
                                         </ffimageloading:CachedImage>
                                         <materialui:MaterialLabel
                                             LineBreakMode="TailTruncation"
