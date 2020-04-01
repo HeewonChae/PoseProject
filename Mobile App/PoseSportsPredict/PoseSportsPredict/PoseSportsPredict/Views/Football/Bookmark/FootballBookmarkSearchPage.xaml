@@ -439,17 +439,14 @@
                                             effects:TapCommandEffect.TapParameter="{Binding .}">
                                             <ffimageloading:CachedImage
                                                 Aspect="AspectFit"
-                                                HeightRequest="22"
-                                                WidthRequest="22"
+                                                HeightRequest="20"
+                                                WidthRequest="20"
                                                 DownsampleHeight="150"
                                                 DownsampleWidth="150"
                                                 DownsampleToViewSize="True"
                                                 LoadingPlaceholder="img_world.png"
                                                 ErrorPlaceholder="img_world.png"
                                                 Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">
-                                                <ffimageloading:CachedImage.Transformations>
-                                                    <fftransformations:CircleTransformation />
-                                                </ffimageloading:CachedImage.Transformations>
                                             </ffimageloading:CachedImage>
                                             <materialui:MaterialLabel
                                                 HorizontalOptions="StartAndExpand"
