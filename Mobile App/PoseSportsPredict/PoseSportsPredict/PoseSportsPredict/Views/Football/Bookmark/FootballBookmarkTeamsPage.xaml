@@ -37,7 +37,7 @@
                 x:Name="lv_bookmarkedTeams"
                 EnableDragAndDrop="True"
                 ColumnCount="1"
-                ItemHeight="58"
+                ItemHeight="65"
                 ItemSpacing="0"
                 ListLayout="Grid"
                 ItemsSource="{Binding BookmarkedTeams}"
@@ -54,7 +54,7 @@
                                     CornerRadius="5"
                                     Elevation="3"
                                     Margin="7,3"
-                                    Padding="0">
+                                    Padding="15,5">
                                     <materialui:MaterialCard.Triggers>
                                         <DataTrigger Binding="{Binding Source={x:Reference _draggableViewCell}, Path=IsDragAndDropping}"
                                              TargetType="materialui:MaterialCard"
@@ -65,12 +65,11 @@
                                     <StackLayout
                                         VerticalOptions="CenterAndExpand"
                                         Orientation="Horizontal"
-                                        Spacing="10"
-                                        Padding="15,13">
+                                        Spacing="10">
                                         <ffimageloading:CachedImage
                                             Aspect="AspectFit"
-                                            HeightRequest="28"
-                                            WidthRequest="28"
+                                            HeightRequest="30"
+                                            WidthRequest="30"
                                             DownsampleHeight="150"
                                             DownsampleWidth="150"
                                             DownsampleToViewSize="True"
@@ -78,13 +77,21 @@
                                             ErrorPlaceholder="img_world.png"
                                             Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
                                         </ffimageloading:CachedImage>
-                                        <materialui:MaterialLabel
-                                            LineBreakMode="TailTruncation"
-                                            Text="{Binding TeamName}"
-                                            TypeScale="Body2"
-                                            TextColor="Black"
-                                            VerticalOptions="CenterAndExpand">
-                                        </materialui:MaterialLabel>
+                                        <StackLayout
+                                            Spacing="0">
+                                            <materialui:MaterialLabel
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding TeamName}"
+                                                TypeScale="Body2"
+                                                TextColor="Black">
+                                            </materialui:MaterialLabel>
+                                            <materialui:MaterialLabel
+                                                LineBreakMode="TailTruncation"
+                                                TextColor="{StaticResource CustomGrey}"
+                                                TypeScale="Caption"
+                                                Text="{Binding CountryName}">
+                                            </materialui:MaterialLabel>
+                                        </StackLayout>
                                         <ContentView
                                             Padding="3"
                                             HorizontalOptions="EndAndExpand"
@@ -94,6 +101,7 @@
                                             effects:TapCommandEffect.TapParameter="{Binding .}">
                                             <Image
                                                 HeightRequest="20"
+                                                WidthRequest="20"
                                                 Aspect="AspectFit"
                                                 Source="ic_delete.png"
                                                 effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
@@ -104,6 +112,7 @@
                                             IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedTeams}}">
                                             <Image
                                                 HeightRequest="20"
+                                                WidthRequest="20"
                                                 Aspect="AspectFit"
                                                 Source="ic_sort.png"
                                                 effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">

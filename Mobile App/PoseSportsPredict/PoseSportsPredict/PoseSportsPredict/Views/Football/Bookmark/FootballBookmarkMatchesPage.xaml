@@ -90,10 +90,16 @@
                                                 </ffimageloading:CachedImage>
                                                 <materialui:MaterialLabel
                                                     LineBreakMode="TailTruncation"
-                                                    Text="{Binding LeagueName}"
                                                     TextColor="{StaticResource CustomGrey}"
                                                     TypeScale="Caption"
                                                     VerticalOptions="CenterAndExpand">
+                                                    <materialui:MaterialLabel.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding CountryName}"/>
+                                                            <Span Text=" - "/>
+                                                            <Span Text="{Binding LeagueName}"/>
+                                                        </FormattedString>
+                                                    </materialui:MaterialLabel.FormattedText>
                                                 </materialui:MaterialLabel>
                                             </StackLayout>
                                             <ContentView
@@ -108,6 +114,7 @@
                                                 effects:TapCommandEffect.TapParameter="{Binding .}">
                                                 <Image
                                                     HeightRequest="20"
+                                                    WidthRequest="20"
                                                     Aspect="AspectFit"
                                                     Source="ic_delete.png"
                                                     effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">

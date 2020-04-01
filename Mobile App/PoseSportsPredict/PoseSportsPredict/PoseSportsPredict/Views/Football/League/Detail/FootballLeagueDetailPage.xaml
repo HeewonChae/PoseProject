@@ -43,12 +43,12 @@
                     Orientation="Horizontal">
                     <ContentView
                         VerticalOptions="End"
-                        HeightRequest="27"
-                        WidthRequest="27"
                         BackgroundColor="Transparent"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         <Image
+                            HeightRequest="27"
+                            WidthRequest="27"
                             Source="ic_arrow_back"
                             Aspect="AspectFit"
                             effects:ImageEffect.TintColor="White">

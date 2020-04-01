@@ -65,6 +65,7 @@
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
                                 MinimumWidthRequest="19"
+                                MinimumHeightRequest="19"
                                 HeightRequest="19"
                                 WidthRequest="19"
                                 CornerRadius="19"

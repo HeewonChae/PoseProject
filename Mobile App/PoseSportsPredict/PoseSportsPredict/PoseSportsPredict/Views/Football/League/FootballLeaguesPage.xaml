@@ -102,7 +102,7 @@
                                 VerticalOptions="CenterAndExpand"
                                 Text="{Binding Title}"
                                 TypeScale="Body2"
-                                TextColor="Black">
+                                TextColor="{StaticResource PrimaryColor}">
                             </materialui:MaterialLabel>
                             <Image
                                 Source="{Binding StateIcon}"

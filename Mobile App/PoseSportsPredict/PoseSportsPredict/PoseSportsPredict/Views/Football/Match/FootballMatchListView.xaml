@@ -33,14 +33,13 @@
                             IsVisible="{Binding Path=BindingContext.AlarmEditMode, Source={x:Reference lv_matches}}">
                             <ContentView
                                 VerticalOptions="Center"
-                                MinimumWidthRequest="17"
-                                HeightRequest="17"
-                                WidthRequest="17"
                                 BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchAlarmButtonCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
+                                    HeightRequest="17"
+                                    WidthRequest="17"
                                     Source="ic_alarm_add2"
                                     Aspect="AspectFit"
                                     effects:ImageEffect.TintColor="{Binding IsAlarmed, Converter={StaticResource matchAlarmColorConverter}}">
