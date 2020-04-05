@@ -2,6 +2,7 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
@@ -27,7 +28,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedTeamsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballTeamInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(Models.SportsType.Football, Models.BookMarkType.Bookmark_Team);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_Team);
             MessagingCenter.Subscribe<BookmarkService, FootballTeamInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
@@ -160,7 +161,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             if (OnInitializeView())
             {
-                coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
+                this.CoupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
 
@@ -194,7 +195,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             // Delete Leauge
             foreach (var deleteTeamInfo in _DeleteTeamList)
             {
-                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(deleteTeamInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Team);
+                deleteTeamInfo.IsBookmarked = false;
+
+                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(deleteTeamInfo, SportsType.Football, BookMarkType.Bookmark_Team);
             }
 
             _DeleteTeamList.Clear();
@@ -213,6 +216,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             _teamList.Sort(ShinyHost.Resolve<StoredData_BasicComparer>());
 
             BookmarkedTeams = new ObservableCollection<FootballTeamInfo>(_teamList);
+
+            await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedTeam();
 
             IsEditMode = false;
 

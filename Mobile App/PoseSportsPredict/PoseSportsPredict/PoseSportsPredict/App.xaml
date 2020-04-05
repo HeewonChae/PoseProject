@@ -7,7 +7,10 @@
              xmlns:converters="clr-namespace:PoseSportsPredict.Logics.View.Converters"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             x:Class="PoseSportsPredict.App">
+             xmlns:mtrltypo="clr-namespace:XF.Material.Forms.Resources.Typography;assembly=XF.Material"
+             xmlns:mtrl="clr-namespace:XF.Material.Forms.Resources;assembly=XF.Material"
+             xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
+            x:Class="PoseSportsPredict.App">
     <Application.Resources>
         <ffimageloadingsvg:SvgImageSourceConverter x:Key="svgImageSourceConverter" />
         <converters:ExceptionToErrorMessageConverter x:Key="exceptionToErrorMessageConverter" />
@@ -17,21 +20,34 @@
         <converters:FootballMatchStatusToStringConverter x:Key="footballMatchStatusToStringConverter" />
         <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
         <converters:MatchAlarmColorConverter x:Key="matchAlarmColorConverter" />
+        <converters:MatchAlarmIconConverter x:Key="matchAlarmIconConverter" />
 
-        <Color x:Key="PrimaryColor">#0288d1</Color>
-        <Color x:Key="PrimaryColor_L">#5eb8ff</Color>
-        <Color x:Key="PrimaryColor_D">#005b9f</Color>
-        <Color x:Key="SecondaryColor">#0097a7</Color>
-        <Color x:Key="SecondaryColor_L">#56c8d8</Color>
-        <Color x:Key="SecondaryColor_D">#006978</Color>
-        <Color x:Key="CustomGrey">#37474f</Color>
-        <Color x:Key="CustomGrey_L">#62727b</Color>
-        <Color x:Key="CustomGrey_D">#102027</Color>
+        <Color x:Key="TextColor_L">#fafafa</Color>
+        <Color x:Key="TextColor_D">#212121</Color>
+        <Color x:Key="TransparentWhite">#7dffffff</Color>
+        <Color x:Key="TransparentBlack">#7d000000</Color>
+
+        <Color x:Key="PrimaryColor">#0091ea</Color>
+        <Color x:Key="PrimaryColor_L">#40c4ff</Color>
+        <Color x:Key="PrimaryColor_D">#0064b7</Color>
+        <Color x:Key="SecondaryColor">#01579b</Color>
+        <Color x:Key="SecondaryColor_L">#039be5</Color>
+        <Color x:Key="SecondaryColor_D">#002f6c</Color>
+        <Color x:Key="CustomGrey">#757575</Color>
+        <Color x:Key="CustomGrey_L">#a4a4a4</Color>
+        <Color x:Key="CustomGrey_D">#424242</Color>
         <Color x:Key="BackgroundColor_Default">#f5f5f5</Color>
+        <Color x:Key="FacebookLogoColor">#3b5998</Color>
+        <Color x:Key="IconActivated">#ffd700</Color>
+
+        <Style TargetType="tabs:UnderlinedTabItem">
+            <Setter Property="SelectedTabColor" Value="{StaticResource TextColor_L}" />
+            <Setter Property="UnselectedLabelColor" Value="{StaticResource TransparentWhite}" />
+        </Style>
 
         <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
-            <Setter Property="AccentColor" Value="Accent" />
-            <Setter Property="TextColor" Value="Gray" />
+            <Setter Property="AccentColor" Value="{StaticResource PrimaryColor_L}" />
+            <Setter Property="TextColor" Value="{StaticResource CustomGrey}" />
             <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
             <Setter Property="ErrorMessageConverter" Value="{StaticResource exceptionToErrorMessageConverter}" />
         </Style>

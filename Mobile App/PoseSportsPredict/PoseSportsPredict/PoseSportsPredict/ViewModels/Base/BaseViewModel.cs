@@ -38,11 +38,11 @@ namespace PoseSportsPredict.ViewModels.Base
         #region Abstract Method
 
         /// <summary>
-        /// 컨텍스트가 바인딩 될때 한번 호출
+        /// 페이지가 셋팅될때 마다 호출
         /// </summary>
         /// <param name="datas"></param>
         /// <returns></returns>
-        public virtual Task<bool> OnInitializeViewAsync(params object[] datas)
+        public virtual Task<bool> OnPrepareViewAsync(params object[] datas)
         {
             return Task.FromResult(true);
         }

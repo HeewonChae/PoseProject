@@ -28,18 +28,17 @@
             <DataTemplate x:Key="collapsedTemplate">
                 <ViewCell>
                     <StackLayout
-                        HeightRequest="{Binding GroupHeaderHeight}"
                         VerticalOptions="CenterAndExpand"
                         Orientation="Horizontal"
                         Spacing="15"
-                        Padding="27,7"
+                        Padding="25,15"
                         effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                         effects:TapCommandEffect.TapParameter="{Binding .}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
-                            HeightRequest="20"
-                            WidthRequest="20"
+                            HeightRequest="23"
+                            WidthRequest="23"
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
@@ -54,22 +53,22 @@
                             LineBreakMode="TailTruncation"
                             Text="{Binding Title}"
                             TypeScale="Body2"
-                            TextColor="Black"
+                            TextColor="{StaticResource TextColor_D}"
                             VerticalOptions="CenterAndExpand">
                         </materialui:MaterialLabel>
                         <Image
                             Source="{Binding StateIcon}"
                             HorizontalOptions="EndAndExpand"
-                            HeightRequest="15"
-                            WidthRequest="15"
-                            effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
+                            HeightRequest="14"
+                            WidthRequest="14"
+                            effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                         </Image>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
             <DataTemplate x:Key="expandedTemplete">
                 <ViewCell>
-                    <Grid>
+                    <Grid RowSpacing="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -79,14 +78,14 @@
                             VerticalOptions="CenterAndExpand"
                             Orientation="Horizontal"
                             Spacing="15"
-                            Padding="27,7,27,0"
-                            HeightRequest="{Binding GroupHeaderHeight}"
+                            Padding="25,15"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="20"
+                                HeightRequest="23"
+                                WidthRequest="23"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
@@ -102,14 +101,15 @@
                                 VerticalOptions="CenterAndExpand"
                                 Text="{Binding Title}"
                                 TypeScale="Body2"
+                                FontAttributes="Bold"
                                 TextColor="{StaticResource PrimaryColor}">
                             </materialui:MaterialLabel>
                             <Image
                                 Source="{Binding StateIcon}"
                                 HorizontalOptions="EndAndExpand"
-                                HeightRequest="15"
-                                WidthRequest="15"
-                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
+                                HeightRequest="14"
+                                WidthRequest="14"
+                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                             </Image>
                         </StackLayout>
                         <!--Inner List-->
@@ -129,15 +129,17 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout
+            Spacing="0">
             <materialui:MaterialCard
-                Margin="25,10,25,5"
-                Padding="0,5,10,10"
+                Margin="25,10"
+                Padding="0"
                 CornerRadius="25"
                 Elevation="5">
                 <SearchBar
                     x:Name="_searchBar"
-                    HeightRequest="30"
+                    Margin ="15,5"
+                    HeightRequest="35"
                     FontSize="Body"
                     IsVisible="{Binding IsSearchEnable}"
                     Placeholder="{x:Static localize:LocalizeString.Search_League_Country}"

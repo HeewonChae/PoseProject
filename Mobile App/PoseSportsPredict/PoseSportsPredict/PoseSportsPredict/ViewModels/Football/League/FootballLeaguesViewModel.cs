@@ -3,8 +3,10 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Football;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.League;
@@ -16,15 +18,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels.Football
 {
-    public class FootballLeaguesViewModel : NavigableViewModel
+    public class FootballLeaguesViewModel : NavigableViewModel, IIconChange
     {
         #region NavigableViewModel
 
         public override bool OnInitializeView(params object[] datas)
         {
+            IsSelected = false;
+
             LeaguesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>>();
 
             string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_League);
@@ -35,13 +40,43 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public override void OnAppearing(params object[] datas)
         {
+            IsSelected = true;
+
             if (!LeaguesTaskLoaderNotifier.IsNotStarted)
                 return;
 
             LeaguesTaskLoaderNotifier.Load(InitLeaguesAsync);
         }
 
+        public override void OnDisAppearing(params object[] datas)
+        {
+            IsSelected = false;
+        }
+
         #endregion NavigableViewModel
+
+        #region IIconChange
+
+        private bool _isSelected;
+
+        public NavigationPage NavigationPage { get; set; }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    NavigationPage.IconImageSource = CurrentIcon;
+                }
+            }
+        }
+
+        public string CurrentIcon { get => IsSelected ? "ic_trophy_selected.png" : "ic_trophy_unselected.png"; }
+
+        #endregion IIconChange
 
         #region Services
 
@@ -105,7 +140,16 @@ namespace PoseSportsPredict.ViewModels.Football
         {
             _bookmarkService = bookmarkService;
 
-            OnInitializeView();
+            NavigationPage = new MaterialNavigationPage(this.CoupledPage)
+            {
+                Title = LocalizeString.Leagues,
+                IconImageSource = CurrentIcon,
+            };
+
+            if (OnInitializeView())
+            {
+                this.CoupledPage.Disappearing += (s, e) => OnDisAppearing();
+            }
         }
 
         #endregion Constructors

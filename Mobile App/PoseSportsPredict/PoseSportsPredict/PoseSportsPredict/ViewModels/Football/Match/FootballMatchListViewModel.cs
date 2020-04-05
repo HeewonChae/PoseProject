@@ -4,6 +4,7 @@ using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities;
@@ -65,31 +66,34 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsBusy(true);
 
-            DateTime notifyTime = matchInfo.MatchTime.AddMinutes(-5);
-            if (notifyTime < DateTime.Now)
-                notifyTime = DateTime.Now.AddSeconds(5);
-
-            var notification = new NotificationRequest
-            {
-                NotificationId = matchInfo.Id,
-                Title = LocalizeString.Match_Begin_Soon,
-                Description = $"{matchInfo.HomeName} vs {matchInfo.AwayName}",
-                ReturningData = matchInfo.JsonSerialize(),
-                NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
-                Android = new AndroidOptions
-                {
-                    IconName = "ic_soccer_alarm",
-                },
-            };
-
-            NotificationCenter.Current.Show(notification);
-
             matchInfo.IsAlarmed = !matchInfo.IsAlarmed;
+
+            if (matchInfo.IsAlarmed)
+            {
+                DateTime notifyTime = matchInfo.MatchTime.AddMinutes(-5);
+                if (notifyTime < DateTime.Now)
+                    notifyTime = DateTime.Now.AddSeconds(5);
+
+                var notification = new NotificationRequest
+                {
+                    NotificationId = matchInfo.Id,
+                    Title = LocalizeString.Match_Begin_Soon,
+                    Description = $"{matchInfo.HomeName} vs {matchInfo.AwayName}",
+                    ReturningData = matchInfo.JsonSerialize(),
+                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
+                    Android = new AndroidOptions
+                    {
+                        IconName = "ic_soccer_alarm",
+                    },
+                };
+
+                NotificationCenter.Current.Show(notification);
+            }
+
+            matchInfo.OnPropertyChanged("IsAlarmed");
 
             var message = matchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
             UserDialogs.Instance.Toast(message);
-
-            matchInfo.OnPropertyChanged("IsAlarmed");
 
             SetIsBusy(false);
         }
@@ -109,9 +113,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             // Add Bookmark
             if (matchInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
             else
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
 
             var message = matchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);

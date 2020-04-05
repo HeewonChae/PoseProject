@@ -6,6 +6,8 @@ namespace PoseSportsPredict.InfraStructure
 {
     public interface IGroupBase
     {
+        string Title { get; set; }
         bool Expanded { get; set; }
+        string StateIcon { get; }
     }
 }

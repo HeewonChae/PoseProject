@@ -53,8 +53,8 @@
                                     BackgroundColor="White"
                                     CornerRadius="5"
                                     Elevation="3"
-                                    Margin="7,3"
-                                    Padding="15, 5">
+                                    Margin="7,4"
+                                    Padding="15,0">
                                     <materialui:MaterialCard.Triggers>
                                         <DataTrigger Binding="{Binding Source={x:Reference _draggableViewCell}, Path=IsDragAndDropping}"
                                              TargetType="materialui:MaterialCard"
@@ -63,13 +63,13 @@
                                         </DataTrigger>
                                     </materialui:MaterialCard.Triggers>
                                     <StackLayout
-                                        VerticalOptions="CenterAndExpand"
+                                        VerticalOptions="FillAndExpand"
                                         Orientation="Horizontal"
-                                        Spacing="10">
+                                        Spacing="15">
                                         <ffimageloading:CachedImage
                                             Aspect="AspectFit"
-                                            HeightRequest="30"
-                                            WidthRequest="30"
+                                            HeightRequest="29"
+                                            WidthRequest="29"
                                             DownsampleHeight="150"
                                             DownsampleWidth="150"
                                             DownsampleToViewSize="True"
@@ -78,47 +78,53 @@
                                             Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
                                         </ffimageloading:CachedImage>
                                         <StackLayout
-                                            Spacing="0">
+                                            Spacing="0"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="FillAndExpand">
                                             <materialui:MaterialLabel
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding LeagueName}"
                                                 TypeScale="Body2"
-                                                TextColor="Black">
+                                                TextColor="{StaticResource TextColor_D}">
                                             </materialui:MaterialLabel>
                                             <materialui:MaterialLabel
                                                 LineBreakMode="TailTruncation"
-                                                TextColor="{StaticResource CustomGrey}"
+                                                TextColor="{StaticResource CustomGrey_D}"
                                                 TypeScale="Caption"
                                                 Text="{Binding CountryName}">
                                             </materialui:MaterialLabel>
                                         </StackLayout>
-                                       
-                                        <ContentView
-                                            Padding="3"
-                                            HorizontalOptions="EndAndExpand"
-                                            IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedLeagues}}"
-                                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
-                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteLeagueCommand, Source={x:Reference lv_bookmarkedLeagues}}"
-                                            effects:TapCommandEffect.TapParameter="{Binding .}">
-                                            <Image
-                                                HeightRequest="20"
-                                                WidthRequest="20"
-                                                Aspect="AspectFit"
-                                                Source="ic_delete.png"
-                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
-                                            </Image>
-                                        </ContentView>
-                                        <ContentView
-                                            Padding="3"
+
+                                        <StackLayout 
+                                            VerticalOptions="Center"
+                                            Orientation="Horizontal"
+                                            HorizontalOptions="End"
                                             IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedLeagues}}">
-                                            <Image
-                                                HeightRequest="20"
-                                                WidthRequest="20"
-                                                Aspect="AspectFit"
-                                                Source="ic_sort.png"
-                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
-                                            </Image>
-                                        </ContentView>
+                                            <ContentView
+                                                Padding="7"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteLeagueCommand, Source={x:Reference lv_bookmarkedLeagues}}"
+                                                effects:TapCommandEffect.TapParameter="{Binding .}">
+                                                <Image
+                                                    HeightRequest="20"
+                                                    WidthRequest="20"
+                                                    Aspect="AspectFit"
+                                                    Source="ic_delete.png"
+                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                                </Image>
+                                            </ContentView>
+                                            <ContentView
+                                                Padding="7"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                <Image
+                                                    HeightRequest="20"
+                                                    WidthRequest="20"
+                                                    Aspect="AspectFit"
+                                                    Source="ic_sort.png"
+                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                                </Image>
+                                            </ContentView>
+                                        </StackLayout>
                                     </StackLayout>
                                 </materialui:MaterialCard>
                             </ContentView>

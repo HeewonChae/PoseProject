@@ -134,7 +134,7 @@
     <value>Retry</value>
   </data>
   <data name="No_Match_datas" xml:space="preserve">
-    <value>No matches were predicted.</value>
+    <value>There are no matches.</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome !</value>
@@ -235,8 +235,8 @@
   <data name="Ongoing_matches" xml:space="preserve">
     <value>Ongoing matches</value>
   </data>
-  <data name="Matches_Filtering" xml:space="preserve">
-    <value>Matches Filtering</value>
+  <data name="Select_Filter" xml:space="preserve">
+    <value>Select a filter</value>
   </data>
   <data name="Match_Begin_Soon" xml:space="preserve">
     <value>The match will begin soon.</value>
@@ -258,5 +258,38 @@
   </data>
   <data name="Search_Results" xml:space="preserve">
     <value>Search results</value>
+  </data>
+  <data name="Login_With_Facebook" xml:space="preserve">
+    <value>Login with Facebook</value>
+  </data>
+  <data name="Login_With_Google" xml:space="preserve">
+    <value>Login with Google</value>
+  </data>
+  <data name="Last_Login" xml:space="preserve">
+    <value>Last login</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Do_You_Want_Logout" xml:space="preserve">
+    <value>Do you want to log out?</value>
+  </data>
+  <data name="App_Title" xml:space="preserve">
+    <value>Poseidon</value>
+  </data>
+  <data name="Favorite_Leagues" xml:space="preserve">
+    <value>Favorite leagues</value>
+  </data>
+  <data name="Favorite_Teams" xml:space="preserve">
+    <value>Favorite teams</value>
+  </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="Google" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="Remember_Account" xml:space="preserve">
+    <value>Remember me</value>
   </data>
 </root>

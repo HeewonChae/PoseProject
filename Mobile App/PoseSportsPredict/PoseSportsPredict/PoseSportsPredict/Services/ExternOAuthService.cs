@@ -80,11 +80,13 @@ namespace PoseSportsPredict.Services
                             }
                             else // Login success
                             {
-                                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
-                                _isAuthenticated = true;
+                                LocalStorage.Storage.GetValueOrDefault<bool>(LocalStorageKey.IsRememberAccount, out bool isRemeberAccount);
+                                if (isRemeberAccount)
+                                {
+                                    LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
+                                }
 
-                                await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
-                                await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
+                                _isAuthenticated = true;
                             }
                         }
                     }
@@ -93,7 +95,10 @@ namespace PoseSportsPredict.Services
                 // Error
                 authenticator.Error += async (sender, eventArgs) =>
                 {
-                    await MaterialDialog.Instance.AlertAsync($"OAuth error: {eventArgs.Message}");
+                    await MaterialDialog.Instance.AlertAsync($"OAuth error: {eventArgs.Message}",
+                        LocalizeString.App_Title,
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
                 };
 
                 var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
@@ -107,13 +112,21 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.AlertAsync($"OAuth exception: {ex.Message}");
+                ShinyHost.Resolve<LoginViewModel>().SetIsBusy(false);
+
+                await MaterialDialog.Instance.AlertAsync($"OAuth exception: {ex.Message}",
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
             }
         }
 
         public async Task<bool> IsAuthenticatedAndValid()
         {
             _isAuthenticated = false;
+            LocalStorage.Storage.GetValueOrDefault<bool>(LocalStorageKey.IsRememberAccount, out bool isRemeberAccount);
+            if (!isRemeberAccount)
+                return _isAuthenticated;
 
             LocalStorage.Storage.GetValueOrDefault(LocalStorageKey.SavedAuthenticatedUser, out _authenticatedUser);
 

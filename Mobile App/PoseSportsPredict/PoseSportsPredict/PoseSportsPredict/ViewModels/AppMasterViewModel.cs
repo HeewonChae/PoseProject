@@ -2,7 +2,9 @@
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;
 using Shiny;
+using System.Linq;
 using System.Threading.Tasks;
+using WebServiceShare.ServiceContext;
 using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels
@@ -11,18 +13,34 @@ namespace PoseSportsPredict.ViewModels
     {
         #region NavigableViewModel
 
-        public override Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
         {
             var masterPage = this.CoupledPage as AppMasterPage;
 
             masterPage.Master = ShinyHost.Resolve<AppMasterMenuViewModel>().CoupledPage;
-            masterPage.Detail = ShinyHost.Resolve<FootballMainViewModel>().CoupledPage;
+            masterPage.Detail = ShinyHost.Resolve<AppMasterMenuViewModel>().SportsCategories.First().SourcePage;
+
+            return true;
+        }
+
+        public override Task<bool> OnPrepareViewAsync(params object[] datas)
+        {
+            var masterPage = this.CoupledPage as AppMasterPage;
+            masterPage.IsPresented = false;
+
+            ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashUserInfo();
+            ShinyHost.Resolve<AppMasterMenuViewModel>().LastLoginTime = ClientContext.LastLoginTime;
 
             return Task.FromResult(true);
         }
 
         public override void OnAppearing(params object[] datas)
         {
+            if (this.CoupledPage is AppMasterPage masterPage)
+            {
+                var bindingCtx = masterPage.Detail.BindingContext as BaseViewModel;
+                bindingCtx.OnAppearing();
+            }
         }
 
         #endregion NavigableViewModel
@@ -31,7 +49,10 @@ namespace PoseSportsPredict.ViewModels
 
         public AppMasterViewModel(AppMasterPage page) : base(page)
         {
-            CoupledPage.Appearing += (s, e) => OnAppearing();
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => this.OnAppearing();
+            }
         }
 
         #endregion Constructors

@@ -5,6 +5,7 @@ using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
@@ -35,7 +36,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
@@ -176,7 +177,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             if (OnInitializeView())
             {
-                coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
+                this.CoupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
 
@@ -248,7 +249,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deleteMatchInfo in _DeleteMatchList)
             {
                 deleteMatchInfo.IsBookmarked = false;
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
             }
 
             _DeleteMatchList.Clear();

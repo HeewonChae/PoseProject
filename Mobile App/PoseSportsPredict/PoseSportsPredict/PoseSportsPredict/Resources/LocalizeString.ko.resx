@@ -154,7 +154,7 @@
     <value>재시도</value>
   </data>
   <data name="No_Match_datas" xml:space="preserve">
-    <value>예측된 경기가 없습니다.</value>
+    <value>경기가 없습니다.</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>환영합니다 !</value>
@@ -255,8 +255,8 @@
   <data name="Ongoing_matches" xml:space="preserve">
     <value>진행중인 경기</value>
   </data>
-  <data name="Matches_Filtering" xml:space="preserve">
-    <value>경기 필터링</value>
+  <data name="Select_Filter" xml:space="preserve">
+    <value>경기 필터 선택</value>
   </data>
   <data name="Match_Begin_Soon" xml:space="preserve">
     <value>경기가 곧 시작합니다.</value>
@@ -278,5 +278,38 @@
   </data>
   <data name="Search_Results" xml:space="preserve">
     <value>검색 결과</value>
+  </data>
+  <data name="Login_With_Facebook" xml:space="preserve">
+    <value>Login with Facebook</value>
+  </data>
+  <data name="Login_With_Google" xml:space="preserve">
+    <value>Login with Google</value>
+  </data>
+  <data name="Last_Login" xml:space="preserve">
+    <value>마지막 접속</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Do_You_Want_Logout" xml:space="preserve">
+    <value>로그아웃 하시겠습니까?</value>
+  </data>
+  <data name="App_Title" xml:space="preserve">
+    <value>Poseidon</value>
+  </data>
+  <data name="Favorite_Leagues" xml:space="preserve">
+    <value>즐겨찾는 리그</value>
+  </data>
+  <data name="Favorite_Teams" xml:space="preserve">
+    <value>즐겨찾는 팀</value>
+  </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="Google" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="Remember_Account" xml:space="preserve">
+    <value>로그인 상태 유지</value>
   </data>
 </root>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PoseSportsPredict.Views.BookmarkMenuListView"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <ContentView.Content>
+        <StackLayout Spacing="0">
+            <StackLayout
+                Padding="0,8"
+                Orientation="Horizontal"
+                effects:TapCommandEffect.Tap="{Binding SelectGroupHeaderCommand}"
+                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                <materialui:MaterialLabel
+                    Text="{Binding Title}"
+                    TypeScale="Caption"
+                    TextColor="{StaticResource CustomGrey}">
+                </materialui:MaterialLabel>
+                <Image
+                    Margin="5,3"
+                    Source="{Binding StateIcon}"
+                    HorizontalOptions="EndAndExpand"
+                    HeightRequest="10"
+                    WidthRequest="10"
+                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                </Image>
+            </StackLayout>
+
+            <!--List-->
+            <StackLayout
+                x:Name="lv_items"
+                Spacing="0"
+                BindableLayout.ItemsSource="{Binding Items}"
+                IsVisible="{Binding Expanded}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="10"
+                            Spacing="15"
+                            HorizontalOptions="FillAndExpand"
+                            Orientation="Horizontal"
+                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectItemCommand, Source={x:Reference lv_items}}"
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFit"
+                                HeightRequest="23"
+                                WidthRequest="23"
+                                DownsampleHeight="150"
+                                DownsampleWidth="150"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="img_world.png"
+                                ErrorPlaceholder="img_world.png"
+                                Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                TypeScale="Body2"
+                                VerticalOptions="Center"
+                                FontAttributes="None"
+                                TextColor="{StaticResource TextColor_D}"
+                                Text="{Binding ShortName}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

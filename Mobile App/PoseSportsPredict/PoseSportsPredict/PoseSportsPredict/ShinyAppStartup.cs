@@ -67,18 +67,21 @@ namespace PoseSportsPredict
         {
             services.AddSingleton<LoadingPage>();
             services.AddSingleton<LoadingViewModel>();
+
+            // Login
             services.AddSingleton<LoginPage>();
             services.AddSingleton<LoginViewModel>();
 
             // MasterPage
             services.AddSingleton<AppMasterPage>();
             services.AddSingleton<AppMasterViewModel>();
-            services.AddTransient<AppMasterMenuPage>();
-            services.AddTransient<AppMasterMenuViewModel>();
+            services.AddSingleton<AppMasterMenuPage>();
+            services.AddSingleton<AppMasterMenuViewModel>();
+            services.AddSingleton<BookmarkMenuListViewModel>();
 
             // Common - Settings
-            services.AddTransient<SettingsPage>();
-            services.AddTransient<SettingsViewModel>();
+            services.AddSingleton<SettingsPage>();
+            services.AddSingleton<SettingsViewModel>();
 
             // Football
             services.AddSingleton<FootballMainPage>();

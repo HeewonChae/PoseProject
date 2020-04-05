@@ -1,6 +1,8 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.CustomViews;
 using PoseSportsPredict.Views.Football.Bookmark;
@@ -10,15 +12,18 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels.Football.Bookmark
 {
-    public class FootballBookmarksTabViewModel : NavigableViewModel
+    public class FootballBookmarksTabViewModel : NavigableViewModel, IIconChange
     {
         #region NavigableViewModel
 
         public override bool OnInitializeView(params object[] datas)
         {
+            IsSelected = false;
+
             var tabbedPage = this.CoupledPage as TabbedPage;
 
             tabbedPage.Children.Clear();
@@ -32,12 +37,44 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override void OnAppearing(params object[] datas)
         {
-            var tabbedPage = this.CoupledPage as TabbedPage;
-            var bindingCtx = tabbedPage.CurrentPage.BindingContext as NavigableViewModel;
-            bindingCtx.OnAppearing();
+            IsSelected = true;
+
+            if (this.CoupledPage is TabbedPage tabbedpage)
+            {
+                var bindingCtx = tabbedpage.CurrentPage.BindingContext as BaseViewModel;
+                bindingCtx.OnAppearing();
+            }
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
+            IsSelected = false;
         }
 
         #endregion NavigableViewModel
+
+        #region IIconChange
+
+        private bool _isSelected;
+
+        public NavigationPage NavigationPage { get; set; }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    NavigationPage.IconImageSource = CurrentIcon;
+                }
+            }
+        }
+
+        public string CurrentIcon { get => IsSelected ? "ic_bookmark_selected.png" : "ic_bookmark_unselected.png"; }
+
+        #endregion IIconChange
 
         #region Fields
 
@@ -84,14 +121,22 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                     break;
             }
 
-            OnInitializeView();
-
-            // Workaround NavigationPage OnAppearing bug
-            ((TabbedPage)this.CoupledPage).CurrentPageChanged += (s, e) =>
+            NavigationPage = new MaterialNavigationPage(this.CoupledPage)
             {
-                if (s is TabbedPage tabbedPage)
+                Title = LocalizeString.Bookmarks,
+                IconImageSource = CurrentIcon,
+            };
+
+            if (OnInitializeView())
+            {
+                this.CoupledPage.Disappearing += (s, e) => OnDisAppearing();
+            }
+
+            ((TabbedPage)CoupledPage).CurrentPageChanged += (s, e) =>
+            {
+                if (s is TabbedPage curPage)
                 {
-                    var bindingCtx = tabbedPage.CurrentPage.BindingContext as BaseViewModel;
+                    var bindingCtx = curPage.BindingContext as BaseViewModel;
                     bindingCtx.OnAppearing();
                 }
             };

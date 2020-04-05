@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
              x:Class="PoseSportsPredict.Views.LoginPage"
-             NavigationPage.HasNavigationBar="False"
+             xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:poseauthenums="PosePacket.Service.Auth.Models.Enums"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              BackgroundColor="White">
 
     <ContentPage.Content>
@@ -13,18 +16,93 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image
-                Grid.Row="2"
-                VerticalOptions="Start"
-                HorizontalOptions="Fill"
-                Source="facegbook_login.png"
-                HeightRequest="70">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding LoginFacebookCommand}" />
-                </Image.GestureRecognizers>
+                Grid.Row="0"
+                WidthRequest="314"
+                HorizontalOptions="Center"
+                Aspect="AspectFit"
+                Source="img_poseidon_logo.png">
             </Image>
+
+            <StackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="CenterAndExpand"
+                Grid.Row="1"
+                Spacing="20">
+                <materialui:MaterialCard
+                    CornerRadius="5"
+                    Elevation="3"
+                    Padding="0"
+                    BackgroundColor="{StaticResource BackgroundColor_Default}">
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Spacing="15"
+                        Padding="15,5"
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                        effects:TapCommandEffect.Tap="{Binding ExternLoginCommand}"
+                        effects:TapCommandEffect.TapParameter="Google">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="27"
+                            HeightRequest="27"
+                            Source="ic_google.png">
+                        </Image>
+                        <materialui:MaterialLabel
+                            VerticalOptions="Center"
+                            TypeScale="Body1"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{x:Static localize:LocalizeString.Login_With_Google}">
+                        </materialui:MaterialLabel>
+                    </StackLayout>
+                </materialui:MaterialCard>
+
+                <materialui:MaterialCard
+                    CornerRadius="5"
+                    Elevation="3"
+                    Padding="0"
+                    BackgroundColor="{StaticResource BackgroundColor_Default}">
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Spacing="15"
+                        Padding="15,5"
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                        effects:TapCommandEffect.Tap="{Binding ExternLoginCommand}"
+                        effects:TapCommandEffect.TapParameter="Facebook">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="27"
+                            HeightRequest="27"
+                            Source="ic_facebook.png">
+                        </Image>
+                        <materialui:MaterialLabel
+                            VerticalOptions="Center"
+                            TypeScale="Body1"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{x:Static localize:LocalizeString.Login_With_Facebook}">
+                        </materialui:MaterialLabel>
+                    </StackLayout>
+                </materialui:MaterialCard>
+
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Spacing="10">
+                    <materialui:MaterialLabel
+                        VerticalOptions="Center"
+                        TypeScale="Body2"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{x:Static localize:LocalizeString.Remember_Account}">
+                    </materialui:MaterialLabel>
+                    <Switch
+                        IsToggled="{Binding IsRemeberAccount}">
+                        <Switch.Behaviors>
+                            <logics:EventToCommandBehavior EventName="Toggled" Command="{Binding RemeberAccountToggleCommand}">
+                            </logics:EventToCommandBehavior>
+                        </Switch.Behaviors>
+                    </Switch>
+                </StackLayout>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

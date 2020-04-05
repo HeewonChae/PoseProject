@@ -15,15 +15,6 @@
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailPage"
              NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="tabs:UnderlinedTabItem">
-                <Setter Property="SelectedTabColor" Value="White" />
-                <Setter Property="UnselectedLabelColor" Value="{StaticResource CustomGrey}" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
         <StackLayout
             VerticalOptions="FillAndExpand"
@@ -42,13 +33,14 @@
                     HeightRequest="35"
                     Orientation="Horizontal">
                     <ContentView
+                        Padding="2"
                         VerticalOptions="End"
                         BackgroundColor="Transparent"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
                         <Image
-                            HeightRequest="27"
-                            WidthRequest="27"
+                            HeightRequest="28"
+                            WidthRequest="28"
                             Source="ic_arrow_back"
                             Aspect="AspectFit"
                             effects:ImageEffect.TintColor="White">
@@ -58,31 +50,33 @@
                     <StackLayout
                         Orientation="Horizontal"
                         HorizontalOptions="EndAndExpand"
-                        VerticalOptions="End"
-                        Spacing="15">
-                        <customviews:RatingView
-                            VerticalOptions="Center"
-                            Margin="1"
-                            WidthRequest="23"
-                            HeightRequest="23"
-                            StrokeWidth="1.2"
-                            RatingType="Full"
-                            ColorOn="White"
-                            OutlineOnColor="White"
-                            OutlineOffColor="{StaticResource CustomGrey}"
-                            Path="{x:Static customviews:PathConstants.Star}"
-                            Count="1"
-                            Value="{Binding LeagueInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}"
+                        VerticalOptions="End">
+                        <ContentView
+                            Padding="5"
+                            BackgroundColor="Transparent"
                             effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
-                        </customviews:RatingView>
+                            <customviews:RatingView
+                                VerticalOptions="Center"
+                                WidthRequest="22"
+                                HeightRequest="22"
+                                StrokeWidth="0.8"
+                                RatingType="Full"
+                                ColorOn="{StaticResource IconActivated}"
+                                OutlineOnColor="{StaticResource IconActivated}"
+                                OutlineOffColor="Black"
+                                Path="{x:Static customviews:PathConstants.Star}"
+                                Count="1"
+                                Value="{Binding LeagueInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
+                            </customviews:RatingView>
+                        </ContentView>
                     </StackLayout>
                 </StackLayout>
 
                 <!--Summary-->
                 <Grid
                     Grid.Row="1"
-                    Margin="0"
+                    Margin="10,0"
                     Padding="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -96,7 +90,7 @@
                     <StackLayout
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="20,5,10,0"
+                        Margin="10,0"
                         HorizontalOptions="Center"
                         VerticalOptions="CenterAndExpand">
                         <ffimageloading:CachedImage
@@ -123,25 +117,23 @@
                             TypeScale="H6"
                             FontAttributes="None"
                             MaxLines="1"
-                            TextColor="White"
+                            TextColor="{StaticResource TextColor_L}"
                             Text="{Binding LeagueInfo.LeagueName}">
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             HorizontalTextAlignment="Start"
                             LineBreakMode="TailTruncation"
                             TypeScale="Caption"
-                            FontAttributes="None"
                             MaxLines="1"
-                            TextColor="{StaticResource CustomGrey}"
+                            TextColor="{StaticResource TransparentWhite}"
                             Text="{Binding LeagueInfo.CountryName}">
                         </materialui:MaterialLabel>
                     </StackLayout>
                     <BoxView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
-                        Margin="10, 0"
                         HeightRequest="0.1"
-                        Color="{StaticResource CustomGrey_L}">
+                        Color="{StaticResource TransparentWhite}">
                     </BoxView>
                 </Grid>
 
@@ -150,7 +142,7 @@
                     Grid.Row="2"
                     x:Name="_tabHost"
                     TabType="Fixed"
-                    Margin="0,-7,0,0"
+                    Margin="0,-6,0,0"
                     HeightRequest="38"
                     ShadowType="Bottom"
                     SelectedIndex="{Binding Source={x:Reference _switcher}, Path=SelectedIndex, Mode=TwoWay}">

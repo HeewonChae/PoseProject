@@ -55,6 +55,7 @@ namespace SportsWebService.Commands.Auth
             {
                 PoseToken = Convert.ToBase64String(Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials))),
                 TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
+                LastLoginTime = db_output.LastLoginTime,
             };
         }
     }

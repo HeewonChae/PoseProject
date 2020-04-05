@@ -13,24 +13,25 @@
     <ContentView.Content>
         <StackLayout
             x:Name="lv_leagues"
+            Spacing="0"
             BindableLayout.ItemsSource="{Binding Leagues}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <StackLayout
-                        Spacing="0"
-                        Padding="17,1.5"
+                        Margin="25,0"
                         Orientation="Horizontal">
                         <StackLayout
+                            Padding="20,15"
                             Spacing="15"
-                            Padding="38,7,0,7"
-                            HorizontalOptions="FillAndExpand"
                             Orientation="Horizontal"
+                            HorizontalOptions="FillAndExpand"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_leagues}}"
-                            effects:TapCommandEffect.TapParameter="{Binding .}">
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="20"
-                                WidthRequest="20"
+                                HeightRequest="23"
+                                WidthRequest="23"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
@@ -40,26 +41,27 @@
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
                                 LineBreakMode="TailTruncation"
-                                VerticalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
                                 TypeScale="Body2"
-                                TextColor="Black"
+                                TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding LeagueName}">
                             </materialui:MaterialLabel>
                         </StackLayout>
                         <ContentView
+                            Padding="7"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_leagues}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <customviews:RatingView
-                                Margin="9.3"
-                                WidthRequest="18"
-                                HeightRequest="18"
-                                VerticalOptions="Center"
-                                StrokeWidth="1.2"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                StrokeWidth="0.8"
                                 RatingType="Full"
-                                ColorOn="Gold"
-                                OutlineOnColor="Gold"
-                                OutlineOffColor="{StaticResource CustomGrey_L}"
+                                ColorOn="{ StaticResource IconActivated}"
+                                OutlineOnColor="{ StaticResource IconActivated}"
+                                OutlineOffColor="{StaticResource CustomGrey}"
                                 Path="{x:Static customviews:PathConstants.Star}"
                                 Count="1"
                                 Value="{Binding IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">

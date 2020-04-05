@@ -7,6 +7,8 @@ using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities;
+using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
 using Shiny;
@@ -16,12 +18,37 @@ using System.Windows.Input;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels
 {
     public class LoginViewModel : NavigableViewModel
     {
+        #region NavigableViewModel
+
+        public override Task<bool> OnPrepareViewAsync(params object[] datas)
+        {
+            LocalStorage.Storage.GetValueOrDefault<bool>(LocalStorageKey.IsRememberAccount, out bool isRemeberAccount);
+            IsRemeberAccount = isRemeberAccount;
+
+            return base.OnPrepareViewAsync(datas);
+        }
+
+        #endregion NavigableViewModel
+
+        #region Fields
+
+        private bool _isRememberAccount;
+
+        #endregion Fields
+
+        #region Properties
+
+        public bool IsRemeberAccount { get => _isRememberAccount; set => SetValue(ref _isRememberAccount, value); }
+
+        #endregion Properties
+
         #region Services
 
         private IOAuthService _OAuthService;
@@ -45,36 +72,32 @@ namespace PoseSportsPredict.ViewModels
 
         #region Commands
 
-        public ICommand LoginFacebookCommand { get => new RelayCommand(LoginFacebook); }
+        public ICommand ExternLoginCommand { get => new RelayCommand<string>(e => ExternLogin(e)); }
 
-        private async void LoginFacebook()
+        private async void ExternLogin(string str_snsType)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            if (!_OAuthService.IsAuthenticated
-                || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Facebook)
-                await _OAuthService.OAuthLoginAsync(SNSProviderType.Facebook);
-            else
-                await PoseLogin();
+            str_snsType.TryParseEnum<SNSProviderType>(out SNSProviderType snsProviderType);
+
+            await _OAuthService.OAuthLoginAsync(snsProviderType);
         }
 
-        public ICommand LoginGoogleCommand { get => new RelayCommand(LoginGoogle); }
+        public ICommand RemeberAccountToggleCommand { get => new RelayCommand<ToggledEventArgs>(e => RemeberAccountToggle(e)); }
 
-        private async void LoginGoogle()
+        private void RemeberAccountToggle(ToggledEventArgs toggleArgs)
         {
-            if (IsBusy)
-                return;
-
-            SetIsBusy(true);
-
-            if (!_OAuthService.IsAuthenticated
-                || _OAuthService.AuthenticatedUser.SNSProvider != SNSProviderType.Google)
-                await _OAuthService.OAuthLoginAsync(SNSProviderType.Google);
+            if (toggleArgs.Value)
+            {
+                LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.IsRememberAccount, true);
+            }
             else
-                await PoseLogin();
+            {
+                LocalStorage.Storage.Remove(LocalStorageKey.IsRememberAccount);
+            }
         }
 
         #endregion Commands
@@ -106,6 +129,10 @@ namespace PoseSportsPredict.ViewModels
             // Update PoseToken, Update ExpireTime
             ClientContext.SetCredentialsFrom(loginResult.PoseToken);
             ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
+            ClientContext.LastLoginTime = loginResult.LastLoginTime.ToLocalTime();
+
+            await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
 
             SetIsBusy(false);
             return true;

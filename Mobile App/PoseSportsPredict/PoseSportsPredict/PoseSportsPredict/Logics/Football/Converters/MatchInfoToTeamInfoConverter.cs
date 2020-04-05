@@ -1,4 +1,5 @@
 ﻿using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
             FootballTeamInfo returnValue = null;
 
-            var matchInfo = value as FootballMatchInfo;
-            if (matchInfo != null)
+            if (value is FootballMatchInfo matchInfo)
             {
                 returnValue = new FootballTeamInfo
                 {

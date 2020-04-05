@@ -1,5 +1,7 @@
 ﻿using PosePacket.Service.Football.Models.Enums;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.Models.Enums;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Text;
 
 namespace PoseSportsPredict.Models.Football
 {
-    public class FootballLeagueInfo : ISQLiteStorable, INotifyPropertyChanged
+    public class FootballLeagueInfo : IBookmarkMenuItem, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 
@@ -21,7 +23,7 @@ namespace PoseSportsPredict.Models.Football
 
         #endregion INotifyPropertyChanged
 
-        #region ISQLiteStorable
+        #region IBookmarkMenuItem
 
         public string _primaryKey;
 
@@ -30,8 +32,11 @@ namespace PoseSportsPredict.Models.Football
 
         public int Order { get; set; }
         public DateTime StoredTime { get; set; }
+        public string ShortName { get => LeagueName; }
+        public string Logo { get => LeagueLogo; }
+        public BookMarkType BookMarkType { get => BookMarkType.Bookmark_League; }
 
-        #endregion ISQLiteStorable
+        #endregion IBookmarkMenuItem
 
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }

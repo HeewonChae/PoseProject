@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
@@ -16,7 +17,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
     {
         #region NavigableViewModel
 
-        public override async Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override async Task<bool> OnPrepareViewAsync(params object[] datas)
         {
             if (datas == null)
                 return false;
@@ -88,9 +89,9 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
             // Add Bookmark
             if (TeamInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballTeamInfo>(TeamInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Team);
+                await _bookmarkService.AddBookmark<FootballTeamInfo>(TeamInfo, SportsType.Football, BookMarkType.Bookmark_Team);
             else
-                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(TeamInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_Team);
+                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(TeamInfo, SportsType.Football, BookMarkType.Bookmark_Team);
 
             var message = TeamInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);

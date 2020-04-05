@@ -7,6 +7,8 @@ using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
 using Xamarin.Forms;
+using XF.Material.Forms.Resources;
+using XF.Material.Forms.Resources.Typography;
 
 namespace PoseSportsPredict
 {
@@ -22,6 +24,7 @@ namespace PoseSportsPredict
         public App()
         {
             InitializeComponent();
+
             XF.Material.Forms.Material.Init(this);
 
             // Local Notification tap event listener

@@ -39,7 +39,7 @@
                 x:Name="lv_bookmarkedMatches"
                 EnableDragAndDrop="False"
                 ColumnCount="1"
-                ItemHeight="95"
+                ItemHeight="100"
                 ItemSpacing="0"
                 ListLayout="Grid"
                 ItemsSource="{Binding BookmarkedMatches}"
@@ -52,12 +52,13 @@
                                 <materialui:MaterialCard
                                     CornerRadius="5"
                                     Elevation="3"
-                                    Margin="7, 3"
+                                    Margin="7,4"
                                     Padding="0">
                                     <StackLayout
-                                        VerticalOptions="CenterAndExpand"
-                                        Padding="15,4">
+                                        Spacing="0"
+                                        Padding="15,5,15,0">
                                         <Grid
+                                            ColumnSpacing="0"
                                             RowSpacing="0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
@@ -69,9 +70,9 @@
                                             </Grid.ColumnDefinitions>
                                             <materialui:MaterialLabel
                                                 Grid.Row="0"
-                                                TextColor="{StaticResource CustomGrey}"
+                                                TextColor="{StaticResource CustomGrey_D}"
                                                 TypeScale="Caption"
-                                                Text="{Binding MatchTime, StringFormat='{0:dddd MM/dd}'}">
+                                                Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
                                             </materialui:MaterialLabel>
                                             <StackLayout
                                                 Grid.Row="1"
@@ -79,25 +80,28 @@
                                                 Spacing="10">
                                                 <ffimageloading:CachedImage
                                                     Aspect="AspectFit"
-                                                    HeightRequest="17"
-                                                    WidthRequest="17"
+                                                    HeightRequest="18"
+                                                    WidthRequest="18"
                                                     DownsampleHeight="150"
                                                     DownsampleWidth="150"
                                                     DownsampleToViewSize="True"
                                                     LoadingPlaceholder="img_world.png"
                                                     ErrorPlaceholder="img_world.png"
                                                     Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                    <ffimageloading:CachedImage.Transformations>
+                                                        <fftransformations:CircleTransformation />
+                                                    </ffimageloading:CachedImage.Transformations>
                                                 </ffimageloading:CachedImage>
                                                 <materialui:MaterialLabel
                                                     LineBreakMode="TailTruncation"
-                                                    TextColor="{StaticResource CustomGrey}"
+                                                    TextColor="{StaticResource CustomGrey_D}"
                                                     TypeScale="Caption"
                                                     VerticalOptions="CenterAndExpand">
                                                     <materialui:MaterialLabel.FormattedText>
                                                         <FormattedString>
-                                                            <Span Text="{Binding CountryName}"/>
-                                                            <Span Text=" - "/>
-                                                            <Span Text="{Binding LeagueName}"/>
+                                                            <Span Text="{Binding CountryName}" />
+                                                            <Span Text=". " />
+                                                            <Span Text="{Binding LeagueName}" />
                                                         </FormattedString>
                                                     </materialui:MaterialLabel.FormattedText>
                                                 </materialui:MaterialLabel>
@@ -106,23 +110,24 @@
                                                 Grid.Row="0"
                                                 Grid.Column="1"
                                                 Grid.RowSpan="2"
-                                                Padding="3"
-                                                HorizontalOptions="EndAndExpand"
+                                                Padding="7"
                                                 VerticalOptions="CenterAndExpand"
                                                 IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedMatches}}"
                                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
-                                                effects:TapCommandEffect.TapParameter="{Binding .}">
+                                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                 <Image
                                                     HeightRequest="20"
                                                     WidthRequest="20"
                                                     Aspect="AspectFit"
                                                     Source="ic_delete.png"
-                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey_L}">
+                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                                                 </Image>
                                             </ContentView>
                                         </Grid>
                                         <Grid
-                                            Padding="25,5">
+                                            VerticalOptions="FillAndExpand"
+                                            Margin="20,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
@@ -132,23 +137,22 @@
                                             </Grid.ColumnDefinitions>
                                             <materialui:MaterialLabel
                                                 Grid.Column="0"
-                                                LineHeight="0.9"
+                                                LineHeight="1"
                                                 HorizontalOptions="EndAndExpand"
                                                 VerticalOptions="Center"
-                                                LineBreakMode="WordWrap"
+                                                LineBreakMode="TailTruncation"
                                                 HorizontalTextAlignment="End"
                                                 MaxLines="2"
                                                 TypeScale="Caption"
-                                                TextColor="Black"
-                                                LetterSpacing="0.3"
+                                                TextColor="{StaticResource TextColor_D}"
                                                 Text="{Binding HomeName}">
                                             </materialui:MaterialLabel>
                                             <ffimageloading:CachedImage
                                                 Grid.Column="1"
                                                 Margin="3,0"
                                                 Aspect="AspectFit"
-                                                WidthRequest="28"
-                                                HeightRequest="28"
+                                                WidthRequest="29"
+                                                HeightRequest="29"
                                                 DownsampleHeight="150"
                                                 DownsampleWidth="150"
                                                 DownsampleToViewSize="True"
@@ -167,14 +171,14 @@
                                                     HorizontalOptions="Center"
                                                     VerticalOptions="EndAndExpand"
                                                     FontSize="12"
-                                                    TextColor="{StaticResource CustomGrey}"
+                                                    TextColor="{StaticResource CustomGrey_D}"
                                                     Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                                 </materialui:MaterialLabel>
                                                 <materialui:MaterialChip
                                                     HorizontalOptions="Center"
                                                     VerticalOptions="StartAndExpand"
                                                     FontSize="11"
-                                                    TextColor="White"
+                                                    TextColor="{StaticResource TextColor_L}"
                                                     HeightRequest="15">
                                                     <materialui:MaterialChip.Triggers>
                                                         <EventTrigger Event="BindingContextChanged">
@@ -187,8 +191,8 @@
                                                 Grid.Column="3"
                                                 Margin="3,0"
                                                 Aspect="AspectFit"
-                                                WidthRequest="28"
-                                                HeightRequest="28"
+                                                WidthRequest="29"
+                                                HeightRequest="29"
                                                 DownsampleHeight="150"
                                                 DownsampleWidth="150"
                                                 DownsampleToViewSize="True"
@@ -201,15 +205,14 @@
                                             </ffimageloading:CachedImage>
                                             <materialui:MaterialLabel
                                                 Grid.Column="4"
-                                                LineHeight="0.9"
+                                                LineHeight="1"
                                                 HorizontalOptions="StartAndExpand"
                                                 VerticalOptions="Center"
-                                                LineBreakMode="WordWrap"
+                                                LineBreakMode="TailTruncation"
                                                 HorizontalTextAlignment="Start"
                                                 MaxLines="2"
                                                 TypeScale="Caption"
-                                                TextColor="Black"
-                                                LetterSpacing="0.3"
+                                                TextColor="{StaticResource TextColor_D}"
                                                 Text="{Binding AwayName}">
                                             </materialui:MaterialLabel>
                                         </Grid>

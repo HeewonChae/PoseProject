@@ -39,7 +39,10 @@ namespace PoseSportsPredict.Services
                 if (flurlException.Call.Response == null)
                 {
                     // 서버에 연결할 수 없음
-                    await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
+                    await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                        LocalizeString.App_Title,
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
 
                     // 로그인 화면으로 이동
                     await ShinyHost.Resolve<IOAuthService>().Logout();
@@ -53,7 +56,10 @@ namespace PoseSportsPredict.Services
 
                         if (error.ErrorCode == (ServiceErrorCode.Authenticate.Credentials + 1))
                         {
-                            await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials);
+                            await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials,
+                                LocalizeString.App_Title,
+                                LocalizeString.Ok,
+                                DialogConfiguration.DefaultAlterDialogConfiguration);
 
                             // 로그인 화면으로 이동
                             await ShinyHost.Resolve<IOAuthService>().Logout();
@@ -61,7 +67,9 @@ namespace PoseSportsPredict.Services
                         }
                         else
                         {
-                            await MaterialDialog.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}");
+                            await MaterialDialog.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}",
+                                LocalizeString.Ok,
+                                DialogConfiguration.DefaultAlterDialogConfiguration);
                         }
                     }
                     catch
@@ -74,10 +82,14 @@ namespace PoseSportsPredict.Services
 #if DEBUG
 
                     await MaterialDialog.Instance.AlertAsync(flurlException.Message
-                    , $"ErrorCode: {flurlException.Call.Response.StatusCode}");
+                        , $"ErrorCode: {flurlException.Call.Response.StatusCode}",
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
 #else
-					await UserDialogs.Instance.AlertAsync(httpEx.Call.Response.StatusCode.ToString()
-					, $"Service ErrorCode: {flurlException.Call.Response.StatusCode}");
+					await UserDialogs.Instance.AlertAsync(httpEx.Call.Response.StatusCode.ToString(),
+					    $"Service ErrorCode: {flurlException.Call.Response.StatusCode}",
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
 #endif
                 }
             }
@@ -91,7 +103,10 @@ namespace PoseSportsPredict.Services
 
             if (!await CheckInternetConnection())
             {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 return result;
             }
 
@@ -141,7 +156,10 @@ namespace PoseSportsPredict.Services
 
             if (!await CheckInternetConnection())
             {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 return result;
             }
 
@@ -215,7 +233,10 @@ namespace PoseSportsPredict.Services
         {
             if (CrossConnectivity.IsSupported && !CrossConnectivity.Current.IsConnected)
             {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 return false;
             }
 

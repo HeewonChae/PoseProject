@@ -17,6 +17,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
         {
             public long UserNo { get; set; }
             public int RoleType { get; set; }
+            public DateTime LastLoginTime { get; set; }
         }
 
         public override void OnAlloc()
@@ -40,7 +41,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
                     null,
                      (Contexts.PoseGlobalDB pose_globalDB) =>
                      {
-                         _output = pose_globalDB.Query<Output>("SELECT user_no as UserNo, role_type as RoleType FROM user_base WHERE platform_id = @platform_id",
+                         _output = pose_globalDB.Query<Output>("SELECT user_no as UserNo, role_type as RoleType, last_login_date as LastLoginTime FROM user_base WHERE platform_id = @platform_id",
                                                                                new { platform_id = _input }).FirstOrDefault();
 
                          if (_output != null)

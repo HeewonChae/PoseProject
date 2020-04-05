@@ -24,7 +24,7 @@ namespace PoseSportsPredict.Logics.View.Converters
                 return LocalizeString.Tomorrow;
             }
 
-            return localTime.ToString("ddd MM/dd");
+            return localTime.ToString("ddd dd MMM");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

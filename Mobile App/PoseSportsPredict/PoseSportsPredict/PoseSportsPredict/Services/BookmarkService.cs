@@ -2,6 +2,7 @@
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

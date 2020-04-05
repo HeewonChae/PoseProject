@@ -204,4 +204,16 @@
   <data name="Settings" xml:space="preserve">
     <value>設定</value>
   </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="Google" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="Login_With_Facebook" xml:space="preserve">
+    <value>Login with Facebook</value>
+  </data>
+  <data name="Login_With_Google" xml:space="preserve">
+    <value>Login with Google</value>
+  </data>
 </root>

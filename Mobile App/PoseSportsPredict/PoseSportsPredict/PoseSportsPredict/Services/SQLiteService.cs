@@ -1,6 +1,7 @@
 ﻿using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.SQLiteConnection;
 using SQLite;
 using System;
@@ -28,7 +29,10 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 throw;
             }
         }
@@ -41,7 +45,10 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 throw;
             }
         }
@@ -62,7 +69,10 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 throw;
             }
         }
@@ -75,7 +85,10 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 throw;
             }
         }
@@ -88,7 +101,10 @@ namespace PoseSportsPredict.Services
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.AlertAsync(ex.Message);
+                await MaterialDialog.Instance.AlertAsync(ex.Message,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 throw;
             }
         }

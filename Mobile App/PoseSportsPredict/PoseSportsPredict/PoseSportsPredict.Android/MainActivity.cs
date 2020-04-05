@@ -1,28 +1,31 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Widget;
 using Plugin.LocalNotification;
-using PoseSportsPredict.Resources;
 using Shiny;
 
 namespace PoseSportsPredict.Droid
 {
     [Activity(Label = "PoseSportsPredict",
         Icon = "@mipmap/icon_round",
-        Theme = "@style/MainTheme",
-        ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        Theme = "@style/MyTheme.Splash",
+        MainLauncher = true,
+        //ScreenOrientation = ScreenOrientation.Portrait,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         //private bool doubleBackToExitPressedOnce = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //base.Window.RequestFeature(WindowFeatures.ActionBar);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            base.SetTheme(Resource.Style.MainTheme);
 
             base.OnCreate(savedInstanceState);
 

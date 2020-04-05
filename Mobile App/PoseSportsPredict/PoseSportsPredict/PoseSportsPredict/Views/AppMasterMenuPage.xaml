@@ -3,57 +3,147 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="PoseSportsPredict.Views.AppMasterMenuPage"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
-             x:Class="PoseSportsPredict.Views.AppMasterMenuPage"
-             Title="MasterMenu">
+             xmlns:appviews="clr-namespace:PoseSportsPredict.Views"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             Title="MasterMenu"
+             BackgroundColor="White">
     <StackLayout>
-        <ListView
-            x:Name="menuListView"
-            SeparatorVisibility="None"
-            HasUnevenRows="true"
-            ItemsSource="{Binding SportsCategories}">
-            <ListView.Header>
-                <Grid BackgroundColor="{StaticResource PrimaryColor}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
-                    </Grid.ColumnDefinitions>
+        <Grid
+            Margin="15,5"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--App Name-->
+            <StackLayout
+                Grid.Row="0">
+                <Image
+                    Aspect="AspectFit"
+                    HeightRequest="33"
+                    Source="img_poseidon_logo.png">
+                </Image>
+                <BoxView
+                    HeightRequest="0.1"
+                    Color="{StaticResource CustomGrey}">
+                </BoxView>
+            </StackLayout>
+
+            <!--User Info-->
+            <StackLayout
+                Grid.Row="1">
+                <Grid
+                    RowSpacing="0"
+                    ColumnSpacing="10"
+                    Margin="0,5">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="80" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloading:CachedImage
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        DownsampleHeight="150"
+                        DownsampleWidth="150"
+                        DownsampleToViewSize="True"
+                        LoadingPlaceholder="ic_profile.png"
+                        ErrorPlaceholder="ic_profile.png"
+                        Source="{Binding AuthUser.PictureUrl, Converter={StaticResource svgImageSourceConverter}}">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <materialui:MaterialLabel
+                        Grid.Row="0"
                         Grid.Column="1"
-                        Grid.Row="2"
-                        Text="AppName" />
+                        HorizontalOptions="FillAndExpand"
+                        LineBreakMode="TailTruncation"
+                        TypeScale="Body2"
+                        TextColor="{StaticResource TextColor_D}">
+                        <materialui:MaterialLabel.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AuthUser.FirstName}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding AuthUser.LastName}" />
+                            </FormattedString>
+                        </materialui:MaterialLabel.FormattedText>
+                    </materialui:MaterialLabel>
+                    <materialui:MaterialLabel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalOptions="FillAndExpand"
+                        LineBreakMode="TailTruncation"
+                        FontSize="11"
+                        TextColor="{StaticResource CustomGrey}">
+                        <materialui:MaterialLabel.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static localize:LocalizeString.Last_Login}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding LastLoginTime, StringFormat='{0:yyyy.MM.dd HH:mm}'}" />
+                            </FormattedString>
+                        </materialui:MaterialLabel.FormattedText>
+                    </materialui:MaterialLabel>
+                    <ContentView
+                        Grid.RowSpan="2"
+                        Grid.Column="2"
+                        Padding="8"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        effects:TapCommandEffect.Tap="{Binding LogoutCommand}"
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="18"
+                            HeightRequest="18"
+                            Source="ic_logout.png"
+                            effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                        </Image>
+                    </ContentView>
                 </Grid>
-            </ListView.Header>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.25*" />
-                                <ColumnDefinition Width="0.75*" />
-                            </Grid.ColumnDefinitions>
-                            <Image
-                                Source="{Binding IconSource}"
-                                HeightRequest="30"
-                                Margin="20,2,0,0">
-                            </Image>
-                            <Label
-                                Grid.Column="1"
-                                Text="{Binding Title}"
-                                VerticalTextAlignment="Center">
-                            </Label>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                <BoxView
+                    HeightRequest="0.1"
+                    Color="{StaticResource CustomGrey}">
+                </BoxView>
+            </StackLayout>
+
+            <!--Bookmark Info-->
+            <ScrollView Grid.Row="2">
+                <StackLayout Margin="5" Spacing="15">
+                    <appviews:BookmarkMenuListView BindingContext="{Binding BookmarkedLeauges}" />
+                    <appviews:BookmarkMenuListView BindingContext="{Binding BookmarkedTeams}" />
+                </StackLayout>
+            </ScrollView>
+
+            <!--Menu Info-->
+            <StackLayout
+                Grid.Row="3"
+                VerticalOptions="End">
+                <BoxView
+                    HeightRequest="0.1"
+                    Color="{StaticResource CustomGrey}">
+                </BoxView>
+                <Image
+                    Aspect="AspectFit"
+                    HeightRequest="33"
+                    Source="img_poseidon_logo.png">
+                </Image>
+            </StackLayout>
+        </Grid>
     </StackLayout>
 </ContentPage>

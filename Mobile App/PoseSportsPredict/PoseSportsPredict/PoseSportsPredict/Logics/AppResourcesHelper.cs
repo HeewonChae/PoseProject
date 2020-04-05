@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.Logics
@@ -9,6 +10,11 @@ namespace PoseSportsPredict.Logics
         {
             if (Application.Current.Resources.TryGetValue(key, out var value))
             {
+                if (value is OnPlatform<T> onValue)
+                {
+                    return (T)onValue.Platforms.FirstOrDefault(p => p.Platform[0] == Device.RuntimePlatform)?.Value;
+                }
+
                 return (T)value;
             }
 
@@ -19,6 +25,11 @@ namespace PoseSportsPredict.Logics
         {
             if (Application.Current.Resources.TryGetValue(key, out var value))
             {
+                if (value is OnPlatform<Color> onValue)
+                {
+                    return (Color)onValue.Default;
+                }
+
                 return (Color)value;
             }
 

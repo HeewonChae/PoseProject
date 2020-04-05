@@ -2,6 +2,7 @@
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
@@ -27,7 +28,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedLeaguesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(Models.SportsType.Football, Models.BookMarkType.Bookmark_League);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
@@ -160,7 +161,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             if (OnInitializeView())
             {
-                coupledPage.Disappearing += (s, e) => this.OnDisAppearing();
+                this.CoupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
 
@@ -197,7 +198,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             {
                 deleteLeagueInfo.IsBookmarked = false;
 
-                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(deleteLeagueInfo, Models.SportsType.Football, Models.BookMarkType.Bookmark_League);
+                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(deleteLeagueInfo, SportsType.Football, BookMarkType.Bookmark_League);
             }
 
             _DeleteLeagueList.Clear();
@@ -216,6 +217,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             _leagueList.Sort(ShinyHost.Resolve<StoredData_BasicComparer>());
 
             BookmarkedLeagues = new ObservableCollection<FootballLeagueInfo>(_leagueList);
+
+            await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedLeague();
 
             IsEditMode = false;
 

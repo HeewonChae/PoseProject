@@ -44,13 +44,19 @@ namespace PoseSportsPredict.ViewModels
 
             if (string.IsNullOrEmpty(serverPubKey))
             {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 return;
             }
 
             _cryptoService.RSA_FromXmlString(serverPubKey);
             ClientContext.eSignature = _cryptoService.GetEncryptedSignature();
             ClientContext.eSignatureIV = _cryptoService.GetEncryptedSignatureIV();
+
+            // Prepare SingletonPage
+            ShinyHost.Resolve<AppMasterViewModel>();
 
             if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
@@ -61,11 +67,6 @@ namespace PoseSportsPredict.ViewModels
 
             _isLoaded = true;
             OnPropertyChanged("IsLoaded");
-
-            await Task.Delay(300);
-
-            await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
         }
 
         #endregion BaseViewModel

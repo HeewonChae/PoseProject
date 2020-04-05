@@ -70,6 +70,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Poseidon.
+        /// </summary>
+        public static string App_Title {
+            get {
+                return ResourceManager.GetString("App_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Applying.
         /// </summary>
         public static string Applying {
@@ -133,11 +142,47 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to log out?.
+        /// </summary>
+        public static string Do_You_Want_Logout {
+            get {
+                return ResourceManager.GetString("Do_You_Want_Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand all leagues.
         /// </summary>
         public static string Expand_All_Leagues {
             get {
                 return ResourceManager.GetString("Expand_All_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facebook.
+        /// </summary>
+        public static string Facebook {
+            get {
+                return ResourceManager.GetString("Facebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite leagues.
+        /// </summary>
+        public static string Favorite_Leagues {
+            get {
+                return ResourceManager.GetString("Favorite_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorite teams.
+        /// </summary>
+        public static string Favorite_Teams {
+            get {
+                return ResourceManager.GetString("Favorite_Teams", resourceCulture);
             }
         }
         
@@ -160,6 +205,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Google.
+        /// </summary>
+        public static string Google {
+            get {
+                return ResourceManager.GetString("Google", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to H2H.
         /// </summary>
         public static string H2H {
@@ -169,11 +223,38 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last login.
+        /// </summary>
+        public static string Last_Login {
+            get {
+                return ResourceManager.GetString("Last_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Leagues.
         /// </summary>
         public static string Leagues {
             get {
                 return ResourceManager.GetString("Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Facebook.
+        /// </summary>
+        public static string Login_With_Facebook {
+            get {
+                return ResourceManager.GetString("Login_With_Facebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login with Google.
+        /// </summary>
+        public static string Login_With_Google {
+            get {
+                return ResourceManager.GetString("Login_With_Google", resourceCulture);
             }
         }
         
@@ -259,15 +340,6 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Matches Filtering.
-        /// </summary>
-        public static string Matches_Filtering {
-            get {
-                return ResourceManager.GetString("Matches_Filtering", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to There are no bookmarked leagues..
         /// </summary>
         public static string No_Bookmarked_Leagues {
@@ -295,7 +367,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No matches were predicted..
+        ///   Looks up a localized string similar to There are no matches..
         /// </summary>
         public static string No_Match_datas {
             get {
@@ -336,6 +408,15 @@ namespace PoseSportsPredict.Resources {
         public static string Odds {
             get {
                 return ResourceManager.GetString("Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         
@@ -381,6 +462,15 @@ namespace PoseSportsPredict.Resources {
         public static string Recent_Search {
             get {
                 return ResourceManager.GetString("Recent_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        public static string Remember_Account {
+            get {
+                return ResourceManager.GetString("Remember_Account", resourceCulture);
             }
         }
         
@@ -435,6 +525,15 @@ namespace PoseSportsPredict.Resources {
         public static string Search_Results {
             get {
                 return ResourceManager.GetString("Search_Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a filter.
+        /// </summary>
+        public static string Select_Filter {
+            get {
+                return ResourceManager.GetString("Select_Filter", resourceCulture);
             }
         }
         

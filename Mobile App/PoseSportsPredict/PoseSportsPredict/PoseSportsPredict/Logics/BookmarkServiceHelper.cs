@@ -1,5 +1,6 @@
 ﻿using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

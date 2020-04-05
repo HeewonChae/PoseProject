@@ -17,7 +17,7 @@ namespace PoseSportsPredict.Logics.View.Triggers
                 || fixtureDetail.MatchStatus == FootballMatchStatusType.PEN)
                 {
                     sender.Text = $"{fixtureDetail.HomeTeam.Score} - {fixtureDetail.AwayTeam.Score}";
-                    sender.BackgroundColor = AppResourcesHelper.GetResourceColor("CustomGrey");
+                    sender.BackgroundColor = AppResourcesHelper.GetResourceColor("CustomGrey_D");
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace PoseSportsPredict.Logics.View.Triggers
                 || matchInfo.MatchStatus == FootballMatchStatusType.PEN)
                 {
                     sender.Text = $"{matchInfo.HomeScore} - {matchInfo.AwayScore}";
-                    sender.BackgroundColor = AppResourcesHelper.GetResourceColor("CustomGrey");
+                    sender.BackgroundColor = AppResourcesHelper.GetResourceColor("CustomGrey_D");
                 }
                 else
                 {

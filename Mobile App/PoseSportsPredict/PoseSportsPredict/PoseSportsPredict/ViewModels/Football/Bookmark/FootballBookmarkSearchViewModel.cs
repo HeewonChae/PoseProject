@@ -25,11 +25,17 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
     {
         #region NavigableViewModel
 
-        public override async Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
+        {
+            BookmarkSearchTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<ISQLiteStorable>>();
+
+            return true;
+        }
+
+        public override async Task<bool> OnPrepareViewAsync(params object[] datas)
         {
             if (_recentSearchList == null)
             {
-                BookmarkSearchTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<ISQLiteStorable>>();
                 _recentSearchList = await _sqliteService.SelectAllAsync<FootballRecentSearch>();
                 _recentSearchList.Sort(ShinyHost.Resolve<StoredData_InverseDateComparer>());
                 RecentSearches = new ObservableCollection<FootballRecentSearch>(_recentSearchList);
@@ -40,10 +46,10 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override void OnAppearing(params object[] datas)
         {
+            IsSearching = false;
+
             var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
             searchBar.Text = string.Empty;
-
-            IsSearching = false;
         }
 
         #endregion NavigableViewModel
@@ -196,7 +202,10 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             _sqliteService = sqliteService;
             _bookmarkService = bookmarkService;
 
-            CoupledPage.Appearing += (s, e) => this.OnAppearing();
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => this.OnAppearing();
+            }
         }
 
         #endregion Constructors

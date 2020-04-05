@@ -13,34 +13,35 @@
     <ContentView.Content>
         <StackLayout
             x:Name="lv_matches"
+            Spacing="0"
             BindableLayout.ItemsSource="{Binding Matches}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Grid
-                        HeightRequest="47"
-                        Padding="20, 3">
+                        Padding="20, 0"
+                        ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <StackLayout
-                            WidthRequest="50"
                             Grid.Column="0"
                             Orientation="Horizontal"
-                            Margin="0"
                             Padding="0"
-                            Spacing="15"
+                            Spacing="0"
                             IsVisible="{Binding Path=BindingContext.AlarmEditMode, Source={x:Reference lv_matches}}">
+                            <!--Alarm-->
                             <ContentView
+                                Padding="7"
                                 VerticalOptions="Center"
                                 BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchAlarmButtonCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
-                                    HeightRequest="17"
-                                    WidthRequest="17"
-                                    Source="ic_alarm_add2"
+                                    HeightRequest="20"
+                                    WidthRequest="20"
+                                    Source="{Binding IsAlarmed, Converter={StaticResource matchAlarmIconConverter}}"
                                     Aspect="AspectFit"
                                     effects:ImageEffect.TintColor="{Binding IsAlarmed, Converter={StaticResource matchAlarmColorConverter}}">
                                 </Image>
@@ -53,29 +54,37 @@
                                     </DataTrigger>
                                 </ContentView.Triggers>
                             </ContentView>
-                            <customviews:RatingView
+                            <!--Bookmark-->
+                            <ContentView
+                                Padding="7"
                                 VerticalOptions="Center"
-                                HorizontalOptions="CenterAndExpand"
-                                WidthRequest="18"
-                                HeightRequest="18"
-                                StrokeWidth="1.2"
-                                RatingType="Full"
-                                ColorOn="Gold"
-                                OutlineOnColor="Gold"
-                                OutlineOffColor="{StaticResource CustomGrey_L}"
-                                Path="{x:Static customviews:PathConstants.Star}"
-                                Count="1"
-                                Value="{Binding IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}"
+                                BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                            </customviews:RatingView>
+                                <customviews:RatingView
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="20"
+                                    HeightRequest="20"
+                                    StrokeWidth="0.8"
+                                    RatingType="Full"
+                                    ColorOn="{ StaticResource IconActivated}"
+                                    OutlineOnColor="{ StaticResource IconActivated}"
+                                    OutlineOffColor="{StaticResource CustomGrey}"
+                                    Path="{x:Static customviews:PathConstants.Star}"
+                                    Count="1"
+                                    Value="{Binding IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
+                                </customviews:RatingView>
+                            </ContentView>
                         </StackLayout>
                         <Grid
                             Grid.Column="1"
-                            Margin="0,0,6,0"
+                            Margin="0,5"
+                            Padding="0,13"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
-                            effects:TapCommandEffect.TapParameter="{Binding .}">
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
@@ -85,23 +94,23 @@
                             </Grid.ColumnDefinitions>
                             <materialui:MaterialLabel
                                 Grid.Column="0"
-                                LineHeight="0.9"
+                                LineHeight="1"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
                                 LineBreakMode="TailTruncation"
                                 HorizontalTextAlignment="End"
                                 MaxLines="2"
                                 TypeScale="Caption"
-                                TextColor="Black"
-                                LetterSpacing="0.3"
+                                TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding HomeName}">
                             </materialui:MaterialLabel>
+                            <!--HomeLogo-->
                             <ffimageloading:CachedImage
                                 Grid.Column="1"
                                 Margin="3,0"
                                 Aspect="AspectFit"
-                                WidthRequest="28"
-                                HeightRequest="28"
+                                WidthRequest="29"
+                                HeightRequest="29"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
@@ -112,6 +121,7 @@
                                     <fftransformations:CircleTransformation />
                                 </ffimageloading:CachedImage.Transformations>
                             </ffimageloading:CachedImage>
+                            <!--Middle-->
                             <StackLayout
                                 Grid.Column="2"
                                 Spacing="0"
@@ -120,14 +130,14 @@
                                     HorizontalOptions="Center"
                                     VerticalOptions="EndAndExpand"
                                     FontSize="12"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialChip
                                     HorizontalOptions="Center"
                                     VerticalOptions="StartAndExpand"
                                     FontSize="11"
-                                    TextColor="White"
+                                    TextColor="{StaticResource TextColor_L}"
                                     HeightRequest="15">
                                     <materialui:MaterialChip.Triggers>
                                         <EventTrigger Event="BindingContextChanged">
@@ -136,12 +146,13 @@
                                     </materialui:MaterialChip.Triggers>
                                 </materialui:MaterialChip>
                             </StackLayout>
+                            <!--AwayLogo-->
                             <ffimageloading:CachedImage
                                 Grid.Column="3"
                                 Margin="3,0"
                                 Aspect="AspectFit"
-                                WidthRequest="28"
-                                HeightRequest="28"
+                                WidthRequest="29"
+                                HeightRequest="29"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
@@ -154,15 +165,14 @@
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
                                 Grid.Column="4"
-                                LineHeight="0.9"
+                                LineHeight="1"
                                 HorizontalOptions="StartAndExpand"
                                 VerticalOptions="Center"
                                 LineBreakMode="TailTruncation"
                                 HorizontalTextAlignment="Start"
                                 MaxLines="2"
                                 TypeScale="Caption"
-                                TextColor="Black"
-                                LetterSpacing="0.3"
+                                TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding AwayName}">
                             </materialui:MaterialLabel>
                         </Grid>

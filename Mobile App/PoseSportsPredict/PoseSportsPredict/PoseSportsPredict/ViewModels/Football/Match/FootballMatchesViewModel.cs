@@ -7,6 +7,7 @@ using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
@@ -122,7 +123,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 $"{LocalizeString.Match_Sort_By_League} {isLeagueFilter}",
             };
 
-            int intResult = await MaterialDialog.Instance.SelectActionAsync(actions);
+            int intResult = await MaterialDialog.Instance.SelectActionAsync(LocalizeString.Select_Filter, actions);
             if (intResult == -1)
                 return;
 
@@ -189,10 +190,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             _webApiService = webApiService;
             _bookmarkService = bookmarkService;
 
-            if (OnInitializeView())
-            {
-                CoupledPage.Appearing += (s, e) => OnAppearing();
-            }
+            OnInitializeView();
         }
 
         #endregion Constructors
@@ -373,7 +371,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 case MatchFilterType.Bookmark:
                 case MatchFilterType.Ongoing:
                 case MatchFilterType.SortByLeague:
-                    var grouping = matchList.GroupBy(elem => $"{elem.CountryName} - {elem.LeagueName}");
+                    var grouping = matchList.GroupBy(elem => $"{elem.CountryName}. {elem.LeagueName}");
                     foreach (var data in grouping)
                     {
                         result.Add(data.Key, data.ToArray());
@@ -395,8 +393,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private void BookmarkMessageHandler(FootballMatchInfo item)
         {
-            SetIsBusy(true);
-
             if (_matchList?.Count > 0)
             {
                 var foundItem = _matchList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
@@ -406,8 +402,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     foundItem.OnPropertyChanged("IsBookmarked");
                 }
             }
-
-            SetIsBusy(false);
         }
 
         #endregion Methods

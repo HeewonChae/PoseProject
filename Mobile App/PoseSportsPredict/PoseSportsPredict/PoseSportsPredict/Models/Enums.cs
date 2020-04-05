@@ -1,4 +1,4 @@
-﻿namespace PoseSportsPredict.Models
+﻿namespace PoseSportsPredict.Models.Enums
 {
     public enum SportsType
     {

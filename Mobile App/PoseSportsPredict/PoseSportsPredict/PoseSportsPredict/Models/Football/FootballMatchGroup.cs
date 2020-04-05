@@ -25,17 +25,15 @@ namespace PoseSportsPredict.Models
         private bool _expanded;
         private string _title;
         private string _countryLogo;
-        private int _groupHeaderHeight = 33;
 
         #endregion Fields
 
         #region Properties
 
-        public string Title => _title;
+        public string Title { get => _title; set => _title = value; }
         public int MatchCount => FootballMatchListViewModel.MatchCount;
         public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
         public string CountryLogo => _countryLogo;
-        public int GroupHeaderHeight => _groupHeaderHeight;
         public FootballMatchListViewModel FootballMatchListViewModel { get; set; }
 
         public bool Expanded

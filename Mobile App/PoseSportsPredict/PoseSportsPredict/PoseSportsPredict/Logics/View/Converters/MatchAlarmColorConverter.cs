@@ -12,14 +12,14 @@ namespace PoseSportsPredict.Logics.View.Converters
         {
             var isAlarmed = (bool)value;
 
-            return isAlarmed ? Color.Gold : AppResourcesHelper.GetResourceColor("CustomGrey_L");
+            return isAlarmed ? AppResourcesHelper.GetResourceColor("IconActivated") : AppResourcesHelper.GetResourceColor("CustomGrey");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var color = (Color)value;
 
-            return color == Color.Gold ? true : false;
+            return color == AppResourcesHelper.GetResourceColor("IconActivated") ? true : false;
         }
     }
 }

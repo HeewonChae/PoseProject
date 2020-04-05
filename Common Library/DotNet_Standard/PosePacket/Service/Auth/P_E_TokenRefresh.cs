@@ -3,6 +3,6 @@
     public class O_TokenRefresh
     {
         public string PoseToken { get; set; }
-        public int TokenExpireIn { get; set; }
+        public long TokenExpireIn { get; set; }
     }
 }

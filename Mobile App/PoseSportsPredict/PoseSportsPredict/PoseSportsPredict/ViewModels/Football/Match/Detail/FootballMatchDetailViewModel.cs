@@ -5,6 +5,7 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities;
@@ -25,7 +26,24 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
     {
         #region NavigableViewModel
 
-        public override async Task<bool> OnInitializeViewAsync(params object[] datas)
+        public override bool OnInitializeView(params object[] datas)
+        {
+            AlarmIcon = new ChangableIcon(
+                "ic_alarm_selected.png",
+                AppResourcesHelper.GetResourceColor("IconActivated"),
+                "ic_alarm_unselected.png",
+                Color.Black);
+
+            OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>();
+            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
+            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
+            OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>();
+            SelectedViewIndex = 0;
+
+            return true;
+        }
+
+        public override async Task<bool> OnPrepareViewAsync(params object[] datas)
         {
             if (datas == null)
                 return false;
@@ -33,16 +51,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (!(datas[0] is FootballMatchInfo matchInfo))
                 return false;
 
+            MatchInfo = matchInfo;
+
             // Check Bookmark
             var bookmarkedMatch = await _bookmarkService.GetBookmark<FootballMatchInfo>(matchInfo.PrimaryKey);
-            MatchInfo = bookmarkedMatch ?? matchInfo;
+            MatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
 
-            OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>();
-            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
-            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
-            OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>();
-
-            SelectedViewIndex = 0;
+            // Check Alarm
+            AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
 
             return true;
         }
@@ -67,12 +83,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         private FootballMatchDetailH2HViewModel _h2hViewModel;
         private FootballMatchDetailPredictionsViewModel _predictionsViewModel;
         private FootballMatchDetailOddsViewModel _oddsViewModel;
+        private ChangableIcon _alarmIcon;
 
         #endregion Fields
 
         #region Properties
 
-        public Color IsAlarmed => (MatchInfo?.IsAlarmed ?? false) ? Color.White : AppResourcesHelper.GetResourceColor("CustomGrey");
+        public ChangableIcon AlarmIcon { get => _alarmIcon; set => SetValue(ref _alarmIcon, value); }
         public FootballMatchInfo MatchInfo { get => _matchInfo; set => SetValue(ref _matchInfo, value); }
         public int SelectedViewIndex { get => _selectedViewIndex; set => SetValue(ref _selectedViewIndex, value); }
         public FootballMatchDetailOverviewModel OverviewModel { get => _overviewModel; set => SetValue(ref _overviewModel, value); }
@@ -108,27 +125,31 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            DateTime notifyTime = MatchInfo.MatchTime.AddMinutes(-5);
-            if (notifyTime < DateTime.Now)
-                notifyTime = DateTime.Now.AddSeconds(5);
-
             MatchInfo.IsAlarmed = !MatchInfo.IsAlarmed;
-            OnPropertyChanged("IsAlarmed");
 
-            var notification = new NotificationRequest
+            if (MatchInfo.IsAlarmed)
             {
-                NotificationId = MatchInfo.Id,
-                Title = LocalizeString.Match_Begin_Soon,
-                Description = $"{MatchInfo.LeagueName}  -  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
-                ReturningData = MatchInfo.JsonSerialize(),
-                NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
-                Android = new AndroidOptions
-                {
-                    IconName = "ic_soccer_alarm",
-                },
-            };
+                DateTime notifyTime = MatchInfo.MatchTime.AddMinutes(-5);
+                if (notifyTime < DateTime.Now)
+                    notifyTime = DateTime.Now.AddSeconds(5);
 
-            NotificationCenter.Current.Show(notification);
+                var notification = new NotificationRequest
+                {
+                    NotificationId = MatchInfo.Id,
+                    Title = LocalizeString.Match_Begin_Soon,
+                    Description = $"{MatchInfo.LeagueName}  -  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
+                    ReturningData = MatchInfo.JsonSerialize(),
+                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
+                    Android = new AndroidOptions
+                    {
+                        IconName = "ic_soccer_alarm",
+                    },
+                };
+
+                NotificationCenter.Current.Show(notification);
+            }
+
+            AlarmIcon.IsSelected = !AlarmIcon.IsSelected;
 
             var message = MatchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
             UserDialogs.Instance.Toast(message);
@@ -231,7 +252,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         {
             _bookmarkService = bookmarkService;
 
-            CoupledPage.Appearing += (s, e) => OnAppearing();
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => OnAppearing();
+            }
         }
 
         #endregion Constructors

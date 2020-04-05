@@ -12,7 +12,7 @@ namespace PoseSportsPredict.Logics
     {
         public static async Task<bool> SwitchMainPageAsync(NavigableViewModel viewModel, bool isNavPage = false, params object[] prepareData)
         {
-            if (!await viewModel.OnInitializeViewAsync(prepareData))
+            if (!await viewModel.OnPrepareViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             if (Application.Current.MainPage is MasterDetailPage masterPage)
@@ -35,7 +35,7 @@ namespace PoseSportsPredict.Logics
 
         public static async Task<bool> PushNavPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
-            if (!await viewModel.OnInitializeViewAsync(prepareData))
+            if (!await viewModel.OnPrepareViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
@@ -50,7 +50,7 @@ namespace PoseSportsPredict.Logics
 
         public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
-            if (!await viewModel.OnInitializeViewAsync(prepareData))
+            if (!await viewModel.OnPrepareViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
@@ -65,7 +65,7 @@ namespace PoseSportsPredict.Logics
 
         public static async Task<bool> PushPopupAsync(NavigableViewModel viewModel, params object[] prepareData)
         {
-            if (!await viewModel.OnInitializeViewAsync(prepareData))
+            if (!await viewModel.OnPrepareViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             if (viewModel.CoupledPage is PopupPage popupPage)
