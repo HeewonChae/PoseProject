@@ -70,7 +70,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Poseidon.
+        ///   Looks up a localized string similar to Poseidon Picks.
         /// </summary>
         public static string App_Title {
             get {

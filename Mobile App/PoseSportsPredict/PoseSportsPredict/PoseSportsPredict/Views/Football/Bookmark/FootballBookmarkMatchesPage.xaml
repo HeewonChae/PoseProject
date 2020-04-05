@@ -127,7 +127,7 @@
                                         </Grid>
                                         <Grid
                                             VerticalOptions="FillAndExpand"
-                                            Margin="20,0">
+                                            Margin="5,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />

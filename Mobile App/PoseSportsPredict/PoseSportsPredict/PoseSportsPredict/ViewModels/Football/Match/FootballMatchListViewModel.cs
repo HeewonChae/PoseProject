@@ -84,6 +84,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     Android = new AndroidOptions
                     {
                         IconName = "ic_soccer_alarm",
+                        AutoCancel = true,
                     },
                 };
 

@@ -45,7 +45,7 @@ namespace PoseSportsPredict.Droid
 
             LoadApplication(new App());
 
-            NotificationCenter.NotifyNotificationTapped(this.Intent);
+            //NotificationCenter.NotifyNotificationTapped(this.Intent);
         }
 
         private void InitExternModule(Bundle savedInstanceState)
