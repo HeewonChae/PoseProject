@@ -1,5 +1,9 @@
-﻿using PoseSportsPredict.ViewModels.Base;
+﻿using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Utilities.LocalStorage;
+using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views;
 using Shiny;
 using System.Linq;
@@ -34,7 +38,7 @@ namespace PoseSportsPredict.ViewModels
             return Task.FromResult(true);
         }
 
-        public override void OnAppearing(params object[] datas)
+        public override async void OnAppearing(params object[] datas)
         {
             if (this.CoupledPage is AppMasterPage masterPage)
             {

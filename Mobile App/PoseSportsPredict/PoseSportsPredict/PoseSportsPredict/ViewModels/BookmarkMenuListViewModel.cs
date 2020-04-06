@@ -29,9 +29,9 @@ namespace PoseSportsPredict.ViewModels
             _expanded = true;
 
             // Football
-            var message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Bookmark_League);
+            var message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
-            message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Bookmark_Team);
+            message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Team);
             MessagingCenter.Subscribe<BookmarkService, FootballTeamInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
@@ -116,11 +116,11 @@ namespace PoseSportsPredict.ViewModels
 
             switch (BookMarkType)
             {
-                case BookMarkType.Bookmark_League:
+                case BookMarkType.League:
                     await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedLeague();
                     break;
 
-                case BookMarkType.Bookmark_Team:
+                case BookMarkType.Team:
                     await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedTeam();
                     break;
             }

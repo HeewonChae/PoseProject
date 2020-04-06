@@ -43,13 +43,13 @@ namespace PoseSportsPredict.ViewModels
             BookmarkedLeauges = new BookmarkMenuListViewModel()
             {
                 Title = LocalizeString.Favorite_Leagues,
-                BookMarkType = BookMarkType.Bookmark_League,
+                BookMarkType = BookMarkType.League,
             };
 
             BookmarkedTeams = new BookmarkMenuListViewModel()
             {
                 Title = LocalizeString.Favorite_Teams,
-                BookMarkType = BookMarkType.Bookmark_Team,
+                BookMarkType = BookMarkType.Team,
             };
 
             _curActiveSportsType = SportsType.Football;

@@ -24,26 +24,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             for (int i = -3; i <= 3; i++)
             {
-                var matchesPage = ShinyHost.Resolve<FootballMatchesViewModel>()
-                    .SetMatchDate(_curDate.AddDays(i)).CoupledPage;
-
-                if (i == -1)
-                {
-                    matchesPage.Title = LocalizeString.Yesterday;
-                }
-                else if (i == 0)
-                {
-                    matchesPage.Title = LocalizeString.Today;
-                }
-                else if (i == 1)
-                {
-                    matchesPage.Title = LocalizeString.Tomorrow;
-                }
-                else
-                {
-                    matchesPage.Title = _curDate.AddDays(i).ToString("ddd dd MMM");
-                }
-                tabbedPage.Children.Add(matchesPage);
+                tabbedPage.Children.Add(
+                    ShinyHost.Resolve<FootballMatchesViewModel>()
+                    .SetMatchDate(_curDate.AddDays(i)).CoupledPage);
             }
 
             tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today

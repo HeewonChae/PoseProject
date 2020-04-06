@@ -3,6 +3,7 @@ using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities;
+using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
@@ -28,7 +29,7 @@ namespace PoseSportsPredict
             XF.Material.Forms.Material.Init(this);
 
             // Local Notification tap event listener
-            //NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
+            NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
 
             MainPage = ShinyHost.Resolve<LoadingViewModel>().CoupledPage;
         }
@@ -45,14 +46,19 @@ namespace PoseSportsPredict
         {
         }
 
-        private void OnLocalNotificationTapped(NotificationTappedEventArgs e)
+        private async void OnLocalNotificationTapped(NotificationTappedEventArgs e)
         {
-            //// your code goes here
-            //if (Application.Current.MainPage is MasterDetailPage)
-            //{
-            //    await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>()
-            //    , e.Data.JsonDeserialize<FootballMatchInfo>());
-            //}
+            // your code goes here
+            var param = e.Data.JsonDeserialize<FootballMatchInfo>();
+            if (Application.Current.MainPage is NavigationPage
+                && param != null)
+            {
+                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), param);
+            }
+            else if (param != null)
+            {
+                LocalStorage.Storage.AddOrUpdateValue<FootballMatchInfo>(LocalStorageKey.NotifyIntentData, param);
+            }
         }
     }
 }

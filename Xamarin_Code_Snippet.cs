@@ -76,7 +76,3 @@ xmlns:keyboard="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHe
 
 //9. ref binding
 {Binding Path=BindingContext.SelectCountryCommand, Source={x:Reference list_country}}
-
-
-이미지, 글자 사이 스페이싱 15
-북마크 스트로크 0.8 패딩 7

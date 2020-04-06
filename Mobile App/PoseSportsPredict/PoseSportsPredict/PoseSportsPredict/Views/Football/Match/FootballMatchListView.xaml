@@ -48,7 +48,7 @@
                                 <ContentView.Triggers>
                                     <DataTrigger
                                         TargetType="ContentView"
-                                        Binding="{Binding MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                        Binding="{Binding MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
                                         Value="True">
                                         <Setter Property="IsVisible" Value="False" />
                                     </DataTrigger>
@@ -80,8 +80,8 @@
                         </StackLayout>
                         <Grid
                             Grid.Column="1"
-                            Margin="0,5"
-                            Padding="0,13"
+                            Margin="0"
+                            Padding="0,20"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
@@ -100,7 +100,7 @@
                                 LineBreakMode="TailTruncation"
                                 HorizontalTextAlignment="End"
                                 MaxLines="2"
-                                TypeScale="Caption"
+                                TypeScale="Body2"
                                 TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding HomeName}">
                             </materialui:MaterialLabel>
@@ -129,16 +129,16 @@
                                 <materialui:MaterialLabel
                                     HorizontalOptions="Center"
                                     VerticalOptions="EndAndExpand"
-                                    FontSize="12"
+                                    TypeScale="Body2"
                                     TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialChip
                                     HorizontalOptions="Center"
                                     VerticalOptions="StartAndExpand"
-                                    FontSize="11"
+                                    FontSize="12"
                                     TextColor="{StaticResource TextColor_L}"
-                                    HeightRequest="15">
+                                    HeightRequest="17">
                                     <materialui:MaterialChip.Triggers>
                                         <EventTrigger Event="BindingContextChanged">
                                             <triggers:MatchStatusCtxChangeTrigger />
@@ -170,8 +170,8 @@
                                 VerticalOptions="Center"
                                 LineBreakMode="TailTruncation"
                                 HorizontalTextAlignment="Start"
+                                TypeScale="Body2"
                                 MaxLines="2"
-                                TypeScale="Caption"
                                 TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding AwayName}">
                             </materialui:MaterialLabel>

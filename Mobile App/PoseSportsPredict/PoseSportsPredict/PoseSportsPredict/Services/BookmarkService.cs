@@ -21,7 +21,7 @@ namespace PoseSportsPredict.Services
             _sqliteService = sqliteService;
         }
 
-        public async Task<int> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new()
+        public async Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new()
         {
             var ret = await _sqliteService.InsertOrUpdateAsync<T>(item);
             Debug.Assert(ret != 0);
@@ -29,18 +29,18 @@ namespace PoseSportsPredict.Services
             string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
             MessagingCenter.Send(this, message, item);
 
-            return ret;
+            return true;
         }
 
-        public async Task<int> UpdateBookmark<T>(T item) where T : ISQLiteStorable, new()
+        public async Task<bool> UpdateBookmark<T>(T item) where T : ISQLiteStorable, new()
         {
             var ret = await _sqliteService.InsertOrUpdateAsync<T>(item);
             Debug.Assert(ret != 0);
 
-            return ret;
+            return true;
         }
 
-        public async Task<int> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new()
+        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new()
         {
             var ret = await _sqliteService.DeleteAsync<T>(item.PrimaryKey);
             Debug.Assert(ret != 0);
@@ -48,7 +48,7 @@ namespace PoseSportsPredict.Services
             string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
             MessagingCenter.Send(this, message, item);
 
-            return ret;
+            return true;
         }
 
         public async Task<List<T>> GetAllBookmark<T>() where T : ISQLiteStorable, new()

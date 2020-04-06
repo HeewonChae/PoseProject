@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
-using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -58,6 +57,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             MatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
 
             // Check Alarm
+            var notification = await _notificationService.GetNotification(MatchInfo.Id, SportsType.Football, NotificationType.MatchStart);
+            MatchInfo.IsAlarmed = notification != null ? true : false;
+
             AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
 
             return true;
@@ -72,6 +74,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         #region Services
 
         private IBookmarkService _bookmarkService;
+        private INotificationService _notificationService;
 
         #endregion Services
 
@@ -118,7 +121,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public ICommand TouchAlarmButtonCommand { get => new RelayCommand(TouchAlarmButton); }
 
-        private void TouchAlarmButton()
+        private async void TouchAlarmButton()
         {
             if (IsBusy)
                 return;
@@ -133,26 +136,28 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 if (notifyTime < DateTime.Now)
                     notifyTime = DateTime.Now.AddSeconds(5);
 
-                var notification = new NotificationRequest
+                await _notificationService.AddNotification(new NotificationInfo
                 {
-                    NotificationId = MatchInfo.Id,
+                    Id = MatchInfo.Id,
                     Title = LocalizeString.Match_Begin_Soon,
                     Description = $"{MatchInfo.LeagueName}  -  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
-                    ReturningData = MatchInfo.JsonSerialize(),
-                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
-                    Android = new AndroidOptions
-                    {
-                        IconName = "ic_soccer_alarm",
-                    },
-                };
-
-                NotificationCenter.Current.Show(notification);
+                    IntentData = MatchInfo.JsonSerialize(),
+                    IconName = "ic_soccer_alarm",
+                    SportsType = SportsType.Football,
+                    NotificationType = NotificationType.MatchStart,
+                    NotifyTime = notifyTime, // DateTime.Now.AddSeconds(5), // notifyTime,
+                    StoredTime = DateTime.UtcNow,
+                });
             }
-
-            AlarmIcon.IsSelected = !AlarmIcon.IsSelected;
+            else
+            {
+                await _notificationService.DeleteNotification(MatchInfo.Id, SportsType.Football, NotificationType.MatchStart);
+            }
 
             var message = MatchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
             UserDialogs.Instance.Toast(message);
+
+            AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
 
             SetIsBusy(false);
         }
@@ -172,9 +177,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             // Add Bookmark
             if (MatchInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
             else
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
 
             var message = MatchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
@@ -247,9 +252,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         #region Constructors
 
         public FootballMatchDetailViewModel(
-            FootballMatchDetailPage page
-            , IBookmarkService bookmarkService) : base(page)
+            FootballMatchDetailPage page,
+            IBookmarkService bookmarkService,
+            INotificationService notificationService) : base(page)
         {
+            _notificationService = notificationService;
             _bookmarkService = bookmarkService;
 
             if (OnInitializeView())

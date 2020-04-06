@@ -18,7 +18,7 @@ namespace PoseSportsPredict.Utilities
             }
             catch (Exception)
             {
-                return result;
+                return default;
             }
 
             return result;
@@ -37,7 +37,7 @@ namespace PoseSportsPredict.Utilities
             }
             catch (Exception)
             {
-                return result;
+                return default;
             }
 
             return result;

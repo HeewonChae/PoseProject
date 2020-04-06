@@ -37,7 +37,7 @@
                 x:Name="lv_bookmarkedLeagues"
                 EnableDragAndDrop="True"
                 ColumnCount="1"
-                ItemHeight="65"
+                ItemHeight="67"
                 ItemSpacing="0"
                 ListLayout="Grid"
                 ItemsSource="{Binding BookmarkedLeagues}"
@@ -68,8 +68,8 @@
                                         Spacing="15">
                                         <ffimageloading:CachedImage
                                             Aspect="AspectFit"
-                                            HeightRequest="29"
-                                            WidthRequest="29"
+                                            HeightRequest="31"
+                                            WidthRequest="31"
                                             DownsampleHeight="150"
                                             DownsampleWidth="150"
                                             DownsampleToViewSize="True"
@@ -84,13 +84,13 @@
                                             <materialui:MaterialLabel
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding LeagueName}"
-                                                TypeScale="Body2"
+                                                TypeScale="Body1"
                                                 TextColor="{StaticResource TextColor_D}">
                                             </materialui:MaterialLabel>
                                             <materialui:MaterialLabel
                                                 LineBreakMode="TailTruncation"
                                                 TextColor="{StaticResource CustomGrey_D}"
-                                                TypeScale="Caption"
+                                                TypeScale="Body2"
                                                 Text="{Binding CountryName}">
                                             </materialui:MaterialLabel>
                                         </StackLayout>

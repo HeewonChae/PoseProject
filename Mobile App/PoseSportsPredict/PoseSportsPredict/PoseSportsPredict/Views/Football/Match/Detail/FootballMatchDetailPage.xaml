@@ -68,7 +68,7 @@
                             <ContentView.Triggers>
                                 <DataTrigger
                                     TargetType="ContentView"
-                                    Binding="{Binding MatchInfo.MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                    Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
                                     Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
@@ -132,15 +132,13 @@
                             </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
-                            WidthRequest="90"
-                            Margin="0,-3"
+                            WidthRequest="95"
                             VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
-                            LineHeight="0.9"
                             MaxLines="2"
-                            LetterSpacing="0.3"
+                            LineHeight="1"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.HomeName}">
                         </materialui:MaterialLabel>
@@ -151,12 +149,11 @@
                     <StackLayout
                         Grid.Column="1"
                         Spacing="0"
-                        Margin="5,0"
-                        MinimumWidthRequest="141">
+                        Margin="7,0">
                         <StackLayout.Triggers>
                             <DataTrigger
                                 TargetType="StackLayout"
-                                Binding="{Binding MatchInfo.MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
                                 Value="True">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
@@ -181,7 +178,7 @@
                         <materialui:MaterialLabel
                             VerticalOptions="EndAndExpand"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Caption"
+                            TypeScale="Body2"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.MatchTime, Converter={StaticResource dateToStringConverter}}">
                         </materialui:MaterialLabel>
@@ -190,12 +187,11 @@
                     <StackLayout
                         Grid.Column="1"
                         Spacing="0"
-                        Margin="5,0"
-                        MinimumWidthRequest="141">
+                        Margin="7,0">
                         <StackLayout.Triggers>
                             <DataTrigger
                                 TargetType="StackLayout"
-                                Binding="{Binding MatchInfo.MatchStatus, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
                                 Value="False">
                                 <Setter Property="IsVisible" Value="False" />
                             </DataTrigger>
@@ -211,33 +207,22 @@
                             effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey}">
                         </materialui:MaterialLabel>
-                        <StackLayout
-                            Spacing="0"
-                            Orientation="Horizontal">
-                            <materialui:MaterialLabel
-                                HorizontalOptions="EndAndExpand"
-                                TypeScale="H6"
-                                TextColor="{StaticResource TextColor_L}"
-                                Text="{Binding MatchInfo.HomeScore}">
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                                HorizontalOptions="CenterAndExpand"
-                                Margin="15,0"
-                                TypeScale="H6"
-                                TextColor="{StaticResource TextColor_L}"
-                                Text=":">
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                                HorizontalOptions="StartAndExpand"
-                                TypeScale="H6"
-                                TextColor="{StaticResource TextColor_L}"
-                                Text="{Binding MatchInfo.AwayScore}">
-                            </materialui:MaterialLabel>
-                        </StackLayout>
+                        <materialui:MaterialLabel
+                            HorizontalOptions="Center"
+                            TypeScale="H6"
+                            TextColor="{StaticResource TextColor_L}">
+                            <materialui:MaterialLabel.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding MatchInfo.HomeScore}" />
+                                    <Span Text="   :   " />
+                                    <Span Text="{Binding MatchInfo.AwayScore}" />
+                                </FormattedString>
+                            </materialui:MaterialLabel.FormattedText>
+                        </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             VerticalOptions="EndAndExpand"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Caption"
+                            TypeScale="Body2"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
                         </materialui:MaterialLabel>
@@ -266,15 +251,13 @@
                             </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
-                            Margin="0,-3"
-                            WidthRequest="90"
-                            HeightRequest="29"
+                            WidthRequest="95"
+                            VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
-                            LineHeight="0.9"
                             MaxLines="2"
-                            LetterSpacing="0.3"
+                            LineHeight="1"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.AwayName}">
                         </materialui:MaterialLabel>
@@ -292,15 +275,15 @@
                     Grid.Row="2"
                     x:Name="_tabHost"
                     TabType="Fixed"
-                    HeightRequest="38"
-                    Margin="0,-6,0,0"
+                    HeightRequest="39"
+                    Margin="0,-7,0,0"
                     ShadowType="Bottom"
                     SelectedIndex="{Binding Source={x:Reference _switcher}, Path=SelectedIndex, Mode=TwoWay}">
                     <tabs:TabHostView.Tabs>
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}"     LabelSize="12" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}"          LabelSize="12" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}"  LabelSize="12" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}"         LabelSize="12" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}"     LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}"          LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}"  LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}"         LabelSize="14" />
                     </tabs:TabHostView.Tabs>
                 </tabs:TabHostView>
             </Grid>

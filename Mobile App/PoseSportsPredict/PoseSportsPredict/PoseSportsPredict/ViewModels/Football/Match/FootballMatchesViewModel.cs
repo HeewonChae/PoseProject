@@ -41,10 +41,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         {
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Bookmark_Match);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
+
             _alarmEditMode = false;
+            _lastUpdateTime = DateTime.MinValue;
 
             return true;
         }
@@ -68,6 +72,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private IWebApiService _webApiService;
         private IBookmarkService _bookmarkService;
+        private INotificationService _notificationService;
 
         #endregion Services
 
@@ -185,10 +190,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public FootballMatchesViewModel(
             FootballMatchesPage page,
             IWebApiService webApiService,
-            IBookmarkService bookmarkService) : base(page)
+            IBookmarkService bookmarkService,
+            INotificationService notificationService) : base(page)
         {
             _webApiService = webApiService;
             _bookmarkService = bookmarkService;
+            _notificationService = notificationService;
 
             OnInitializeView();
         }
@@ -199,7 +206,25 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public FootballMatchesViewModel SetMatchDate(DateTime date)
         {
+            _lastUpdateTime = DateTime.MinValue;
             _matchDate = date;
+
+            if (_matchDate == DateTime.Now.Date.AddDays(-1))
+            {
+                this.CoupledPage.Title = LocalizeString.Yesterday;
+            }
+            else if (_matchDate == DateTime.Now.Date)
+            {
+                this.CoupledPage.Title = LocalizeString.Today;
+            }
+            else if (_matchDate == DateTime.Now.Date.AddDays(1))
+            {
+                this.CoupledPage.Title = LocalizeString.Tomorrow;
+            }
+            else
+            {
+                this.CoupledPage.Title = _matchDate.ToString("ddd dd MMM");
+            }
             return this;
         }
 
@@ -226,6 +251,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             _matchList = new List<FootballMatchInfo>();
 
             var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
+            var notifications = await _notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart);
             foreach (var fixture in result.Fixtures)
             {
                 var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(
@@ -235,8 +261,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                                     CultureInfo.CurrentCulture) as FootballMatchInfo;
 
                 var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
+                var notifiedMatch = notifications.FirstOrDefault(elem => elem.Id == convertedMatchInfo.Id);
 
                 convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+                convertedMatchInfo.IsAlarmed = notifiedMatch != null ? true : false;
 
                 _matchList.Add(convertedMatchInfo);
             }
@@ -395,11 +423,24 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         {
             if (_matchList?.Count > 0)
             {
-                var foundItem = _matchList.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
+                var foundItem = _matchList.FirstOrDefault(elem => elem.PrimaryKey.Equals(item.PrimaryKey));
                 if (foundItem != null)
                 {
                     foundItem.IsBookmarked = item.IsBookmarked;
                     foundItem.OnPropertyChanged("IsBookmarked");
+                }
+            }
+        }
+
+        private void NotificationMessageHandler(NotificationInfo item)
+        {
+            if (_matchList?.Count > 0)
+            {
+                var foundItem = _matchList.FirstOrDefault(elem => elem.PrimaryKey.Equals(item.Id.ToString()));
+                if (foundItem != null)
+                {
+                    foundItem.IsAlarmed = item.IsAlarmed;
+                    foundItem.OnPropertyChanged("IsAlarmed");
                 }
             }
         }

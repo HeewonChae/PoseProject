@@ -6,10 +6,12 @@ using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views;
 using Shiny;
 using System;
@@ -133,6 +135,14 @@ namespace PoseSportsPredict.ViewModels
 
             await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
             await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
+
+            // Setup NotiData
+            LocalStorage.Storage.GetValueOrDefault<FootballMatchInfo>(LocalStorageKey.NotifyIntentData, out FootballMatchInfo notiIntentData);
+            if (notiIntentData != null)
+            {
+                LocalStorage.Storage.Remove(LocalStorageKey.NotifyIntentData);
+                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), notiIntentData);
+            }
 
             SetIsBusy(false);
             return true;

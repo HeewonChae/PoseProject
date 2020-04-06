@@ -21,8 +21,13 @@
 
     public enum BookMarkType
     {
-        Bookmark_Match,
-        Bookmark_League,
-        Bookmark_Team,
+        Match,
+        League,
+        Team,
+    }
+
+    public enum NotificationType
+    {
+        MatchStart
     }
 }

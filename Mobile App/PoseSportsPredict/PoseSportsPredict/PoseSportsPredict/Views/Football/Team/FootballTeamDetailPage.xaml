@@ -123,7 +123,7 @@
                         <materialui:MaterialLabel
                             HorizontalTextAlignment="Start"
                             LineBreakMode="TailTruncation"
-                            TypeScale="Caption"
+                            TypeScale="Body2"
                             MaxLines="1"
                             TextColor="{StaticResource TransparentWhite}"
                             Text="{Binding TeamInfo.CountryName}">
@@ -142,14 +142,14 @@
                     Grid.Row="2"
                     x:Name="_tabHost"
                     TabType="Fixed"
-                    Margin="0,-6,0,0"
-                    HeightRequest="38"
+                    HeightRequest="39"
+                    Margin="0,-7,0,0"
                     ShadowType="Bottom"
                     SelectedIndex="{Binding Source={x:Reference _switcher}, Path=SelectedIndex, Mode=TwoWay}">
                     <tabs:TabHostView.Tabs>
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" LabelSize="12" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Scheduled_Matches}" LabelSize="12" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Finished_Matches}" LabelSize="12" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Scheduled_Matches}" LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Finished_Matches}" LabelSize="14" />
                     </tabs:TabHostView.Tabs>
                 </tabs:TabHostView>
             </Grid>

@@ -1,10 +1,14 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Widget;
 using Plugin.LocalNotification;
+using PoseSportsPredict.Resources;
 using Shiny;
+using System.Linq;
 
 namespace PoseSportsPredict.Droid
 {
@@ -16,7 +20,7 @@ namespace PoseSportsPredict.Droid
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        //private bool doubleBackToExitPressedOnce = false;
+        private bool doubleBackToExitPressedOnce = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,7 +49,13 @@ namespace PoseSportsPredict.Droid
 
             LoadApplication(new App());
 
-            //NotificationCenter.NotifyNotificationTapped(this.Intent);
+            NotificationCenter.NotifyNotificationTapped(this.Intent);
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            NotificationCenter.NotifyNotificationTapped(intent);
+            base.OnNewIntent(intent);
         }
 
         private void InitExternModule(Bundle savedInstanceState)
@@ -73,34 +83,37 @@ namespace PoseSportsPredict.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        //public override void OnBackPressed()
-        //{
-        //    if (doubleBackToExitPressedOnce)
-        //    {
-        //        base.OnBackPressed();
-        //        Java.Lang.JavaSystem.Exit(0);
-        //        return;
-        //    }
-
-        //    this.doubleBackToExitPressedOnce = true;
-        //    string message = LocalizeString.PressBack_Twice_To_Exit;
-        //    Toast.MakeText(this, message, ToastLength.Short).Show();
-
-        //    new Handler().PostDelayed(() =>
-        //    {
-        //        doubleBackToExitPressedOnce = false;
-        //    }, 2000);
-        //}
-
-        public override void OnBackPressed()
+        public async override void OnBackPressed()
         {
-            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            if (Rg.Plugins.Popup.Popup.SendBackPressed())
             {
                 // Do something if there are some pages in the `PopupStack`
             }
             else
             {
-                // Do something if there are not any pages in the `PopupStack`
+                if (Xamarin.Forms.Application.Current.MainPage.Navigation is Xamarin.Forms.INavigation nav
+                    && nav.NavigationStack.Count > 1)
+                {
+                    await nav.PopAsync();
+
+                    return;
+                }
+
+                if (doubleBackToExitPressedOnce)
+                {
+                    base.OnBackPressed();
+                    Java.Lang.JavaSystem.Exit(0);
+                    return;
+                }
+
+                this.doubleBackToExitPressedOnce = true;
+                string message = LocalizeString.PressBack_Twice_To_Exit;
+                Toast.MakeText(this, message, ToastLength.Short).Show();
+
+                new Handler().PostDelayed(() =>
+                {
+                    doubleBackToExitPressedOnce = false;
+                }, 2000);
             }
         }
     }

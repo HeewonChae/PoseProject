@@ -39,7 +39,7 @@
                 x:Name="lv_bookmarkedMatches"
                 EnableDragAndDrop="False"
                 ColumnCount="1"
-                ItemHeight="100"
+                ItemHeight="105"
                 ItemSpacing="0"
                 ListLayout="Grid"
                 ItemsSource="{Binding BookmarkedMatches}"
@@ -68,14 +68,8 @@
                                                 <ColumnDefinition />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            <materialui:MaterialLabel
-                                                Grid.Row="0"
-                                                TextColor="{StaticResource CustomGrey_D}"
-                                                TypeScale="Caption"
-                                                Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
-                                            </materialui:MaterialLabel>
                                             <StackLayout
-                                                Grid.Row="1"
+                                                Grid.Row="0"
                                                 Orientation="Horizontal"
                                                 Spacing="10">
                                                 <ffimageloading:CachedImage
@@ -106,6 +100,12 @@
                                                     </materialui:MaterialLabel.FormattedText>
                                                 </materialui:MaterialLabel>
                                             </StackLayout>
+                                            <materialui:MaterialLabel
+                                                Grid.Row="1"
+                                                TextColor="{StaticResource CustomGrey_D}"
+                                                TypeScale="Caption"
+                                                Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
+                                            </materialui:MaterialLabel>
                                             <ContentView
                                                 Grid.Row="0"
                                                 Grid.Column="1"
@@ -143,7 +143,7 @@
                                                 LineBreakMode="TailTruncation"
                                                 HorizontalTextAlignment="End"
                                                 MaxLines="2"
-                                                TypeScale="Caption"
+                                                TypeScale="Body2"
                                                 TextColor="{StaticResource TextColor_D}"
                                                 Text="{Binding HomeName}">
                                             </materialui:MaterialLabel>
@@ -170,16 +170,16 @@
                                                 <materialui:MaterialLabel
                                                     HorizontalOptions="Center"
                                                     VerticalOptions="EndAndExpand"
-                                                    FontSize="12"
+                                                    TypeScale="Body2"
                                                     TextColor="{StaticResource CustomGrey_D}"
                                                     Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                                 </materialui:MaterialLabel>
                                                 <materialui:MaterialChip
                                                     HorizontalOptions="Center"
                                                     VerticalOptions="StartAndExpand"
-                                                    FontSize="11"
+                                                    FontSize="12"
                                                     TextColor="{StaticResource TextColor_L}"
-                                                    HeightRequest="15">
+                                                    HeightRequest="17">
                                                     <materialui:MaterialChip.Triggers>
                                                         <EventTrigger Event="BindingContextChanged">
                                                             <triggers:MatchStatusCtxChangeTrigger />
@@ -211,7 +211,7 @@
                                                 LineBreakMode="TailTruncation"
                                                 HorizontalTextAlignment="Start"
                                                 MaxLines="2"
-                                                TypeScale="Caption"
+                                                TypeScale="Body2"
                                                 TextColor="{StaticResource TextColor_D}"
                                                 Text="{Binding AwayName}">
                                             </materialui:MaterialLabel>

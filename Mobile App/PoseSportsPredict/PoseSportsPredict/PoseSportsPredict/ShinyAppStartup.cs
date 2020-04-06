@@ -53,6 +53,7 @@ namespace PoseSportsPredict
             services.AddSingleton<ISQLiteService, SQLiteService>();
             services.AddSingleton<IOAuthService, ExternOAuthService>();
             services.AddSingleton<IBookmarkService, BookmarkService>();
+            services.AddSingleton<INotificationService, NotificationService>();
         }
 
         private void RegisterConverters(IServiceCollection services)

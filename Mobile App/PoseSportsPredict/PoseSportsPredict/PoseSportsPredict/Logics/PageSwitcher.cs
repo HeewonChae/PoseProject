@@ -48,20 +48,20 @@ namespace PoseSportsPredict.Logics
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 
-        public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
-        {
-            if (!await viewModel.OnPrepareViewAsync(prepareData))
-                throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
+        //public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)
+        //{
+        //    if (!await viewModel.OnPrepareViewAsync(prepareData))
+        //        throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
-            await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
+        //    await Application.Current.MainPage.Navigation.PushModalAsync(new MaterialNavigationPage(viewModel.CoupledPage));
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        public static async Task PopModalPageAsync()
-        {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
-        }
+        //public static async Task PopModalPageAsync()
+        //{
+        //    await Application.Current.MainPage.Navigation.PopModalAsync();
+        //}
 
         public static async Task<bool> PushPopupAsync(NavigableViewModel viewModel, params object[] prepareData)
         {

@@ -130,7 +130,7 @@ namespace SportsAdminTool
             this._progRing_collectDatasAndPredict.IsActive = false;
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(6) - DateTime.Now; // 6시간 후
+            TimeSpan ts = DateTime.Now.AddHours(3) - DateTime.Now; // 3시간 후
             alarm.SetAlarm((long)ts.TotalMilliseconds);
         }
 

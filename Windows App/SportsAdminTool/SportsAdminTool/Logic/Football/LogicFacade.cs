@@ -147,8 +147,6 @@ namespace SportsAdminTool.Logic.Football
         public static bool UpdateStandings(short leagueId)
         {
             var db_league = Database.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault();
-            //if (db_league?.type.Equals("Cup") ?? false)
-            //    return true;
 
             // Call API
             var api_standings = Singleton.Get<ApiLogic.FootballWebAPI>().GetStandingsByLeagueId(leagueId);

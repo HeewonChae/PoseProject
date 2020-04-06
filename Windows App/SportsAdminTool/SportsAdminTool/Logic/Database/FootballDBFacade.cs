@@ -277,6 +277,7 @@ namespace SportsAdminTool.Logic.Database
             sb.Append("VALUES");
 
             int rowCnt = 0;
+            int errorCnt = 0;
             for (int i = 0; i < standingsies.Length; i++)
             {
                 var Standings = standingsies[i];
@@ -292,7 +293,10 @@ namespace SportsAdminTool.Logic.Database
                 }
 
                 if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)Standings.TeamId, Standings.TeamName, leagueId, countryName, true))
+                {
+                    errorCnt++;
                     continue;
+                }
 
                 sb.Append($"({leagueId}, " +
                     $"{Standings.TeamId}, " +
@@ -330,7 +334,7 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.Standings.goals_against)} = VALUES({nameof(FootballDB.Tables.Standings.goals_against)}), " +
                 $"{nameof(FootballDB.Tables.Standings.upt_time)} = VALUES({nameof(FootballDB.Tables.Standings.upt_time)});");
 
-            return ExecuteQuery(sb.ToString());
+            return ExecuteQuery(sb.ToString()) && errorCnt == 0;
         }
 
         public static bool UpdateFixture(params AppModel.Football.Fixture[] fixtures)

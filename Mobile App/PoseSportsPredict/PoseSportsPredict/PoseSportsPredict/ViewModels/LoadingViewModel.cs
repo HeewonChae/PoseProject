@@ -58,6 +58,9 @@ namespace PoseSportsPredict.ViewModels
             // Prepare SingletonPage
             ShinyHost.Resolve<AppMasterViewModel>();
 
+            // Notify Init
+            await _notificationService.Initialize();
+
             if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
             {
@@ -75,6 +78,7 @@ namespace PoseSportsPredict.ViewModels
 
         private IWebApiService _webApiService;
         private IOAuthService _OAuthService;
+        private INotificationService _notificationService;
         private CryptoService _cryptoService;
 
         #endregion Services
@@ -95,8 +99,10 @@ namespace PoseSportsPredict.ViewModels
             LoadingPage coupledPage,
             CryptoService cryptoService,
             IWebApiService webApiService,
-            IOAuthService OAuthService) : base(coupledPage)
+            IOAuthService OAuthService,
+            INotificationService notificationService) : base(coupledPage)
         {
+            _notificationService = notificationService;
             _cryptoService = cryptoService;
             _webApiService = webApiService;
             _OAuthService = OAuthService;

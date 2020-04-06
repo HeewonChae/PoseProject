@@ -33,7 +33,7 @@ namespace PoseSportsPredict.Models.Football
         public DateTime StoredTime { get; set; }
         public string ShortName { get => TeamName; }
         public string Logo { get => TeamLogo; }
-        public BookMarkType BookMarkType { get => BookMarkType.Bookmark_Team; }
+        public BookMarkType BookMarkType { get => BookMarkType.Team; }
 
         #endregion IBookmarkMenuItem
 

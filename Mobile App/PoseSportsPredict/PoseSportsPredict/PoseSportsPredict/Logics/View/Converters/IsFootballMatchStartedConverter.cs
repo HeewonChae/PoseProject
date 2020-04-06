@@ -10,19 +10,14 @@ namespace PoseSportsPredict.Logics.View.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var matchStatus = value.ToString();
+            var matchTime = (DateTime)value;
 
-            matchStatus.TryParseEnum(out FootballMatchStatusType statusType);
-
-            if (statusType == FootballMatchStatusType.NS)
-                return false;
-
-            return true;
+            return matchTime < DateTime.Now;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "";
+            return DateTime.Now;
         }
     }
 }

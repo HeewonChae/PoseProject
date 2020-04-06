@@ -1,9 +1,8 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
-using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
@@ -22,7 +21,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
     {
         #region Services
 
-        public IBookmarkService _bookmarkService;
+        private IBookmarkService _bookmarkService;
+        private INotificationService _notificationService;
 
         #endregion Services
 
@@ -59,7 +59,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public ICommand TouchAlarmButtonCommand { get => new RelayCommand<FootballMatchInfo>((e) => TouchAlarmButton(e)); }
 
-        private void TouchAlarmButton(FootballMatchInfo matchInfo)
+        private async void TouchAlarmButton(FootballMatchInfo matchInfo)
         {
             if (IsBusy)
                 return;
@@ -74,24 +74,23 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 if (notifyTime < DateTime.Now)
                     notifyTime = DateTime.Now.AddSeconds(5);
 
-                var notification = new NotificationRequest
+                await _notificationService.AddNotification(new NotificationInfo
                 {
-                    NotificationId = matchInfo.Id,
+                    Id = matchInfo.Id,
                     Title = LocalizeString.Match_Begin_Soon,
-                    Description = $"{matchInfo.HomeName} vs {matchInfo.AwayName}",
-                    ReturningData = matchInfo.JsonSerialize(),
-                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime
-                    Android = new AndroidOptions
-                    {
-                        IconName = "ic_soccer_alarm",
-                        AutoCancel = true,
-                    },
-                };
-
-                NotificationCenter.Current.Show(notification);
+                    Description = $"{matchInfo.LeagueName}  -  {matchInfo.HomeName}  vs  {matchInfo.AwayName}",
+                    IntentData = matchInfo.JsonSerialize(),
+                    IconName = "ic_soccer_alarm",
+                    SportsType = SportsType.Football,
+                    NotificationType = NotificationType.MatchStart,
+                    NotifyTime = notifyTime, // DateTime.Now.AddSeconds(5), // notifyTime,
+                    StoredTime = DateTime.UtcNow,
+                });
             }
-
-            matchInfo.OnPropertyChanged("IsAlarmed");
+            else
+            {
+                await _notificationService.DeleteNotification(matchInfo.Id, SportsType.Football, NotificationType.MatchStart);
+            }
 
             var message = matchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
             UserDialogs.Instance.Toast(message);
@@ -114,9 +113,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             // Add Bookmark
             if (matchInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
             else
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Bookmark_Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
 
             var message = matchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
@@ -130,9 +129,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Constructors
 
-        public FootballMatchListViewModel(IBookmarkService bookmarkService)
+        public FootballMatchListViewModel(
+            IBookmarkService bookmarkService,
+            INotificationService notificationService)
         {
             _bookmarkService = bookmarkService;
+            _notificationService = notificationService;
         }
 
         #endregion Constructors
