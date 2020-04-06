@@ -106,21 +106,43 @@ namespace PoseSportsPredict.ViewModels
 
         #region Methods
 
-        public async Task<bool> PoseLogin()
+        public async Task<bool> PoseLogin(bool showIndicator = true)
         {
             SetIsBusy(true);
 
-            var loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+            O_Login loginResult = null;
+
+            if (showIndicator)
             {
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = AuthProxy.ServiceUrl,
-                SegmentGroup = AuthProxy.P_E_Login,
-                PostData = new I_Login
+                using (UserDialogs.Instance.Loading(LocalizeString.Loginning))
                 {
-                    PlatformId = _OAuthService.AuthenticatedUser.Id,
+                    loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+                    {
+                        MethodType = WebMethodType.POST,
+                        BaseUrl = AppConfig.PoseWebBaseUrl,
+                        ServiceUrl = AuthProxy.ServiceUrl,
+                        SegmentGroup = AuthProxy.P_E_Login,
+                        PostData = new I_Login
+                        {
+                            PlatformId = _OAuthService.AuthenticatedUser.Id,
+                        }
+                    });
                 }
-            });
+            }
+            else
+            {
+                loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+                {
+                    MethodType = WebMethodType.POST,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = AuthProxy.ServiceUrl,
+                    SegmentGroup = AuthProxy.P_E_Login,
+                    PostData = new I_Login
+                    {
+                        PlatformId = _OAuthService.AuthenticatedUser.Id,
+                    }
+                });
+            }
 
             if (loginResult == null)
             {
@@ -146,16 +168,6 @@ namespace PoseSportsPredict.ViewModels
 
             SetIsBusy(false);
             return true;
-        }
-
-        public override void SetIsBusy(bool isBusy)
-        {
-            base.SetIsBusy(isBusy);
-
-            if (isBusy)
-                UserDialogs.Instance.ShowLoading(LocalizeString.Loginning);
-            else
-                UserDialogs.Instance.HideLoading();
         }
 
         #endregion Methods

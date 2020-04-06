@@ -107,11 +107,13 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <!--Home Team-->
                     <StackLayout
-                        Grid.Column="0"
+                        Grid.Column="1"
                         Spacing="0"
                         HorizontalOptions="End"
                         effects:TapCommandEffect.Tap="{Binding HomeTeamLogoClickCommand}"
@@ -132,7 +134,7 @@
                             </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
-                            WidthRequest="95"
+                            WidthRequest="90"
                             VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
@@ -147,7 +149,7 @@
                     <!--Match Summary-->
                     <!--For NS Match-->
                     <StackLayout
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Spacing="0"
                         Margin="7,0">
                         <StackLayout.Triggers>
@@ -167,7 +169,7 @@
                             Text="{Binding MatchInfo.LeagueName}"
                             effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
                             effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey}">
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             HorizontalTextAlignment="Center"
@@ -178,14 +180,15 @@
                         <materialui:MaterialLabel
                             VerticalOptions="EndAndExpand"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
+                            TypeScale="Subtitle2"
+                            FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.MatchTime, Converter={StaticResource dateToStringConverter}}">
                         </materialui:MaterialLabel>
                     </StackLayout>
                     <!--For Started Match-->
                     <StackLayout
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Spacing="0"
                         Margin="7,0">
                         <StackLayout.Triggers>
@@ -205,7 +208,7 @@
                             Text="{Binding MatchInfo.LeagueName}"
                             effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
                             effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey}">
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             HorizontalOptions="Center"
@@ -222,7 +225,8 @@
                         <materialui:MaterialLabel
                             VerticalOptions="EndAndExpand"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
+                            TypeScale="Subtitle2"
+                            FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
                         </materialui:MaterialLabel>
@@ -230,7 +234,7 @@
 
                     <!--Away Team-->
                     <StackLayout
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Spacing="0"
                         HorizontalOptions="Start"
                         effects:TapCommandEffect.Tap="{Binding AwayTeamLogoClickCommand}"
@@ -251,7 +255,7 @@
                             </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
-                            WidthRequest="95"
+                            WidthRequest="90"
                             VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
@@ -264,7 +268,7 @@
                     </StackLayout>
                     <BoxView
                         Grid.Row="1"
-                        Grid.ColumnSpan="3"
+                        Grid.ColumnSpan="5"
                         HeightRequest="0.1"
                         Color="{StaticResource TransparentWhite}">
                     </BoxView>

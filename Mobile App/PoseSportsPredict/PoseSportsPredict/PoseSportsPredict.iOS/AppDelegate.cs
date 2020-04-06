@@ -49,6 +49,7 @@ namespace PoseSportsPredict.iOS
             Sharpnado.Presentation.Forms.iOS.SharpnadoInitializer.Initialize();
             FFImageLoading.FormsHandler.Init(debug: false);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Xam.Plugin.iOS.PopupEffect.Init();
         }
 
         private void InitShiny()

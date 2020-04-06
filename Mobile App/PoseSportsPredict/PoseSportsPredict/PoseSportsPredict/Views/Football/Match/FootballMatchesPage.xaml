@@ -33,7 +33,7 @@
                         <StackLayout
                             VerticalOptions="Center"
                             Orientation="Horizontal"
-                            Padding="20,10"
+                            Padding="20,11"
                             Spacing="15"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -55,7 +55,7 @@
                             <materialui:MaterialLabel
                                 VerticalOptions="Center"
                                 LineBreakMode="TailTruncation"
-                                TypeScale="Body2"
+                                TypeScale="Subtitle1"
                                 TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding Title}">
                             </materialui:MaterialLabel>
@@ -71,7 +71,7 @@
                                 BackgroundColor="{StaticResource CustomGrey}">
                                 <materialui:MaterialLabel
                                     Text="{Binding MatchCount}"
-                                    TypeScale="Overline"
+                                    TypeScale="Caption"
                                     TextColor="White"
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center">
@@ -111,7 +111,7 @@
                                 <StackLayout
                                     VerticalOptions="Center"
                                     Orientation="Horizontal"
-                                    Padding="20,10"
+                                    Padding="20,11"
                                     Spacing="15">
                                     <ffimageloading:CachedImage
                                         Aspect="AspectFit"
@@ -130,7 +130,7 @@
                                     <materialui:MaterialLabel
                                         VerticalOptions="Center"
                                         LineBreakMode="TailTruncation"
-                                        TypeScale="Body2"
+                                        TypeScale="Subtitle1"
                                         TextColor="{StaticResource TextColor_D}"
                                         Text="{Binding Title}">
                                     </materialui:MaterialLabel>

@@ -45,7 +45,7 @@ namespace Repository.Mysql.FootballDB.Procedures
             sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");
             sb.Append($"INNER JOIN team as ht on f.{nameof(Fixture.home_team_id)} = ht.{nameof(Team.id)} ");
             sb.Append($"INNER JOIN team as at on f.{nameof(Fixture.away_team_id)} = at.{nameof(Team.id)} ");
-            sb.Append($"WHERE f.{nameof(Fixture.is_predicted)} AND f.{nameof(Fixture.match_time)} BETWEEN \"{_input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{_input.EndTime.ToString("yyyyMMddTHHmmss")}\";");
+            sb.Append($"WHERE f.{nameof(Fixture.match_time)} BETWEEN \"{_input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{_input.EndTime.ToString("yyyyMMddTHHmmss")}\" AND l.{nameof(League.is_predict_coverage)} = 1 ;");
 
             queryString = sb.ToString();
         }

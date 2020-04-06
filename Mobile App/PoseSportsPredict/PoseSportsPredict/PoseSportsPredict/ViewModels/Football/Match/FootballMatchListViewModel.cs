@@ -11,9 +11,12 @@ using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Xam.Plugin;
 using Xamarin.Forms;
+using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels.Football.Match
 {
@@ -37,6 +40,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public int MatchCount => Matches?.Count ?? 0;
         public bool AlarmEditMode { get => _alarmEditMode; set => SetValue(ref _alarmEditMode, value); }
         public ObservableCollection<FootballMatchInfo> Matches { get; set; }
+        public List<string> Actions = new List<string>() { "Test1", "Test2" };
 
         #endregion Properties
 
@@ -78,12 +82,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 {
                     Id = matchInfo.Id,
                     Title = LocalizeString.Match_Begin_Soon,
-                    Description = $"{matchInfo.LeagueName}  -  {matchInfo.HomeName}  vs  {matchInfo.AwayName}",
+                    Description = $"{matchInfo.LeagueName}.  {matchInfo.HomeName}  vs  {matchInfo.AwayName}",
                     IntentData = matchInfo.JsonSerialize(),
                     IconName = "ic_soccer_alarm",
                     SportsType = SportsType.Football,
                     NotificationType = NotificationType.MatchStart,
-                    NotifyTime = notifyTime, // DateTime.Now.AddSeconds(5), // notifyTime,
+                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime,
                     StoredTime = DateTime.UtcNow,
                 });
             }

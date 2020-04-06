@@ -28,6 +28,7 @@ namespace PoseSportsPredict.Droid
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            Xam.Plugin.Droid.PopupEffect.Init();
 
             base.SetTheme(Resource.Style.MainTheme);
 

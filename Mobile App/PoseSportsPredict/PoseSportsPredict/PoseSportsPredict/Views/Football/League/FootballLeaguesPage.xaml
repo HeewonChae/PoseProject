@@ -52,7 +52,7 @@
                         <materialui:MaterialLabel
                             LineBreakMode="TailTruncation"
                             Text="{Binding Title}"
-                            TypeScale="Body2"
+                            TypeScale="Subtitle1"
                             TextColor="{StaticResource TextColor_D}"
                             VerticalOptions="CenterAndExpand">
                         </materialui:MaterialLabel>
@@ -100,7 +100,7 @@
                                 LineBreakMode="TailTruncation"
                                 VerticalOptions="CenterAndExpand"
                                 Text="{Binding Title}"
-                                TypeScale="Body2"
+                                TypeScale="Subtitle1 "
                                 FontAttributes="Bold"
                                 TextColor="{StaticResource PrimaryColor}">
                             </materialui:MaterialLabel>

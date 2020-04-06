@@ -55,6 +55,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             // Check Bookmark
             var bookmarkedMatch = await _bookmarkService.GetBookmark<FootballMatchInfo>(matchInfo.PrimaryKey);
             MatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+            MatchInfo.OnPropertyChanged(nameof(MatchInfo.IsBookmarked));
 
             // Check Alarm
             var notification = await _notificationService.GetNotification(MatchInfo.Id, SportsType.Football, NotificationType.MatchStart);
@@ -140,12 +141,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 {
                     Id = MatchInfo.Id,
                     Title = LocalizeString.Match_Begin_Soon,
-                    Description = $"{MatchInfo.LeagueName}  -  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
+                    Description = $"{MatchInfo.LeagueName}.  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
                     IntentData = MatchInfo.JsonSerialize(),
                     IconName = "ic_soccer_alarm",
                     SportsType = SportsType.Football,
                     NotificationType = NotificationType.MatchStart,
-                    NotifyTime = notifyTime, // DateTime.Now.AddSeconds(5), // notifyTime,
+                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime,
                     StoredTime = DateTime.UtcNow,
                 });
             }

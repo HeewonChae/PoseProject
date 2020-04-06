@@ -89,7 +89,8 @@
                                                 <materialui:MaterialLabel
                                                     LineBreakMode="TailTruncation"
                                                     TextColor="{StaticResource CustomGrey_D}"
-                                                    TypeScale="Caption"
+                                                    TypeScale="Subtitle2"
+                                                    FontAttributes="None"
                                                     VerticalOptions="CenterAndExpand">
                                                     <materialui:MaterialLabel.FormattedText>
                                                         <FormattedString>
@@ -103,7 +104,8 @@
                                             <materialui:MaterialLabel
                                                 Grid.Row="1"
                                                 TextColor="{StaticResource CustomGrey_D}"
-                                                TypeScale="Caption"
+                                                TypeScale="Subtitle2"
+                                                FontAttributes="None"
                                                 Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
                                             </materialui:MaterialLabel>
                                             <ContentView
@@ -170,7 +172,8 @@
                                                 <materialui:MaterialLabel
                                                     HorizontalOptions="Center"
                                                     VerticalOptions="EndAndExpand"
-                                                    TypeScale="Body2"
+                                                    TypeScale="Subtitle2"
+                                                    FontAttributes="None"
                                                     TextColor="{StaticResource CustomGrey_D}"
                                                     Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                                 </materialui:MaterialLabel>

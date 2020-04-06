@@ -79,6 +79,7 @@
                             </ContentView>
                         </StackLayout>
                         <Grid
+                            x:Name="_grid"
                             Grid.Column="1"
                             Margin="0"
                             Padding="0,20"
@@ -129,7 +130,8 @@
                                 <materialui:MaterialLabel
                                     HorizontalOptions="Center"
                                     VerticalOptions="EndAndExpand"
-                                    TypeScale="Body2"
+                                    TypeScale="Subtitle2"
+                                    FontAttributes="None"
                                     TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                 </materialui:MaterialLabel>

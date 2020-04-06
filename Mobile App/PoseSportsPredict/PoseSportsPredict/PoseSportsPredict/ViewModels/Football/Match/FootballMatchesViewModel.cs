@@ -206,8 +206,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public FootballMatchesViewModel SetMatchDate(DateTime date)
         {
-            _lastUpdateTime = DateTime.MinValue;
+            if (_matchDate == date)
+                return this;
+
             _matchDate = date;
+            _lastUpdateTime = DateTime.MinValue;
 
             if (_matchDate == DateTime.Now.Date.AddDays(-1))
             {

@@ -37,7 +37,7 @@
                         VerticalOptions="End"
                         BackgroundColor="Transparent"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
+                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <Image
                             HeightRequest="28"
                             WidthRequest="28"
@@ -55,7 +55,7 @@
                             Padding="5"
                             BackgroundColor="Transparent"
                             effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource SecondaryColor_L}">
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <customviews:RatingView
                                 VerticalOptions="Center"
                                 WidthRequest="22"

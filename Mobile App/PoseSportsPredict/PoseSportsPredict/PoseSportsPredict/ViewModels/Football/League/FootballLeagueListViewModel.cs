@@ -69,8 +69,6 @@ namespace PoseSportsPredict.ViewModels.Football.League
             var message = leagueInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
             UserDialogs.Instance.Toast(message);
 
-            leagueInfo.OnPropertyChanged("IsBookmarked");
-
             SetIsBusy(false);
         }
 

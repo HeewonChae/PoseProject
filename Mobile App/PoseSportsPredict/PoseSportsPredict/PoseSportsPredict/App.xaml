@@ -14,6 +14,7 @@
     <Application.Resources>
         <ffimageloadingsvg:SvgImageSourceConverter x:Key="svgImageSourceConverter" />
         <converters:ExceptionToErrorMessageConverter x:Key="exceptionToErrorMessageConverter" />
+        <converters:ExceptionToImageSourceConverter x:Key="exceptionToImageSourceConverter" />
         <converters:BoolToDoubleConverter x:Key="boolToDoubleConverter" />
         <converters:DateToStringConverter x:Key="dateToStringConverter" />
         <converters:IsFootballMatchStartedConverter x:Key="isFootballMatchStartedConverter" />
@@ -40,6 +41,7 @@
         <Color x:Key="FacebookLogoColor">#3b5998</Color>
         <Color x:Key="IconActivated">#ffd700</Color>
 
+        <!--Control Style-->
         <Style TargetType="tabs:UnderlinedTabItem">
             <Setter Property="SelectedTabColor" Value="{StaticResource TextColor_L}" />
             <Setter Property="UnselectedLabelColor" Value="{StaticResource TransparentWhite}" />
@@ -48,8 +50,10 @@
         <Style x:Key="PoseTaskLoader" TargetType="loader:TaskLoaderView">
             <Setter Property="AccentColor" Value="{StaticResource PrimaryColor_L}" />
             <Setter Property="TextColor" Value="{StaticResource CustomGrey}" />
+            <Setter Property="EmptyStateImageSource" Value="img_empty_state_stadium.png" />
             <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
             <Setter Property="ErrorMessageConverter" Value="{StaticResource exceptionToErrorMessageConverter}" />
+            <Setter Property="ErrorImageConverter" Value="{StaticResource exceptionToImageSourceConverter}" />
         </Style>
     </Application.Resources>
 </Application>

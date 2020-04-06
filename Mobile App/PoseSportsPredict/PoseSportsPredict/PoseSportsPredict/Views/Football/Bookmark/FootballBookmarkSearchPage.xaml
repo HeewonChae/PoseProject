@@ -97,7 +97,7 @@
                     IsVisible="{Binding IsSearching}">
                         <ScrollView Scrolled="lv_Scrolled">
                             <Grid
-                            Margin="3">
+                            Margin="0,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -164,12 +164,13 @@
                                                             <materialui:MaterialLabel
                                                                 LineBreakMode="TailTruncation"
                                                                 TextColor="{StaticResource CustomGrey_D}"
-                                                                TypeScale="Caption"
+                                                                TypeScale="Subtitle2"
+                                                                FontAttributes="None"
                                                                 VerticalOptions="CenterAndExpand">
                                                                 <materialui:MaterialLabel.FormattedText>
                                                                     <FormattedString>
                                                                         <Span Text="{Binding CountryName}" />
-                                                                        <Span Text=" - " />
+                                                                        <Span Text=". " />
                                                                         <Span Text="{Binding LeagueName}" />
                                                                     </FormattedString>
                                                                 </materialui:MaterialLabel.FormattedText>
@@ -178,7 +179,8 @@
                                                         <materialui:MaterialLabel
                                                             Grid.Row="0"
                                                             TextColor="{StaticResource CustomGrey_D}"
-                                                            TypeScale="Caption"
+                                                            TypeScale="Subtitle2"
+                                                            FontAttributes="None"
                                                             Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
                                                         </materialui:MaterialLabel>
 
@@ -228,7 +230,8 @@
                                                                 <materialui:MaterialLabel
                                                                 HorizontalOptions="Center"
                                                                 VerticalOptions="EndAndExpand"
-                                                                TypeScale="Body2"
+                                                                TypeScale="Subtitle2"
+                                                                FontAttributes="None"
                                                                 TextColor="{StaticResource CustomGrey_D}"
                                                                 Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                                                 </materialui:MaterialLabel>

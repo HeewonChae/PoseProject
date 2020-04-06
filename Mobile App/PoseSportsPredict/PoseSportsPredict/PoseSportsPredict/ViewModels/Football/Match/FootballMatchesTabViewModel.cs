@@ -1,10 +1,13 @@
-﻿using PoseSportsPredict.InfraStructure;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Match;
 using Shiny;
 using System;
 using System.Diagnostics;
+using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
@@ -80,6 +83,37 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private DateTime _curDate;
 
         #endregion Fields
+
+        #region Commands
+
+        public ICommand SelectMatchDateCommand { get => new RelayCommand(SelectMatchDate); }
+
+        private async void SelectMatchDate()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            var selectedDate = await UserDialogs.Instance.DatePromptAsync(null, DateTime.Now);
+            if (selectedDate.Ok)
+            {
+                var tabbedPage = this.CoupledPage as TabbedPage;
+
+                for (int i = -3; i <= 3; i++)
+                {
+                    var bindingCtx = tabbedPage.Children[i + 3].BindingContext as FootballMatchesViewModel;
+                    bindingCtx.SetMatchDate(selectedDate.Value.AddDays(i));
+                }
+
+                tabbedPage.CurrentPage = tabbedPage.Children[3]; // selectedDate
+                ((FootballMatchesViewModel)tabbedPage.CurrentPage.BindingContext).OnAppearing();
+            }
+
+            SetIsBusy(false);
+        }
+
+        #endregion Commands
 
         #region Constructors
 
