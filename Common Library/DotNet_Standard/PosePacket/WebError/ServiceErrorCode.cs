@@ -49,6 +49,7 @@
         public static class WebMethod_Football
         {
             public const int P_GET_FIXTURES_BY_DATE = WebService.Football + 001000;
+            public const int P_GET_FIXTURES_BY_INDEX = WebService.Football + 002000;
         }
 
         public static class WebMethod_HelloWorld
@@ -64,7 +65,8 @@
 
         public static class StoredProcedure_Football
         {
-            public const int P_GET_FIXTURES_BY_DATE = Database.FootballDB + 002000;
+            public const int P_GET_FIXTURES_BY_DATE = Database.FootballDB + 001000;
+            public const int P_GET_FIXTURES_BY_INDEX = Database.FootballDB + 002000;
         }
 
         public static class Procedure

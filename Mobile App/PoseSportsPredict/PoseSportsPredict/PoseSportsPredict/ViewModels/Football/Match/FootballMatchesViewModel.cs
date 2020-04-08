@@ -128,7 +128,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 $"{LocalizeString.Match_Sort_By_League} {isLeagueFilter}",
             };
 
-            int intResult = await MaterialDialog.Instance.SelectActionAsync(LocalizeString.Select_Filter, actions);
+            int intResult = await MaterialDialog.Instance.SelectActionAsync(LocalizeString.Select_Filter, actions, DialogConfiguration.DefaultSimpleDialogConfiguration);
             if (intResult == -1)
                 return;
 
@@ -253,8 +253,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             _matchList = new List<FootballMatchInfo>();
 
-            var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
-            var notifications = await _notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart);
+            var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+                .Where(elem => _matchDate.AddDays(-1) < elem.MatchTime && elem.MatchTime < _matchDate.AddDays(1));
+            var notifications = (await _notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart))
+                .Where(elem => _matchDate.AddDays(-1) < elem.NotifyTime && elem.NotifyTime < _matchDate.AddDays(1));
+
             foreach (var fixture in result.Fixtures)
             {
                 var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(

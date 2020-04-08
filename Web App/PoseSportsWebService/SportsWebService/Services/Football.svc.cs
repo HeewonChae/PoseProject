@@ -24,9 +24,11 @@ namespace SportsWebService.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
-        public O_GET_FIXTURES_BY_DATE P_GET_FIXTURES_BY_INDEX(string i_json)
+        public O_GET_FIXTURES_BY_INDEX P_GET_FIXTURES_BY_INDEX(string i_json)
         {
-            throw new NotImplementedException();
+            var input = i_json.JsonDeserialize<I_GET_FIXTURES_BY_INDEX>();
+
+            return Commands.Football.P_GET_FIXTURES_BY_INDEX.Execute(input);
         }
     }
 }

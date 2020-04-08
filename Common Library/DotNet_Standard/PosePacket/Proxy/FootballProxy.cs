@@ -20,6 +20,8 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_FIXTURES_BY_DATE = "GetFixturesByDate";
         
+        private static string _P_GET_FIXTURES_BY_INDEX = "GetFixturesByIndex";
+        
         // Service base url
         public static string ServiceUrl
         {
@@ -37,6 +39,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_FIXTURES_BY_DATE;
+            }
+        }
+        
+        // MethodType: POST, Segment: GetFixturesByIndex 
+        // InputType: PosePacket.Service.Football.I_GET_FIXTURES_BY_INDEX 
+        // OutputType: PosePacket.Service.Football.O_GET_FIXTURES_BY_INDEX
+        public static string P_GET_FIXTURES_BY_INDEX
+        {
+            get
+            {
+                return _P_GET_FIXTURES_BY_INDEX;
             }
         }
     }

@@ -73,20 +73,18 @@ namespace PoseSportsPredict.Services
 
                         if (_authenticatedUser != null)
                         {
-                            // PoseLogin
-                            if (!await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
-                            {
-                                _authenticatedUser = null;
-                            }
-                            else // Login success
+                            // PoseLogin success
+                            if (await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
                             {
                                 LocalStorage.Storage.GetValueOrDefault<bool>(LocalStorageKey.IsRememberAccount, out bool isRemeberAccount);
                                 if (isRemeberAccount)
                                 {
                                     LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.SavedAuthenticatedUser, _authenticatedUser);
                                 }
-
-                                _isAuthenticated = true;
+                            }
+                            else
+                            {
+                                _authenticatedUser = null;
                             }
                         }
                     }

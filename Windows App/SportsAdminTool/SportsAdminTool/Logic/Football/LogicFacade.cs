@@ -28,8 +28,8 @@ namespace SportsAdminTool.Logic.Football
             var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByLeagueIdAndLabelId(leagueId, (int)OddsLabelType.Match_Winner);
 
             // 지금 시각 이후의 경기들 일단 삭제 (취소, 연기된 경기가 있을지도 모르니)
-            Database.FootballDBFacade.DeleteFixtures(
-                where: $"league_id = {leagueId} AND match_time > \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND is_predicted = 0");
+            //Database.FootballDBFacade.DeleteFixtures(
+            //    where: $"league_id = {leagueId} AND match_time > \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND is_predicted = 0");
 
             // DB Save
             Database.FootballDBFacade.UpdateFixture(api_filteredFixtures.ToArray());

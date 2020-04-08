@@ -9,7 +9,7 @@ namespace WebServiceShare.ServiceContext
         public static byte[] eSignature { get; set; } = new byte[0];
         public static byte[] eSignatureIV { get; set; } = new byte[0];
         public static byte[] eCredentials { get; set; } = new byte[0];
-        public static DateTime TokenExpireIn { get; set; } = DateTime.UtcNow;
+        public static DateTime TokenExpireIn { get; set; } = DateTime.MinValue;
         public static DateTime LastLoginTime { get; set; } = DateTime.MinValue;
 
         public static PoseHeader MakeHeader()

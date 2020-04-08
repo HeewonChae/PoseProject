@@ -31,15 +31,8 @@ namespace Repository.Mysql.FootballDB.Procedures
 
         public override void BindParameters()
         {
-            var indexesString = new StringBuilder();
-            foreach (var index in _input.Indexes)
-            {
-                indexesString.Append($"{index},");
-            }
-
-            indexesString.Remove(indexesString.Length - 1, 1);
-
             var sb = new StringBuilder();
+
             sb.Append($"SELECT c.{nameof(Country.name)} as {nameof(DB_FootballFixtureDetail.CountryName)}, c.{nameof(Country.logo)} as {nameof(DB_FootballFixtureDetail.CountryLogo)}, ");
             sb.Append($"l.{nameof(League.name)} as {nameof(DB_FootballFixtureDetail.LeagueName)}, l.{nameof(League.logo)} as {nameof(DB_FootballFixtureDetail.LeagueLogo)}, ");
             sb.Append($"ht.{nameof(League.id)} as {nameof(DB_FootballFixtureDetail.HomeTeamId)}, ht.{nameof(Team.name)} as {nameof(DB_FootballFixtureDetail.HomeTeamName)}, ht.{nameof(Team.logo)} as {nameof(DB_FootballFixtureDetail.HomeTeamLogo)}, ");
@@ -52,7 +45,7 @@ namespace Repository.Mysql.FootballDB.Procedures
             sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");
             sb.Append($"INNER JOIN team as ht on f.{nameof(Fixture.home_team_id)} = ht.{nameof(Team.id)} ");
             sb.Append($"INNER JOIN team as at on f.{nameof(Fixture.away_team_id)} = at.{nameof(Team.id)} ");
-            sb.Append($"WHERE f.{nameof(Fixture.id)} in ({indexesString.ToString()});");
+            sb.Append($"WHERE f.{nameof(Fixture.id)} in @Ids;");
 
             queryString = sb.ToString();
         }
@@ -63,7 +56,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                     null,
                     (Contexts.FootballDB footballDB) =>
                     {
-                        _output = footballDB.Query<DB_FootballFixtureDetail>(queryString);
+                        _output = footballDB.Query<DB_FootballFixtureDetail>(queryString, new { Ids = _input.Indexes });
                     },
                     this.OnError);
 

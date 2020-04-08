@@ -1,5 +1,7 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PosePacket.Proxy;
+using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
@@ -23,6 +25,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WebServiceShare.ServiceContext;
+using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -67,6 +71,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         #region Services
 
         private IBookmarkService _bookmarkService;
+        private IWebApiService _webApiService;
 
         #endregion Services
 
@@ -170,10 +175,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         #region Constructors
 
         public FootballBookmarkMatchesViewModel(
-            FootballBookmarkMatchesPage coupledPage
-            , IBookmarkService bookmarkService) : base(coupledPage)
+            FootballBookmarkMatchesPage coupledPage,
+            IBookmarkService bookmarkService,
+            IWebApiService webApiService) : base(coupledPage)
         {
             _bookmarkService = bookmarkService;
+            _webApiService = webApiService;
 
             if (OnInitializeView())
             {
@@ -200,34 +207,49 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 && elem.MatchStatus != FootballMatchStatusType.PEN)
                 .Select(elem => elem.Id).ToList();
 
-            //if (needRefrashMatchIndexes.Count > 0)
-            //{
-            //    // call server
-            //    List<FootballFixtureDetail> fixtureDetails = new List<FootballFixtureDetail>();
+            if (needRefrashMatchIndexes.Count > 0)
+            {
+                // call server
+                var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
+                {
+                    MethodType = WebMethodType.POST,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = FootballProxy.ServiceUrl,
+                    SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_INDEX,
+                    PostData = new I_GET_FIXTURES_BY_INDEX
+                    {
+                        FixtureIds = needRefrashMatchIndexes.ToArray(),
+                    }
+                });
 
-            //    // Update Matches
-            //    foreach (var fixtureDetail in fixtureDetails)
-            //    {
-            //        var foundMatchInfo = _matchList.Find(elem => elem.Id == fixtureDetail.FixtureId);
+                if (server_result == null)
+                    throw new Exception(LocalizeString.Occur_Error);
 
-            //        foundMatchInfo.MatchStatus = fixtureDetail.MatchStatus;
-            //        foundMatchInfo.MatchTime = fixtureDetail.MatchTime;
-            //        foundMatchInfo.HomeScore = fixtureDetail.HomeTeam.Score;
-            //        foundMatchInfo.AwayScore = fixtureDetail.AwayTeam.Score;
+                List<FootballFixtureDetail> fixtureDetails = server_result.Fixtures;
 
-            //        await _sqliteService.InsertOrUpdateAsync<FootballMatchInfo>(foundMatchInfo);
-            //        needRefrashMatchIndexes.Remove(foundMatchInfo.Id);
-            //    }
+                // Update Matches
+                foreach (var fixtureDetail in fixtureDetails)
+                {
+                    var foundMatchInfo = _matchList.Find(elem => elem.Id == fixtureDetail.FixtureId);
 
-            //    // Delete Invalid Matches
-            //    foreach (var deletedIndex in needRefrashMatchIndexes)
-            //    {
-            //        var foundMatchInfo = _matchList.Find(elem => elem.Id == deletedIndex);
+                    foundMatchInfo.MatchStatus = fixtureDetail.MatchStatus;
+                    foundMatchInfo.MatchTime = fixtureDetail.MatchTime;
+                    foundMatchInfo.HomeScore = fixtureDetail.HomeTeam.Score;
+                    foundMatchInfo.AwayScore = fixtureDetail.AwayTeam.Score;
 
-            //        await _sqliteService.DeleteAsync<FootballMatchInfo>(foundMatchInfo.PrimaryKey);
-            //        _matchList.Remove(foundMatchInfo);
-            //    }
-            //}
+                    await _bookmarkService.UpdateBookmark<FootballMatchInfo>(foundMatchInfo);
+                    needRefrashMatchIndexes.Remove(foundMatchInfo.Id);
+                }
+
+                // Delete Invalid Matches
+                foreach (var deletedIndex in needRefrashMatchIndexes)
+                {
+                    var foundMatchInfo = _matchList.Find(elem => elem.Id == deletedIndex);
+
+                    await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match);
+                    _matchList.Remove(foundMatchInfo);
+                }
+            }
 
             _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);

@@ -32,11 +32,11 @@ namespace PoseSportsPredict.Models
 
         #endregion INotificable
 
-        public DateTime NotifyTime { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string IntentData { get; set; }
         public string IconName { get; set; }
+        public DateTime NotifyTime { get; set; }
 
         public static string BuildPrimaryKey(int id, SportsType sportsType, NotificationType notificationType)
         {

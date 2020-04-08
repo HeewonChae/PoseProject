@@ -23,6 +23,6 @@ namespace SportsWebService.Services.Contract
         [WebInvoke(Method = "POST", UriTemplate = "GetFixturesByIndex"
             , RequestFormat = WebMessageFormat.Json
             , ResponseFormat = WebMessageFormat.Json)]
-        O_GET_FIXTURES_BY_DATE P_GET_FIXTURES_BY_INDEX(string i_json);
+        O_GET_FIXTURES_BY_INDEX P_GET_FIXTURES_BY_INDEX(string i_json);
     }
 }
