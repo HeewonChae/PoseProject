@@ -22,6 +22,8 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_FIXTURES_BY_INDEX = "GetFixturesByIndex";
         
+        private static string _P_GET_MATCH_OVERVIEW = "GetMatchOverview";
+        
         // Service base url
         public static string ServiceUrl
         {
@@ -50,6 +52,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_FIXTURES_BY_INDEX;
+            }
+        }
+        
+        // MethodType: POST, Segment: GetMatchOverview 
+        // InputType: PosePacket.Service.Football.I_GET_MATCH_OVERVIEW 
+        // OutputType: PosePacket.Service.Football.O_GET_MATCH_OVERVIEW
+        public static string P_GET_MATCH_OVERVIEW
+        {
+            get
+            {
+                return _P_GET_MATCH_OVERVIEW;
             }
         }
     }

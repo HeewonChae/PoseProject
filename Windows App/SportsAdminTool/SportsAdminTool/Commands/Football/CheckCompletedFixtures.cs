@@ -22,7 +22,7 @@ namespace SportsAdminTool.Commands.Football
                 mainWindow.Set_Lable(mainWindow._lbl_check_completed_fixtures, "Check completed fixtures");
 
                 var db_fixtures = Logic.Database.FootballDBFacade.SelectFixtures(
-                    where: $"is_completed = 0 AND match_time < '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}'");
+                    where: $"is_completed = 0 AND match_time < '{DateTime.UtcNow.AddDays(1).ToString("yyyyMMddTHHmmss")}'");
 
                 int fixtureCnt = db_fixtures.Count();
                 int loop = 0;

@@ -13,6 +13,7 @@ namespace Repository.Mysql.FootballDB.OutputModels
         public string CountryLogo { get; set; }
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }
+        public string Round { get; set; }
         public short HomeTeamId { get; set; }
         public string HomeTeamName { get; set; }
         public string HomeTeamLogo { get; set; }

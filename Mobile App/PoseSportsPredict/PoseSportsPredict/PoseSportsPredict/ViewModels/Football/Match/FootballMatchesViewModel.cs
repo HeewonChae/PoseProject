@@ -360,7 +360,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     break;
 
                 case MatchFilterType.SortByLeague:
-                    matchList = _matchList;
+                    matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
                     break;
             }
 

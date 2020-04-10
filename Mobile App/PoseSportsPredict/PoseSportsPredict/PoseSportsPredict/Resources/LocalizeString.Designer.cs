@@ -205,11 +205,47 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GA Avg.
+        /// </summary>
+        public static string Goal_Against_Avg {
+            get {
+                return ResourceManager.GetString("Goal_Against_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GF Avg.
+        /// </summary>
+        public static string Goal_Avg {
+            get {
+                return ResourceManager.GetString("Goal_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google.
         /// </summary>
         public static string Google {
             get {
                 return ResourceManager.GetString("Google", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H/A GA Avg.
+        /// </summary>
+        public static string H_A_Goal_Against_Avg {
+            get {
+                return ResourceManager.GetString("H_A_Goal_Against_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to H/A GF Avg.
+        /// </summary>
+        public static string H_A_Goal_Avg {
+            get {
+                return ResourceManager.GetString("H_A_Goal_Avg", resourceCulture);
             }
         }
         
@@ -228,6 +264,15 @@ namespace PoseSportsPredict.Resources {
         public static string Last_Login {
             get {
                 return ResourceManager.GetString("Last_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Points.
+        /// </summary>
+        public static string League_Points {
+            get {
+                return ResourceManager.GetString("League_Points", resourceCulture);
             }
         }
         
@@ -457,6 +502,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent Form.
+        /// </summary>
+        public static string Recent_Form {
+            get {
+                return ResourceManager.GetString("Recent_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recent search.
         /// </summary>
         public static string Recent_Search {
@@ -471,6 +525,15 @@ namespace PoseSportsPredict.Resources {
         public static string Remember_Account {
             get {
                 return ResourceManager.GetString("Remember_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rest Period.
+        /// </summary>
+        public static string Rest_Period {
+            get {
+                return ResourceManager.GetString("Rest_Period", resourceCulture);
             }
         }
         

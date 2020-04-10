@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Common Library\External\GameKernel.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SqlServer.Assessment, Version=1.100.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\lib\net45\Microsoft.SqlServer.Assessment.dll</HintPath>
@@ -206,6 +209,7 @@
     <Compile Include="Commands\Auth\P_E_TokenRefresh.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_DATE.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_INDEX.cs" />
+    <Compile Include="Commands\Football\P_GET_MATCH_OVERVIEW.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />

@@ -3,11 +3,323 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOverview">
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOverview"
+             BackgroundColor="{StaticResource BackgroundColor_Default}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
     <ContentView.Content>
         <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                TaskLoaderNotifier="{Binding OverviewTaskLoaderNotifier}">
+                <StackLayout
+                    Margin="7"
+                    Spacing="8">
+                    <!--기본 정보 (평균 득실점, 회복기간)-->
+                    <materialui:MaterialCard
+                        Padding="10, 5">
+                        <StackLayout
+                            Spacing="10">
+                            <materialui:MaterialLabel
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"
+                                TypeScale="Subtitle2"
+                                TextColor="{StaticResource CustomGrey}"
+                                Text="{Binding MatchInfo.Round}">
+                            </materialui:MaterialLabel>
+                            <!--승점-->
+                            <Grid
+                                IsVisible="{Binding IsCup, Converter={StaticResource inverseBoolConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    WidthRequest="60"
+                                    Color="{StaticResource LoseColor}">
+                                </BoxView>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    MaxLines="1"
+                                    TypeScale="Caption"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.League_Points}">
+                                </materialui:MaterialLabel>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="80"
+                                    Color="{StaticResource WinColor}">
+                                </BoxView>
+                            </Grid>
+                            <!--평균 득점-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    WidthRequest="60"
+                                    Color="{StaticResource LoseColor}">
+                                </BoxView>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    MaxLines="1"
+                                    TypeScale="Caption"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.Goal_Avg}">
+                                </materialui:MaterialLabel>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="80"
+                                    Color="{StaticResource WinColor}">
+                                </BoxView>
+                            </Grid>
+                            <!--평균 실점-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    WidthRequest="60"
+                                    Color="{StaticResource LoseColor}">
+                                </BoxView>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    MaxLines="1"
+                                    TypeScale="Caption"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.Goal_Against_Avg}">
+                                </materialui:MaterialLabel>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="80"
+                                    Color="{StaticResource WinColor}">
+                                </BoxView>
+                            </Grid>
+                            <!--H/A 평균 득점-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    WidthRequest="60"
+                                    Color="{StaticResource LoseColor}">
+                                </BoxView>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    MaxLines="1"
+                                    TypeScale="Caption"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.H_A_Goal_Avg}">
+                                </materialui:MaterialLabel>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="80"
+                                    Color="{StaticResource WinColor}">
+                                </BoxView>
+                            </Grid>
+                            <!--H/A 평균 실점-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    WidthRequest="60"
+                                    Color="{StaticResource LoseColor}">
+                                </BoxView>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    MaxLines="1"
+                                    TypeScale="Caption"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.H_A_Goal_Against_Avg}">
+                                </materialui:MaterialLabel>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="80"
+                                    Color="{StaticResource WinColor}">
+                                </BoxView>
+                            </Grid>
+                            <!--H/A 휴식 기간-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="0"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    WidthRequest="60"
+                                    Color="{StaticResource LoseColor}">
+                                </BoxView>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    MaxLines="1"
+                                    TypeScale="Caption"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.Rest_Period}">
+                                </materialui:MaterialLabel>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    Color="{StaticResource ChartBackgroundBlack}">
+                                </BoxView>
+                                <BoxView
+                                    Grid.Column="2"
+                                    CornerRadius="5"
+                                    HeightRequest="17"
+                                    HorizontalOptions="Start"
+                                    WidthRequest="80"
+                                    Color="{StaticResource WinColor}">
+                                </BoxView>
+                            </Grid>
+                        </StackLayout>
+                    </materialui:MaterialCard>
+                    <materialui:MaterialCard
+                        Padding="10, 5">
+                        <StackLayout>
+                            <materialui:MaterialLabel
+                                MaxLines="1"
+                                TypeScale="Subtitle2"
+                                TextColor="{StaticResource CustomGrey}"
+                                Text="{x:Static localize:LocalizeString.Recent_Form}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                    </materialui:MaterialCard>
+                </StackLayout>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

@@ -49,18 +49,17 @@ namespace SportsWebService.Commands.Football
                     ErrorHandler.OccurException(RowCode.DB_Failed_Error);
             }
 
-            var output = new O_GET_FIXTURES_BY_DATE
-            {
-                Fixtures = new List<PacketModels.FootballFixtureDetail>()
-            };
-
+            var fixtures = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output)
             {
                 var fixtureDetail = Singleton.Get<FootballFixtureDetailConverter>().Convert(dbFixtureDetail);
-                output.Fixtures.Add(fixtureDetail);
+                fixtures.Add(fixtureDetail);
             }
 
-            return output;
+            return new O_GET_FIXTURES_BY_DATE
+            {
+                Fixtures = fixtures,
+            };
         }
     }
 }

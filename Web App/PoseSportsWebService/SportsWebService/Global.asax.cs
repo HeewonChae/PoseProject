@@ -11,6 +11,9 @@ namespace SportsWebService
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            // Log
+            LogicCore.Utility.ThirdPartyLog.Log4Net.Initialize();
+
             // Mysql
             Repository.RepositoryStatic.Init_Mysql();
 

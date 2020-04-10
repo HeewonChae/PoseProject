@@ -50,6 +50,7 @@
         {
             public const int P_GET_FIXTURES_BY_DATE = WebService.Football + 001000;
             public const int P_GET_FIXTURES_BY_INDEX = WebService.Football + 002000;
+            public const int P_GET_MATCH_OVERVIEW = WebService.Football + 003000;
         }
 
         public static class WebMethod_HelloWorld
@@ -67,6 +68,7 @@
         {
             public const int P_GET_FIXTURES_BY_DATE = Database.FootballDB + 001000;
             public const int P_GET_FIXTURES_BY_INDEX = Database.FootballDB + 002000;
+            public const int P_GET_MATCH_OVERVIEW = Database.FootballDB + 003000;
         }
 
         public static class Procedure

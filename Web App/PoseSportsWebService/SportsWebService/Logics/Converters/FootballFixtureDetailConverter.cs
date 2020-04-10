@@ -45,6 +45,7 @@ namespace SportsWebService.Logics.Converters
                     Logo = db_fixtureDetail.AwayTeamLogo,
                     Score = db_fixtureDetail.AwayTeamScore
                 };
+                result.Round = db_fixtureDetail.Round;
                 result.FixtureId = db_fixtureDetail.FixtureId;
                 result.MatchStatus = statusType;
                 result.MatchTime = db_fixtureDetail.MatchTime;

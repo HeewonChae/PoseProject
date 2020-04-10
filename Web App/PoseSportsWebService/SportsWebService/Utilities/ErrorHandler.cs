@@ -10,12 +10,9 @@ namespace SportsWebService.Utilities
     {
         public static void OccurException(int errorCode)
         {
-            string message = string.Empty;
-            message = ErrorCodeDescription.GetErrorDesc(errorCode);
-
             throw new WebFaultException<ErrorDetail>(new ErrorDetail()
             {
-                Message = message,
+                Message = ErrorCodeDescription.GetErrorDesc(errorCode),
                 ErrorCode = errorCode,
             }
             , HttpStatusCode.ServiceUnavailable);
@@ -28,7 +25,17 @@ namespace SportsWebService.Utilities
 
         public static void WriteErrorLog(Exception exception)
         {
-            // TODO: 예외 로그 작성
+            switch (exception)
+            {
+                case WebFaultException<ErrorDetail> webFaultException:
+                    var message = $"{webFaultException.Detail.ErrorCode}, {webFaultException.Detail.Message} \n {webFaultException.StackTrace}";
+                    LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(message, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.ERROR);
+                    break;
+
+                default:
+                    LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(exception.StackTrace, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.FATAL);
+                    break;
+            }
         }
     }
 }

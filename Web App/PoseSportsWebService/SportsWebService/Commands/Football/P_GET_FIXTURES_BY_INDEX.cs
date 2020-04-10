@@ -51,6 +51,9 @@ namespace SportsWebService.Commands.Football
             var fixtureDetails = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output)
             {
+                if (dbFixtureDetail == null)
+                    continue;
+
                 var fixtureDetail = Singleton.Get<FootballFixtureDetailConverter>().Convert(dbFixtureDetail);
                 fixtureDetails.Add(fixtureDetail);
             }

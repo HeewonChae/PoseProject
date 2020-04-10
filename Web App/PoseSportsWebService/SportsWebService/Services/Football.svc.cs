@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SportsWebService.Services
 {
@@ -29,6 +30,14 @@ namespace SportsWebService.Services
             var input = i_json.JsonDeserialize<I_GET_FIXTURES_BY_INDEX>();
 
             return Commands.Football.P_GET_FIXTURES_BY_INDEX.Execute(input);
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public async Task<O_GET_MATCH_OVERVIEW> P_GET_MATCH_OVERVIEW(string i_json)
+        {
+            var input = i_json.JsonDeserialize<I_GET_MATCH_OVERVIEW>();
+
+            return await Commands.Football.P_GET_MATCH_OVERVIEW.Execute(input);
         }
     }
 }

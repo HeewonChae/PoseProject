@@ -12,6 +12,7 @@ using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views.Football.Match.Detail;
+using Sharpnado.Presentation.Forms.CustomViews.Tabs;
 using Shiny;
 using System;
 using System.Globalization;
@@ -32,12 +33,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 AppResourcesHelper.GetResourceColor("IconActivated"),
                 "ic_alarm_unselected.png",
                 Color.Black);
-
-            OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>();
-            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
-            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
-            OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>();
-            SelectedViewIndex = 0;
 
             return true;
         }
@@ -63,11 +58,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
 
+            OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>().SetMatchInfo(matchInfo);
+            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
+            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
+            OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>();
+            SelectedViewIndex = 0;
+
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
+            var viewSwitcher = this.CoupledPage.FindByName<ViewSwitcher>("_switcher");
+            var bindingCtx = viewSwitcher.Children[SelectedViewIndex].BindingContext as BaseViewModel;
+            bindingCtx.OnAppearing();
         }
 
         #endregion NavigableViewModel
@@ -135,7 +139,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             {
                 DateTime notifyTime = MatchInfo.MatchTime.AddMinutes(-5);
                 if (notifyTime < DateTime.Now)
-                    notifyTime = DateTime.Now.AddSeconds(5);
+                    notifyTime = DateTime.Now.AddSeconds(10);
 
                 await _notificationService.AddNotification(new NotificationInfo
                 {
@@ -146,7 +150,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                     IconName = "ic_soccer_alarm",
                     SportsType = SportsType.Football,
                     NotificationType = NotificationType.MatchStart,
-                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime,
+                    NotifyTime = notifyTime,
                     StoredTime = DateTime.UtcNow,
                 });
             }
@@ -264,6 +268,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             {
                 CoupledPage.Appearing += (s, e) => OnAppearing();
             }
+
+            this.CoupledPage.FindByName<TabHostView>("_tabHost").SelectedTabIndexChanged += (s, e) =>
+            {
+                var viewSwitcher = this.CoupledPage.FindByName<ViewSwitcher>("_switcher");
+                var bindingCtx = viewSwitcher.Children[(int)e.SelectedPosition].BindingContext as BaseViewModel;
+                bindingCtx.OnAppearing();
+            };
         }
 
         #endregion Constructors

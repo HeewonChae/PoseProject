@@ -38,6 +38,7 @@ namespace PoseSportsPredict.Models.Football
         public string CountryLogo { get; set; }
         public string LeagueName { get; set; }
         public string LeagueLogo { get; set; }
+        public string Round { get; set; }
         public short HomeTeamId { get; set; }
         public string HomeName { get; set; }
         public string HomeLogo { get; set; }

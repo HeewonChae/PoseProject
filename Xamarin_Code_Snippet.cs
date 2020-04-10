@@ -76,3 +76,8 @@ xmlns:keyboard="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHe
 
 //9. ref binding
 {Binding Path=BindingContext.SelectCountryCommand, Source={x:Reference list_country}}
+
+
+NotificationMessageHandler
+
+    

@@ -34,7 +34,7 @@ namespace Repository.Mysql.FootballDB.Procedures
             var sb = new StringBuilder();
 
             sb.Append($"SELECT c.{nameof(Country.name)} as {nameof(DB_FootballFixtureDetail.CountryName)}, c.{nameof(Country.logo)} as {nameof(DB_FootballFixtureDetail.CountryLogo)}, ");
-            sb.Append($"l.{nameof(League.name)} as {nameof(DB_FootballFixtureDetail.LeagueName)}, l.{nameof(League.logo)} as {nameof(DB_FootballFixtureDetail.LeagueLogo)}, ");
+            sb.Append($"l.{nameof(League.name)} as {nameof(DB_FootballFixtureDetail.LeagueName)}, l.{nameof(League.logo)} as {nameof(DB_FootballFixtureDetail.LeagueLogo)}, f.{nameof(Fixture.round)} as {nameof(DB_FootballFixtureDetail.Round)},");
             sb.Append($"ht.{nameof(League.id)} as {nameof(DB_FootballFixtureDetail.HomeTeamId)}, ht.{nameof(Team.name)} as {nameof(DB_FootballFixtureDetail.HomeTeamName)}, ht.{nameof(Team.logo)} as {nameof(DB_FootballFixtureDetail.HomeTeamLogo)}, ");
             sb.Append($"at.{nameof(League.id)} as {nameof(DB_FootballFixtureDetail.AwayTeamId)}, at.{nameof(Team.name)} as {nameof(DB_FootballFixtureDetail.AwayTeamName)}, at.{nameof(Team.logo)} as {nameof(DB_FootballFixtureDetail.AwayTeamLogo)}, ");
             sb.Append($"f.{nameof(Fixture.home_score)} as {nameof(DB_FootballFixtureDetail.HomeTeamScore)}, f.{nameof(Fixture.away_score)} as {nameof(DB_FootballFixtureDetail.AwayTeamScore)}, ");

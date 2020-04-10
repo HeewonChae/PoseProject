@@ -292,4 +292,25 @@
   <data name="Remember_Account" xml:space="preserve">
     <value>Remember me</value>
   </data>
+  <data name="Recent_Form" xml:space="preserve">
+    <value>Recent Form</value>
+  </data>
+  <data name="League_Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="Goal_Avg" xml:space="preserve">
+    <value>GF Avg</value>
+  </data>
+  <data name="Goal_Against_Avg" xml:space="preserve">
+    <value>GA Avg</value>
+  </data>
+  <data name="Rest_Period" xml:space="preserve">
+    <value>Rest Period</value>
+  </data>
+  <data name="H_A_Goal_Against_Avg" xml:space="preserve">
+    <value>H/A GA Avg</value>
+  </data>
+  <data name="H_A_Goal_Avg" xml:space="preserve">
+    <value>H/A GF Avg</value>
+  </data>
 </root>

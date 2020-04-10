@@ -197,7 +197,6 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deleteLeagueInfo in _DeleteLeagueList)
             {
                 deleteLeagueInfo.IsBookmarked = false;
-
                 await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(deleteLeagueInfo, SportsType.Football, BookMarkType.League);
             }
 

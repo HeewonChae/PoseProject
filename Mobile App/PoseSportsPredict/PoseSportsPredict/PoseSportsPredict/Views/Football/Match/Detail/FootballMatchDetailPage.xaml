@@ -31,18 +31,17 @@
                 <!--Toolbar-->
                 <StackLayout
                     Grid.Row="0"
-                    Margin="15,0"
-                    HeightRequest="35"
+                    Margin="15,5"
                     Orientation="Horizontal">
                     <ContentView
-                        Padding="2"
+                        Padding="4"
                         BackgroundColor="Transparent"
-                        VerticalOptions="End"
+                        VerticalOptions="Center"
                         effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <Image
-                            HeightRequest="28"
-                            WidthRequest="28"
+                            HeightRequest="24"
+                            WidthRequest="24"
                             Source="ic_arrow_back"
                             Aspect="AspectFit"
                             effects:ImageEffect.TintColor="White">
@@ -52,7 +51,7 @@
                     <StackLayout
                         Orientation="Horizontal"
                         HorizontalOptions="EndAndExpand"
-                        VerticalOptions="End">
+                        VerticalOptions="Center">
                         <ContentView
                             Padding="5"
                             BackgroundColor="Transparent"
@@ -139,6 +138,7 @@
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
                             TypeScale="Caption"
+                            HeightRequest="30"
                             MaxLines="2"
                             LineHeight="1"
                             TextColor="{StaticResource TextColor_L}"
@@ -164,7 +164,7 @@
                             MaxLines="1"
                             LineBreakMode="TailTruncation"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
+                            TypeScale="Subtitle1"
                             TextColor="{StaticResource TransparentWhite}"
                             Text="{Binding MatchInfo.LeagueName}"
                             effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
@@ -174,6 +174,7 @@
                         <materialui:MaterialLabel
                             HorizontalTextAlignment="Center"
                             TypeScale="H6"
+                            FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.MatchTime, StringFormat='{0:tt hh:mm}'}">
                         </materialui:MaterialLabel>
@@ -203,7 +204,7 @@
                             MaxLines="1"
                             LineBreakMode="TailTruncation"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
+                            TypeScale="Subtitle1"
                             TextColor="{StaticResource TransparentWhite}"
                             Text="{Binding MatchInfo.LeagueName}"
                             effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
@@ -213,6 +214,7 @@
                         <materialui:MaterialLabel
                             HorizontalOptions="Center"
                             TypeScale="H6"
+                            FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}">
                             <materialui:MaterialLabel.FormattedText>
                                 <FormattedString>
@@ -262,6 +264,7 @@
                             TypeScale="Caption"
                             MaxLines="2"
                             LineHeight="1"
+                            HeightRequest="30"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.AwayName}">
                         </materialui:MaterialLabel>
@@ -279,15 +282,15 @@
                     Grid.Row="2"
                     x:Name="_tabHost"
                     TabType="Fixed"
-                    HeightRequest="39"
+                    HeightRequest="43"
                     Margin="0,-7,0,0"
                     ShadowType="Bottom"
-                    SelectedIndex="{Binding Source={x:Reference _switcher}, Path=SelectedIndex, Mode=TwoWay}">
+                    SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
                     <tabs:TabHostView.Tabs>
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}"     LabelSize="14" />
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}"          LabelSize="14" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}"  LabelSize="14" />
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}"         LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}"  LabelSize="14" />
                     </tabs:TabHostView.Tabs>
                 </tabs:TabHostView>
             </Grid>
@@ -296,7 +299,7 @@
             <tabs:ViewSwitcher
                 x:Name="_switcher"
                 VerticalOptions="FillAndExpand"
-                SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
+                SelectedIndex="{Binding Source={x:Reference _tabHost}, Path=SelectedIndex}">
                 <tabs:ViewSwitcher.GestureRecognizers>
                     <SwipeGestureRecognizer Threshold="80" Direction="Left" Command="{Binding SwipeLeftViewSwitcherCommad}" />
                     <SwipeGestureRecognizer Threshold="80" Direction="Right" Command="{Binding SwipeRightViewSwitcherCommad}" />
@@ -304,8 +307,8 @@
 
                 <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOverview" BindingContext="{Binding OverviewModel}" />
                 <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailH2HView" BindingContext="{Binding H2HViewModel}" />
-                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailPredictionsView" BindingContext="{Binding PredictionsViewModel}" />
                 <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOddsView" BindingContext="{Binding OddsViewModel}" />
+                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailPredictionsView" BindingContext="{Binding PredictionsViewModel}" />
             </tabs:ViewSwitcher>
         </StackLayout>
     </ContentPage.Content>

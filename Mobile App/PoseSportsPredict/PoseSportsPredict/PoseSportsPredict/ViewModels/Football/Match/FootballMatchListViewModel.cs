@@ -76,7 +76,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             {
                 DateTime notifyTime = matchInfo.MatchTime.AddMinutes(-5);
                 if (notifyTime < DateTime.Now)
-                    notifyTime = DateTime.Now.AddSeconds(5);
+                    notifyTime = DateTime.Now.AddSeconds(10);
 
                 await _notificationService.AddNotification(new NotificationInfo
                 {
@@ -87,7 +87,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     IconName = "ic_soccer_alarm",
                     SportsType = SportsType.Football,
                     NotificationType = NotificationType.MatchStart,
-                    NotifyTime = DateTime.Now.AddSeconds(5), // notifyTime,
+                    NotifyTime = notifyTime,
                     StoredTime = DateTime.UtcNow,
                 });
             }

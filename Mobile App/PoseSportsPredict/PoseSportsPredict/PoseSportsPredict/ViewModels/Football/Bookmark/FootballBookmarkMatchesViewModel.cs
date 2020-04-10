@@ -7,6 +7,7 @@ using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
@@ -21,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -198,14 +200,26 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             await Task.Delay(300);
 
-            _matchList = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
+            var oldBookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
 
             // Need Refrash MatchInfo
-            var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
-                && elem.MatchStatus != FootballMatchStatusType.FT
-                && elem.MatchStatus != FootballMatchStatusType.AET
-                && elem.MatchStatus != FootballMatchStatusType.PEN)
-                .Select(elem => elem.Id).ToList();
+            List<int> needRefrashMatchIndexes = null;
+            if (_matchList?.Count > 0)
+            {
+                needRefrashMatchIndexes = oldBookmarkedMatches.Where(elem => elem.MatchTime < DateTime.Now
+                   && elem.MatchStatus != FootballMatchStatusType.FT
+                   && elem.MatchStatus != FootballMatchStatusType.AET
+                   && elem.MatchStatus != FootballMatchStatusType.PEN)
+                   .Select(elem => elem.Id).ToList();
+            }
+            else
+            {
+                needRefrashMatchIndexes = oldBookmarkedMatches.Where(elem =>
+                  elem.MatchStatus != FootballMatchStatusType.FT
+                  && elem.MatchStatus != FootballMatchStatusType.AET
+                  && elem.MatchStatus != FootballMatchStatusType.PEN)
+                  .Select(elem => elem.Id).ToList();
+            }
 
             if (needRefrashMatchIndexes.Count > 0)
             {
@@ -225,17 +239,21 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 if (server_result == null)
                     throw new Exception(LocalizeString.Occur_Error);
 
-                List<FootballFixtureDetail> fixtureDetails = server_result.Fixtures;
-
                 // Update Matches
-                foreach (var fixtureDetail in fixtureDetails)
+                foreach (var fixtureDetail in server_result.Fixtures)
                 {
-                    var foundMatchInfo = _matchList.Find(elem => elem.Id == fixtureDetail.FixtureId);
+                    var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(
+                                   fixtureDetail,
+                                   typeof(FootballMatchInfo),
+                                   null,
+                                   null) as FootballMatchInfo;
 
-                    foundMatchInfo.MatchStatus = fixtureDetail.MatchStatus;
-                    foundMatchInfo.MatchTime = fixtureDetail.MatchTime;
-                    foundMatchInfo.HomeScore = fixtureDetail.HomeTeam.Score;
-                    foundMatchInfo.AwayScore = fixtureDetail.AwayTeam.Score;
+                    var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == fixtureDetail.FixtureId);
+
+                    foundMatchInfo.MatchStatus = convertedMatchInfo.MatchStatus;
+                    foundMatchInfo.MatchTime = convertedMatchInfo.MatchTime;
+                    foundMatchInfo.HomeScore = convertedMatchInfo.HomeScore;
+                    foundMatchInfo.AwayScore = convertedMatchInfo.AwayScore;
 
                     await _bookmarkService.UpdateBookmark<FootballMatchInfo>(foundMatchInfo);
                     needRefrashMatchIndexes.Remove(foundMatchInfo.Id);
@@ -244,21 +262,21 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 // Delete Invalid Matches
                 foreach (var deletedIndex in needRefrashMatchIndexes)
                 {
-                    var foundMatchInfo = _matchList.Find(elem => elem.Id == deletedIndex);
+                    var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == deletedIndex);
 
                     await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match);
-                    _matchList.Remove(foundMatchInfo);
                 }
             }
 
-            _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
+            _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+                .OrderBy(elem => elem.MatchTime).ToList();
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
 
             _lastUpdateTime = DateTime.UtcNow;
-
             IsEditMode = false;
 
             SetIsBusy(false);
+
             return _matchList;
         }
 
@@ -276,9 +294,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             _DeleteMatchList.Clear();
 
-            _matchList = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
-            _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
-
+            _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+                .OrderBy(elem => elem.MatchTime).ToList();
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
 
             IsEditMode = false;

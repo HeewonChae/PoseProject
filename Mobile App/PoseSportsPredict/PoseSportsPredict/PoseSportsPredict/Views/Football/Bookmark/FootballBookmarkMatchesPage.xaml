@@ -39,7 +39,7 @@
                 x:Name="lv_bookmarkedMatches"
                 EnableDragAndDrop="False"
                 ColumnCount="1"
-                ItemHeight="105"
+                ItemHeight="110"
                 ItemSpacing="0"
                 ListLayout="Grid"
                 ItemsSource="{Binding BookmarkedMatches}"

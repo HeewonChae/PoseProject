@@ -97,6 +97,20 @@
       "CountryName": "Denmark",
       "ConvertTeamId": 6021,
       "ConvertTeamName": "HIK"
+    },
+    {
+      "Index": 17,
+      "TeamName": "Petrzalka",
+      "CountryName": "Slovakia",
+      "ConvertTeamId": 10538,
+      "ConvertTeamName": "Petržalka"
+    },
+    {
+      "Index": 18,
+      "TeamName": "SfB-Oure",
+      "CountryName": "Denmark",
+      "ConvertTeamId": 6052,
+      "ConvertTeamName": "SfB-Oure"
     }
   ]
 }

@@ -39,6 +39,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     CountryLogo = fixtureDetail.Country.Logo,
                     LeagueName = fixtureDetail.League.Name,
                     LeagueLogo = fixtureDetail.League.Logo,
+                    Round = fixtureDetail.Round,
 
                     HomeTeamId = fixtureDetail.HomeTeam.Id,
                     HomeName = fixtureDetail.HomeTeam.Name,
