@@ -205,24 +205,6 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GA Avg.
-        /// </summary>
-        public static string Goal_Against_Avg {
-            get {
-                return ResourceManager.GetString("Goal_Against_Avg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GF Avg.
-        /// </summary>
-        public static string Goal_Avg {
-            get {
-                return ResourceManager.GetString("Goal_Avg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Google.
         /// </summary>
         public static string Google {
@@ -232,20 +214,20 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to H/A GA Avg.
+        ///   Looks up a localized string similar to H/A Recent Goal Against.
         /// </summary>
-        public static string H_A_Goal_Against_Avg {
+        public static string H_A_Recent_Goal_Against {
             get {
-                return ResourceManager.GetString("H_A_Goal_Against_Avg", resourceCulture);
+                return ResourceManager.GetString("H_A_Recent_Goal_Against", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to H/A GF Avg.
+        ///   Looks up a localized string similar to H/A Recent Goal For.
         /// </summary>
-        public static string H_A_Goal_Avg {
+        public static string H_A_Recent_Goal_For {
             get {
-                return ResourceManager.GetString("H_A_Goal_Avg", resourceCulture);
+                return ResourceManager.GetString("H_A_Recent_Goal_For", resourceCulture);
             }
         }
         
@@ -507,6 +489,24 @@ namespace PoseSportsPredict.Resources {
         public static string Recent_Form {
             get {
                 return ResourceManager.GetString("Recent_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Goal Against.
+        /// </summary>
+        public static string Recent_Goal_Against {
+            get {
+                return ResourceManager.GetString("Recent_Goal_Against", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Goal For.
+        /// </summary>
+        public static string Recent_Goal_For {
+            get {
+                return ResourceManager.GetString("Recent_Goal_For", resourceCulture);
             }
         }
         

@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
@@ -93,12 +94,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 }
             });
 
-            // 기본정보 (평균 득실점, 회복기간)
-
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
-            SetIsBusy(false);
+            // 기본정보 (평균 득실점, 회복기간)
         }
 
         #endregion Methods

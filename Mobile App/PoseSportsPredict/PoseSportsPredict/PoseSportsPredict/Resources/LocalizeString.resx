@@ -298,19 +298,19 @@
   <data name="League_Points" xml:space="preserve">
     <value>Points</value>
   </data>
-  <data name="Goal_Avg" xml:space="preserve">
-    <value>GF Avg</value>
+  <data name="Recent_Goal_For" xml:space="preserve">
+    <value>Recent Goal For</value>
   </data>
-  <data name="Goal_Against_Avg" xml:space="preserve">
-    <value>GA Avg</value>
+  <data name="Recent_Goal_Against" xml:space="preserve">
+    <value>Recent Goal Against</value>
   </data>
   <data name="Rest_Period" xml:space="preserve">
     <value>Rest Period</value>
   </data>
-  <data name="H_A_Goal_Against_Avg" xml:space="preserve">
-    <value>H/A GA Avg</value>
+  <data name="H_A_Recent_Goal_Against" xml:space="preserve">
+    <value>H/A Recent Goal Against</value>
   </data>
-  <data name="H_A_Goal_Avg" xml:space="preserve">
-    <value>H/A GF Avg</value>
+  <data name="H_A_Recent_Goal_For" xml:space="preserve">
+    <value>H/A Recent Goal For</value>
   </data>
 </root>

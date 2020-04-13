@@ -28,8 +28,8 @@
         <Color x:Key="TransparentWhite">#7dffffff</Color>
         <Color x:Key="TransparentBlack">#7d000000</Color>
         <Color x:Key="ChartBackgroundBlack">#1d000000</Color>
-        <Color x:Key="WinColor">#00e676</Color>
-        <Color x:Key="LoseColor">#ff5252</Color>
+        <Color x:Key="WinColor">#64dd17</Color>
+        <Color x:Key="LoseColor">#FF4500</Color>
 
         <Color x:Key="PrimaryColor">#0091ea</Color>
         <Color x:Key="PrimaryColor_L">#40c4ff</Color>

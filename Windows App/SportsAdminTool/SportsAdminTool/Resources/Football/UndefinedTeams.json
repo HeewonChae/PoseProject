@@ -111,6 +111,13 @@
       "CountryName": "Denmark",
       "ConvertTeamId": 6052,
       "ConvertTeamName": "SfB-Oure"
+    },
+    {
+      "Index": 19,
+      "TeamName": "Tianjin Tianhai",
+      "CountryName": "China",
+      "ConvertTeamId": 843,
+      "ConvertTeamName": "Tianjin Songjiang"
     }
   ]
 }

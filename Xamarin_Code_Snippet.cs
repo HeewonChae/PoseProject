@@ -63,7 +63,7 @@ if (OnInitializeView())
     CoupledPage.Disappearing += (s, e) => this.OnDisAppearing();
 }
 
-// 8. Xml namespace
+// 8. xaml namespace
 xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
 xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
 xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
