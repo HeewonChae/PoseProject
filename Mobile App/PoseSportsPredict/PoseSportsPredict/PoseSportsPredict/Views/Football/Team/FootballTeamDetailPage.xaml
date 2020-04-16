@@ -63,7 +63,7 @@
                                 RatingType="Full"
                                 ColorOn="{StaticResource IconActivated}"
                                 OutlineOnColor="{StaticResource IconActivated}"
-                                OutlineOffColor="Black"
+                                OutlineOffColor="{StaticResource TextColor_L}"
                                 Path="{x:Static customviews:PathConstants.Star}"
                                 Count="1"
                                 Value="{Binding TeamInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
@@ -131,7 +131,7 @@
                     <BoxView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
-                        HeightRequest="0.1"
+                        HeightRequest="0.5"
                         Color="{StaticResource TransparentWhite}">
                     </BoxView>
                 </Grid>

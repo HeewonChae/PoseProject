@@ -34,7 +34,7 @@ namespace RapidAPI.Converter
 
                 foreach (var tempStanding in tempStandings)
                 {
-                    tempStanding.Group = $"Group-{1} {tempStanding.Group}";
+                    tempStanding.Group = $"{tempStanding.Group}"; //$"Group-{1} {tempStanding.Group}";
                     standings.Add(tempStanding);
                 }
 
@@ -52,7 +52,7 @@ namespace RapidAPI.Converter
                 {
                     foreach (var tempStanding in tempStandings)
                     {
-                        tempStanding.Group = $"Group-{group} {tempStanding.Group}";
+                        tempStanding.Group = $"{tempStanding.Group}"; //$"Group-{group} {tempStanding.Group}";
                         standings.Add(tempStanding);
                     }
                     group++;

@@ -14,13 +14,11 @@ namespace Repository.Mysql.FootballDB.Tables
     {
         [Key]
         [Column(Order = 1, TypeName = "MEDIUMINT")]
-        [Index("IDX_LEAGUE_ID", IsUnique = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public short league_id { get; set; }
 
         [Key]
         [Column(Order = 2, TypeName = "MEDIUMINT")]
-        [Index("IDX_TEAM_ID", IsUnique = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public short team_id { get; set; }
 

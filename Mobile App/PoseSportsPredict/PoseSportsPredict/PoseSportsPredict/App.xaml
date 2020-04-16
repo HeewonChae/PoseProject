@@ -22,6 +22,8 @@
         <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
         <converters:MatchAlarmColorConverter x:Key="matchAlarmColorConverter" />
         <converters:MatchAlarmIconConverter x:Key="matchAlarmIconConverter" />
+        <converters:MatchResultToStringConverter x:Key="matchResultToStringConverter" />
+        <converters:MatchResultToColorConverter x:Key="matchResultToColorConverter" />
 
         <Color x:Key="TextColor_L">#fafafa</Color>
         <Color x:Key="TextColor_D">#212121</Color>
@@ -34,10 +36,10 @@
         <Color x:Key="PrimaryColor">#0091ea</Color>
         <Color x:Key="PrimaryColor_L">#40c4ff</Color>
         <Color x:Key="PrimaryColor_D">#0064b7</Color>
-        <Color x:Key="SecondaryColor">#01579b</Color>
-        <Color x:Key="SecondaryColor_L">#039be5</Color>
-        <Color x:Key="SecondaryColor_D">#002f6c</Color>
-        <Color x:Key="CustomGrey">#757575</Color>
+        <Color x:Key="SecondaryColor">#0063cb</Color>
+        <Color x:Key="SecondaryColor_L">#5c90ff</Color>
+        <Color x:Key="SecondaryColor_D">#003a99</Color>
+        <Color x:Key="CustomGrey">#616161</Color>
         <Color x:Key="CustomGrey_L">#a4a4a4</Color>
         <Color x:Key="CustomGrey_D">#424242</Color>
         <Color x:Key="BackgroundColor_Default">#f5f5f5</Color>

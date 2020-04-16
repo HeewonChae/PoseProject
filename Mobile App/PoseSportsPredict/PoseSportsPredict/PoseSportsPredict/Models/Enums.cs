@@ -30,4 +30,11 @@
     {
         MatchStart
     }
+
+    public enum MatchResultType
+    {
+        Win,
+        Draw,
+        Lose,
+    }
 }

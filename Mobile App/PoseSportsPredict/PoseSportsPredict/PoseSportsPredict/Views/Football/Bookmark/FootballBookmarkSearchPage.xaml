@@ -163,7 +163,7 @@
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
                                                                 LineBreakMode="TailTruncation"
-                                                                TextColor="{StaticResource CustomGrey_D}"
+                                                                TextColor="{StaticResource CustomGrey}"
                                                                 TypeScale="Subtitle2"
                                                                 FontAttributes="None"
                                                                 VerticalOptions="CenterAndExpand">
@@ -178,7 +178,7 @@
                                                         </StackLayout>
                                                         <materialui:MaterialLabel
                                                             Grid.Row="0"
-                                                            TextColor="{StaticResource CustomGrey_D}"
+                                                            TextColor="{StaticResource CustomGrey}"
                                                             TypeScale="Subtitle2"
                                                             FontAttributes="None"
                                                             Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
@@ -219,9 +219,6 @@
                                                             LoadingPlaceholder="img_football.png"
                                                             ErrorPlaceholder="img_football.png"
                                                             Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
-                                                                <ffimageloading:CachedImage.Transformations>
-                                                                    <fftransformations:CircleTransformation />
-                                                                </ffimageloading:CachedImage.Transformations>
                                                             </ffimageloading:CachedImage>
                                                             <StackLayout
                                                             Grid.Column="2"
@@ -260,9 +257,6 @@
                                                             LoadingPlaceholder="img_football.png"
                                                             ErrorPlaceholder="img_football.png"
                                                             Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                                                <ffimageloading:CachedImage.Transformations>
-                                                                    <fftransformations:CircleTransformation />
-                                                                </ffimageloading:CachedImage.Transformations>
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
                                                             Grid.Column="4"
@@ -349,7 +343,7 @@
                                                             </materialui:MaterialLabel>
                                                             <materialui:MaterialLabel
                                                             LineBreakMode="TailTruncation"
-                                                            TextColor="{StaticResource CustomGrey_D}"
+                                                            TextColor="{StaticResource CustomGrey}"
                                                             TypeScale="Body2"
                                                             Text="{Binding CountryName}">
                                                             </materialui:MaterialLabel>
@@ -425,7 +419,7 @@
                                                             <materialui:MaterialLabel
                                                             LineBreakMode="TailTruncation"
                                                             TypeScale="Body2"
-                                                            TextColor="{StaticResource CustomGrey_D}"
+                                                            TextColor="{StaticResource CustomGrey}"
                                                             Text="{Binding CountryName}">
                                                             </materialui:MaterialLabel>
                                                         </StackLayout>
@@ -471,8 +465,8 @@
                                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                 <ffimageloading:CachedImage
                                                 Aspect="AspectFit"
-                                                HeightRequest="23"
-                                                WidthRequest="23"
+                                                HeightRequest="25"
+                                                WidthRequest="25"
                                                 DownsampleHeight="150"
                                                 DownsampleWidth="150"
                                                 DownsampleToViewSize="True"
@@ -518,8 +512,9 @@
         <!--Close button-->
         <materialui:MaterialCard
             Margin="0"
-            Padding="0"            WidthRequest="23"
-            HeightRequest="23"
+            Padding="0"
+            WidthRequest="25"
+            HeightRequest="25"
             CornerRadius="25"
             BackgroundColor="{StaticResource PrimaryColor}"
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.98, Constant=-23}"

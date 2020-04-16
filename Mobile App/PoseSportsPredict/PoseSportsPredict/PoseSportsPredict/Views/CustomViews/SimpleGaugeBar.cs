@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PoseSportsPredict.Logics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,7 +76,7 @@ namespace PoseSportsPredict.Views.CustomViews
         private Grid _grid = new Grid();
         private BoxView _boxView1 = new BoxView();
         private BoxView _boxView2 = new BoxView();
-        private Label _textLable = new Label();
+        //private Label _textLable = new Label();
 
         #endregion Fields
 
@@ -99,6 +100,8 @@ namespace PoseSportsPredict.Views.CustomViews
 
             _frame.Content = _grid;
             Content = _frame;
+
+            ReloadView();
         }
 
         private void ReloadView()
@@ -108,7 +111,7 @@ namespace PoseSportsPredict.Views.CustomViews
 
             _frame.BackgroundColor = GaugeBackgroundColor;
 
-            var gaugeRate = CurValue / MaxValue;
+            var gaugeRate = MaxValue == 0 ? 0 : CurValue / MaxValue;
             GridLength gaugeLenth = new GridLength(gaugeRate, GridUnitType.Star);
             GridLength ungaugeLenth = new GridLength((1 - gaugeRate), GridUnitType.Star);
 
@@ -120,7 +123,7 @@ namespace PoseSportsPredict.Views.CustomViews
             // Gauge
             BoxView gaugeBox = IsLeftStart ? _boxView1 : _boxView2;
             BoxView ungaugeBox = IsLeftStart ? _boxView2 : _boxView1;
-            gaugeBox.Color = gaugeRate > 0.5 ? GaugeColor1 : GaugeColor2;
+            gaugeBox.Color = gaugeRate == 0.5 ? AppResourcesHelper.GetResourceColor("CustomGrey") : gaugeRate > 0.5 ? GaugeColor1 : GaugeColor2;
             ungaugeBox.Color = Color.Transparent;
 
             if (IsAnimation && gaugeLenth.Value > 0)
@@ -133,7 +136,7 @@ namespace PoseSportsPredict.Views.CustomViews
                 gaugeLenth.Value,
                 Easing.Linear);
 
-                animation.Commit(this, "default animation", 16, 700, Easing.Linear);
+                animation.Commit(this, "default animation", 16, 1000, Easing.Linear);
             }
         }
     }

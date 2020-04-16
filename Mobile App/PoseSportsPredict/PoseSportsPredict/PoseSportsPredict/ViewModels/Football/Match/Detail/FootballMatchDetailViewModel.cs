@@ -32,7 +32,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 "ic_alarm_selected.png",
                 AppResourcesHelper.GetResourceColor("IconActivated"),
                 "ic_alarm_unselected.png",
-                Color.Black);
+                AppResourcesHelper.GetResourceColor("TextColor_L"));
 
             return true;
         }
@@ -234,22 +234,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Away, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);
-        }
-
-        public ICommand SwipeLeftViewSwitcherCommad { get => new RelayCommand(SwipeLeftViewSwitcher); }
-
-        private void SwipeLeftViewSwitcher()
-        {
-            if (SelectedViewIndex < 3)
-                SelectedViewIndex++;
-        }
-
-        public ICommand SwipeRightViewSwitcherCommad { get => new RelayCommand(SwipeRightViewSwitcher); }
-
-        private void SwipeRightViewSwitcher()
-        {
-            if (SelectedViewIndex > 0)
-                SelectedViewIndex--;
         }
 
         #endregion Commands

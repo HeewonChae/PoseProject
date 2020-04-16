@@ -88,7 +88,7 @@
                                                 </ffimageloading:CachedImage>
                                                 <materialui:MaterialLabel
                                                     LineBreakMode="TailTruncation"
-                                                    TextColor="{StaticResource CustomGrey_D}"
+                                                    TextColor="{StaticResource CustomGrey}"
                                                     TypeScale="Subtitle2"
                                                     FontAttributes="None"
                                                     VerticalOptions="CenterAndExpand">
@@ -103,10 +103,10 @@
                                             </StackLayout>
                                             <materialui:MaterialLabel
                                                 Grid.Row="1"
-                                                TextColor="{StaticResource CustomGrey_D}"
+                                                TextColor="{StaticResource CustomGrey}"
                                                 TypeScale="Subtitle2"
                                                 FontAttributes="None"
-                                                Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
+                                                Text="{Binding MatchTime, Converter={StaticResource dateToStringConverter}}">
                                             </materialui:MaterialLabel>
                                             <ContentView
                                                 Grid.Row="0"
@@ -161,9 +161,6 @@
                                                 LoadingPlaceholder="img_football.png"
                                                 ErrorPlaceholder="img_football.png"
                                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
-                                                <ffimageloading:CachedImage.Transformations>
-                                                    <fftransformations:CircleTransformation />
-                                                </ffimageloading:CachedImage.Transformations>
                                             </ffimageloading:CachedImage>
                                             <StackLayout
                                                 Grid.Column="2"
@@ -202,9 +199,6 @@
                                                 LoadingPlaceholder="img_football.png"
                                                 ErrorPlaceholder="img_football.png"
                                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                                <ffimageloading:CachedImage.Transformations>
-                                                    <fftransformations:CircleTransformation />
-                                                </ffimageloading:CachedImage.Transformations>
                                             </ffimageloading:CachedImage>
                                             <materialui:MaterialLabel
                                                 Grid.Column="4"

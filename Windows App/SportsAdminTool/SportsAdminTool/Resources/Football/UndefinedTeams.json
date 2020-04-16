@@ -118,6 +118,13 @@
       "CountryName": "China",
       "ConvertTeamId": 843,
       "ConvertTeamName": "Tianjin Songjiang"
+    },
+    {
+      "Index": 20,
+      "TeamName": "BATE",
+      "CountryName": "Belarus",
+      "ConvertTeamId": 388,
+      "ConvertTeamName": "Bate Borisov"
     }
   ]
 }

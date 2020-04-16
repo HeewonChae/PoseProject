@@ -48,9 +48,9 @@ namespace Repository.Mysql.FootballDB.Tables
         [Index("IDX_MATCH_TIME", Order = 1, IsUnique = false)]
         public DateTime match_time { get; set; }
 
+        [Required]
         [Column(TypeName = "VARCHAR")]
         [StringLength(64)]
-        [SqlDefaultValue(DefaultValue = "")]
         public string round { get; set; }
 
         [Required]

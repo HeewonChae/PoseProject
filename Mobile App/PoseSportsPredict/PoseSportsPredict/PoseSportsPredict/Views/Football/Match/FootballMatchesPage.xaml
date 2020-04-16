@@ -40,8 +40,8 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="23"
-                                WidthRequest="23"
+                                HeightRequest="25"
+                                WidthRequest="25"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"
@@ -115,8 +115,8 @@
                                     Spacing="15">
                                     <ffimageloading:CachedImage
                                         Aspect="AspectFit"
-                                        HeightRequest="23"
-                                        WidthRequest="23"
+                                        HeightRequest="25"
+                                        WidthRequest="25"
                                         DownsampleHeight="150"
                                         DownsampleWidth="150"
                                         DownsampleToViewSize="True"
@@ -145,8 +145,8 @@
                                 <BoxView
                                     VerticalOptions="Center"
                                     Margin="10, 0"
-                                    HeightRequest="0.1"
-                                    Color="{StaticResource CustomGrey}">
+                                    HeightRequest="0.5"
+                                    Color="{StaticResource CustomGrey_L}">
                                 </BoxView>
                             </StackLayout>
                             <!--Inner List-->

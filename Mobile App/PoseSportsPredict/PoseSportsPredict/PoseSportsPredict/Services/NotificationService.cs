@@ -102,6 +102,8 @@ namespace PoseSportsPredict.Services
             var ret = await _sqliteService.DeleteAsync<NotificationInfo>(found.PrimaryKey);
             Debug.Assert(ret != 0);
 
+            NotificationCenter.Current.Cancel(found.Id);
+
             found.SetIsAlarmed(false);
 
             string message = this.BuildNotificationMessage(found.SportsType, found.NotificationType);

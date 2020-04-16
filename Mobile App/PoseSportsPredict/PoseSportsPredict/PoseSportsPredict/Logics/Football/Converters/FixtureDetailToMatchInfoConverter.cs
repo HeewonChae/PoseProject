@@ -10,10 +10,6 @@ namespace PoseSportsPredict.Logics.Football.Converters
 {
     public class FixtureDetailToMatchInfoConverter : IValueConverter
     {
-        public FixtureDetailToMatchInfoConverter()
-        {
-        }
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             FootballMatchInfo returnValue = null;

@@ -118,9 +118,6 @@
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
-                                <ffimageloading:CachedImage.Transformations>
-                                    <fftransformations:CircleTransformation />
-                                </ffimageloading:CachedImage.Transformations>
                             </ffimageloading:CachedImage>
                             <!--Middle-->
                             <StackLayout
@@ -161,9 +158,6 @@
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                <ffimageloading:CachedImage.Transformations>
-                                    <fftransformations:CircleTransformation />
-                                </ffimageloading:CachedImage.Transformations>
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
                                 Grid.Column="4"

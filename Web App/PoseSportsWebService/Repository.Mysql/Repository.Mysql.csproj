@@ -86,8 +86,25 @@
     <Compile Include="FootballDBMigrations\202003250048585_AlterTeamTableNullCheck.designer.cs">
       <DependentUpon>202003250048585_AlterTeamTableNullCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202004140701534_StandingsTableIndexAlter.cs" />
+    <Compile Include="FootballDBMigrations\202004140701534_StandingsTableIndexAlter.designer.cs">
+      <DependentUpon>202004140701534_StandingsTableIndexAlter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FootballDBMigrations\202004140705401_DeleteStandingsIndex.cs" />
+    <Compile Include="FootballDBMigrations\202004140705401_DeleteStandingsIndex.designer.cs">
+      <DependentUpon>202004140705401_DeleteStandingsIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FootballDBMigrations\202004151549520_FixtureTableRoundColumnNotNull.cs" />
+    <Compile Include="FootballDBMigrations\202004151549520_FixtureTableRoundColumnNotNull.designer.cs">
+      <DependentUpon>202004151549520_FixtureTableRoundColumnNotNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FootballDBMigrations\202004151551107_FixtureTableRoundColumnNotNull2.cs" />
+    <Compile Include="FootballDBMigrations\202004151551107_FixtureTableRoundColumnNotNull2.designer.cs">
+      <DependentUpon>202004151551107_FixtureTableRoundColumnNotNull2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
+    <Compile Include="FootballDB\OutputModels\DB_FootballStandingsDetail.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
@@ -142,6 +159,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FootballDBMigrations\202003250048585_AlterTeamTableNullCheck.resx">
       <DependentUpon>202003250048585_AlterTeamTableNullCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202004140701534_StandingsTableIndexAlter.resx">
+      <DependentUpon>202004140701534_StandingsTableIndexAlter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202004140705401_DeleteStandingsIndex.resx">
+      <DependentUpon>202004140705401_DeleteStandingsIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202004151549520_FixtureTableRoundColumnNotNull.resx">
+      <DependentUpon>202004151549520_FixtureTableRoundColumnNotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202004151551107_FixtureTableRoundColumnNotNull2.resx">
+      <DependentUpon>202004151551107_FixtureTableRoundColumnNotNull2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

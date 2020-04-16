@@ -154,7 +154,7 @@ namespace SportsAdminTool
             this._lbl_check_completed_fixtures.Content = org_bannerText;
             this._progRing_check_completed_fixtures.IsActive = false;
 
-            TimeSpan ts = DateTime.Now.AddMinutes(5) - DateTime.Now; // 10분 후
+            TimeSpan ts = DateTime.Now.AddMinutes(5) - DateTime.Now; // 5분 후
             Singleton.Get<FootballAlarm.CheckCompletedFixtures>().SetAlarm((long)ts.TotalMilliseconds);
         }
 

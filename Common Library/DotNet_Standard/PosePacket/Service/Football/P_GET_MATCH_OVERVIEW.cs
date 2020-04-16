@@ -12,10 +12,12 @@ namespace PosePacket.Service.Football
 
     public class O_GET_MATCH_OVERVIEW
     {
-        public List<FootballFixtureDetail> HomeLastFixtures { get; set; }
-        public List<FootballFixtureDetail> AwayLastFixtures { get; set; }
+        public List<FootballFixtureDetail> HomeRecentFixtures { get; set; }
+        public List<FootballFixtureDetail> AwayRecentFixtures { get; set; }
 
-        public List<FootballFixtureDetail> League_HomeLastFixtures { get; set; }
-        public List<FootballFixtureDetail> Leauge_AwayLastFixtures { get; set; }
+        public List<FootballFixtureDetail> League_HomeRecentFixtures { get; set; }
+        public List<FootballFixtureDetail> Leauge_AwayRecentFixtures { get; set; }
+
+        public List<FootballStandingsDetail> StandingsDetails { get; set; }
     }
 }

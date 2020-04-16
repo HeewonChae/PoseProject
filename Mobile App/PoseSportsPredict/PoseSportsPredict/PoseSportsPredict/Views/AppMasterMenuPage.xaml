@@ -32,8 +32,8 @@
                     Source="img_poseidon_logo.png">
                 </Image>
                 <BoxView
-                    HeightRequest="0.1"
-                    Color="{StaticResource CustomGrey}">
+                    HeightRequest="0.5"
+                    Color="{StaticResource CustomGrey_L}">
                 </BoxView>
             </StackLayout>
 
@@ -117,8 +117,8 @@
                     </ContentView>
                 </Grid>
                 <BoxView
-                    HeightRequest="0.1"
-                    Color="{StaticResource CustomGrey}">
+                    HeightRequest="0.5"
+                    Color="{StaticResource CustomGrey_L}">
                 </BoxView>
             </StackLayout>
 
@@ -135,8 +135,8 @@
                 Grid.Row="3"
                 VerticalOptions="End">
                 <BoxView
-                    HeightRequest="0.1"
-                    Color="{StaticResource CustomGrey}">
+                    HeightRequest="0.5"
+                    Color="{StaticResource CustomGrey_L}">
                 </BoxView>
                 <Image
                     Aspect="AspectFit"

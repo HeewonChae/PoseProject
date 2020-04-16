@@ -63,7 +63,7 @@
                                 RatingType="Full"
                                 ColorOn="{StaticResource IconActivated}"
                                 OutlineOnColor="{StaticResource IconActivated}"
-                                OutlineOffColor="Black"
+                                OutlineOffColor="{StaticResource TextColor_L}"
                                 Path="{x:Static customviews:PathConstants.Star}"
                                 Count="1"
                                 Value="{Binding LeagueInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
@@ -131,7 +131,7 @@
                     <BoxView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
-                        HeightRequest="0.1"
+                        HeightRequest="0.5"
                         Color="{StaticResource TransparentWhite}">
                     </BoxView>
                 </Grid>
@@ -146,7 +146,7 @@
                     ShadowType="Bottom"
                     SelectedIndex="{Binding Source={x:Reference _switcher}, Path=SelectedIndex, Mode=TwoWay}">
                     <tabs:TabHostView.Tabs>
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Standings}" LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" LabelSize="14" />
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Scheduled_Matches}" LabelSize="14" />
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Finished_Matches}" LabelSize="14" />
                     </tabs:TabHostView.Tabs>

@@ -313,7 +313,7 @@
     <value>로그인 상태 유지</value>
   </data>
   <data name="Recent_Form" xml:space="preserve">
-    <value>최근 결과</value>
+    <value>최근 기록</value>
   </data>
   <data name="League_Points" xml:space="preserve">
     <value>승점</value>
@@ -332,5 +332,23 @@
   </data>
   <data name="H_A_Recent_Goal_For" xml:space="preserve">
     <value>H/A 최근 득점</value>
+  </data>
+  <data name="No_Data_Available" xml:space="preserve">
+    <value>이용 가능한 데이터가 없습니다.</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>통계</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>시간</value>
+  </data>
+  <data name="League" xml:space="preserve">
+    <value>리그</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>라운드</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>기록</value>
   </data>
 </root>

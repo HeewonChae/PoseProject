@@ -59,37 +59,45 @@ namespace SportsWebService.Commands.Football
         private static O_GET_MATCH_OVERVIEW ConvertOutput(FootballDB.Procedures.P_GET_MATCH_OVERVIEW.Output db_output)
         {
             var footballFixtureDetailConverter = Singleton.Get<FootballFixtureDetailConverter>();
+            var footballStandingsDetailConverter = Singleton.Get<FootballStandingsDetailConverter>();
 
             var homeFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
-            foreach (var dbFixtureDetail in db_output.HomeLastFixtures)
+            foreach (var dbFixtureDetail in db_output.HomeRecntFixtures)
             {
                 homeFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
 
             var AwayFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
-            foreach (var dbFixtureDetail in db_output.AwayLastFixtures)
+            foreach (var dbFixtureDetail in db_output.AwayRecentFixtures)
             {
                 AwayFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
 
             var league_homeFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
-            foreach (var dbFixtureDetail in db_output.League_HomeLastFixtures)
+            foreach (var dbFixtureDetail in db_output.League_HomeRecentFixtures)
             {
                 league_homeFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
 
             var league_AwayFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
-            foreach (var dbFixtureDetail in db_output.League_AwayLastFixtures)
+            foreach (var dbFixtureDetail in db_output.League_AwayRecentFixtures)
             {
                 league_AwayFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
 
+            var standingsDetail = new List<PacketModels.FootballStandingsDetail>();
+            foreach (var dbStandingsDetail in db_output.StandingsDetails)
+            {
+                standingsDetail.Add(footballStandingsDetailConverter.Convert(dbStandingsDetail));
+            }
+
             return new O_GET_MATCH_OVERVIEW
             {
-                HomeLastFixtures = homeFixtureDetails,
-                AwayLastFixtures = AwayFixtureDetails,
-                League_HomeLastFixtures = league_homeFixtureDetails,
-                Leauge_AwayLastFixtures = league_AwayFixtureDetails,
+                HomeRecentFixtures = homeFixtureDetails,
+                AwayRecentFixtures = AwayFixtureDetails,
+                League_HomeRecentFixtures = league_homeFixtureDetails,
+                Leauge_AwayRecentFixtures = league_AwayFixtureDetails,
+                StandingsDetails = standingsDetail,
             };
         }
     }

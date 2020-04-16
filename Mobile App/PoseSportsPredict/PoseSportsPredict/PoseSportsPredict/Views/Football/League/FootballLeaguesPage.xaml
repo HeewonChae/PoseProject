@@ -37,8 +37,8 @@
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
-                            HeightRequest="23"
-                            WidthRequest="23"
+                            HeightRequest="25"
+                            WidthRequest="25"
                             DownsampleHeight="150"
                             DownsampleWidth="150"
                             DownsampleToViewSize="True"
@@ -84,8 +84,8 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="23"
-                                WidthRequest="23"
+                                HeightRequest="25"
+                                WidthRequest="25"
                                 DownsampleHeight="150"
                                 DownsampleWidth="150"
                                 DownsampleToViewSize="True"

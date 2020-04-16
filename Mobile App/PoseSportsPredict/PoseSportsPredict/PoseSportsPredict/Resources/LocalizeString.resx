@@ -313,4 +313,22 @@
   <data name="H_A_Recent_Goal_For" xml:space="preserve">
     <value>H/A Recent Goal For</value>
   </data>
+  <data name="No_Data_Available" xml:space="preserve">
+    <value>There are no data available.</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="League" xml:space="preserve">
+    <value>League</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>Form</value>
+  </data>
 </root>

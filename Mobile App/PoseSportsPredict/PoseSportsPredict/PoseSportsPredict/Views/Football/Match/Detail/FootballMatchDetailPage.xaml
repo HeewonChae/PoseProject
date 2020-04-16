@@ -50,6 +50,7 @@
                     <!--Toolbar button-->
                     <StackLayout
                         Orientation="Horizontal"
+                        Spacing="9"
                         HorizontalOptions="EndAndExpand"
                         VerticalOptions="Center">
                         <ContentView
@@ -80,13 +81,13 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <customviews:RatingView
                                 VerticalOptions="Center"
-                                WidthRequest="22"
-                                HeightRequest="22"
+                                WidthRequest="22.5"
+                                HeightRequest="22.5"
                                 StrokeWidth="0.8"
                                 RatingType="Full"
                                 ColorOn="{StaticResource IconActivated}"
                                 OutlineOnColor="{StaticResource IconActivated}"
-                                OutlineOffColor="Black"
+                                OutlineOffColor="{StaticResource TextColor_L}"
                                 Path="{x:Static customviews:PathConstants.Star}"
                                 Count="1"
                                 Value="{Binding MatchInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
@@ -114,7 +115,7 @@
                     <StackLayout
                         Grid.Column="1"
                         Spacing="0"
-                        HorizontalOptions="End"
+                        HorizontalOptions="Center"
                         effects:TapCommandEffect.Tap="{Binding HomeTeamLogoClickCommand}"
                         effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
@@ -128,17 +129,13 @@
                             LoadingPlaceholder="img_football.png"
                             ErrorPlaceholder="img_football.png"
                             Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
-                            <ffimageloading:CachedImage.Transformations>
-                                <fftransformations:CircleTransformation />
-                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             WidthRequest="90"
                             VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Caption"
-                            HeightRequest="30"
+                            TypeScale="Body2"
                             MaxLines="2"
                             LineHeight="1"
                             TextColor="{StaticResource TextColor_L}"
@@ -151,6 +148,7 @@
                     <StackLayout
                         Grid.Column="2"
                         Spacing="0"
+                        VerticalOptions="CenterAndExpand"
                         Margin="7,0">
                         <StackLayout.Triggers>
                             <DataTrigger
@@ -173,24 +171,24 @@
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             HorizontalTextAlignment="Center"
-                            TypeScale="H6"
+                            TypeScale="H5"
                             FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.MatchTime, StringFormat='{0:tt hh:mm}'}">
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
-                            VerticalOptions="EndAndExpand"
                             HorizontalTextAlignment="Center"
                             TypeScale="Subtitle2"
                             FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}"
-                            Text="{Binding MatchInfo.MatchTime, Converter={StaticResource dateToStringConverter}}">
+                            Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
                         </materialui:MaterialLabel>
                     </StackLayout>
                     <!--For Started Match-->
                     <StackLayout
                         Grid.Column="2"
                         Spacing="0"
+                        VerticalOptions="CenterAndExpand"
                         Margin="7,0">
                         <StackLayout.Triggers>
                             <DataTrigger
@@ -213,7 +211,7 @@
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
                             HorizontalOptions="Center"
-                            TypeScale="H6"
+                            TypeScale="H5"
                             FontAttributes="None"
                             TextColor="{StaticResource TextColor_L}">
                             <materialui:MaterialLabel.FormattedText>
@@ -225,7 +223,6 @@
                             </materialui:MaterialLabel.FormattedText>
                         </materialui:MaterialLabel>
                         <materialui:MaterialLabel
-                            VerticalOptions="EndAndExpand"
                             HorizontalTextAlignment="Center"
                             TypeScale="Subtitle2"
                             FontAttributes="None"
@@ -252,19 +249,15 @@
                             LoadingPlaceholder="img_football.png"
                             ErrorPlaceholder="img_football.png"
                             Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
-                            <ffimageloading:CachedImage.Transformations>
-                                <fftransformations:CircleTransformation />
-                            </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
                         <materialui:MaterialLabel
                             WidthRequest="90"
                             VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Center"
-                            TypeScale="Caption"
+                            TypeScale="Body2"
                             MaxLines="2"
                             LineHeight="1"
-                            HeightRequest="30"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{Binding MatchInfo.AwayName}">
                         </materialui:MaterialLabel>
@@ -272,7 +265,7 @@
                     <BoxView
                         Grid.Row="1"
                         Grid.ColumnSpan="5"
-                        HeightRequest="0.1"
+                        HeightRequest="0.5"
                         Color="{StaticResource TransparentWhite}">
                     </BoxView>
                 </Grid>
@@ -300,10 +293,6 @@
                 x:Name="_switcher"
                 VerticalOptions="FillAndExpand"
                 SelectedIndex="{Binding Source={x:Reference _tabHost}, Path=SelectedIndex}">
-                <tabs:ViewSwitcher.GestureRecognizers>
-                    <SwipeGestureRecognizer Threshold="80" Direction="Left" Command="{Binding SwipeLeftViewSwitcherCommad}" />
-                    <SwipeGestureRecognizer Threshold="80" Direction="Right" Command="{Binding SwipeRightViewSwitcherCommad}" />
-                </tabs:ViewSwitcher.GestureRecognizers>
 
                 <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOverview" BindingContext="{Binding OverviewModel}" />
                 <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailH2HView" BindingContext="{Binding H2HViewModel}" />
