@@ -48,6 +48,7 @@ namespace PoseSportsPredict.Services
                     {
                         IconName = registerItem.IconName,
                     },
+                    Repeats = NotificationRepeat.No,
                 };
 
                 NotificationCenter.Current.Show(req);
@@ -87,6 +88,7 @@ namespace PoseSportsPredict.Services
                 {
                     IconName = item.IconName,
                 },
+                Repeats = NotificationRepeat.No,
             };
 
             NotificationCenter.Current.Show(req);

@@ -74,10 +74,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             if (matchInfo.IsAlarmed)
             {
-                DateTime notifyTime = matchInfo.MatchTime.AddMinutes(-5);
-                if (notifyTime < DateTime.Now)
-                    notifyTime = DateTime.Now.AddSeconds(10);
-
+                DateTime notifyTime = matchInfo.MatchTime;
                 await _notificationService.AddNotification(new NotificationInfo
                 {
                     Id = matchInfo.Id,

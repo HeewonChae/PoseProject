@@ -20,6 +20,19 @@ namespace PoseSportsPredict.Droid
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        private readonly string[] Permissions =
+        {
+            Android.Manifest.Permission.Internet,
+            Android.Manifest.Permission.AccessNetworkState,
+            Android.Manifest.Permission.WriteExternalStorage,
+            Android.Manifest.Permission.ReadExternalStorage,
+            Android.Manifest.Permission.AccessNotificationPolicy,
+            Android.Manifest.Permission.BindNotificationListenerService,
+            Android.Manifest.Permission.AccessNotificationPolicy,
+        };
+
+        private int PermissionReqId = 0;
+
         private bool doubleBackToExitPressedOnce = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -41,6 +54,7 @@ namespace PoseSportsPredict.Droid
 
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            RequestPermissions(Permissions, PermissionReqId);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             XF.Material.Droid.Material.Init(this, savedInstanceState);
@@ -103,7 +117,7 @@ namespace PoseSportsPredict.Droid
                 if (doubleBackToExitPressedOnce)
                 {
                     base.OnBackPressed();
-                    Java.Lang.JavaSystem.Exit(0);
+                    //Java.Lang.JavaSystem.Exit(0);
                     return;
                 }
 

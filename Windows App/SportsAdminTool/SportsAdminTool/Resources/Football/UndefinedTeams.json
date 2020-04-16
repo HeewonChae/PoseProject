@@ -125,6 +125,13 @@
       "CountryName": "Belarus",
       "ConvertTeamId": 388,
       "ConvertTeamName": "Bate Borisov"
+    },
+    {
+      "Index": 21,
+      "TeamName": "Dreams Metro Gallery",
+      "CountryName": "Hong-Kong",
+      "ConvertTeamId": 4459,
+      "ConvertTeamName": "Rangers"
     }
   ]
 }
