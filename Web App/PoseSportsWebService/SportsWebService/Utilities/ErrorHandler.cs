@@ -25,15 +25,17 @@ namespace SportsWebService.Utilities
 
         public static void WriteErrorLog(Exception exception)
         {
+            var message = "";
             switch (exception)
             {
                 case WebFaultException<ErrorDetail> webFaultException:
-                    var message = $"{webFaultException.Detail.ErrorCode}, {webFaultException.Detail.Message} \n {webFaultException.StackTrace}";
+                    message = $"{webFaultException.Detail.ErrorCode}, {webFaultException.Detail.Message}";
                     LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(message, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.ERROR);
                     break;
 
                 default:
-                    LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(exception.StackTrace, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.FATAL);
+                    message = $"{exception.Message}";
+                    LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(message, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.FATAL);
                     break;
             }
         }
