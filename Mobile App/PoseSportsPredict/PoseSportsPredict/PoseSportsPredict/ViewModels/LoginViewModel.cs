@@ -116,12 +116,14 @@ namespace PoseSportsPredict.ViewModels
             {
                 using (UserDialogs.Instance.Loading(LocalizeString.Loginning))
                 {
-                    loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+                    loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
                     {
+                        SerializeType = SerializeType.MessagePack,
                         MethodType = WebMethodType.POST,
                         BaseUrl = AppConfig.PoseWebBaseUrl,
                         ServiceUrl = AuthProxy.ServiceUrl,
                         SegmentGroup = AuthProxy.P_E_Login,
+                        NeedEncrypt = true,
                         PostData = new I_Login
                         {
                             PlatformId = _OAuthService.AuthenticatedUser.Id,
@@ -131,12 +133,14 @@ namespace PoseSportsPredict.ViewModels
             }
             else
             {
-                loginResult = await _webApiService.EncryptRequestAsync<O_Login>(new WebRequestContext
+                loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
                 {
+                    SerializeType = SerializeType.MessagePack,
                     MethodType = WebMethodType.POST,
                     BaseUrl = AppConfig.PoseWebBaseUrl,
                     ServiceUrl = AuthProxy.ServiceUrl,
                     SegmentGroup = AuthProxy.P_E_Login,
+                    NeedEncrypt = true,
                     PostData = new I_Login
                     {
                         PlatformId = _OAuthService.AuthenticatedUser.Id,

@@ -226,6 +226,7 @@
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
+    <Compile Include="Logics\StreamExtensions.cs" />
     <Compile Include="ServerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -247,6 +248,7 @@
     <Compile Include="Utilities\ErrorHandler.cs" />
     <Compile Include="Logics\TableLoader.cs" />
     <Compile Include="Infrastructure\WebModelTypeAttribute.cs" />
+    <Compile Include="Utilities\RawContentTypeMapper.cs" />
     <Compile Include="WebBehavior\Common\HeaderProcess\HeaderMessageBahavior.cs" />
     <Compile Include="WebBehavior\Common\HeaderProcess\HeaderMessageBehaviorSection.cs" />
     <Compile Include="WebBehavior\Common\HeaderProcess\HeaderMessageInspector.cs" />

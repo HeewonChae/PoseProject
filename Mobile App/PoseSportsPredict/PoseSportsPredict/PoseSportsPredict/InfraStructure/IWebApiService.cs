@@ -8,9 +8,5 @@ namespace PoseSportsPredict.InfraStructure
         Task<TOut> RequestAsync<TOut>(WebRequestContext reqContext);
 
         Task<TOut> RequestAsyncWithToken<TOut>(WebRequestContext reqContext);
-
-        Task<TOut> EncryptRequestAsync<TOut>(WebRequestContext reqContext);
-
-        Task<TOut> EncrpytRequestAsyncWithToken<TOut>(WebRequestContext reqContext);
     }
 }

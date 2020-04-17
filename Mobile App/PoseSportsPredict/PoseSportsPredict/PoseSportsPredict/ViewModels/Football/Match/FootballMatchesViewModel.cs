@@ -237,6 +237,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
             {
+                SerializeType = SerializeType.MessagePack,
                 MethodType = WebMethodType.POST,
                 BaseUrl = AppConfig.PoseWebBaseUrl,
                 ServiceUrl = FootballProxy.ServiceUrl,

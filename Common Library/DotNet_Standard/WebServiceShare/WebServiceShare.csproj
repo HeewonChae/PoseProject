@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PoseCrypto\PoseCrypto.csproj" />
     <ProjectReference Include="..\PosePacket\PosePacket.csproj" />
   </ItemGroup>
 </Project>

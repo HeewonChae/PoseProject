@@ -5,25 +5,36 @@ namespace WebServiceShare.ServiceContext
 {
     public class ClientContext
     {
-        private static PoseHeader _header = new PoseHeader();
+        #region Header
+
+        private static PoseHeader _header;
+
+        public static PoseHeader Header
+        {
+            get
+            {
+                if (_header == null)
+                    _header = new PoseHeader();
+
+                _header.eSignature = eSignature;
+                _header.eSignatureIV = eSignatureIV;
+                _header.eCredentials = eCredentials;
+
+                return _header;
+            }
+        }
+
+        #endregion Header
+
         public static byte[] eSignature { get; set; } = new byte[0];
         public static byte[] eSignatureIV { get; set; } = new byte[0];
         public static byte[] eCredentials { get; set; } = new byte[0];
         public static DateTime TokenExpireIn { get; set; } = DateTime.MinValue;
         public static DateTime LastLoginTime { get; set; } = DateTime.MinValue;
 
-        public static PoseHeader MakeHeader()
+        public static void SetCredentialsFrom(byte[] token)
         {
-            _header.eSignature = eSignature;
-            _header.eSignatureIV = eSignatureIV;
-            _header.eCredentials = eCredentials;
-
-            return _header;
-        }
-
-        public static void SetCredentialsFrom(string token)
-        {
-            eCredentials = System.Convert.FromBase64String(token);
+            eCredentials = token;
         }
     }
 }

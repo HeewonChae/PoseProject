@@ -1,9 +1,10 @@
 ﻿using Flurl.Http;
+using MessagePack;
+using PoseCrypto;
 using PosePacket.Header;
 using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.WebError;
-using ReferenceTest.NetCore;
 using System;
 using System.Threading.Tasks;
 using WebServiceShare.ServiceContext;
@@ -34,8 +35,7 @@ namespace ReferenceText.NetCore
             }
         }
 
-        private static readonly CryptoService _cryptoService = new CryptoService();
-        private static readonly string _serviceBaseUrl = "http://192.168.0.157:8888/";
+        public static readonly string ServiceBaseUrl = "http://192.168.0.157:8888/";
 
         private static void Main(string[] args)
         {
@@ -44,52 +44,46 @@ namespace ReferenceText.NetCore
             // RSA Key
             string serverPubKey = WebClient.RequestAsync<string>(new WebRequestContext
             {
+                SerializeType = SerializeType.MessagePack,
                 MethodType = WebMethodType.GET,
-                BaseUrl = _serviceBaseUrl,
+                BaseUrl = ServiceBaseUrl,
                 ServiceUrl = AuthProxy.ServiceUrl,
-                SegmentGroup = AuthProxy.P_PUBLISHKEY,
-            }).Result;
+                SegmentGroup = AuthProxy.P_PUBLISH_KEY,
+            },
+             (PoseHeader.HEADER_NAME, ClientContext.Header)).Result;
 
-            _cryptoService.RSA_FromXmlString(serverPubKey);
-            ClientContext.eSignature = _cryptoService.GetEncryptedSignature();
-            ClientContext.eSignatureIV = _cryptoService.GetEncryptedSignatureIV();
+            CryptoFacade.Instance.RSA_FromXmlString(serverPubKey);
+            ClientContext.eSignature = CryptoFacade.Instance.GetEncryptedSignature();
+            ClientContext.eSignatureIV = CryptoFacade.Instance.GetEncryptedSignatureIV();
 
-            O_Login login_output = EncryptRequestAsync<O_Login>(new WebRequestContext()
+            // Login
+            O_Login login_output = WebClient.RequestAsync<O_Login>(new WebRequestContext()
             {
+                SerializeType = SerializeType.MessagePack,
                 MethodType = WebMethodType.POST,
-                BaseUrl = _serviceBaseUrl,
+                BaseUrl = ServiceBaseUrl,
                 ServiceUrl = AuthProxy.ServiceUrl,
                 SegmentGroup = AuthProxy.P_E_Login,
+                NeedEncrypt = true,
                 PostData = new I_Login
                 {
                     PlatformId = "test",
                 }
-            }).Result;
+            },
+             (PoseHeader.HEADER_NAME, ClientContext.Header)).Result;
 
             ClientContext.SetCredentialsFrom(login_output.PoseToken);
+            ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(login_output.TokenExpireIn);
+            ClientContext.LastLoginTime = login_output.LastLoginTime.ToLocalTime();
+
+            // Serializer benchmark
+            //Task.Factory.StartNew(() =>
+            //{
+            //    var serializerBenchmark = new SerializerBenchmark();
+            //    serializerBenchmark.StartBenchmark();
+            //}, TaskCreationOptions.LongRunning);
 
             Console.ReadLine();
-        }
-
-        public static async Task<TOut> EncryptRequestAsync<TOut>(WebRequestContext reqContext)
-        {
-            TOut result = default;
-
-            // Encrypt PostData
-            if (reqContext.PostData != null)
-            {
-                reqContext.PostData = _cryptoService.Encrypt_AES(reqContext.JsonSerialize());
-            }
-
-            string eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-
-            // Decrpyt output
-            if (!string.IsNullOrEmpty(eResult))
-            {
-                result = _cryptoService.Decrypt_AES(eResult).JsonDeserialize<TOut>();
-            }
-
-            return result;
         }
     }
 }

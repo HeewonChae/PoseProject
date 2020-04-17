@@ -1,7 +1,10 @@
 ﻿using Flurl;
 using Flurl.Http;
+using MessagePack;
+using PoseCrypto;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebServiceShare.ServiceContext;
 
@@ -32,25 +35,35 @@ namespace WebServiceShare.WebServiceClient
         public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, params (string name, object value)[] headers)
         {
             var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
-            var flurlReqeust = new FlurlClient(endPointAddr).Request();
+            var flurlRequest = new FlurlClient(endPointAddr).Request();
+
             if (headers != null)
             {
                 foreach (var (name, value) in headers)
                 {
-                    flurlReqeust.WithHeader(name, value);
+                    flurlRequest.WithHeader(name, value);
                 }
             }
 
             var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
-            flurlReqeust.AppendPathSegments(convertedSegments);
+            flurlRequest.AppendPathSegments(convertedSegments);
 
             List<(string, string)> convertedParams = ConvertQueryParams(requestContext.QueryParamGroup, requestContext.QueryParamData);
             foreach (var (name, value) in convertedParams)
             {
-                flurlReqeust.SetQueryParam(name, value);
+                flurlRequest.SetQueryParam(name, value);
             }
 
-            return await SendAsync<TOut>(flurlReqeust, requestContext);
+            requestContext.DataSerialize();
+            if (requestContext.NeedEncrypt)
+            {
+                if (requestContext.PostData != null)
+                    requestContext.PostData = CryptoFacade.Instance.Encrypt_AES((byte[])requestContext);
+
+                return await EncryptSendAsync<TOut>(flurlRequest, requestContext);
+            }
+            else
+                return await SendAsync<TOut>(flurlRequest, requestContext);
         }
 
         private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
@@ -62,20 +75,75 @@ namespace WebServiceShare.WebServiceClient
 
                 if (requestContext.MethodType == WebMethodType.GET)
                 {
-                    result = await flurlRequest
-                        .GetJsonAsync<TOut>();
+                    if (requestContext.SerializeType == SerializeType.Json)
+                    {
+                        result = await flurlRequest.GetJsonAsync<TOut>();
+                    }
+                    else
+                    {
+                        var rawData = await flurlRequest.GetBytesAsync();
+                        result = MessagePackSerializer.Deserialize<TOut>(rawData);
+                    }
                 }
                 else if (requestContext.MethodType == WebMethodType.POST)
                 {
-                    result = await flurlRequest
-                        .PostJsonAsync(requestContext.JsonSerialize())
-                        .ReceiveJson<TOut>();
+                    if (requestContext.SerializeType == SerializeType.Json)
+                    {
+                        result = await flurlRequest
+                            .PostJsonAsync((string)requestContext)
+                            .ReceiveJson<TOut>();
+                    }
+                    else
+                    {
+                        var rawData = await flurlRequest
+                            .PostAsync(new ByteArrayContent(requestContext))
+                            .ReceiveBytes();
+
+                        result = MessagePackSerializer.Deserialize<TOut>(rawData);
+                    }
                 }
             }
             catch (FlurlHttpException flurlException)
             {
                 if (requestContext.AttemptCnt < WebConfig.ReTryCount)
-                    result = await RequestRetryPolicy<TOut>(flurlException, requestContext);
+                    result = await RequestRetryPolicy<TOut>(flurlException, flurlRequest, requestContext);
+                else
+                    await _exceptionHandler?.Invoke(flurlException);
+            }
+            catch (Exception ex)
+            {
+                await _exceptionHandler?.Invoke(ex);
+            }
+
+            return result;
+        }
+
+        private static async Task<TOut> EncryptSendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
+        {
+            TOut result = default;
+            try
+            {
+                requestContext.AttemptCnt++;
+
+                byte[] e_rawData = null;
+                if (requestContext.MethodType == WebMethodType.GET)
+                {
+                    e_rawData = await flurlRequest.GetBytesAsync();
+                }
+                else if (requestContext.MethodType == WebMethodType.POST)
+                {
+                    e_rawData = await flurlRequest
+                        .PostAsync(new ByteArrayContent(requestContext))
+                        .ReceiveBytes();
+                }
+
+                var rawData = CryptoFacade.Instance.Decrypt_AES(e_rawData);
+                result = MessagePackSerializer.Deserialize<TOut>(rawData);
+            }
+            catch (FlurlHttpException flurlException)
+            {
+                if (requestContext.AttemptCnt < WebConfig.ReTryCount)
+                    result = await RequestRetryPolicy<TOut>(flurlException, flurlRequest, requestContext);
                 else
                     await _exceptionHandler?.Invoke(flurlException);
             }
@@ -144,7 +212,7 @@ namespace WebServiceShare.WebServiceClient
             return convertedParams;
         }
 
-        private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, WebRequestContext requestContext)
+        private static async Task<TOut> RequestRetryPolicy<TOut>(FlurlHttpException flurlException, IFlurlRequest flurlRequest, WebRequestContext requestContext)
         {
             TOut result = default;
 
@@ -156,7 +224,10 @@ namespace WebServiceShare.WebServiceClient
             }
             else if (flurlException.Call.Response != null)// 재시도
             {
-                result = await WebClient.RequestAsync<TOut>(requestContext);
+                if (requestContext.NeedEncrypt)
+                    return await EncryptSendAsync<TOut>(flurlRequest, requestContext);
+                else
+                    return await SendAsync<TOut>(flurlRequest, requestContext);
             }
 
             return result;

@@ -33,7 +33,7 @@ namespace SportsWebService.Commands.Auth
 
             return new O_TokenRefresh
             {
-                PoseToken = Convert.ToBase64String(Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials))),
+                PoseToken = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials)),
                 TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
             };
         }

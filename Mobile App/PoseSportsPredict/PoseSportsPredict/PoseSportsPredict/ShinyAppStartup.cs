@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PoseCrypto;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -48,7 +49,6 @@ namespace PoseSportsPredict
 
         private void RegisterServices(IServiceCollection services)
         {
-            services.AddSingleton<CryptoService>();
             services.AddSingleton<IWebApiService, WebApiService>();
             services.AddSingleton<ISQLiteService, SQLiteService>();
             services.AddSingleton<IOAuthService, ExternOAuthService>();

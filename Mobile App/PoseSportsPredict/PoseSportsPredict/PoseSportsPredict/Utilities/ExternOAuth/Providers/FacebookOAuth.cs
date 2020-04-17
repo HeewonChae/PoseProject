@@ -38,6 +38,7 @@ namespace PoseSportsPredict.Utilities.ExternOAuth.Providers
             // Get user information
             var facebookUser = await _webService.RequestAsync<FacebookUser>(new WebRequestContext()
             {
+                SerializeType = SerializeType.Json,
                 MethodType = WebMethodType.GET,
                 BaseUrl = UserInfoUrl,
                 QueryParamGroup = "fields={fields}&access_token={access_token}",

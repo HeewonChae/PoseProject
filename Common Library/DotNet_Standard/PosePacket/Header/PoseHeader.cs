@@ -14,6 +14,11 @@ namespace PosePacket.Header
 
         public override string ToString()
         {
+            if (eSignature.Length == 0
+                && eSignatureIV.Length == 0
+                && eCredentials.Length == 0)
+                return string.Empty;
+
             List<byte> buffer = new List<byte>();
 
             int lenth = eSignature.Length;

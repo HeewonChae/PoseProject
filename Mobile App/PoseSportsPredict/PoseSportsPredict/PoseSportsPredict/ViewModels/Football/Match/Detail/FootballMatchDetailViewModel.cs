@@ -137,7 +137,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             if (MatchInfo.IsAlarmed)
             {
-                DateTime notifyTime = DateTime.Now.AddSeconds(10);//MatchInfo.MatchTime;
+                DateTime notifyTime = MatchInfo.MatchTime;
                 await _notificationService.AddNotification(new NotificationInfo
                 {
                     Id = MatchInfo.Id,

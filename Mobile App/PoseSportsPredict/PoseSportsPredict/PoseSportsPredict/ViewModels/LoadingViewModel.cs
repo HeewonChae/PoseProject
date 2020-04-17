@@ -1,4 +1,5 @@
-﻿using PosePacket.Proxy;
+﻿using PoseCrypto;
+using PosePacket.Proxy;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Resources;
@@ -36,10 +37,11 @@ namespace PoseSportsPredict.ViewModels
 
             string serverPubKey = await _webApiService.RequestAsync<string>(new WebRequestContext
             {
+                SerializeType = SerializeType.MessagePack,
                 MethodType = WebMethodType.GET,
                 BaseUrl = AppConfig.PoseWebBaseUrl,
                 ServiceUrl = AuthProxy.ServiceUrl,
-                SegmentGroup = AuthProxy.P_PUBLISHKEY,
+                SegmentGroup = AuthProxy.P_PUBLISH_KEY,
             });
 
             if (string.IsNullOrEmpty(serverPubKey))
@@ -51,9 +53,9 @@ namespace PoseSportsPredict.ViewModels
                 return;
             }
 
-            _cryptoService.RSA_FromXmlString(serverPubKey);
-            ClientContext.eSignature = _cryptoService.GetEncryptedSignature();
-            ClientContext.eSignatureIV = _cryptoService.GetEncryptedSignatureIV();
+            CryptoFacade.Instance.RSA_FromXmlString(serverPubKey);
+            ClientContext.eSignature = CryptoFacade.Instance.GetEncryptedSignature();
+            ClientContext.eSignatureIV = CryptoFacade.Instance.GetEncryptedSignatureIV();
 
             // Prepare SingletonPage
             ShinyHost.Resolve<AppMasterViewModel>();
@@ -79,7 +81,6 @@ namespace PoseSportsPredict.ViewModels
         private IWebApiService _webApiService;
         private IOAuthService _OAuthService;
         private INotificationService _notificationService;
-        private CryptoService _cryptoService;
 
         #endregion Services
 
@@ -97,13 +98,11 @@ namespace PoseSportsPredict.ViewModels
 
         public LoadingViewModel(
             LoadingPage coupledPage,
-            CryptoService cryptoService,
             IWebApiService webApiService,
             IOAuthService OAuthService,
             INotificationService notificationService) : base(coupledPage)
         {
             _notificationService = notificationService;
-            _cryptoService = cryptoService;
             _webApiService = webApiService;
             _OAuthService = OAuthService;
 

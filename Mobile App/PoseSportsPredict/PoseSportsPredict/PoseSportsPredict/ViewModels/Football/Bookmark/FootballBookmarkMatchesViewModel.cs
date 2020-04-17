@@ -226,6 +226,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 // call server
                 var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
                 {
+                    SerializeType = SerializeType.MessagePack,
                     MethodType = WebMethodType.POST,
                     BaseUrl = AppConfig.PoseWebBaseUrl,
                     ServiceUrl = FootballProxy.ServiceUrl,

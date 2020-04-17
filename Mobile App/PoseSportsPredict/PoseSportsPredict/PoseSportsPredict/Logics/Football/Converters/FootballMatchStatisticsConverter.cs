@@ -185,8 +185,8 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 returnValue.TotalSideGoalAgainst = returnValue.HomeSideGoalAgainst.Avg + returnValue.AwaySideGoalAgainst.Avg;
 
                 // Rest Period
-                returnValue.HomeRestPeriod = homeMatches.Count() == 0 ? 0 : (curMatch.MatchTime - homeMatches.First().MatchTime.ToLocalTime()).Days;
-                returnValue.AwayRestPeriod = awayMatches.Count() == 0 ? 0 : (curMatch.MatchTime - awayMatches.First().MatchTime.ToLocalTime()).Days;
+                returnValue.HomeRestPeriod = homeMatches.Count() == 0 ? 0 : (curMatch.MatchTime - matchOverviewInfo.HomeRecentFixtures.First().MatchTime.ToLocalTime()).Days;
+                returnValue.AwayRestPeriod = awayMatches.Count() == 0 ? 0 : (curMatch.MatchTime - matchOverviewInfo.AwayRecentFixtures.First().MatchTime.ToLocalTime()).Days;
                 returnValue.TotalRestPeriod = returnValue.HomeRestPeriod + returnValue.AwayRestPeriod;
             }
 

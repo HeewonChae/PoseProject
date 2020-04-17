@@ -18,7 +18,7 @@ namespace PosePacket.Proxy
         
         private static string _serviceUrl = "Services/Auth.svc";
         
-        private static string _P_PUBLISHKEY = "PUBLISHKEY";
+        private static string _P_PUBLISH_KEY = "PUBLISHKEY";
         
         private static string _P_E_TokenRefresh = "TokenRefresh";
         
@@ -38,11 +38,11 @@ namespace PosePacket.Proxy
         // MethodType: GET, Segment: PUBLISHKEY 
         // InputType: null 
         // OutputType: null
-        public static string P_PUBLISHKEY
+        public static string P_PUBLISH_KEY
         {
             get
             {
-                return _P_PUBLISHKEY;
+                return _P_PUBLISH_KEY;
             }
         }
         

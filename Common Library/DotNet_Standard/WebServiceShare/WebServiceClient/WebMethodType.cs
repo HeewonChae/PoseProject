@@ -5,4 +5,10 @@
         GET,
         POST,
     }
+
+    public enum SerializeType
+    {
+        Json,
+        MessagePack,
+    }
 }

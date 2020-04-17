@@ -4,6 +4,7 @@ using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace SportsWebService
 {
@@ -11,6 +12,9 @@ namespace SportsWebService
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            ThreadPool.SetMinThreads(Environment.ProcessorCount * 2, Environment.ProcessorCount * 10);
+            ThreadPool.SetMaxThreads(Environment.ProcessorCount * 4, Environment.ProcessorCount * 16);
+
             // Log
             LogicCore.Utility.ThirdPartyLog.Log4Net.Initialize();
 

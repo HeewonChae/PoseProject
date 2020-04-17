@@ -58,12 +58,14 @@ namespace PoseSportsPredict.Services
                         string token = eventArgs.Account.Properties["access_token"];
 
                         // P_E_CheckVaildOAuthUser
-                        _authenticatedUser = await _webApiService.EncryptRequestAsync<ExternAuthUser>(new WebRequestContext
+                        _authenticatedUser = await _webApiService.RequestAsync<ExternAuthUser>(new WebRequestContext
                         {
+                            SerializeType = SerializeType.MessagePack,
                             MethodType = WebMethodType.POST,
                             BaseUrl = AppConfig.PoseWebBaseUrl,
                             ServiceUrl = AuthProxy.ServiceUrl,
                             SegmentGroup = AuthProxy.P_E_CheckVaildOAuthUser,
+                            NeedEncrypt = true,
                             PostData = new I_CheckVaildOAuthUser
                             {
                                 SNSProvider = provider,

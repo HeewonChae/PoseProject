@@ -1,5 +1,6 @@
 ﻿using Flurl.Http;
 using Plugin.Connectivity;
+using PoseCrypto;
 using PosePacket;
 using PosePacket.Header;
 using PosePacket.Proxy;
@@ -20,14 +21,10 @@ namespace PoseSportsPredict.Services
 {
     public sealed class WebApiService : IWebApiService
     {
-        private CryptoService _cryptoService;
-
-        public WebApiService(CryptoService cryptoService)
+        public WebApiService()
         {
             if (WebClient.ExceptionHandler == null)
                 WebClient.ExceptionHandler = this.ExceptionHandler;
-
-            _cryptoService = cryptoService;
         }
 
         #region Exception Handler
@@ -97,20 +94,16 @@ namespace PoseSportsPredict.Services
 
         #endregion Exception Handler
 
+        #region IWebApiService
+
         public async Task<TOut> RequestAsync<TOut>(WebRequestContext reqContext)
         {
             TOut result = default;
 
             if (!await CheckInternetConnection())
-            {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection,
-                    LocalizeString.App_Title,
-                    LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
                 return result;
-            }
 
-            result = await WebClient.RequestAsync<TOut>(reqContext);
+            result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.Header));
 
             return result;
         }
@@ -119,115 +112,15 @@ namespace PoseSportsPredict.Services
         {
             TOut result = default;
 
-            if (!await CheckInternetConnection())
-            {
+            if (!await CheckInternetConnection() || !await RefrashToken())
                 return result;
-            }
 
-            // 토큰 만료 시간 체크
-            if (ClientContext.TokenExpireIn < DateTime.UtcNow.AddMinutes(5))
-            {
-                // P_E_TokenRefresh
-                var refreshToken = await this.EncryptRequestAsync<O_TokenRefresh>(new WebRequestContext
-                {
-                    MethodType = WebMethodType.GET,
-                    BaseUrl = AppConfig.PoseWebBaseUrl,
-                    ServiceUrl = AuthProxy.ServiceUrl,
-                    SegmentGroup = AuthProxy.P_E_TokenRefresh,
-                });
-
-                if (refreshToken == null)
-                {
-                    return result;
-                }
-
-                ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
-                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
-            }
-
-            result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
+            result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.Header));
 
             return result;
         }
 
-        public async Task<TOut> EncryptRequestAsync<TOut>(WebRequestContext reqContext)
-        {
-            TOut result = default;
-
-            if (!await CheckInternetConnection())
-            {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection,
-                    LocalizeString.App_Title,
-                    LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
-                return result;
-            }
-
-            // Encrypt PostData
-            if (reqContext.PostData != null)
-            {
-                reqContext.PostData = _cryptoService.Encrypt_AES(reqContext.JsonSerialize());
-            }
-
-            string eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-
-            // Decrpyt output
-            if (!string.IsNullOrEmpty(eResult))
-            {
-                result = _cryptoService.Decrypt_AES(eResult)
-                    .JsonDeserialize<TOut>();
-            }
-
-            return result;
-        }
-
-        public async Task<TOut> EncrpytRequestAsyncWithToken<TOut>(WebRequestContext reqContext)
-        {
-            TOut result = default;
-
-            if (!await CheckInternetConnection())
-            {
-                return result;
-            }
-
-            // Encrypt PostData
-            if (reqContext.PostData != null)
-            {
-                reqContext.PostData = _cryptoService.Encrypt_AES(reqContext.JsonSerialize());
-            }
-
-            // 토큰 만료 시간 체크
-            if (ClientContext.TokenExpireIn < DateTime.UtcNow.AddMinutes(5))
-            {
-                // P_E_TokenRefresh
-                var refreshToken = await this.EncryptRequestAsync<O_TokenRefresh>(new WebRequestContext
-                {
-                    MethodType = WebMethodType.GET,
-                    BaseUrl = AppConfig.PoseWebBaseUrl,
-                    ServiceUrl = AuthProxy.ServiceUrl,
-                    SegmentGroup = AuthProxy.P_E_TokenRefresh,
-                });
-
-                if (refreshToken == null)
-                {
-                    return result;
-                }
-
-                ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
-                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
-            }
-
-            string eResult = await WebClient.RequestAsync<string>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.MakeHeader()));
-
-            // Decrpyt output
-            if (!string.IsNullOrEmpty(eResult))
-            {
-                result = _cryptoService.Decrypt_AES(eResult)
-                    .JsonDeserialize<TOut>();
-            }
-
-            return result;
-        }
+        #endregion IWebApiService
 
         public static async Task<bool> CheckInternetConnection()
         {
@@ -238,6 +131,34 @@ namespace PoseSportsPredict.Services
                     LocalizeString.Ok,
                     DialogConfiguration.DefaultAlterDialogConfiguration);
                 return false;
+            }
+
+            return true;
+        }
+
+        public async Task<bool> RefrashToken()
+        {
+            // 토큰 만료 시간 체크
+            if (ClientContext.TokenExpireIn < DateTime.UtcNow.AddMinutes(5))
+            {
+                // P_E_TokenRefresh
+                var refreshToken = await this.RequestAsync<O_TokenRefresh>(new WebRequestContext
+                {
+                    SerializeType = SerializeType.MessagePack,
+                    MethodType = WebMethodType.GET,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = AuthProxy.ServiceUrl,
+                    SegmentGroup = AuthProxy.P_E_TokenRefresh,
+                    NeedEncrypt = true,
+                });
+
+                if (refreshToken == null)
+                {
+                    return false;
+                }
+
+                ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
+                ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);
             }
 
             return true;
