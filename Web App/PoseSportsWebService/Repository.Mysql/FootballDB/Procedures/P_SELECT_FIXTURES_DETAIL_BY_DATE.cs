@@ -42,10 +42,11 @@ namespace Repository.Mysql.FootballDB.Procedures
             sb.Append($"f.{nameof(Fixture.match_time)} as {nameof(DB_FootballFixtureDetail.MatchTime)}, l.{nameof(League.type)} as {nameof(DB_FootballFixtureDetail.LeagueType)} ");
             sb.Append("FROM fixture as f ");
             sb.Append($"INNER JOIN league as l on f.{nameof(Fixture.league_id)} = l.{nameof(League.id)} ");
+            sb.Append($"INNER JOIN league_coverage as lc on l.{nameof(League.id)} = lc.{nameof(LeagueCoverage.league_id)} ");
             sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");
             sb.Append($"INNER JOIN team as ht on f.{nameof(Fixture.home_team_id)} = ht.{nameof(Team.id)} ");
             sb.Append($"INNER JOIN team as at on f.{nameof(Fixture.away_team_id)} = at.{nameof(Team.id)} ");
-            sb.Append($"WHERE f.{nameof(Fixture.match_time)} BETWEEN \"{_input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{_input.EndTime.ToString("yyyyMMddTHHmmss")}\" AND l.{nameof(League.is_predict_coverage)} = 1 ;");
+            sb.Append($"WHERE f.{nameof(Fixture.match_time)} BETWEEN \"{_input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{_input.EndTime.ToString("yyyyMMddTHHmmss")}\" AND lc.{nameof(LeagueCoverage.predictions)} = 1 ;");
 
             queryString = sb.ToString();
         }

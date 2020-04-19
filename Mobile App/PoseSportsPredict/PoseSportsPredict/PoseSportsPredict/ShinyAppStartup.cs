@@ -12,6 +12,7 @@ using PoseSportsPredict.ViewModels.Football.League;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
+using PoseSportsPredict.ViewModels.Football.Standings;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views;
 using PoseSportsPredict.Views.Common;
@@ -64,6 +65,7 @@ namespace PoseSportsPredict
             services.AddSingleton<MatchInfoToTeamInfoConverter>();
             services.AddSingleton<FootballMatchStatisticsConverter>();
             services.AddSingleton<FixtureDetailToLastFormConverter>();
+            services.AddSingleton<StandingsDetailToStandingsInfo>();
         }
 
         private void MatchViewModels(IServiceCollection services)
@@ -119,6 +121,9 @@ namespace PoseSportsPredict
             services.AddTransient<FootballBookmarkTeamsViewModel>();
             services.AddSingleton<FootballBookmarkSearchPage>();
             services.AddSingleton<FootballBookmarkSearchViewModel>();
+
+            // Football - Standings
+            services.AddSingleton<FootballStandingsViewModel>();
         }
     }
 }

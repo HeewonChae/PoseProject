@@ -10,6 +10,7 @@ using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
+using PoseSportsPredict.ViewModels.Football.Standings;
 using Sharpnado.Presentation.Forms;
 using Shiny;
 using System;
@@ -59,17 +60,18 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         private FootballMatchStatistics _matchStatistics;
         private ObservableList<FootballLastForm> _homeRecentForm;
         private ObservableList<FootballLastForm> _awayRecentForm;
+        private ObservableList<FootballStandingsViewModel> _standingsViewModels;
 
         #endregion Fields
 
         #region Properties
 
-        public bool IsExistRankTable => MatchInfo.LeagueType == FootballLeagueType.League;
         public FootballMatchInfo MatchInfo { get => _matchInfo; set => SetValue(ref _matchInfo, value); }
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
         public FootballMatchStatistics MatchStatistics { get => _matchStatistics; set => SetValue(ref _matchStatistics, value); }
         public ObservableList<FootballLastForm> HomeRecentForm { get => _homeRecentForm; set => SetValue(ref _homeRecentForm, value); }
         public ObservableList<FootballLastForm> AwayRecentForm { get => _awayRecentForm; set => SetValue(ref _awayRecentForm, value); }
+        public ObservableList<FootballStandingsViewModel> StandingsViewModels { get => _standingsViewModels; set => SetValue(ref _standingsViewModels, value); }
 
         #endregion Properties
 
@@ -199,7 +201,23 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             HomeRecentForm = new ObservableList<FootballLastForm>(homeRecentForm);
             AwayRecentForm = new ObservableList<FootballLastForm>(awayRecentForm);
 
-            // League Table
+            // League Standings Table
+            List<FootballStandingsInfo> standingsInfos = new List<FootballStandingsInfo>();
+            foreach (var standingsDetail in server_result.StandingsDetails)
+            {
+                standingsInfos.Add(ShinyHost.Resolve<StandingsDetailToStandingsInfo>()
+                    .Convert(standingsDetail, null, null, null) as FootballStandingsInfo);
+            }
+
+            var standingsGroups = standingsInfos.GroupBy(elem => elem.Group);
+            StandingsViewModels = new ObservableList<FootballStandingsViewModel>();
+            foreach (var standingsGroup in standingsGroups)
+            {
+                var standingsViewModel = ShinyHost.Resolve<FootballStandingsViewModel>();
+                standingsViewModel.OnInitializeView(standingsGroup.ToArray());
+
+                StandingsViewModels.Add(standingsViewModel);
+            }
 
             SetIsBusy(false);
 

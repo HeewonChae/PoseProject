@@ -70,9 +70,6 @@
                                             Aspect="AspectFit"
                                             HeightRequest="31"
                                             WidthRequest="31"
-                                            DownsampleHeight="150"
-                                            DownsampleWidth="150"
-                                            DownsampleToViewSize="True"
                                             LoadingPlaceholder="img_world.png"
                                             ErrorPlaceholder="img_world.png"
                                             Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -95,7 +92,7 @@
                                             </materialui:MaterialLabel>
                                         </StackLayout>
 
-                                        <StackLayout 
+                                        <StackLayout
                                             VerticalOptions="Center"
                                             Orientation="Horizontal"
                                             HorizontalOptions="End"

@@ -42,8 +42,6 @@
                                 Aspect="AspectFit"
                                 HeightRequest="25"
                                 WidthRequest="25"
-                                DownsampleHeight="150"
-                                DownsampleWidth="150"
                                 DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
@@ -117,9 +115,6 @@
                                         Aspect="AspectFit"
                                         HeightRequest="25"
                                         WidthRequest="25"
-                                        DownsampleHeight="150"
-                                        DownsampleWidth="150"
-                                        DownsampleToViewSize="True"
                                         LoadingPlaceholder="img_world.png"
                                         ErrorPlaceholder="img_world.png"
                                         Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">

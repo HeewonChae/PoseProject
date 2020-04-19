@@ -25,13 +25,11 @@ namespace SportsAdminTool.Logic.Football
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
             var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
+            var api_deleteFixtures = api_fixtures.Except(api_filteredFixtures);
             var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByLeagueIdAndLabelId(leagueId, (int)OddsLabelType.Match_Winner);
 
-            // 지금 시각 이후의 경기들 일단 삭제 (취소, 연기된 경기가 있을지도 모르니)
-            //Database.FootballDBFacade.DeleteFixtures(
-            //    where: $"league_id = {leagueId} AND match_time > \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND is_predicted = 0");
-
             // DB Save
+            Database.FootballDBFacade.DeleteFixtures(api_deleteFixtures.ToArray());
             Database.FootballDBFacade.UpdateFixture(api_filteredFixtures.ToArray());
             Database.FootballDBFacade.UpdateOdds(api_odds.ToArray());
         }
@@ -119,11 +117,21 @@ namespace SportsAdminTool.Logic.Football
 
                     // Call API
                     var api_league = Singleton.Get<ApiLogic.FootballWebAPI>().GetLeagueByLeagueId(errorLeague.LeagueId);
-                    Dev.Assert(api_league != null, $"api_league is null leagueId: {errorLeague.LeagueId}");
+                    //Dev.Assert(api_league != null, $"api_league is null leagueId: {errorLeague.LeagueId}");
 
-                    // DB Save
-                    Database.FootballDBFacade.UpdateLeague(false, api_league);
-                    Database.FootballDBFacade.UpdateCoverage(api_league);
+                    if (api_league != null)
+                    {
+                        // DB Save
+                        api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type)
+                           || api_league.Coverage.FixtureCoverage.Statistics
+                           || (api_league.Coverage.Players
+                           && api_league.Coverage.FixtureCoverage.Lineups);
+
+                        Database.FootballDBFacade.UpdateCoverage(api_league);
+                        Database.FootballDBFacade.UpdateLeague(api_league);
+
+                        Singleton.Get<CheckValidation>().DeleteErrorLeague(errorLeague);
+                    }
                 }
 
                 var teamErrors = Singleton.Get<CheckValidation>().GetErrorTeams(InvalidType.NotExistInDB, false);
@@ -135,11 +143,16 @@ namespace SportsAdminTool.Logic.Football
                     mainWindow.Set_Lable(lbl, $"Solve Team Errors ({loop}/{errorTeamCnt})");
 
                     // Call API
-                    var api_team = Singleton.Get<ApiLogic.FootballWebAPI>().GetTeamByTeamId(errorTeam.TeamsId);
-                    Dev.Assert(api_team != null, $"api_team is null teamId: {errorTeam.TeamsId}");
+                    var api_team = Singleton.Get<ApiLogic.FootballWebAPI>().GetTeamByTeamId(errorTeam.TeamId);
+                    //Dev.Assert(api_team != null, $"api_team is null teamId: {errorTeam.TeamsId}");
 
-                    // DB Save
-                    Database.FootballDBFacade.UpdateTeam(errorTeam.LeagueId, api_team);
+                    if (api_team != null)
+                    {
+                        // DB Save
+                        Database.FootballDBFacade.UpdateTeam(errorTeam.LeagueId, api_team);
+
+                        Singleton.Get<CheckValidation>().DeleteErrorTeam(errorTeam);
+                    }
                 }
             });
         }

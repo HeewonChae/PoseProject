@@ -59,9 +59,6 @@
                         Aspect="AspectFit"
                         HeightRequest="40"
                         WidthRequest="40"
-                        DownsampleHeight="150"
-                        DownsampleWidth="150"
-                        DownsampleToViewSize="True"
                         LoadingPlaceholder="ic_profile.png"
                         ErrorPlaceholder="ic_profile.png"
                         Source="{Binding AuthUser.PictureUrl, Converter={StaticResource svgImageSourceConverter}}">

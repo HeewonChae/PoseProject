@@ -1,6 +1,7 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility;
 using Repository.Mysql.FootballDB.Procedures;
+using Repository.Mysql.FootballDB.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace SportsAdminTool.Commands.Football
                 {
                     P_SELECT_PREDICTABLE_FIXTURES.SetInput(new FootballDB.Procedures.P_SELECT_PREDICTABLE_FIXTURES.Input
                     {
-                        WHERE = $"f.is_predicted = 0 AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMdd")}\" AND \"{DateTime.UtcNow.AddDays(5).ToString("yyyyMMdd")}\" AND l.is_predict_coverage = 1",
+                        WHERE = $"f.is_predicted = 0 AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMdd")}\" AND \"{DateTime.UtcNow.AddDays(4).ToString("yyyyMMdd")}\" AND lc.{nameof(LeagueCoverage.predictions)} = 1",
                     });
                     db_fixtures = P_SELECT_PREDICTABLE_FIXTURES.OnQuery();
 

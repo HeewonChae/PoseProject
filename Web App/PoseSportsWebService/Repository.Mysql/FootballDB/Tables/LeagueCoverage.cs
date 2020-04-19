@@ -32,6 +32,7 @@ namespace Repository.Mysql.FootballDB.Tables
         public bool lineups { get; set; }
 
         [Required]
+        [Index("IDX_PREDICT", Order = 1, IsUnique = false)]
         public bool predictions { get; set; }
 
         [Required]

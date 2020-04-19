@@ -41,9 +41,11 @@ namespace Repository.Mysql.FootballDB.Procedures
             sb.Append($"SELECT l.{nameof(League.name)} as {nameof(Output.LeagueName)}, ");
             sb.Append($"l.{nameof(League.logo)} as {nameof(Output.LeagueLogo)}, l.{nameof(League.type)} as {nameof(Output.LeagueType)}, ");
             sb.Append($"c.{nameof(Country.name)} as {nameof(Output.CountryName)}, c.{nameof(Country.logo)} as {nameof(Output.CountryLogo)} ");
-            sb.Append("FROM league as l ");
+            sb.Append("FROM league_coverage as lc ");
+            sb.Append($"INNER JOIN league as l on lc.{nameof(LeagueCoverage.league_id)} = l.{nameof(League.id)} ");
             sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");
-            sb.Append($"WHERE l.{nameof(League.is_predict_coverage)} = 1 GROUP BY l.{nameof(League.name)}, l.{nameof(League.type)}, l.{nameof(League.country_name)};");
+            sb.Append($"WHERE lc.{nameof(LeagueCoverage.predictions)} = 1 AND l.{nameof(League.is_current)} = 1 ");
+            sb.Append($"GROUP BY l.{nameof(League.name)}, l.{nameof(League.country_name)};");
 
             DapperFacade.DoWithDBContext(
                     null,

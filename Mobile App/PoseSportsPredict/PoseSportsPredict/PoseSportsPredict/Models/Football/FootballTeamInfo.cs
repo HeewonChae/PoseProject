@@ -27,7 +27,7 @@ namespace PoseSportsPredict.Models.Football
         public string _primaryKey;
 
         [PrimaryKey]
-        public string PrimaryKey { get => $"{CountryName}:{LeagueName}:{TeamName}"; set => _primaryKey = value; }
+        public string PrimaryKey { get => $"{CountryName}:{TeamName}"; set => _primaryKey = value; }
 
         public int Order { get; set; }
         public DateTime StoredTime { get; set; }
@@ -40,8 +40,6 @@ namespace PoseSportsPredict.Models.Football
         public short TeamId { get; set; }
         public string TeamName { get; set; }
         public string TeamLogo { get; set; }
-        public string LeagueName { get; set; }
-        public string LeagueLogo { get; set; }
         public string CountryName { get; set; }
         public string CountryLogo { get; set; }
         public bool IsBookmarked { get; set; }

@@ -96,9 +96,6 @@
                             Aspect="AspectFit"
                             HeightRequest="50"
                             WidthRequest="50"
-                            DownsampleHeight="150"
-                            DownsampleWidth="150"
-                            DownsampleToViewSize="True"
                             LoadingPlaceholder="img_football.png"
                             ErrorPlaceholder="img_football.png"
                             Source="{Binding TeamInfo.TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

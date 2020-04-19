@@ -238,8 +238,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 SearchedLeagues = new ObservableCollection<FootballLeagueInfo>(searchedLeagues);
 
                 var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
-                var searchedTeams = bookmarkedTeams.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())
-                            || elem.CountryName.ToLower().Contains(searchText.ToLower())
+                var searchedTeams = bookmarkedTeams.Where(elem => elem.CountryName.ToLower().Contains(searchText.ToLower())
                             || elem.TeamName.ToLower().Contains(searchText.ToLower())).ToList();
 
                 searchResult.AddRange(searchedTeams);

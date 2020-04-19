@@ -42,18 +42,18 @@ namespace SportsAdminTool.Commands.Football
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled leagues ({loop}/{api_groupingbyLeague.Count()})");
 
-                    if (!Singleton.Get<CheckValidation>().IsValidLeague((short)api_groupingFixtures.Key, null, null, out League db_league))
+                    if (!Singleton.Get<CheckValidation>().IsValidLeague((short)api_groupingFixtures.Key, null, null, out League db_league, out LeagueCoverage db_leagueCoverage))
                         continue;
 
                     // Check Already Updated
-                    //if (db_league.upt_time.Date == DateTime.UtcNow.Date)
-                    //continue;
+                    if (db_league.upt_time.Date == DateTime.UtcNow.Date)
+                        continue;
 
                     // Update League All Fixtures
                     LogicFacade.UpdateLeagueAllFixtures((short)api_groupingFixtures.Key);
 
                     // is_predict_coverage 참인 리그만 업데이트
-                    if (db_league.is_predict_coverage)
+                    if (db_leagueCoverage.predictions)
                     {
                         // Update Fixtures, Odds, Statistics,
                         int innerloop = 0;

@@ -32,7 +32,7 @@ public class P_EXECUTE_QUERY : MysqlQuery<T_in, T_out>
     public override int OnQuery()
     {
         DapperFacade.DoWithDBContext(
-                null,
+                null, 
                 (Contexts.FootballDB footballDB) =>
                 {
                     if (!string.IsNullOrEmpty(_input))
@@ -71,16 +71,19 @@ public static class P_Command
 
 // Find Invalid Team
 https://rapidapi.com/api-sports/api/api-football
-SELECT l.id, l.country_name, l.name, f.home_team_id, t.name FROM footballdb.fixture as f
+SELECT l.id, l.country_name, l.name, f.home_team_id, t.name 
+FROM footballdb.fixture as f
 INNER JOIN footballdb.league as l ON f.league_id = l.id
 INNER JOIN footballdb.team as t ON f.home_team_id = t.id
-where league_id=1083 group by home_team_id;
-SELECT * FROM footballdb.league where country_name="Austria";
-SELECT * FROM footballdb.team where country_name="Austria";
-SELECT f.id as fixtureId, f.league_id as league_id, f.home_team_id as home_team_id, ht.name as home_team_name
-, f.away_team_id as away_team_id, at.name as away_team_name, ht.country_name
-FROM footballdb.fixture as f
-inner join footballdb.team as ht on f.home_team_id = ht.id
-inner join footballdb.team as at on f.away_team_id = at.id
-where f.league_id=1083;
-SELECT * FROM footballdb.standings where league_id=1083 order by 'group' asc , 'rank'asc;
+where f.league_id=855 and home_team_id not in (SELECT team_id FROM footballdb.standings where league_id=855 group by team_id)
+group by home_team_id;
+ 
+SELECT * FROM footballdb.team where country_name="Azerbaidjan";
+SELECT * FROM footballdb.league where country_name="Azerbaidjan";
+SELECT * FROM footballdb.standings where league_id=905 order by `group`, `rank`;
+
+// Select LeagueCoverage
+SELECT l.id, l.name, l.type, l.country_name, lc.standings, lc.predictions, lc.odds, lc.players, lc.lineups, lc.fixture_statistics, l.logo FROM footballdb.league as l
+inner join footballdb.league_coverage as lc on l.id = lc.league_id
+where lc.predictions = 1 and l.is_current = 1
+group by l.name, l.country_name order by l.country_name;

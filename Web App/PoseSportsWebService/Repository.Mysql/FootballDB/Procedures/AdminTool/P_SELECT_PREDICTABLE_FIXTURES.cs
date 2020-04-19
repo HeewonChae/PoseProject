@@ -36,7 +36,7 @@ namespace Repository.Mysql.FootballDB.Procedures
             var sb = new StringBuilder();
             sb.Append($"SELECT f.* ");
             sb.Append("FROM fixture as f ");
-            sb.Append($"INNER JOIN league as l on f.{nameof(Fixture.league_id)} = l.{nameof(League.id)} ");
+            sb.Append($"INNER JOIN league_coverage as lc on f.{nameof(Fixture.league_id)} = lc.{nameof(LeagueCoverage.league_id)} ");
             sb.Append($"WHERE {_input.WHERE};");
 
             DapperFacade.DoWithDBContext(

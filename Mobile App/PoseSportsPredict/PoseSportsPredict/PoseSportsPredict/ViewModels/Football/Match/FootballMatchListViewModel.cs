@@ -55,7 +55,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsBusy(true);
 
-            //await PageSwitcher.PushModalPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
 
             SetIsBusy(false);

@@ -64,14 +64,14 @@ namespace PoseSportsPredict.Droid
 
             LoadApplication(new App());
 
-            NotificationCenter.NotifyNotificationTapped(this.Intent);
+            //NotificationCenter.NotifyNotificationTapped(this.Intent);
         }
 
-        protected override void OnNewIntent(Intent intent)
-        {
-            NotificationCenter.NotifyNotificationTapped(intent);
-            base.OnNewIntent(intent);
-        }
+        //protected override void OnNewIntent(Intent intent)
+        //{
+        //    NotificationCenter.NotifyNotificationTapped(intent);
+        //    base.OnNewIntent(intent);
+        //}
 
         private void InitExternModule(Bundle savedInstanceState)
         {

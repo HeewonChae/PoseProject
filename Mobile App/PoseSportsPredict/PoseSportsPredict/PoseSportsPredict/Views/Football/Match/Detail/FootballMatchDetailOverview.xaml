@@ -48,9 +48,6 @@
                             Aspect="AspectFit"
                             HeightRequest="25"
                             WidthRequest="25"
-                            DownsampleHeight="150"
-                            DownsampleWidth="150"
-                            DownsampleToViewSize="True"
                             LoadingPlaceholder="img_football.png"
                             ErrorPlaceholder="img_football.png"
                             Source="{Binding OpposingTeamLogo, Converter={StaticResource svgImageSourceConverter}}">

@@ -226,7 +226,7 @@
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
-    <Compile Include="Logics\StreamExtensions.cs" />
+    <Compile Include="Utilities\StreamExtensions.cs" />
     <Compile Include="ServerContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

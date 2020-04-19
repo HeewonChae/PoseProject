@@ -29,8 +29,7 @@ namespace PoseSportsPredict.ViewModels
 
         public override async void OnAppearing(params object[] datas)
         {
-            while (!await WebApiService.CheckInternetConnection())
-            { }
+            while (!await WebApiService.CheckInternetConnection()) { }
 
             // Table Loader
             TableLoader.Init(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));

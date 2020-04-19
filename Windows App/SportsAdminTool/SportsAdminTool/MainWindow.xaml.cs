@@ -86,11 +86,17 @@ namespace SportsAdminTool
             string org_bannerText = this._lbl_initialize_footballdb.Content.ToString();
             this._progRing_initialize_footballdb.IsActive = true;
 
-            await FootballCommands.InitializeFootballDB.Execute();
+            if (!await FootballCommands.InitializeFootballDB.Execute())
+            {
+                // Error처리
+                await FootballLogic.LogicFacade.SolveErrors(_lbl_initialize_footballdb);
+            }
 
             // 텍스트 원래대로 변경
             this._lbl_initialize_footballdb.Content = org_bannerText;
             this._progRing_initialize_footballdb.IsActive = false;
+
+            await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile);
 
             // 다음 업데이트 알람
             //TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후
@@ -130,7 +136,7 @@ namespace SportsAdminTool
             this._progRing_collectDatasAndPredict.IsActive = false;
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(3) - DateTime.Now; // 3시간 후
+            TimeSpan ts = DateTime.Now.AddHours(12) - DateTime.Now; // 12시간 후
             alarm.SetAlarm((long)ts.TotalMilliseconds);
         }
 

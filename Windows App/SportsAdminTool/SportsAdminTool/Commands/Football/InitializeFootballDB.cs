@@ -1,4 +1,5 @@
 ﻿using LogicCore.Utility;
+using SportsAdminTool.Logic.Football;
 using SportsAdminTool.Model.Resource.Football;
 using System;
 using System.Collections.Generic;
@@ -18,35 +19,43 @@ namespace SportsAdminTool.Commands.Football
             {
                 var mainWindow = Singleton.Get<MainWindow>();
 
-                // Update all country
+                // Update all countrys
                 mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update countries");
                 var api_countries = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllCountries();
                 Logic.Database.FootballDBFacade.UpdateCountry(api_countries.ToArray());
 
-                // Update all league
+                // Update all leagues
                 mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update leagues");
                 var api_leagues = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllAvailableLeauges();
 
-                // Update all team
-                //mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, "Update teams");
-                //var allLeagues = Logic.Database.FootballDBFacade.SelectLeagues();
-
                 var leagueCnt = api_leagues.Count();
                 int loop = 0;
-                foreach (var league in api_leagues)
+                foreach (var api_league in api_leagues)
                 {
                     loop++;
-                    mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, $"Update Teams ({loop}/{leagueCnt})");
+                    mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, $"Update Leagues ({loop}/{leagueCnt})");
 
-                    bool isPredictCoverage = CoverageLeague.HasLeague(league.Country, league.Name, league.Type);
-                    Logic.Database.FootballDBFacade.UpdateLeague(isPredictCoverage, league);
-                    Logic.Database.FootballDBFacade.UpdateCoverage(league);
+                    // Update League
+                    api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type)
+                    || api_league.Coverage.FixtureCoverage.Statistics
+                    || (api_league.Coverage.Players
+                    && api_league.Coverage.FixtureCoverage.Lineups);
 
-                    var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueId((short)league.LeagueId);
-                    Logic.Database.FootballDBFacade.UpdateTeam((short)league.LeagueId, api_teams.ToArray());
+                    Logic.Database.FootballDBFacade.UpdateCoverage(api_league);
+                    Logic.Database.FootballDBFacade.UpdateLeague(api_league);
+
+                    // Update All Teams
+                    var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueId((short)api_league.LeagueId);
+                    Logic.Database.FootballDBFacade.UpdateTeam((short)api_league.LeagueId, api_teams.ToArray());
+
+                    // Update All Fixtures
+                    LogicFacade.UpdateLeagueAllFixtures((short)api_league.LeagueId);
+
+                    if (api_league.IsCurrent == 1)
+                        LogicFacade.UpdateStandings((short)api_league.LeagueId);
                 }
 
-                return true;
+                return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);
             });
         }
     }

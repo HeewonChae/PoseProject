@@ -31,11 +31,13 @@ namespace SportsAdminTool.Logic.Football
 
     public struct InvalidTeam
     {
-        public short TeamsId;
+        public short TeamId;
         public string TeamName;
         public short LeagueId;
         public string CountryName;
         public int ReasonType;
+
+        public string TeamKey => $"{TeamId}:{CountryName}:{TeamName}";
     }
 
     public struct InvalidLeague
@@ -44,19 +46,22 @@ namespace SportsAdminTool.Logic.Football
         public string LeagueName;
         public string CountryName;
         public int ReasonType;
+        public string LeagueKey => $"{LeagueId}:{CountryName}:{LeagueName}";
     }
 
     public class CheckValidation : Singleton.INode
     {
         private readonly string rootDir = ".\\Errors\\";
-        private readonly List<InvalidLeague> _invalidLeauges = new List<InvalidLeague>();
-        private readonly List<InvalidTeam> _invalidTeams = new List<InvalidTeam>();
+        private readonly Dictionary<string, InvalidLeague> _invalidLeauges = new Dictionary<string, InvalidLeague>();
+        private readonly Dictionary<string, InvalidTeam> _invalidTeams = new Dictionary<string, InvalidTeam>();
 
         #region Check validation
 
-        public bool IsValidLeague(short leagueId, string leagueName, string countryName, out FootballDB.Tables.League league)
+        public bool IsValidLeague(short leagueId, string leagueName, string countryName, out FootballDB.Tables.League league, out FootballDB.Tables.LeagueCoverage leagueCoverage)
         {
             league = DatabaseLogic.FootballDBFacade.SelectLeagues(where: $"id = {leagueId}").FirstOrDefault();
+            leagueCoverage = DatabaseLogic.FootballDBFacade.SelectCoverages(where: $"league_id = {leagueId}").FirstOrDefault();
+
             bool db_result = league != null;
             if (!db_result)
             {
@@ -79,7 +84,7 @@ namespace SportsAdminTool.Logic.Football
             {
                 AddInvalidTeam(new InvalidTeam()
                 {
-                    TeamsId = teamId,
+                    TeamId = teamId,
                     TeamName = teamName,
                     LeagueId = leagueId,
                     CountryName = countryName,
@@ -95,7 +100,7 @@ namespace SportsAdminTool.Logic.Football
                 {
                     AddInvalidTeam(new InvalidTeam()
                     {
-                        TeamsId = teamId,
+                        TeamId = teamId,
                         TeamName = teamName,
                         LeagueId = leagueId,
                         CountryName = countryName,
@@ -141,7 +146,8 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                _invalidLeauges.Add(invalidLeague);
+                if (!_invalidLeauges.ContainsKey(invalidLeague.LeagueKey))
+                    _invalidLeauges.Add(invalidLeague.LeagueKey, invalidLeague);
 
                 Log4Net.WriteLog($"Invalid League {nameof(InvalidLeague.LeagueId)}: {invalidLeague.LeagueId}" +
                                 $", {nameof(InvalidLeague.LeagueName)}: {invalidLeague.LeagueName}" +
@@ -155,9 +161,10 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                _invalidTeams.Add(invalidTeam);
+                if (!_invalidTeams.ContainsKey(invalidTeam.TeamKey))
+                    _invalidTeams.Add(invalidTeam.TeamKey, invalidTeam);
 
-                Log4Net.WriteLog($"Invalid Team {nameof(InvalidTeam.TeamsId)}: {invalidTeam.TeamsId}" +
+                Log4Net.WriteLog($"Invalid Team {nameof(InvalidTeam.TeamId)}: {invalidTeam.TeamId}" +
                                 $", {nameof(InvalidTeam.TeamName)}: {invalidTeam.TeamName}" +
                                 $", {nameof(InvalidTeam.CountryName)}: {invalidTeam.CountryName}" +
                                 $", {nameof(InvalidTeam.ReasonType)}: {invalidTeam.ReasonType}"
@@ -173,13 +180,13 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                var result = _invalidLeauges.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
+                var result = _invalidLeauges.Values.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
 
                 if (isRemove)
                 {
                     foreach (var data in result)
                     {
-                        _invalidLeauges.Remove(data);
+                        _invalidLeauges.Remove(data.LeagueKey);
                     }
                 }
 
@@ -187,21 +194,37 @@ namespace SportsAdminTool.Logic.Football
             }
         }
 
+        public void DeleteErrorLeague(InvalidLeague league)
+        {
+            lock (_lockObject)
+            {
+                _invalidLeauges.Remove(league.LeagueKey);
+            }
+        }
+
         public InvalidTeam[] GetErrorTeams(InvalidType invalidType, bool isRemove)
         {
             lock (_lockObject)
             {
-                var result = _invalidTeams.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
+                var result = _invalidTeams.Values.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
 
                 if (isRemove)
                 {
                     foreach (var data in result)
                     {
-                        _invalidTeams.Remove(data);
+                        _invalidTeams.Remove(data.TeamKey);
                     }
                 }
 
                 return result;
+            }
+        }
+
+        public void DeleteErrorTeam(InvalidTeam team)
+        {
+            lock (_lockObject)
+            {
+                _invalidTeams.Remove(team.TeamKey);
             }
         }
 
@@ -219,7 +242,9 @@ namespace SportsAdminTool.Logic.Football
             {
                 if (_invalidLeauges.Count > 0)
                 {
-                    var serializeString = JsonConvert.SerializeObject(_invalidLeauges, Formatting.Indented);
+                    var invalidLeauges = _invalidLeauges.Values.OrderBy(elem => elem.CountryName).ToList();
+
+                    var serializeString = JsonConvert.SerializeObject(invalidLeauges, Formatting.Indented);
                     FileFacade.MakeSimpleTextFile(rootDir, "invalidLeauges.json", serializeString);
                 }
 
@@ -227,7 +252,9 @@ namespace SportsAdminTool.Logic.Football
 
                 if (_invalidTeams.Count > 0)
                 {
-                    var serializeString = JsonConvert.SerializeObject(_invalidTeams, Formatting.Indented);
+                    var invalidTeams = _invalidTeams.Values.OrderBy(elem => elem.CountryName).ToList();
+
+                    var serializeString = JsonConvert.SerializeObject(invalidTeams, Formatting.Indented);
                     FileFacade.MakeSimpleTextFile(rootDir, "invalidTeams.json", serializeString);
                 }
 

@@ -123,9 +123,6 @@
                             Aspect="AspectFit"
                             HeightRequest="45"
                             WidthRequest="45"
-                            DownsampleHeight="150"
-                            DownsampleWidth="150"
-                            DownsampleToViewSize="True"
                             LoadingPlaceholder="img_football.png"
                             ErrorPlaceholder="img_football.png"
                             Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -243,9 +240,6 @@
                             Aspect="AspectFit"
                             HeightRequest="45"
                             WidthRequest="45"
-                            DownsampleHeight="150"
-                            DownsampleWidth="150"
-                            DownsampleToViewSize="True"
                             LoadingPlaceholder="img_football.png"
                             ErrorPlaceholder="img_football.png"
                             Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">

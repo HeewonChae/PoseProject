@@ -56,7 +56,7 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
-        public static bool UpdateLeague(bool isPredictCoverage, params AppModel.Football.League[] leagues)
+        public static bool UpdateLeague(params AppModel.Football.League[] leagues)
         {
             if (leagues.Length == 0)
                 return false;
@@ -73,7 +73,6 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.League.season_start)}`, " +
                 $"`{nameof(FootballDB.Tables.League.season_end)}`, " +
                 $"`{nameof(FootballDB.Tables.League.logo)}`, " +
-                $"`{nameof(FootballDB.Tables.League.is_predict_coverage)}`, " +
                 $"`{nameof(FootballDB.Tables.League.upt_time)}`)");
             sb.Append("VALUES");
 
@@ -84,10 +83,6 @@ namespace SportsAdminTool.Logic.Database
 
                 var league = leagues[i];
 
-                // CoverageLeagues.json 테이블 없을 때 사용할것...
-                //bool isCoverageLeage = league.Coverage != null
-                //    && (league.Coverage.FixtureCoverage.Statistics || league.Coverage.Odds || !string.IsNullOrEmpty(league.Logo));
-
                 sb.Append($"({league.LeagueId}, " +
                     $"\"{league.Name}\", " +
                     $"\"{league.Type}\", " +
@@ -96,7 +91,6 @@ namespace SportsAdminTool.Logic.Database
                     $"\"{league.SeasonStart.ToString("yyyyMMddTHHmmss")}\", " +
                     $"\"{league.SeasonEnd.ToString("yyyyMMddTHHmmss")}\", " +
                     $"\"{league.Logo}\", " +
-                    $"{isPredictCoverage}, " +
                     $"\"{DateTime.MinValue.ToString("yyyyMMddTHHmmss")}\")");
             }
 
@@ -104,7 +98,6 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.League.logo)} = VALUES({nameof(FootballDB.Tables.League.logo)}), " +
                 $"{nameof(FootballDB.Tables.League.season_start)} = VALUES({nameof(FootballDB.Tables.League.season_start)}), " +
                 $"{nameof(FootballDB.Tables.League.season_end)} = VALUES({nameof(FootballDB.Tables.League.season_end)}), " +
-                $"{nameof(FootballDB.Tables.League.is_predict_coverage)} = VALUES({nameof(FootballDB.Tables.League.is_predict_coverage)}), " +
                 $"{nameof(FootballDB.Tables.League.is_current)} = VALUES({nameof(FootballDB.Tables.League.is_current)});");
 
             return ExecuteQuery(sb.ToString());
@@ -127,7 +120,6 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.League.season_start)}`, " +
                 $"`{nameof(FootballDB.Tables.League.season_end)}`, " +
                 $"`{nameof(FootballDB.Tables.League.logo)}`, " +
-                $"`{nameof(FootballDB.Tables.League.is_predict_coverage)}`, " +
                 $"`{nameof(FootballDB.Tables.League.upt_time)}`)");
             sb.Append("VALUES");
 
@@ -146,12 +138,10 @@ namespace SportsAdminTool.Logic.Database
                     $"\"{league.season_start.ToString("yyyyMMddTHHmmss")}\", " +
                     $"\"{league.season_end.ToString("yyyyMMddTHHmmss")}\", " +
                     $"\"{league.logo}\", " +
-                    $"{league.is_predict_coverage}, " +
                     $"\"{league.upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
             sb.Append($"ON DUPLICATE KEY UPDATE " +
-                //$"{nameof(FootballDB.Tables.League.is_predict_coverage)} = VALUES({nameof(FootballDB.Tables.League.is_predict_coverage)}), " +
                 $"{nameof(FootballDB.Tables.League.upt_time)} = VALUES({nameof(FootballDB.Tables.League.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
@@ -283,13 +273,10 @@ namespace SportsAdminTool.Logic.Database
                 var Standings = standingsies[i];
 
                 // TeamId 컨버트 가능한지..
-                if (Standings.TeamId == 0)
+                if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
                 {
-                    if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
-                    {
-                        Standings.TeamId = convertedteamId;
-                        Standings.TeamName = convertedTeamName;
-                    }
+                    Standings.TeamId = convertedteamId;
+                    Standings.TeamName = convertedTeamName;
                 }
 
                 if (!Singleton.Get<FootballLogic.CheckValidation>().IsValidTeam((short)Standings.TeamId, Standings.TeamName, leagueId, countryName, true))
@@ -797,6 +784,23 @@ namespace SportsAdminTool.Logic.Database
             Dev.DebugString("Call DB - FootballFacade.DeleteFixtures");
 
             return ExecuteQuery($"DELETE FROM fixture WHERE {where}");
+        }
+
+        public static bool DeleteFixtures(params AppModel.Football.Fixture[] fixtures)
+        {
+            if (fixtures.Length == 0)
+                return false;
+
+            Dev.DebugString("Call DB - FootballFacade.DeleteFixtures");
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var fixture in fixtures)
+            {
+                sb.Append($"{fixture.FixtureId},");
+            }
+            sb.Remove(sb.Length - 1, 1);
+
+            return ExecuteQuery($"DELETE FROM fixture WHERE id in ({sb});");
         }
 
         #endregion Delete

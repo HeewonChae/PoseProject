@@ -96,9 +96,6 @@
                             Aspect="AspectFit"
                             HeightRequest="50"
                             WidthRequest="50"
-                            DownsampleHeight="150"
-                            DownsampleWidth="150"
-                            DownsampleToViewSize="True"
                             LoadingPlaceholder="img_world.png"
                             ErrorPlaceholder="img_world.png"
                             Source="{Binding LeagueInfo.LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">

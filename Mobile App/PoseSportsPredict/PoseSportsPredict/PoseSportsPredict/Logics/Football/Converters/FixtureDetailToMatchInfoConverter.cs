@@ -61,7 +61,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)value != 0 ? true : false;
+            throw new NotImplementedException();
         }
     }
 }
