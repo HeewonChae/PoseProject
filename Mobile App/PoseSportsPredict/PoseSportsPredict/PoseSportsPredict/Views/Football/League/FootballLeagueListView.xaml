@@ -30,8 +30,10 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="25"
-                                WidthRequest="25"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="29"
+                                WidthRequest="29"
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
                                 Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">

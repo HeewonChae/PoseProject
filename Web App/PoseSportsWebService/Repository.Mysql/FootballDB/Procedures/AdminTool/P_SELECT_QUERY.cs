@@ -36,7 +36,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                 set
                 {
                     if (!string.IsNullOrEmpty(value))
-                        _groupBy = $"WHERE {value}";
+                        _groupBy = $"GROUP BY {value}";
                     else
                         _groupBy = value;
                 }
@@ -48,7 +48,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                 set
                 {
                     if (!string.IsNullOrEmpty(value))
-                        _orderBy = $"WHERE {value}";
+                        _orderBy = $"ORDER BY {value}";
                     else
                         _orderBy = value;
                 }

@@ -11,7 +11,7 @@
     <ContentView.Content>
         <StackLayout Spacing="0">
             <StackLayout
-                Padding="0,8"
+                Padding="0,7"
                 Orientation="Horizontal"
                 effects:TapCommandEffect.Tap="{Binding SelectGroupHeaderCommand}"
                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
@@ -21,7 +21,7 @@
                     TextColor="{StaticResource CustomGrey}">
                 </materialui:MaterialLabel>
                 <Image
-                    Margin="5,3"
+                    Margin="5,0"
                     Source="{Binding StateIcon}"
                     HorizontalOptions="EndAndExpand"
                     HeightRequest="10"
@@ -48,8 +48,10 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="25"
-                                WidthRequest="25"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="27"
+                                WidthRequest="27"
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
                                 Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">

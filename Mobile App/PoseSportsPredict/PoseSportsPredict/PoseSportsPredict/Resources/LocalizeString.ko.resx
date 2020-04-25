@@ -351,4 +351,28 @@
   <data name="Form" xml:space="preserve">
     <value>기록</value>
   </data>
+  <data name="View_Form" xml:space="preserve">
+    <value>기록 보기</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>팀</value>
+  </data>
+  <data name="Win_Initial" xml:space="preserve">
+    <value>승</value>
+  </data>
+  <data name="Draw_Initial" xml:space="preserve">
+    <value>무</value>
+  </data>
+  <data name="Lose_Initial" xml:space="preserve">
+    <value>패</value>
+  </data>
+  <data name="Played_Initial" xml:space="preserve">
+    <value>경기</value>
+  </data>
+  <data name="Points_Initial" xml:space="preserve">
+    <value>승점</value>
+  </data>
+  <data name="Recent_Record" xml:space="preserve">
+    <value>최근 전적</value>
+  </data>
 </root>

@@ -121,6 +121,8 @@
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             HeightRequest="45"
                             WidthRequest="45"
                             LoadingPlaceholder="img_football.png"

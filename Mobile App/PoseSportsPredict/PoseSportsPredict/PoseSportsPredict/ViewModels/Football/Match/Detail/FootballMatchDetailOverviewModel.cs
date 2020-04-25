@@ -6,7 +6,9 @@ using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
@@ -154,7 +156,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
-            // All Form
+            // All Form (별 의미 없음)
             _allForm = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.HomeRecentFixtures)
             {
@@ -209,14 +211,57 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                     .Convert(standingsDetail, null, null, null) as FootballStandingsInfo);
             }
 
+            // Set RankColor
+            var descGroups = standingsInfos.GroupBy(elem => elem.Description);
+            int positiveDescCnt = 0;
+            int negativeDescCnt = 0;
+            int neutralDescCnt = 0;
+            foreach (var descGroup in descGroups)
+            {
+                if (string.IsNullOrEmpty(descGroup.Key))
+                    continue;
+
+                var descCategoryType = StandginsDescription.GetDescCategory(descGroup.Key);
+                Color descColor;
+                if (descCategoryType == StandingsDescCategoryType.Positive)
+                {
+                    descColor = StandingsRankColor.GetRankColor(descCategoryType, positiveDescCnt);
+                    positiveDescCnt++;
+                }
+                else if (descCategoryType == StandingsDescCategoryType.Negative)
+                {
+                    descColor = StandingsRankColor.GetRankColor(descCategoryType, negativeDescCnt);
+                    negativeDescCnt++;
+                }
+                else if (descCategoryType == StandingsDescCategoryType.Neutral)
+                {
+                    descColor = StandingsRankColor.GetRankColor(descCategoryType, neutralDescCnt);
+                    neutralDescCnt++;
+                }
+                else
+                {
+                    descColor = StandingsRankColor.GetRankColor(StandingsDescCategoryType.None, 0);
+                }
+
+                foreach (var standings in descGroup)
+                {
+                    standings.RankColor = descColor;
+                }
+            }
+
+            // Groupping Standings by group data
             var standingsGroups = standingsInfos.GroupBy(elem => elem.Group);
             StandingsViewModels = new ObservableList<FootballStandingsViewModel>();
             foreach (var standingsGroup in standingsGroups)
             {
-                var standingsViewModel = ShinyHost.Resolve<FootballStandingsViewModel>();
-                standingsViewModel.OnInitializeView(standingsGroup.ToArray());
+                var standings = standingsGroup.ToArray();
+                if (standings.Length >= 2)
+                {
+                    var standingsViewModel = ShinyHost.Resolve<FootballStandingsViewModel>();
+                    standingsViewModel.OnInitializeView(standings);
 
-                StandingsViewModels.Add(standingsViewModel);
+                    StandingsViewModels.Add(standingsViewModel);
+                }
             }
 
             SetIsBusy(false);

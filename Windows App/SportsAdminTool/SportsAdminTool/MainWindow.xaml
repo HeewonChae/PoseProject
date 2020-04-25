@@ -5,6 +5,7 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
                       xmlns:local="clr-namespace:SportsAdminTool"
                       mc:Ignorable="d"
                       Title="Pose Sports" Height="900" Width="1200"
@@ -45,113 +46,166 @@
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
 
-    <!--Root Grid-->
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="330" />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <StackPanel Margin="10">
+        <!--Automated Processing-->
+        <Controls:FlipView
+            x:Name="_fv_football"
+            Foreground="{DynamicResource WhiteBrush}"
+            BannerText="Update League, Team"
+            Height="200"
+            Width="350"
+            HorizontalAlignment="Left"
+            SelectionChanged="Fv_football_SelectionChanged">
+            <Controls:FlipView.Items>
+                <Grid
+                    Background="LightSeaGreen"
+                    MouseLeftButtonUp="Fv_item_UpdateLeagueNTeam_Click">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label
+                        x:Name="_lbl_initialize_footballdb"
+                        Grid.Row="0"
+                        Content="Ready (country, league, team)"
+                        Foreground="Black"
+                        FontSize="14" />
+                    <iconPacks:PackIconModern
+                        Width="80"
+                        Height="80"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="SportFootball"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+                    <Controls:ProgressRing
+                        x:Name="_progRing_initialize_footballdb"
+                        Width="80"
+                        Height="80"
+                        Foreground="Black"
+                        IsActive="False"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+                </Grid>
+                <Grid
+                    Background="DodgerBlue"
+                    MouseLeftButtonUp="Fv_item_collectDatas_and_predict_Click">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label
+                        x:Name="_lbl_collectDatasAndPredict"
+                        Grid.Row="0"
+                        Content="Ready (fixtures, odds, standings)"
+                        Foreground="Black"
+                        FontSize="14" />
+                    <iconPacks:PackIconModern
+                        Width="80"
+                        Height="80"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="SportFootball"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+                    <Controls:ProgressRing
+                        x:Name="_progRing_collectDatasAndPredict"
+                        Width="80"
+                        Height="80"
+                        Foreground="Black"
+                        IsActive="False"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+                </Grid>
+                <Grid
+                    Background="DarkOrange"
+                    MouseLeftButtonUp="Fv_item_check_completed_fixtures_Click">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label
+                        x:Name="_lbl_check_completed_fixtures"
+                        Grid.Row="0"
+                        Content="Ready (last fixtures, H2H, statistics)"
+                        Foreground="Black"
+                        FontSize="14" />
+                    <iconPacks:PackIconModern
+                        Width="80"
+                        Height="80"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Kind="SportFootball"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+                    <Controls:ProgressRing
+                        x:Name="_progRing_check_completed_fixtures"
+                        Width="80"
+                        Height="80"
+                        Foreground="Black"
+                        IsActive="False"
+                        Grid.Row="1"
+                        Grid.RowSpan="2" />
+                </Grid>
+            </Controls:FlipView.Items>
+        </Controls:FlipView>
 
-        <Grid Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="225" />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Controls:FlipView x:Name="_fv_football"
-                               Foreground="{DynamicResource WhiteBrush}"
-                               BannerText="FootballDB Initialize" Margin="10 20 10 20"
-                               Grid.Row="0"
-                               SelectionChanged="Fv_football_SelectionChanged">
-                <Controls:FlipView.Items>
-                    <Grid Background="LightSeaGreen"
-                          MouseLeftButtonUp="Fv_item_initialize_footballdb_Click">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Label x:Name="_lbl_initialize_footballdb"
-                               Grid.Row="0"
-                               Content="Ready (country, league, team)"
-                               Foreground="Black"
-                               FontSize="14" />
-                        <iconPacks:PackIconModern Width="80"
-                                                  Height="80"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  Kind="SportFootball"
-                                                  Grid.Row="1"
-                                                  Grid.RowSpan="2" />
-                        <Controls:ProgressRing x:Name="_progRing_initialize_footballdb"
-                                               Width="80"
-                                               Height="80"
-                                               Foreground="Black"
-                                               IsActive="False"
-                                               Grid.Row="1"
-                                               Grid.RowSpan="2" />
-                    </Grid>
-                    <Grid Background="DodgerBlue"
-                          MouseLeftButtonUp="Fv_item_collectDatas_and_predict_Click">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Label x:Name="_lbl_collectDatasAndPredict"
-                               Grid.Row="0"
-                               Content="Ready (fixtures, odds, standings)"
-                               Foreground="Black"
-                               FontSize="14" />
-                        <iconPacks:PackIconModern Width="80"
-                                                  Height="80"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  Kind="SportFootball"
-                                                  Grid.Row="1"
-                                                  Grid.RowSpan="2" />
-                        <Controls:ProgressRing x:Name="_progRing_collectDatasAndPredict"
-                                               Width="80"
-                                               Height="80"
-                                               Foreground="Black"
-                                               IsActive="False"
-                                               Grid.Row="1"
-                                               Grid.RowSpan="2" />
-                    </Grid>
-                    <Grid Background="DarkOrange"
-                          MouseLeftButtonUp="Fv_item_check_completed_fixtures_Click">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Label x:Name="_lbl_check_completed_fixtures"
-                               Grid.Row="0"
-                               Content="Ready (last fixtures, H2H, statistics)"
-                               Foreground="Black"
-                               FontSize="14" />
-                        <iconPacks:PackIconModern Width="80"
-                                                  Height="80"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  Kind="SportFootball"
-                                                  Grid.Row="1"
-                                                  Grid.RowSpan="2" />
-                        <Controls:ProgressRing x:Name="_progRing_check_completed_fixtures"
-                                               Width="80"
-                                               Height="80"
-                                               Foreground="Black"
-                                               IsActive="False"
-                                               Grid.Row="1"
-                                               Grid.RowSpan="2" />
-                    </Grid>
-                </Controls:FlipView.Items>
-            </Controls:FlipView>
-        </Grid>
-    </Grid>
+        <Separator Margin="0 10" />
+
+        <!--Manage LeagueCoverage-->
+        <StackPanel>
+            <Label
+                Content="LeagueCoverage 테이블 관리"
+                FontSize="18"
+                FontWeight="Bold">
+            </Label>
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0 5">
+                <ComboBox
+                    x:Name="_cb_countryName"
+                    Width="200"
+                    Height="30"
+                    FontSize="14"
+                    Initialized="LeagueCoverage_CountryName_Initialized"
+                    SelectionChanged="LeagueCoverage_CountryName_SelectionChanged">
+                </ComboBox>
+                <ComboBox
+                    x:Name="_cb_leagueName"
+                    Margin="10 0"
+                    Width="250"
+                    Height="30"
+                    FontSize="14">
+                </ComboBox>
+                <Button
+                    Width="80"
+                    FontSize="12"
+                    Content="Select"
+                    Click="Button_LeagueCoverage_Select">
+                </Button>
+            </StackPanel>
+            <ScrollViewer
+                Margin="0 5">
+                <syncfusion:SfDataGrid
+                    x:Name="_sfdg_leagueCoverage"
+                    AllowEditing="True"
+                    CurrentCellValueChanged="leagueCoverage_CurrentCellValueChanged">
+                </syncfusion:SfDataGrid>
+            </ScrollViewer>
+            <Label
+                x:Name="_lbl_manage_leagueCoverage_result"
+                FontSize="14"
+                Foreground="OrangeRed">
+            </Label>
+        </StackPanel>
+
+        <Separator Margin="0 10" />
+        
+    </StackPanel>
 </Controls:MetroWindow>

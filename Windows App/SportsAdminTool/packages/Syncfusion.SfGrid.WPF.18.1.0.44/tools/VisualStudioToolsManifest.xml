@@ -1,0 +1,11 @@
+<FileList>
+<File Reference="Syncfusion.SfGrid.WPF.dll">
+	<ContainsControls>True</ContainsControls>
+	<ToolboxItems VSCategory="Syncfusion Controls for WPF" BlendCategory="Syncfusion Controls for WPF">
+		<Item Type="Syncfusion.UI.Xaml.Grid.SfDataGrid"/>
+		<Item Type="Syncfusion.UI.Xaml.Grid.SfMultiColumnDropDownControl"/>
+		<Item Type="Syncfusion.UI.Xaml.TreeGrid.SfTreeGrid"/>
+		<Item Type="Syncfusion.UI.Xaml.Controls.DataPager.SfDataPager"/>
+	</ToolboxItems>
+</File>
+</FileList>

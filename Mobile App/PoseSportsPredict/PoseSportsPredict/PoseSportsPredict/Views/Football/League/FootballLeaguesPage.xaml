@@ -31,14 +31,16 @@
                         VerticalOptions="CenterAndExpand"
                         Orientation="Horizontal"
                         Spacing="15"
-                        Padding="25,15"
+                        Padding="25,17"
                         effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                         effects:TapCommandEffect.TapParameter="{Binding .}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
-                            HeightRequest="25"
-                            WidthRequest="25"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HeightRequest="27"
+                            WidthRequest="27"
                             LoadingPlaceholder="img_world.png"
                             ErrorPlaceholder="img_world.png"
                             Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -75,14 +77,16 @@
                             VerticalOptions="CenterAndExpand"
                             Orientation="Horizontal"
                             Spacing="15"
-                            Padding="25,15"
+                            Padding="25,17"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="25"
-                                WidthRequest="25"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="27"
+                                WidthRequest="27"
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
                                 Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">

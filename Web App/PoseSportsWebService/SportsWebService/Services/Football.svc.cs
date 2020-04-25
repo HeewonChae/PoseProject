@@ -38,10 +38,10 @@ namespace SportsWebService.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
-        public async Task<Stream> P_GET_MATCH_OVERVIEW(Stream stream)
+        public Stream P_GET_MATCH_OVERVIEW(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_MATCH_OVERVIEW>();
-            var output = await Commands.Football.P_GET_MATCH_OVERVIEW.Execute(input);
+            var output = Commands.Football.P_GET_MATCH_OVERVIEW.Execute(input);
 
             return output.SerializeToStream();
         }

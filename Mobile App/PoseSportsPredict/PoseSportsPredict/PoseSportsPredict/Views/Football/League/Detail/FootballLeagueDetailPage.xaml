@@ -94,6 +94,8 @@
                         VerticalOptions="CenterAndExpand">
                         <ffimageloading:CachedImage
                             Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             HeightRequest="50"
                             WidthRequest="50"
                             LoadingPlaceholder="img_world.png"

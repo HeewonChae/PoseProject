@@ -1,0 +1,34 @@
+[
+  {
+    "Category": "Positive",
+    "Colors": [
+      "#1976d2",
+      "#0097a7",
+      "#00796b",
+      "#388e3c"
+    ]
+  },
+  {
+    "Category": "Neutral",
+    "Colors": [
+      "#afb42b",
+      "#fbc02d",
+      "#f57c00"
+    ]
+  },
+  {
+    "Category": "Negative",
+    "Colors": [
+      "#d32f2f",
+      "#c2185b",
+      "#7b1fa2",
+      "#512da8"
+    ]
+  },
+  {
+    "Category": "None",
+    "Colors": [
+      "#616161"
+    ]
+  }
+]

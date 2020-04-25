@@ -18,6 +18,11 @@ namespace SportsAdminTool
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQzNTA2QDMxMzgyZTMxMmUzMEk5TlYrL2swcThIUCtsZllqRXFzZWx6YituY3VOTW15RS8wVHZEbjVOOWc9");
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             // Global Exception Handler
@@ -25,8 +30,6 @@ namespace SportsAdminTool
             {
                 Log4Net.WriteLog(eArgs.ExceptionObject.ToString(), Log4Net.Level.FATAL);
                 Trace.Assert(false, eArgs.ExceptionObject.ToString());
-
-                Singleton.Get<CheckValidation>().OutputErrorToJsonFile();
             };
 
             base.OnStartup(e);

@@ -196,6 +196,55 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
+        public static bool UpdateCoverage(params FootballDB.Tables.LeagueCoverage[] leagues)
+        {
+            if (leagues.Length == 0)
+                return false;
+
+            Dev.DebugString("Call DB - FootballFacade.UpdateCoverage");
+
+            DateTime upt_time = DateTime.Now.ToUniversalTime();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" INSERT INTO league_coverage");
+            sb.Append($" (`{nameof(FootballDB.Tables.LeagueCoverage.league_id)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.standings)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.odds)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.fixture_statistics)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.players)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.lineups)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.predictions)}`, " +
+                $"`{nameof(FootballDB.Tables.LeagueCoverage.upt_time)}`)");
+            sb.Append("VALUES");
+
+            for (int i = 0; i < leagues.Length; i++)
+            {
+                if (i != 0)
+                    sb.Append(", ");
+
+                var league = leagues[i];
+
+                sb.Append($"({league.league_id}, " +
+                    $"{league.standings}, " +
+                    $"{league.odds}, " +
+                    $"{league.fixture_statistics}, " +
+                    $"{league.players}, " +
+                    $"{league.lineups}, " +
+                    $"{league.predictions}, " +
+                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+            }
+
+            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.LeagueCoverage.standings)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.standings)}), " +
+                $"{nameof(FootballDB.Tables.LeagueCoverage.odds)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.odds)}), " +
+                $"{nameof(FootballDB.Tables.LeagueCoverage.fixture_statistics)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.fixture_statistics)}), " +
+                $"{nameof(FootballDB.Tables.LeagueCoverage.players)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.players)}), " +
+                $"{nameof(FootballDB.Tables.LeagueCoverage.lineups)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.lineups)}), " +
+                $"{nameof(FootballDB.Tables.LeagueCoverage.predictions)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.predictions)}), " +
+                $"{nameof(FootballDB.Tables.LeagueCoverage.upt_time)} = VALUES({nameof(FootballDB.Tables.LeagueCoverage.upt_time)});");
+
+            return ExecuteQuery(sb.ToString());
+        }
+
         public static bool UpdateTeam(short leagueId, params AppModel.Football.Team[] teams)
         {
             if (teams.Length == 0)
@@ -683,6 +732,19 @@ namespace SportsAdminTool.Logic.Database
         #endregion Update
 
         #region Select
+
+        public static IEnumerable<FootballDB.Tables.Country> SelectCountries(string where = null, string groupBy = null, string orderBy = null)
+        {
+            Dev.DebugString("Call DB - FootballFacade.SelectCountries");
+
+            return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Country>.Input
+            {
+                Query = "SELECT * FROM country",
+                Where = where,
+                GroupBy = groupBy,
+                OrderBy = orderBy,
+            });
+        }
 
         public static IEnumerable<FootballDB.Tables.League> SelectLeagues(string where = null, string groupBy = null, string orderBy = null)
         {

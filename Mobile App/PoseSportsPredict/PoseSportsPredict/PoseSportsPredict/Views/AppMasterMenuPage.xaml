@@ -57,6 +57,8 @@
                         Grid.RowSpan="2"
                         Grid.Column="0"
                         Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
                         HeightRequest="40"
                         WidthRequest="40"
                         LoadingPlaceholder="ic_profile.png"
@@ -121,7 +123,7 @@
 
             <!--Bookmark Info-->
             <ScrollView Grid.Row="2">
-                <StackLayout Margin="5" Spacing="15">
+                <StackLayout Spacing="15">
                     <appviews:BookmarkMenuListView BindingContext="{Binding BookmarkedLeauges}" />
                     <appviews:BookmarkMenuListView BindingContext="{Binding BookmarkedTeams}" />
                 </StackLayout>

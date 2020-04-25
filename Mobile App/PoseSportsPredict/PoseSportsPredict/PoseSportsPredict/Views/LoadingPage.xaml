@@ -18,8 +18,8 @@
                 Grid.RowSpan="3"
                 Margin="3,0"
                 Aspect="AspectFit"
-                WidthRequest="314"
                 HorizontalOptions="Center"
+                WidthRequest="314"
                 Source="img_poseidon_logo">
             </ffimageloading:CachedImage>
             <ActivityIndicator

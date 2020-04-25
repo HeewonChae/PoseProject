@@ -16,7 +16,7 @@ namespace SportsWebService.WebBehavior.Server.ErrorHandler
         public bool HandleError(Exception exception)
         {
             Utilities.ErrorHandler.WriteErrorLog(exception);
-            return false;
+            return true;
         }
 
         #endregion 에러 처리하기 - HandleError(exception)

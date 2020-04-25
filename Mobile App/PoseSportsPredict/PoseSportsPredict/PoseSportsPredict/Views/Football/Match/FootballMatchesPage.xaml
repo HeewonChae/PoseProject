@@ -40,8 +40,10 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="25"
-                                WidthRequest="25"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="27"
+                                WidthRequest="27"
                                 DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
@@ -113,8 +115,10 @@
                                     Spacing="15">
                                     <ffimageloading:CachedImage
                                         Aspect="AspectFit"
-                                        HeightRequest="25"
-                                        WidthRequest="25"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        HeightRequest="27"
+                                        WidthRequest="27"
                                         LoadingPlaceholder="img_world.png"
                                         ErrorPlaceholder="img_world.png"
                                         Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">

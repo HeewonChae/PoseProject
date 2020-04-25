@@ -123,7 +123,7 @@ namespace PoseSportsPredict
             services.AddSingleton<FootballBookmarkSearchViewModel>();
 
             // Football - Standings
-            services.AddSingleton<FootballStandingsViewModel>();
+            services.AddTransient<FootballStandingsViewModel>();
         }
     }
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "Keyword": "Promotion",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Libertadores",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Sudamericana",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Final",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Champion",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "UEFA",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Next",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Cup",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Ranking",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Top",
+    "Category": "Positive"
+  },
+  {
+    "Keyword": "Middle",
+    "Category": "Neutral"
+  },
+  {
+    "Keyword": "Play-off",
+    "Category": "Neutral"
+  },
+  {
+    "Keyword": "Relegation",
+    "Category": "Negative"
+  },
+  {
+    "Keyword": "Withdrawn",
+    "Category": "Negative"
+  },
+  {
+    "Keyword": "Bottom",
+    "Category": "Negative"
+  }
+]

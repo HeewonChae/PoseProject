@@ -236,7 +236,7 @@ namespace SportsAdminTool.Logic.Football
 
         #endregion GetError
 
-        public void OutputErrorToJsonFile()
+        public void OutputErrorToJsonFile(string fileName)
         {
             lock (_lockObject)
             {
@@ -245,7 +245,7 @@ namespace SportsAdminTool.Logic.Football
                     var invalidLeauges = _invalidLeauges.Values.OrderBy(elem => elem.CountryName).ToList();
 
                     var serializeString = JsonConvert.SerializeObject(invalidLeauges, Formatting.Indented);
-                    FileFacade.MakeSimpleTextFile(rootDir, "invalidLeauges.json", serializeString);
+                    FileFacade.MakeSimpleTextFile(rootDir, fileName, serializeString);
                 }
 
                 _invalidLeauges.Clear();
@@ -255,7 +255,7 @@ namespace SportsAdminTool.Logic.Football
                     var invalidTeams = _invalidTeams.Values.OrderBy(elem => elem.CountryName).ToList();
 
                     var serializeString = JsonConvert.SerializeObject(invalidTeams, Formatting.Indented);
-                    FileFacade.MakeSimpleTextFile(rootDir, "invalidTeams.json", serializeString);
+                    FileFacade.MakeSimpleTextFile(rootDir, fileName, serializeString);
                 }
 
                 _invalidTeams.Clear();

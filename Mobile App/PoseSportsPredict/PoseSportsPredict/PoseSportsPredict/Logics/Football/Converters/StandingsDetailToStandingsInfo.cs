@@ -1,8 +1,11 @@
 ﻿using PosePacket.Service.Football.Models;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Football;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -30,21 +33,51 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     CountryName = standingsDetail.Country.Name,
                     LeagueLogo = standingsDetail.League.Logo,
                     LeagueName = standingsDetail.League.Name,
+                    LeagueType = standingsDetail.LeagueType,
                     TeamId = standingsDetail.Team.Id,
                     TeamLogo = standingsDetail.Team.Logo,
                     TeamName = standingsDetail.Team.Name,
                     Rank = standingsDetail.Rank,
+                    RankColor = Color.Transparent,
                     Points = standingsDetail.Points,
                     Group = standingsDetail.Group,
                     Description = standingsDetail.Description,
+                    Played = standingsDetail.Played,
                     Win = standingsDetail.Win,
                     Draw = standingsDetail.Draw,
                     Lose = standingsDetail.Lose,
                     GoalFor = standingsDetail.GoalFor,
                     GoalAgainst = standingsDetail.GoalAgainst,
                     GoalDifference = standingsDetail.GoalDifference,
-                    Form = standingsDetail.Form,
                 };
+
+                returnValue.Form = new List<FootballLastForm>();
+                standingsDetail.Form.Reverse();
+                foreach (var form in standingsDetail.Form)
+                {
+                    FootballLastForm footballForm = new FootballLastForm();
+
+                    if (form.Equals('W'))
+                    {
+                        footballForm.Result = Models.Enums.MatchResultType.Win;
+                    }
+                    else if (form.Equals('L'))
+                    {
+                        footballForm.Result = Models.Enums.MatchResultType.Lose;
+                    }
+                    else
+                    {
+                        footballForm.Result = Models.Enums.MatchResultType.Draw;
+                    }
+
+                    returnValue.Form.Add(footballForm);
+                }
+
+                if (returnValue.Form.Count > 0)
+                {
+                    var lastForm = returnValue.Form.Last();
+                    lastForm.IsLastMatch = true;
+                }
             }
 
             return returnValue;

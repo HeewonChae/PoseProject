@@ -149,6 +149,8 @@
                                                             Spacing="10">
                                                             <ffimageloading:CachedImage
                                                                 Aspect="AspectFit"
+                                                                HorizontalOptions="Center"
+                                                                VerticalOptions="Center"
                                                                 HeightRequest="18"
                                                                 WidthRequest="18"
                                                                 LoadingPlaceholder="img_world.png"
@@ -208,6 +210,8 @@
                                                             Grid.Column="1"
                                                             Margin="3,0"
                                                             Aspect="AspectFit"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
                                                             WidthRequest="29"
                                                             HeightRequest="29"
                                                             LoadingPlaceholder="img_football.png"
@@ -243,6 +247,8 @@
                                                             Grid.Column="3"
                                                             Margin="3,0"
                                                             Aspect="AspectFit"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
                                                             WidthRequest="29"
                                                             HeightRequest="29"
                                                             LoadingPlaceholder="img_football.png"
@@ -313,6 +319,8 @@
                                                     effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                         <ffimageloading:CachedImage
                                                         Aspect="AspectFit"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center"
                                                         HeightRequest="29"
                                                         WidthRequest="29"
                                                         LoadingPlaceholder="img_world.png"
@@ -387,6 +395,8 @@
                                                     effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                         <ffimageloading:CachedImage
                                                         Aspect="AspectFit"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center"
                                                         HeightRequest="29"
                                                         WidthRequest="29"
                                                         LoadingPlaceholder="img_world.png"
@@ -450,8 +460,10 @@
                                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                 <ffimageloading:CachedImage
                                                 Aspect="AspectFit"
-                                                HeightRequest="25"
-                                                WidthRequest="25"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                HeightRequest="27"
+                                                WidthRequest="27"
                                                 LoadingPlaceholder="img_world.png"
                                                 ErrorPlaceholder="img_world.png"
                                                 Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">

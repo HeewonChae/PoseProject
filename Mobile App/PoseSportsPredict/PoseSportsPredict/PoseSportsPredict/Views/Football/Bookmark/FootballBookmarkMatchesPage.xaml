@@ -74,6 +74,8 @@
                                                 Spacing="10">
                                                 <ffimageloading:CachedImage
                                                     Aspect="AspectFit"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"
                                                     HeightRequest="18"
                                                     WidthRequest="18"
                                                     LoadingPlaceholder="img_world.png"
@@ -150,6 +152,8 @@
                                                 Grid.Column="1"
                                                 Margin="3,0"
                                                 Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
                                                 WidthRequest="29"
                                                 HeightRequest="29"
                                                 LoadingPlaceholder="img_football.png"
@@ -185,6 +189,8 @@
                                                 Grid.Column="3"
                                                 Margin="3,0"
                                                 Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
                                                 WidthRequest="29"
                                                 HeightRequest="29"
                                                 LoadingPlaceholder="img_football.png"

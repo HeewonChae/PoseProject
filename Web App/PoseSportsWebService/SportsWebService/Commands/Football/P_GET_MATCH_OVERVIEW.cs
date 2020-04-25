@@ -31,7 +31,7 @@ namespace SportsWebService.Commands.Football
             public const int DB_Fixture_Not_Found = ServiceErrorCode.StoredProcedure_Football.P_GET_MATCH_OVERVIEW + 2;
         }
 
-        public static async Task<O_GET_MATCH_OVERVIEW> Execute(I_GET_MATCH_OVERVIEW input)
+        public static O_GET_MATCH_OVERVIEW Execute(I_GET_MATCH_OVERVIEW input)
         {
             if (input == null
                 || input.FixtureId == 0)
@@ -46,7 +46,7 @@ namespace SportsWebService.Commands.Football
                     FixtureId = input.FixtureId,
                 });
 
-                db_output = await P_GET_MATCH_OVERVIEW.OnQueryAsync();
+                db_output = P_GET_MATCH_OVERVIEW.OnQuery();
 
                 if (P_GET_MATCH_OVERVIEW.EntityStatus != null || db_output.Result != 0)
                     ErrorHandler.OccurException(RowCode.DB_Failed_Error + db_output.Result);

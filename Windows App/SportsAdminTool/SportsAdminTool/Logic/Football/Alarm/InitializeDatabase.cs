@@ -20,7 +20,7 @@ namespace SportsAdminTool.Logic.Football.Alarm
 
             mainWindow.Dispatcher.Invoke(() =>
             {
-                mainWindow.Fv_item_initialize_footballdb_Click(null, null);
+                mainWindow.Fv_item_UpdateLeagueNTeam_Click(null, null);
             });
         }
     }

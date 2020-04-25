@@ -151,6 +151,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to D.
+        /// </summary>
+        public static string Draw_Initial {
+            get {
+                return ResourceManager.GetString("Draw_Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand all leagues.
         /// </summary>
         public static string Expand_All_Leagues {
@@ -309,6 +318,15 @@ namespace PoseSportsPredict.Resources {
         public static string Loginning {
             get {
                 return ResourceManager.GetString("Loginning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L.
+        /// </summary>
+        public static string Lose_Initial {
+            get {
+                return ResourceManager.GetString("Lose_Initial", resourceCulture);
             }
         }
         
@@ -493,6 +511,24 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to P.
+        /// </summary>
+        public static string Played_Initial {
+            get {
+                return ResourceManager.GetString("Played_Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pts.
+        /// </summary>
+        public static string Points_Initial {
+            get {
+                return ResourceManager.GetString("Points_Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predictions.
         /// </summary>
         public static string Predictions {
@@ -534,6 +570,15 @@ namespace PoseSportsPredict.Resources {
         public static string Recent_Goal_For {
             get {
                 return ResourceManager.GetString("Recent_Goal_For", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Record.
+        /// </summary>
+        public static string Recent_Record {
+            get {
+                return ResourceManager.GetString("Recent_Record", resourceCulture);
             }
         }
         
@@ -700,6 +745,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Team.
+        /// </summary>
+        public static string Team {
+            get {
+                return ResourceManager.GetString("Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Teams.
         /// </summary>
         public static string Teams {
@@ -745,11 +799,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View form.
+        /// </summary>
+        public static string View_Form {
+            get {
+                return ResourceManager.GetString("View_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome !.
         /// </summary>
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W.
+        /// </summary>
+        public static string Win_Initial {
+            get {
+                return ResourceManager.GetString("Win_Initial", resourceCulture);
             }
         }
         

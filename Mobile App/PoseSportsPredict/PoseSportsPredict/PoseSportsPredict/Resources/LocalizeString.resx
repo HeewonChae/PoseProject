@@ -331,4 +331,28 @@
   <data name="Form" xml:space="preserve">
     <value>Form</value>
   </data>
+  <data name="View_Form" xml:space="preserve">
+    <value>View form</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="Win_Initial" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="Draw_Initial" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="Lose_Initial" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="Played_Initial" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="Points_Initial" xml:space="preserve">
+    <value>Pts</value>
+  </data>
+  <data name="Recent_Record" xml:space="preserve">
+    <value>Recent Record</value>
+  </data>
 </root>

@@ -28,6 +28,55 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 var awayMatches = matchOverviewInfo.Leauge_AwayRecentFixtures.Take(6);
                 var awaySideMatches = matchOverviewInfo.Leauge_AwayRecentFixtures.Where(elem => elem.AwayTeam.Id == curMatch.AwayTeamId).Take(3);
 
+                // Recent Record
+                returnValue.HomeRecentRecord = new FootballMatchStatistics.RecordInfo();
+                foreach (var match in homeMatches)
+                {
+                    if (match.HomeTeam.Score > match.AwayTeam.Score)
+                    {
+                        if (match.HomeTeam.Id == curMatch.HomeTeamId)
+                            returnValue.HomeRecentRecord.Win++;
+                        else
+                            returnValue.HomeRecentRecord.Lose++;
+                    }
+                    else if (match.HomeTeam.Score == match.AwayTeam.Score)
+                    {
+                        returnValue.HomeRecentRecord.Darw++;
+                    }
+                    else
+                    {
+                        if (match.HomeTeam.Id == curMatch.HomeTeamId)
+                            returnValue.HomeRecentRecord.Lose++;
+                        else
+                            returnValue.HomeRecentRecord.Win++;
+                    }
+                }
+
+                returnValue.AwayRecentRecord = new FootballMatchStatistics.RecordInfo();
+                foreach (var match in awayMatches)
+                {
+                    if (match.HomeTeam.Score > match.AwayTeam.Score)
+                    {
+                        if (match.HomeTeam.Id == curMatch.AwayTeamId)
+                            returnValue.AwayRecentRecord.Win++;
+                        else
+                            returnValue.AwayRecentRecord.Lose++;
+                    }
+                    else if (match.HomeTeam.Score == match.AwayTeam.Score)
+                    {
+                        returnValue.AwayRecentRecord.Darw++;
+                    }
+                    else
+                    {
+                        if (match.HomeTeam.Id == curMatch.AwayTeamId)
+                            returnValue.AwayRecentRecord.Lose++;
+                        else
+                            returnValue.AwayRecentRecord.Win++;
+                    }
+                }
+
+                returnValue.TotalRecordPoints = returnValue.HomeRecentRecord.Points + returnValue.AwayRecentRecord.Points;
+
                 // Goal For
                 int homeGF = 0;
                 foreach (var match in homeMatches)

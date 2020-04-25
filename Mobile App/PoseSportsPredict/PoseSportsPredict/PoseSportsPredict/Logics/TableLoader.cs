@@ -46,6 +46,8 @@ namespace PoseSportsPredict.Logics
 #endif
             // Football
             Load_Football_CoverageLeagues(rootPath);
+            Load_Football_StandingsDescription(rootPath);
+            Load_Football_StandingsRankColor(rootPath);
         }
 
         private static void Load_Football_CoverageLeagues(string rootPath)
@@ -55,6 +57,24 @@ namespace PoseSportsPredict.Logics
             Debug.Assert(CoverageLeagues.Length != 0);
 
             CoverageLeague.Load(CoverageLeagues);
+        }
+
+        private static void Load_Football_StandingsDescription(string rootPath)
+        {
+            var StandginsDescriptions = LoadJson<StandginsDescription[]>("Resources.Football.StandingsDescription.json");
+
+            Debug.Assert(StandginsDescriptions.Length != 0);
+
+            StandginsDescription.Load(StandginsDescriptions);
+        }
+
+        private static void Load_Football_StandingsRankColor(string rootPath)
+        {
+            var StandingsRankColors = LoadJson<StandingsRankColor[]>("Resources.Football.StandingsRankColor.json");
+
+            Debug.Assert(StandingsRankColors.Length != 0);
+
+            StandingsRankColor.Load(StandingsRankColors);
         }
 
         #region JsonLoader

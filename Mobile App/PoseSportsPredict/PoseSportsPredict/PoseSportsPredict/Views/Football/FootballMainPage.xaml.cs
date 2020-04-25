@@ -1,5 +1,4 @@
-﻿using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+﻿using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
 namespace PoseSportsPredict.Views.Football
@@ -10,8 +9,8 @@ namespace PoseSportsPredict.Views.Football
         public FootballMainPage()
         {
             InitializeComponent();
-            On<Android>().SetIsSwipePagingEnabled(false);
-            On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
         }
     }
 }

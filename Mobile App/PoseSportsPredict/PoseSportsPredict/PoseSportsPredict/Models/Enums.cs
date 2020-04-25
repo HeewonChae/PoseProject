@@ -37,4 +37,12 @@
         Draw,
         Lose,
     }
+
+    public enum StandingsDescCategoryType
+    {
+        None,
+        Positive,
+        Neutral,
+        Negative,
+    }
 }

@@ -7,12 +7,16 @@
 
   <ItemGroup>
     <None Remove="Resources\Football\CoverageLeagues.json" />
+    <None Remove="Resources\Football\StandingsDescription.json" />
+    <None Remove="Resources\Football\StandingsRankColor.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Football\CoverageLeagues.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Football\StandingsDescription.json" />
+    <EmbeddedResource Include="Resources\Football\StandingsRankColor.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +42,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+    <PackageReference Include="Xamarin.Forms.DataGrid" Version="2.1.0" />
     <PackageReference Include="Xamarin.KeyboardHelper" Version="2.0.7" />
     <PackageReference Include="XF.Material" Version="1.5.8" />
   </ItemGroup>
@@ -88,6 +93,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\BookmarkMenuListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Standings\FootballStandingsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoadingPage.xaml">

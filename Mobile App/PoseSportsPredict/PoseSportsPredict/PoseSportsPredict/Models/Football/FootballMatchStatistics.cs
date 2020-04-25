@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PoseSportsPredict.Resources;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,6 +18,26 @@ namespace PoseSportsPredict.Models.Football
                 return $"{Avg} ({Value})";
             }
         }
+
+        public class RecordInfo
+        {
+            public int Win { get; set; }
+            public int Darw { get; set; }
+            public int Lose { get; set; }
+            public int Points => (Win * 3) + (Darw * 1);
+            public string Text => ToString();
+
+            public override string ToString()
+            {
+                return $"{Win}{LocalizeString.Win_Initial} {Darw}{LocalizeString.Draw_Initial} {Lose}{LocalizeString.Lose_Initial}";
+            }
+        }
+
+        //Recent Record
+
+        public RecordInfo HomeRecentRecord { get; set; }
+        public RecordInfo AwayRecentRecord { get; set; }
+        public double TotalRecordPoints { get; set; }
 
         // Goal For
 
