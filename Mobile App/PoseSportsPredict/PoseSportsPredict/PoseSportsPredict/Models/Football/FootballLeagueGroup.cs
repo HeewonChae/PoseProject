@@ -10,7 +10,7 @@ using System.Text;
 
 namespace PoseSportsPredict.Models
 {
-    public class FootballLeagueGroup : IGroupBase, INotifyPropertyChanged
+    public class FootballLeagueGroup : IExpandable, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 

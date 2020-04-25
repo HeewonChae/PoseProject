@@ -285,16 +285,15 @@
             </Grid>
 
             <!--ContentView-->
-            <tabs:ViewSwitcher
-                x:Name="_switcher"
-                VerticalOptions="FillAndExpand"
-                SelectedIndex="{Binding Source={x:Reference _tabHost}, Path=SelectedIndex}">
-
-                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOverview" BindingContext="{Binding OverviewModel}" />
-                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailH2HView" BindingContext="{Binding H2HViewModel}" />
-                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailOddsView" BindingContext="{Binding OddsViewModel}" />
-                <customs:LazyView x:TypeArguments="footballmatchdetailviews:FootballMatchDetailPredictionsView" BindingContext="{Binding PredictionsViewModel}" />
-            </tabs:ViewSwitcher>
+            <CarouselView
+                x:Name="_tabContents"
+                ItemsSource="{Binding TabContents}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Content="{Binding CoupledView}" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

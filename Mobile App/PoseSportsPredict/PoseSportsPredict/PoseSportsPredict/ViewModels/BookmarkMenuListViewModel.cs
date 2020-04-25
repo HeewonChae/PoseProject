@@ -20,7 +20,7 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {
-    public class BookmarkMenuListViewModel : BaseViewModel, IGroupBase
+    public class BookmarkMenuListViewModel : BaseViewModel, IExpandable
     {
         #region BaseViewModel
 

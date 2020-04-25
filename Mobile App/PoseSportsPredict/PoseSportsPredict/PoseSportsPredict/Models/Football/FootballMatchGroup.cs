@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace PoseSportsPredict.Models
 {
-    public class FootballMatchGroup : IGroupBase, INotifyPropertyChanged
+    public class FootballMatchGroup : IExpandable, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 

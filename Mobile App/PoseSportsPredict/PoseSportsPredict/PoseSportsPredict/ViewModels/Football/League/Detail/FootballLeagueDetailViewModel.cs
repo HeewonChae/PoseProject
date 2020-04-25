@@ -27,7 +27,9 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             // Check Bookmark
             var bookmarkedLeague = await _bookmarkService.GetBookmark<FootballLeagueInfo>(leagueInfo.PrimaryKey);
-            LeagueInfo = bookmarkedLeague ?? leagueInfo;
+            leagueInfo.IsBookmarked = bookmarkedLeague?.IsBookmarked ?? false;
+
+            LeagueInfo = leagueInfo;
 
             return true;
         }

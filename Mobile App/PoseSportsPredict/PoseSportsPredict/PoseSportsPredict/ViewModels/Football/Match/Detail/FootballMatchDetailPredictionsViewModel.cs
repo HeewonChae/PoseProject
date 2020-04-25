@@ -1,4 +1,5 @@
 ﻿using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.Views.Football.Match.Detail;
 using System.Threading.Tasks;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
@@ -21,7 +22,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Constructors
 
-        public FootballMatchDetailPredictionsViewModel()
+        public FootballMatchDetailPredictionsViewModel(
+            FootballMatchDetailPredictionsView view) : base(view)
         {
             OnInitializeView();
         }

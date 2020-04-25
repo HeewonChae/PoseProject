@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Base
 {
@@ -76,6 +77,24 @@ namespace PoseSportsPredict.ViewModels.Base
         }
 
         #endregion Abstract Method
+
+        #region Constructors
+
+        private View _coupledView;
+        public View CoupledView => _coupledView;
+
+        protected BaseViewModel(View coupledView)
+        {
+            _coupledView = coupledView;
+            if (_coupledView != null)
+                _coupledView.BindingContext = this;
+        }
+
+        protected BaseViewModel()
+        {
+        }
+
+        #endregion Constructors
 
         #region Methods
 

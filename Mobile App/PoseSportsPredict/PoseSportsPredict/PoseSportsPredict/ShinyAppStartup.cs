@@ -98,9 +98,14 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchListViewModel>();
             services.AddTransient<FootballMatchDetailPage>();
             services.AddTransient<FootballMatchDetailViewModel>();
+
+            services.AddTransient<FootballMatchDetailOverview>();
             services.AddTransient<FootballMatchDetailOverviewModel>();
+            services.AddTransient<FootballMatchDetailH2HView>();
             services.AddTransient<FootballMatchDetailH2HViewModel>();
+            services.AddTransient<FootballMatchDetailPredictionsView>();
             services.AddTransient<FootballMatchDetailPredictionsViewModel>();
+            services.AddTransient<FootballMatchDetailOddsView>();
             services.AddTransient<FootballMatchDetailOddsViewModel>();
             // Football - League
             services.AddTransient<FootballLeaguesPage>();

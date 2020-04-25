@@ -339,15 +339,19 @@
   </data>
   <data name="Win_Initial" xml:space="preserve">
     <value>W</value>
+    <comment>2글자 이하로 번역할 것</comment>
   </data>
   <data name="Draw_Initial" xml:space="preserve">
     <value>D</value>
+    <comment>2글자 이하로 번역할 것</comment>
   </data>
   <data name="Lose_Initial" xml:space="preserve">
     <value>L</value>
+    <comment>2글자 이하로 번역할 것</comment>
   </data>
   <data name="Played_Initial" xml:space="preserve">
     <value>P</value>
+    <comment>2글자 이하로 번역할 것</comment>
   </data>
   <data name="Points_Initial" xml:space="preserve">
     <value>Pts</value>

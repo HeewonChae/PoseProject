@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PoseSportsPredict.InfraStructure
 {
-    public interface IGroupBase
+    public interface IExpandable
     {
         string Title { get; set; }
         bool Expanded { get; set; }

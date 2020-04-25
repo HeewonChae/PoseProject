@@ -11,7 +11,7 @@ namespace PoseSportsPredict.Logics.View.TempleteSelectors
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            if (!(item is IGroupBase group))
+            if (!(item is IExpandable group))
                 return null;
 
             if (group.Expanded)

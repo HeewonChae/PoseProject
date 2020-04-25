@@ -13,6 +13,7 @@ using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Standings;
+using PoseSportsPredict.Views.Football.Match.Detail;
 using Sharpnado.Presentation.Forms;
 using Shiny;
 using System;
@@ -33,17 +34,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            _overviewTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
+            OverviewTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
-            if (!_overviewTaskLoaderNotifier.IsNotStarted)
+            if (!OverviewTaskLoaderNotifier.IsNotStarted)
                 return;
 
-            _overviewTaskLoaderNotifier.Load(InitOverviewData);
+            OverviewTaskLoaderNotifier.Load(InitOverviewData);
         }
 
         #endregion BaseViewModel
@@ -116,7 +117,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Constructors
 
-        public FootballMatchDetailOverviewModel(IWebApiService webApiService)
+        public FootballMatchDetailOverviewModel(
+            FootballMatchDetailOverview view,
+            IWebApiService webApiService) : base(view)
         {
             _webApiService = webApiService;
 
@@ -129,7 +132,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public FootballMatchDetailOverviewModel SetMatchInfo(FootballMatchInfo matchInfo)
         {
-            _matchInfo = matchInfo;
+            MatchInfo = matchInfo;
             return this;
         }
 

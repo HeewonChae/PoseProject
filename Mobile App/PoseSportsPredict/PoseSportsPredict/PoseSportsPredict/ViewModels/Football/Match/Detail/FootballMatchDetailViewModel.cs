@@ -15,6 +15,7 @@ using PoseSportsPredict.Views.Football.Match.Detail;
 using Sharpnado.Presentation.Forms.CustomViews.Tabs;
 using Shiny;
 using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -45,23 +46,25 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (!(datas[0] is FootballMatchInfo matchInfo))
                 return false;
 
-            MatchInfo = matchInfo;
-
             // Check Bookmark
             var bookmarkedMatch = await _bookmarkService.GetBookmark<FootballMatchInfo>(matchInfo.PrimaryKey);
-            MatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
-            MatchInfo.OnPropertyChanged(nameof(MatchInfo.IsBookmarked));
+            matchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
 
             // Check Alarm
-            var notification = await _notificationService.GetNotification(MatchInfo.Id, SportsType.Football, NotificationType.MatchStart);
-            MatchInfo.IsAlarmed = notification != null ? true : false;
+            var notification = await _notificationService.GetNotification(matchInfo.Id, SportsType.Football, NotificationType.MatchStart);
+            matchInfo.IsAlarmed = notification != null ? true : false;
+            AlarmIcon.IsSelected = matchInfo.IsAlarmed;
 
-            AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
+            MatchInfo = matchInfo;
 
-            OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>().SetMatchInfo(matchInfo);
-            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
-            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
-            OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>();
+            TabContents = new ObservableCollection<BaseViewModel>
+            {
+                ShinyHost.Resolve<FootballMatchDetailOverviewModel>().SetMatchInfo(MatchInfo),
+                ShinyHost.Resolve<FootballMatchDetailH2HViewModel>(),
+                ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>(),
+                ShinyHost.Resolve<FootballMatchDetailOddsViewModel>(),
+            };
+
             SelectedViewIndex = 0;
 
             return true;
@@ -69,9 +72,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override void OnAppearing(params object[] datas)
         {
-            var viewSwitcher = this.CoupledPage.FindByName<ViewSwitcher>("_switcher");
-            var bindingCtx = viewSwitcher.Children[SelectedViewIndex].BindingContext as BaseViewModel;
-            bindingCtx.OnAppearing();
         }
 
         #endregion NavigableViewModel
@@ -87,10 +87,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private FootballMatchInfo _matchInfo;
         private int _selectedViewIndex;
-        private FootballMatchDetailOverviewModel _overviewModel;
-        private FootballMatchDetailH2HViewModel _h2hViewModel;
-        private FootballMatchDetailPredictionsViewModel _predictionsViewModel;
-        private FootballMatchDetailOddsViewModel _oddsViewModel;
+        private ObservableCollection<BaseViewModel> _tabContents;
         private ChangableIcon _alarmIcon;
 
         #endregion Fields
@@ -100,10 +97,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public ChangableIcon AlarmIcon { get => _alarmIcon; set => SetValue(ref _alarmIcon, value); }
         public FootballMatchInfo MatchInfo { get => _matchInfo; set => SetValue(ref _matchInfo, value); }
         public int SelectedViewIndex { get => _selectedViewIndex; set => SetValue(ref _selectedViewIndex, value); }
-        public FootballMatchDetailOverviewModel OverviewModel { get => _overviewModel; set => SetValue(ref _overviewModel, value); }
-        public FootballMatchDetailH2HViewModel H2HViewModel { get => _h2hViewModel; set => SetValue(ref _h2hViewModel, value); }
-        public FootballMatchDetailPredictionsViewModel PredictionsViewModel { get => _predictionsViewModel; set => SetValue(ref _predictionsViewModel, value); }
-        public FootballMatchDetailOddsViewModel OddsViewModel { get => _oddsViewModel; set => SetValue(ref _oddsViewModel, value); }
+        public ObservableCollection<BaseViewModel> TabContents { get => _tabContents; set => SetValue(ref _tabContents, value); }
 
         #endregion Properties
 
@@ -252,9 +246,16 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             this.CoupledPage.FindByName<TabHostView>("_tabHost").SelectedTabIndexChanged += (s, e) =>
             {
-                var viewSwitcher = this.CoupledPage.FindByName<ViewSwitcher>("_switcher");
-                var bindingCtx = viewSwitcher.Children[(int)e.SelectedPosition].BindingContext as BaseViewModel;
-                bindingCtx.OnAppearing();
+                var tabContents = this.CoupledPage.FindByName<CarouselView>("_tabContents");
+                tabContents.CurrentItem = TabContents[SelectedViewIndex];
+            };
+
+            this.CoupledPage.FindByName<CarouselView>("_tabContents").CurrentItemChanged += (s, e) =>
+            {
+                SelectedViewIndex = TabContents.IndexOf(e.CurrentItem as BaseViewModel);
+
+                var curContent = TabContents[SelectedViewIndex];
+                curContent.OnAppearing();
             };
         }
 
