@@ -79,7 +79,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Fields
 
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _matchesTaskLoaderNotifier;
-        private ObservableCollection<FootballMatchGroup> _matchGroups;
+        private ObservableCollection<FootballMatchListViewModel> _matchListViewModels;
         private List<FootballMatchInfo> _matchList;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
@@ -91,22 +91,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Properties
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
-        public ObservableCollection<FootballMatchGroup> MatchGroups { get => _matchGroups; set => SetValue(ref _matchGroups, value); }
+        public ObservableCollection<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
 
         #endregion Properties
 
         #region Commands
 
-        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<FootballMatchGroup>((e) => SelectGroupHeader(e)); }
+        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<FootballMatchListViewModel>((e) => SelectGroupHeader(e)); }
 
-        private void SelectGroupHeader(FootballMatchGroup groupInfo)
+        private void SelectGroupHeader(FootballMatchListViewModel groupInfo)
         {
             if (IsBusy)
                 return;
 
             groupInfo.Expanded = !groupInfo.Expanded;
-
-            MatchGroups = new ObservableCollection<FootballMatchGroup>(MatchGroups);
         }
 
         public ICommand MatchFilterCommand { get => new RelayCommand(MatchFilter); }
@@ -147,9 +145,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             _alarmEditMode = !_alarmEditMode;
 
-            foreach (var matchGroup in MatchGroups)
+            foreach (var MatchListViewModel in MatchListViewModels)
             {
-                matchGroup.FootballMatchListViewModel.AlarmEditMode = _alarmEditMode;
+                MatchListViewModel.AlarmEditMode = _alarmEditMode;
             }
         }
 
@@ -160,12 +158,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (IsBusy)
                 return;
 
-            foreach (var matchGroup in MatchGroups)
+            foreach (var MatchListViewModel in MatchListViewModels)
             {
-                matchGroup.Expanded = true;
+                MatchListViewModel.Expanded = true;
             }
-
-            MatchGroups = new ObservableCollection<FootballMatchGroup>(MatchGroups);
         }
 
         public ICommand CollapseAllLeaguesCommand { get => new RelayCommand(CollapseAllLeagues); }
@@ -175,12 +171,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (IsBusy)
                 return;
 
-            foreach (var matchGroup in MatchGroups)
+            foreach (var MatchListViewModel in MatchListViewModels)
             {
-                matchGroup.Expanded = false;
+                MatchListViewModel.Expanded = false;
             }
-
-            MatchGroups = new ObservableCollection<FootballMatchGroup>(MatchGroups);
         }
 
         #endregion Commands
@@ -376,24 +370,26 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private void UpdateMatcheGroups(List<FootballMatchInfo> matchList, bool? isAllExpand = null)
         {
-            ObservableCollection<FootballMatchGroup> matchGroupCollection;
-            matchGroupCollection = new ObservableCollection<FootballMatchGroup>();
+            ObservableCollection<FootballMatchListViewModel> matchGroupCollection;
+            matchGroupCollection = new ObservableCollection<FootballMatchListViewModel>();
 
             var grouppingMatches = MatchGroupingByFilterType(matchList, out string logo);
             foreach (var grouppingMatch in grouppingMatches)
             {
                 // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
-                bool isExpand = isAllExpand == null ? MatchGroups?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? true : isAllExpand.Value;
+                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? true : isAllExpand.Value;
 
-                matchGroupCollection.Add(new FootballMatchGroup(
-                    grouppingMatch.Key,
-                    string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.CountryLogo : logo,
-                    _alarmEditMode,
-                    grouppingMatch.Value,
-                    isExpand));
+                var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
+                matchListViewModel.Title = grouppingMatch.Key;
+                matchListViewModel.TitleLogo = string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.CountryLogo : logo;
+                matchListViewModel.AlarmEditMode = _alarmEditMode;
+                matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
+                matchListViewModel.Expanded = isExpand;
+
+                matchGroupCollection.Add(matchListViewModel);
             }
 
-            MatchGroups = matchGroupCollection;
+            MatchListViewModels = matchGroupCollection;
         }
 
         private Dictionary<string, FootballMatchInfo[]> MatchGroupingByFilterType(List<FootballMatchInfo> matchList, out string logo)

@@ -215,7 +215,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             }
 
             // Set RankColor
-            var descGroups = standingsInfos.GroupBy(elem => elem.Description);
+            var descGroups = standingsInfos.OrderBy(elem => elem.Rank).GroupBy(elem => elem.Description);
             int positiveDescCnt = 0;
             int negativeDescCnt = 0;
             int neutralDescCnt = 0;
@@ -253,7 +253,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             }
 
             // Groupping Standings by group data
-            var standingsGroups = standingsInfos.GroupBy(elem => elem.Group);
+            var standingsGroups = standingsInfos.OrderBy(elem => elem.Rank).GroupBy(elem => elem.Group);
             StandingsViewModels = new ObservableList<FootballStandingsViewModel>();
             foreach (var standingsGroup in standingsGroups)
             {

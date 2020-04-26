@@ -25,8 +25,7 @@ namespace PoseSportsPredict.ViewModels.Football.Standings
         {
             if (datas is FootballStandingsInfo[] footballStandingsInfos)
             {
-                StandingsInfos = new ObservableCollection<FootballStandingsInfo>(
-                    footballStandingsInfos.OrderBy(elem => elem.Rank));
+                StandingsInfos = new ObservableCollection<FootballStandingsInfo>(footballStandingsInfos);
 
                 LeagueTitle = footballStandingsInfos.First().Group;
 

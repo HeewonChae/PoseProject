@@ -17,8 +17,34 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Football.League
 {
-    public class FootballLeagueListViewModel : BaseViewModel
+    public class FootballLeagueListViewModel : BaseViewModel, IExpandable
     {
+        #region IExpandable
+
+        private bool _expanded;
+        private string _title;
+        private string _titleLogo;
+
+        public string Title { get => _title; set => SetValue(ref _title, value); }
+        public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
+        public string TitleLogo { get => _titleLogo; set => SetValue(ref _titleLogo, value); }
+
+        public bool Expanded
+        {
+            get { return _expanded; }
+            set
+            {
+                if (_expanded != value)
+                {
+                    _expanded = value;
+                    OnPropertyChanged(nameof(Expanded));
+                    OnPropertyChanged(nameof(StateIcon));
+                }
+            }
+        }
+
+        #endregion IExpandable
+
         #region Fields
 
         private IBookmarkService _bookmarkService;

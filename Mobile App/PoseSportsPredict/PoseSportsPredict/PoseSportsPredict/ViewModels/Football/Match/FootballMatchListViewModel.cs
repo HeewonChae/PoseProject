@@ -20,7 +20,7 @@ using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels.Football.Match
 {
-    public class FootballMatchListViewModel : BaseViewModel
+    public class FootballMatchListViewModel : BaseViewModel, IExpandable
     {
         #region Services
 
@@ -28,6 +28,32 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private INotificationService _notificationService;
 
         #endregion Services
+
+        #region IExpandable
+
+        private bool _expanded;
+        private string _title;
+        private string _titleLogo;
+
+        public string Title { get => _title; set => SetValue(ref _title, value); }
+        public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
+        public string TitleLogo { get => _titleLogo; set => SetValue(ref _titleLogo, value); }
+
+        public bool Expanded
+        {
+            get { return _expanded; }
+            set
+            {
+                if (_expanded != value)
+                {
+                    _expanded = value;
+                    OnPropertyChanged(nameof(Expanded));
+                    OnPropertyChanged(nameof(StateIcon));
+                }
+            }
+        }
+
+        #endregion IExpandable
 
         #region Fields
 
@@ -40,7 +66,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public int MatchCount => Matches?.Count ?? 0;
         public bool AlarmEditMode { get => _alarmEditMode; set => SetValue(ref _alarmEditMode, value); }
         public ObservableCollection<FootballMatchInfo> Matches { get; set; }
-        public List<string> Actions = new List<string>() { "Test1", "Test2" };
 
         #endregion Properties
 

@@ -22,109 +22,6 @@
              x:Class="PoseSportsPredict.Views.Football.League.FootballLeaguesPage"
              Title="{x:Static localize:LocalizeString.Leagues}"
              BackgroundColor="White">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!--Listview ItemTemplete Selector-->
-            <DataTemplate x:Key="collapsedTemplate">
-                <ViewCell>
-                    <StackLayout
-                        VerticalOptions="CenterAndExpand"
-                        Orientation="Horizontal"
-                        Spacing="15"
-                        Padding="25,17"
-                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
-                        effects:TapCommandEffect.TapParameter="{Binding .}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                        <ffimageloading:CachedImage
-                            Aspect="AspectFit"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            HeightRequest="27"
-                            WidthRequest="27"
-                            LoadingPlaceholder="img_world.png"
-                            ErrorPlaceholder="img_world.png"
-                            Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
-                            <ffimageloading:CachedImage.Transformations>
-                                <fftransformations:CircleTransformation />
-                            </ffimageloading:CachedImage.Transformations>
-                        </ffimageloading:CachedImage>
-                        <materialui:MaterialLabel
-                            LineBreakMode="TailTruncation"
-                            Text="{Binding Title}"
-                            TypeScale="Subtitle1"
-                            TextColor="{StaticResource TextColor_D}"
-                            VerticalOptions="CenterAndExpand">
-                        </materialui:MaterialLabel>
-                        <Image
-                            Source="{Binding StateIcon}"
-                            HorizontalOptions="EndAndExpand"
-                            HeightRequest="14"
-                            WidthRequest="14"
-                            effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
-                        </Image>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-            <DataTemplate x:Key="expandedTemplete">
-                <ViewCell>
-                    <Grid RowSpacing="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackLayout
-                            Grid.Row="0"
-                            VerticalOptions="CenterAndExpand"
-                            Orientation="Horizontal"
-                            Spacing="15"
-                            Padding="25,17"
-                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
-                            effects:TapCommandEffect.TapParameter="{Binding .}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                            <ffimageloading:CachedImage
-                                Aspect="AspectFit"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                HeightRequest="27"
-                                WidthRequest="27"
-                                LoadingPlaceholder="img_world.png"
-                                ErrorPlaceholder="img_world.png"
-                                Source="{Binding CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                <ffimageloading:CachedImage.Transformations>
-                                    <fftransformations:CircleTransformation />
-                                </ffimageloading:CachedImage.Transformations>
-                            </ffimageloading:CachedImage>
-                            <materialui:MaterialLabel
-                                LineBreakMode="TailTruncation"
-                                VerticalOptions="CenterAndExpand"
-                                Text="{Binding Title}"
-                                TypeScale="Subtitle1 "
-                                FontAttributes="Bold"
-                                TextColor="{StaticResource PrimaryColor}">
-                            </materialui:MaterialLabel>
-                            <Image
-                                Source="{Binding StateIcon}"
-                                HorizontalOptions="EndAndExpand"
-                                HeightRequest="14"
-                                WidthRequest="14"
-                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
-                            </Image>
-                        </StackLayout>
-                        <!--Inner List-->
-                        <footballleagueview:FootballLeagueListView
-                            Grid.Row="1"
-                            BindingContext="{Binding FootballLeagueListViewModel}">
-                        </footballleagueview:FootballLeagueListView>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-            <templeteselectors:GroupListTempleteSelector
-                x:Key="leagueGroupTempleteSelector"
-                CollapsedTemplate="{StaticResource collapsedTemplate}"
-                ExpandedTamplete="{StaticResource expandedTemplete}">
-            </templeteselectors:GroupListTempleteSelector>
-        </ResourceDictionary>
-    </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout
@@ -148,6 +45,7 @@
                     </SearchBar.Behaviors>
                 </SearchBar>
             </materialui:MaterialCard>
+
             <loader:TaskLoaderView
                 Style="{StaticResource PoseTaskLoader}"
                 TaskLoaderNotifier="{Binding LeaguesTaskLoaderNotifier}"
@@ -158,8 +56,56 @@
                     ItemsSource="{Binding LeagueGroups}"
                     HasUnevenRows="True"
                     IsPullToRefreshEnabled="False"
-                    SeparatorVisibility="None"
-                    ItemTemplate="{StaticResource leagueGroupTempleteSelector}">
+                    SeparatorVisibility="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Spacing="0">
+                                    <StackLayout
+                                        VerticalOptions="CenterAndExpand"
+                                        Orientation="Horizontal"
+                                        Spacing="15"
+                                        Padding="25,17"
+                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
+                                        effects:TapCommandEffect.TapParameter="{Binding .}"
+                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        <ffimageloading:CachedImage
+                                            Aspect="AspectFit"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            HeightRequest="27"
+                                            WidthRequest="27"
+                                            LoadingPlaceholder="img_world.png"
+                                            ErrorPlaceholder="img_world.png"
+                                            Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                            <ffimageloading:CachedImage.Transformations>
+                                                <fftransformations:CircleTransformation />
+                                            </ffimageloading:CachedImage.Transformations>
+                                        </ffimageloading:CachedImage>
+                                        <materialui:MaterialLabel
+                                            LineBreakMode="TailTruncation"
+                                            VerticalOptions="CenterAndExpand"
+                                            Text="{Binding Title}"
+                                            TypeScale="Subtitle1 "
+                                            FontAttributes="Bold"
+                                            TextColor="{StaticResource PrimaryColor}">
+                                        </materialui:MaterialLabel>
+                                        <Image
+                                            Source="{Binding StateIcon}"
+                                            HorizontalOptions="EndAndExpand"
+                                            HeightRequest="14"
+                                            WidthRequest="14"
+                                            effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                        </Image>
+                                    </StackLayout>
+                                    <!--Inner List-->
+                                    <footballleagueview:FootballLeagueListView
+                                        IsVisible="{Binding Expanded}">
+                                    </footballleagueview:FootballLeagueListView>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </loader:TaskLoaderView>
         </StackLayout>

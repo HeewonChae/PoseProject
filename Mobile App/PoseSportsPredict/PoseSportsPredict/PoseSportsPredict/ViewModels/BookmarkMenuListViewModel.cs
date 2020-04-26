@@ -65,6 +65,8 @@ namespace PoseSportsPredict.ViewModels
             }
         }
 
+        public string TitleLogo { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         #endregion Properties
 
         #region Commands

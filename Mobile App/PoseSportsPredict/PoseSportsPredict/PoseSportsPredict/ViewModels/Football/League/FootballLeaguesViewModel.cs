@@ -9,8 +9,10 @@ using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.League;
 using PoseSportsPredict.Views.Football.League;
 using Sharpnado.Presentation.Forms;
+using Shiny;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -88,8 +90,8 @@ namespace PoseSportsPredict.ViewModels.Football
 
         private TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> _leaguesTaskLoaderNotifier;
         private List<FootballLeagueInfo> _leagueList;
-        private ObservableCollection<FootballLeagueGroup> _orgLeagueGroups;
-        private ObservableCollection<FootballLeagueGroup> _leagueGroups;
+        private ObservableCollection<FootballLeagueListViewModel> _orgLeagueGroups;
+        private ObservableCollection<FootballLeagueListViewModel> _leagueGroups;
         private string _searchText;
 
         #endregion Fields
@@ -98,18 +100,17 @@ namespace PoseSportsPredict.ViewModels.Football
 
         public bool IsSearchEnable { get => _leagueList?.Count > 0; set => OnPropertyChanged("IsSearchEnable"); }
         public TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> LeaguesTaskLoaderNotifier { get => _leaguesTaskLoaderNotifier; set => SetValue(ref _leaguesTaskLoaderNotifier, value); }
-        public ObservableCollection<FootballLeagueGroup> LeagueGroups { get => _leagueGroups; set => SetValue(ref _leagueGroups, value); }
+        public ObservableCollection<FootballLeagueListViewModel> LeagueGroups { get => _leagueGroups; set => SetValue(ref _leagueGroups, value); }
 
         #endregion Properties
 
         #region Commands
 
-        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<FootballLeagueGroup>((e) => SelectGroupHeader(e)); }
+        public ICommand SelectGroupHeaderCommand { get => new RelayCommand<FootballLeagueListViewModel>((e) => SelectGroupHeader(e)); }
 
-        private void SelectGroupHeader(FootballLeagueGroup groupInfo)
+        private void SelectGroupHeader(FootballLeagueListViewModel groupInfo)
         {
             groupInfo.Expanded = !groupInfo.Expanded;
-            LeagueGroups = new ObservableCollection<FootballLeagueGroup>(LeagueGroups);
         }
 
         public ICommand SearchBarTextChangedCommand { get => new RelayCommand<TextChangedEventArgs>((e) => SearchBarTextChanged(e)); }
@@ -187,7 +188,7 @@ namespace PoseSportsPredict.ViewModels.Football
 
             if (searchText == string.Empty)
             {
-                LeagueGroups = new ObservableCollection<FootballLeagueGroup>(_orgLeagueGroups);
+                LeagueGroups = _orgLeagueGroups;
             }
             else
             {
@@ -203,9 +204,9 @@ namespace PoseSportsPredict.ViewModels.Football
         private void UpdateLeagueGroups(List<FootballLeagueInfo> leagueList, bool isAllExpanded)
         {
             if (leagueList == null || leagueList.Count == 0)
-                LeagueGroups = new ObservableCollection<FootballLeagueGroup>();
+                LeagueGroups = new ObservableCollection<FootballLeagueListViewModel>();
 
-            var leagueGroupsCollection = new ObservableCollection<FootballLeagueGroup>();
+            var leagueGroupsCollection = new ObservableCollection<FootballLeagueListViewModel>();
 
             // Group by country
             var leaguesGroupByCountry = leagueList.GroupBy(elem => elem.CountryName);
@@ -214,11 +215,13 @@ namespace PoseSportsPredict.ViewModels.Football
             var InternationalLeagues = leaguesGroupByCountry.FirstOrDefault(elem => elem.Key == "World");
             if (InternationalLeagues != null)
             {
-                leagueGroupsCollection.Add(new FootballLeagueGroup(
-                    InternationalLeagues.Key,
-                    InternationalLeagues.First().CountryLogo,
-                    InternationalLeagues.ToArray(),
-                    isAllExpanded));
+                var leagueListViewModel = ShinyHost.Resolve<FootballLeagueListViewModel>();
+                leagueListViewModel.Title = InternationalLeagues.Key;
+                leagueListViewModel.TitleLogo = InternationalLeagues.First().CountryLogo;
+                leagueListViewModel.Leagues = new ObservableCollection<FootballLeagueInfo>(InternationalLeagues.ToArray());
+                leagueListViewModel.Expanded = isAllExpanded;
+
+                leagueGroupsCollection.Add(leagueListViewModel);
             }
 
             foreach (var grouppingLeague in leaguesGroupByCountry)
@@ -226,11 +229,13 @@ namespace PoseSportsPredict.ViewModels.Football
                 if (grouppingLeague.Key == "World")
                     continue;
 
-                leagueGroupsCollection.Add(new FootballLeagueGroup(
-                    grouppingLeague.Key,
-                    grouppingLeague.First().CountryLogo,
-                    grouppingLeague.ToArray(),
-                    isAllExpanded));
+                var leagueListViewModel = ShinyHost.Resolve<FootballLeagueListViewModel>();
+                leagueListViewModel.Title = grouppingLeague.Key;
+                leagueListViewModel.TitleLogo = grouppingLeague.First().CountryLogo;
+                leagueListViewModel.Leagues = new ObservableCollection<FootballLeagueInfo>(grouppingLeague.ToArray());
+                leagueListViewModel.Expanded = isAllExpanded;
+
+                leagueGroupsCollection.Add(leagueListViewModel);
             }
 
             LeagueGroups = leagueGroupsCollection;
