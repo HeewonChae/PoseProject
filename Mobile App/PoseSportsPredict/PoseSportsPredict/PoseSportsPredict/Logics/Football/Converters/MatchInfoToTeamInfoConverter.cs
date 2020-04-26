@@ -27,8 +27,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     TeamId = teamType == TeamType.Home ? matchInfo.HomeTeamId : matchInfo.AwayTeamId,
                     TeamName = teamType == TeamType.Home ? matchInfo.HomeName : matchInfo.AwayName,
                     TeamLogo = teamType == TeamType.Home ? matchInfo.HomeLogo : matchInfo.AwayLogo,
-                    CountryName = matchInfo.CountryName,
-                    CountryLogo = matchInfo.CountryLogo,
+                    CountryName = teamType == TeamType.Home ? matchInfo.Home_CountryName : matchInfo.Away_CountryName,
                     IsBookmarked = false,
                 };
             }

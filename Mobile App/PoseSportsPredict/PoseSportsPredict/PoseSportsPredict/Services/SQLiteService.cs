@@ -1,12 +1,8 @@
-﻿using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.InfraStructure.SQLite;
-using PoseSportsPredict.Models.Football;
+﻿using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.Utilities.SQLiteConnection;
-using SQLite;
+using PoseSportsPredict.Utilities.SQLite.SQLiteConnection;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using XF.Material.Forms.UI.Dialogs;
 

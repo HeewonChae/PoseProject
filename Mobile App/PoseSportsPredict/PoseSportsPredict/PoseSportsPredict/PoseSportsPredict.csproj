@@ -77,6 +77,9 @@
     <Compile Update="Views\Football\FootballMainPage.xaml.cs">
       <DependentUpon>FootballMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Football\League\Detail\FootballLeagueDetailScheduledMatchesView.xaml.cs">
+      <DependentUpon>FootballLeagueDetailScheduledMatchesView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Football\League\Detail\FootballLeagueDetailPage.xaml.cs">
       <DependentUpon>FootballLeagueDetailPage.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,15 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Views\BookmarkMenuListView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\League\Detail\FootballLeagueDetailScheduledMatchesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\League\Detail\FootballLeagueDetailFinishedMatchesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\League\Detail\FootballLeagueDetailOverview.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Standings\FootballStandingsView.xaml">
@@ -172,5 +184,6 @@
 
   <ItemGroup>
     <Folder Include="CustomViews\" />
+    <Folder Include="Utilities\DataCaching\" />
   </ItemGroup>
 </Project>

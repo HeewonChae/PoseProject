@@ -308,9 +308,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
                         foreach (var bookmarkedLeague in bookmarkedLeagues)
                         {
-                            var matches = _matchList.Where(elem =>
-                                elem.CountryName.Equals(bookmarkedLeague.CountryName)
-                                && elem.LeagueName.Equals(bookmarkedLeague.LeagueName)).ToArray();
+                            var matches = _matchList.Where(elem => elem.LeagueName.Equals(bookmarkedLeague.LeagueName)).ToArray();
 
                             if (matches.Length > 0)
                             {
@@ -323,9 +321,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         foreach (var bookmarkedTeam in bookmarkedTeams)
                         {
                             var matches = _matchList.Where(elem =>
-                                elem.CountryName.Equals(bookmarkedTeam.CountryName)
-                                && (elem.HomeName.Equals(bookmarkedTeam.TeamName)
-                                || elem.AwayName.Equals(bookmarkedTeam.TeamName))).ToArray();
+                                elem.HomeName.Equals(bookmarkedTeam.TeamName)
+                                || elem.AwayName.Equals(bookmarkedTeam.TeamName)).ToArray();
 
                             if (matches.Length > 0)
                             {
@@ -381,7 +378,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
                 matchListViewModel.Title = grouppingMatch.Key;
-                matchListViewModel.TitleLogo = string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.CountryLogo : logo;
+                matchListViewModel.TitleLogo = string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.League_CountryLogo : logo;
                 matchListViewModel.AlarmEditMode = _alarmEditMode;
                 matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
                 matchListViewModel.Expanded = isExpand;
@@ -402,7 +399,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 case MatchFilterType.Bookmark:
                 case MatchFilterType.Ongoing:
                 case MatchFilterType.SortByLeague:
-                    var grouping = matchList.GroupBy(elem => $"{elem.CountryName}. {elem.LeagueName}");
+                    var grouping = matchList.GroupBy(elem => $"{elem.League_CountryName}. {elem.LeagueName}");
                     foreach (var data in grouping)
                     {
                         result.Add(data.Key, data.ToArray());

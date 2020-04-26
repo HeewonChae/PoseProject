@@ -20,23 +20,25 @@ namespace PoseSportsPredict.Logics.Football.Converters
             if (value is FootballStandingsDetail standingsDetail)
             {
                 // 기본 이미지 설정
-                if (string.IsNullOrEmpty(standingsDetail.Country.Logo))
-                    standingsDetail.Country.Logo = "img_world.png";
+                if (string.IsNullOrEmpty(standingsDetail.League.Country.Logo))
+                    standingsDetail.League.Country.Logo = "img_world.png";
                 if (string.IsNullOrEmpty(standingsDetail.League.Logo))
-                    standingsDetail.League.Logo = standingsDetail.Country.Logo;
+                    standingsDetail.League.Logo = standingsDetail.League.Country.Logo;
+
                 if (string.IsNullOrEmpty(standingsDetail.Team.Logo))
                     standingsDetail.Team.Logo = "img_football.png";
 
                 returnValue = new FootballStandingsInfo()
                 {
-                    CountryLogo = standingsDetail.Country.Logo,
-                    CountryName = standingsDetail.Country.Name,
+                    League_CountryLogo = standingsDetail.League.Country.Logo,
+                    League_CountryName = standingsDetail.League.Country.Name,
                     LeagueLogo = standingsDetail.League.Logo,
                     LeagueName = standingsDetail.League.Name,
-                    LeagueType = standingsDetail.LeagueType,
+                    LeagueType = standingsDetail.League.LeagueType,
                     TeamId = standingsDetail.Team.Id,
                     TeamLogo = standingsDetail.Team.Logo,
                     TeamName = standingsDetail.Team.Name,
+                    Team_CountryName = standingsDetail.Team.CountryName,
                     Rank = standingsDetail.Rank,
                     RankColor = Color.Transparent,
                     Points = standingsDetail.Points,

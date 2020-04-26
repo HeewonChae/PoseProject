@@ -32,7 +32,7 @@ namespace PoseSportsPredict.Models.Football
 
         public int Order { get; set; }
         public DateTime StoredTime { get; set; }
-        public string ShortName { get => LeagueName; }
+        public string MenuName { get => LeagueName; }
         public string Logo { get => LeagueLogo; }
         public BookMarkType BookMarkType { get => BookMarkType.League; }
 
@@ -43,6 +43,8 @@ namespace PoseSportsPredict.Models.Football
         public FootballLeagueType LeagueType { get; set; }
         public string CountryName { get; set; }
         public string CountryLogo { get; set; }
+        public DateTime SeasonStartDate { get; set; }
+        public DateTime SeasonEndDate { get; set; }
         public bool IsBookmarked { get; set; }
     }
 }

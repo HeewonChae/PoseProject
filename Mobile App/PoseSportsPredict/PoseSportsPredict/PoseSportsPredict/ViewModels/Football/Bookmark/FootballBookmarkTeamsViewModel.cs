@@ -1,10 +1,10 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Services;
+using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views.Football.Bookmark;

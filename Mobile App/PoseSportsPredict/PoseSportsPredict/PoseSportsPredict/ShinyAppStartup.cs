@@ -4,6 +4,7 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Services;
+using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.ViewModels.Football;
@@ -98,7 +99,6 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchListViewModel>();
             services.AddTransient<FootballMatchDetailPage>();
             services.AddTransient<FootballMatchDetailViewModel>();
-
             services.AddTransient<FootballMatchDetailOverview>();
             services.AddTransient<FootballMatchDetailOverviewModel>();
             services.AddTransient<FootballMatchDetailH2HView>();
@@ -113,6 +113,12 @@ namespace PoseSportsPredict
             services.AddTransient<FootballLeagueListViewModel>();
             services.AddTransient<FootballLeagueDetailPage>();
             services.AddTransient<FootballLeagueDetailViewModel>();
+            services.AddTransient<FootballLeagueDetailOverview>();
+            services.AddTransient<FootballLeagueDetailOverviewModel>();
+            services.AddTransient<FootballLeagueDetailFinishedMatchesView>();
+            services.AddTransient<FootballLeagueDetailFinishedMatchesViewModel>();
+            services.AddTransient<FootballLeagueDetailScheduledMatchesView>();
+            services.AddTransient<FootballLeagueDetailScheduledMatchesViewModel>();
             //Football - Team
             services.AddTransient<FootballTeamDetailPage>();
             services.AddTransient<FootballTeamDetailViewModel>();

@@ -86,8 +86,8 @@ namespace PoseSportsPredict.ViewModels.Football.Standings
                 LeagueName = standingsFirstData.LeagueName,
                 LeagueLogo = standingsFirstData.LeagueLogo,
                 LeagueType = standingsFirstData.LeagueType,
-                CountryName = standingsFirstData.CountryName,
-                CountryLogo = standingsFirstData.CountryLogo,
+                CountryName = standingsFirstData.League_CountryName,
+                CountryLogo = standingsFirstData.League_CountryLogo,
             };
 
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>(), leagueInfo);
@@ -109,8 +109,7 @@ namespace PoseSportsPredict.ViewModels.Football.Standings
                 TeamId = standings.TeamId,
                 TeamName = standings.TeamName,
                 TeamLogo = standings.TeamLogo,
-                CountryName = standings.CountryName,
-                CountryLogo = standings.CountryLogo,
+                CountryName = standings.Team_CountryName,
             };
 
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>(), teamInfo);

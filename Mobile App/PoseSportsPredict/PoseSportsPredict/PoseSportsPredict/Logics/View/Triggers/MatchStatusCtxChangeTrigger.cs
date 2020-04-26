@@ -16,7 +16,7 @@ namespace PoseSportsPredict.Logics.View.Triggers
                 || fixtureDetail.MatchStatus == FootballMatchStatusType.AET
                 || fixtureDetail.MatchStatus == FootballMatchStatusType.PEN)
                 {
-                    sender.Text = $"{fixtureDetail.HomeTeam.Score} - {fixtureDetail.AwayTeam.Score}";
+                    sender.Text = $"{fixtureDetail.HomeTeamScore} - {fixtureDetail.AwayTeamScore}";
                     sender.BackgroundColor = AppResourcesHelper.GetResourceColor("CustomGrey_D");
                 }
                 else
@@ -28,7 +28,7 @@ namespace PoseSportsPredict.Logics.View.Triggers
                     }
                     else
                     {
-                        sender.Text = $"{fixtureDetail.HomeTeam.Score} - {fixtureDetail.AwayTeam.Score}";
+                        sender.Text = $"{fixtureDetail.HomeTeamScore} - {fixtureDetail.AwayTeamScore}";
                         sender.BackgroundColor = AppResourcesHelper.GetResourceColor("PrimaryColor_L");
                     }
                 }

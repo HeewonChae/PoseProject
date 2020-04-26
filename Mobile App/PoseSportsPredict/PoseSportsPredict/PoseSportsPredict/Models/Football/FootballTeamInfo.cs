@@ -31,7 +31,7 @@ namespace PoseSportsPredict.Models.Football
 
         public int Order { get; set; }
         public DateTime StoredTime { get; set; }
-        public string ShortName { get => TeamName; }
+        public string MenuName { get => TeamName; }
         public string Logo { get => TeamLogo; }
         public BookMarkType BookMarkType { get => BookMarkType.Team; }
 
@@ -41,7 +41,6 @@ namespace PoseSportsPredict.Models.Football
         public string TeamName { get; set; }
         public string TeamLogo { get; set; }
         public string CountryName { get; set; }
-        public string CountryLogo { get; set; }
         public bool IsBookmarked { get; set; }
     }
 }

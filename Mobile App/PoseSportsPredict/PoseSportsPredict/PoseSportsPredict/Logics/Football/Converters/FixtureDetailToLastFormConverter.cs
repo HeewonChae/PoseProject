@@ -23,10 +23,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
             if (value is FootballFixtureDetail fixtureDetail)
             {
                 // 기본 이미지 설정
-                if (string.IsNullOrEmpty(fixtureDetail.Country.Logo))
-                    fixtureDetail.Country.Logo = "img_world.png";
+                if (string.IsNullOrEmpty(fixtureDetail.League.Country.Logo))
+                    fixtureDetail.League.Country.Logo = "img_world.png";
                 if (string.IsNullOrEmpty(fixtureDetail.League.Logo))
-                    fixtureDetail.League.Logo = fixtureDetail.Country.Logo;
+                    fixtureDetail.League.Logo = fixtureDetail.League.Country.Logo;
+
                 if (string.IsNullOrEmpty(fixtureDetail.HomeTeam.Logo))
                     fixtureDetail.HomeTeam.Logo = "img_football.png";
                 if (string.IsNullOrEmpty(fixtureDetail.AwayTeam.Logo))
@@ -39,8 +40,8 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     OpposingTeamLogo = myTeamId == fixtureDetail.HomeTeam.Id ? fixtureDetail.AwayTeam.Logo : fixtureDetail.HomeTeam.Logo,
                     OpposingTeamName = myTeamId == fixtureDetail.HomeTeam.Id ? fixtureDetail.AwayTeam.Name : fixtureDetail.HomeTeam.Name,
                     IsHomeMatch = myTeamId == fixtureDetail.HomeTeam.Id,
-                    HomeScore = fixtureDetail.HomeTeam.Score,
-                    AwayScore = fixtureDetail.AwayTeam.Score,
+                    HomeScore = fixtureDetail.HomeTeamScore,
+                    AwayScore = fixtureDetail.AwayTeamScore,
                 };
 
                 if (returnValue.HomeScore == returnValue.AwayScore)

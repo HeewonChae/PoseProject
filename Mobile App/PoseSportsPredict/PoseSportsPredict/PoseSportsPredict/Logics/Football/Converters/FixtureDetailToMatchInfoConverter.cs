@@ -19,10 +19,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 fixtureDetail.MatchTime = fixtureDetail.MatchTime.ToLocalTime();
 
                 // 기본 이미지 설정
-                if (string.IsNullOrEmpty(fixtureDetail.Country.Logo))
-                    fixtureDetail.Country.Logo = "img_world.png";
+                if (string.IsNullOrEmpty(fixtureDetail.League.Country.Logo))
+                    fixtureDetail.League.Country.Logo = "img_world.png";
                 if (string.IsNullOrEmpty(fixtureDetail.League.Logo))
-                    fixtureDetail.League.Logo = fixtureDetail.Country.Logo;
+                    fixtureDetail.League.Logo = fixtureDetail.League.Country.Logo;
+
                 if (string.IsNullOrEmpty(fixtureDetail.HomeTeam.Logo))
                     fixtureDetail.HomeTeam.Logo = "img_football.png";
                 if (string.IsNullOrEmpty(fixtureDetail.AwayTeam.Logo))
@@ -31,8 +32,8 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 returnValue = new FootballMatchInfo
                 {
                     Id = fixtureDetail.FixtureId,
-                    CountryName = fixtureDetail.Country.Name,
-                    CountryLogo = fixtureDetail.Country.Logo,
+                    League_CountryName = fixtureDetail.League.Country.Name,
+                    League_CountryLogo = fixtureDetail.League.Country.Logo,
                     LeagueName = fixtureDetail.League.Name,
                     LeagueLogo = fixtureDetail.League.Logo,
                     Round = fixtureDetail.Round,
@@ -40,16 +41,18 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     HomeTeamId = fixtureDetail.HomeTeam.Id,
                     HomeName = fixtureDetail.HomeTeam.Name,
                     HomeLogo = fixtureDetail.HomeTeam.Logo,
-                    HomeScore = fixtureDetail.HomeTeam.Score,
+                    Home_CountryName = fixtureDetail.HomeTeam.CountryName,
+                    HomeScore = fixtureDetail.HomeTeamScore,
 
                     AwayTeamId = fixtureDetail.AwayTeam.Id,
                     AwayName = fixtureDetail.AwayTeam.Name,
                     AwayLogo = fixtureDetail.AwayTeam.Logo,
-                    AwayScore = fixtureDetail.AwayTeam.Score,
+                    Away_CountryName = fixtureDetail.AwayTeam.CountryName,
+                    AwayScore = fixtureDetail.AwayTeamScore,
 
                     MatchStatus = fixtureDetail.MatchStatus,
                     MatchTime = fixtureDetail.MatchTime,
-                    LeagueType = fixtureDetail.LeagueType,
+                    LeagueType = fixtureDetail.League.LeagueType,
 
                     IsAlarmed = false,
                     IsBookmarked = false,

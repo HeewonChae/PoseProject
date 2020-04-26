@@ -61,7 +61,7 @@
                                 VerticalOptions="Center"
                                 FontAttributes="None"
                                 TextColor="{StaticResource TextColor_D}"
-                                Text="{Binding ShortName}">
+                                Text="{Binding MenuName}">
                             </materialui:MaterialLabel>
                         </StackLayout>
                     </DataTemplate>

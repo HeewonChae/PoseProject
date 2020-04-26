@@ -32,14 +32,14 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 returnValue.HomeRecentRecord = new FootballMatchStatistics.RecordInfo();
                 foreach (var match in homeMatches)
                 {
-                    if (match.HomeTeam.Score > match.AwayTeam.Score)
+                    if (match.HomeTeamScore > match.AwayTeamScore)
                     {
                         if (match.HomeTeam.Id == curMatch.HomeTeamId)
                             returnValue.HomeRecentRecord.Win++;
                         else
                             returnValue.HomeRecentRecord.Lose++;
                     }
-                    else if (match.HomeTeam.Score == match.AwayTeam.Score)
+                    else if (match.HomeTeamScore == match.AwayTeamScore)
                     {
                         returnValue.HomeRecentRecord.Darw++;
                     }
@@ -55,14 +55,14 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 returnValue.AwayRecentRecord = new FootballMatchStatistics.RecordInfo();
                 foreach (var match in awayMatches)
                 {
-                    if (match.HomeTeam.Score > match.AwayTeam.Score)
+                    if (match.HomeTeamScore > match.AwayTeamScore)
                     {
                         if (match.HomeTeam.Id == curMatch.AwayTeamId)
                             returnValue.AwayRecentRecord.Win++;
                         else
                             returnValue.AwayRecentRecord.Lose++;
                     }
-                    else if (match.HomeTeam.Score == match.AwayTeam.Score)
+                    else if (match.HomeTeamScore == match.AwayTeamScore)
                     {
                         returnValue.AwayRecentRecord.Darw++;
                     }
@@ -83,11 +83,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.HomeTeamId)
                     {
-                        homeGF += match.HomeTeam.Score;
+                        homeGF += match.HomeTeamScore;
                     }
                     else
                     {
-                        homeGF += match.AwayTeam.Score;
+                        homeGF += match.AwayTeamScore;
                     }
                 }
                 returnValue.HomeGoalFor = new FootballMatchStatistics.BaseInfo
@@ -101,11 +101,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.AwayTeamId)
                     {
-                        awayGF += match.HomeTeam.Score;
+                        awayGF += match.HomeTeamScore;
                     }
                     else
                     {
-                        awayGF += match.AwayTeam.Score;
+                        awayGF += match.AwayTeamScore;
                     }
                 }
                 returnValue.AwayGoalFor = new FootballMatchStatistics.BaseInfo
@@ -122,11 +122,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.HomeTeamId)
                     {
-                        homeGA += match.AwayTeam.Score;
+                        homeGA += match.AwayTeamScore;
                     }
                     else
                     {
-                        homeGA += match.HomeTeam.Score;
+                        homeGA += match.HomeTeamScore;
                     }
                 }
                 returnValue.HomeGoalAgainst = new FootballMatchStatistics.BaseInfo
@@ -140,11 +140,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.AwayTeamId)
                     {
-                        awayGA += match.AwayTeam.Score;
+                        awayGA += match.AwayTeamScore;
                     }
                     else
                     {
-                        awayGA += match.HomeTeam.Score;
+                        awayGA += match.HomeTeamScore;
                     }
                 }
                 returnValue.AwayGoalAgainst = new FootballMatchStatistics.BaseInfo
@@ -161,11 +161,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.HomeTeamId)
                     {
-                        homeSideGF += match.HomeTeam.Score;
+                        homeSideGF += match.HomeTeamScore;
                     }
                     else
                     {
-                        homeSideGF += match.AwayTeam.Score;
+                        homeSideGF += match.AwayTeamScore;
                     }
                 }
                 returnValue.HomeSideGoalFor = new FootballMatchStatistics.BaseInfo
@@ -179,11 +179,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.AwayTeamId)
                     {
-                        awaySideGF += match.HomeTeam.Score;
+                        awaySideGF += match.HomeTeamScore;
                     }
                     else
                     {
-                        awaySideGF += match.AwayTeam.Score;
+                        awaySideGF += match.AwayTeamScore;
                     }
                 }
                 returnValue.AwaySideGoalFor = new FootballMatchStatistics.BaseInfo
@@ -200,11 +200,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.HomeTeamId)
                     {
-                        homeSideGA += match.AwayTeam.Score;
+                        homeSideGA += match.AwayTeamScore;
                     }
                     else
                     {
-                        homeSideGA += match.HomeTeam.Score;
+                        homeSideGA += match.HomeTeamScore;
                     }
                 }
                 returnValue.HomeSideGoalAgainst = new FootballMatchStatistics.BaseInfo
@@ -218,11 +218,11 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 {
                     if (match.HomeTeam.Id == curMatch.AwayTeamId)
                     {
-                        awaySideGA += match.AwayTeam.Score;
+                        awaySideGA += match.AwayTeamScore;
                     }
                     else
                     {
-                        awaySideGA += match.HomeTeam.Score;
+                        awaySideGA += match.HomeTeamScore;
                     }
                 }
                 returnValue.AwaySideGoalAgainst = new FootballMatchStatistics.BaseInfo

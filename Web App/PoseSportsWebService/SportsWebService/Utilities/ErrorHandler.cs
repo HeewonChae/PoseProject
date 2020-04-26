@@ -25,7 +25,7 @@ namespace SportsWebService.Utilities
 
         public static void WriteErrorLog(Exception exception)
         {
-            var message = "";
+            string message;
             switch (exception)
             {
                 case WebFaultException<ErrorDetail> webFaultException:

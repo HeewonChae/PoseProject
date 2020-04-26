@@ -143,25 +143,25 @@
                     HeightRequest="43"
                     Margin="0,-7,0,0"
                     ShadowType="Bottom"
-                    SelectedIndex="{Binding Source={x:Reference _switcher}, Path=SelectedIndex, Mode=TwoWay}">
+                    SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
                     <tabs:TabHostView.Tabs>
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" LabelSize="14" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Scheduled_Matches}" LabelSize="14" />
                         <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Finished_Matches}" LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Scheduled_Matches}" LabelSize="14" />
                     </tabs:TabHostView.Tabs>
                 </tabs:TabHostView>
             </Grid>
 
             <!--ContentView-->
-            <tabs:ViewSwitcher
-                x:Name="_switcher"
-                VerticalOptions="FillAndExpand"
-                SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
-                <tabs:ViewSwitcher.GestureRecognizers>
-                    <SwipeGestureRecognizer Threshold="80" Direction="Left" Command="{Binding SwipeLeftViewSwitcherCommad}" />
-                    <SwipeGestureRecognizer Threshold="80" Direction="Right" Command="{Binding SwipeRightViewSwitcherCommad}" />
-                </tabs:ViewSwitcher.GestureRecognizers>
-            </tabs:ViewSwitcher>
+            <CarouselView
+                x:Name="_tabContents"
+                ItemsSource="{Binding TabContents}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Content="{Binding CoupledView}" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,11 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Service.Auth.Models;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.Views;

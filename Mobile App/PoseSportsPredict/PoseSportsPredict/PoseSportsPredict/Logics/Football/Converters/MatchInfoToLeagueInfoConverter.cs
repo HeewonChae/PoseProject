@@ -18,8 +18,8 @@ namespace PoseSportsPredict.Logics.Football.Converters
             {
                 returnValue = new FootballLeagueInfo
                 {
-                    CountryName = matchInfo.CountryName,
-                    CountryLogo = matchInfo.CountryLogo,
+                    CountryName = matchInfo.League_CountryName,
+                    CountryLogo = matchInfo.League_CountryLogo,
                     LeagueName = matchInfo.LeagueName,
                     LeagueLogo = matchInfo.LeagueLogo,
                     LeagueType = matchInfo.LeagueType,

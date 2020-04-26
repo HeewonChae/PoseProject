@@ -21,35 +21,37 @@ namespace SportsWebService.Logics.Converters
                 db_fixtureDetail.MatchStatus.TryParseEnum(out FootballMatchStatusType statusType);
                 db_fixtureDetail.LeagueType.TryParseEnum(out FootballLeagueType leagueType);
 
-                result.Country = new FootballFixtureDetail.DataInfo
+                result.League = new FootballLeagueDetail
                 {
-                    Name = db_fixtureDetail.CountryName,
-                    Logo = db_fixtureDetail.CountryLogo,
-                };
-                result.League = new FootballFixtureDetail.DataInfo
-                {
+                    Country = new FootballCountryDetail
+                    {
+                        Name = db_fixtureDetail.League_CountryName,
+                        Logo = db_fixtureDetail.League_CountryLogo
+                    },
                     Name = db_fixtureDetail.LeagueName,
                     Logo = db_fixtureDetail.LeagueLogo,
+                    LeagueType = leagueType,
                 };
-                result.HomeTeam = new FootballFixtureDetail.TeamInfo
+                result.HomeTeam = new FootballTeamDetail
                 {
                     Id = db_fixtureDetail.HomeTeamId,
                     Name = db_fixtureDetail.HomeTeamName,
                     Logo = db_fixtureDetail.HomeTeamLogo,
-                    Score = db_fixtureDetail.HomeTeamScore,
+                    CountryName = db_fixtureDetail.HomeTeam_CountryName,
                 };
-                result.AwayTeam = new FootballFixtureDetail.TeamInfo
+                result.AwayTeam = new FootballTeamDetail
                 {
                     Id = db_fixtureDetail.AwayTeamId,
                     Name = db_fixtureDetail.AwayTeamName,
                     Logo = db_fixtureDetail.AwayTeamLogo,
-                    Score = db_fixtureDetail.AwayTeamScore
+                    CountryName = db_fixtureDetail.AwayTeam_CountryName,
                 };
                 result.Round = db_fixtureDetail.Round;
                 result.FixtureId = db_fixtureDetail.FixtureId;
                 result.MatchStatus = statusType;
                 result.MatchTime = db_fixtureDetail.MatchTime;
-                result.LeagueType = leagueType;
+                result.HomeTeamScore = db_fixtureDetail.HomeTeamScore;
+                result.AwayTeamScore = db_fixtureDetail.AwayTeamScore;
             }
             return result;
         }

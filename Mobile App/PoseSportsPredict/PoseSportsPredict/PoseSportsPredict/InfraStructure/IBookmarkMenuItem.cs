@@ -9,7 +9,7 @@ namespace PoseSportsPredict.InfraStructure
 {
     public interface IBookmarkMenuItem : ISQLiteStorable
     {
-        string ShortName { get; }
+        string MenuName { get; }
         string Logo { get; }
         BookMarkType BookMarkType { get; }
     }

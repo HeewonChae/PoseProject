@@ -3,6 +3,7 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -223,7 +224,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
                 var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
                 var searchedMatches = bookmarkedMatches.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())
-                            || elem.CountryName.ToLower().Contains(searchText.ToLower())
+                            || elem.League_CountryName.ToLower().Contains(searchText.ToLower())
+                            || elem.Home_CountryName.ToLower().Contains(searchText.ToLower())
+                            || elem.Away_CountryName.ToLower().Contains(searchText.ToLower())
                             || elem.HomeName.ToLower().Contains(searchText.ToLower())
                             || elem.AwayName.ToLower().Contains(searchText.ToLower())).ToList();
 

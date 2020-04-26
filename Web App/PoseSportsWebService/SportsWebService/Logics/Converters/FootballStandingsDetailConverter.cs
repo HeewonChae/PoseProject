@@ -18,26 +18,26 @@ namespace SportsWebService.Logics.Converters
 
             if (value is DB_FootballStandingsDetail db_standingsDetail)
             {
-                result.Country = new FootballStandingsDetail.DataInfo()
-                {
-                    Logo = db_standingsDetail.CountryLogo,
-                    Name = db_standingsDetail.CountryName,
-                };
-
-                result.League = new FootballStandingsDetail.DataInfo()
-                {
-                    Logo = db_standingsDetail.LeagueLogo,
-                    Name = db_standingsDetail.LeagueName,
-                };
-
                 db_standingsDetail.LeagueType.TryParseEnum<FootballLeagueType>(out FootballLeagueType leagueType);
-                result.LeagueType = leagueType;
 
-                result.Team = new FootballStandingsDetail.TeamInfo()
+                result.League = new FootballLeagueDetail
+                {
+                    Country = new FootballCountryDetail
+                    {
+                        Name = db_standingsDetail.League_CountryName,
+                        Logo = db_standingsDetail.League_CountryLogo,
+                    },
+                    Name = db_standingsDetail.LeagueLogo,
+                    Logo = db_standingsDetail.LeagueName,
+                    LeagueType = leagueType,
+                };
+
+                result.Team = new FootballTeamDetail
                 {
                     Id = db_standingsDetail.TeamId,
                     Logo = db_standingsDetail.TeamLogo,
                     Name = db_standingsDetail.TeamName,
+                    CountryName = db_standingsDetail.Team_CountryName,
                 };
 
                 result.Rank = db_standingsDetail.Rank;
