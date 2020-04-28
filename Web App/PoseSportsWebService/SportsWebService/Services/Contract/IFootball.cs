@@ -24,8 +24,20 @@ namespace SportsWebService.Services.Contract
         Stream P_GET_FIXTURES_BY_INDEX(Stream stream);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetFixturesByLeague")]
+        Stream P_GET_FIXTURES_BY_LEAGUE(Stream stream);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetFixturesByTeam")]
+        Stream P_GET_FIXTURES_BY_TEAM(Stream stream);
+
+        [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "GetMatchOverview")]
         Stream P_GET_MATCH_OVERVIEW(Stream stream);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetLeagueOverview")]
+        Stream P_GET_LEAGUE_OVERVIEW(Stream stream);
 
         #region For Benchmark
 

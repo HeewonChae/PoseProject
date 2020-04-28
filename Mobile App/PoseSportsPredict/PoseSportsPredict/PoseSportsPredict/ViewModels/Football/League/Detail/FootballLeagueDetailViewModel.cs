@@ -37,8 +37,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             TabContents = new ObservableCollection<BaseViewModel>
             {
-                ShinyHost.Resolve<FootballLeagueDetailOverviewModel>(),
-                ShinyHost.Resolve<FootballLeagueDetailFinishedMatchesViewModel>(),
+                ShinyHost.Resolve<FootballLeagueDetailOverviewModel>().SetLeagueInfo(leagueInfo),
+                ShinyHost.Resolve<FootballLeagueDetailFinishedMatchesViewModel>().SetLeagueInfo(leagueInfo),
                 ShinyHost.Resolve<FootballLeagueDetailScheduledMatchesViewModel>(),
             };
 
@@ -116,22 +116,6 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             LeagueInfo.OnPropertyChanged("IsBookmarked");
 
             SetIsBusy(false);
-        }
-
-        public ICommand SwipeLeftViewSwitcherCommad { get => new RelayCommand(SwipeLeftViewSwitcher); }
-
-        private void SwipeLeftViewSwitcher()
-        {
-            if (SelectedViewIndex < 3)
-                SelectedViewIndex++;
-        }
-
-        public ICommand SwipeRightViewSwitcherCommad { get => new RelayCommand(SwipeRightViewSwitcher); }
-
-        private void SwipeRightViewSwitcher()
-        {
-            if (SelectedViewIndex > 0)
-                SelectedViewIndex--;
         }
 
         #endregion Commands

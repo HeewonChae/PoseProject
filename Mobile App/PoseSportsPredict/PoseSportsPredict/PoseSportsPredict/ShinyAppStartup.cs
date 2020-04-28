@@ -67,6 +67,8 @@ namespace PoseSportsPredict
             services.AddSingleton<FootballMatchStatisticsConverter>();
             services.AddSingleton<FixtureDetailToLastFormConverter>();
             services.AddSingleton<StandingsDetailToStandingsInfo>();
+            services.AddSingleton<LeagueDetailToLeagueInfo>();
+            services.AddSingleton<TeamDetailToTeamInfo>();
         }
 
         private void MatchViewModels(IServiceCollection services)

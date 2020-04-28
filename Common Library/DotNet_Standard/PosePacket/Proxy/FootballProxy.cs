@@ -22,7 +22,13 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_FIXTURES_BY_INDEX = "GetFixturesByIndex";
         
+        private static string _P_GET_FIXTURES_BY_LEAGUE = "GetFixturesByLeague";
+        
+        private static string _P_GET_FIXTURES_BY_TEAM = "GetFixturesByTeam";
+        
         private static string _P_GET_MATCH_OVERVIEW = "GetMatchOverview";
+        
+        private static string _P_GET_LEAGUE_OVERVIEW = "GetLeagueOverview";
         
         // Service base url
         public static string ServiceUrl
@@ -55,6 +61,28 @@ namespace PosePacket.Proxy
             }
         }
         
+        // MethodType: POST, Segment: GetFixturesByLeague 
+        // InputType: PosePacket.Service.Football.I_GET_FIXTURES_BY_LEAGUE 
+        // OutputType: PosePacket.Service.Football.O_GET_FIXTURES_BY_LEAGUE
+        public static string P_GET_FIXTURES_BY_LEAGUE
+        {
+            get
+            {
+                return _P_GET_FIXTURES_BY_LEAGUE;
+            }
+        }
+        
+        // MethodType: POST, Segment: GetFixturesByTeam 
+        // InputType: null 
+        // OutputType: null
+        public static string P_GET_FIXTURES_BY_TEAM
+        {
+            get
+            {
+                return _P_GET_FIXTURES_BY_TEAM;
+            }
+        }
+        
         // MethodType: POST, Segment: GetMatchOverview 
         // InputType: PosePacket.Service.Football.I_GET_MATCH_OVERVIEW 
         // OutputType: PosePacket.Service.Football.O_GET_MATCH_OVERVIEW
@@ -63,6 +91,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_MATCH_OVERVIEW;
+            }
+        }
+        
+        // MethodType: POST, Segment: GetLeagueOverview 
+        // InputType: PosePacket.Service.Football.I_GET_LEAGUE_OVERVIEW 
+        // OutputType: PosePacket.Service.Football.O_GET_LEAGUE_OVERVIEW
+        public static string P_GET_LEAGUE_OVERVIEW
+        {
+            get
+            {
+                return _P_GET_LEAGUE_OVERVIEW;
             }
         }
     }

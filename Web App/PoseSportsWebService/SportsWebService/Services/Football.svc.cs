@@ -37,11 +37,34 @@ namespace SportsWebService.Services
             return output.SerializeToStream();
         }
 
+        public Stream P_GET_FIXTURES_BY_LEAGUE(Stream stream)
+        {
+            var input = stream.StreamDeserialize<I_GET_FIXTURES_BY_LEAGUE>();
+            var output = Commands.Football.P_GET_FIXTURES_BY_LEAGUE.Execute(input);
+
+            return output.SerializeToStream();
+        }
+
+        public Stream P_GET_FIXTURES_BY_TEAM(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_GET_MATCH_OVERVIEW(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_MATCH_OVERVIEW>();
             var output = Commands.Football.P_GET_MATCH_OVERVIEW.Execute(input);
+
+            return output.SerializeToStream();
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public Stream P_GET_LEAGUE_OVERVIEW(Stream stream)
+        {
+            var input = stream.StreamDeserialize<I_GET_LEAGUE_OVERVIEW>();
+
+            var output = Commands.Football.P_GET_LEAGUE_OVERVIEW.Execute(input);
 
             return output.SerializeToStream();
         }

@@ -56,56 +56,53 @@
                                     Padding="0">
                                     <StackLayout
                                         Spacing="0"
-                                        Padding="15,5,15,0">
+                                        Padding="15,5,15,7">
                                         <Grid
-                                            ColumnSpacing="0"
+                                            ColumnSpacing="15"
                                             RowSpacing="0">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition />
-                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
-                                            <StackLayout
-                                                Grid.Row="0"
-                                                Orientation="Horizontal"
-                                                Spacing="10">
-                                                <ffimageloading:CachedImage
-                                                    Aspect="AspectFit"
-                                                    HorizontalOptions="Center"
-                                                    VerticalOptions="Center"
-                                                    HeightRequest="18"
-                                                    WidthRequest="18"
-                                                    LoadingPlaceholder="img_world.png"
-                                                    ErrorPlaceholder="img_world.png"
-                                                    Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                                    <ffimageloading:CachedImage.Transformations>
-                                                        <fftransformations:CircleTransformation />
-                                                    </ffimageloading:CachedImage.Transformations>
-                                                </ffimageloading:CachedImage>
-                                                <materialui:MaterialLabel
-                                                    LineBreakMode="TailTruncation"
-                                                    TextColor="{StaticResource CustomGrey}"
-                                                    TypeScale="Subtitle2"
-                                                    FontAttributes="None"
-                                                    VerticalOptions="CenterAndExpand">
-                                                    <materialui:MaterialLabel.FormattedText>
-                                                        <FormattedString>
-                                                            <Span Text="{Binding CountryName}" />
-                                                            <Span Text=". " />
-                                                            <Span Text="{Binding LeagueName}" />
-                                                        </FormattedString>
-                                                    </materialui:MaterialLabel.FormattedText>
-                                                </materialui:MaterialLabel>
-                                            </StackLayout>
+                                            <ffimageloading:CachedImage
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                HeightRequest="27"
+                                                WidthRequest="27"
+                                                LoadingPlaceholder="img_world.png"
+                                                ErrorPlaceholder="img_world.png"
+                                                Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                            </ffimageloading:CachedImage>
                                             <materialui:MaterialLabel
-                                                Grid.Row="1"
-                                                TextColor="{StaticResource CustomGrey}"
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                LineBreakMode="TailTruncation"
+                                                TextColor="{StaticResource CustomGrey_D}"
                                                 TypeScale="Subtitle2"
                                                 FontAttributes="None"
-                                                Text="{Binding MatchTime, Converter={StaticResource dateToStringConverter}}">
+                                                VerticalOptions="CenterAndExpand">
+                                                <materialui:MaterialLabel.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding League_CountryName}" />
+                                                        <Span Text=". " />
+                                                        <Span Text="{Binding LeagueName}" />
+                                                    </FormattedString>
+                                                </materialui:MaterialLabel.FormattedText>
+                                            </materialui:MaterialLabel>
+                                            <materialui:MaterialLabel
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                TextColor="{StaticResource CustomGrey_D}"
+                                                TypeScale="Subtitle2"
+                                                FontAttributes="None"
+                                                Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
                                             </materialui:MaterialLabel>
                                             <ContentView
                                                 Grid.Row="0"
@@ -113,6 +110,7 @@
                                                 Grid.RowSpan="2"
                                                 Padding="7"
                                                 VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="EndAndExpand"
                                                 IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedMatches}}"
                                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
                                                 effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -127,7 +125,7 @@
                                             </ContentView>
                                         </Grid>
                                         <Grid
-                                            VerticalOptions="FillAndExpand"
+                                            VerticalOptions="EndAndExpand"
                                             Margin="5,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />

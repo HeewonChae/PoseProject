@@ -221,11 +221,15 @@
     <Compile Include="Commands\Auth\P_E_TokenRefresh.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_DATE.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_INDEX.cs" />
+    <Compile Include="Commands\Football\P_GET_FIXTURES_BY_LEAGUE.cs" />
+    <Compile Include="Commands\Football\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_OVERVIEW.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
+    <Compile Include="Logics\Converters\FootballLeagueDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
+    <Compile Include="Logics\Converters\FootballTeamDetailConverter.cs" />
     <Compile Include="Utilities\StreamExtensions.cs" />
     <Compile Include="ServerContext.cs" />
     <Compile Include="Global.asax.cs">

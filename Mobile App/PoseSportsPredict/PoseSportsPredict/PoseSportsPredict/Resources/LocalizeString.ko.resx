@@ -375,4 +375,13 @@
   <data name="Recent_Record" xml:space="preserve">
     <value>최근 전적</value>
   </data>
+  <data name="Season_EndDate" xml:space="preserve">
+    <value>시즌 종료일</value>
+  </data>
+  <data name="Season_StartDate" xml:space="preserve">
+    <value>시즌 시작일</value>
+  </data>
+  <data name="Participating_Teams" xml:space="preserve">
+    <value>참가중인 팀</value>
+  </data>
 </root>

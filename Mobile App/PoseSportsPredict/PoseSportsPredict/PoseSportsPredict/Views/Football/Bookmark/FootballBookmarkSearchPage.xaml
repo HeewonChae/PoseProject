@@ -105,8 +105,8 @@
                                 </Grid.RowDefinitions>
                                 <!--Match Search Result-->
                                 <StackLayout
-                                Grid.Row="0"
-                                Margin="0,0,0,25">
+                                    Grid.Row="0"
+                                    Margin="0,0,0,25">
                                     <StackLayout.Triggers>
                                         <DataTrigger TargetType="StackLayout" Binding="{Binding SearchedMatches.Count}" Value="0">
                                             <Setter Property="IsVisible" Value="False" />
@@ -127,15 +127,15 @@
                                         </materialui:MaterialLabel.FormattedText>
                                     </materialui:MaterialLabel>
                                     <StackLayout
-                                    x:Name="lv_searched_matches"
-                                    BindableLayout.ItemsSource="{Binding SearchedMatches}">
+                                        x:Name="lv_searched_matches"
+                                        BindableLayout.ItemsSource="{Binding SearchedMatches}">
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <materialui:MaterialCard
-                                                CornerRadius="5"
-                                                Elevation="3"
-                                                Margin="3"
-                                                Padding="0">
+                                                    CornerRadius="5"
+                                                    Elevation="3"
+                                                    Margin="3"
+                                                    Padding="0">
                                                     <StackLayout
                                                         Spacing="0"
                                                         Padding="8,5,8,0"
@@ -143,50 +143,59 @@
                                                         effects:TapCommandEffect.TapParameter="{Binding .}"
                                                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                         <!--SubTitle-->
-                                                        <StackLayout
-                                                            Grid.Row="1"
-                                                            Orientation="Horizontal"
-                                                            Spacing="10">
+                                                        <Grid
+                                                            ColumnSpacing="15"
+                                                            RowSpacing="0">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition />
+                                                                <RowDefinition />
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
                                                             <ffimageloading:CachedImage
+                                                                Grid.RowSpan="2"
+                                                                Grid.Column="0"
                                                                 Aspect="AspectFit"
                                                                 HorizontalOptions="Center"
                                                                 VerticalOptions="Center"
-                                                                HeightRequest="18"
-                                                                WidthRequest="18"
+                                                                HeightRequest="27"
+                                                                WidthRequest="27"
                                                                 LoadingPlaceholder="img_world.png"
                                                                 ErrorPlaceholder="img_world.png"
                                                                 Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                                                <ffimageloading:CachedImage.Transformations>
-                                                                    <fftransformations:CircleTransformation />
-                                                                </ffimageloading:CachedImage.Transformations>
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
+                                                                Grid.Row="0"
+                                                                Grid.Column="1"
                                                                 LineBreakMode="TailTruncation"
-                                                                TextColor="{StaticResource CustomGrey}"
+                                                                TextColor="{StaticResource CustomGrey_D}"
                                                                 TypeScale="Subtitle2"
                                                                 FontAttributes="None"
                                                                 VerticalOptions="CenterAndExpand">
                                                                 <materialui:MaterialLabel.FormattedText>
                                                                     <FormattedString>
-                                                                        <Span Text="{Binding CountryName}" />
+                                                                        <Span Text="{Binding League_CountryName}" />
                                                                         <Span Text=". " />
                                                                         <Span Text="{Binding LeagueName}" />
                                                                     </FormattedString>
                                                                 </materialui:MaterialLabel.FormattedText>
                                                             </materialui:MaterialLabel>
-                                                        </StackLayout>
-                                                        <materialui:MaterialLabel
-                                                            Grid.Row="0"
-                                                            TextColor="{StaticResource CustomGrey}"
-                                                            TypeScale="Subtitle2"
-                                                            FontAttributes="None"
-                                                            Text="{Binding MatchTime, StringFormat='{0:dddd dd MMM}'}">
-                                                        </materialui:MaterialLabel>
+                                                            <materialui:MaterialLabel
+                                                                Grid.Row="1"
+                                                                Grid.Column="1"
+                                                                TextColor="{StaticResource CustomGrey_D}"
+                                                                TypeScale="Subtitle2"
+                                                                FontAttributes="None"
+                                                                Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
+                                                            </materialui:MaterialLabel>
+                                                        </Grid>
 
                                                         <!--MatchInfo-->
                                                         <Grid
-                                                        VerticalOptions="FillAndExpand"
-                                                        Margin="10">
+                                                            VerticalOptions="FillAndExpand"
+                                                            Margin="10,15,10,7">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*" />
                                                                 <ColumnDefinition Width="Auto" />
@@ -195,47 +204,47 @@
                                                                 <ColumnDefinition Width="*" />
                                                             </Grid.ColumnDefinitions>
                                                             <materialui:MaterialLabel
-                                                            Grid.Column="0"
-                                                            LineHeight="1"
-                                                            HorizontalOptions="EndAndExpand"
-                                                            VerticalOptions="Center"
-                                                            LineBreakMode="TailTruncation"
-                                                            HorizontalTextAlignment="End"
-                                                            MaxLines="2"
-                                                            TypeScale="Body2"
-                                                            TextColor="{StaticResource TextColor_D}"
-                                                            Text="{Binding HomeName}">
+                                                                Grid.Column="0"
+                                                                LineHeight="1"
+                                                                HorizontalOptions="EndAndExpand"
+                                                                VerticalOptions="Center"
+                                                                LineBreakMode="TailTruncation"
+                                                                HorizontalTextAlignment="End"
+                                                                MaxLines="2"
+                                                                TypeScale="Body2"
+                                                                TextColor="{StaticResource TextColor_D}"
+                                                                Text="{Binding HomeName}">
                                                             </materialui:MaterialLabel>
                                                             <ffimageloading:CachedImage
-                                                            Grid.Column="1"
-                                                            Margin="3,0"
-                                                            Aspect="AspectFit"
-                                                            HorizontalOptions="Center"
-                                                            VerticalOptions="Center"
-                                                            WidthRequest="29"
-                                                            HeightRequest="29"
-                                                            LoadingPlaceholder="img_football.png"
-                                                            ErrorPlaceholder="img_football.png"
-                                                            Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
+                                                                Grid.Column="1"
+                                                                Margin="3,0"
+                                                                Aspect="AspectFit"
+                                                                HorizontalOptions="Center"
+                                                                VerticalOptions="Center"
+                                                                WidthRequest="29"
+                                                                HeightRequest="29"
+                                                                LoadingPlaceholder="img_football.png"
+                                                                ErrorPlaceholder="img_football.png"
+                                                                Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
                                                             </ffimageloading:CachedImage>
                                                             <StackLayout
-                                                            Grid.Column="2"
-                                                            Spacing="0"
-                                                            VerticalOptions="FillAndExpand">
+                                                                Grid.Column="2"
+                                                                Spacing="0"
+                                                                VerticalOptions="FillAndExpand">
                                                                 <materialui:MaterialLabel
-                                                                HorizontalOptions="Center"
-                                                                VerticalOptions="EndAndExpand"
-                                                                TypeScale="Subtitle2"
-                                                                FontAttributes="None"
-                                                                TextColor="{StaticResource CustomGrey_D}"
-                                                                Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="EndAndExpand"
+                                                                    TypeScale="Subtitle2"
+                                                                    FontAttributes="None"
+                                                                    TextColor="{StaticResource CustomGrey_D}"
+                                                                    Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
                                                                 </materialui:MaterialLabel>
                                                                 <materialui:MaterialChip
-                                                                HorizontalOptions="Center"
-                                                                VerticalOptions="StartAndExpand"
-                                                                FontSize="12"
-                                                                TextColor="{StaticResource TextColor_L}"
-                                                                HeightRequest="17">
+                                                                    HorizontalOptions="Center"
+                                                                    VerticalOptions="StartAndExpand"
+                                                                    FontSize="12"
+                                                                    TextColor="{StaticResource TextColor_L}"
+                                                                    HeightRequest="17">
                                                                     <materialui:MaterialChip.Triggers>
                                                                         <EventTrigger Event="BindingContextChanged">
                                                                             <triggers:MatchStatusCtxChangeTrigger />
@@ -244,28 +253,28 @@
                                                                 </materialui:MaterialChip>
                                                             </StackLayout>
                                                             <ffimageloading:CachedImage
-                                                            Grid.Column="3"
-                                                            Margin="3,0"
-                                                            Aspect="AspectFit"
-                                                            HorizontalOptions="Center"
-                                                            VerticalOptions="Center"
-                                                            WidthRequest="29"
-                                                            HeightRequest="29"
-                                                            LoadingPlaceholder="img_football.png"
-                                                            ErrorPlaceholder="img_football.png"
-                                                            Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                                Grid.Column="3"
+                                                                Margin="3,0"
+                                                                Aspect="AspectFit"
+                                                                HorizontalOptions="Center"
+                                                                VerticalOptions="Center"
+                                                                WidthRequest="29"
+                                                                HeightRequest="29"
+                                                                LoadingPlaceholder="img_football.png"
+                                                                ErrorPlaceholder="img_football.png"
+                                                                Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
-                                                            Grid.Column="4"
-                                                            LineHeight="1"
-                                                            HorizontalOptions="StartAndExpand"
-                                                            VerticalOptions="Center"
-                                                            LineBreakMode="TailTruncation"
-                                                            HorizontalTextAlignment="Start"
-                                                            MaxLines="2"
-                                                            TypeScale="Body2"
-                                                            TextColor="{StaticResource TextColor_D}"
-                                                            Text="{Binding AwayName}">
+                                                                Grid.Column="4"
+                                                                LineHeight="1"
+                                                                HorizontalOptions="StartAndExpand"
+                                                                VerticalOptions="Center"
+                                                                LineBreakMode="TailTruncation"
+                                                                HorizontalTextAlignment="Start"
+                                                                MaxLines="2"
+                                                                TypeScale="Body2"
+                                                                TextColor="{StaticResource TextColor_D}"
+                                                                Text="{Binding AwayName}">
                                                             </materialui:MaterialLabel>
                                                         </Grid>
                                                     </StackLayout>
@@ -304,44 +313,44 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <materialui:MaterialCard
-                                                BackgroundColor="White"
-                                                CornerRadius="5"
-                                                Elevation="3"
-                                                Margin="3"
-                                                Padding="0">
+                                                    BackgroundColor="White"
+                                                    CornerRadius="5"
+                                                    Elevation="3"
+                                                    Margin="3"
+                                                    Padding="0">
                                                     <StackLayout
-                                                    VerticalOptions="FillAndExpand"
-                                                    Orientation="Horizontal"
-                                                    Padding="15,10"
-                                                    Spacing="15"
-                                                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_searched_leagues}}"
-                                                    effects:TapCommandEffect.TapParameter="{Binding .}"
-                                                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                        VerticalOptions="FillAndExpand"
+                                                        Orientation="Horizontal"
+                                                        Padding="15,10"
+                                                        Spacing="15"
+                                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_searched_leagues}}"
+                                                        effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                         <ffimageloading:CachedImage
-                                                        Aspect="AspectFit"
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"
-                                                        HeightRequest="29"
-                                                        WidthRequest="29"
-                                                        LoadingPlaceholder="img_world.png"
-                                                        ErrorPlaceholder="img_world.png"
-                                                        Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                            Aspect="AspectFit"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
+                                                            HeightRequest="29"
+                                                            WidthRequest="29"
+                                                            LoadingPlaceholder="img_world.png"
+                                                            ErrorPlaceholder="img_world.png"
+                                                            Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
                                                         </ffimageloading:CachedImage>
                                                         <StackLayout
-                                                        Spacing="0"
-                                                        VerticalOptions="Center"
-                                                        HorizontalOptions="FillAndExpand">
+                                                            Spacing="0"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="FillAndExpand">
                                                             <materialui:MaterialLabel
-                                                            LineBreakMode="TailTruncation"
-                                                            Text="{Binding LeagueName}"
-                                                            TypeScale="Body1"
-                                                            TextColor="{StaticResource TextColor_D}">
+                                                                LineBreakMode="TailTruncation"
+                                                                Text="{Binding LeagueName}"
+                                                                TypeScale="Body1"
+                                                                TextColor="{StaticResource TextColor_D}">
                                                             </materialui:MaterialLabel>
                                                             <materialui:MaterialLabel
-                                                            LineBreakMode="TailTruncation"
-                                                            TextColor="{StaticResource CustomGrey}"
-                                                            TypeScale="Body2"
-                                                            Text="{Binding CountryName}">
+                                                                LineBreakMode="TailTruncation"
+                                                                TextColor="{StaticResource CustomGrey}"
+                                                                TypeScale="Body2"
+                                                                Text="{Binding CountryName}">
                                                             </materialui:MaterialLabel>
                                                         </StackLayout>
                                                     </StackLayout>
@@ -380,42 +389,41 @@
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate>
                                                 <materialui:MaterialCard
-                                                BackgroundColor="White"
-                                                CornerRadius="5"
-                                                Elevation="3"
-                                                Margin="3"
-                                                Padding="0">
+                                                    BackgroundColor="White"
+                                                    CornerRadius="5"
+                                                    Elevation="3"
+                                                    Margin="3"
+                                                    Padding="0">
                                                     <StackLayout
-                                                    VerticalOptions="FillAndExpand"
-                                                    Orientation="Horizontal"
-                                                    Padding="15,10"
-                                                    Spacing="15"
-                                                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectTeamCommand, Source={x:Reference lv_searched_teams}}"
-                                                    effects:TapCommandEffect.TapParameter="{Binding .}"
-                                                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                        VerticalOptions="FillAndExpand"
+                                                        Orientation="Horizontal"
+                                                        Padding="15,10"
+                                                        Spacing="15"
+                                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectTeamCommand, Source={x:Reference lv_searched_teams}}"
+                                                        effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                         <ffimageloading:CachedImage
-                                                        Aspect="AspectFit"
-                                                        HorizontalOptions="Center"
-                                                        VerticalOptions="Center"
-                                                        HeightRequest="29"
-                                                        WidthRequest="29"
-                                                        LoadingPlaceholder="img_world.png"
-                                                        ErrorPlaceholder="img_world.png"
-                                                        Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                            Aspect="AspectFit"
+                                                            HorizontalOptions="Center"
+                                                            VerticalOptions="Center"
+                                                            HeightRequest="29"
+                                                            WidthRequest="29"
+                                                            LoadingPlaceholder="img_world.png"
+                                                            ErrorPlaceholder="img_world.png"
+                                                            Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
                                                         </ffimageloading:CachedImage>
-                                                        <StackLayout
-                                                        Spacing="0">
+                                                        <StackLayout Spacing="0">
                                                             <materialui:MaterialLabel
-                                                            LineBreakMode="TailTruncation"
-                                                            TypeScale="Body1"
-                                                            TextColor="{StaticResource TextColor_D}"
-                                                            Text="{Binding TeamName}">
+                                                                LineBreakMode="TailTruncation"
+                                                                TypeScale="Body1"
+                                                                TextColor="{StaticResource TextColor_D}"
+                                                                Text="{Binding TeamName}">
                                                             </materialui:MaterialLabel>
                                                             <materialui:MaterialLabel
-                                                            LineBreakMode="TailTruncation"
-                                                            TypeScale="Body2"
-                                                            TextColor="{StaticResource CustomGrey}"
-                                                            Text="{Binding CountryName}">
+                                                                LineBreakMode="TailTruncation"
+                                                                TypeScale="Body2"
+                                                                TextColor="{StaticResource CustomGrey}"
+                                                                Text="{Binding CountryName}">
                                                             </materialui:MaterialLabel>
                                                         </StackLayout>
                                                     </StackLayout>
@@ -438,59 +446,59 @@
                             Text="{x:Static localize:LocalizeString.Recent_Search}">
                         </materialui:MaterialLabel>
                         <ListView
-                        x:Name="lv_recent_search"
-                        Scrolled="lv_Scrolled"
-                        ItemsSource="{Binding RecentSearches}"
-                        HasUnevenRows="True"
-                        IsPullToRefreshEnabled="False"
-                        SeparatorVisibility="None">
+                            x:Name="lv_recent_search"
+                            Scrolled="lv_Scrolled"
+                            ItemsSource="{Binding RecentSearches}"
+                            HasUnevenRows="True"
+                            IsPullToRefreshEnabled="False"
+                            SeparatorVisibility="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                         <StackLayout
-                                        Spacing="0"
-                                        Orientation="Horizontal">
+                                            Spacing="0"
+                                            Orientation="Horizontal">
                                             <StackLayout
-                                            Orientation="Horizontal"
-                                            Spacing="15"
-                                            Padding="0,10"
-                                            HorizontalOptions="FillAndExpand"
-                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectSearchKeywordCommand, Source={x:Reference lv_recent_search}}"
-                                            effects:TapCommandEffect.TapParameter="{Binding .}"
-                                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                Orientation="Horizontal"
+                                                Spacing="15"
+                                                Padding="0,10"
+                                                HorizontalOptions="FillAndExpand"
+                                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectSearchKeywordCommand, Source={x:Reference lv_recent_search}}"
+                                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                                 <ffimageloading:CachedImage
-                                                Aspect="AspectFit"
-                                                HorizontalOptions="Center"
-                                                VerticalOptions="Center"
-                                                HeightRequest="27"
-                                                WidthRequest="27"
-                                                LoadingPlaceholder="img_world.png"
-                                                ErrorPlaceholder="img_world.png"
-                                                Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">
+                                                    Aspect="AspectFit"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"
+                                                    HeightRequest="27"
+                                                    WidthRequest="27"
+                                                    LoadingPlaceholder="img_world.png"
+                                                    ErrorPlaceholder="img_world.png"
+                                                    Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">
                                                 </ffimageloading:CachedImage>
                                                 <materialui:MaterialLabel
-                                                HorizontalOptions="StartAndExpand"
-                                                VerticalOptions="Center"
-                                                LineBreakMode="TailTruncation"
-                                                TypeScale="Body2"
-                                                FontAttributes="None"
-                                                TextColor="{StaticResource TextColor_D}"
-                                                Text="{Binding Keyword}">
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"
+                                                    TypeScale="Body2"
+                                                    FontAttributes="None"
+                                                    TextColor="{StaticResource TextColor_D}"
+                                                    Text="{Binding Keyword}">
                                                 </materialui:MaterialLabel>
                                             </StackLayout>
                                             <ContentView
-                                            Padding="10"
-                                            VerticalOptions="CenterAndExpand"
-                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteSearchKeywordCommand, Source={x:Reference lv_recent_search}}"
-                                            effects:TapCommandEffect.TapParameter="{Binding .}"
-                                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
-                                            HorizontalOptions="End">
+                                                Padding="10"
+                                                VerticalOptions="CenterAndExpand"
+                                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteSearchKeywordCommand, Source={x:Reference lv_recent_search}}"
+                                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                                HorizontalOptions="End">
                                                 <Image
-                                                HeightRequest="11"
-                                                WidthRequest="11"
-                                                Source="ic_close"
-                                                Aspect="AspectFit"
-                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                                    HeightRequest="11"
+                                                    WidthRequest="11"
+                                                    Source="ic_close"
+                                                    Aspect="AspectFit"
+                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                                                 </Image>
                                             </ContentView>
                                         </StackLayout>

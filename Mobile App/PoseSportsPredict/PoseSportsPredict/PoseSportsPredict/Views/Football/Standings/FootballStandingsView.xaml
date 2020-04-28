@@ -16,7 +16,7 @@
                 Orientation="Horizontal">
                 <materialui:MaterialLabel
                     MaxLines="1"
-                    Padding="0,7"
+                    Padding="0,6,0,11"
                     LineBreakMode="TailTruncation"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="Center"
@@ -259,8 +259,8 @@
                                         Aspect="AspectFit"
                                         HorizontalOptions="Center"
                                         VerticalOptions="Center"
-                                        HeightRequest="27"
-                                        WidthRequest="27"
+                                        HeightRequest="29"
+                                        WidthRequest="29"
                                         LoadingPlaceholder="img_football.png"
                                         ErrorPlaceholder="img_football.png"
                                         Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

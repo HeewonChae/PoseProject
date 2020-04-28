@@ -11,13 +11,201 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.Standings"
+             BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailOverview">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <!--Last Form Templete-->
+            <DataTemplate x:Key="ParticipatingTeamTemplete">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="15"
+                    VerticalOptions="Center"
+                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.ParticipatingTeamClickCommand, Source={x:Reference _participatingTeams}}"
+                    effects:TapCommandEffect.TapParameter="{Binding .}"
+                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                    <ffimageloading:CachedImage
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="29"
+                        WidthRequest="29"
+                        LoadingPlaceholder="img_football.png"
+                        ErrorPlaceholder="img_football.png"
+                        Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
+                    </ffimageloading:CachedImage>
+                    <materialui:MaterialLabel
+                            Padding="0,11"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Start"
+                            TypeScale="Body2"
+                            LineHeight="1"
+                            MaxLines="2"
+                            LineBreakMode="TailTruncation"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{Binding TeamName}">
+                    </materialui:MaterialLabel>
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
     <ContentView.Content>
         <StackLayout>
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Data_Available}"
                 TaskLoaderNotifier="{Binding OverviewTaskLoaderNotifier}">
+                <ScrollView>
+                    <StackLayout
+                        Spacing="0">
+                        <!--기본 정보 (시즌 시작, 종료)-->
+                        <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="10, 5"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <Grid
+                                Margin="10,10"
+                                RowSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="End"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.Season_StartDate}">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    VerticalTextAlignment="Center"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text=" :  ">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    VerticalTextAlignment="Center"
+                                    MaxLines="1"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding LeagueInfo.SeasonStartDate, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
+                                </materialui:MaterialLabel>
+
+                                <materialui:MaterialLabel
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="End"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.Season_EndDate}">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    VerticalTextAlignment="Center"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text=" :  ">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    VerticalTextAlignment="Center"
+                                    MaxLines="1"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding LeagueInfo.SeasonEndDate, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
+                                </materialui:MaterialLabel>
+                            </Grid>
+                        </materialui:MaterialCard>
+
+                        <!--참가 팀-->
+                        <materialui:MaterialCard
+                            x:Name="_participatingTeams"
+                            Margin="7,6"
+                            Padding="10,5"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <StackLayout
+                                Spacing="0">
+                                <materialui:MaterialLabel
+                                    Margin="0,0,0,12"
+                                    MaxLines="1"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Subtitle2"
+                                    TextColor="{StaticResource CustomGrey_D}"
+                                    Text="{x:Static localize:LocalizeString.Participating_Teams}">
+                                </materialui:MaterialLabel>
+                                <Grid Margin="0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout
+                                        Grid.Column="0"
+                                        HorizontalOptions="Center"
+                                        BindableLayout.ItemsSource="{Binding ParticipatingTeams_Left}"
+                                        BindableLayout.ItemTemplate="{StaticResource ParticipatingTeamTemplete}">
+                                    </StackLayout>
+                                    <BoxView
+                                        Grid.Column="1"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="FillAndExpand"
+                                        WidthRequest="0.5"
+                                        Color="{StaticResource CustomGrey_L}">
+                                    </BoxView>
+                                    <StackLayout
+                                        Grid.Column="2"
+                                        HorizontalOptions="Center"
+                                        BindableLayout.ItemsSource="{Binding ParticipatingTeams_Right}"
+                                        BindableLayout.ItemTemplate="{StaticResource ParticipatingTeamTemplete}">
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                            <materialui:MaterialCard.Triggers>
+                                <DataTrigger TargetType="materialui:MaterialCard" Binding="{Binding ParticipatingTeams_Left, Converter={StaticResource nullValueBoolConverter}}" Value="True">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </materialui:MaterialCard.Triggers>
+                        </materialui:MaterialCard>
+
+                        <!--Standings-->
+                        <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="10,5"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <StackLayout
+                                Spacing="15"
+                                BindableLayout.ItemsSource="{Binding StandingsViewModels}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <standings:FootballStandingsView />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                            <materialui:MaterialCard.Triggers>
+                                <DataTrigger TargetType="materialui:MaterialCard" Binding="{Binding StandingsViewModels.Count}" Value="0">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </materialui:MaterialCard.Triggers>
+                        </materialui:MaterialCard>
+                    </StackLayout>
+                </ScrollView>
             </loader:TaskLoaderView>
         </StackLayout>
     </ContentView.Content>

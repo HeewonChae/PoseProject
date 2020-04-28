@@ -9,10 +9,8 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
              xmlns:footballleagueview="clr-namespace:PoseSportsPredict.Views.Football.League"
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
-             xmlns:keyboard="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHelper"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              material:MaterialNavigationPage.AppBarTitleTextFontSize="20"
@@ -87,8 +85,16 @@
                                             VerticalOptions="CenterAndExpand"
                                             Text="{Binding Title}"
                                             TypeScale="Subtitle1 "
-                                            FontAttributes="Bold"
-                                            TextColor="{StaticResource PrimaryColor}">
+                                            TextColor="{StaticResource TextColor_D}">
+                                            <materialui:MaterialLabel.Triggers>
+                                                <DataTrigger
+                                                    TargetType="materialui:MaterialLabel"
+                                                    Binding="{Binding Expanded}"
+                                                    Value="True">
+                                                    <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+                                                    <Setter Property="FontAttributes" Value="Bold" />
+                                                </DataTrigger>
+                                            </materialui:MaterialLabel.Triggers>
                                         </materialui:MaterialLabel>
                                         <Image
                                             Source="{Binding StateIcon}"

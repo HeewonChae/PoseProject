@@ -511,6 +511,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Participating Teams.
+        /// </summary>
+        public static string Participating_Teams {
+            get {
+                return ResourceManager.GetString("Participating_Teams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to P.
         /// </summary>
         public static string Played_Initial {
@@ -669,6 +678,24 @@ namespace PoseSportsPredict.Resources {
         public static string Search_Results {
             get {
                 return ResourceManager.GetString("Search_Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Season End.
+        /// </summary>
+        public static string Season_EndDate {
+            get {
+                return ResourceManager.GetString("Season_EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Season Start.
+        /// </summary>
+        public static string Season_StartDate {
+            get {
+                return ResourceManager.GetString("Season_StartDate", resourceCulture);
             }
         }
         

@@ -254,7 +254,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             // Groupping Standings by group data
             var standingsGroups = standingsInfos.OrderBy(elem => elem.Rank).GroupBy(elem => elem.Group);
-            StandingsViewModels = new ObservableList<FootballStandingsViewModel>();
+            var standingsViewModels = new List<FootballStandingsViewModel>();
             foreach (var standingsGroup in standingsGroups)
             {
                 var standings = standingsGroup.ToArray();
@@ -263,9 +263,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                     var standingsViewModel = ShinyHost.Resolve<FootballStandingsViewModel>();
                     standingsViewModel.OnInitializeView(standings);
 
-                    StandingsViewModels.Add(standingsViewModel);
+                    standingsViewModels.Add(standingsViewModel);
                 }
             }
+
+            StandingsViewModels = new ObservableList<FootballStandingsViewModel>(
+                standingsViewModels.OrderBy(elem => elem.LeagueTitle).ToArray());
 
             SetIsBusy(false);
 

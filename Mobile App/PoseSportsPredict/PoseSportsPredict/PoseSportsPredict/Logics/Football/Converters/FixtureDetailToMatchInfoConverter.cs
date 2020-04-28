@@ -16,8 +16,6 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
             if (value is FootballFixtureDetail fixtureDetail)
             {
-                fixtureDetail.MatchTime = fixtureDetail.MatchTime.ToLocalTime();
-
                 // 기본 이미지 설정
                 if (string.IsNullOrEmpty(fixtureDetail.League.Country.Logo))
                     fixtureDetail.League.Country.Logo = "img_world.png";
@@ -51,7 +49,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                     AwayScore = fixtureDetail.AwayTeamScore,
 
                     MatchStatus = fixtureDetail.MatchStatus,
-                    MatchTime = fixtureDetail.MatchTime,
+                    MatchTime = fixtureDetail.MatchTime.ToLocalTime(),
                     LeagueType = fixtureDetail.League.LeagueType,
 
                     IsAlarmed = false,

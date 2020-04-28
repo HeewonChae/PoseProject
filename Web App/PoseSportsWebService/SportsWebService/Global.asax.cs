@@ -25,6 +25,8 @@ namespace SportsWebService
             Singleton.Register<CryptoFacade>();
             Singleton.Register<FootballFixtureDetailConverter>();
             Singleton.Register<FootballStandingsDetailConverter>();
+            Singleton.Register<FootballLeagueDetailConverter>();
+            Singleton.Register<FootballTeamDetailConverter>();
 
             // Load Table
             string tableRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data");

@@ -11,11 +11,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-using FootballDB = Repository.Mysql.FootballDB;
-using PacketModels = PosePacket.Service.Football.Models;
-
 namespace SportsWebService.Commands.Football
 {
+    using FootballDB = Repository.Mysql.FootballDB;
+    using PacketModels = PosePacket.Service.Football.Models;
+
     [WebModelType(InputType = typeof(I_GET_MATCH_OVERVIEW), OutputType = typeof(O_GET_MATCH_OVERVIEW))]
     public static class P_GET_MATCH_OVERVIEW
     {

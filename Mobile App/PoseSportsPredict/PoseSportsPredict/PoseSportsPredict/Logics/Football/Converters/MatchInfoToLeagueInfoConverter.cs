@@ -12,9 +12,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             FootballLeagueInfo returnValue = null;
-
-            var matchInfo = value as FootballMatchInfo;
-            if (matchInfo != null)
+            if (value is FootballMatchInfo matchInfo)
             {
                 returnValue = new FootballLeagueInfo
                 {

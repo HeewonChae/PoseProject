@@ -1,4 +1,5 @@
 ﻿using Flurl.Http;
+using MessagePack;
 using Plugin.Connectivity;
 using PoseCrypto;
 using PosePacket;
@@ -12,6 +13,7 @@ using PoseSportsPredict.Utilities;
 using Shiny;
 using System;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
@@ -49,29 +51,47 @@ namespace PoseSportsPredict.Services
                 {
                     try
                     {
-                        var error = await flurlException.GetResponseJsonAsync<ErrorDetail>();
+                        var errorString = await flurlException.Call.Response.Content.ReadAsStringAsync();
 
-                        if (error.ErrorCode == (ServiceErrorCode.Authenticate.Credentials + 1))
+                        if (errorString.Contains("ErrorCode") && errorString.Contains("Message"))
                         {
-                            await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials,
-                                LocalizeString.App_Title,
-                                LocalizeString.Ok,
-                                DialogConfiguration.DefaultAlterDialogConfiguration);
+                            var startIndex = errorString.IndexOf("<ErrorCode>") + 11;
+                            var length = errorString.IndexOf("</ErrorCode>") - startIndex;
+                            var str_errorCode = errorString.Substring(startIndex, length);
+                            int errorCode = int.Parse(str_errorCode);
 
-                            // 로그인 화면으로 이동
-                            await ShinyHost.Resolve<IOAuthService>().Logout();
-                            return;
+                            startIndex = errorString.IndexOf("<Message>") + 9;
+                            length = errorString.IndexOf("</Message>") - startIndex;
+                            var errorMessage = errorString.Substring(startIndex, length);
+
+                            if (errorCode == (ServiceErrorCode.Authenticate.Credentials + 1))
+                            {
+                                await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials,
+                                    LocalizeString.App_Title,
+                                    LocalizeString.Ok,
+                                    DialogConfiguration.DefaultAlterDialogConfiguration);
+
+                                // 로그인 화면으로 이동
+                                await ShinyHost.Resolve<IOAuthService>().Logout();
+                                return;
+                            }
+                            else
+                            {
+                                await MaterialDialog.Instance.AlertAsync(errorMessage, $"ErrorCode: {errorCode}",
+                                    LocalizeString.Ok,
+                                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                            }
                         }
                         else
                         {
-                            await MaterialDialog.Instance.AlertAsync(error.Message, $"ErrorCode: {error.ErrorCode}",
-                                LocalizeString.Ok,
-                                DialogConfiguration.DefaultAlterDialogConfiguration);
+                            await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                            DialogConfiguration.DefaultAlterDialogConfiguration);
                         }
                     }
                     catch
                     {
-                        await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available);
+                        await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                            DialogConfiguration.DefaultAlterDialogConfiguration);
                     }
                 }
                 else

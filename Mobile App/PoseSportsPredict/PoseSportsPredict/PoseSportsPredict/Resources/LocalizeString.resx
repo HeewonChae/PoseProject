@@ -359,4 +359,13 @@
   <data name="Recent_Record" xml:space="preserve">
     <value>Recent Record</value>
   </data>
+  <data name="Season_StartDate" xml:space="preserve">
+    <value>Season Start</value>
+  </data>
+  <data name="Season_EndDate" xml:space="preserve">
+    <value>Season End</value>
+  </data>
+  <data name="Participating_Teams" xml:space="preserve">
+    <value>Participating Teams</value>
+  </data>
 </root>

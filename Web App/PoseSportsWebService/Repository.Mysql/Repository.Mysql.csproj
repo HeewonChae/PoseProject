@@ -74,13 +74,25 @@
     <Compile Include="FootballDBMigrations\202004180850356_Initialize.designer.cs">
       <DependentUpon>202004180850356_Initialize.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202004260834499_LeagueTableIndexAlter.cs" />
+    <Compile Include="FootballDBMigrations\202004260834499_LeagueTableIndexAlter.designer.cs">
+      <DependentUpon>202004260834499_LeagueTableIndexAlter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FootballDBMigrations\202004260838385_LeagueTableLogoNullable.cs" />
+    <Compile Include="FootballDBMigrations\202004260838385_LeagueTableLogoNullable.designer.cs">
+      <DependentUpon>202004260838385_LeagueTableLogoNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
+    <Compile Include="FootballDB\OutputModels\DB_FootballLeagueDetail.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballStandingsDetail.cs" />
+    <Compile Include="FootballDB\OutputModels\DB_FootballTeamDetail.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.cs" />
+    <Compile Include="FootballDB\Procedures\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_OVERVIEW.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_DATE.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_INDEX.cs" />
@@ -118,10 +130,20 @@
       <Project>{E798B808-207E-48F7-A509-6473FB43EAE2}</Project>
       <Name>Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj">
+      <Project>{41132F88-A0CD-4D5C-9351-C90F67369089}</Project>
+      <Name>PosePacket</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FootballDBMigrations\202004180850356_Initialize.resx">
       <DependentUpon>202004180850356_Initialize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202004260834499_LeagueTableIndexAlter.resx">
+      <DependentUpon>202004260834499_LeagueTableIndexAlter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202004260838385_LeagueTableLogoNullable.resx">
+      <DependentUpon>202004260838385_LeagueTableLogoNullable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

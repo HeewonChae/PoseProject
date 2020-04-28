@@ -27,8 +27,8 @@ namespace SportsWebService.Logics.Converters
                         Name = db_standingsDetail.League_CountryName,
                         Logo = db_standingsDetail.League_CountryLogo,
                     },
-                    Name = db_standingsDetail.LeagueLogo,
-                    Logo = db_standingsDetail.LeagueName,
+                    Logo = db_standingsDetail.LeagueLogo,
+                    Name = db_standingsDetail.LeagueName,
                     LeagueType = leagueType,
                 };
 

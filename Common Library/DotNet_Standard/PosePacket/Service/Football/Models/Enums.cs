@@ -57,4 +57,10 @@ namespace PosePacket.Service.Football.Models.Enums
     // Both_Teams_Score = 8,
     // Goals_Over_Under = 5,
     // Double_Chance = 12,
+
+    public enum SearchFixtureStatusType
+    {
+        Finished,
+        Scheduled,
+    }
 }

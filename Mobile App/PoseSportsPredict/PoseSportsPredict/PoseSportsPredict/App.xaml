@@ -24,6 +24,7 @@
         <converters:MatchAlarmIconConverter x:Key="matchAlarmIconConverter" />
         <converters:MatchResultToStringConverter x:Key="matchResultToStringConverter" />
         <converters:MatchResultToColorConverter x:Key="matchResultToColorConverter" />
+        <converters:NullValueBoolConverter x:Key="nullValueBoolConverter" />
 
         <Color x:Key="TextColor_L">#fafafa</Color>
         <Color x:Key="TextColor_D">#212121</Color>
