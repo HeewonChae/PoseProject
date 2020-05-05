@@ -53,6 +53,7 @@
             public const int P_GET_MATCH_OVERVIEW = WebService.Football + 003000;
             public const int P_GET_LEAGUE_OVERVIEW = WebService.Football + 004000;
             public const int P_GET_FIXTURES_BY_LEAGUE = WebService.Football + 005000;
+            public const int P_GET_FIXTURES_BY_TEAM = WebService.Football + 006000;
         }
 
         public static class WebMethod_HelloWorld
@@ -73,6 +74,7 @@
             public const int P_GET_MATCH_OVERVIEW = Database.FootballDB + 003000;
             public const int P_GET_LEAGUE_OVERVIEW = Database.FootballDB + 004000;
             public const int P_GET_FIXTURES_BY_LEAGUE = Database.FootballDB + 005000;
+            public const int P_GET_FIXTURES_BY_TEAM = Database.FootballDB + 006000;
         }
 
         public static class Procedure

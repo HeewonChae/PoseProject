@@ -9,7 +9,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-              xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
+             xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailFinishedMatchesView">
     <ContentView.Content>

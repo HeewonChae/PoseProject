@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
+             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView"
+              BackgroundColor="{StaticResource BackgroundColor_Default}">
     <ContentView.Content>
         <StackLayout>
             <Label Text="Hello Xamarin.Forms!" />

@@ -37,6 +37,7 @@ namespace SportsWebService.Services
             return output.SerializeToStream();
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_GET_FIXTURES_BY_LEAGUE(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_FIXTURES_BY_LEAGUE>();
@@ -45,9 +46,13 @@ namespace SportsWebService.Services
             return output.SerializeToStream();
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_GET_FIXTURES_BY_TEAM(Stream stream)
         {
-            throw new NotImplementedException();
+            var input = stream.StreamDeserialize<I_GET_FIXTURES_BY_TEAM>();
+            var output = Commands.Football.P_GET_FIXTURES_BY_TEAM.Execute(input);
+
+            return output.SerializeToStream();
         }
 
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]

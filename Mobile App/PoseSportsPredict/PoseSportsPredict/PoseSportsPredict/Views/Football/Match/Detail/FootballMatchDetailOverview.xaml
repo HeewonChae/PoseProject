@@ -31,7 +31,7 @@
                             VerticalTextAlignment="Center"
                             HorizontalTextAlignment="Start"
                             TypeScale="Caption"
-                            TextColor="{StaticResource CustomGrey}"
+                            TextColor="{StaticResource CustomGrey_D}"
                             Text="{Binding LeagueName}">
                         </materialui:MaterialLabel>
                         <Grid>
@@ -180,6 +180,7 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+
                                 <materialui:MaterialLabel
                                     Grid.Row="0"
                                     Grid.Column="0"
@@ -225,7 +226,7 @@
                                     TextColor="{StaticResource TextColor_D}"
                                     Text=" :  ">
                                 </materialui:MaterialLabel>
-                                <Frame
+                                <materialui:MaterialCard
                                     Grid.Row="1"
                                     Grid.Column="2"
                                     Margin="3,0"
@@ -234,7 +235,7 @@
                                     BackgroundColor="{StaticResource ChartBackgroundBlack}"
                                     VerticalOptions="Center">
                                     <materialui:MaterialLabel
-                                        Padding="5,1"
+                                        Padding="5,2"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
                                         MaxLines="1"
@@ -246,7 +247,7 @@
                                         effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
                                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                     </materialui:MaterialLabel>
-                                </Frame>
+                                </materialui:MaterialCard>
 
                                 <materialui:MaterialLabel
                                     Grid.Row="2"
@@ -328,7 +329,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.HomeRecentRecord.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
@@ -347,7 +348,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.AwayRecentRecord.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
@@ -393,7 +394,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.HomeGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
@@ -412,7 +413,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.AwayGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
@@ -458,7 +459,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.HomeGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
@@ -477,7 +478,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.AwayGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
@@ -523,7 +524,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.HomeSideGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
@@ -542,7 +543,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.AwaySideGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
@@ -588,7 +589,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.HomeSideGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
@@ -607,7 +608,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.AwaySideGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
@@ -653,7 +654,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.HomeRestPeriod}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
@@ -672,7 +673,7 @@
                                     TypeScale="Caption"
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
-                                    TextColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource CustomGrey_D}"
                                     Text="{Binding MatchStatistics.AwayRestPeriod}">
                                     </materialui:MaterialLabel>
                                 </Grid>
@@ -755,7 +756,7 @@
                         <!--Standings-->
                         <materialui:MaterialCard
                             Margin="7,6"
-                            Padding="10,5"
+                            Padding="0,5"
                             Elevation="3"
                             CornerRadius="5">
                             <StackLayout

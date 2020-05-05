@@ -13,6 +13,7 @@ using PoseSportsPredict.ViewModels.Football.League;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
+using PoseSportsPredict.ViewModels.Football.Match.RecentForm;
 using PoseSportsPredict.ViewModels.Football.Standings;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views;
@@ -124,6 +125,12 @@ namespace PoseSportsPredict
             //Football - Team
             services.AddTransient<FootballTeamDetailPage>();
             services.AddTransient<FootballTeamDetailViewModel>();
+            services.AddTransient<FootballTeamDetailOverview>();
+            services.AddTransient<FootballTeamDetailOverviewModel>();
+            services.AddTransient<FootballTeamDetailFinishedMatchesView>();
+            services.AddTransient<FootballTeamDetailFinishedMatchesViewModel>();
+            services.AddTransient<FootballTeamDetailScheduledMatchesView>();
+            services.AddTransient<FootballTeamDetailScheduledMatchesViewModel>();
             // Football - Bookmark
             services.AddTransient<FootballBookmarksTabViewModel>();
             services.AddTransient<FootballBookmarkMatchesPage>();
@@ -134,9 +141,10 @@ namespace PoseSportsPredict
             services.AddTransient<FootballBookmarkTeamsViewModel>();
             services.AddSingleton<FootballBookmarkSearchPage>();
             services.AddSingleton<FootballBookmarkSearchViewModel>();
-
             // Football - Standings
             services.AddTransient<FootballStandingsViewModel>();
+            // Football - RecentForm
+            services.AddTransient<FootballRecentFormViewModel>();
         }
     }
 }

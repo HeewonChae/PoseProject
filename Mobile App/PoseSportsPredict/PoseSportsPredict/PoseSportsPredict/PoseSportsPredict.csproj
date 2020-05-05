@@ -30,6 +30,7 @@
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="SlideOverKit" Version="2.1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.46" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.PopupMenu" Version="1.1.0" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
@@ -42,7 +43,6 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
-    <PackageReference Include="Xamarin.Forms.DataGrid" Version="2.1.0" />
     <PackageReference Include="Xamarin.KeyboardHelper" Version="2.0.7" />
     <PackageReference Include="XF.Material" Version="1.5.8" />
   </ItemGroup>
@@ -92,6 +92,9 @@
     <Compile Update="Views\Football\Match\Detail\FootballMatchDetailPredictionsView.xaml.cs">
       <DependentUpon>FootballMatchDetailPredictionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Football\Match\RecentForm\FootballRecentFormView.xaml.cs">
+      <DependentUpon>FootballRecentFormView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -107,7 +110,19 @@
     <EmbeddedResource Update="Views\Football\League\Detail\FootballLeagueDetailOverview.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Match\RecentForm\FootballRecentFormView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Standings\FootballStandingsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Team\FootballTeamDetailFinishedMatchesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Team\FootballTeamDetailOverview.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Team\FootballTeamDetailScheduledMatchesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LoadingPage.xaml">

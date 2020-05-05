@@ -222,6 +222,7 @@
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_DATE.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_INDEX.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_LEAGUE.cs" />
+    <Compile Include="Commands\Football\P_GET_FIXTURES_BY_TEAM.cs" />
     <Compile Include="Commands\Football\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_OVERVIEW.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />

@@ -94,8 +94,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         #region Constructors
 
         public FootballLeagueDetailOverviewModel(
-            IWebApiService webApiService,
-            FootballLeagueDetailOverview view) : base(view)
+            FootballLeagueDetailOverview view,
+            IWebApiService webApiService) : base(view)
         {
             _webApiService = webApiService;
 

@@ -31,7 +31,7 @@ namespace PoseSportsPredict
             // Local Notification tap event listener
             //NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
 
-            Xamarin.Forms.DataGrid.DataGridComponent.Init();
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppConfig.Syncfusion_18_1_0_46);
 
             MainPage = ShinyHost.Resolve<LoadingViewModel>().CoupledPage;
         }

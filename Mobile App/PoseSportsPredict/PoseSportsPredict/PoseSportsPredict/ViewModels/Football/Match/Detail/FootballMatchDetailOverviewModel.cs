@@ -12,6 +12,7 @@ using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
+using PoseSportsPredict.ViewModels.Football.Match.RecentForm;
 using PoseSportsPredict.ViewModels.Football.Standings;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Sharpnado.Presentation.Forms;
@@ -61,8 +62,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _overviewTaskLoaderNotifier;
         private List<FootballMatchInfo> _allForm;
         private FootballMatchStatistics _matchStatistics;
-        private ObservableList<FootballLastForm> _homeRecentForm;
-        private ObservableList<FootballLastForm> _awayRecentForm;
+        private FootballRecentFormViewModel _recentFormViewModel;
         private ObservableList<FootballStandingsViewModel> _standingsViewModels;
 
         #endregion Fields
@@ -72,8 +72,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public FootballMatchInfo MatchInfo { get => _matchInfo; set => SetValue(ref _matchInfo, value); }
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
         public FootballMatchStatistics MatchStatistics { get => _matchStatistics; set => SetValue(ref _matchStatistics, value); }
-        public ObservableList<FootballLastForm> HomeRecentForm { get => _homeRecentForm; set => SetValue(ref _homeRecentForm, value); }
-        public ObservableList<FootballLastForm> AwayRecentForm { get => _awayRecentForm; set => SetValue(ref _awayRecentForm, value); }
+        public FootballRecentFormViewModel RecentFormViewModel { get => _recentFormViewModel; set => SetValue(ref _recentFormViewModel, value); }
         public ObservableList<FootballStandingsViewModel> StandingsViewModels { get => _standingsViewModels; set => SetValue(ref _standingsViewModels, value); }
 
         #endregion Properties
@@ -159,52 +158,31 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
-            // All Form (별 의미 없음)
+            // All Form
             _allForm = new List<FootballMatchInfo>();
+            var homeRecentMatches = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.HomeRecentFixtures)
             {
-                _allForm.Add(ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo);
+                var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo;
+                homeRecentMatches.Add(matchInfo);
+                _allForm.Add(matchInfo);
             }
+
+            var awayRecentMatches = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.AwayRecentFixtures)
             {
-                _allForm.Add(ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo);
+                var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo;
+                awayRecentMatches.Add(matchInfo);
+                _allForm.Add(matchInfo);
             }
 
             // 기본정보 (평균 득실점, 회복기간)
             MatchStatistics = ShinyHost.Resolve<FootballMatchStatisticsConverter>()
                 .Convert(server_result, null, MatchInfo, null) as FootballMatchStatistics;
 
-            // 최근 결과
-            List<FootballLastForm> homeRecentForm = new List<FootballLastForm>();
-            int loop = 0;
-            foreach (var fixture in server_result.HomeRecentFixtures)
-            {
-                loop++;
-
-                var lastform = ShinyHost.Resolve<FixtureDetailToLastFormConverter>().Convert(fixture, null, MatchInfo.HomeTeamId, null) as FootballLastForm;
-
-                if (loop == 1)
-                    lastform.IsLastMatch = true;
-
-                homeRecentForm.Add(lastform);
-            }
-
-            List<FootballLastForm> awayRecentForm = new List<FootballLastForm>();
-            loop = 0;
-            foreach (var fixture in server_result.AwayRecentFixtures)
-            {
-                loop++;
-
-                var lastform = ShinyHost.Resolve<FixtureDetailToLastFormConverter>().Convert(fixture, null, MatchInfo.AwayTeamId, null) as FootballLastForm;
-
-                if (loop == 1)
-                    lastform.IsLastMatch = true;
-
-                awayRecentForm.Add(lastform);
-            }
-
-            HomeRecentForm = new ObservableList<FootballLastForm>(homeRecentForm);
-            AwayRecentForm = new ObservableList<FootballLastForm>(awayRecentForm);
+            // RecentForm
+            RecentFormViewModel = ShinyHost.Resolve<FootballRecentFormViewModel>();
+            RecentFormViewModel.SetMembers(homeRecentMatches, _matchInfo.HomeTeamId, awayRecentMatches, _matchInfo.AwayTeamId);
 
             // League Standings Table
             List<FootballStandingsInfo> standingsInfos = new List<FootballStandingsInfo>();

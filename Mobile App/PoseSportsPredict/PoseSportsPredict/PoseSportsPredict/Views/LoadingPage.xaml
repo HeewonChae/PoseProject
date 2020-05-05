@@ -25,6 +25,7 @@
             <ActivityIndicator
                 x:Name="_loadingIndicator"
                 Grid.Row="2"
+                Color="{StaticResource PrimaryColor}"
                 IsRunning="{Binding IsLoaded, Converter={StaticResource inverseBoolConverter}}"
                 HorizontalOptions="Center"
                 VerticalOptions="Start">

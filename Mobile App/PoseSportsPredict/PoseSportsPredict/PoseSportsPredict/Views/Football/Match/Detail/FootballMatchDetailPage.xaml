@@ -10,6 +10,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
              xmlns:footballmatchdetailviews="clr-namespace:PoseSportsPredict.Views.Football.Match.Detail"
              xmlns:customs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.Presentation.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
@@ -269,31 +270,51 @@
                 <!--TabHostView-->
                 <tabs:TabHostView
                     Grid.Row="2"
-                    x:Name="_tabHost"
                     TabType="Fixed"
                     HeightRequest="43"
                     Margin="0,-7,0,0"
                     ShadowType="Bottom"
                     SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
                     <tabs:TabHostView.Tabs>
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}"     LabelSize="14" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}"          LabelSize="14" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}"         LabelSize="14" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}"  LabelSize="14" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}" />
+                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}" />
                     </tabs:TabHostView.Tabs>
                 </tabs:TabHostView>
             </Grid>
 
             <!--ContentView-->
-            <CarouselView
-                x:Name="_tabContents"
-                ItemsSource="{Binding TabContents}">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <ContentView Content="{Binding CoupledView}" />
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+            <tabView:SfTabView
+                x:Name="_tabView"
+                DisplayMode="NoHeader"
+                VerticalOptions="FillAndExpand"
+                SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
+                <tabView:SfTabItem>
+                    <tabView:SfTabItem.Content>
+                        <ContentView
+                            Content="{Binding OverviewModel.CoupledView}" />
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <tabView:SfTabItem>
+                    <tabView:SfTabItem.Content>
+                        <ContentView
+                            Content="{Binding H2HViewModel.CoupledView}" />
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <tabView:SfTabItem>
+                    <tabView:SfTabItem.Content>
+                        <ContentView
+                            Content="{Binding OddsViewModel.CoupledView}" />
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+                <tabView:SfTabItem>
+                    <tabView:SfTabItem.Content>
+                        <ContentView
+                            Content="{Binding PredictionsViewModel.CoupledView}" />
+                    </tabView:SfTabItem.Content>
+                </tabView:SfTabItem>
+            </tabView:SfTabView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

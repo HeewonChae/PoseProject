@@ -71,6 +71,20 @@ namespace PoseSportsPredict.ViewModels.Football.Standings
 
         #region Commands
 
+        public ICommand ViewFormClickCommand { get => new RelayCommand(ViewFormClick); }
+
+        private void ViewFormClick()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            IsViewForm = !IsViewForm;
+
+            SetIsBusy(false);
+        }
+
         public ICommand LeagueNameClickCommand { get => new RelayCommand(LeagueNameClick); }
 
         private async void LeagueNameClick()

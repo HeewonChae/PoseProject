@@ -73,8 +73,8 @@ namespace PosePacket.Proxy
         }
         
         // MethodType: POST, Segment: GetFixturesByTeam 
-        // InputType: null 
-        // OutputType: null
+        // InputType: PosePacket.Service.Football.I_GET_FIXTURES_BY_TEAM 
+        // OutputType: PosePacket.Service.Football.O_GET_FIXTURES_BY_TEAM
         public static string P_GET_FIXTURES_BY_TEAM
         {
             get

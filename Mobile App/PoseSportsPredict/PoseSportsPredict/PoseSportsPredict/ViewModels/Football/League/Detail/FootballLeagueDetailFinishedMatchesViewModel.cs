@@ -39,7 +39,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             if (!MatchesTaskLoaderNotifier.IsNotStarted)
                 return;
 
-            MatchesTaskLoaderNotifier.Load(InitMatcheDatas);
+            MatchesTaskLoaderNotifier.Load(InitMatchDatas);
         }
 
         #endregion BaseViewModel
@@ -62,6 +62,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Properties
 
+        public bool AlarmEditMode { get => _alarmEditMode; set => SetValue(ref _alarmEditMode, value); }
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
         public ObservableList<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
 
@@ -84,8 +85,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         #region Constructors
 
         public FootballLeagueDetailFinishedMatchesViewModel(
-            IWebApiService webApiService,
-            FootballLeagueDetailFinishedMatchesView view) : base(view)
+            FootballLeagueDetailFinishedMatchesView view,
+            IWebApiService webApiService) : base(view)
         {
             _webApiService = webApiService;
 
@@ -102,7 +103,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Methods
 
-        private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatcheDatas()
+        private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchDatas()
         {
             SetIsBusy(true);
 

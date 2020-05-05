@@ -176,8 +176,6 @@
                                                                 VerticalOptions="CenterAndExpand">
                                                                 <materialui:MaterialLabel.FormattedText>
                                                                     <FormattedString>
-                                                                        <Span Text="{Binding League_CountryName}" />
-                                                                        <Span Text=". " />
                                                                         <Span Text="{Binding LeagueName}" />
                                                                     </FormattedString>
                                                                 </materialui:MaterialLabel.FormattedText>
@@ -186,7 +184,7 @@
                                                                 Grid.Row="1"
                                                                 Grid.Column="1"
                                                                 TextColor="{StaticResource CustomGrey_D}"
-                                                                TypeScale="Subtitle2"
+                                                                TypeScale="Caption"
                                                                 FontAttributes="None"
                                                                 Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
                                                             </materialui:MaterialLabel>
@@ -195,7 +193,7 @@
                                                         <!--MatchInfo-->
                                                         <Grid
                                                             VerticalOptions="FillAndExpand"
-                                                            Margin="10,15,10,7">
+                                                            Padding="10">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*" />
                                                                 <ColumnDefinition Width="Auto" />
@@ -233,7 +231,7 @@
                                                                 VerticalOptions="FillAndExpand">
                                                                 <materialui:MaterialLabel
                                                                     HorizontalOptions="Center"
-                                                                    VerticalOptions="EndAndExpand"
+                                                                    VerticalOptions="End"
                                                                     TypeScale="Subtitle2"
                                                                     FontAttributes="None"
                                                                     TextColor="{StaticResource CustomGrey_D}"
@@ -330,8 +328,8 @@
                                                             Aspect="AspectFit"
                                                             HorizontalOptions="Center"
                                                             VerticalOptions="Center"
-                                                            HeightRequest="29"
-                                                            WidthRequest="29"
+                                                            HeightRequest="31"
+                                                            WidthRequest="31"
                                                             LoadingPlaceholder="img_world.png"
                                                             ErrorPlaceholder="img_world.png"
                                                             Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -406,8 +404,8 @@
                                                             Aspect="AspectFit"
                                                             HorizontalOptions="Center"
                                                             VerticalOptions="Center"
-                                                            HeightRequest="29"
-                                                            WidthRequest="29"
+                                                            HeightRequest="31"
+                                                            WidthRequest="31"
                                                             LoadingPlaceholder="img_world.png"
                                                             ErrorPlaceholder="img_world.png"
                                                             Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

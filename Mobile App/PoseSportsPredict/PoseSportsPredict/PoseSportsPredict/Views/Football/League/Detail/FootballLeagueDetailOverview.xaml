@@ -16,7 +16,7 @@
 
     <ContentView.Resources>
         <ResourceDictionary>
-            <!--Last Form Templete-->
+            <!--Participating Team Templete-->
             <DataTemplate x:Key="ParticipatingTeamTemplete">
                 <StackLayout
                     Orientation="Horizontal"
@@ -36,15 +36,15 @@
                         Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
                     </ffimageloading:CachedImage>
                     <materialui:MaterialLabel
-                            Padding="0,11"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Start"
-                            TypeScale="Body2"
-                            LineHeight="1"
-                            MaxLines="2"
-                            LineBreakMode="TailTruncation"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding TeamName}">
+                        Padding="0,11"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Start"
+                        TypeScale="Body2"
+                        LineHeight="1"
+                        MaxLines="2"
+                        LineBreakMode="TailTruncation"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{Binding TeamName}">
                     </materialui:MaterialLabel>
                 </StackLayout>
             </DataTemplate>
@@ -186,7 +186,7 @@
                         <!--Standings-->
                         <materialui:MaterialCard
                             Margin="7,6"
-                            Padding="10,5"
+                            Padding="0,5"
                             Elevation="3"
                             CornerRadius="5">
                             <StackLayout

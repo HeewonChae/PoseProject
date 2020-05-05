@@ -125,7 +125,7 @@
                                 VerticalOptions="FillAndExpand">
                                 <materialui:MaterialLabel
                                     HorizontalOptions="Center"
-                                    VerticalOptions="EndAndExpand"
+                                    VerticalOptions="End"
                                     TypeScale="Subtitle2"
                                     FontAttributes="None"
                                     TextColor="{StaticResource CustomGrey_D}"

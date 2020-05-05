@@ -43,8 +43,8 @@ namespace Repository.Mysql.FootballDB.Procedures
         public override void BindParameters()
         {
             FindLeagueQuery = $"SELECT * FROM league WHERE {nameof(League.country_name)} = \'{_input.CountryName}\' AND {nameof(League.name)} = \'{_input.LeagueName}\' AND {nameof(League.is_current)} = 1 ;";
-            FinishedFixturesQuery = $"{DB_FootballFixtureDetail.SelectQuery} WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND f.{nameof(Fixture.match_time)} <= @CurDate ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 40 ;";
-            ScheduledixturesQuery = $"{DB_FootballFixtureDetail.SelectQuery} WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND f.{nameof(Fixture.match_time)} > @CurDate ORDER BY f.{nameof(Fixture.match_time)} ASC LIMIT 40 ;";
+            FinishedFixturesQuery = $"{DB_FootballFixtureDetail.SelectQuery} WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND f.{nameof(Fixture.match_time)} <= @CurDate ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 30 ;";
+            ScheduledixturesQuery = $"{DB_FootballFixtureDetail.SelectQuery} WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND f.{nameof(Fixture.match_time)} > @CurDate ORDER BY f.{nameof(Fixture.match_time)} ASC LIMIT 30 ;";
         }
 
         public override Output OnQuery()

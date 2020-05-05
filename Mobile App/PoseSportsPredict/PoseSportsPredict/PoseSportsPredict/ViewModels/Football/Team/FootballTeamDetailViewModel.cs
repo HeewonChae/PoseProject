@@ -7,9 +7,13 @@ using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Team;
+using Shiny;
+using Syncfusion.XForms.TabView;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Team
 {
@@ -27,13 +31,29 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
             // Check Bookmark
             var bookmarkedTeam = await _bookmarkService.GetBookmark<FootballTeamInfo>(teamInfo.PrimaryKey);
-            TeamInfo = bookmarkedTeam ?? teamInfo;
+            teamInfo.IsBookmarked = bookmarkedTeam?.IsBookmarked ?? false;
+
+            TeamInfo = teamInfo;
+
+            OverviewModel = ShinyHost.Resolve<FootballTeamDetailOverviewModel>().SetTeamInfo(teamInfo);
+            FinishedMatchesViewModel = ShinyHost.Resolve<FootballTeamDetailFinishedMatchesViewModel>().SetTeamInfo(teamInfo);
+            ScheduledMatchesViewModel = ShinyHost.Resolve<FootballTeamDetailScheduledMatchesViewModel>().SetTeamInfo(teamInfo); ;
+
+            _tabContents = new List<BaseViewModel>
+            {
+                OverviewModel,
+                FinishedMatchesViewModel,
+                ScheduledMatchesViewModel,
+            };
+
+            SelectedViewIndex = 0;
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
+            _tabContents[SelectedViewIndex].OnAppearing();
         }
 
         #endregion NavigableViewModel
@@ -48,6 +68,10 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         private FootballTeamInfo _teamInfo;
         private int _selectedViewIndex;
+        private FootballTeamDetailOverviewModel _overviewModel;
+        private FootballTeamDetailFinishedMatchesViewModel _finishedMatchesViewModel;
+        private FootballTeamDetailScheduledMatchesViewModel _scheduledMatchesViewModel;
+        private List<BaseViewModel> _tabContents;
 
         #endregion Fields
 
@@ -55,6 +79,9 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public FootballTeamInfo TeamInfo { get => _teamInfo; set => SetValue(ref _teamInfo, value); }
         public int SelectedViewIndex { get => _selectedViewIndex; set => SetValue(ref _selectedViewIndex, value); }
+        public FootballTeamDetailOverviewModel OverviewModel { get => _overviewModel; set => SetValue(ref _overviewModel, value); }
+        public FootballTeamDetailFinishedMatchesViewModel FinishedMatchesViewModel { get => _finishedMatchesViewModel; set => SetValue(ref _finishedMatchesViewModel, value); }
+        public FootballTeamDetailScheduledMatchesViewModel ScheduledMatchesViewModel { get => _scheduledMatchesViewModel; set => SetValue(ref _scheduledMatchesViewModel, value); }
 
         #endregion Properties
 
@@ -101,22 +128,6 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             SetIsBusy(false);
         }
 
-        public ICommand SwipeLeftViewSwitcherCommad { get => new RelayCommand(SwipeLeftViewSwitcher); }
-
-        private void SwipeLeftViewSwitcher()
-        {
-            if (SelectedViewIndex < 3)
-                SelectedViewIndex++;
-        }
-
-        public ICommand SwipeRightViewSwitcherCommad { get => new RelayCommand(SwipeRightViewSwitcher); }
-
-        private void SwipeRightViewSwitcher()
-        {
-            if (SelectedViewIndex > 0)
-                SelectedViewIndex--;
-        }
-
         #endregion Commands
 
         #region Constructors
@@ -127,7 +138,13 @@ namespace PoseSportsPredict.ViewModels.Football.Team
         {
             _bookmarkService = bookmarkService;
 
-            CoupledPage.Appearing += (s, e) => OnAppearing();
+            if (OnInitializeView())
+            {
+                CoupledPage.Appearing += (s, e) => OnAppearing();
+            }
+
+            this.CoupledPage.FindByName<SfTabView>("_tabView").SelectionChanged
+                += (s, e) => _tabContents[SelectedViewIndex].OnAppearing();
         }
 
         #endregion Constructors

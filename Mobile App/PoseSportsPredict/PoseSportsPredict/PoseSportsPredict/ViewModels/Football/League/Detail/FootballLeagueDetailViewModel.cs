@@ -9,7 +9,9 @@ using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.League.Detail;
 using Sharpnado.Presentation.Forms.CustomViews.Tabs;
 using Shiny;
+using Syncfusion.XForms.TabView;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -35,11 +37,15 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             LeagueInfo = leagueInfo;
 
-            TabContents = new ObservableCollection<BaseViewModel>
+            OverviewModel = ShinyHost.Resolve<FootballLeagueDetailOverviewModel>().SetLeagueInfo(leagueInfo);
+            FinishedMatchesViewModel = ShinyHost.Resolve<FootballLeagueDetailFinishedMatchesViewModel>().SetLeagueInfo(leagueInfo);
+            ScheduledMatchesViewModel = ShinyHost.Resolve<FootballLeagueDetailScheduledMatchesViewModel>().SetLeagueInfo(leagueInfo); ;
+
+            _tabContents = new List<BaseViewModel>
             {
-                ShinyHost.Resolve<FootballLeagueDetailOverviewModel>().SetLeagueInfo(leagueInfo),
-                ShinyHost.Resolve<FootballLeagueDetailFinishedMatchesViewModel>().SetLeagueInfo(leagueInfo),
-                ShinyHost.Resolve<FootballLeagueDetailScheduledMatchesViewModel>(),
+                OverviewModel,
+                FinishedMatchesViewModel,
+                ScheduledMatchesViewModel,
             };
 
             SelectedViewIndex = 0;
@@ -49,6 +55,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override void OnAppearing(params object[] datas)
         {
+            _tabContents[SelectedViewIndex].OnAppearing();
         }
 
         #endregion NavigableViewModel
@@ -63,7 +70,10 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         private FootballLeagueInfo _leagueInfo;
         private int _selectedViewIndex;
-        private ObservableCollection<BaseViewModel> _tabContents;
+        private FootballLeagueDetailOverviewModel _overviewModel;
+        private FootballLeagueDetailFinishedMatchesViewModel _finishedMatchesViewModel;
+        private FootballLeagueDetailScheduledMatchesViewModel _scheduledMatchesViewModel;
+        private List<BaseViewModel> _tabContents;
 
         #endregion Fields
 
@@ -71,7 +81,9 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public FootballLeagueInfo LeagueInfo { get => _leagueInfo; set => SetValue(ref _leagueInfo, value); }
         public int SelectedViewIndex { get => _selectedViewIndex; set => SetValue(ref _selectedViewIndex, value); }
-        public ObservableCollection<BaseViewModel> TabContents { get => _tabContents; set => SetValue(ref _tabContents, value); }
+        public FootballLeagueDetailOverviewModel OverviewModel { get => _overviewModel; set => SetValue(ref _overviewModel, value); }
+        public FootballLeagueDetailFinishedMatchesViewModel FinishedMatchesViewModel { get => _finishedMatchesViewModel; set => SetValue(ref _finishedMatchesViewModel, value); }
+        public FootballLeagueDetailScheduledMatchesViewModel ScheduledMatchesViewModel { get => _scheduledMatchesViewModel; set => SetValue(ref _scheduledMatchesViewModel, value); }
 
         #endregion Properties
 
@@ -133,19 +145,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                 CoupledPage.Appearing += (s, e) => OnAppearing();
             }
 
-            this.CoupledPage.FindByName<TabHostView>("_tabHost").SelectedTabIndexChanged += (s, e) =>
-            {
-                var tabContents = this.CoupledPage.FindByName<CarouselView>("_tabContents");
-                tabContents.CurrentItem = TabContents[SelectedViewIndex];
-            };
-
-            this.CoupledPage.FindByName<CarouselView>("_tabContents").CurrentItemChanged += (s, e) =>
-            {
-                SelectedViewIndex = TabContents.IndexOf(e.CurrentItem as BaseViewModel);
-
-                var curContent = TabContents[SelectedViewIndex];
-                curContent.OnAppearing();
-            };
+            this.CoupledPage.FindByName<SfTabView>("_tabView").SelectionChanged
+                += (s, e) => _tabContents[SelectedViewIndex].OnAppearing();
         }
 
         #endregion Constructors
