@@ -1,6 +1,10 @@
-﻿using PoseSportsPredict.Models.Enums;
+﻿using GalaSoft.MvvmLight.Command;
+using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Sharpnado.Presentation.Forms;
 using Shiny;
 using System;
@@ -8,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 {
@@ -48,6 +53,64 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         public ObservableList<FootballMatchInfo> SelectedRecentForm { get => _selectedRecentForm; set => SetValue(ref _selectedRecentForm, value); }
 
         #endregion Properties
+
+        #region Commands
+
+        public ICommand HomeClickCommand { get => new RelayCommand(HomeClick); }
+
+        private void HomeClick()
+        {
+            if (IsBusy || IsSelectedHomeTeam)
+                return;
+
+            SetIsBusy(true);
+
+            IsSelectedHomeTeam = true;
+            TaskLoaderNotifier.Load(InitData);
+        }
+
+        public ICommand AwayClickCommand { get => new RelayCommand(AwayClick); }
+
+        private void AwayClick()
+        {
+            if (IsBusy || !IsSelectedHomeTeam)
+                return;
+
+            SetIsBusy(true);
+
+            IsSelectedHomeTeam = false;
+            TaskLoaderNotifier.Load(InitData);
+        }
+
+        public ICommand SelectMatchCommand { get => new RelayCommand<FootballMatchInfo>((e) => SelectMatch(e)); }
+
+        private async void SelectMatch(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectMatch_LongTapCommand { get => new RelayCommand<FootballMatchInfo>((e) => SelectMatch_LongTap(e)); }
+
+        private void SelectMatch_LongTap(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            MatchInfoLongTapPopup.Execute(matchInfo);
+
+            SetIsBusy(false);
+        }
+
+        #endregion Commands
 
         #region Constructors
 

@@ -5,7 +5,6 @@ using System.Text;
 
 namespace PoseSportsPredict.Models.Football
 {
-    [Obsolete("사용하지 않음")]
     public class FootballLastForm
     {
         public int FixtureId { get; set; }

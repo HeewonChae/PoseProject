@@ -1,8 +1,10 @@
-﻿using Plugin.LocalNotification;
+﻿using Acr.UserDialogs;
+using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
+using PoseSportsPredict.Resources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -93,6 +95,8 @@ namespace PoseSportsPredict.Services
 
             NotificationCenter.Current.Show(req);
 
+            UserDialogs.Instance.Toast(LocalizeString.Set_Alarm);
+
             return true;
         }
 
@@ -111,6 +115,7 @@ namespace PoseSportsPredict.Services
             string message = this.BuildNotificationMessage(found.SportsType, found.NotificationType);
             MessagingCenter.Send(this, message, found);
 
+            UserDialogs.Instance.Toast(LocalizeString.Cancle_Alarm);
             return true;
         }
     }

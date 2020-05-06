@@ -384,4 +384,37 @@
   <data name="Participating_Teams" xml:space="preserve">
     <value>참가중인 팀</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>홈</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>원정</value>
+  </data>
+  <data name="Add_The_Match" xml:space="preserve">
+    <value>경기 추가</value>
+  </data>
+  <data name="Delete_The_Match" xml:space="preserve">
+    <value>경기 삭제</value>
+  </data>
+  <data name="Add_The_League" xml:space="preserve">
+    <value>리그 추가</value>
+  </data>
+  <data name="Delete_The_League" xml:space="preserve">
+    <value>리그 삭제</value>
+  </data>
+  <data name="Add_The_Home_Team" xml:space="preserve">
+    <value>홈 팀 추가</value>
+  </data>
+  <data name="Delete_The_Home_Team" xml:space="preserve">
+    <value>홈 팀 삭제</value>
+  </data>
+  <data name="Add_The_Away_Team" xml:space="preserve">
+    <value>원정 팀 추가</value>
+  </data>
+  <data name="Delete_The_Away_Team" xml:space="preserve">
+    <value>원정 팀 삭제</value>
+  </data>
+  <data name="Bookmark_Management" xml:space="preserve">
+    <value>북마크 관리</value>
+  </data>
 </root>

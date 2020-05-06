@@ -7,6 +7,7 @@ using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
@@ -30,6 +31,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
+
             AlarmIcon = new ChangableIcon(
                 "ic_alarm_selected.png",
                 AppResourcesHelper.GetResourceColor("IconActivated"),
@@ -127,7 +134,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            //await PageSwitcher.PopModalPageAsync();
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
+
             await PageSwitcher.PopNavPageAsync();
 
             SetIsBusy(false);
@@ -142,9 +154,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            MatchInfo.IsAlarmed = !MatchInfo.IsAlarmed;
-
-            if (MatchInfo.IsAlarmed)
+            if (!MatchInfo.IsAlarmed)
             {
                 DateTime notifyTime = MatchInfo.MatchTime;
                 await _notificationService.AddNotification(new NotificationInfo
@@ -165,11 +175,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 await _notificationService.DeleteNotification(MatchInfo.Id, SportsType.Football, NotificationType.MatchStart);
             }
 
-            var message = MatchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
-            UserDialogs.Instance.Toast(message);
-
-            AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
-
             SetIsBusy(false);
         }
 
@@ -182,20 +187,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            MatchInfo.Order = 0;
-            MatchInfo.StoredTime = DateTime.Now;
-            MatchInfo.IsBookmarked = !MatchInfo.IsBookmarked;
-
             // Add Bookmark
             if (MatchInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
-            else
                 await _bookmarkService.RemoveBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
-
-            var message = MatchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
-            UserDialogs.Instance.Toast(message);
-
-            MatchInfo.OnPropertyChanged("IsBookmarked");
+            else
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
 
             SetIsBusy(false);
         }
@@ -264,5 +260,27 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        private void MatchBookmarkMessageHandler(FootballMatchInfo item)
+        {
+            if (MatchInfo.PrimaryKey == item.PrimaryKey)
+            {
+                MatchInfo.IsBookmarked = item.IsBookmarked;
+                MatchInfo.OnPropertyChanged("IsBookmarked");
+            }
+        }
+
+        private void NotificationMessageHandler(NotificationInfo item)
+        {
+            if (MatchInfo.Id == item.Id)
+            {
+                MatchInfo.IsAlarmed = item.IsAlarmed;
+                AlarmIcon.IsSelected = item.IsAlarmed;
+            }
+        }
+
+        #endregion Methods
     }
 }

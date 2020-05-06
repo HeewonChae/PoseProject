@@ -29,14 +29,14 @@
                     effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                 </materialui:MaterialLabel>
                 <materialui:MaterialCard
+                    ClickCommand="{Binding ViewFormClickCommand}"
+                    IsClickable="True"
                     Margin="3,0"
                     Padding="15,4"
                     CornerRadius="5"
                     VerticalOptions="Center"
                     BorderColor="{StaticResource SecondaryColor}"
-                    BackgroundColor="{StaticResource BackgroundColor_Default}"
-                    effects:TapCommandEffect.Tap="{Binding ViewFormClickCommand}"
-                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                    BackgroundColor="{StaticResource BackgroundColor_Default}">
                     <materialui:MaterialLabel
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -291,6 +291,8 @@
                                         VerticalOptions="Center"
                                         HeightRequest="29"
                                         WidthRequest="29"
+                                        DownsampleHeight="90"
+                                        DownsampleToViewSize="True"
                                         LoadingPlaceholder="img_football.png"
                                         ErrorPlaceholder="img_football.png"
                                         Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

@@ -82,18 +82,11 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
             SetIsBusy(true);
 
-            leagueInfo.Order = 0;
-            leagueInfo.StoredTime = DateTime.UtcNow;
-            leagueInfo.IsBookmarked = !leagueInfo.IsBookmarked;
-
             // Add Bookmark
             if (leagueInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
-            else
                 await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
-
-            var message = leagueInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
-            UserDialogs.Instance.Toast(message);
+            else
+                await _bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
 
             SetIsBusy(false);
         }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PoseSportsPredict.InfraStructure
 {
-    public interface IBookmarkMenuItem : ISQLiteStorable
+    public interface IBookmarkMenuItem : ISQLiteStorable, IBookmarkable
     {
         string MenuName { get; }
         string Logo { get; }

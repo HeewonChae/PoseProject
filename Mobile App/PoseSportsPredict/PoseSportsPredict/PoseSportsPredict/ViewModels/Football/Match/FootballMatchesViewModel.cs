@@ -105,6 +105,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 return;
 
             groupInfo.Expanded = !groupInfo.Expanded;
+
+            MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand MatchFilterCommand { get => new RelayCommand(MatchFilter); }
@@ -162,6 +164,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             {
                 MatchListViewModel.Expanded = true;
             }
+
+            MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand CollapseAllLeaguesCommand { get => new RelayCommand(CollapseAllLeagues); }
@@ -175,6 +179,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             {
                 MatchListViewModel.Expanded = false;
             }
+
+            MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         #endregion Commands
@@ -374,7 +380,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             foreach (var grouppingMatch in grouppingMatches)
             {
                 // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
-                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? true : isAllExpand.Value;
+                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? false : isAllExpand.Value;
 
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
                 matchListViewModel.Title = grouppingMatch.Key;

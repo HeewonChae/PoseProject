@@ -41,7 +41,6 @@ namespace PoseSportsPredict.ViewModels
 
         #region Fields
 
-        private BookMarkType _bookMarkType;
         private string _title;
         private bool _expanded;
         private ObservableCollection<IBookmarkMenuItem> _items;
@@ -50,7 +49,7 @@ namespace PoseSportsPredict.ViewModels
 
         #region Properties
 
-        public BookMarkType BookMarkType;
+        public BookMarkType BookMarkType { get; set; }
         public ObservableCollection<IBookmarkMenuItem> Items { get => _items; set => SetValue(ref _items, value); }
         public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
         public string Title { get => _title; set => SetValue(ref _title, value); }

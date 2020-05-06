@@ -162,6 +162,8 @@
                                                                 VerticalOptions="Center"
                                                                 HeightRequest="27"
                                                                 WidthRequest="27"
+                                                                DownsampleHeight="90"
+                                                                DownsampleToViewSize="True"
                                                                 LoadingPlaceholder="img_world.png"
                                                                 ErrorPlaceholder="img_world.png"
                                                                 Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -221,6 +223,8 @@
                                                                 VerticalOptions="Center"
                                                                 WidthRequest="29"
                                                                 HeightRequest="29"
+                                                                DownsampleHeight="90"
+                                                                DownsampleToViewSize="True"
                                                                 LoadingPlaceholder="img_football.png"
                                                                 ErrorPlaceholder="img_football.png"
                                                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
@@ -240,9 +244,9 @@
                                                                 <materialui:MaterialChip
                                                                     HorizontalOptions="Center"
                                                                     VerticalOptions="StartAndExpand"
-                                                                    FontSize="12"
+                                                                    FontSize="13"
                                                                     TextColor="{StaticResource TextColor_L}"
-                                                                    HeightRequest="17">
+                                                                    HeightRequest="18">
                                                                     <materialui:MaterialChip.Triggers>
                                                                         <EventTrigger Event="BindingContextChanged">
                                                                             <triggers:MatchStatusCtxChangeTrigger />
@@ -258,6 +262,8 @@
                                                                 VerticalOptions="Center"
                                                                 WidthRequest="29"
                                                                 HeightRequest="29"
+                                                                DownsampleHeight="90"
+                                                                DownsampleToViewSize="True"
                                                                 LoadingPlaceholder="img_football.png"
                                                                 ErrorPlaceholder="img_football.png"
                                                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -330,6 +336,8 @@
                                                             VerticalOptions="Center"
                                                             HeightRequest="31"
                                                             WidthRequest="31"
+                                                            DownsampleHeight="90"
+                                                            DownsampleToViewSize="True"
                                                             LoadingPlaceholder="img_world.png"
                                                             ErrorPlaceholder="img_world.png"
                                                             Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -406,6 +414,8 @@
                                                             VerticalOptions="Center"
                                                             HeightRequest="31"
                                                             WidthRequest="31"
+                                                            DownsampleHeight="90"
+                                                            DownsampleToViewSize="True"
                                                             LoadingPlaceholder="img_world.png"
                                                             ErrorPlaceholder="img_world.png"
                                                             Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -470,6 +480,8 @@
                                                     VerticalOptions="Center"
                                                     HeightRequest="27"
                                                     WidthRequest="27"
+                                                    DownsampleHeight="90"
+                                                    DownsampleToViewSize="True"
                                                     LoadingPlaceholder="img_world.png"
                                                     ErrorPlaceholder="img_world.png"
                                                     Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">

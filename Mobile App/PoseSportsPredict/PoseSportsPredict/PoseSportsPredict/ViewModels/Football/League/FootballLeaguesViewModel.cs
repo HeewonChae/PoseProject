@@ -111,6 +111,8 @@ namespace PoseSportsPredict.ViewModels.Football
         private void SelectGroupHeader(FootballLeagueListViewModel groupInfo)
         {
             groupInfo.Expanded = !groupInfo.Expanded;
+
+            LeagueGroups = new ObservableCollection<FootballLeagueListViewModel>(LeagueGroups);
         }
 
         public ICommand SearchBarTextChangedCommand { get => new RelayCommand<TextChangedEventArgs>((e) => SearchBarTextChanged(e)); }

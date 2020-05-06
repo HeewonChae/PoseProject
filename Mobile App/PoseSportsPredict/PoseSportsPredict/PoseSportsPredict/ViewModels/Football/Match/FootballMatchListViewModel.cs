@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
@@ -85,6 +86,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             SetIsBusy(false);
         }
 
+        public ICommand SelectMatch_LongTapCommand { get => new RelayCommand<FootballMatchInfo>((e) => SelectMatch_LongTap(e)); }
+
+        private void SelectMatch_LongTap(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            MatchInfoLongTapPopup.Execute(matchInfo);
+
+            SetIsBusy(false);
+        }
+
         public ICommand TouchAlarmButtonCommand { get => new RelayCommand<FootballMatchInfo>((e) => TouchAlarmButton(e)); }
 
         private async void TouchAlarmButton(FootballMatchInfo matchInfo)
@@ -94,9 +109,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsBusy(true);
 
-            matchInfo.IsAlarmed = !matchInfo.IsAlarmed;
-
-            if (matchInfo.IsAlarmed)
+            if (!matchInfo.IsAlarmed)
             {
                 DateTime notifyTime = matchInfo.MatchTime;
                 await _notificationService.AddNotification(new NotificationInfo
@@ -117,9 +130,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 await _notificationService.DeleteNotification(matchInfo.Id, SportsType.Football, NotificationType.MatchStart);
             }
 
-            var message = matchInfo.IsAlarmed ? LocalizeString.Set_Alarm : LocalizeString.Cancle_Alarm;
-            UserDialogs.Instance.Toast(message);
-
             SetIsBusy(false);
         }
 
@@ -132,20 +142,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsBusy(true);
 
-            matchInfo.Order = 0;
-            matchInfo.StoredTime = DateTime.Now;
-            matchInfo.IsBookmarked = !matchInfo.IsBookmarked;
-
             // Add Bookmark
             if (matchInfo.IsBookmarked)
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
-            else
                 await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
-
-            var message = matchInfo.IsBookmarked ? LocalizeString.Set_Bookmark : LocalizeString.Delete_Bookmark;
-            UserDialogs.Instance.Toast(message);
-
-            matchInfo.OnPropertyChanged("IsBookmarked");
+            else
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
 
             SetIsBusy(false);
         }

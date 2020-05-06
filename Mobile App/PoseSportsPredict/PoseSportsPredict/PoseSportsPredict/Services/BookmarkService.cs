@@ -1,8 +1,10 @@
-﻿using PoseSportsPredict.InfraStructure;
+﻿using Acr.UserDialogs;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
+using PoseSportsPredict.Resources;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,13 +23,19 @@ namespace PoseSportsPredict.Services
             _sqliteService = sqliteService;
         }
 
-        public async Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new()
+        public async Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new()
         {
+            item.Order = 0;
+            item.StoredTime = DateTime.UtcNow;
+            item.IsBookmarked = true;
+
             var ret = await _sqliteService.InsertOrUpdateAsync<T>(item);
             Debug.Assert(ret != 0);
 
             string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
             MessagingCenter.Send(this, message, item);
+
+            UserDialogs.Instance.Toast(LocalizeString.Set_Bookmark);
 
             return true;
         }
@@ -40,13 +48,19 @@ namespace PoseSportsPredict.Services
             return true;
         }
 
-        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new()
+        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new()
         {
+            item.Order = 0;
+            item.StoredTime = DateTime.UtcNow;
+            item.IsBookmarked = false;
+
             var ret = await _sqliteService.DeleteAsync<T>(item.PrimaryKey);
             Debug.Assert(ret != 0);
 
             string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
             MessagingCenter.Send(this, message, item);
+
+            UserDialogs.Instance.Toast(LocalizeString.Delete_Bookmark);
 
             return true;
         }

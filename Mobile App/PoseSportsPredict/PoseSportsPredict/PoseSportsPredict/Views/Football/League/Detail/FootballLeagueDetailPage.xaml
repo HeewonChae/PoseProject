@@ -49,6 +49,7 @@
                     </ContentView>
                     <!--Toolbar button-->
                     <StackLayout
+                        Spacing="9"
                         Orientation="Horizontal"
                         HorizontalOptions="EndAndExpand"
                         VerticalOptions="Center">
@@ -70,6 +71,21 @@
                                 Count="1"
                                 Value="{Binding LeagueInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
                             </customviews:RatingView>
+                        </ContentView>
+                        <ContentView
+                            x:Name="_moreButton"
+                            IsVisible="{Binding IsMoreButtonVisible}"
+                            Padding="5,0"
+                            BackgroundColor="Transparent"
+                            effects:TapCommandEffect.Tap="{Binding MoreButtonCommand}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            <Image
+                                Aspect="AspectFit"
+                                HeightRequest="18"
+                                WidthRequest="18"
+                                Source="ic_more"
+                                effects:ImageEffect.TintColor="White">
+                            </Image>
                         </ContentView>
                     </StackLayout>
                 </StackLayout>
@@ -100,6 +116,8 @@
                             VerticalOptions="Center"
                             HeightRequest="50"
                             WidthRequest="50"
+                            DownsampleHeight="90"
+                            DownsampleToViewSize="True"
                             LoadingPlaceholder="img_world.png"
                             ErrorPlaceholder="img_world.png"
                             Source="{Binding LeagueInfo.LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">

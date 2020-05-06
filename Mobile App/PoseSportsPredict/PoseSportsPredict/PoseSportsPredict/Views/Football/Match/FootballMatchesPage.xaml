@@ -20,6 +20,143 @@
         <ToolbarItem Text="{x:Static localize:LocalizeString.Collapse_All_Leagues}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
     </ContentPage.ToolbarItems>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="collapsedTemplate">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="0">
+                        <StackLayout Spacing="0">
+                            <StackLayout
+                                VerticalOptions="Center"
+                                Orientation="Horizontal"
+                                Padding="20,11"
+                                Spacing="15"
+                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
+                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <ffimageloading:CachedImage
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    HeightRequest="29"
+                                    WidthRequest="29"
+                                    DownsampleHeight="90"
+                                    DownsampleToViewSize="True"
+                                    LoadingPlaceholder="img_world.png"
+                                    ErrorPlaceholder="img_world.png"
+                                    Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:CircleTransformation />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                                <materialui:MaterialLabel
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Subtitle1"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding Title}">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialCard
+                                    Padding="0"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    MinimumWidthRequest="19"
+                                    MinimumHeightRequest="19"
+                                    HeightRequest="21"
+                                    WidthRequest="21"
+                                    CornerRadius="21"
+                                    BackgroundColor="{StaticResource CustomGrey}">
+                                    <materialui:MaterialLabel
+                                        Text="{Binding MatchCount}"
+                                        TypeScale="Caption"
+                                        TextColor="White"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center">
+                                    </materialui:MaterialLabel>
+                                </materialui:MaterialCard>
+                                <Image
+                                    Source="{Binding StateIcon}"
+                                    HorizontalOptions="Center"
+                                    HeightRequest="14"
+                                    WidthRequest="14"
+                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                </Image>
+                            </StackLayout>
+                        </StackLayout>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="expandedTamplete">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="0">
+                        <StackLayout Spacing="0">
+                            <StackLayout
+                                VerticalOptions="Center"
+                                Orientation="Horizontal"
+                                Padding="20,11"
+                                Spacing="15"
+                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
+                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <ffimageloading:CachedImage
+                                    Aspect="AspectFit"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    HeightRequest="27"
+                                    WidthRequest="27"
+                                    DownsampleHeight="90"
+                                    DownsampleToViewSize="True"
+                                    LoadingPlaceholder="img_world.png"
+                                    ErrorPlaceholder="img_world.png"
+                                    Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:CircleTransformation />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                                <materialui:MaterialLabel
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Subtitle1"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding Title}">
+                                </materialui:MaterialLabel>
+                                <Image
+                                    Source="{Binding StateIcon}"
+                                    HorizontalOptions="Center"
+                                    HeightRequest="14"
+                                    WidthRequest="14"
+                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                </Image>
+                            </StackLayout>
+                            <BoxView
+                                VerticalOptions="Center"
+                                Margin="10, 0"
+                                HeightRequest="0.5"
+                                Color="{StaticResource CustomGrey_L}">
+                            </BoxView>
+
+                            <!--Inner List-->
+                            <footballmatchview:FootballMatchListView />
+                        </StackLayout>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
+            <templeteselectors:GroupListTempleteSelector x:Key="matchDataTemplateSelector"
+                CollapsedTemplate="{StaticResource collapsedTemplate}"
+                ExpandedTamplete="{StaticResource expandedTamplete}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
             <loader:TaskLoaderView
@@ -32,90 +169,8 @@
                     ItemsSource="{Binding MatchListViewModels}"
                     HasUnevenRows="True"
                     IsPullToRefreshEnabled="False"
-                    SeparatorVisibility="None">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <materialui:MaterialCard
-                                    CornerRadius="5"
-                                    Elevation="3"
-                                    Margin="7,6"
-                                    Padding="0">
-                                    <StackLayout Spacing="0">
-                                        <StackLayout
-                                            VerticalOptions="Center"
-                                            Orientation="Horizontal"
-                                            Padding="20,11"
-                                            Spacing="15"
-                                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
-                                            effects:TapCommandEffect.TapParameter="{Binding .}"
-                                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                                            <ffimageloading:CachedImage
-                                                Aspect="AspectFit"
-                                                HorizontalOptions="Center"
-                                                VerticalOptions="Center"
-                                                HeightRequest="27"
-                                                WidthRequest="27"
-                                                LoadingPlaceholder="img_world.png"
-                                                ErrorPlaceholder="img_world.png"
-                                                Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                                <ffimageloading:CachedImage.Transformations>
-                                                    <fftransformations:CircleTransformation />
-                                                </ffimageloading:CachedImage.Transformations>
-                                            </ffimageloading:CachedImage>
-                                            <materialui:MaterialLabel
-                                                HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="Center"
-                                                LineBreakMode="TailTruncation"
-                                                TypeScale="Subtitle1"
-                                                TextColor="{StaticResource TextColor_D}"
-                                                Text="{Binding Title}">
-                                            </materialui:MaterialLabel>
-                                            <materialui:MaterialCard
-                                                IsVisible="{Binding Expanded, Converter={StaticResource inverseBoolConverter}}"
-                                                Padding="0"
-                                                HorizontalOptions="Center"
-                                                VerticalOptions="Center"
-                                                MinimumWidthRequest="19"
-                                                MinimumHeightRequest="19"
-                                                HeightRequest="21"
-                                                WidthRequest="21"
-                                                CornerRadius="21"
-                                                BackgroundColor="{StaticResource CustomGrey}">
-                                                <materialui:MaterialLabel
-                                                    Text="{Binding MatchCount}"
-                                                    TypeScale="Caption"
-                                                    TextColor="White"
-                                                    HorizontalTextAlignment="Center"
-                                                    VerticalTextAlignment="Center">
-                                                </materialui:MaterialLabel>
-                                            </materialui:MaterialCard>
-                                            <Image
-                                                Source="{Binding StateIcon}"
-                                                HorizontalOptions="Center"
-                                                HeightRequest="14"
-                                                WidthRequest="14"
-                                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
-                                            </Image>
-                                        </StackLayout>
-                                        <BoxView
-                                            IsVisible="{Binding Expanded}"
-                                            VerticalOptions="Center"
-                                            Margin="10, 0"
-                                            HeightRequest="0.5"
-                                            Color="{StaticResource CustomGrey_L}">
-                                        </BoxView>
-
-                                        <!--Inner List-->
-                                        <footballmatchview:FootballMatchListView
-                                            Grid.Row="1"
-                                            IsVisible="{Binding Expanded}">
-                                        </footballmatchview:FootballMatchListView>
-                                    </StackLayout>
-                                </materialui:MaterialCard>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                    SeparatorVisibility="None"
+                    ItemTemplate="{StaticResource matchDataTemplateSelector}">
                 </ListView>
             </loader:TaskLoaderView>
         </StackLayout>

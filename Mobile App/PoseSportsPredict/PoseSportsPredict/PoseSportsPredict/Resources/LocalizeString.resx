@@ -368,4 +368,37 @@
   <data name="Participating_Teams" xml:space="preserve">
     <value>Participating Teams</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>Away</value>
+  </data>
+  <data name="Add_The_Match" xml:space="preserve">
+    <value>Add the match</value>
+  </data>
+  <data name="Delete_The_Match" xml:space="preserve">
+    <value>Delete the match</value>
+  </data>
+  <data name="Add_The_League" xml:space="preserve">
+    <value>Add the league</value>
+  </data>
+  <data name="Delete_The_League" xml:space="preserve">
+    <value>Delete the league</value>
+  </data>
+  <data name="Add_The_Home_Team" xml:space="preserve">
+    <value>Add the home team</value>
+  </data>
+  <data name="Delete_The_Home_Team" xml:space="preserve">
+    <value>Delete the home team</value>
+  </data>
+  <data name="Add_The_Away_Team" xml:space="preserve">
+    <value>Add the away team</value>
+  </data>
+  <data name="Delete_The_Away_Team" xml:space="preserve">
+    <value>Delete the away team</value>
+  </data>
+  <data name="Bookmark_Management" xml:space="preserve">
+    <value>Bookmark Management</value>
+  </data>
 </root>

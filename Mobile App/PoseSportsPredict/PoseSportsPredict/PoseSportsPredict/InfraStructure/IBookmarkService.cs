@@ -14,9 +14,9 @@ namespace PoseSportsPredict.InfraStructure
 
         Task<T> GetBookmark<T>(string pk) where T : ISQLiteStorable, new();
 
-        Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new();
+        Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new();
 
-        Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, new();
+        Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new();
 
         Task<bool> UpdateBookmark<T>(T item) where T : ISQLiteStorable, new();
     }

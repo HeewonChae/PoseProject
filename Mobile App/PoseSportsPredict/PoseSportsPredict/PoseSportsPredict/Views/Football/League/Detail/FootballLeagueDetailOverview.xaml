@@ -31,6 +31,8 @@
                         VerticalOptions="Center"
                         HeightRequest="29"
                         WidthRequest="29"
+                        DownsampleHeight="90"
+                        DownsampleToViewSize="True"
                         LoadingPlaceholder="img_football.png"
                         ErrorPlaceholder="img_football.png"
                         Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

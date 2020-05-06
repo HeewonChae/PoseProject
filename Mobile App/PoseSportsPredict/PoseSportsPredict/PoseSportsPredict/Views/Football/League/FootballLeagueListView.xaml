@@ -34,6 +34,8 @@
                                 VerticalOptions="Center"
                                 HeightRequest="29"
                                 WidthRequest="29"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_world.png"
                                 ErrorPlaceholder="img_world.png"
                                 Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">

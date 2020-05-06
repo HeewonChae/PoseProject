@@ -72,6 +72,8 @@
                                             VerticalOptions="Center"
                                             HeightRequest="31"
                                             WidthRequest="31"
+                                            DownsampleHeight="90"
+                                            DownsampleToViewSize="True"
                                             LoadingPlaceholder="img_world.png"
                                             ErrorPlaceholder="img_world.png"
                                             Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

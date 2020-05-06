@@ -1,4 +1,5 @@
 ﻿using PosePacket.Service.Football.Models.Enums;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using SQLite;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace PoseSportsPredict.Models.Football
 {
-    public class FootballMatchInfo : ISQLiteStorable, INotifyPropertyChanged
+    public class FootballMatchInfo : ISQLiteStorable, IBookmarkable, INotifyPropertyChanged
     {
         #region INotifyPropertyChanged
 

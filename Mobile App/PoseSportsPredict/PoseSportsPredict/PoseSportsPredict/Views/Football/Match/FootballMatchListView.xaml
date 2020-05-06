@@ -9,6 +9,8 @@
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match"
+             xmlns:models ="clr-namespace:PoseSportsPredict.Models.Football"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchListView">
     <ContentView.Content>
         <StackLayout
@@ -85,6 +87,8 @@
                             Padding="0,20"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"
+                            effects:TapCommandEffect.LongTapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -114,6 +118,8 @@
                                 VerticalOptions="Center"
                                 WidthRequest="29"
                                 HeightRequest="29"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
@@ -134,9 +140,9 @@
                                 <materialui:MaterialChip
                                     HorizontalOptions="Center"
                                     VerticalOptions="StartAndExpand"
-                                    FontSize="12"
+                                    FontSize="13"
                                     TextColor="{StaticResource TextColor_L}"
-                                    HeightRequest="17">
+                                    HeightRequest="18">
                                     <materialui:MaterialChip.Triggers>
                                         <EventTrigger Event="BindingContextChanged">
                                             <triggers:MatchStatusCtxChangeTrigger />
@@ -153,6 +159,8 @@
                                 VerticalOptions="Center"
                                 WidthRequest="29"
                                 HeightRequest="29"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">

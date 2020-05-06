@@ -70,6 +70,42 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add the away team.
+        /// </summary>
+        public static string Add_The_Away_Team {
+            get {
+                return ResourceManager.GetString("Add_The_Away_Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add the home team.
+        /// </summary>
+        public static string Add_The_Home_Team {
+            get {
+                return ResourceManager.GetString("Add_The_Home_Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add the league.
+        /// </summary>
+        public static string Add_The_League {
+            get {
+                return ResourceManager.GetString("Add_The_League", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add the match.
+        /// </summary>
+        public static string Add_The_Match {
+            get {
+                return ResourceManager.GetString("Add_The_Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Poseidon Picks.
         /// </summary>
         public static string App_Title {
@@ -84,6 +120,24 @@ namespace PoseSportsPredict.Resources {
         public static string Applying {
             get {
                 return ResourceManager.GetString("Applying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Away.
+        /// </summary>
+        public static string Away {
+            get {
+                return ResourceManager.GetString("Away", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bookmark Management.
+        /// </summary>
+        public static string Bookmark_Management {
+            get {
+                return ResourceManager.GetString("Bookmark_Management", resourceCulture);
             }
         }
         
@@ -138,6 +192,42 @@ namespace PoseSportsPredict.Resources {
         public static string Delete_Bookmark {
             get {
                 return ResourceManager.GetString("Delete_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the away team.
+        /// </summary>
+        public static string Delete_The_Away_Team {
+            get {
+                return ResourceManager.GetString("Delete_The_Away_Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the home team.
+        /// </summary>
+        public static string Delete_The_Home_Team {
+            get {
+                return ResourceManager.GetString("Delete_The_Home_Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the league.
+        /// </summary>
+        public static string Delete_The_League {
+            get {
+                return ResourceManager.GetString("Delete_The_League", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the match.
+        /// </summary>
+        public static string Delete_The_Match {
+            get {
+                return ResourceManager.GetString("Delete_The_Match", resourceCulture);
             }
         }
         
@@ -255,6 +345,15 @@ namespace PoseSportsPredict.Resources {
         public static string H2H {
             get {
                 return ResourceManager.GetString("H2H", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         

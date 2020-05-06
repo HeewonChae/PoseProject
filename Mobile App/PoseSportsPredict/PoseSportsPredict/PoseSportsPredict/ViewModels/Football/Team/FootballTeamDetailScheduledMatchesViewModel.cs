@@ -4,9 +4,13 @@ using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
+using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Team;
@@ -46,6 +50,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
         #region Services
 
         private IWebApiService _webApiService;
+        private IBookmarkService _bookmarkService;
+        private INotificationService _notificationService;
 
         #endregion Services
 
@@ -83,15 +89,84 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             SetIsBusy(false);
         }
 
+        public ICommand SelectMatch_LongTapCommand { get => new RelayCommand<FootballMatchInfo>((e) => SelectMatch_LongTap(e)); }
+
+        private void SelectMatch_LongTap(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            MatchInfoLongTapPopup.Execute(matchInfo);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand TouchAlarmButtonCommand { get => new RelayCommand<FootballMatchInfo>((e) => TouchAlarmButton(e)); }
+
+        private async void TouchAlarmButton(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            if (!matchInfo.IsAlarmed)
+            {
+                DateTime notifyTime = matchInfo.MatchTime;
+                await _notificationService.AddNotification(new NotificationInfo
+                {
+                    Id = matchInfo.Id,
+                    Title = LocalizeString.Match_Begin_Soon,
+                    Description = $"{matchInfo.LeagueName}.  {matchInfo.HomeName}  vs  {matchInfo.AwayName}",
+                    IntentData = matchInfo.JsonSerialize(),
+                    IconName = "ic_soccer_alarm",
+                    SportsType = SportsType.Football,
+                    NotificationType = NotificationType.MatchStart,
+                    NotifyTime = notifyTime,
+                    StoredTime = DateTime.UtcNow,
+                });
+            }
+            else
+            {
+                await _notificationService.DeleteNotification(matchInfo.Id, SportsType.Football, NotificationType.MatchStart);
+            }
+
+            SetIsBusy(false);
+        }
+
+        public ICommand TouchBookmarkButtonCommand { get => new RelayCommand<FootballMatchInfo>((e) => TouchBookmarkButton(e)); }
+
+        private async void TouchBookmarkButton(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            // Add Bookmark
+            if (matchInfo.IsBookmarked)
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
+            else
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
+
+            SetIsBusy(false);
+        }
+
         #endregion Commands
 
         #region Constructors
 
         public FootballTeamDetailScheduledMatchesViewModel(
             FootballTeamDetailScheduledMatchesView view,
-            IWebApiService webApiService) : base(view)
+            IWebApiService webApiService,
+            INotificationService notificationService,
+            IBookmarkService bookmarkService) : base(view)
         {
             _webApiService = webApiService;
+            _notificationService = notificationService;
+            _bookmarkService = bookmarkService;
 
             OnInitializeView();
         }
@@ -104,6 +179,20 @@ namespace PoseSportsPredict.ViewModels.Football.Team
         {
             TeamInfo = teamInfo;
             return this;
+        }
+
+        public async void EditAlarmMode()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            AlarmEditMode = !AlarmEditMode;
+
+            await Task.Delay(300);
+
+            SetIsBusy(false);
         }
 
         private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchDatas()
