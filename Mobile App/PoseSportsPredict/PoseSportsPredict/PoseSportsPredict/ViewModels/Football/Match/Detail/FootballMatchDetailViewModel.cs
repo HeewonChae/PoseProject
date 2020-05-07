@@ -219,7 +219,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
-                , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Home, CultureInfo.CurrentUICulture));
+                , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamCampType.Home, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);
         }
@@ -233,7 +233,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
-                , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamType.Away, CultureInfo.CurrentUICulture));
+                , ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, typeof(FootballTeamInfo), TeamCampType.Away, CultureInfo.CurrentUICulture));
 
             SetIsBusy(false);
         }

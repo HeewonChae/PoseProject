@@ -240,7 +240,7 @@
                                     BackgroundColor="{StaticResource ChartBackgroundBlack}"
                                     VerticalOptions="Center">
                                     <materialui:MaterialLabel
-                                        Padding="5,2"
+                                        Padding="5,3"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
                                         MaxLines="1"

@@ -126,18 +126,18 @@ namespace PoseSportsPredict.Views.CustomViews
             gaugeBox.Color = gaugeRate == 0.5 ? AppResourcesHelper.GetResourceColor("CustomGrey") : gaugeRate > 0.5 ? GaugeColor1 : GaugeColor2;
             ungaugeBox.Color = Color.Transparent;
 
-            if (IsAnimation && gaugeLenth.Value > 0)
-            {
-                var animation = new Animation(v =>
-                {
-                    gaugeColumn.Width = new GridLength(v, GridUnitType.Star);
-                },
-                0,
-                gaugeLenth.Value,
-                Easing.Linear);
+            //if (IsAnimation && gaugeLenth.Value > 0)
+            //{
+            //    var animation = new Animation(v =>
+            //    {
+            //        gaugeColumn.Width = new GridLength(v, GridUnitType.Star);
+            //    },
+            //    0,
+            //    gaugeLenth.Value,
+            //    Easing.Linear);
 
-                animation.Commit(this, "default animation", 16, 1000, Easing.Linear);
-            }
+            //    animation.Commit(this, "default animation", 8, 750, Easing.Linear);
+            //}
         }
     }
 }

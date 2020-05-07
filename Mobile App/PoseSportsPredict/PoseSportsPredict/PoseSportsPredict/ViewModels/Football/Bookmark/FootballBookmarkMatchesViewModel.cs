@@ -51,6 +51,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         public override void OnAppearing(params object[] datas)
         {
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+            IsEditMode = false;
 
 #if DEBUG
             if (_matchList?.Count > 0 && timeSpan.TotalMinutes < 1) // 1분 마다 갱신

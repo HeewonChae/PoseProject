@@ -39,7 +39,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 
         private bool _isTeamSelectorVisible;
         private short _selectedTeamId;
-        private bool _isSelectedHomeTeam;
+        private TeamCampType _selectedTeamType;
         private ObservableList<FootballMatchInfo> _selectedRecentForm;
 
         #endregion Fields
@@ -49,7 +49,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> TaskLoaderNotifier { get => _taskLoaderNotifier; set => SetValue(ref _taskLoaderNotifier, value); }
         public bool IsTeamSelectorVisible { get => _isTeamSelectorVisible; set => SetValue(ref _isTeamSelectorVisible, value); }
         public short SelectedTeamId { get => _selectedTeamId; set => SetValue(ref _selectedTeamId, value); }
-        public bool IsSelectedHomeTeam { get => _isSelectedHomeTeam; set => SetValue(ref _isSelectedHomeTeam, value); }
+        public TeamCampType SelectedTeamType { get => _selectedTeamType; set => SetValue(ref _selectedTeamType, value); }
         public ObservableList<FootballMatchInfo> SelectedRecentForm { get => _selectedRecentForm; set => SetValue(ref _selectedRecentForm, value); }
 
         #endregion Properties
@@ -60,12 +60,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 
         private void HomeClick()
         {
-            if (IsBusy || IsSelectedHomeTeam)
+            if (IsBusy
+                || SelectedTeamType == TeamCampType.Home)
                 return;
 
             SetIsBusy(true);
 
-            IsSelectedHomeTeam = true;
+            SelectedTeamType = TeamCampType.Home;
             TaskLoaderNotifier.Load(InitData);
         }
 
@@ -73,12 +74,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 
         private void AwayClick()
         {
-            if (IsBusy || !IsSelectedHomeTeam)
+            if (IsBusy
+                || SelectedTeamType == TeamCampType.Away)
                 return;
 
             SetIsBusy(true);
 
-            IsSelectedHomeTeam = false;
+            SelectedTeamType = TeamCampType.Away;
             TaskLoaderNotifier.Load(InitData);
         }
 
@@ -131,8 +133,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
             _awayRecentForm = awayMatches;
 
             IsTeamSelectorVisible = _homeRecentForm != null && _awayRecentForm != null;
-            IsSelectedHomeTeam = true;
-
+            SelectedTeamType = TeamCampType.Home;
             TaskLoaderNotifier.Load(InitData);
         }
 
@@ -140,12 +141,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         {
             SetIsBusy(true);
 
-            await Task.Delay(300);
-
-            SelectedTeamId = IsSelectedHomeTeam ? _homeTeamId : _awayTeamId;
+            SelectedTeamId = SelectedTeamType == TeamCampType.Home ? _homeTeamId : _awayTeamId;
 
             SelectedRecentForm = new ObservableList<FootballMatchInfo>(
-                IsSelectedHomeTeam ? _homeRecentForm : _awayRecentForm);
+                SelectedTeamType == TeamCampType.Home ? _homeRecentForm : _awayRecentForm);
 
             SetIsBusy(false);
 

@@ -16,7 +16,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
             if (parameter == null)
                 throw new ArgumentException("parameter");
 
-            var teamType = (TeamType)parameter;
+            var teamType = (TeamCampType)parameter;
 
             FootballTeamInfo returnValue = null;
 
@@ -24,10 +24,10 @@ namespace PoseSportsPredict.Logics.Football.Converters
             {
                 returnValue = new FootballTeamInfo
                 {
-                    TeamId = teamType == TeamType.Home ? matchInfo.HomeTeamId : matchInfo.AwayTeamId,
-                    TeamName = teamType == TeamType.Home ? matchInfo.HomeName : matchInfo.AwayName,
-                    TeamLogo = teamType == TeamType.Home ? matchInfo.HomeLogo : matchInfo.AwayLogo,
-                    CountryName = teamType == TeamType.Home ? matchInfo.Home_CountryName : matchInfo.Away_CountryName,
+                    TeamId = teamType == TeamCampType.Home ? matchInfo.HomeTeamId : matchInfo.AwayTeamId,
+                    TeamName = teamType == TeamCampType.Home ? matchInfo.HomeName : matchInfo.AwayName,
+                    TeamLogo = teamType == TeamCampType.Home ? matchInfo.HomeLogo : matchInfo.AwayLogo,
+                    CountryName = teamType == TeamCampType.Home ? matchInfo.Home_CountryName : matchInfo.Away_CountryName,
                     IsBookmarked = false,
                 };
             }

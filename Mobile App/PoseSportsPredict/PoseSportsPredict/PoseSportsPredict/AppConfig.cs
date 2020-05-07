@@ -12,6 +12,7 @@ namespace PoseSportsPredict
 
         public static string SQLiteScheme = "PoseSportsPredict.db3";
 
-        public static string Syncfusion_18_1_0_46 = "MjQ4OTA2QDMxMzgyZTMxMmUzMGRHQ1NJem5RNmgrYTBwQ0Z3TDdXcm9NdW81TVdDLzcveHordTVYOE5UQWM9";
+        // Syncfusion v18.1.0.46
+        public static string SyncfusionKey = "MjQ4OTA2QDMxMzgyZTMxMmUzMGRHQ1NJem5RNmgrYTBwQ0Z3TDdXcm9NdW81TVdDLzcveHordTVYOE5UQWM9";
     }
 }

@@ -11,6 +11,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
+             xmlns:enums="clr-namespace:PoseSportsPredict.Models.Enums"
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              x:Class="PoseSportsPredict.Views.Football.Match.RecentForm.FootballRecentFormView">
     <ContentView.Content>
@@ -53,8 +54,8 @@
                                 <materialui:MaterialLabel.Triggers>
                                     <DataTrigger
                                         TargetType="materialui:MaterialLabel"
-                                        Binding="{Binding IsSelectedHomeTeam}"
-                                        Value="True">
+                                        Binding="{Binding SelectedTeamType}"
+                                        Value="{x:Static enums:TeamCampType.Home}">
                                         <Setter Property="TextColor" Value="{StaticResource TextColor_L}" />
                                     </DataTrigger>
                                 </materialui:MaterialLabel.Triggers>
@@ -62,8 +63,8 @@
                             <materialui:MaterialCard.Triggers>
                                 <DataTrigger
                                     TargetType="materialui:MaterialCard"
-                                    Binding="{Binding IsSelectedHomeTeam}"
-                                    Value="True">
+                                    Binding="{Binding SelectedTeamType}"
+                                    Value="{x:Static enums:TeamCampType.Home}">
                                     <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}" />
                                 </DataTrigger>
                             </materialui:MaterialCard.Triggers>
@@ -80,14 +81,15 @@
                             <materialui:MaterialLabel
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
+                                Padding="0,4"
                                 TypeScale="Body2"
                                 TextColor="{StaticResource TextColor_D}"
                                 Text="{x:Static localize:LocalizeString.Away}">
                                 <materialui:MaterialLabel.Triggers>
                                     <DataTrigger
                                         TargetType="materialui:MaterialLabel"
-                                        Binding="{Binding IsSelectedHomeTeam, Converter={StaticResource inverseBoolConverter}}"
-                                        Value="True">
+                                        Binding="{Binding SelectedTeamType}"
+                                        Value="{x:Static enums:TeamCampType.Away}">
                                         <Setter Property="TextColor" Value="{StaticResource TextColor_L}" />
                                     </DataTrigger>
                                 </materialui:MaterialLabel.Triggers>
@@ -95,8 +97,8 @@
                             <materialui:MaterialCard.Triggers>
                                 <DataTrigger
                                     TargetType="materialui:MaterialCard"
-                                    Binding="{Binding IsSelectedHomeTeam, Converter={StaticResource inverseBoolConverter}}"
-                                    Value="True">
+                                    Binding="{Binding SelectedTeamType}"
+                                    Value="{x:Static enums:TeamCampType.Away}">
                                     <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}" />
                                 </DataTrigger>
                             </materialui:MaterialCard.Triggers>

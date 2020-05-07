@@ -5,8 +5,9 @@
         Football,
     }
 
-    public enum TeamType
+    public enum TeamCampType
     {
+        Total,
         Home,
         Away,
     }

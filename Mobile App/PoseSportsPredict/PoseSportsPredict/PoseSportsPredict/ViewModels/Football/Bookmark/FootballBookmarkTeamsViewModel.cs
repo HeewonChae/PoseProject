@@ -36,6 +36,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override void OnAppearing(params object[] datas)
         {
+            IsEditMode = false;
+
             if (_teamList?.Count > 0)
                 return;
 

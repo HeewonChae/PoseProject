@@ -145,7 +145,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
              {
                  if (s is TabbedPage curPage)
                  {
-                     var bindingCtx = curPage.BindingContext as BaseViewModel;
+                     var bindingCtx = curPage.CurrentPage.BindingContext as BaseViewModel;
                      bindingCtx.OnAppearing();
                  }
              };

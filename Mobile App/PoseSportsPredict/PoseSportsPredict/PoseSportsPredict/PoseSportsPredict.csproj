@@ -125,6 +125,9 @@
     <EmbeddedResource Update="Views\Football\Team\FootballTeamDetailScheduledMatchesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Team\GoalStatistics\FootballTeamGoalStatisticsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoadingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -200,5 +203,6 @@
   <ItemGroup>
     <Folder Include="CustomViews\" />
     <Folder Include="Utilities\DataCaching\" />
+    <Folder Include="ViewModels\Charts\" />
   </ItemGroup>
 </Project>

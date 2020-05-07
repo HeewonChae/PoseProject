@@ -91,7 +91,7 @@
                         HorizontalOptions="FillAndExpand"
                         LineBreakMode="TailTruncation"
                         FontSize="11"
-                        TextColor="{StaticResource CustomGrey}">
+                        TextColor="{StaticResource CustomGrey_D}">
                         <materialui:MaterialLabel.FormattedText>
                             <FormattedString>
                                 <Span Text="{x:Static localize:LocalizeString.Last_Login}" />

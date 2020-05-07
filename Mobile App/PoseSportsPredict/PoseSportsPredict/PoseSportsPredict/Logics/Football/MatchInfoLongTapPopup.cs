@@ -16,8 +16,8 @@ namespace PoseSportsPredict.Logics.Football
         public static async void Execute(FootballMatchInfo matchInfo)
         {
             var leagueInfo = ShinyHost.Resolve<MatchInfoToLeagueInfoConverter>().Convert(matchInfo, null, null, null) as FootballLeagueInfo;
-            var homeTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, null, TeamType.Home, null) as FootballTeamInfo;
-            var awayTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, null, TeamType.Away, null) as FootballTeamInfo;
+            var homeTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, null, TeamCampType.Home, null) as FootballTeamInfo;
+            var awayTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, null, TeamCampType.Away, null) as FootballTeamInfo;
 
             IBookmarkService bookmarkService = ShinyHost.Resolve<IBookmarkService>();
 

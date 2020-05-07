@@ -136,7 +136,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             {
                 if (s is TabbedPage curPage)
                 {
-                    var bindingCtx = curPage.BindingContext as BaseViewModel;
+                    var bindingCtx = curPage.CurrentPage.BindingContext as BaseViewModel;
                     bindingCtx.OnAppearing();
                 }
             };

@@ -18,7 +18,7 @@
                 <materialui:MaterialLabel
                     Text="{Binding Title}"
                     TypeScale="Caption"
-                    TextColor="{StaticResource CustomGrey}">
+                    TextColor="{StaticResource CustomGrey_D}">
                 </materialui:MaterialLabel>
                 <Image
                     Margin="5,0"
@@ -26,7 +26,7 @@
                     HorizontalOptions="EndAndExpand"
                     HeightRequest="10"
                     WidthRequest="10"
-                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                    effects:ImageEffect.TintColor="{StaticResource CustomGrey_D}">
                 </Image>
             </StackLayout>
 
