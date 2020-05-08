@@ -15,158 +15,11 @@
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOverview"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
-    <!--<ContentView.Resources>
-        <ResourceDictionary>
-            -->
-    <!--Last Form Templete-->
-    <!--
-            <DataTemplate x:Key="lastFormTemplete">
-                <StackLayout
-                    Spacing="0"
-                    HeightRequest="60"
-                    effects:TapCommandEffect.Tap="{Binding BindingContext.SelectFormComaand, Source={x:Reference _recnetForm}}"
-                    effects:TapCommandEffect.TapParameter="{Binding FixtureId}"
-                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                    <StackLayout
-                        Spacing="3"
-                        VerticalOptions="CenterAndExpand">
-                        <materialui:MaterialLabel
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Start"
-                            TypeScale="Caption"
-                            TextColor="{StaticResource CustomGrey_D}"
-                            Text="{Binding LeagueName}">
-                        </materialui:MaterialLabel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ffimageloading:CachedImage
-                            Grid.Column="0"
-                            Aspect="AspectFit"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            HeightRequest="25"
-                            WidthRequest="25"
-                            DownsampleHeight="90"
-                            DownsampleToViewSize="True"
-                            LoadingPlaceholder="img_football.png"
-                            ErrorPlaceholder="img_football.png"
-                            Source="{Binding OpposingTeamLogo, Converter={StaticResource svgImageSourceConverter}}">
-                            </ffimageloading:CachedImage>
-                            <materialui:MaterialLabel
-                            Grid.Column="1"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
-                            TextColor="{StaticResource TextColor_D}"
-                            IsVisible="{Binding IsHomeMatch, Converter={StaticResource inverseBoolConverter}}"
-                            Text="@">
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                            Grid.Column="1"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
-                            LineHeight="1"
-                            TextColor="{StaticResource TextColor_D}"
-                            IsVisible="{Binding IsHomeMatch}"
-                            Text="vs">
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                            Grid.Column="2"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Start"
-                            LineBreakMode="TailTruncation"
-                            MaxLines="2"
-                            LineHeight="1"
-                            TypeScale="Caption"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding OpposingTeamName}">
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                            Grid.Column="3"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            WidthRequest="7"
-                            TypeScale="Body2"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding HomeScore}">
-                                <materialui:MaterialLabel.Triggers>
-                                    <DataTrigger TargetType="materialui:MaterialLabel" Binding="{Binding IsHomeMatch}" Value="True">
-                                        <Setter Property="FontAttributes" Value="Bold" />
-                                    </DataTrigger>
-                                </materialui:MaterialLabel.Triggers>
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                            Grid.Column="4"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text=":">
-                            </materialui:MaterialLabel>
-                            <materialui:MaterialLabel
-                            Grid.Column="5"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            WidthRequest="7"
-                            TypeScale="Body2"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding AwayScore}">
-                                <materialui:MaterialLabel.Triggers>
-                                    <DataTrigger TargetType="materialui:MaterialLabel" Binding="{Binding IsHomeMatch}" Value="False">
-                                        <Setter Property="FontAttributes" Value="Bold" />
-                                    </DataTrigger>
-                                </materialui:MaterialLabel.Triggers>
-                            </materialui:MaterialLabel>
-                            <StackLayout
-                            Grid.Column="6"
-                            Margin="3,0"
-                            VerticalOptions="Center">
-                                <materialui:MaterialCard
-                                WidthRequest="19"
-                                HeightRequest="19"
-                                Padding="0"
-                                Margin="0"
-                                CornerRadius="3"
-                                Elevation="0"
-                                BackgroundColor="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
-                                    <materialui:MaterialLabel
-                                    VerticalTextAlignment="Center"
-                                    HorizontalTextAlignment="Center"
-                                    TypeScale="Caption"
-                                    TextColor="{StaticResource TextColor_L}"
-                                    Text="{Binding Result, Converter={StaticResource matchResultToStringConverter}}">
-                                    </materialui:MaterialLabel>
-                                </materialui:MaterialCard>
-                                <BoxView
-                                Grid.Column="1"
-                                WidthRequest="17"
-                                HeightRequest="1"
-                                IsVisible="{Binding IsLastMatch}"
-                                Color="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
-                                </BoxView>
-                            </StackLayout>
-                        </Grid>
-                    </StackLayout>
-                </StackLayout>
-            </DataTemplate>
-        </ResourceDictionary>
-    </ContentView.Resources>-->
-
     <ContentView.Content>
         <StackLayout>
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
-                EmptyStateMessage="{x:Static localize:LocalizeString.No_Data_Available}"
                 TaskLoaderNotifier="{Binding OverviewTaskLoaderNotifier}">
                 <ScrollView>
                     <StackLayout
@@ -174,11 +27,11 @@
                         <!--기본 정보 (시간, 리그, 라운드)-->
                         <materialui:MaterialCard
                             Margin="7,6"
-                            Padding="10, 5"
+                            Padding="20, 10"
                             Elevation="3"
                             CornerRadius="5">
                             <Grid
-                                Margin="10,10"
+                                Margin="0"
                                 RowSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -201,7 +54,7 @@
                                     VerticalTextAlignment="Center"
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text=" :  ">
+                                    Text=" : ">
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialLabel
                                     Grid.Row="0"
@@ -229,7 +82,7 @@
                                     VerticalTextAlignment="Center"
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text=" :  ">
+                                    Text=" : ">
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialCard
                                     Grid.Row="1"
@@ -237,20 +90,20 @@
                                     Margin="3,0"
                                     Padding="0"
                                     CornerRadius="5"
+                                    IsClickable="true"
+                                    ClickCommand="{Binding LeagueNameClickCommand}"
+                                    ClickCommandParameter="{Binding MatchInfo}"
                                     BackgroundColor="{StaticResource ChartBackgroundBlack}"
                                     VerticalOptions="Center">
                                     <materialui:MaterialLabel
-                                        Padding="5,3"
+                                        Padding="15,3"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
                                         MaxLines="1"
                                         LineBreakMode="TailTruncation"
                                         TypeScale="Body2"
                                         TextColor="{StaticResource TextColor_D}"
-                                        Text="{Binding MatchInfo.LeagueName}"
-                                        effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
-                                        effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        Text="{Binding MatchInfo.LeagueName}">
                                     </materialui:MaterialLabel>
                                 </materialui:MaterialCard>
 
@@ -276,7 +129,7 @@
                                     VerticalTextAlignment="Center"
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text=" :  ">
+                                    Text=" : ">
                                     <materialui:MaterialLabel.Triggers>
                                         <DataTrigger
                                             TargetType="materialui:MaterialLabel"
@@ -304,6 +157,7 @@
                                 </materialui:MaterialLabel>
                             </Grid>
                         </materialui:MaterialCard>
+
                         <!--기본 정보 (평균 득실점, 회복기간)-->
                         <materialui:MaterialCard
                             Margin="7,6"
@@ -335,7 +189,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.HomeRecentRecord.Text}">
+                                    Text="{Binding MatchStatistics.HomeTeamStatistics.RecentRecord.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="1"
@@ -354,7 +208,7 @@
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.AwayRecentRecord.Text}">
+                                    Text="{Binding MatchStatistics.AwayTeamStatistics.RecentRecord.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
                                 <Grid
@@ -372,7 +226,7 @@
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalRecordPoints}"
-                                        CurValue="{Binding MatchStatistics.HomeRecentRecord.Points}">
+                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.RecentRecord.Points}">
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
@@ -382,7 +236,7 @@
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalRecordPoints}"
-                                        CurValue="{Binding MatchStatistics.AwayRecentRecord.Points}">
+                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.RecentRecord.Points}">
                                     </customviews:SimpleGaugeBar>
                                 </Grid>
                                 <!--평균 득점-->
@@ -400,7 +254,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.HomeGoalFor.Text}">
+                                    Text="{Binding MatchStatistics.HomeTeamStatistics.TotalGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="1"
@@ -419,7 +273,7 @@
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.AwayGoalFor.Text}">
+                                    Text="{Binding MatchStatistics.AwayTeamStatistics.TotalGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
                                 <Grid
@@ -437,7 +291,7 @@
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalFor}"
-                                        CurValue="{Binding MatchStatistics.HomeGoalFor.Avg}">
+                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.TotalGoalFor.Avg}">
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
@@ -447,7 +301,7 @@
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalFor}"
-                                        CurValue="{Binding MatchStatistics.AwayGoalFor.Avg}">
+                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.TotalGoalFor.Avg}">
                                     </customviews:SimpleGaugeBar>
                                 </Grid>
                                 <!--평균 실점-->
@@ -465,7 +319,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.HomeGoalAgainst.Text}">
+                                    Text="{Binding MatchStatistics.HomeTeamStatistics.TotalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="1"
@@ -484,7 +338,7 @@
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.AwayGoalAgainst.Text}">
+                                    Text="{Binding MatchStatistics.AwayTeamStatistics.TotalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
                                 <Grid
@@ -502,7 +356,7 @@
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
-                                        CurValue="{Binding MatchStatistics.HomeGoalAgainst.Avg}">
+                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.TotalAgainst.Avg}">
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
@@ -512,7 +366,7 @@
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
-                                        CurValue="{Binding MatchStatistics.AwayGoalAgainst.Avg}">
+                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.TotalAgainst.Avg}">
                                     </customviews:SimpleGaugeBar>
                                 </Grid>
                                 <!--H/A 평균 득점-->
@@ -530,7 +384,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.HomeSideGoalFor.Text}">
+                                    Text="{Binding MatchStatistics.HomeTeamStatistics.HomeGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="1"
@@ -549,7 +403,7 @@
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.AwaySideGoalFor.Text}">
+                                    Text="{Binding MatchStatistics.AwayTeamStatistics.AwayGoalFor.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
                                 <Grid
@@ -566,8 +420,8 @@
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
-                                        MaxValue="{Binding MatchStatistics.TotalSideGoalFor}"
-                                        CurValue="{Binding MatchStatistics.HomeSideGoalFor.Avg}">
+                                        MaxValue="{Binding MatchStatistics.TotalCampGoalFor}"
+                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.HomeGoalFor.Avg}">
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
@@ -576,8 +430,8 @@
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
-                                        MaxValue="{Binding MatchStatistics.TotalSideGoalFor}"
-                                        CurValue="{Binding MatchStatistics.AwaySideGoalFor.Avg}">
+                                        MaxValue="{Binding MatchStatistics.TotalCampGoalFor}"
+                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.AwayGoalFor.Avg}">
                                     </customviews:SimpleGaugeBar>
                                 </Grid>
                                 <!--H/A 평균 실점-->
@@ -595,7 +449,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.HomeSideGoalAgainst.Text}">
+                                    Text="{Binding MatchStatistics.HomeTeamStatistics.HoemGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="1"
@@ -614,7 +468,7 @@
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.AwaySideGoalAgainst.Text}">
+                                    Text="{Binding MatchStatistics.AwayTeamStatistics.AwayGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
                                 <Grid
@@ -631,8 +485,8 @@
                                         GaugeColor2="{StaticResource PrimaryColor}"
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
-                                        MaxValue="{Binding MatchStatistics.TotalSideGoalAgainst}"
-                                        CurValue="{Binding MatchStatistics.HomeSideGoalAgainst.Avg}">
+                                        MaxValue="{Binding MatchStatistics.TotalCampGoalAgainst}"
+                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.HoemGoalAgainst.Avg}">
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
@@ -641,8 +495,8 @@
                                         GaugeColor2="{StaticResource PrimaryColor}"
                                         GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
                                         IsAnimation="True"
-                                        MaxValue="{Binding MatchStatistics.TotalSideGoalAgainst}"
-                                        CurValue="{Binding MatchStatistics.AwaySideGoalAgainst.Avg}">
+                                        MaxValue="{Binding MatchStatistics.TotalCampGoalAgainst}"
+                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.AwayGoalAgainst.Avg}">
                                     </customviews:SimpleGaugeBar>
                                 </Grid>
                                 <!--휴식 기간-->

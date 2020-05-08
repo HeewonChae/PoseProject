@@ -91,6 +91,7 @@
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
+    <Compile Include="FootballDB\Procedures\P_GET_TEAM_OVERVIEW.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_OVERVIEW.cs" />

@@ -1,4 +1,5 @@
-﻿using PoseSportsPredict.InfraStructure;
+﻿using Plugin.Vibrate;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
@@ -15,9 +16,11 @@ namespace PoseSportsPredict.Logics.Football
     {
         public static async void Execute(FootballMatchInfo matchInfo)
         {
-            var leagueInfo = ShinyHost.Resolve<MatchInfoToLeagueInfoConverter>().Convert(matchInfo, null, null, null) as FootballLeagueInfo;
-            var homeTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, null, TeamCampType.Home, null) as FootballTeamInfo;
-            var awayTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfoConverter>().Convert(matchInfo, null, TeamCampType.Away, null) as FootballTeamInfo;
+            CrossVibrate.Current.Vibration(new TimeSpan(0, 0, 0, 0, 100));
+
+            var leagueInfo = ShinyHost.Resolve<MatchInfoToLeagueInfo>().Convert(matchInfo);
+            var homeTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfo>().Convert(matchInfo, TeamCampType.Home);
+            var awayTeamInfo = ShinyHost.Resolve<MatchInfoToTeamInfo>().Convert(matchInfo, TeamCampType.Away);
 
             IBookmarkService bookmarkService = ShinyHost.Resolve<IBookmarkService>();
 

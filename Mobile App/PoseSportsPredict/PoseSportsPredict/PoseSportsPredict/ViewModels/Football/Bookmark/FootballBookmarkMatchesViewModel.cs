@@ -244,14 +244,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 // Update Matches
                 foreach (var fixtureDetail in server_result.Fixtures)
                 {
-                    var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(
-                                   fixtureDetail,
-                                   typeof(FootballMatchInfo),
-                                   null,
-                                   null) as FootballMatchInfo;
+                    var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixtureDetail);
 
                     var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == fixtureDetail.FixtureId);
-
                     foundMatchInfo.MatchStatus = convertedMatchInfo.MatchStatus;
                     foundMatchInfo.MatchTime = convertedMatchInfo.MatchTime;
                     foundMatchInfo.HomeScore = convertedMatchInfo.HomeScore;

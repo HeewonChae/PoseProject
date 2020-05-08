@@ -417,4 +417,7 @@
   <data name="Bookmark_Management" xml:space="preserve">
     <value>북마크 관리</value>
   </data>
+  <data name="Participating_Leagues" xml:space="preserve">
+    <value>참가중인 리그</value>
+  </data>
 </root>

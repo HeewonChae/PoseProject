@@ -58,7 +58,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         var league = footballDB.Query<League>(FindLeagueQuery).FirstOrDefault();
                         if (league == null)
                         {
-                            _output.Result = 1;
+                            _output.Result = 2;
                             return;
                         }
 

@@ -26,7 +26,7 @@ namespace PosePacket.Service.Football
         public List<FootballFixtureDetail> League_HomeRecentFixtures { get; set; }
 
         [Key(3)]
-        public List<FootballFixtureDetail> Leauge_AwayRecentFixtures { get; set; }
+        public List<FootballFixtureDetail> League_AwayRecentFixtures { get; set; }
 
         [Key(4)]
         public List<FootballStandingsDetail> StandingsDetails { get; set; }

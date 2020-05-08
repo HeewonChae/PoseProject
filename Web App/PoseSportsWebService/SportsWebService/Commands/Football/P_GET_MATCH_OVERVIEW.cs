@@ -96,7 +96,7 @@ namespace SportsWebService.Commands.Football
                 HomeRecentFixtures = homeFixtureDetails,
                 AwayRecentFixtures = AwayFixtureDetails,
                 League_HomeRecentFixtures = league_homeFixtureDetails,
-                Leauge_AwayRecentFixtures = league_AwayFixtureDetails,
+                League_AwayRecentFixtures = league_AwayFixtureDetails,
                 StandingsDetails = standingsDetail,
             };
         }

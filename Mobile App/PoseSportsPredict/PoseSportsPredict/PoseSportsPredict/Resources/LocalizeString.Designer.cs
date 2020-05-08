@@ -610,6 +610,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Participating Leagues.
+        /// </summary>
+        public static string Participating_Leagues {
+            get {
+                return ResourceManager.GetString("Participating_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Participating Teams.
         /// </summary>
         public static string Participating_Teams {

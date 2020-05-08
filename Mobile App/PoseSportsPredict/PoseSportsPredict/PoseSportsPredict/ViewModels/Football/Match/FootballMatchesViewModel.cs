@@ -261,11 +261,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             foreach (var fixture in result.Fixtures)
             {
-                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(
-                                    fixture,
-                                    typeof(FootballMatchInfo),
-                                    null,
-                                    CultureInfo.CurrentCulture) as FootballMatchInfo;
+                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
 
                 var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
                 var notifiedMatch = notifications.FirstOrDefault(elem => elem.Id == convertedMatchInfo.Id);

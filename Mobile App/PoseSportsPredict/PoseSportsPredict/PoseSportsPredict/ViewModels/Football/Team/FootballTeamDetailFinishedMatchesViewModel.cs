@@ -223,8 +223,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             Matches = new ObservableList<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
-                Matches.Add(
-                    ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo);
+                Matches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
 
             SetIsBusy(false);

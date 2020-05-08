@@ -225,6 +225,7 @@
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_TEAM.cs" />
     <Compile Include="Commands\Football\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_OVERVIEW.cs" />
+    <Compile Include="Commands\Football\P_GET_TEAM_OVERVIEW.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />

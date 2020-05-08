@@ -32,6 +32,6 @@ namespace PoseSportsPredict.Models.Football
         public short GoalFor { get; set; }
         public short GoalAgainst { get; set; }
         public short GoalDifference { get; set; }
-        public List<FootballLastForm> Form { get; set; }
+        public List<FootballFormInfo> Form { get; set; }
     }
 }

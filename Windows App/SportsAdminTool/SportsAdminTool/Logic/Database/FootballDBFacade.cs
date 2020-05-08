@@ -322,7 +322,8 @@ namespace SportsAdminTool.Logic.Database
                 var Standings = standingsies[i];
 
                 // TeamId 컨버트 가능한지..
-                if (ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
+                if (Standings.TeamId == 0 &&
+                    ResourceModel.Football.UndefinedTeam.TryConvertTeamId(countryName, Standings.TeamName, out short convertedteamId, out string convertedTeamName))
                 {
                     Standings.TeamId = convertedteamId;
                     Standings.TeamName = convertedTeamName;

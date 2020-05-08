@@ -42,8 +42,7 @@ namespace PoseSportsPredict.Models.Resources.Football
                 if (string.IsNullOrEmpty(covaerageLeague.LeagueLogo))
                     covaerageLeague.LeagueLogo = covaerageLeague.CountryLogo;
 
-                var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfoConverter>().Convert(
-                    covaerageLeague, typeof(FootballLeagueInfo), null, CultureInfo.CurrentUICulture) as FootballLeagueInfo;
+                var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfo>().Convert(covaerageLeague);
 
                 CoverageLeagues.Add(key, leagueInfo);
             }

@@ -137,7 +137,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                 throw new Exception(LocalizeString.Occur_Error);
 
             // LeagueInfo
-            LeagueInfo = ShinyHost.Resolve<LeagueDetailToLeagueInfo>().Convert(server_result.LeagueDetail, null, null, null) as FootballLeagueInfo;
+            LeagueInfo = ShinyHost.Resolve<LeagueDetailToLeagueInfo>().Convert(server_result.LeagueDetail);
 
             // 참가중인 팀
             var teamInfos = new List<FootballTeamInfo>();
@@ -145,8 +145,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             {
                 foreach (var teamDetail in server_result.ParticipatingTeams)
                 {
-                    teamInfos.Add(
-                        ShinyHost.Resolve<TeamDetailToTeamInfo>().Convert(teamDetail, null, null, null) as FootballTeamInfo);
+                    teamInfos.Add(ShinyHost.Resolve<TeamDetailToTeamInfo>().Convert(teamDetail));
                 }
 
                 ParticipatingTeams_Left = new ObservableList<FootballTeamInfo>();
@@ -169,8 +168,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             var standingsInfos = new List<FootballStandingsInfo>();
             foreach (var standingsDetail in server_result.StandingsDetails)
             {
-                standingsInfos.Add(
-                    ShinyHost.Resolve<StandingsDetailToStandingsInfo>().Convert(standingsDetail, null, null, null) as FootballStandingsInfo);
+                standingsInfos.Add(ShinyHost.Resolve<StandingsDetailToStandingsInfo>().Convert(standingsDetail));
             }
 
             //// Set RankColor

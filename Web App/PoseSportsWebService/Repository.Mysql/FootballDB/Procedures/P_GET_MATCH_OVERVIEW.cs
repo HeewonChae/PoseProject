@@ -46,9 +46,14 @@ namespace Repository.Mysql.FootballDB.Procedures
 
         public override void BindParameters()
         {
-            FixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} WHERE (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 6;";
-            LeagueFixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 10;";
-            StandingsQueryString = $"{DB_FootballStandingsDetail.SelectQuery} WHERE s.{nameof(Standings.league_id)} = @LeagueId AND s.{nameof(Standings.team_id)} IN (@HomeTeamId, @AwayTeamId);";
+            FixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
+                $"WHERE (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime " +
+                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 6;";
+            LeagueFixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
+                $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime " +
+                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 10;";
+            StandingsQueryString = $"{DB_FootballStandingsDetail.SelectQuery} " +
+                $"WHERE s.{nameof(Standings.league_id)} = @LeagueId AND s.{nameof(Standings.team_id)} IN (@HomeTeamId, @AwayTeamId);";
         }
 
         public override P_GET_MATCH_OVERVIEW.Output OnQuery()
@@ -62,7 +67,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         var fixture = footballDB.Query<Fixture>($"SELECT * FROM fixture WHERE id={_input.FixtureId}").FirstOrDefault();
                         if (fixture == null)
                         {
-                            _output.Result = 1;
+                            _output.Result = 2;
                             return;
                         }
 

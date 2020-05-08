@@ -191,8 +191,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             _matchList = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
-                _matchList.Add(
-                    ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo);
+                _matchList.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
 
             UpdateMatcheGroups(_matchList);

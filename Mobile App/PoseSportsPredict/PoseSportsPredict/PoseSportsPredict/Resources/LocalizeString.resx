@@ -401,4 +401,7 @@
   <data name="Bookmark_Management" xml:space="preserve">
     <value>Bookmark Management</value>
   </data>
+  <data name="Participating_Leagues" xml:space="preserve">
+    <value>Participating Leagues</value>
+  </data>
 </root>

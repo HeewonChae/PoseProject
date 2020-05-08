@@ -35,7 +35,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            OverviewTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
+            OverviewTaskLoaderNotifier = new TaskLoaderNotifier();
 
             return true;
         }
@@ -59,9 +59,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         #region Fields
 
         private FootballMatchInfo _matchInfo;
-        private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _overviewTaskLoaderNotifier;
-        private List<FootballMatchInfo> _allForm;
-        private FootballMatchStatistics _matchStatistics;
+        private TaskLoaderNotifier _overviewTaskLoaderNotifier;
+        private Models.Football.FootballMatchStatistics _matchStatistics;
         private FootballRecentFormViewModel _recentFormViewModel;
         private ObservableList<FootballStandingsViewModel> _standingsViewModels;
 
@@ -70,33 +69,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         #region Properties
 
         public FootballMatchInfo MatchInfo { get => _matchInfo; set => SetValue(ref _matchInfo, value); }
-        public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
-        public FootballMatchStatistics MatchStatistics { get => _matchStatistics; set => SetValue(ref _matchStatistics, value); }
+        public TaskLoaderNotifier OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
+        public Models.Football.FootballMatchStatistics MatchStatistics { get => _matchStatistics; set => SetValue(ref _matchStatistics, value); }
         public FootballRecentFormViewModel RecentFormViewModel { get => _recentFormViewModel; set => SetValue(ref _recentFormViewModel, value); }
         public ObservableList<FootballStandingsViewModel> StandingsViewModels { get => _standingsViewModels; set => SetValue(ref _standingsViewModels, value); }
 
         #endregion Properties
 
         #region Commands
-
-        public ICommand SelectFormComaand { get => new RelayCommand<int>(e => SelectForm(e)); }
-
-        private async void SelectForm(int fixtureId)
-        {
-            if (IsBusy)
-                return;
-
-            SetIsBusy(true);
-
-            var foundMatch = _allForm.Where(elem => elem.Id == fixtureId).FirstOrDefault();
-
-            if (foundMatch != null)
-            {
-                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), foundMatch);
-            }
-
-            SetIsBusy(false);
-        }
 
         public ICommand LeagueNameClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => LeagueNameClick(e)); }
 
@@ -107,7 +87,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>()
-                , ShinyHost.Resolve<MatchInfoToLeagueInfoConverter>().Convert(matchInfo, null, null, null));
+                , ShinyHost.Resolve<MatchInfoToLeagueInfo>().Convert(matchInfo));
 
             SetIsBusy(false);
         }
@@ -135,7 +115,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             return this;
         }
 
-        private async Task<IReadOnlyCollection<FootballMatchInfo>> InitOverviewData()
+        private async Task InitOverviewData()
         {
             SetIsBusy(true);
 
@@ -159,26 +139,30 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 throw new Exception(LocalizeString.Occur_Error);
 
             // All Form
-            _allForm = new List<FootballMatchInfo>();
             var homeRecentMatches = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.HomeRecentFixtures)
             {
-                var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo;
-                homeRecentMatches.Add(matchInfo);
-                _allForm.Add(matchInfo);
+                homeRecentMatches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
 
             var awayRecentMatches = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.AwayRecentFixtures)
             {
-                var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfoConverter>().Convert(fixture, null, null, null) as FootballMatchInfo;
-                awayRecentMatches.Add(matchInfo);
-                _allForm.Add(matchInfo);
+                awayRecentMatches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
 
             // 기본정보 (평균 득실점, 회복기간)
-            MatchStatistics = ShinyHost.Resolve<FootballMatchStatisticsConverter>()
-                .Convert(server_result, null, MatchInfo, null) as FootballMatchStatistics;
+            MatchStatistics = new FootballMatchStatistics
+            {
+                HomeTeamStatistics = ShinyHost.Resolve<FixtureDetailToTeamStatistics>()
+                .Convert(server_result.League_HomeRecentFixtures, MatchInfo.HomeTeamId, 6, 3),
+
+                AwayTeamStatistics = ShinyHost.Resolve<FixtureDetailToTeamStatistics>()
+                .Convert(server_result.League_AwayRecentFixtures, MatchInfo.AwayTeamId, 6, 3),
+
+                AwayRestPeriod = (DateTime.Now - (homeRecentMatches.FirstOrDefault()?.MatchTime ?? DateTime.Now)).Days,
+                HomeRestPeriod = (DateTime.Now - (awayRecentMatches.FirstOrDefault()?.MatchTime ?? DateTime.Now)).Days,
+            };
 
             // RecentForm
             RecentFormViewModel = ShinyHost.Resolve<FootballRecentFormViewModel>();
@@ -188,8 +172,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             List<FootballStandingsInfo> standingsInfos = new List<FootballStandingsInfo>();
             foreach (var standingsDetail in server_result.StandingsDetails)
             {
-                standingsInfos.Add(ShinyHost.Resolve<StandingsDetailToStandingsInfo>()
-                    .Convert(standingsDetail, null, null, null) as FootballStandingsInfo);
+                standingsInfos.Add(ShinyHost.Resolve<StandingsDetailToStandingsInfo>().Convert(standingsDetail));
             }
 
             // Set RankColor
@@ -249,8 +232,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 standingsViewModels.OrderBy(elem => elem.LeagueTitle).ToArray());
 
             SetIsBusy(false);
-
-            return _allForm;
         }
 
         #endregion Methods

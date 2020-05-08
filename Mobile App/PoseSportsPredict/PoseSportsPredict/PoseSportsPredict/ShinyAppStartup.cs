@@ -16,6 +16,7 @@ using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.RecentForm;
 using PoseSportsPredict.ViewModels.Football.Standings;
 using PoseSportsPredict.ViewModels.Football.Team;
+using PoseSportsPredict.ViewModels.Football.Team.GoalStatistics;
 using PoseSportsPredict.Views;
 using PoseSportsPredict.Views.Common;
 using PoseSportsPredict.Views.Football;
@@ -25,6 +26,7 @@ using PoseSportsPredict.Views.Football.League.Detail;
 using PoseSportsPredict.Views.Football.Match;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Team;
+using PoseSportsPredict.Views.Football.Team.GoalStatistics;
 using Shiny;
 using System;
 using WebServiceShare.ExternAuthentication;
@@ -61,15 +63,16 @@ namespace PoseSportsPredict
 
         private void RegisterConverters(IServiceCollection services)
         {
-            services.AddSingleton<FixtureDetailToMatchInfoConverter>();
-            services.AddSingleton<CoverageLeagueToLeagueInfoConverter>();
-            services.AddSingleton<MatchInfoToLeagueInfoConverter>();
-            services.AddSingleton<MatchInfoToTeamInfoConverter>();
-            services.AddSingleton<FootballMatchStatisticsConverter>();
-            services.AddSingleton<FixtureDetailToLastFormConverter>();
+            services.AddSingleton<FixtureDetailToMatchInfo>();
+            services.AddSingleton<MatchInfoToFormInfo>();
+            services.AddSingleton<FixtureDetailToTeamStatistics>();
             services.AddSingleton<StandingsDetailToStandingsInfo>();
             services.AddSingleton<LeagueDetailToLeagueInfo>();
             services.AddSingleton<TeamDetailToTeamInfo>();
+
+            services.AddSingleton<CoverageLeagueToLeagueInfo>();
+            services.AddSingleton<MatchInfoToLeagueInfo>();
+            services.AddSingleton<MatchInfoToTeamInfo>();
         }
 
         private void MatchViewModels(IServiceCollection services)
@@ -110,6 +113,9 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchDetailPredictionsViewModel>();
             services.AddTransient<FootballMatchDetailOddsView>();
             services.AddTransient<FootballMatchDetailOddsViewModel>();
+            // Football - RecentForm
+            services.AddTransient<FootballRecentFormViewModel>();
+
             // Football - League
             services.AddTransient<FootballLeaguesPage>();
             services.AddTransient<FootballLeaguesViewModel>();
@@ -122,6 +128,8 @@ namespace PoseSportsPredict
             services.AddTransient<FootballLeagueDetailFinishedMatchesViewModel>();
             services.AddTransient<FootballLeagueDetailScheduledMatchesView>();
             services.AddTransient<FootballLeagueDetailScheduledMatchesViewModel>();
+            // Football - Standings
+            services.AddTransient<FootballStandingsViewModel>();
             //Football - Team
             services.AddTransient<FootballTeamDetailPage>();
             services.AddTransient<FootballTeamDetailViewModel>();
@@ -131,6 +139,9 @@ namespace PoseSportsPredict
             services.AddTransient<FootballTeamDetailFinishedMatchesViewModel>();
             services.AddTransient<FootballTeamDetailScheduledMatchesView>();
             services.AddTransient<FootballTeamDetailScheduledMatchesViewModel>();
+            // Football - GoalStatistics
+            services.AddTransient<FootballTeamGoalStatisticsView>();
+            services.AddTransient<FootballTeamGoalStatisticsViewModel>();
             // Football - Bookmark
             services.AddTransient<FootballBookmarksTabViewModel>();
             services.AddTransient<FootballBookmarkMatchesPage>();
@@ -141,10 +152,6 @@ namespace PoseSportsPredict
             services.AddTransient<FootballBookmarkTeamsViewModel>();
             services.AddSingleton<FootballBookmarkSearchPage>();
             services.AddSingleton<FootballBookmarkSearchViewModel>();
-            // Football - Standings
-            services.AddTransient<FootballStandingsViewModel>();
-            // Football - RecentForm
-            services.AddTransient<FootballRecentFormViewModel>();
         }
     }
 }

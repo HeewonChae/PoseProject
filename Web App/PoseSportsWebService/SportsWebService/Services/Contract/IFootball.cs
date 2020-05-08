@@ -39,6 +39,10 @@ namespace SportsWebService.Services.Contract
         [WebInvoke(Method = "POST", UriTemplate = "GetLeagueOverview")]
         Stream P_GET_LEAGUE_OVERVIEW(Stream stream);
 
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetTeamOverview")]
+        Stream P_GET_TEAM_OVERVIEW(Stream stream);
+
         #region For Benchmark
 
         //[OperationContract]

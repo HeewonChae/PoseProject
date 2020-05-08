@@ -11,83 +11,71 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.Logics.Football.Converters
 {
-    internal class StandingsDetailToStandingsInfo : IValueConverter
+    internal class StandingsDetailToStandingsInfo
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public FootballStandingsInfo Convert(FootballStandingsDetail standingsDetail)
         {
-            FootballStandingsInfo returnValue = null;
+            // 기본 이미지 설정
+            if (string.IsNullOrEmpty(standingsDetail.League.Country.Logo))
+                standingsDetail.League.Country.Logo = "img_world.png";
+            if (string.IsNullOrEmpty(standingsDetail.League.Logo))
+                standingsDetail.League.Logo = standingsDetail.League.Country.Logo;
 
-            if (value is FootballStandingsDetail standingsDetail)
+            if (string.IsNullOrEmpty(standingsDetail.Team.Logo))
+                standingsDetail.Team.Logo = "img_football.png";
+
+            var returnValue = new FootballStandingsInfo()
             {
-                // 기본 이미지 설정
-                if (string.IsNullOrEmpty(standingsDetail.League.Country.Logo))
-                    standingsDetail.League.Country.Logo = "img_world.png";
-                if (string.IsNullOrEmpty(standingsDetail.League.Logo))
-                    standingsDetail.League.Logo = standingsDetail.League.Country.Logo;
+                League_CountryLogo = standingsDetail.League.Country.Logo,
+                League_CountryName = standingsDetail.League.Country.Name,
+                LeagueLogo = standingsDetail.League.Logo,
+                LeagueName = standingsDetail.League.Name,
+                LeagueType = standingsDetail.League.LeagueType,
+                TeamId = standingsDetail.Team.Id,
+                TeamLogo = standingsDetail.Team.Logo,
+                TeamName = standingsDetail.Team.Name,
+                Team_CountryName = standingsDetail.Team.CountryName,
+                Rank = standingsDetail.Rank,
+                RankColor = Color.Transparent,
+                Points = standingsDetail.Points,
+                Group = standingsDetail.Group,
+                Description = standingsDetail.Description,
+                Played = standingsDetail.Played,
+                Win = standingsDetail.Win,
+                Draw = standingsDetail.Draw,
+                Lose = standingsDetail.Lose,
+                GoalFor = standingsDetail.GoalFor,
+                GoalAgainst = standingsDetail.GoalAgainst,
+                GoalDifference = standingsDetail.GoalDifference,
+            };
 
-                if (string.IsNullOrEmpty(standingsDetail.Team.Logo))
-                    standingsDetail.Team.Logo = "img_football.png";
+            returnValue.Form = new List<FootballFormInfo>();
+            standingsDetail.Form.Reverse();
+            foreach (var form in standingsDetail.Form)
+            {
+                FootballFormInfo footballForm = new FootballFormInfo();
 
-                returnValue = new FootballStandingsInfo()
+                if (form.Equals('W'))
                 {
-                    League_CountryLogo = standingsDetail.League.Country.Logo,
-                    League_CountryName = standingsDetail.League.Country.Name,
-                    LeagueLogo = standingsDetail.League.Logo,
-                    LeagueName = standingsDetail.League.Name,
-                    LeagueType = standingsDetail.League.LeagueType,
-                    TeamId = standingsDetail.Team.Id,
-                    TeamLogo = standingsDetail.Team.Logo,
-                    TeamName = standingsDetail.Team.Name,
-                    Team_CountryName = standingsDetail.Team.CountryName,
-                    Rank = standingsDetail.Rank,
-                    RankColor = Color.Transparent,
-                    Points = standingsDetail.Points,
-                    Group = standingsDetail.Group,
-                    Description = standingsDetail.Description,
-                    Played = standingsDetail.Played,
-                    Win = standingsDetail.Win,
-                    Draw = standingsDetail.Draw,
-                    Lose = standingsDetail.Lose,
-                    GoalFor = standingsDetail.GoalFor,
-                    GoalAgainst = standingsDetail.GoalAgainst,
-                    GoalDifference = standingsDetail.GoalDifference,
-                };
-
-                returnValue.Form = new List<FootballLastForm>();
-                standingsDetail.Form.Reverse();
-                foreach (var form in standingsDetail.Form)
+                    footballForm.Result = Models.Enums.MatchResultType.Win;
+                }
+                else if (form.Equals('L'))
                 {
-                    FootballLastForm footballForm = new FootballLastForm();
-
-                    if (form.Equals('W'))
-                    {
-                        footballForm.Result = Models.Enums.MatchResultType.Win;
-                    }
-                    else if (form.Equals('L'))
-                    {
-                        footballForm.Result = Models.Enums.MatchResultType.Lose;
-                    }
-                    else
-                    {
-                        footballForm.Result = Models.Enums.MatchResultType.Draw;
-                    }
-
-                    returnValue.Form.Add(footballForm);
+                    footballForm.Result = Models.Enums.MatchResultType.Lose;
+                }
+                else
+                {
+                    footballForm.Result = Models.Enums.MatchResultType.Draw;
                 }
 
-                if (returnValue.Form.Count > 0)
-                {
-                    var lastForm = returnValue.Form.Last();
-                    lastForm.IsLastMatch = true;
-                }
+                returnValue.Form.Add(footballForm);
             }
 
-            return returnValue;
-        }
+            var lastForm = returnValue.Form.LastOrDefault();
+            if (lastForm != null)
+                lastForm.IsLastMatch = true;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return returnValue;
         }
     }
 }

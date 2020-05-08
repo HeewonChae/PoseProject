@@ -530,9 +530,8 @@
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <materialui:MaterialLabel
+                            <StackLayout Orientation="Horizontal">
+                                <materialui:MaterialLabel
                                         Padding="0,4"
                                         HeightRequest="44"
                                         VerticalTextAlignment="Center"
@@ -540,43 +539,44 @@
                                         TypeScale="Body2"
                                         TextColor="{StaticResource TextColor_D}"
                                         Text="">
-                                    </materialui:MaterialLabel>
-                                    <StackLayout
+                                </materialui:MaterialLabel>
+                                <StackLayout
                                         Margin="10,0"
                                         Orientation="Horizontal"
                                         Spacing="10"
                                         BindableLayout.ItemsSource="{Binding Form}">
-                                        <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackLayout Orientation="Horizontal">
-                                                    <StackLayout VerticalOptions="Center">
-                                                        <materialui:MaterialCard
-                                                        WidthRequest="21"
-                                                        HeightRequest="21"
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Orientation="Horizontal">
+                                                <StackLayout
+                                                        Spacing="3"
+                                                        VerticalOptions="Center">
+                                                    <materialui:MaterialCard
+                                                        WidthRequest="22"
+                                                        HeightRequest="22"
                                                         Padding="0"
                                                         Margin="0"
                                                         CornerRadius="3"
                                                         Elevation="0"
                                                         BackgroundColor="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
-                                                            <materialui:MaterialLabel
+                                                        <materialui:MaterialLabel
                                                             VerticalTextAlignment="Center"
                                                             HorizontalTextAlignment="Center"
                                                             TypeScale="Body2"
                                                             TextColor="{StaticResource TextColor_L}"
                                                             Text="{Binding Result, Converter={StaticResource matchResultToStringConverter}}">
-                                                            </materialui:MaterialLabel>
-                                                        </materialui:MaterialCard>
-                                                        <BoxView
-                                                        WidthRequest="17"
+                                                        </materialui:MaterialLabel>
+                                                    </materialui:MaterialCard>
+                                                    <BoxView
+                                                        WidthRequest="0"
                                                         HeightRequest="1"
                                                         IsVisible="{Binding IsLastMatch}"
                                                         Color="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
-                                                        </BoxView>
-                                                    </StackLayout>
+                                                    </BoxView>
                                                 </StackLayout>
-                                            </DataTemplate>
-                                        </BindableLayout.ItemTemplate>
-                                    </StackLayout>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
                                 </StackLayout>
                                 <BoxView
                                     WidthRequest="0"
