@@ -251,6 +251,27 @@
       "CountryName": "Sweden",
       "ConvertTeamId": 5244,
       "ConvertTeamName": "Alamal Atbara"
+    },
+    {
+      "Index": 39,
+      "TeamName": "KFUM",
+      "CountryName": "Denmark",
+      "ConvertTeamId": 13169,
+      "ConvertTeamName": "KFUM"
+    },
+    {
+      "Index": 40,
+      "TeamName": "Galicia",
+      "CountryName": "Brazil",
+      "ConvertTeamId": 12935,
+      "ConvertTeamName": "Galícia"
+    },
+    {
+      "Index": 41,
+      "TeamName": "Harelbeke",
+      "CountryName": "Belgium",
+      "ConvertTeamId": 5817,
+      "ConvertTeamName": "Harelbeke"
     }
   ]
 }

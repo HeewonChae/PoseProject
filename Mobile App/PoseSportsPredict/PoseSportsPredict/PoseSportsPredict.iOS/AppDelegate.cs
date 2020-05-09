@@ -18,6 +18,7 @@ namespace PoseSportsPredict.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            new Syncfusion.XForms.iOS.ComboBox.SfComboBoxRenderer();
             Naxam.Controls.Platform.iOS.TopTabbedRenderer.Init();
             Rg.Plugins.Popup.Popup.Init();
 

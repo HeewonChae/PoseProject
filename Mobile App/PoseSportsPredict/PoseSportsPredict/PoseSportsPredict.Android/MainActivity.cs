@@ -17,6 +17,7 @@ namespace PoseSportsPredict.Droid
         Theme = "@style/MyTheme.Splash",
         MainLauncher = true,
         //ScreenOrientation = ScreenOrientation.Portrait,
+        LaunchMode = LaunchMode.SingleTop,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -64,14 +65,8 @@ namespace PoseSportsPredict.Droid
 
             LoadApplication(new App());
 
-            //NotificationCenter.NotifyNotificationTapped(this.Intent);
+            NotificationCenter.NotifyNotificationTapped(this.Intent);
         }
-
-        //protected override void OnNewIntent(Intent intent)
-        //{
-        //    NotificationCenter.NotifyNotificationTapped(intent);
-        //    base.OnNewIntent(intent);
-        //}
 
         private void InitExternModule(Bundle savedInstanceState)
         {

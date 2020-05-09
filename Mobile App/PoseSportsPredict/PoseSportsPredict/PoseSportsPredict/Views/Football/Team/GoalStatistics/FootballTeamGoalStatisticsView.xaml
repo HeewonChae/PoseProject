@@ -1,13 +1,82 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              x:Class="PoseSportsPredict.Views.Football.Team.GoalStatistics.FootballTeamGoalStatisticsView">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
+    <ContentView.Content>
+        <StackLayout>
+            <combobox:SfComboBox
+                    Margin="0"
+                    HorizontalOptions="Center"
+                    DisplayMemberPath="LeagueName"
+                    HeightRequest="40"
+                    TextSize="14"
+                    SelectedIndex="{Binding Ddl_selectedIndex, Mode=TwoWay}"
+                    DropDownBorderColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource CustomGrey_D}"
+                    DataSource="{Binding Ddl_Leagues}">
+                <combobox:SfComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Padding="10,5"
+                            Orientation="Horizontal">
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFit"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="27"
+                                WidthRequest="27"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="img_football.png"
+                                ErrorPlaceholder="img_football.png"
+                                Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                Padding="0,4"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Start"
+                                TypeScale="Body2"
+                                LineHeight="1"
+                                MaxLines="2"
+                                LineBreakMode="TailTruncation"
+                                TextColor="{StaticResource TextColor_D}"
+                                Text="{Binding LeagueName}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                    </DataTemplate>
+                </combobox:SfComboBox.ItemTemplate>
+                <combobox:SfComboBox.Behaviors>
+                    <logics:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding LeagueSelectionChangedCommand}">
+                    </logics:EventToCommandBehavior>
+                </combobox:SfComboBox.Behaviors>
+            </combobox:SfComboBox>
+
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Data_Available}"
+                TaskLoaderNotifier="{Binding TaskLoaderNotifier}">
+                <StackLayout>
+                    <!--CampType button-->
+
+                    <!--득/실점-->
+
+                    <!--골 차트-->
+
+                    <!--최근 기록-->
+                </StackLayout>
+            </loader:TaskLoaderView>
+        </StackLayout>
+    </ContentView.Content>
 </ContentView>

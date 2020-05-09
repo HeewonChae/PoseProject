@@ -140,7 +140,6 @@ namespace PoseSportsPredict
             services.AddTransient<FootballTeamDetailScheduledMatchesView>();
             services.AddTransient<FootballTeamDetailScheduledMatchesViewModel>();
             // Football - GoalStatistics
-            services.AddTransient<FootballTeamGoalStatisticsView>();
             services.AddTransient<FootballTeamGoalStatisticsViewModel>();
             // Football - Bookmark
             services.AddTransient<FootballBookmarksTabViewModel>();

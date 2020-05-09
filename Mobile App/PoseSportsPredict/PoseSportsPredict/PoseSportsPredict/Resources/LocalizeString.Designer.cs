@@ -313,6 +313,24 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Goal For/Against.
+        /// </summary>
+        public static string Goal_For_Against {
+            get {
+                return ResourceManager.GetString("Goal_For_Against", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goal Statistics.
+        /// </summary>
+        public static string Goal_Statistics {
+            get {
+                return ResourceManager.GetString("Goal_Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google.
         /// </summary>
         public static string Google {

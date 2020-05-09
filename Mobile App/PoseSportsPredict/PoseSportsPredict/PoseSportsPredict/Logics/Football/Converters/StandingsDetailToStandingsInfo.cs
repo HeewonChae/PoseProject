@@ -26,15 +26,23 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
             var returnValue = new FootballStandingsInfo()
             {
-                League_CountryLogo = standingsDetail.League.Country.Logo,
-                League_CountryName = standingsDetail.League.Country.Name,
-                LeagueLogo = standingsDetail.League.Logo,
-                LeagueName = standingsDetail.League.Name,
-                LeagueType = standingsDetail.League.LeagueType,
-                TeamId = standingsDetail.Team.Id,
-                TeamLogo = standingsDetail.Team.Logo,
-                TeamName = standingsDetail.Team.Name,
-                Team_CountryName = standingsDetail.Team.CountryName,
+                LeagueInfo = new FootballLeagueInfo
+                {
+                    CountryLogo = standingsDetail.League.Country.Logo,
+                    CountryName = standingsDetail.League.Country.Name,
+                    LeagueLogo = standingsDetail.League.Logo,
+                    LeagueName = standingsDetail.League.Name,
+                    LeagueType = standingsDetail.League.LeagueType,
+                },
+
+                TeamInfo = new FootballTeamInfo
+                {
+                    TeamId = standingsDetail.Team.Id,
+                    TeamLogo = standingsDetail.Team.Logo,
+                    TeamName = standingsDetail.Team.Name,
+                    CountryName = standingsDetail.Team.CountryName,
+                },
+
                 Rank = standingsDetail.Rank,
                 RankColor = Color.Transparent,
                 Points = standingsDetail.Points,

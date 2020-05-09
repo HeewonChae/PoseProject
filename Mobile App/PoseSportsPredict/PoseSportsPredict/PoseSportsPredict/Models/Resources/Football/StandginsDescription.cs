@@ -25,21 +25,21 @@ namespace PoseSportsPredict.Models.Resources.Football
 
         public static StandingsDescCategoryType GetDescCategory(string description)
         {
-            if (StandginsDescriptions.TryGetValue(StandingsDescCategoryType.Negative, out StandginsDescription[] negativeDescs))
-            {
-                foreach (var negativeDesc in negativeDescs)
-                {
-                    if (description.ToLower().Contains(negativeDesc.Keyword.ToLower()))
-                        return StandingsDescCategoryType.Negative;
-                }
-            }
-
             if (StandginsDescriptions.TryGetValue(StandingsDescCategoryType.Positive, out StandginsDescription[] positiveDescs))
             {
                 foreach (var positiveDesc in positiveDescs)
                 {
                     if (description.ToLower().Contains(positiveDesc.Keyword.ToLower()))
                         return StandingsDescCategoryType.Positive;
+                }
+            }
+
+            if (StandginsDescriptions.TryGetValue(StandingsDescCategoryType.Negative, out StandginsDescription[] negativeDescs))
+            {
+                foreach (var negativeDesc in negativeDescs)
+                {
+                    if (description.ToLower().Contains(negativeDesc.Keyword.ToLower()))
+                        return StandingsDescCategoryType.Negative;
                 }
             }
 

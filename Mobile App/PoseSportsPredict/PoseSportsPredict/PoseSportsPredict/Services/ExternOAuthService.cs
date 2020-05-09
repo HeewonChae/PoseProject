@@ -95,7 +95,7 @@ namespace PoseSportsPredict.Services
                 // Error
                 authenticator.Error += async (sender, eventArgs) =>
                 {
-                    await MaterialDialog.Instance.AlertAsync($"OAuth error: {eventArgs.Message}",
+                    await MaterialDialog.Instance.AlertAsync($"OAuth Error: {eventArgs.Message}",
                         LocalizeString.App_Title,
                         LocalizeString.Ok,
                         DialogConfiguration.DefaultAlterDialogConfiguration);

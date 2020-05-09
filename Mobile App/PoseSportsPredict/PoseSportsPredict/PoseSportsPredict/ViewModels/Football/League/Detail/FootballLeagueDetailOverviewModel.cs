@@ -14,6 +14,7 @@ using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views.Football.League.Detail;
 using Sharpnado.Presentation.Forms;
 using Shiny;
+using Syncfusion.XForms.ComboBox;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -59,7 +60,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         private TaskLoaderNotifier _overviewTaskLoaderNotifier;
         private ObservableList<FootballTeamInfo> _participatingTeams_Left;
         private ObservableList<FootballTeamInfo> _participatingTeams_Right;
-        private ObservableList<FootballStandingsViewModel> _standingsViewModels;
+        private FootballStandingsViewModel _standingsViewModel;
 
         #endregion Fields
 
@@ -69,7 +70,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         public TaskLoaderNotifier OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
         public ObservableList<FootballTeamInfo> ParticipatingTeams_Left { get => _participatingTeams_Left; set => SetValue(ref _participatingTeams_Left, value); }
         public ObservableList<FootballTeamInfo> ParticipatingTeams_Right { get => _participatingTeams_Right; set => SetValue(ref _participatingTeams_Right, value); }
-        public ObservableList<FootballStandingsViewModel> StandingsViewModels { get => _standingsViewModels; set => SetValue(ref _standingsViewModels, value); }
+        public FootballStandingsViewModel StandingsViewModel { get => _standingsViewModel; set => SetValue(ref _standingsViewModel, value); }
 
         #endregion Properties
 
@@ -171,57 +172,14 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                 standingsInfos.Add(ShinyHost.Resolve<StandingsDetailToStandingsInfo>().Convert(standingsDetail));
             }
 
-            //// Set RankColor
-            var descGroups = standingsInfos.OrderBy(elem => elem.Rank).GroupBy(elem => elem.Description);
-            int positiveDescCnt = 0;
-            int negativeDescCnt = 0;
-            int neutralDescCnt = 0;
-            foreach (var descGroup in descGroups)
+            if (standingsInfos.Count > 0)
             {
-                if (string.IsNullOrEmpty(descGroup.Key))
-                    continue;
-
-                var descCategoryType = StandginsDescription.GetDescCategory(descGroup.Key);
-                Color descColor;
-                if (descCategoryType == StandingsDescCategoryType.Positive)
-                {
-                    descColor = StandingsRankColor.GetRankColor(descCategoryType, positiveDescCnt);
-                    positiveDescCnt++;
-                }
-                else if (descCategoryType == StandingsDescCategoryType.Negative)
-                {
-                    descColor = StandingsRankColor.GetRankColor(descCategoryType, negativeDescCnt);
-                    negativeDescCnt++;
-                }
-                else if (descCategoryType == StandingsDescCategoryType.Neutral)
-                {
-                    descColor = StandingsRankColor.GetRankColor(descCategoryType, neutralDescCnt);
-                    neutralDescCnt++;
-                }
-                else
-                {
-                    descColor = StandingsRankColor.GetRankColor(StandingsDescCategoryType.None, 0);
-                }
-
-                foreach (var standings in descGroup)
-                {
-                    standings.RankColor = descColor;
-                }
+                var standingsByGroup = standingsInfos
+                .GroupBy(elem => elem.Group)
+                .ToDictionary(elem => elem.Key, elem => elem.ToList());
+                StandingsViewModel = ShinyHost.Resolve<FootballStandingsViewModel>();
+                StandingsViewModel.SetMember(standingsByGroup);
             }
-
-            // Groupping Standings by group data
-            var standingsGroups = standingsInfos.OrderBy(elem => elem.Rank).GroupBy(elem => elem.Group);
-            var standingsViewModels = new List<FootballStandingsViewModel>();
-            foreach (var standingsGroup in standingsGroups)
-            {
-                var standingsViewModel = ShinyHost.Resolve<FootballStandingsViewModel>();
-                standingsViewModel.OnInitializeView(standingsGroup.ToArray());
-
-                standingsViewModels.Add(standingsViewModel);
-            }
-
-            StandingsViewModels = new ObservableList<FootballStandingsViewModel>(
-                standingsViewModels.OrderBy(elem => elem.LeagueTitle).ToArray());
 
             SetIsBusy(false);
         }

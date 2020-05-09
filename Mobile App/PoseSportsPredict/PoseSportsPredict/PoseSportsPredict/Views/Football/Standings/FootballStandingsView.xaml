@@ -8,26 +8,49 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              x:Class="PoseSportsPredict.Views.Football.Standings.FootballStandingsView">
     <ContentView.Content>
-        <StackLayout Margin="0,0,0,5">
+        <StackLayout Margin="0">
             <StackLayout
                 Padding="10,0"
+                Spacing="20"
                 Orientation="Horizontal">
-                <materialui:MaterialLabel
-                    MaxLines="1"
-                    Padding="0,7"
-                    LineBreakMode="TailTruncation"
-                    HorizontalOptions="StartAndExpand"
-                    VerticalOptions="Start"
-                    TypeScale="Subtitle2"
+                <combobox:SfComboBox
+                    Margin="0"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="40"
+                    TextSize="14"
+                    SelectedIndex="{Binding Ddl_selectedIndex, Mode=TwoWay}"
+                    DropDownBorderColor="{StaticResource PrimaryColor}"
                     TextColor="{StaticResource CustomGrey_D}"
-                    Text="{Binding LeagueTitle}"
-                    effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
-                    effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                </materialui:MaterialLabel>
+                    DataSource="{Binding Ddl_Groups}">
+                    <combobox:SfComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                Padding="10,5"
+                                Orientation="Horizontal">
+                                <materialui:MaterialLabel
+                                Padding="0,4"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Start"
+                                TypeScale="Body2"
+                                LineHeight="1"
+                                MaxLines="2"
+                                LineBreakMode="TailTruncation"
+                                TextColor="{StaticResource TextColor_D}"
+                                Text="{Binding .}">
+                                </materialui:MaterialLabel>
+                            </StackLayout>
+                        </DataTemplate>
+                    </combobox:SfComboBox.ItemTemplate>
+                    <combobox:SfComboBox.Behaviors>
+                        <logics:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding LeagueSelectionChangedCommand}">
+                        </logics:EventToCommandBehavior>
+                    </combobox:SfComboBox.Behaviors>
+                </combobox:SfComboBox>
                 <materialui:MaterialCard
                     ClickCommand="{Binding ViewFormClickCommand}"
                     IsClickable="True"
@@ -62,29 +85,36 @@
                     </materialui:MaterialCard.Triggers>
                 </materialui:MaterialCard>
             </StackLayout>
-            <Grid
-                x:Name="_gd_leagueTable"
-                ColumnSpacing="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
 
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Data_Available}"
+                TaskLoaderNotifier="{Binding TaskLoaderNotifier}">
+                <StackLayout>
+                    <Grid
+                        x:Name="_gd_leagueTable"
+                        ColumnSpacing="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
 
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <!--Header-->
-                <materialui:MaterialLabel
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!--Header-->
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="0"
                     Padding="7,5"
@@ -95,8 +125,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="#">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="1"
                     VerticalTextAlignment="Center"
@@ -106,9 +136,9 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Team}">
-                </materialui:MaterialLabel>
+                        </materialui:MaterialLabel>
 
-                <materialui:MaterialLabel
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="2"
                     Padding="7,0"
@@ -120,8 +150,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Played_Initial}">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="3"
                     Padding="7,0"
@@ -133,8 +163,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Win_Initial}">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="4"
                     Padding="7,0"
@@ -146,8 +176,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Draw_Initial}">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="5"
                     Padding="7,0"
@@ -159,8 +189,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Lose_Initial}">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="6"
                     VerticalTextAlignment="Center"
@@ -171,8 +201,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="+ / -">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="7"
                     Padding="7,0"
@@ -184,8 +214,8 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="=">
-                </materialui:MaterialLabel>
-                <materialui:MaterialLabel
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="8"
                     Padding="7,0"
@@ -197,9 +227,9 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Points_Initial}">
-                </materialui:MaterialLabel>
+                        </materialui:MaterialLabel>
 
-                <materialui:MaterialLabel
+                        <materialui:MaterialLabel
                     Grid.Row="0"
                     Grid.Column="9"
                     Padding="7,0"
@@ -211,24 +241,24 @@
                     BackgroundColor="{StaticResource CustomGrey}"
                     TextColor="{StaticResource TextColor_L}"
                     Text="{x:Static localize:LocalizeString.Form}">
-                </materialui:MaterialLabel>
+                        </materialui:MaterialLabel>
 
-                <!--Rank-->
-                <StackLayout
+                        <!--Rank-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="0"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <StackLayout Orientation="Horizontal">
-                                    <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <materialui:MaterialLabel
                                         HeightRequest="44"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
                                         TypeScale="Body2">
-                                    </materialui:MaterialLabel>
-                                    <materialui:MaterialCard
+                                            </materialui:MaterialLabel>
+                                            <materialui:MaterialCard
                                         x:Name="_rankCard"
                                         Margin="0"
                                         Padding="0"
@@ -238,54 +268,54 @@
                                         WidthRequest="21"
                                         HeightRequest="21"
                                         BackgroundColor="{Binding RankColor}">
-                                        <materialui:MaterialLabel
+                                                <materialui:MaterialLabel
                                             VerticalTextAlignment="Center"
                                             HorizontalTextAlignment="Center"
                                             TypeScale="Body2"
                                             TextColor="{StaticResource TextColor_L}"
                                             Text="{Binding Rank}">
-                                            <materialui:MaterialLabel.Triggers>
-                                                <DataTrigger
+                                                    <materialui:MaterialLabel.Triggers>
+                                                        <DataTrigger
                                                     TargetType="materialui:MaterialLabel"
                                                     Binding="{Binding Path=BackgroundColor, Source={x:Reference _rankCard}}"
                                                     Value="TransParent">
-                                                    <Setter Property="TextColor" Value="{StaticResource TextColor_D}" />
-                                                </DataTrigger>
-                                            </materialui:MaterialLabel.Triggers>
-                                        </materialui:MaterialLabel>
-                                    </materialui:MaterialCard>
-                                    <materialui:MaterialLabel
+                                                            <Setter Property="TextColor" Value="{StaticResource TextColor_D}" />
+                                                        </DataTrigger>
+                                                    </materialui:MaterialLabel.Triggers>
+                                                </materialui:MaterialLabel>
+                                            </materialui:MaterialCard>
+                                            <materialui:MaterialLabel
                                         HeightRequest="44"
                                         VerticalTextAlignment="Center"
                                         HorizontalTextAlignment="Center"
                                         TypeScale="Body2">
-                                    </materialui:MaterialLabel>
-                                </StackLayout>
-                                <BoxView
+                                            </materialui:MaterialLabel>
+                                        </StackLayout>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Team Name-->
-                <StackLayout
+                        <!--Team Name-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="1"
                     x:Name="_gd_teamName"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <StackLayout
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <StackLayout
                                     Orientation="Horizontal"
                                     effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TeamNameClickCommand, Source={x:Reference _gd_teamName}}"
                                     effects:TapCommandEffect.TapParameter="{Binding .}"
                                     effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                                    <ffimageloading:CachedImage
+                                            <ffimageloading:CachedImage
                                         Aspect="AspectFit"
                                         HorizontalOptions="Center"
                                         VerticalOptions="Center"
@@ -295,9 +325,9 @@
                                         DownsampleToViewSize="True"
                                         LoadingPlaceholder="img_football.png"
                                         ErrorPlaceholder="img_football.png"
-                                        Source="{Binding TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                    </ffimageloading:CachedImage>
-                                    <materialui:MaterialLabel
+                                        Source="{Binding TeamInfo.TeamLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                            </ffimageloading:CachedImage>
+                                            <materialui:MaterialLabel
                                         Padding="0,4"
                                         HeightRequest="44"
                                         VerticalTextAlignment="Center"
@@ -307,29 +337,29 @@
                                         MaxLines="2"
                                         LineBreakMode="TailTruncation"
                                         TextColor="{StaticResource TextColor_D}"
-                                        Text="{Binding TeamName}">
-                                    </materialui:MaterialLabel>
-                                </StackLayout>
-                                <BoxView
+                                        Text="{Binding TeamInfo.TeamName}">
+                                            </materialui:MaterialLabel>
+                                        </StackLayout>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Played-->
-                <StackLayout
+                        <!--Played-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="2"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
@@ -337,27 +367,27 @@
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding Played}">
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Win-->
-                <StackLayout
+                        <!--Win-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="3"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
@@ -365,27 +395,27 @@
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding Win}">
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Draw-->
-                <StackLayout
+                        <!--Draw-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="4"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
@@ -393,27 +423,27 @@
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding Draw}">
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                      WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Lose-->
-                <StackLayout
+                        <!--Lose-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="5"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
@@ -421,61 +451,61 @@
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding Lose}">
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Goal-->
-                <StackLayout
+                        <!--Goal-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="6"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
                                     HorizontalTextAlignment="Center"
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}">
-                                    <materialui:MaterialLabel.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding GoalFor}" />
-                                            <Span Text=" - " />
-                                            <Span Text="{Binding GoalAgainst}" />
-                                        </FormattedString>
-                                    </materialui:MaterialLabel.FormattedText>
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                            <materialui:MaterialLabel.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding GoalFor}" />
+                                                    <Span Text=" - " />
+                                                    <Span Text="{Binding GoalAgainst}" />
+                                                </FormattedString>
+                                            </materialui:MaterialLabel.FormattedText>
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Goal Diff-->
-                <StackLayout
+                        <!--Goal Diff-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="7"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
@@ -483,27 +513,27 @@
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding GoalDifference}">
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Points-->
-                <StackLayout
+                        <!--Points-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="8"
                     IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <materialui:MaterialLabel
                                     Padding="7,4"
                                     HeightRequest="44"
                                     VerticalTextAlignment="Center"
@@ -511,27 +541,28 @@
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding Points}">
-                                </materialui:MaterialLabel>
-                                <BoxView
+                                        </materialui:MaterialLabel>
+                                        <BoxView
                                     WidthRequest="0"
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
 
-                <!--Form-->
-                <StackLayout
+                        <!--Form-->
+                        <StackLayout
                     Grid.Row="1"
                     Grid.Column="9"
                     IsVisible="{Binding IsViewForm}"
                     BindableLayout.ItemsSource="{Binding StandingsInfos}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Orientation="Horizontal">
-                                <materialui:MaterialLabel
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <materialui:MaterialLabel
                                         Padding="0,4"
                                         HeightRequest="44"
                                         VerticalTextAlignment="Center"
@@ -539,19 +570,18 @@
                                         TypeScale="Body2"
                                         TextColor="{StaticResource TextColor_D}"
                                         Text="">
-                                </materialui:MaterialLabel>
-                                <StackLayout
+                                            </materialui:MaterialLabel>
+                                            <StackLayout
                                         Margin="10,0"
                                         Orientation="Horizontal"
-                                        Spacing="10"
                                         BindableLayout.ItemsSource="{Binding Form}">
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Orientation="Horizontal">
-                                                <StackLayout
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <StackLayout
                                                         Spacing="3"
                                                         VerticalOptions="Center">
-                                                    <materialui:MaterialCard
+                                                                <materialui:MaterialCard
                                                         WidthRequest="22"
                                                         HeightRequest="22"
                                                         Padding="0"
@@ -559,66 +589,68 @@
                                                         CornerRadius="3"
                                                         Elevation="0"
                                                         BackgroundColor="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
-                                                        <materialui:MaterialLabel
+                                                                    <materialui:MaterialLabel
                                                             VerticalTextAlignment="Center"
                                                             HorizontalTextAlignment="Center"
                                                             TypeScale="Body2"
                                                             TextColor="{StaticResource TextColor_L}"
                                                             Text="{Binding Result, Converter={StaticResource matchResultToStringConverter}}">
-                                                        </materialui:MaterialLabel>
-                                                    </materialui:MaterialCard>
-                                                    <BoxView
+                                                                    </materialui:MaterialLabel>
+                                                                </materialui:MaterialCard>
+                                                                <BoxView
                                                         WidthRequest="0"
                                                         HeightRequest="1"
                                                         IsVisible="{Binding IsLastMatch}"
                                                         Color="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
-                                                    </BoxView>
-                                                </StackLayout>
+                                                                </BoxView>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
                                             </StackLayout>
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
-                                </StackLayout>
-                                <BoxView
-                                    WidthRequest="0"
+                                        </StackLayout>
+                                        <BoxView
                                     HeightRequest="0.5"
                                     Color="{StaticResource CustomGrey_L}">
-                                </BoxView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-            </Grid>
+                                        </BoxView>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </Grid>
 
-            <!--Rank Description-->
-            <StackLayout
+                    <!--Rank Description-->
+                    <StackLayout
                 Margin="10,7"
                 BindableLayout.ItemsSource="{Binding StandingsDescription}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Spacing="10">
-                            <materialui:MaterialCard
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <materialui:MaterialCard
                                 Margin="0"
                                 Padding="0"
                                 CornerRadius="3"
                                 WidthRequest="21"
                                 HeightRequest="21"
                                 BackgroundColor="{Binding DescColor}">
-                            </materialui:MaterialCard>
-                            <materialui:MaterialLabel
+                                    </materialui:MaterialCard>
+                                    <materialui:MaterialLabel
                                     VerticalTextAlignment="Center"
                                     HorizontalTextAlignment="Start"
                                     TypeScale="Body2"
                                     TextColor="{StaticResource CustomGrey_D}">
-                                <materialui:MaterialLabel.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding Description}" />
-                                    </FormattedString>
-                                </materialui:MaterialLabel.FormattedText>
-                            </materialui:MaterialLabel>
-                        </StackLayout>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </StackLayout>
+                                        <materialui:MaterialLabel.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Description}" />
+                                            </FormattedString>
+                                        </materialui:MaterialLabel.FormattedText>
+                                    </materialui:MaterialLabel>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

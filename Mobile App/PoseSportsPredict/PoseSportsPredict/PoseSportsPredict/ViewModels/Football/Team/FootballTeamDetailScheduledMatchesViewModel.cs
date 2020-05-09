@@ -18,6 +18,7 @@ using Sharpnado.Presentation.Forms;
 using Shiny;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -216,13 +217,25 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                 }
             });
 
+            var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+               .Where(elem => elem.HomeTeamId == _teamInfo.TeamId || elem.AwayTeamId == _teamInfo.TeamId);
+            var notifications = await _notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart);
+
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
             Matches = new ObservableList<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
-                Matches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
+                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
+
+                var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
+                var notifiedMatch = notifications.FirstOrDefault(elem => elem.Id == convertedMatchInfo.Id);
+
+                convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+                convertedMatchInfo.IsAlarmed = notifiedMatch != null ? true : false;
+
+                Matches.Add(convertedMatchInfo);
             }
 
             SetIsBusy(false);

@@ -132,19 +132,14 @@
             </ScrollView>
 
             <!--Menu Info-->
-            <StackLayout
+            <!--<StackLayout
                 Grid.Row="3"
                 VerticalOptions="End">
                 <BoxView
                     HeightRequest="0.5"
                     Color="{StaticResource CustomGrey_L}">
                 </BoxView>
-                <Image
-                    Aspect="AspectFit"
-                    HeightRequest="33"
-                    Source="img_poseidon_logo.png">
-                </Image>
-            </StackLayout>
+            </StackLayout>-->
         </Grid>
     </StackLayout>
 </ContentPage>

@@ -49,6 +49,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         #region Services
 
         private IWebApiService _webApiService;
+        private IBookmarkService _bookmarkService;
 
         #endregion Services
 
@@ -89,9 +90,11 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public FootballLeagueDetailFinishedMatchesViewModel(
             FootballLeagueDetailFinishedMatchesView view,
-            IWebApiService webApiService) : base(view)
+            IWebApiService webApiService,
+            IBookmarkService bookmarkService) : base(view)
         {
             _webApiService = webApiService;
+            _bookmarkService = bookmarkService;
 
             OnInitializeView();
         }
@@ -188,10 +191,18 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
+            var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+               .Where(elem => elem.LeagueName == _leagueInfo.LeagueName);
+
             _matchList = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
-                _matchList.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
+                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
+
+                var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
+                convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+
+                _matchList.Add(convertedMatchInfo);
             }
 
             UpdateMatcheGroups(_matchList);

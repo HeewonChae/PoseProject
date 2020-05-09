@@ -18,6 +18,7 @@ using Sharpnado.Presentation.Forms;
 using Shiny;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -220,10 +221,18 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
+            var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+               .Where(elem => elem.HomeTeamId == _teamInfo.TeamId || elem.AwayTeamId == _teamInfo.TeamId);
+
             Matches = new ObservableList<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
-                Matches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
+                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
+
+                var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
+                convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+
+                Matches.Add(convertedMatchInfo);
             }
 
             SetIsBusy(false);

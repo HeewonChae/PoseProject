@@ -34,6 +34,7 @@ namespace PoseSportsPredict.Services
             foreach (var deleteitem in deleteItems)
             {
                 await _sqliteService.DeleteAsync<NotificationInfo>(deleteitem.PrimaryKey);
+                NotificationCenter.Current.Cancel(deleteitem.Id);
             }
 
             // 노티 재등록
@@ -50,7 +51,6 @@ namespace PoseSportsPredict.Services
                     {
                         IconName = registerItem.IconName,
                     },
-                    Repeats = NotificationRepeat.No,
                 };
 
                 NotificationCenter.Current.Show(req);
@@ -76,9 +76,6 @@ namespace PoseSportsPredict.Services
 
             item.SetIsAlarmed(true);
 
-            var message = this.BuildNotificationMessage(item.SportsType, item.NotificationType);
-            MessagingCenter.Send(this, message, item);
-
             var req = new NotificationRequest
             {
                 NotificationId = item.Id,
@@ -90,10 +87,11 @@ namespace PoseSportsPredict.Services
                 {
                     IconName = item.IconName,
                 },
-                Repeats = NotificationRepeat.No,
             };
-
             NotificationCenter.Current.Show(req);
+
+            var message = this.BuildNotificationMessage(item.SportsType, item.NotificationType);
+            MessagingCenter.Send(this, message, item);
 
             UserDialogs.Instance.Toast(LocalizeString.Set_Alarm);
 

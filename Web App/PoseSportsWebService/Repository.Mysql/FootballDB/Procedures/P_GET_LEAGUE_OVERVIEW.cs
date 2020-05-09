@@ -43,9 +43,13 @@ namespace Repository.Mysql.FootballDB.Procedures
 
         public override void BindParameters()
         {
-            LeagueQuery = $"{DB_FootballLeagueDetail.SelectQuery} WHERE l.{nameof(League.country_name)} = \'{_input.CountryName}\' AND l.{nameof(League.name)} = \'{_input.LeagueName}\' AND l.{nameof(League.is_current)} = 1";
-            StandingsQuery = $"{DB_FootballStandingsDetail.SelectQuery} WHERE s.{nameof(Standings.league_id)} = @LeagueId AND s.{nameof(Standings.group)} <> \"\";";
-            TeamsQuery = $"{DB_FootballTeamDetail.SelectQuery} WHERE t.{nameof(Team.id)} in @TeamIds";
+            LeagueQuery = $"{DB_FootballLeagueDetail.SelectQuery} " +
+                $"WHERE l.{nameof(League.country_name)} = \'{_input.CountryName}\' AND l.{nameof(League.name)} = \'{_input.LeagueName}\' AND l.{nameof(League.is_current)} = 1 " +
+                $"ORDER BY l.season_start DESC LIMIT 1";
+            StandingsQuery = $"{DB_FootballStandingsDetail.SelectQuery} " +
+                $"WHERE s.{nameof(Standings.league_id)} = @LeagueId AND s.{nameof(Standings.group)} <> \"\";";
+            TeamsQuery = $"{DB_FootballTeamDetail.SelectQuery} " +
+                $"WHERE t.{nameof(Team.id)} in @TeamIds";
         }
 
         public override P_GET_LEAGUE_OVERVIEW.Output OnQuery()

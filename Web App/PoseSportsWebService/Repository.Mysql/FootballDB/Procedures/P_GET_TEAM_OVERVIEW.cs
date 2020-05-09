@@ -64,16 +64,31 @@ namespace Repository.Mysql.FootballDB.Procedures
                     {
                         _output.DB_FixtureDetailsByLeague = new Dictionary<DB_FootballLeagueDetail, IEnumerable<DB_FootballFixtureDetail>>();
 
-                        var leagueDetails = footballDB.Query<DB_FootballLeagueDetail>(ParticipatingLeaguesQueryString);
+                        var leagueDetails = footballDB.Query<DB_FootballLeagueDetail>(ParticipatingLeaguesQueryString).ToList();
                         if (leagueDetails == null || leagueDetails.Count() == 0)
                             return;
 
-                        foreach (var leagueDetail in leagueDetails)
+                        // 중복 리그 제거
+                        var leagues = new List<DB_FootballLeagueDetail>();
+                        var leagueByGroups = leagueDetails.GroupBy(elem => $"{elem.CountryName}:{elem.LeagueType}:{elem.Name}");
+                        foreach (var leagueByGroup in leagueByGroups)
                         {
-                            var homeFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(HomeFixturesQueryString, new { LeagueId = leagueDetail.Id, _input.TeamId });
-                            var awayFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(AwayFixturesQueryString, new { LeagueId = leagueDetail.Id, _input.TeamId });
+                            if (leagueByGroup.Count() == 1)
+                            {
+                                leagues.Add(leagueByGroup.First());
+                            }
+                            else
+                            {
+                                leagues.Add(leagueByGroup.OrderByDescending(elem => elem.SeasonStartDate).First());
+                            }
+                        }
 
-                            _output.DB_FixtureDetailsByLeague.Add(leagueDetail, homeFixtureDetails.Concat(awayFixtureDetails));
+                        foreach (var league in leagues)
+                        {
+                            var homeFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(HomeFixturesQueryString, new { LeagueId = league.Id, _input.TeamId });
+                            var awayFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(AwayFixturesQueryString, new { LeagueId = league.Id, _input.TeamId });
+
+                            _output.DB_FixtureDetailsByLeague.Add(league, homeFixtureDetails.Concat(awayFixtureDetails));
                         }
                     },
                     this.OnError);

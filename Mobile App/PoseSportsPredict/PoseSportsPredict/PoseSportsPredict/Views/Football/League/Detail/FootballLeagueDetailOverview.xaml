@@ -186,26 +186,18 @@
                         </materialui:MaterialCard>
 
                         <!--Standings-->
-                        <StackLayout
-                            Spacing="0"
-                            BindableLayout.ItemsSource="{Binding StandingsViewModels}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <materialui:MaterialCard
-                                        Margin="7,6"
-                                        Padding="0,5"
-                                        Elevation="3"
-                                        CornerRadius="5">
-                                        <standings:FootballStandingsView />
-                                    </materialui:MaterialCard>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                            <StackLayout.Triggers>
-                                <DataTrigger TargetType="StackLayout" Binding="{Binding StandingsViewModels.Count}" Value="0">
+                        <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="0,5"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <standings:FootballStandingsView BindingContext="{Binding StandingsViewModel}" />
+                            <materialui:MaterialCard.Triggers>
+                                <DataTrigger TargetType="materialui:MaterialCard" Binding="{Binding StandingsViewModel, Converter={StaticResource nullValueBoolConverter}}" Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
-                            </StackLayout.Triggers>
-                        </StackLayout>
+                            </materialui:MaterialCard.Triggers>
+                        </materialui:MaterialCard>
                     </StackLayout>
                 </ScrollView>
             </loader:TaskLoaderView>

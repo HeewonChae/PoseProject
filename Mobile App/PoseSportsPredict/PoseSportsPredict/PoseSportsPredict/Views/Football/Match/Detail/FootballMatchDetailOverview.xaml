@@ -595,17 +595,9 @@
                             Padding="0,5"
                             Elevation="3"
                             CornerRadius="5">
-                            <StackLayout
-                                Spacing="15"
-                                BindableLayout.ItemsSource="{Binding StandingsViewModels}">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate>
-                                        <standings:FootballStandingsView />
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </StackLayout>
+                            <standings:FootballStandingsView BindingContext="{Binding StandingsViewModel}" />
                             <materialui:MaterialCard.Triggers>
-                                <DataTrigger TargetType="materialui:MaterialCard" Binding="{Binding StandingsViewModels.Count}" Value="0">
+                                <DataTrigger TargetType="materialui:MaterialCard" Binding="{Binding StandingsViewModel, Converter={StaticResource nullValueBoolConverter}}" Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
                             </materialui:MaterialCard.Triggers>

@@ -4,6 +4,7 @@ using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;
+using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
@@ -49,6 +50,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
         #region Services
 
         private IWebApiService _webApiService;
+        private IBookmarkService _bookmarkService;
+        private INotificationService _notificationService;
 
         #endregion Services
 
@@ -89,9 +92,13 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public FootballLeagueDetailScheduledMatchesViewModel(
             FootballLeagueDetailScheduledMatchesView view,
-            IWebApiService webApiService) : base(view)
+            IWebApiService webApiService,
+            IBookmarkService bookmarkService,
+            INotificationService notificationService) : base(view)
         {
             _webApiService = webApiService;
+            _bookmarkService = bookmarkService;
+            _notificationService = notificationService;
 
             OnInitializeView();
         }
@@ -188,10 +195,22 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
+            var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+               .Where(elem => elem.LeagueName == _leagueInfo.LeagueName);
+            var notifications = await _notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart);
+
             _matchList = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
-                _matchList.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
+                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
+
+                var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
+                var notifiedMatch = notifications.FirstOrDefault(elem => elem.Id == convertedMatchInfo.Id);
+
+                convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+                convertedMatchInfo.IsAlarmed = notifiedMatch != null ? true : false;
+
+                _matchList.Add(convertedMatchInfo);
             }
 
             UpdateMatcheGroups(_matchList);

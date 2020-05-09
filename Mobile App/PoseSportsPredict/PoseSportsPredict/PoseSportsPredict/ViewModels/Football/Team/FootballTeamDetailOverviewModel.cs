@@ -13,6 +13,7 @@ using PoseSportsPredict.ViewModels.Football.Team.GoalStatistics;
 using PoseSportsPredict.Views.Football.Team;
 using Sharpnado.Presentation.Forms;
 using Shiny;
+using Syncfusion.XForms.ComboBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +55,10 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         private FootballTeamInfo _teamInfo;
         private List<FootballMatchInfo> _matches;
+
         private TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> _overviewTaskLoaderNotifier;
         private ObservableList<ParticipatingLeagueInfo> _participatingLeagues;
-        private ObservableList<FootballTeamGoalStatisticsViewModel> _teamGoalStatisticsViewModels;
+        private FootballTeamGoalStatisticsViewModel _teamGoalStatisticsViewModel;
 
         #endregion Fields
 
@@ -64,7 +66,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
         public ObservableList<ParticipatingLeagueInfo> ParticipatingLeagues { get => _participatingLeagues; set => SetValue(ref _participatingLeagues, value); }
-        public ObservableList<FootballTeamGoalStatisticsViewModel> TeamGoalStatisticsViewModels { get => _teamGoalStatisticsViewModels; set => SetValue(ref _teamGoalStatisticsViewModels, value); }
+        public FootballTeamGoalStatisticsViewModel TeamGoalStatisticsViewModel { get => _teamGoalStatisticsViewModel; set => SetValue(ref _teamGoalStatisticsViewModel, value); }
 
         #endregion Properties
 
@@ -146,6 +148,9 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
+            if (server_result.FixtureDetailsByLeague.Count == 0)
+                return null;
+
             _matches = new List<FootballMatchInfo>();
             var matchesByLeague = new Dictionary<FootballLeagueInfo, List<FootballMatchInfo>>();
             foreach (var keyValue in server_result.FixtureDetailsByLeague)
@@ -161,6 +166,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
                 _matches.AddRange(matches);
             }
+
+            matchesByLeague = matchesByLeague.OrderByDescending(elem => $"{elem.Key.LeagueType}:{elem.Key.CountryName}").ToDictionary(elem => elem.Key, elem => elem.Value);
 
             // 참가중인 리그
             ParticipatingLeagues = new ObservableList<ParticipatingLeagueInfo>();
@@ -186,13 +193,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             }
 
             // 팀 득점 통계
-            TeamGoalStatisticsViewModels = new ObservableList<FootballTeamGoalStatisticsViewModel>();
-            foreach (var keyValue in matchesByLeague)
-            {
-                var teamGoalStatisticsViewModel = new FootballTeamGoalStatisticsViewModel();
-                teamGoalStatisticsViewModel.SetMember(keyValue.Value, _teamInfo, keyValue.Key);
-                TeamGoalStatisticsViewModels.Add(teamGoalStatisticsViewModel);
-            }
+            TeamGoalStatisticsViewModel = ShinyHost.Resolve<FootballTeamGoalStatisticsViewModel>();
+            TeamGoalStatisticsViewModel.SetMember(matchesByLeague, _teamInfo);
 
             SetIsBusy(false);
 
