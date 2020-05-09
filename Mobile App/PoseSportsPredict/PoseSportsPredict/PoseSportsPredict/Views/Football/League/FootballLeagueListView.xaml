@@ -18,10 +18,10 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <StackLayout
-                        Margin="25,0"
+                        Margin="20,0"
                         Orientation="Horizontal">
                         <StackLayout
-                            Padding="20,15"
+                            Padding="18,15"
                             Spacing="15"
                             Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand"

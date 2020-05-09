@@ -31,7 +31,7 @@
                             VerticalOptions="CenterAndExpand"
                             Orientation="Horizontal"
                             Spacing="15"
-                            Padding="25,17"
+                            Padding="20,17"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
@@ -75,7 +75,7 @@
                             VerticalOptions="CenterAndExpand"
                             Orientation="Horizontal"
                             Spacing="15"
-                            Padding="25,17"
+                            Padding="20,17"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">

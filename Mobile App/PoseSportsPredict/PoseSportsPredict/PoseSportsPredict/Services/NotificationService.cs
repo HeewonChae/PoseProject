@@ -50,6 +50,7 @@ namespace PoseSportsPredict.Services
                     Android = new AndroidOptions
                     {
                         IconName = registerItem.IconName,
+                        ChannelId = AppConfig.Psoe_Noti_Channel_01,
                     },
                 };
 
@@ -86,6 +87,7 @@ namespace PoseSportsPredict.Services
                 Android = new AndroidOptions
                 {
                     IconName = item.IconName,
+                    ChannelId = AppConfig.Psoe_Noti_Channel_01,
                 },
             };
             NotificationCenter.Current.Show(req);

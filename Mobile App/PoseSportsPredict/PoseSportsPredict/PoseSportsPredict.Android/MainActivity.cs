@@ -9,6 +9,7 @@ using Plugin.LocalNotification;
 using PoseSportsPredict.Resources;
 using Shiny;
 using System.Linq;
+using static Acr.UserDialogs.Resource;
 
 namespace PoseSportsPredict.Droid
 {
@@ -17,7 +18,7 @@ namespace PoseSportsPredict.Droid
         Theme = "@style/MyTheme.Splash",
         MainLauncher = true,
         //ScreenOrientation = ScreenOrientation.Portrait,
-        LaunchMode = LaunchMode.SingleTop,
+        LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -58,8 +59,6 @@ namespace PoseSportsPredict.Droid
             RequestPermissions(Permissions, PermissionReqId);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            XF.Material.Droid.Material.Init(this, savedInstanceState);
-
             // Initialize extern module
             this.InitExternModule(savedInstanceState);
 
@@ -68,11 +67,24 @@ namespace PoseSportsPredict.Droid
             NotificationCenter.NotifyNotificationTapped(this.Intent);
         }
 
+        //protected override void OnNewIntent(Intent intent)
+        //{
+        //    NotificationCenter.NotifyNotificationTapped(intent);
+        //    base.OnNewIntent(intent);
+        //}
+
         private void InitExternModule(Bundle savedInstanceState)
         {
+            XF.Material.Droid.Material.Init(this, savedInstanceState);
             Android.Glide.Forms.Init(this, debug: false);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
-            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest());
+            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
+            {
+                Id = AppConfig.Psoe_Noti_Channel_01,
+                Importance = NotificationImportance.High,
+                Name = "General",
+                Description = "General",
+            });
             Xamarin.KeyboardHelper.Platform.Droid.Effects.Init(this);
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
             ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();

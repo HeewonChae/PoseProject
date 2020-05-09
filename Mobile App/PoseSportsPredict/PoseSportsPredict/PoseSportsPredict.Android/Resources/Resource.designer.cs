@@ -5410,11 +5410,22 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.abc_slide_in_top = global::PoseSportsPredict.Droid.Resource.Animation.abc_slide_in_top;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.abc_slide_out_bottom = global::PoseSportsPredict.Droid.Resource.Animation.abc_slide_out_bottom;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.abc_slide_out_top = global::PoseSportsPredict.Droid.Resource.Animation.abc_slide_out_top;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.abc_tooltip_enter = global::PoseSportsPredict.Droid.Resource.Animation.abc_tooltip_enter;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.abc_tooltip_exit = global::PoseSportsPredict.Droid.Resource.Animation.abc_tooltip_exit;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.design_bottom_sheet_slide_in = global::PoseSportsPredict.Droid.Resource.Animation.design_bottom_sheet_slide_in;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.design_bottom_sheet_slide_out = global::PoseSportsPredict.Droid.Resource.Animation.design_bottom_sheet_slide_out;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.design_snackbar_in = global::PoseSportsPredict.Droid.Resource.Animation.design_snackbar_in;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animation.design_snackbar_out = global::PoseSportsPredict.Droid.Resource.Animation.design_snackbar_out;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.design_appbar_state_list_animator = global::PoseSportsPredict.Droid.Resource.Animator.design_appbar_state_list_animator;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.design_fab_hide_motion_spec = global::PoseSportsPredict.Droid.Resource.Animator.design_fab_hide_motion_spec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.design_fab_show_motion_spec = global::PoseSportsPredict.Droid.Resource.Animator.design_fab_show_motion_spec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_btn_state_list_anim = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_btn_state_list_anim;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_btn_unelevated_state_list_anim = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_btn_unelevated_state_list_anim;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_chip_state_list_anim = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_chip_state_list_anim;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_fab_hide_motion_spec = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_fab_hide_motion_spec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_fab_show_motion_spec = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_fab_show_motion_spec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_fab_transformation_sheet_collapse_spec = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_fab_transformation_sheet_collapse_spec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Animator.mtrl_fab_transformation_sheet_expand_spec = global::PoseSportsPredict.Droid.Resource.Animator.mtrl_fab_transformation_sheet_expand_spec;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.actionBarDivider = global::PoseSportsPredict.Droid.Resource.Attribute.actionBarDivider;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.actionBarItemBackground = global::PoseSportsPredict.Droid.Resource.Attribute.actionBarItemBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.actionBarPopupTheme = global::PoseSportsPredict.Droid.Resource.Attribute.actionBarPopupTheme;
@@ -5471,20 +5482,33 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.backgroundTintMode = global::PoseSportsPredict.Droid.Resource.Attribute.backgroundTintMode;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.barLength = global::PoseSportsPredict.Droid.Resource.Attribute.barLength;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.behavior_autoHide = global::PoseSportsPredict.Droid.Resource.Attribute.behavior_autoHide;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.behavior_fitToContents = global::PoseSportsPredict.Droid.Resource.Attribute.behavior_fitToContents;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.behavior_hideable = global::PoseSportsPredict.Droid.Resource.Attribute.behavior_hideable;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.behavior_overlapTop = global::PoseSportsPredict.Droid.Resource.Attribute.behavior_overlapTop;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.behavior_peekHeight = global::PoseSportsPredict.Droid.Resource.Attribute.behavior_peekHeight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.behavior_skipCollapsed = global::PoseSportsPredict.Droid.Resource.Attribute.behavior_skipCollapsed;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.borderlessButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.borderlessButtonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.borderWidth = global::PoseSportsPredict.Droid.Resource.Attribute.borderWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.bottomAppBarStyle = global::PoseSportsPredict.Droid.Resource.Attribute.bottomAppBarStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.bottomNavigationStyle = global::PoseSportsPredict.Droid.Resource.Attribute.bottomNavigationStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.bottomSheetDialogTheme = global::PoseSportsPredict.Droid.Resource.Attribute.bottomSheetDialogTheme;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.bottomSheetStyle = global::PoseSportsPredict.Droid.Resource.Attribute.bottomSheetStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxBackgroundColor = global::PoseSportsPredict.Droid.Resource.Attribute.boxBackgroundColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxBackgroundMode = global::PoseSportsPredict.Droid.Resource.Attribute.boxBackgroundMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxCollapsedPaddingTop = global::PoseSportsPredict.Droid.Resource.Attribute.boxCollapsedPaddingTop;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxCornerRadiusBottomEnd = global::PoseSportsPredict.Droid.Resource.Attribute.boxCornerRadiusBottomEnd;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxCornerRadiusBottomStart = global::PoseSportsPredict.Droid.Resource.Attribute.boxCornerRadiusBottomStart;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxCornerRadiusTopEnd = global::PoseSportsPredict.Droid.Resource.Attribute.boxCornerRadiusTopEnd;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxCornerRadiusTopStart = global::PoseSportsPredict.Droid.Resource.Attribute.boxCornerRadiusTopStart;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxStrokeColor = global::PoseSportsPredict.Droid.Resource.Attribute.boxStrokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.boxStrokeWidth = global::PoseSportsPredict.Droid.Resource.Attribute.boxStrokeWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonBarButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.buttonBarButtonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonBarNegativeButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.buttonBarNegativeButtonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonBarNeutralButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.buttonBarNeutralButtonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonBarPositiveButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.buttonBarPositiveButtonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonBarStyle = global::PoseSportsPredict.Droid.Resource.Attribute.buttonBarStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonGravity = global::PoseSportsPredict.Droid.Resource.Attribute.buttonGravity;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonIconDimen = global::PoseSportsPredict.Droid.Resource.Attribute.buttonIconDimen;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonPanelSideLayout = global::PoseSportsPredict.Droid.Resource.Attribute.buttonPanelSideLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.buttonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.buttonStyleSmall = global::PoseSportsPredict.Droid.Resource.Attribute.buttonStyleSmall;
@@ -5496,9 +5520,38 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.cardMaxElevation = global::PoseSportsPredict.Droid.Resource.Attribute.cardMaxElevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.cardPreventCornerOverlap = global::PoseSportsPredict.Droid.Resource.Attribute.cardPreventCornerOverlap;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.cardUseCompatPadding = global::PoseSportsPredict.Droid.Resource.Attribute.cardUseCompatPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.cardViewStyle = global::PoseSportsPredict.Droid.Resource.Attribute.cardViewStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.checkboxStyle = global::PoseSportsPredict.Droid.Resource.Attribute.checkboxStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.checkedChip = global::PoseSportsPredict.Droid.Resource.Attribute.checkedChip;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.checkedIcon = global::PoseSportsPredict.Droid.Resource.Attribute.checkedIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.checkedIconEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.checkedIconEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.checkedIconVisible = global::PoseSportsPredict.Droid.Resource.Attribute.checkedIconVisible;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.checkedTextViewStyle = global::PoseSportsPredict.Droid.Resource.Attribute.checkedTextViewStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipBackgroundColor = global::PoseSportsPredict.Droid.Resource.Attribute.chipBackgroundColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipCornerRadius = global::PoseSportsPredict.Droid.Resource.Attribute.chipCornerRadius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipEndPadding = global::PoseSportsPredict.Droid.Resource.Attribute.chipEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipGroupStyle = global::PoseSportsPredict.Droid.Resource.Attribute.chipGroupStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipIcon = global::PoseSportsPredict.Droid.Resource.Attribute.chipIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipIconEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.chipIconEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipIconSize = global::PoseSportsPredict.Droid.Resource.Attribute.chipIconSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipIconTint = global::PoseSportsPredict.Droid.Resource.Attribute.chipIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipIconVisible = global::PoseSportsPredict.Droid.Resource.Attribute.chipIconVisible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipMinHeight = global::PoseSportsPredict.Droid.Resource.Attribute.chipMinHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipSpacing = global::PoseSportsPredict.Droid.Resource.Attribute.chipSpacing;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipSpacingHorizontal = global::PoseSportsPredict.Droid.Resource.Attribute.chipSpacingHorizontal;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipSpacingVertical = global::PoseSportsPredict.Droid.Resource.Attribute.chipSpacingVertical;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipStandaloneStyle = global::PoseSportsPredict.Droid.Resource.Attribute.chipStandaloneStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipStartPadding = global::PoseSportsPredict.Droid.Resource.Attribute.chipStartPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipStrokeColor = global::PoseSportsPredict.Droid.Resource.Attribute.chipStrokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipStrokeWidth = global::PoseSportsPredict.Droid.Resource.Attribute.chipStrokeWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.chipStyle = global::PoseSportsPredict.Droid.Resource.Attribute.chipStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIcon = global::PoseSportsPredict.Droid.Resource.Attribute.closeIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIconEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.closeIconEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIconEndPadding = global::PoseSportsPredict.Droid.Resource.Attribute.closeIconEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIconSize = global::PoseSportsPredict.Droid.Resource.Attribute.closeIconSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIconStartPadding = global::PoseSportsPredict.Droid.Resource.Attribute.closeIconStartPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIconTint = global::PoseSportsPredict.Droid.Resource.Attribute.closeIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeIconVisible = global::PoseSportsPredict.Droid.Resource.Attribute.closeIconVisible;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.closeItemLayout = global::PoseSportsPredict.Droid.Resource.Attribute.closeItemLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.collapseContentDescription = global::PoseSportsPredict.Droid.Resource.Attribute.collapseContentDescription;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.collapsedTitleGravity = global::PoseSportsPredict.Droid.Resource.Attribute.collapsedTitleGravity;
@@ -5514,6 +5567,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.colorError = global::PoseSportsPredict.Droid.Resource.Attribute.colorError;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.colorPrimary = global::PoseSportsPredict.Droid.Resource.Attribute.colorPrimary;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.colorPrimaryDark = global::PoseSportsPredict.Droid.Resource.Attribute.colorPrimaryDark;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.colorSecondary = global::PoseSportsPredict.Droid.Resource.Attribute.colorSecondary;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.colorSwitchThumbNormal = global::PoseSportsPredict.Droid.Resource.Attribute.colorSwitchThumbNormal;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.commitIcon = global::PoseSportsPredict.Droid.Resource.Attribute.commitIcon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.contentDescription = global::PoseSportsPredict.Droid.Resource.Attribute.contentDescription;
@@ -5530,12 +5584,15 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.contentPaddingTop = global::PoseSportsPredict.Droid.Resource.Attribute.contentPaddingTop;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.contentScrim = global::PoseSportsPredict.Droid.Resource.Attribute.contentScrim;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.controlBackground = global::PoseSportsPredict.Droid.Resource.Attribute.controlBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.coordinatorLayoutStyle = global::PoseSportsPredict.Droid.Resource.Attribute.coordinatorLayoutStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.cornerRadius = global::PoseSportsPredict.Droid.Resource.Attribute.cornerRadius;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.counterEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.counterEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.counterMaxLength = global::PoseSportsPredict.Droid.Resource.Attribute.counterMaxLength;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.counterOverflowTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.counterOverflowTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.counterTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.counterTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.customNavigationLayout = global::PoseSportsPredict.Droid.Resource.Attribute.customNavigationLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.defaultQueryHint = global::PoseSportsPredict.Droid.Resource.Attribute.defaultQueryHint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.dialogCornerRadius = global::PoseSportsPredict.Droid.Resource.Attribute.dialogCornerRadius;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.dialogPreferredPadding = global::PoseSportsPredict.Droid.Resource.Attribute.dialogPreferredPadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.dialogTheme = global::PoseSportsPredict.Droid.Resource.Attribute.dialogTheme;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.displayOptions = global::PoseSportsPredict.Droid.Resource.Attribute.displayOptions;
@@ -5551,6 +5608,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.editTextColor = global::PoseSportsPredict.Droid.Resource.Attribute.editTextColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.editTextStyle = global::PoseSportsPredict.Droid.Resource.Attribute.editTextStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.elevation = global::PoseSportsPredict.Droid.Resource.Attribute.elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.enforceMaterialTheme = global::PoseSportsPredict.Droid.Resource.Attribute.enforceMaterialTheme;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.enforceTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.enforceTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.errorEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.errorEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.errorTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.errorTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.expandActivityOverflowButtonDrawable = global::PoseSportsPredict.Droid.Resource.Attribute.expandActivityOverflowButtonDrawable;
@@ -5562,12 +5621,19 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.expandedTitleMarginStart = global::PoseSportsPredict.Droid.Resource.Attribute.expandedTitleMarginStart;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.expandedTitleMarginTop = global::PoseSportsPredict.Droid.Resource.Attribute.expandedTitleMarginTop;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.expandedTitleTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.expandedTitleTextAppearance;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fabAlignmentMode = global::PoseSportsPredict.Droid.Resource.Attribute.fabAlignmentMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fabCradleMargin = global::PoseSportsPredict.Droid.Resource.Attribute.fabCradleMargin;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fabCradleRoundedCornerRadius = global::PoseSportsPredict.Droid.Resource.Attribute.fabCradleRoundedCornerRadius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fabCradleVerticalOffset = global::PoseSportsPredict.Droid.Resource.Attribute.fabCradleVerticalOffset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fabCustomSize = global::PoseSportsPredict.Droid.Resource.Attribute.fabCustomSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fabSize = global::PoseSportsPredict.Droid.Resource.Attribute.fabSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fastScrollEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.fastScrollEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fastScrollHorizontalThumbDrawable = global::PoseSportsPredict.Droid.Resource.Attribute.fastScrollHorizontalThumbDrawable;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fastScrollHorizontalTrackDrawable = global::PoseSportsPredict.Droid.Resource.Attribute.fastScrollHorizontalTrackDrawable;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fastScrollVerticalThumbDrawable = global::PoseSportsPredict.Droid.Resource.Attribute.fastScrollVerticalThumbDrawable;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fastScrollVerticalTrackDrawable = global::PoseSportsPredict.Droid.Resource.Attribute.fastScrollVerticalTrackDrawable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.firstBaselineToTopHeight = global::PoseSportsPredict.Droid.Resource.Attribute.firstBaselineToTopHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.floatingActionButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.floatingActionButtonStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.font = global::PoseSportsPredict.Droid.Resource.Attribute.font;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontFamily = global::PoseSportsPredict.Droid.Resource.Attribute.fontFamily;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontProviderAuthority = global::PoseSportsPredict.Droid.Resource.Attribute.fontProviderAuthority;
@@ -5577,20 +5643,32 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontProviderPackage = global::PoseSportsPredict.Droid.Resource.Attribute.fontProviderPackage;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontProviderQuery = global::PoseSportsPredict.Droid.Resource.Attribute.fontProviderQuery;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontStyle = global::PoseSportsPredict.Droid.Resource.Attribute.fontStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontVariationSettings = global::PoseSportsPredict.Droid.Resource.Attribute.fontVariationSettings;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.fontWeight = global::PoseSportsPredict.Droid.Resource.Attribute.fontWeight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.foregroundInsidePadding = global::PoseSportsPredict.Droid.Resource.Attribute.foregroundInsidePadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.gapBetweenBars = global::PoseSportsPredict.Droid.Resource.Attribute.gapBetweenBars;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.goIcon = global::PoseSportsPredict.Droid.Resource.Attribute.goIcon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.headerLayout = global::PoseSportsPredict.Droid.Resource.Attribute.headerLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.height = global::PoseSportsPredict.Droid.Resource.Attribute.height;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.helperText = global::PoseSportsPredict.Droid.Resource.Attribute.helperText;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.helperTextEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.helperTextEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.helperTextTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.helperTextTextAppearance;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hideMotionSpec = global::PoseSportsPredict.Droid.Resource.Attribute.hideMotionSpec;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hideOnContentScroll = global::PoseSportsPredict.Droid.Resource.Attribute.hideOnContentScroll;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hideOnScroll = global::PoseSportsPredict.Droid.Resource.Attribute.hideOnScroll;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hintAnimationEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.hintAnimationEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hintEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.hintEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hintTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.hintTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.homeAsUpIndicator = global::PoseSportsPredict.Droid.Resource.Attribute.homeAsUpIndicator;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.homeLayout = global::PoseSportsPredict.Droid.Resource.Attribute.homeLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.hoveredFocusedTranslationZ = global::PoseSportsPredict.Droid.Resource.Attribute.hoveredFocusedTranslationZ;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.icon = global::PoseSportsPredict.Droid.Resource.Attribute.icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconEndPadding = global::PoseSportsPredict.Droid.Resource.Attribute.iconEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconGravity = global::PoseSportsPredict.Droid.Resource.Attribute.iconGravity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconifiedByDefault = global::PoseSportsPredict.Droid.Resource.Attribute.iconifiedByDefault;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconPadding = global::PoseSportsPredict.Droid.Resource.Attribute.iconPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconSize = global::PoseSportsPredict.Droid.Resource.Attribute.iconSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconStartPadding = global::PoseSportsPredict.Droid.Resource.Attribute.iconStartPadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconTint = global::PoseSportsPredict.Droid.Resource.Attribute.iconTint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.iconTintMode = global::PoseSportsPredict.Droid.Resource.Attribute.iconTintMode;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.imageButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.imageButtonStyle;
@@ -5599,11 +5677,20 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.insetForeground = global::PoseSportsPredict.Droid.Resource.Attribute.insetForeground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.isLightTheme = global::PoseSportsPredict.Droid.Resource.Attribute.isLightTheme;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemBackground = global::PoseSportsPredict.Droid.Resource.Attribute.itemBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemHorizontalPadding = global::PoseSportsPredict.Droid.Resource.Attribute.itemHorizontalPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemHorizontalTranslationEnabled = global::PoseSportsPredict.Droid.Resource.Attribute.itemHorizontalTranslationEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemIconPadding = global::PoseSportsPredict.Droid.Resource.Attribute.itemIconPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemIconSize = global::PoseSportsPredict.Droid.Resource.Attribute.itemIconSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemIconTint = global::PoseSportsPredict.Droid.Resource.Attribute.itemIconTint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemPadding = global::PoseSportsPredict.Droid.Resource.Attribute.itemPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemSpacing = global::PoseSportsPredict.Droid.Resource.Attribute.itemSpacing;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.itemTextAppearance;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemTextAppearanceActive = global::PoseSportsPredict.Droid.Resource.Attribute.itemTextAppearanceActive;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemTextAppearanceInactive = global::PoseSportsPredict.Droid.Resource.Attribute.itemTextAppearanceInactive;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.itemTextColor = global::PoseSportsPredict.Droid.Resource.Attribute.itemTextColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.keylines = global::PoseSportsPredict.Droid.Resource.Attribute.keylines;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.labelVisibilityMode = global::PoseSportsPredict.Droid.Resource.Attribute.labelVisibilityMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.lastBaselineToBottomHeight = global::PoseSportsPredict.Droid.Resource.Attribute.lastBaselineToBottomHeight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.layout = global::PoseSportsPredict.Droid.Resource.Attribute.layout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.layoutManager = global::PoseSportsPredict.Droid.Resource.Attribute.layoutManager;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.layout_anchor = global::PoseSportsPredict.Droid.Resource.Attribute.layout_anchor;
@@ -5616,6 +5703,9 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.layout_keyline = global::PoseSportsPredict.Droid.Resource.Attribute.layout_keyline;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.layout_scrollFlags = global::PoseSportsPredict.Droid.Resource.Attribute.layout_scrollFlags;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.layout_scrollInterpolator = global::PoseSportsPredict.Droid.Resource.Attribute.layout_scrollInterpolator;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.liftOnScroll = global::PoseSportsPredict.Droid.Resource.Attribute.liftOnScroll;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.lineHeight = global::PoseSportsPredict.Droid.Resource.Attribute.lineHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.lineSpacing = global::PoseSportsPredict.Droid.Resource.Attribute.lineSpacing;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.listChoiceBackgroundIndicator = global::PoseSportsPredict.Droid.Resource.Attribute.listChoiceBackgroundIndicator;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.listDividerAlertDialog = global::PoseSportsPredict.Droid.Resource.Attribute.listDividerAlertDialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.listItemLayout = global::PoseSportsPredict.Droid.Resource.Attribute.listItemLayout;
@@ -5629,14 +5719,18 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.listPreferredItemPaddingRight = global::PoseSportsPredict.Droid.Resource.Attribute.listPreferredItemPaddingRight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.logo = global::PoseSportsPredict.Droid.Resource.Attribute.logo;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.logoDescription = global::PoseSportsPredict.Droid.Resource.Attribute.logoDescription;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.materialButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.materialButtonStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.materialCardViewStyle = global::PoseSportsPredict.Droid.Resource.Attribute.materialCardViewStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.maxActionInlineWidth = global::PoseSportsPredict.Droid.Resource.Attribute.maxActionInlineWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.maxButtonHeight = global::PoseSportsPredict.Droid.Resource.Attribute.maxButtonHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.maxImageSize = global::PoseSportsPredict.Droid.Resource.Attribute.maxImageSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.measureWithLargestChild = global::PoseSportsPredict.Droid.Resource.Attribute.measureWithLargestChild;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.menu = global::PoseSportsPredict.Droid.Resource.Attribute.menu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.multiChoiceItemLayout = global::PoseSportsPredict.Droid.Resource.Attribute.multiChoiceItemLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.navigationContentDescription = global::PoseSportsPredict.Droid.Resource.Attribute.navigationContentDescription;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.navigationIcon = global::PoseSportsPredict.Droid.Resource.Attribute.navigationIcon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.navigationMode = global::PoseSportsPredict.Droid.Resource.Attribute.navigationMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.navigationViewStyle = global::PoseSportsPredict.Droid.Resource.Attribute.navigationViewStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.numericModifiers = global::PoseSportsPredict.Droid.Resource.Attribute.numericModifiers;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.overlapAnchor = global::PoseSportsPredict.Droid.Resource.Attribute.overlapAnchor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.paddingBottomNoButtons = global::PoseSportsPredict.Droid.Resource.Attribute.paddingBottomNoButtons;
@@ -5667,6 +5761,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.reverseLayout = global::PoseSportsPredict.Droid.Resource.Attribute.reverseLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.rippleColor = global::PoseSportsPredict.Droid.Resource.Attribute.rippleColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.scrimAnimationDuration = global::PoseSportsPredict.Droid.Resource.Attribute.scrimAnimationDuration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.scrimBackground = global::PoseSportsPredict.Droid.Resource.Attribute.scrimBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.scrimVisibleHeightTrigger = global::PoseSportsPredict.Droid.Resource.Attribute.scrimVisibleHeightTrigger;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.searchHintIcon = global::PoseSportsPredict.Droid.Resource.Attribute.searchHintIcon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.searchIcon = global::PoseSportsPredict.Droid.Resource.Attribute.searchIcon;
@@ -5676,9 +5771,14 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.selectableItemBackgroundBorderless = global::PoseSportsPredict.Droid.Resource.Attribute.selectableItemBackgroundBorderless;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.showAsAction = global::PoseSportsPredict.Droid.Resource.Attribute.showAsAction;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.showDividers = global::PoseSportsPredict.Droid.Resource.Attribute.showDividers;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.showMotionSpec = global::PoseSportsPredict.Droid.Resource.Attribute.showMotionSpec;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.showText = global::PoseSportsPredict.Droid.Resource.Attribute.showText;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.showTitle = global::PoseSportsPredict.Droid.Resource.Attribute.showTitle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.singleChoiceItemLayout = global::PoseSportsPredict.Droid.Resource.Attribute.singleChoiceItemLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.singleLine = global::PoseSportsPredict.Droid.Resource.Attribute.singleLine;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.singleSelection = global::PoseSportsPredict.Droid.Resource.Attribute.singleSelection;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.snackbarButtonStyle = global::PoseSportsPredict.Droid.Resource.Attribute.snackbarButtonStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.snackbarStyle = global::PoseSportsPredict.Droid.Resource.Attribute.snackbarStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.spanCount = global::PoseSportsPredict.Droid.Resource.Attribute.spanCount;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.spinBars = global::PoseSportsPredict.Droid.Resource.Attribute.spinBars;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.spinnerDropDownItemStyle = global::PoseSportsPredict.Droid.Resource.Attribute.spinnerDropDownItemStyle;
@@ -5689,8 +5789,12 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.state_above_anchor = global::PoseSportsPredict.Droid.Resource.Attribute.state_above_anchor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.state_collapsed = global::PoseSportsPredict.Droid.Resource.Attribute.state_collapsed;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.state_collapsible = global::PoseSportsPredict.Droid.Resource.Attribute.state_collapsible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.state_liftable = global::PoseSportsPredict.Droid.Resource.Attribute.state_liftable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.state_lifted = global::PoseSportsPredict.Droid.Resource.Attribute.state_lifted;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.statusBarBackground = global::PoseSportsPredict.Droid.Resource.Attribute.statusBarBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.statusBarScrim = global::PoseSportsPredict.Droid.Resource.Attribute.statusBarScrim;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.strokeColor = global::PoseSportsPredict.Droid.Resource.Attribute.strokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.strokeWidth = global::PoseSportsPredict.Droid.Resource.Attribute.strokeWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.subMenuArrow = global::PoseSportsPredict.Droid.Resource.Attribute.subMenuArrow;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.submitBackground = global::PoseSportsPredict.Droid.Resource.Attribute.submitBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.subtitle = global::PoseSportsPredict.Droid.Resource.Attribute.subtitle;
@@ -5705,8 +5809,15 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabBackground = global::PoseSportsPredict.Droid.Resource.Attribute.tabBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabContentStart = global::PoseSportsPredict.Droid.Resource.Attribute.tabContentStart;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabGravity = global::PoseSportsPredict.Droid.Resource.Attribute.tabGravity;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIconTint = global::PoseSportsPredict.Droid.Resource.Attribute.tabIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIconTintMode = global::PoseSportsPredict.Droid.Resource.Attribute.tabIconTintMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIndicator = global::PoseSportsPredict.Droid.Resource.Attribute.tabIndicator;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIndicatorAnimationDuration = global::PoseSportsPredict.Droid.Resource.Attribute.tabIndicatorAnimationDuration;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIndicatorColor = global::PoseSportsPredict.Droid.Resource.Attribute.tabIndicatorColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIndicatorFullWidth = global::PoseSportsPredict.Droid.Resource.Attribute.tabIndicatorFullWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIndicatorGravity = global::PoseSportsPredict.Droid.Resource.Attribute.tabIndicatorGravity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabIndicatorHeight = global::PoseSportsPredict.Droid.Resource.Attribute.tabIndicatorHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabInlineLabel = global::PoseSportsPredict.Droid.Resource.Attribute.tabInlineLabel;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabMaxWidth = global::PoseSportsPredict.Droid.Resource.Attribute.tabMaxWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabMinWidth = global::PoseSportsPredict.Droid.Resource.Attribute.tabMinWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabMode = global::PoseSportsPredict.Droid.Resource.Attribute.tabMode;
@@ -5715,20 +5826,39 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabPaddingEnd = global::PoseSportsPredict.Droid.Resource.Attribute.tabPaddingEnd;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabPaddingStart = global::PoseSportsPredict.Droid.Resource.Attribute.tabPaddingStart;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabPaddingTop = global::PoseSportsPredict.Droid.Resource.Attribute.tabPaddingTop;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabRippleColor = global::PoseSportsPredict.Droid.Resource.Attribute.tabRippleColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabSelectedTextColor = global::PoseSportsPredict.Droid.Resource.Attribute.tabSelectedTextColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabStyle = global::PoseSportsPredict.Droid.Resource.Attribute.tabStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabTextAppearance = global::PoseSportsPredict.Droid.Resource.Attribute.tabTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabTextColor = global::PoseSportsPredict.Droid.Resource.Attribute.tabTextColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.tabUnboundedRipple = global::PoseSportsPredict.Droid.Resource.Attribute.tabUnboundedRipple;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAllCaps = global::PoseSportsPredict.Droid.Resource.Attribute.textAllCaps;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceBody1 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceBody1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceBody2 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceBody2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceButton = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceCaption = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceCaption;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceHeadline1 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceHeadline1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceHeadline2 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceHeadline2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceHeadline3 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceHeadline3;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceHeadline4 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceHeadline4;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceHeadline5 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceHeadline5;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceHeadline6 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceHeadline6;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceLargePopupMenu = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceLargePopupMenu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceListItem = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceListItem;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceListItemSecondary = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceListItemSecondary;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceListItemSmall = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceListItemSmall;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceOverline = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceOverline;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearancePopupMenuHeader = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearancePopupMenuHeader;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceSearchResultSubtitle = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceSearchResultSubtitle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceSearchResultTitle = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceSearchResultTitle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceSmallPopupMenu = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceSmallPopupMenu;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceSubtitle1 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceSubtitle1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textAppearanceSubtitle2 = global::PoseSportsPredict.Droid.Resource.Attribute.textAppearanceSubtitle2;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textColorAlertDialogListItem = global::PoseSportsPredict.Droid.Resource.Attribute.textColorAlertDialogListItem;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textColorSearchUrl = global::PoseSportsPredict.Droid.Resource.Attribute.textColorSearchUrl;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textEndPadding = global::PoseSportsPredict.Droid.Resource.Attribute.textEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textInputStyle = global::PoseSportsPredict.Droid.Resource.Attribute.textInputStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.textStartPadding = global::PoseSportsPredict.Droid.Resource.Attribute.textStartPadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.theme = global::PoseSportsPredict.Droid.Resource.Attribute.theme;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.thickness = global::PoseSportsPredict.Droid.Resource.Attribute.thickness;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.thumbTextPadding = global::PoseSportsPredict.Droid.Resource.Attribute.thumbTextPadding;
@@ -5759,7 +5889,9 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.track = global::PoseSportsPredict.Droid.Resource.Attribute.track;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.trackTint = global::PoseSportsPredict.Droid.Resource.Attribute.trackTint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.trackTintMode = global::PoseSportsPredict.Droid.Resource.Attribute.trackTintMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.ttcIndex = global::PoseSportsPredict.Droid.Resource.Attribute.ttcIndex;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.useCompatPadding = global::PoseSportsPredict.Droid.Resource.Attribute.useCompatPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.viewInflaterClass = global::PoseSportsPredict.Droid.Resource.Attribute.viewInflaterClass;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.voiceIcon = global::PoseSportsPredict.Droid.Resource.Attribute.voiceIcon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.windowActionBar = global::PoseSportsPredict.Droid.Resource.Attribute.windowActionBar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Attribute.windowActionBarOverlay = global::PoseSportsPredict.Droid.Resource.Attribute.windowActionBarOverlay;
@@ -5774,6 +5906,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Boolean.abc_action_bar_embed_tabs = global::PoseSportsPredict.Droid.Resource.Boolean.abc_action_bar_embed_tabs;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Boolean.abc_allow_stacked_button_bar = global::PoseSportsPredict.Droid.Resource.Boolean.abc_allow_stacked_button_bar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Boolean.abc_config_actionMenuItemAllCaps = global::PoseSportsPredict.Droid.Resource.Boolean.abc_config_actionMenuItemAllCaps;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Boolean.mtrl_btn_textappearance_all_caps = global::PoseSportsPredict.Droid.Resource.Boolean.mtrl_btn_textappearance_all_caps;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.abc_background_cache_hint_selector_material_dark = global::PoseSportsPredict.Droid.Resource.Color.abc_background_cache_hint_selector_material_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.abc_background_cache_hint_selector_material_light = global::PoseSportsPredict.Droid.Resource.Color.abc_background_cache_hint_selector_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.abc_btn_colored_borderless_text_material = global::PoseSportsPredict.Droid.Resource.Color.abc_btn_colored_borderless_text_material;
@@ -5810,6 +5943,10 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.bright_foreground_inverse_material_light = global::PoseSportsPredict.Droid.Resource.Color.bright_foreground_inverse_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.bright_foreground_material_dark = global::PoseSportsPredict.Droid.Resource.Color.bright_foreground_material_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.bright_foreground_material_light = global::PoseSportsPredict.Droid.Resource.Color.bright_foreground_material_light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.browser_actions_bg_grey = global::PoseSportsPredict.Droid.Resource.Color.browser_actions_bg_grey;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.browser_actions_divider_color = global::PoseSportsPredict.Droid.Resource.Color.browser_actions_divider_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.browser_actions_text_color = global::PoseSportsPredict.Droid.Resource.Color.browser_actions_text_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.browser_actions_title_color = global::PoseSportsPredict.Droid.Resource.Color.browser_actions_title_color;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.button_material_dark = global::PoseSportsPredict.Droid.Resource.Color.button_material_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.button_material_light = global::PoseSportsPredict.Droid.Resource.Color.button_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.cardview_dark_background = global::PoseSportsPredict.Droid.Resource.Color.cardview_dark_background;
@@ -5817,6 +5954,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.cardview_shadow_end_color = global::PoseSportsPredict.Droid.Resource.Color.cardview_shadow_end_color;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.cardview_shadow_start_color = global::PoseSportsPredict.Droid.Resource.Color.cardview_shadow_start_color;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.design_bottom_navigation_shadow_color = global::PoseSportsPredict.Droid.Resource.Color.design_bottom_navigation_shadow_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.design_default_color_primary = global::PoseSportsPredict.Droid.Resource.Color.design_default_color_primary;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.design_default_color_primary_dark = global::PoseSportsPredict.Droid.Resource.Color.design_default_color_primary_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.design_error = global::PoseSportsPredict.Droid.Resource.Color.design_error;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.design_fab_shadow_end_color = global::PoseSportsPredict.Droid.Resource.Color.design_fab_shadow_end_color;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.design_fab_shadow_mid_color = global::PoseSportsPredict.Droid.Resource.Color.design_fab_shadow_mid_color;
@@ -5831,6 +5970,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.dim_foreground_disabled_material_light = global::PoseSportsPredict.Droid.Resource.Color.dim_foreground_disabled_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.dim_foreground_material_dark = global::PoseSportsPredict.Droid.Resource.Color.dim_foreground_material_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.dim_foreground_material_light = global::PoseSportsPredict.Droid.Resource.Color.dim_foreground_material_light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.error_color_material_dark = global::PoseSportsPredict.Droid.Resource.Color.error_color_material_dark;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.error_color_material_light = global::PoseSportsPredict.Droid.Resource.Color.error_color_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.foreground_material_dark = global::PoseSportsPredict.Droid.Resource.Color.foreground_material_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.foreground_material_light = global::PoseSportsPredict.Droid.Resource.Color.foreground_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.highlighted_text_material_dark = global::PoseSportsPredict.Droid.Resource.Color.highlighted_text_material_dark;
@@ -5847,6 +5988,32 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.material_grey_800 = global::PoseSportsPredict.Droid.Resource.Color.material_grey_800;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.material_grey_850 = global::PoseSportsPredict.Droid.Resource.Color.material_grey_850;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.material_grey_900 = global::PoseSportsPredict.Droid.Resource.Color.material_grey_900;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_bottom_nav_colored_item_tint = global::PoseSportsPredict.Droid.Resource.Color.mtrl_bottom_nav_colored_item_tint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_bottom_nav_item_tint = global::PoseSportsPredict.Droid.Resource.Color.mtrl_bottom_nav_item_tint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_bg_color_disabled = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_bg_color_disabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_bg_color_selector = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_bg_color_selector;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_ripple_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_ripple_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_stroke_color_selector = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_stroke_color_selector;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_text_btn_ripple_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_text_btn_ripple_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_text_color_disabled = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_text_color_disabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_text_color_selector = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_text_color_selector;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_btn_transparent_bg_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_btn_transparent_bg_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_chip_background_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_chip_background_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_chip_close_icon_tint = global::PoseSportsPredict.Droid.Resource.Color.mtrl_chip_close_icon_tint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_chip_ripple_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_chip_ripple_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_chip_text_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_chip_text_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_fab_ripple_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_fab_ripple_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_scrim_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_scrim_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_tabs_colored_ripple_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_tabs_colored_ripple_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_tabs_icon_color_selector = global::PoseSportsPredict.Droid.Resource.Color.mtrl_tabs_icon_color_selector;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_tabs_icon_color_selector_colored = global::PoseSportsPredict.Droid.Resource.Color.mtrl_tabs_icon_color_selector_colored;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_tabs_legacy_text_color_selector = global::PoseSportsPredict.Droid.Resource.Color.mtrl_tabs_legacy_text_color_selector;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_tabs_ripple_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_tabs_ripple_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_textinput_default_box_stroke_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_textinput_default_box_stroke_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_textinput_disabled_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_textinput_disabled_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_textinput_filled_box_default_background_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_textinput_filled_box_default_background_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_textinput_hovered_box_stroke_color = global::PoseSportsPredict.Droid.Resource.Color.mtrl_textinput_hovered_box_stroke_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.mtrl_text_btn_text_color_selector = global::PoseSportsPredict.Droid.Resource.Color.mtrl_text_btn_text_color_selector;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.notification_action_color_filter = global::PoseSportsPredict.Droid.Resource.Color.notification_action_color_filter;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.notification_icon_bg_color = global::PoseSportsPredict.Droid.Resource.Color.notification_icon_bg_color;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Color.notification_material_background_media_default_color = global::PoseSportsPredict.Droid.Resource.Color.notification_material_background_media_default_color;
@@ -5889,6 +6056,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_action_button_min_width_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_action_button_min_width_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_action_button_min_width_overflow_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_action_button_min_width_overflow_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_alert_dialog_button_bar_height = global::PoseSportsPredict.Droid.Resource.Dimension.abc_alert_dialog_button_bar_height;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_alert_dialog_button_dimen = global::PoseSportsPredict.Droid.Resource.Dimension.abc_alert_dialog_button_dimen;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_button_inset_horizontal_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_button_inset_horizontal_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_button_inset_vertical_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_button_inset_vertical_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_button_padding_horizontal_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_button_padding_horizontal_material;
@@ -5898,6 +6066,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_control_corner_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_control_corner_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_control_inset_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_control_inset_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_control_padding_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_control_padding_material;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_dialog_corner_radius_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_dialog_corner_radius_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_dialog_fixed_height_major = global::PoseSportsPredict.Droid.Resource.Dimension.abc_dialog_fixed_height_major;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_dialog_fixed_height_minor = global::PoseSportsPredict.Droid.Resource.Dimension.abc_dialog_fixed_height_minor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_dialog_fixed_width_major = global::PoseSportsPredict.Droid.Resource.Dimension.abc_dialog_fixed_width_major;
@@ -5945,6 +6114,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_text_size_subtitle_material_toolbar = global::PoseSportsPredict.Droid.Resource.Dimension.abc_text_size_subtitle_material_toolbar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_text_size_title_material = global::PoseSportsPredict.Droid.Resource.Dimension.abc_text_size_title_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.abc_text_size_title_material_toolbar = global::PoseSportsPredict.Droid.Resource.Dimension.abc_text_size_title_material_toolbar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.browser_actions_context_menu_max_width = global::PoseSportsPredict.Droid.Resource.Dimension.browser_actions_context_menu_max_width;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.browser_actions_context_menu_min_padding = global::PoseSportsPredict.Droid.Resource.Dimension.browser_actions_context_menu_min_padding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.cardview_compat_inset_shadow = global::PoseSportsPredict.Droid.Resource.Dimension.cardview_compat_inset_shadow;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.cardview_default_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.cardview_default_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.cardview_default_radius = global::PoseSportsPredict.Droid.Resource.Dimension.cardview_default_radius;
@@ -5953,11 +6124,15 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.compat_button_padding_horizontal_material = global::PoseSportsPredict.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.compat_button_padding_vertical_material = global::PoseSportsPredict.Droid.Resource.Dimension.compat_button_padding_vertical_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.compat_control_corner_material = global::PoseSportsPredict.Droid.Resource.Dimension.compat_control_corner_material;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.compat_notification_large_icon_max_height = global::PoseSportsPredict.Droid.Resource.Dimension.compat_notification_large_icon_max_height;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.compat_notification_large_icon_max_width = global::PoseSportsPredict.Droid.Resource.Dimension.compat_notification_large_icon_max_width;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_appbar_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.design_appbar_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_active_item_max_width = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_active_item_max_width;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_active_item_min_width = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_active_item_min_width;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_active_text_size = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_active_text_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_height = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_height;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_icon_size = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_icon_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_item_max_width = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_item_max_width;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_item_min_width = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_item_min_width;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_bottom_navigation_margin = global::PoseSportsPredict.Droid.Resource.Dimension.design_bottom_navigation_margin;
@@ -5970,10 +6145,13 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_fab_image_size = global::PoseSportsPredict.Droid.Resource.Dimension.design_fab_image_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_fab_size_mini = global::PoseSportsPredict.Droid.Resource.Dimension.design_fab_size_mini;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_fab_size_normal = global::PoseSportsPredict.Droid.Resource.Dimension.design_fab_size_normal;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_fab_translation_z_hovered_focused = global::PoseSportsPredict.Droid.Resource.Dimension.design_fab_translation_z_hovered_focused;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_fab_translation_z_pressed = global::PoseSportsPredict.Droid.Resource.Dimension.design_fab_translation_z_pressed;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_icon_padding = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_icon_padding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_icon_size = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_icon_size;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_item_horizontal_padding = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_item_horizontal_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_item_icon_padding = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_item_icon_padding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_max_width = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_max_width;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_padding_bottom = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_padding_bottom;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_navigation_separator_vertical_padding = global::PoseSportsPredict.Droid.Resource.Dimension.design_navigation_separator_vertical_padding;
@@ -5991,6 +6169,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_tab_scrollable_min_width = global::PoseSportsPredict.Droid.Resource.Dimension.design_tab_scrollable_min_width;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_tab_text_size = global::PoseSportsPredict.Droid.Resource.Dimension.design_tab_text_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_tab_text_size_2line = global::PoseSportsPredict.Droid.Resource.Dimension.design_tab_text_size_2line;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.design_textinput_caption_translate_y = global::PoseSportsPredict.Droid.Resource.Dimension.design_textinput_caption_translate_y;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.disabled_alpha_material_dark = global::PoseSportsPredict.Droid.Resource.Dimension.disabled_alpha_material_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.disabled_alpha_material_light = global::PoseSportsPredict.Droid.Resource.Dimension.disabled_alpha_material_light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.fastscroll_default_thickness = global::PoseSportsPredict.Droid.Resource.Dimension.fastscroll_default_thickness;
@@ -6006,6 +6185,54 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame = global::PoseSportsPredict.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.item_touch_helper_swipe_escape_max_velocity = global::PoseSportsPredict.Droid.Resource.Dimension.item_touch_helper_swipe_escape_max_velocity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.item_touch_helper_swipe_escape_velocity = global::PoseSportsPredict.Droid.Resource.Dimension.item_touch_helper_swipe_escape_velocity;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_bottomappbar_fabOffsetEndMode = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_bottomappbar_fabOffsetEndMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_bottomappbar_fab_cradle_margin = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_bottomappbar_fab_cradle_margin;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_bottomappbar_fab_cradle_rounded_corner_radius = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_bottomappbar_fab_cradle_rounded_corner_radius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_bottomappbar_fab_cradle_vertical_offset = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_bottomappbar_fab_cradle_vertical_offset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_bottomappbar_height = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_bottomappbar_height;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_corner_radius = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_corner_radius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_dialog_btn_min_width = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_dialog_btn_min_width;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_disabled_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_disabled_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_disabled_z = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_disabled_z;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_focused_z = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_focused_z;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_hovered_z = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_hovered_z;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_icon_btn_padding_left = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_icon_btn_padding_left;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_icon_padding = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_icon_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_inset = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_inset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_letter_spacing = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_letter_spacing;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_padding_bottom = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_padding_bottom;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_padding_left = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_padding_left;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_padding_right = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_padding_right;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_padding_top = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_padding_top;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_pressed_z = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_pressed_z;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_stroke_size = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_stroke_size;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_text_btn_icon_padding = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_text_btn_icon_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_text_btn_padding_left = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_text_btn_padding_left;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_text_btn_padding_right = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_text_btn_padding_right;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_text_size = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_text_size;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_btn_z = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_btn_z;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_card_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_card_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_card_spacing = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_card_spacing;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_chip_pressed_translation_z = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_chip_pressed_translation_z;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_chip_text_size = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_chip_text_size;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_fab_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_fab_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_fab_translation_z_hovered_focused = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_fab_translation_z_hovered_focused;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_fab_translation_z_pressed = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_fab_translation_z_pressed;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_navigation_elevation = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_navigation_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_navigation_item_horizontal_padding = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_navigation_item_horizontal_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_navigation_item_icon_padding = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_navigation_item_icon_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_snackbar_background_corner_radius = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_snackbar_background_corner_radius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_snackbar_margin = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_snackbar_margin;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_bottom_offset = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_bottom_offset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_corner_radius_medium = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_corner_radius_medium;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_corner_radius_small = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_corner_radius_small;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_label_cutout_padding = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_label_cutout_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_padding_end = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_padding_end;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_stroke_width_default = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_stroke_width_default;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_box_stroke_width_focused = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_box_stroke_width_focused;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_textinput_outline_box_expanded_padding = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_textinput_outline_box_expanded_padding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.mtrl_toolbar_default_height = global::PoseSportsPredict.Droid.Resource.Dimension.mtrl_toolbar_default_height;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.notification_action_icon_size = global::PoseSportsPredict.Droid.Resource.Dimension.notification_action_icon_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.notification_action_text_size = global::PoseSportsPredict.Droid.Resource.Dimension.notification_action_text_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.notification_big_circle_margin = global::PoseSportsPredict.Droid.Resource.Dimension.notification_big_circle_margin;
@@ -6021,6 +6248,10 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.notification_subtext_size = global::PoseSportsPredict.Droid.Resource.Dimension.notification_subtext_size;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.notification_top_pad = global::PoseSportsPredict.Droid.Resource.Dimension.notification_top_pad;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.notification_top_pad_large_text = global::PoseSportsPredict.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.subtitle_corner_radius = global::PoseSportsPredict.Droid.Resource.Dimension.subtitle_corner_radius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.subtitle_outline_width = global::PoseSportsPredict.Droid.Resource.Dimension.subtitle_outline_width;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.subtitle_shadow_offset = global::PoseSportsPredict.Droid.Resource.Dimension.subtitle_shadow_offset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.subtitle_shadow_radius = global::PoseSportsPredict.Droid.Resource.Dimension.subtitle_shadow_radius;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.tooltip_corner_radius = global::PoseSportsPredict.Droid.Resource.Dimension.tooltip_corner_radius;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.tooltip_horizontal_padding = global::PoseSportsPredict.Droid.Resource.Dimension.tooltip_horizontal_padding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Dimension.tooltip_margin = global::PoseSportsPredict.Droid.Resource.Dimension.tooltip_margin;
@@ -6069,6 +6300,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_ic_voice_search_api_material = global::PoseSportsPredict.Droid.Resource.Drawable.abc_ic_voice_search_api_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_item_background_holo_dark = global::PoseSportsPredict.Droid.Resource.Drawable.abc_item_background_holo_dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_item_background_holo_light = global::PoseSportsPredict.Droid.Resource.Drawable.abc_item_background_holo_light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_list_divider_material = global::PoseSportsPredict.Droid.Resource.Drawable.abc_list_divider_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_list_divider_mtrl_alpha = global::PoseSportsPredict.Droid.Resource.Drawable.abc_list_divider_mtrl_alpha;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_list_focused_holo = global::PoseSportsPredict.Droid.Resource.Drawable.abc_list_focused_holo;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.abc_list_longpressed_holo = global::PoseSportsPredict.Droid.Resource.Drawable.abc_list_longpressed_holo;
@@ -6121,6 +6353,11 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.design_ic_visibility_off = global::PoseSportsPredict.Droid.Resource.Drawable.design_ic_visibility_off;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.design_password_eye = global::PoseSportsPredict.Droid.Resource.Drawable.design_password_eye;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.design_snackbar_background = global::PoseSportsPredict.Droid.Resource.Drawable.design_snackbar_background;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.ic_mtrl_chip_checked_black = global::PoseSportsPredict.Droid.Resource.Drawable.ic_mtrl_chip_checked_black;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.ic_mtrl_chip_checked_circle = global::PoseSportsPredict.Droid.Resource.Drawable.ic_mtrl_chip_checked_circle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.ic_mtrl_chip_close_circle = global::PoseSportsPredict.Droid.Resource.Drawable.ic_mtrl_chip_close_circle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.mtrl_snackbar_background = global::PoseSportsPredict.Droid.Resource.Drawable.mtrl_snackbar_background;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.mtrl_tabs_default_indicator = global::PoseSportsPredict.Droid.Resource.Drawable.mtrl_tabs_default_indicator;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.navigation_empty_icon = global::PoseSportsPredict.Droid.Resource.Drawable.navigation_empty_icon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.notification_action_background = global::PoseSportsPredict.Droid.Resource.Drawable.notification_action_background;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Drawable.notification_bg = global::PoseSportsPredict.Droid.Resource.Drawable.notification_bg;
@@ -6167,6 +6404,11 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.beginning = global::PoseSportsPredict.Droid.Resource.Id.beginning;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.blocking = global::PoseSportsPredict.Droid.Resource.Id.blocking;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.bottom = global::PoseSportsPredict.Droid.Resource.Id.bottom;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.browser_actions_header_text = global::PoseSportsPredict.Droid.Resource.Id.browser_actions_header_text;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.browser_actions_menu_items = global::PoseSportsPredict.Droid.Resource.Id.browser_actions_menu_items;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.browser_actions_menu_item_icon = global::PoseSportsPredict.Droid.Resource.Id.browser_actions_menu_item_icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.browser_actions_menu_item_text = global::PoseSportsPredict.Droid.Resource.Id.browser_actions_menu_item_text;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.browser_actions_menu_view = global::PoseSportsPredict.Droid.Resource.Id.browser_actions_menu_view;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.buttonPanel = global::PoseSportsPredict.Droid.Resource.Id.buttonPanel;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.cancel_action = global::PoseSportsPredict.Droid.Resource.Id.cancel_action;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.center = global::PoseSportsPredict.Droid.Resource.Id.center;
@@ -6178,6 +6420,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.clip_vertical = global::PoseSportsPredict.Droid.Resource.Id.clip_vertical;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.collapseActionView = global::PoseSportsPredict.Droid.Resource.Id.collapseActionView;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.container = global::PoseSportsPredict.Droid.Resource.Id.container;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.content = global::PoseSportsPredict.Droid.Resource.Id.content;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.contentPanel = global::PoseSportsPredict.Droid.Resource.Id.contentPanel;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.coordinator = global::PoseSportsPredict.Droid.Resource.Id.coordinator;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.CTRL = global::PoseSportsPredict.Droid.Resource.Id.CTRL;
@@ -6200,12 +6443,14 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.expanded_menu = global::PoseSportsPredict.Droid.Resource.Id.expanded_menu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.expand_activities_button = global::PoseSportsPredict.Droid.Resource.Id.expand_activities_button;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.fill = global::PoseSportsPredict.Droid.Resource.Id.fill;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.filled = global::PoseSportsPredict.Droid.Resource.Id.filled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.fill_horizontal = global::PoseSportsPredict.Droid.Resource.Id.fill_horizontal;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.fill_vertical = global::PoseSportsPredict.Droid.Resource.Id.fill_vertical;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.@fixed = global::PoseSportsPredict.Droid.Resource.Id.@fixed;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.forever = global::PoseSportsPredict.Droid.Resource.Id.forever;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.FUNCTION = global::PoseSportsPredict.Droid.Resource.Id.FUNCTION;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.ghost_view = global::PoseSportsPredict.Droid.Resource.Id.ghost_view;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.group_divider = global::PoseSportsPredict.Droid.Resource.Id.group_divider;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.home = global::PoseSportsPredict.Droid.Resource.Id.home;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.homeAsUp = global::PoseSportsPredict.Droid.Resource.Id.homeAsUp;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.icon = global::PoseSportsPredict.Droid.Resource.Id.icon;
@@ -6215,6 +6460,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.info = global::PoseSportsPredict.Droid.Resource.Id.info;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.italic = global::PoseSportsPredict.Droid.Resource.Id.italic;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.item_touch_helper_previous_elevation = global::PoseSportsPredict.Droid.Resource.Id.item_touch_helper_previous_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.labeled = global::PoseSportsPredict.Droid.Resource.Id.labeled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.largeLabel = global::PoseSportsPredict.Droid.Resource.Id.largeLabel;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.left = global::PoseSportsPredict.Droid.Resource.Id.left;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.line1 = global::PoseSportsPredict.Droid.Resource.Id.line1;
@@ -6227,6 +6473,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.META = global::PoseSportsPredict.Droid.Resource.Id.META;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.middle = global::PoseSportsPredict.Droid.Resource.Id.middle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.mini = global::PoseSportsPredict.Droid.Resource.Id.mini;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.mtrl_child_content_container = global::PoseSportsPredict.Droid.Resource.Id.mtrl_child_content_container;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.mtrl_internal_children_alpha_tag = global::PoseSportsPredict.Droid.Resource.Id.mtrl_internal_children_alpha_tag;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.multiply = global::PoseSportsPredict.Droid.Resource.Id.multiply;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.navigation_header_container = global::PoseSportsPredict.Droid.Resource.Id.navigation_header_container;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.never = global::PoseSportsPredict.Droid.Resource.Id.never;
@@ -6235,6 +6483,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.notification_background = global::PoseSportsPredict.Droid.Resource.Id.notification_background;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.notification_main_column = global::PoseSportsPredict.Droid.Resource.Id.notification_main_column;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.notification_main_column_container = global::PoseSportsPredict.Droid.Resource.Id.notification_main_column_container;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.outline = global::PoseSportsPredict.Droid.Resource.Id.outline;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.parallax = global::PoseSportsPredict.Droid.Resource.Id.parallax;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.parentPanel = global::PoseSportsPredict.Droid.Resource.Id.parentPanel;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.parent_matrix = global::PoseSportsPredict.Droid.Resource.Id.parent_matrix;
@@ -6264,6 +6513,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.search_plate = global::PoseSportsPredict.Droid.Resource.Id.search_plate;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.search_src_text = global::PoseSportsPredict.Droid.Resource.Id.search_src_text;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.search_voice_btn = global::PoseSportsPredict.Droid.Resource.Id.search_voice_btn;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.selected = global::PoseSportsPredict.Droid.Resource.Id.selected;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.select_dialog_listview = global::PoseSportsPredict.Droid.Resource.Id.select_dialog_listview;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.SHIFT = global::PoseSportsPredict.Droid.Resource.Id.SHIFT;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.shortcut = global::PoseSportsPredict.Droid.Resource.Id.shortcut;
@@ -6274,6 +6524,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.snackbar_action = global::PoseSportsPredict.Droid.Resource.Id.snackbar_action;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.snackbar_text = global::PoseSportsPredict.Droid.Resource.Id.snackbar_text;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.snap = global::PoseSportsPredict.Droid.Resource.Id.snap;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.snapMargins = global::PoseSportsPredict.Droid.Resource.Id.snapMargins;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.spacer = global::PoseSportsPredict.Droid.Resource.Id.spacer;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.split_action_bar = global::PoseSportsPredict.Droid.Resource.Id.split_action_bar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.src_atop = global::PoseSportsPredict.Droid.Resource.Id.src_atop;
@@ -6281,17 +6532,22 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.src_over = global::PoseSportsPredict.Droid.Resource.Id.src_over;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.start = global::PoseSportsPredict.Droid.Resource.Id.start;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.status_bar_latest_event_content = global::PoseSportsPredict.Droid.Resource.Id.status_bar_latest_event_content;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.stretch = global::PoseSportsPredict.Droid.Resource.Id.stretch;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.submenuarrow = global::PoseSportsPredict.Droid.Resource.Id.submenuarrow;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.submit_area = global::PoseSportsPredict.Droid.Resource.Id.submit_area;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.SYM = global::PoseSportsPredict.Droid.Resource.Id.SYM;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.tabMode = global::PoseSportsPredict.Droid.Resource.Id.tabMode;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.tag_transition_group = global::PoseSportsPredict.Droid.Resource.Id.tag_transition_group;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.tag_unhandled_key_event_manager = global::PoseSportsPredict.Droid.Resource.Id.tag_unhandled_key_event_manager;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.tag_unhandled_key_listeners = global::PoseSportsPredict.Droid.Resource.Id.tag_unhandled_key_listeners;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.text = global::PoseSportsPredict.Droid.Resource.Id.text;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.text2 = global::PoseSportsPredict.Droid.Resource.Id.text2;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.textinput_counter = global::PoseSportsPredict.Droid.Resource.Id.textinput_counter;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.textinput_error = global::PoseSportsPredict.Droid.Resource.Id.textinput_error;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.textinput_helper_text = global::PoseSportsPredict.Droid.Resource.Id.textinput_helper_text;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.textSpacerNoButtons = global::PoseSportsPredict.Droid.Resource.Id.textSpacerNoButtons;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.textSpacerNoTitle = global::PoseSportsPredict.Droid.Resource.Id.textSpacerNoTitle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.textStart = global::PoseSportsPredict.Droid.Resource.Id.textStart;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.text_input_password_toggle = global::PoseSportsPredict.Droid.Resource.Id.text_input_password_toggle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.time = global::PoseSportsPredict.Droid.Resource.Id.time;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.title = global::PoseSportsPredict.Droid.Resource.Id.title;
@@ -6306,6 +6562,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.transition_scene_layoutid_cache = global::PoseSportsPredict.Droid.Resource.Id.transition_scene_layoutid_cache;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.transition_transform = global::PoseSportsPredict.Droid.Resource.Id.transition_transform;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.uniform = global::PoseSportsPredict.Droid.Resource.Id.uniform;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.unlabeled = global::PoseSportsPredict.Droid.Resource.Id.unlabeled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.up = global::PoseSportsPredict.Droid.Resource.Id.up;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.useLogo = global::PoseSportsPredict.Droid.Resource.Id.useLogo;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Id.view_offset_helper = global::PoseSportsPredict.Droid.Resource.Id.view_offset_helper;
@@ -6319,9 +6576,18 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.cancel_button_image_alpha = global::PoseSportsPredict.Droid.Resource.Integer.cancel_button_image_alpha;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.config_tooltipAnimTime = global::PoseSportsPredict.Droid.Resource.Integer.config_tooltipAnimTime;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.design_snackbar_text_max_lines = global::PoseSportsPredict.Droid.Resource.Integer.design_snackbar_text_max_lines;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.design_tab_indicator_anim_duration_ms = global::PoseSportsPredict.Droid.Resource.Integer.design_tab_indicator_anim_duration_ms;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.hide_password_duration = global::PoseSportsPredict.Droid.Resource.Integer.hide_password_duration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.mtrl_btn_anim_delay_ms = global::PoseSportsPredict.Droid.Resource.Integer.mtrl_btn_anim_delay_ms;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.mtrl_btn_anim_duration_ms = global::PoseSportsPredict.Droid.Resource.Integer.mtrl_btn_anim_duration_ms;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.mtrl_chip_anim_duration = global::PoseSportsPredict.Droid.Resource.Integer.mtrl_chip_anim_duration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.mtrl_tab_indicator_anim_duration_ms = global::PoseSportsPredict.Droid.Resource.Integer.mtrl_tab_indicator_anim_duration_ms;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.show_password_duration = global::PoseSportsPredict.Droid.Resource.Integer.show_password_duration;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Integer.status_bar_notification_info_maxnum = global::PoseSportsPredict.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Interpolator.mtrl_fast_out_linear_in = global::PoseSportsPredict.Droid.Resource.Interpolator.mtrl_fast_out_linear_in;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Interpolator.mtrl_fast_out_slow_in = global::PoseSportsPredict.Droid.Resource.Interpolator.mtrl_fast_out_slow_in;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Interpolator.mtrl_linear = global::PoseSportsPredict.Droid.Resource.Interpolator.mtrl_linear;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Interpolator.mtrl_linear_out_slow_in = global::PoseSportsPredict.Droid.Resource.Interpolator.mtrl_linear_out_slow_in;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_action_bar_title_item = global::PoseSportsPredict.Droid.Resource.Layout.abc_action_bar_title_item;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_action_bar_up_container = global::PoseSportsPredict.Droid.Resource.Layout.abc_action_bar_up_container;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_action_menu_item_layout = global::PoseSportsPredict.Droid.Resource.Layout.abc_action_menu_item_layout;
@@ -6333,6 +6599,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_alert_dialog_button_bar_material = global::PoseSportsPredict.Droid.Resource.Layout.abc_alert_dialog_button_bar_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_alert_dialog_material = global::PoseSportsPredict.Droid.Resource.Layout.abc_alert_dialog_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_alert_dialog_title_material = global::PoseSportsPredict.Droid.Resource.Layout.abc_alert_dialog_title_material;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_cascading_menu_item_layout = global::PoseSportsPredict.Droid.Resource.Layout.abc_cascading_menu_item_layout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_dialog_title_material = global::PoseSportsPredict.Droid.Resource.Layout.abc_dialog_title_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_expanded_menu_layout = global::PoseSportsPredict.Droid.Resource.Layout.abc_expanded_menu_layout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_list_menu_item_checkbox = global::PoseSportsPredict.Droid.Resource.Layout.abc_list_menu_item_checkbox;
@@ -6348,6 +6615,9 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_search_dropdown_item_icons_2line = global::PoseSportsPredict.Droid.Resource.Layout.abc_search_dropdown_item_icons_2line;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_search_view = global::PoseSportsPredict.Droid.Resource.Layout.abc_search_view;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_select_dialog_material = global::PoseSportsPredict.Droid.Resource.Layout.abc_select_dialog_material;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.abc_tooltip = global::PoseSportsPredict.Droid.Resource.Layout.abc_tooltip;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.browser_actions_context_menu_page = global::PoseSportsPredict.Droid.Resource.Layout.browser_actions_context_menu_page;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.browser_actions_context_menu_row = global::PoseSportsPredict.Droid.Resource.Layout.browser_actions_context_menu_row;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.design_bottom_navigation_item = global::PoseSportsPredict.Droid.Resource.Layout.design_bottom_navigation_item;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.design_bottom_sheet_dialog = global::PoseSportsPredict.Droid.Resource.Layout.design_bottom_sheet_dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.design_layout_snackbar = global::PoseSportsPredict.Droid.Resource.Layout.design_layout_snackbar;
@@ -6362,6 +6632,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.design_navigation_menu = global::PoseSportsPredict.Droid.Resource.Layout.design_navigation_menu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.design_navigation_menu_item = global::PoseSportsPredict.Droid.Resource.Layout.design_navigation_menu_item;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.design_text_input_password_icon = global::PoseSportsPredict.Droid.Resource.Layout.design_text_input_password_icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.mtrl_layout_snackbar = global::PoseSportsPredict.Droid.Resource.Layout.mtrl_layout_snackbar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.mtrl_layout_snackbar_include = global::PoseSportsPredict.Droid.Resource.Layout.mtrl_layout_snackbar_include;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.notification_action = global::PoseSportsPredict.Droid.Resource.Layout.notification_action;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.notification_action_tombstone = global::PoseSportsPredict.Droid.Resource.Layout.notification_action_tombstone;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Layout.notification_media_action = global::PoseSportsPredict.Droid.Resource.Layout.notification_media_action;
@@ -6401,6 +6673,16 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_font_family_menu_material = global::PoseSportsPredict.Droid.Resource.String.abc_font_family_menu_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_font_family_subhead_material = global::PoseSportsPredict.Droid.Resource.String.abc_font_family_subhead_material;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_font_family_title_material = global::PoseSportsPredict.Droid.Resource.String.abc_font_family_title_material;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_alt_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_alt_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_ctrl_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_ctrl_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_delete_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_delete_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_enter_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_enter_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_function_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_function_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_meta_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_meta_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_shift_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_shift_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_space_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_space_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_menu_sym_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_menu_sym_shortcut_label;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_prepend_shortcut_label = global::PoseSportsPredict.Droid.Resource.String.abc_prepend_shortcut_label;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_searchview_description_clear = global::PoseSportsPredict.Droid.Resource.String.abc_searchview_description_clear;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_searchview_description_query = global::PoseSportsPredict.Droid.Resource.String.abc_searchview_description_query;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.abc_searchview_description_search = global::PoseSportsPredict.Droid.Resource.String.abc_searchview_description_search;
@@ -6413,8 +6695,13 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.appbar_scrolling_view_behavior = global::PoseSportsPredict.Droid.Resource.String.appbar_scrolling_view_behavior;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.app_name = global::PoseSportsPredict.Droid.Resource.String.app_name;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.bottom_sheet_behavior = global::PoseSportsPredict.Droid.Resource.String.bottom_sheet_behavior;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.character_counter_content_description = global::PoseSportsPredict.Droid.Resource.String.character_counter_content_description;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.character_counter_pattern = global::PoseSportsPredict.Droid.Resource.String.character_counter_pattern;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.fab_transformation_scrim_behavior = global::PoseSportsPredict.Droid.Resource.String.fab_transformation_scrim_behavior;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.fab_transformation_sheet_behavior = global::PoseSportsPredict.Droid.Resource.String.fab_transformation_sheet_behavior;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.hello = global::PoseSportsPredict.Droid.Resource.String.hello;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.hide_bottom_view_on_scroll_behavior = global::PoseSportsPredict.Droid.Resource.String.hide_bottom_view_on_scroll_behavior;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.String.mtrl_chip_close_icon_content_description = global::PoseSportsPredict.Droid.Resource.String.mtrl_chip_close_icon_content_description;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.password_toggle_content_description = global::PoseSportsPredict.Droid.Resource.String.password_toggle_content_description;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.path_password_eye = global::PoseSportsPredict.Droid.Resource.String.path_password_eye;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.String.path_password_eye_mask_strike_through = global::PoseSportsPredict.Droid.Resource.String.path_password_eye_mask_strike_through;
@@ -6491,6 +6778,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog_Alert;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_ThemeOverlay_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_ThemeOverlay_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_ThemeOverlay_MaterialComponents_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Base_ThemeOverlay_MaterialComponents_Dialog_Alert;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_AppCompat_CompactMenu = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_AppCompat_CompactMenu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_AppCompat_Dialog;
@@ -6505,6 +6794,32 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_CompactMenu = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_CompactMenu;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_DialogWhenLarge = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_DialogWhenLarge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog_Alert;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog_FixedSize = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog_FixedSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog_MinWidth = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Dialog_MinWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_DarkActionBar = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_DarkActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_DarkActionBar_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_DarkActionBar_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_DialogWhenLarge = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_DialogWhenLarge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog_Alert;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog_FixedSize = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog_FixedSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog_MinWidth = global::PoseSportsPredict.Droid.Resource.Style.Base_Theme_MaterialComponents_Light_Dialog_MinWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_ThemeOverlay_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_ThemeOverlay_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_ThemeOverlay_MaterialComponents_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_ThemeOverlay_MaterialComponents_Dialog_Alert;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light_DarkActionBar_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light_DarkActionBar_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V14_Theme_MaterialComponents_Light_Dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V21_Theme_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_V21_Theme_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V21_Theme_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V21_Theme_AppCompat_Dialog;
@@ -6517,6 +6832,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V26_Theme_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_V26_Theme_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V26_Theme_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_V26_Theme_AppCompat_Light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V26_Widget_AppCompat_Toolbar = global::PoseSportsPredict.Droid.Resource.Style.Base_V26_Widget_AppCompat_Toolbar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V28_Theme_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_V28_Theme_AppCompat;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V28_Theme_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_V28_Theme_AppCompat_Light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V7_Theme_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_V7_Theme_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_V7_Theme_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_V7_Theme_AppCompat_Dialog;
@@ -6583,11 +6900,18 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar = global::PoseSportsPredict.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation = global::PoseSportsPredict.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Widget_Design_TabLayout = global::PoseSportsPredict.Droid.Resource.Style.Base_Widget_Design_TabLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Widget_MaterialComponents_Chip = global::PoseSportsPredict.Droid.Resource.Style.Base_Widget_MaterialComponents_Chip;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Widget_MaterialComponents_TextInputEditText = global::PoseSportsPredict.Droid.Resource.Style.Base_Widget_MaterialComponents_TextInputEditText;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Base_Widget_MaterialComponents_TextInputLayout = global::PoseSportsPredict.Droid.Resource.Style.Base_Widget_MaterialComponents_TextInputLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.CardView = global::PoseSportsPredict.Droid.Resource.Style.CardView;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.CardView_Dark = global::PoseSportsPredict.Droid.Resource.Style.CardView_Dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.CardView_Light = global::PoseSportsPredict.Droid.Resource.Style.CardView_Light;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Platform_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Platform_AppCompat_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.Platform_MaterialComponents;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Platform_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_MaterialComponents_Light = global::PoseSportsPredict.Droid.Resource.Style.Platform_MaterialComponents_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_MaterialComponents_Light_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Platform_MaterialComponents_Light_Dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark = global::PoseSportsPredict.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Light;
@@ -6601,7 +6925,10 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Shortcut = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Shortcut;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_SubmenuArrow = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_SubmenuArrow;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Title = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Title;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1 = global::PoseSportsPredict.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1;
@@ -6672,9 +6999,25 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_Counter = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_Counter;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_Counter_Overflow = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_Counter_Overflow;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_Error = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_Error;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_HelperText = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_HelperText;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_Hint = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_Hint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_Snackbar_Message = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_Snackbar_Message;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Design_Tab = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Design_Tab;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Body1 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Body1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Body2 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Body2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Button = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Button;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Caption = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Caption;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Chip = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Chip;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline1 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline2 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline3 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline3;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline4 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline4;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline5 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline5;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline6 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Headline6;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Overline = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Overline;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Subtitle1 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Subtitle1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Subtitle2 = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Subtitle2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_MaterialComponents_Tab = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_MaterialComponents_Tab;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title = global::PoseSportsPredict.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title;
@@ -6685,6 +7028,18 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_AppCompat_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_ActionBar = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_ActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dark = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dark;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dark_ActionBar = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dark_ActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Dialog_Alert;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Light = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox_Dense = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox_Dense;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense = global::PoseSportsPredict.Droid.Resource.Style.ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Theme_AppCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_AppCompat_CompactMenu = global::PoseSportsPredict.Droid.Resource.Style.Theme_AppCompat_CompactMenu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_AppCompat_DayNight = global::PoseSportsPredict.Droid.Resource.Style.Theme_AppCompat_DayNight;
@@ -6712,6 +7067,27 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_Design_Light_BottomSheetDialog = global::PoseSportsPredict.Droid.Resource.Style.Theme_Design_Light_BottomSheetDialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_Design_Light_NoActionBar = global::PoseSportsPredict.Droid.Resource.Style.Theme_Design_Light_NoActionBar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_Design_NoActionBar = global::PoseSportsPredict.Droid.Resource.Style.Theme_Design_NoActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_BottomSheetDialog = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_BottomSheetDialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_CompactMenu = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_CompactMenu;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_DialogWhenLarge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_DialogWhenLarge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Dialog_Alert;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Dialog_MinWidth = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Dialog_MinWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_BottomSheetDialog = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_BottomSheetDialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_DarkActionBar = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_DarkActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_DarkActionBar_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_DarkActionBar_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_DialogWhenLarge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_DialogWhenLarge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_Dialog_Alert = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_Dialog_Alert;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_Dialog_MinWidth = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_Dialog_MinWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_NoActionBar = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_NoActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_Light_NoActionBar_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_Light_NoActionBar_Bridge;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_NoActionBar = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_NoActionBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Theme_MaterialComponents_NoActionBar_Bridge = global::PoseSportsPredict.Droid.Resource.Style.Theme_MaterialComponents_NoActionBar_Bridge;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_AppCompat_ActionBar = global::PoseSportsPredict.Droid.Resource.Style.Widget_AppCompat_ActionBar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_AppCompat_ActionBar_Solid = global::PoseSportsPredict.Droid.Resource.Style.Widget_AppCompat_ActionBar_Solid;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabBar = global::PoseSportsPredict.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabBar;
@@ -6796,6 +7172,43 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_Design_Snackbar = global::PoseSportsPredict.Droid.Resource.Style.Widget_Design_Snackbar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_Design_TabLayout = global::PoseSportsPredict.Droid.Resource.Style.Widget_Design_TabLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_Design_TextInputLayout = global::PoseSportsPredict.Droid.Resource.Style.Widget_Design_TextInputLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_BottomAppBar = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_BottomAppBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_BottomAppBar_Colored = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_BottomAppBar_Colored;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_BottomNavigationView = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_BottomNavigationView;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_BottomNavigationView_Colored = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_BottomNavigationView_Colored;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_BottomSheet_Modal = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_BottomSheet_Modal;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_Icon = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_Icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_OutlinedButton = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_OutlinedButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_OutlinedButton_Icon = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_OutlinedButton_Icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton_Dialog;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton_Dialog_Icon = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton_Dialog_Icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton_Icon = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_TextButton_Icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_UnelevatedButton = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_UnelevatedButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Button_UnelevatedButton_Icon = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Button_UnelevatedButton_Icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_CardView = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_CardView;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_ChipGroup = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_ChipGroup;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Chip_Action = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Chip_Action;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Chip_Choice = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Chip_Choice;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Chip_Entry = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Chip_Entry;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Chip_Filter = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Chip_Filter;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_FloatingActionButton = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_FloatingActionButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_NavigationView = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_NavigationView;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Snackbar = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Snackbar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Snackbar_FullWidth = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Snackbar_FullWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TabLayout = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TabLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TabLayout_Colored = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TabLayout_Colored;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_FilledBox = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_FilledBox;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_FilledBox_Dense = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_FilledBox_Dense;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_OutlinedBox = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_OutlinedBox;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_OutlinedBox_Dense = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputEditText_OutlinedBox_Dense;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_FilledBox = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_FilledBox;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_FilledBox_Dense = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_FilledBox_Dense;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_OutlinedBox = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_OutlinedBox;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_MaterialComponents_Toolbar = global::PoseSportsPredict.Droid.Resource.Style.Widget_MaterialComponents_Toolbar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Style.Widget_Support_CoordinatorLayout = global::PoseSportsPredict.Droid.Resource.Style.Widget_Support_CoordinatorLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ActionBar = global::PoseSportsPredict.Droid.Resource.Styleable.ActionBar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ActionBarLayout = global::PoseSportsPredict.Droid.Resource.Styleable.ActionBarLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ActionBarLayout_android_layout_gravity = global::PoseSportsPredict.Droid.Resource.Styleable.ActionBarLayout_android_layout_gravity;
@@ -6843,16 +7256,34 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ActivityChooserView_initialActivityCount = global::PoseSportsPredict.Droid.Resource.Styleable.ActivityChooserView_initialActivityCount;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_android_layout = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_android_layout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_buttonIconDimen = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_buttonIconDimen;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_buttonPanelSideLayout = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_buttonPanelSideLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_listItemLayout = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_listItemLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_listLayout = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_listLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_multiChoiceItemLayout = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_multiChoiceItemLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_showTitle = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_showTitle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AlertDialog_singleChoiceItemLayout = global::PoseSportsPredict.Droid.Resource.Styleable.AlertDialog_singleChoiceItemLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_constantSize = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_constantSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_dither = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_dither;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_enterFadeDuration = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_enterFadeDuration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_exitFadeDuration = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_exitFadeDuration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_variablePadding = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_variablePadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_visible = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_visible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableItem = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableItem;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableItem_android_drawable = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableItem_android_drawable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableItem_android_id = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableItem_android_id;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableTransition = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableTransition;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_drawable = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_drawable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_fromId = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_fromId;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_reversible = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_reversible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_toId = global::PoseSportsPredict.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_toId;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayoutStates = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayoutStates;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsed = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsed;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsible = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayoutStates_state_collapsible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayoutStates_state_liftable = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayoutStates_state_liftable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayoutStates_state_lifted = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayoutStates_state_lifted;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_android_background = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_android_background;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_android_keyboardNavigationCluster = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_android_keyboardNavigationCluster;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_android_touchscreenBlocksFocus = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_android_touchscreenBlocksFocus;
@@ -6861,6 +7292,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_Layout = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_Layout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollFlags = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollFlags;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollInterpolator = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_Layout_layout_scrollInterpolator;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppBarLayout_liftOnScroll = global::PoseSportsPredict.Droid.Resource.Styleable.AppBarLayout_liftOnScroll;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatImageView = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatImageView;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatImageView_android_src = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatImageView_android_src;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatImageView_srcCompat = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatImageView_srcCompat;
@@ -6886,7 +7318,10 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_autoSizePresetSizes = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_autoSizePresetSizes;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_autoSizeTextType = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_autoSizeTextType;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_firstBaselineToTopHeight = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_firstBaselineToTopHeight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_fontFamily = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_fontFamily;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_lastBaselineToBottomHeight = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_lastBaselineToBottomHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_lineHeight = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_lineHeight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTextView_textAllCaps = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTextView_textAllCaps;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_actionBarDivider = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_actionBarDivider;
@@ -6948,6 +7383,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_colorPrimaryDark = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_colorPrimaryDark;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_controlBackground = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_controlBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_dialogCornerRadius = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_dialogCornerRadius;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_dialogPreferredPadding = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_dialogPreferredPadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_dialogTheme = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_dialogTheme;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_dividerHorizontal = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_dividerHorizontal;
@@ -6998,6 +7434,7 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_toolbarStyle = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_toolbarStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_tooltipForegroundColor = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_tooltipForegroundColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_tooltipFrameBackground = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_tooltipFrameBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_viewInflaterClass = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_viewInflaterClass;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_windowActionBar = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_windowActionBar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_windowActionBarOverlay = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_windowActionBarOverlay;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_windowActionModeOverlay = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_windowActionModeOverlay;
@@ -7008,13 +7445,26 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMajor = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMajor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMinor = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMinor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.AppCompatTheme_windowNoTitle = global::PoseSportsPredict.Droid.Resource.Styleable.AppCompatTheme_windowNoTitle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar_backgroundTint = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar_backgroundTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar_fabAlignmentMode = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar_fabAlignmentMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar_fabCradleMargin = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar_fabCradleMargin;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar_fabCradleRoundedCornerRadius = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar_fabCradleRoundedCornerRadius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar_fabCradleVerticalOffset = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar_fabCradleVerticalOffset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomAppBar_hideOnScroll = global::PoseSportsPredict.Droid.Resource.Styleable.BottomAppBar_hideOnScroll;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_elevation = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemBackground = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemHorizontalTranslationEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemHorizontalTranslationEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemIconSize = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemIconSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemIconTint = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemTextAppearanceActive = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemTextAppearanceActive;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemTextAppearanceInactive = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemTextAppearanceInactive;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_itemTextColor = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_itemTextColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_labelVisibilityMode = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_labelVisibilityMode;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomNavigationView_menu = global::PoseSportsPredict.Droid.Resource.Styleable.BottomNavigationView_menu;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomSheetBehavior_Layout = global::PoseSportsPredict.Droid.Resource.Styleable.BottomSheetBehavior_Layout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_fitToContents = global::PoseSportsPredict.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_fitToContents;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_hideable = global::PoseSportsPredict.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_hideable;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_peekHeight = global::PoseSportsPredict.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_peekHeight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_skipCollapsed = global::PoseSportsPredict.Droid.Resource.Styleable.BottomSheetBehavior_Layout_behavior_skipCollapsed;
@@ -7034,6 +7484,48 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.CardView_contentPaddingLeft = global::PoseSportsPredict.Droid.Resource.Styleable.CardView_contentPaddingLeft;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.CardView_contentPaddingRight = global::PoseSportsPredict.Droid.Resource.Styleable.CardView_contentPaddingRight;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.CardView_contentPaddingTop = global::PoseSportsPredict.Droid.Resource.Styleable.CardView_contentPaddingTop;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip = global::PoseSportsPredict.Droid.Resource.Styleable.Chip;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup_checkedChip = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup_checkedChip;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup_chipSpacing = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup_chipSpacing;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup_chipSpacingHorizontal = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup_chipSpacingHorizontal;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup_chipSpacingVertical = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup_chipSpacingVertical;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup_singleLine = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup_singleLine;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ChipGroup_singleSelection = global::PoseSportsPredict.Droid.Resource.Styleable.ChipGroup_singleSelection;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_android_checkable = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_android_checkable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_android_ellipsize = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_android_ellipsize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_android_maxWidth = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_android_maxWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_android_text = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_android_text;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_android_textAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_android_textAppearance;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_checkedIcon = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_checkedIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_checkedIconEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_checkedIconEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_checkedIconVisible = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_checkedIconVisible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipBackgroundColor = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipBackgroundColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipCornerRadius = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipCornerRadius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipEndPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipIcon = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipIconEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipIconEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipIconSize = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipIconSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipIconTint = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipIconVisible = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipIconVisible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipMinHeight = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipMinHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipStartPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipStartPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipStrokeColor = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipStrokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_chipStrokeWidth = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_chipStrokeWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIcon = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIconEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIconEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIconEndPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIconEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIconSize = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIconSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIconStartPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIconStartPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIconTint = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_closeIconVisible = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_closeIconVisible;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_hideMotionSpec = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_hideMotionSpec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_iconEndPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_iconEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_iconStartPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_iconStartPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_rippleColor = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_rippleColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_showMotionSpec = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_showMotionSpec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_textEndPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_textEndPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Chip_textStartPadding = global::PoseSportsPredict.Droid.Resource.Styleable.Chip_textStartPadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.CollapsingToolbarLayout = global::PoseSportsPredict.Droid.Resource.Styleable.CollapsingToolbarLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleGravity = global::PoseSportsPredict.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleGravity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.CollapsingToolbarLayout_collapsedTitleTextAppearance;
@@ -7092,18 +7584,30 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout_behavior_autoHide = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout_behavior_autoHide;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_borderWidth = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_borderWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_elevation = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_elevation;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_fabCustomSize = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_fabCustomSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_fabSize = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_fabSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_hideMotionSpec = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_hideMotionSpec;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_hoveredFocusedTranslationZ = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_hoveredFocusedTranslationZ;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_maxImageSize = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_maxImageSize;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_pressedTranslationZ = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_pressedTranslationZ;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_rippleColor = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_rippleColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_showMotionSpec = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_showMotionSpec;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FloatingActionButton_useCompatPadding = global::PoseSportsPredict.Droid.Resource.Styleable.FloatingActionButton_useCompatPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FlowLayout = global::PoseSportsPredict.Droid.Resource.Styleable.FlowLayout;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FlowLayout_itemSpacing = global::PoseSportsPredict.Droid.Resource.Styleable.FlowLayout_itemSpacing;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FlowLayout_lineSpacing = global::PoseSportsPredict.Droid.Resource.Styleable.FlowLayout_lineSpacing;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamily = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamily;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_android_font = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_android_font;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_android_fontVariationSettings = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_android_fontVariationSettings;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_android_ttcIndex = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_android_ttcIndex;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_font = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_font;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_fontStyle = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_fontVariationSettings = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_fontVariationSettings;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_fontWeight = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamilyFont_ttcIndex = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamilyFont_ttcIndex;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamily_fontProviderAuthority = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamily_fontProviderCerts = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::PoseSportsPredict.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
@@ -7114,6 +7618,22 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ForegroundLinearLayout_android_foreground = global::PoseSportsPredict.Droid.Resource.Styleable.ForegroundLinearLayout_android_foreground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity = global::PoseSportsPredict.Droid.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ForegroundLinearLayout_foregroundInsidePadding = global::PoseSportsPredict.Droid.Resource.Styleable.ForegroundLinearLayout_foregroundInsidePadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColorItem = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColorItem;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColorItem_android_color = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColorItem_android_color;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColorItem_android_offset = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColorItem_android_offset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_centerColor = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_centerColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_centerX = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_centerX;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_centerY = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_centerY;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_endColor = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_endColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_endX = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_endX;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_endY = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_endY;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_gradientRadius = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_gradientRadius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_startColor = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_startColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_startX = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_startX;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_startY = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_startY;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_tileMode = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_tileMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.GradientColor_android_type = global::PoseSportsPredict.Droid.Resource.Styleable.GradientColor_android_type;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.LinearLayoutCompat = global::PoseSportsPredict.Droid.Resource.Styleable.LinearLayoutCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::PoseSportsPredict.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::PoseSportsPredict.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
@@ -7132,6 +7652,59 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ListPopupWindow = global::PoseSportsPredict.Droid.Resource.Styleable.ListPopupWindow;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset = global::PoseSportsPredict.Droid.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset = global::PoseSportsPredict.Droid.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_android_insetBottom = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_android_insetBottom;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_android_insetLeft = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_android_insetLeft;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_android_insetRight = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_android_insetRight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_android_insetTop = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_android_insetTop;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_backgroundTint = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_backgroundTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_backgroundTintMode = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_backgroundTintMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_cornerRadius = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_cornerRadius;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_icon = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_icon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_iconGravity = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_iconGravity;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_iconPadding = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_iconPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_iconSize = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_iconSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_iconTint = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_iconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_iconTintMode = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_iconTintMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_rippleColor = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_rippleColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_strokeColor = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_strokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialButton_strokeWidth = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialButton_strokeWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialCardView = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialCardView;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialCardView_strokeColor = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialCardView_strokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialCardView_strokeWidth = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialCardView_strokeWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_bottomSheetDialogTheme = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_bottomSheetDialogTheme;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_bottomSheetStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_bottomSheetStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_chipGroupStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_chipGroupStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_chipStandaloneStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_chipStandaloneStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_chipStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_chipStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_colorAccent = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_colorAccent;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_colorBackgroundFloating = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_colorBackgroundFloating;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_colorPrimary = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_colorPrimary;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_colorPrimaryDark = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_colorPrimaryDark;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_colorSecondary = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_colorSecondary;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_editTextStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_editTextStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_floatingActionButtonStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_floatingActionButtonStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_materialButtonStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_materialButtonStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_materialCardViewStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_materialCardViewStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_navigationViewStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_navigationViewStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_scrimBackground = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_scrimBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_snackbarButtonStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_snackbarButtonStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_tabStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_tabStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceBody1 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceBody1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceBody2 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceBody2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceButton = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceButton;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceCaption = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceCaption;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline1 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline2 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline3 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline3;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline4 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline4;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline5 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline5;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline6 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceHeadline6;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceOverline = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceOverline;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceSubtitle1 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceSubtitle1;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceSubtitle2 = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textAppearanceSubtitle2;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MaterialComponentsTheme_textInputStyle = global::PoseSportsPredict.Droid.Resource.Styleable.MaterialComponentsTheme_textInputStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MenuGroup = global::PoseSportsPredict.Droid.Resource.Styleable.MenuGroup;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MenuGroup_android_checkableBehavior = global::PoseSportsPredict.Droid.Resource.Styleable.MenuGroup_android_checkableBehavior;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.MenuGroup_android_enabled = global::PoseSportsPredict.Droid.Resource.Styleable.MenuGroup_android_enabled;
@@ -7180,6 +7753,8 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_elevation = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_headerLayout = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_headerLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_itemBackground = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_itemBackground;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_itemHorizontalPadding = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_itemHorizontalPadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_itemIconPadding = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_itemIconPadding;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_itemIconTint = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_itemIconTint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_itemTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_itemTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.NavigationView_itemTextColor = global::PoseSportsPredict.Droid.Resource.Styleable.NavigationView_itemTextColor;
@@ -7227,16 +7802,28 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SearchView_submitBackground = global::PoseSportsPredict.Droid.Resource.Styleable.SearchView_submitBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SearchView_suggestionRowLayout = global::PoseSportsPredict.Droid.Resource.Styleable.SearchView_suggestionRowLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SearchView_voiceIcon = global::PoseSportsPredict.Droid.Resource.Styleable.SearchView_voiceIcon;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Snackbar = global::PoseSportsPredict.Droid.Resource.Styleable.Snackbar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SnackbarLayout = global::PoseSportsPredict.Droid.Resource.Styleable.SnackbarLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SnackbarLayout_android_maxWidth = global::PoseSportsPredict.Droid.Resource.Styleable.SnackbarLayout_android_maxWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SnackbarLayout_elevation = global::PoseSportsPredict.Droid.Resource.Styleable.SnackbarLayout_elevation;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SnackbarLayout_maxActionInlineWidth = global::PoseSportsPredict.Droid.Resource.Styleable.SnackbarLayout_maxActionInlineWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Snackbar_snackbarButtonStyle = global::PoseSportsPredict.Droid.Resource.Styleable.Snackbar_snackbarButtonStyle;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Snackbar_snackbarStyle = global::PoseSportsPredict.Droid.Resource.Styleable.Snackbar_snackbarStyle;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Spinner = global::PoseSportsPredict.Droid.Resource.Styleable.Spinner;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Spinner_android_dropDownWidth = global::PoseSportsPredict.Droid.Resource.Styleable.Spinner_android_dropDownWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Spinner_android_entries = global::PoseSportsPredict.Droid.Resource.Styleable.Spinner_android_entries;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Spinner_android_popupBackground = global::PoseSportsPredict.Droid.Resource.Styleable.Spinner_android_popupBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Spinner_android_prompt = global::PoseSportsPredict.Droid.Resource.Styleable.Spinner_android_prompt;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Spinner_popupTheme = global::PoseSportsPredict.Droid.Resource.Styleable.Spinner_popupTheme;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawableItem = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawableItem;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawableItem_android_drawable = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawableItem_android_drawable;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable_android_constantSize = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable_android_constantSize;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable_android_dither = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable_android_dither;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable_android_enterFadeDuration = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable_android_enterFadeDuration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable_android_exitFadeDuration = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable_android_exitFadeDuration;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable_android_variablePadding = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable_android_variablePadding;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.StateListDrawable_android_visible = global::PoseSportsPredict.Droid.Resource.Styleable.StateListDrawable_android_visible;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SwitchCompat = global::PoseSportsPredict.Droid.Resource.Styleable.SwitchCompat;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SwitchCompat_android_textOff = global::PoseSportsPredict.Droid.Resource.Styleable.SwitchCompat_android_textOff;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.SwitchCompat_android_textOn = global::PoseSportsPredict.Droid.Resource.Styleable.SwitchCompat_android_textOn;
@@ -7260,8 +7847,15 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabBackground = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabBackground;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabContentStart = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabContentStart;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabGravity = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabGravity;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIconTint = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIconTint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIconTintMode = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIconTintMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIndicator = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIndicator;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIndicatorAnimationDuration = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIndicatorAnimationDuration;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIndicatorColor = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIndicatorColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIndicatorFullWidth = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIndicatorFullWidth;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIndicatorGravity = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIndicatorGravity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabIndicatorHeight = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabIndicatorHeight;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabInlineLabel = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabInlineLabel;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabMaxWidth = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabMaxWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabMinWidth = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabMinWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabMode = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabMode;
@@ -7270,9 +7864,11 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabPaddingEnd = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabPaddingEnd;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabPaddingStart = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabPaddingStart;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabPaddingTop = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabPaddingTop;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabRippleColor = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabRippleColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabSelectedTextColor = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabSelectedTextColor;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabTextColor = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabTextColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TabLayout_tabUnboundedRipple = global::PoseSportsPredict.Droid.Resource.Styleable.TabLayout_tabUnboundedRipple;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextAppearance_android_fontFamily = global::PoseSportsPredict.Droid.Resource.Styleable.TextAppearance_android_fontFamily;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextAppearance_android_shadowColor = global::PoseSportsPredict.Droid.Resource.Styleable.TextAppearance_android_shadowColor;
@@ -7290,12 +7886,24 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_android_hint = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_android_hint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_android_textColorHint = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_android_textColorHint;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxBackgroundColor = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxBackgroundColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxBackgroundMode = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxBackgroundMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxCollapsedPaddingTop = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxCollapsedPaddingTop;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusBottomEnd = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusBottomEnd;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusBottomStart = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusBottomStart;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusTopEnd = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusTopEnd;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusTopStart = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxCornerRadiusTopStart;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxStrokeColor = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxStrokeColor;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_boxStrokeWidth = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_boxStrokeWidth;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_counterEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_counterEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_counterMaxLength = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_counterMaxLength;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_counterOverflowTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_counterOverflowTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_counterTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_counterTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_errorEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_errorEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_errorTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_errorTextAppearance;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_helperText = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_helperText;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_helperTextEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_helperTextEnabled;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_helperTextTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_helperTextTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_hintAnimationEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_hintAnimationEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_hintEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_hintEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_hintTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_hintTextAppearance;
@@ -7304,6 +7912,10 @@ namespace PoseSportsPredict.Droid
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_passwordToggleEnabled = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_passwordToggleEnabled;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_passwordToggleTint = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_passwordToggleTint;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.TextInputLayout_passwordToggleTintMode = global::PoseSportsPredict.Droid.Resource.Styleable.TextInputLayout_passwordToggleTintMode;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ThemeEnforcement = global::PoseSportsPredict.Droid.Resource.Styleable.ThemeEnforcement;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ThemeEnforcement_android_textAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.ThemeEnforcement_android_textAppearance;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ThemeEnforcement_enforceMaterialTheme = global::PoseSportsPredict.Droid.Resource.Styleable.ThemeEnforcement_enforceMaterialTheme;
+			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.ThemeEnforcement_enforceTextAppearance = global::PoseSportsPredict.Droid.Resource.Styleable.ThemeEnforcement_enforceTextAppearance;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Toolbar = global::PoseSportsPredict.Droid.Resource.Styleable.Toolbar;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Toolbar_android_gravity = global::PoseSportsPredict.Droid.Resource.Styleable.Toolbar_android_gravity;
 			global::Sharpnado.Presentation.Forms.Droid.Resource.Styleable.Toolbar_android_minHeight = global::PoseSportsPredict.Droid.Resource.Styleable.Toolbar_android_minHeight;
@@ -11801,6 +12413,7 @@ namespace PoseSportsPredict.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Animation_AppCompat_DropDownUp = global::PoseSportsPredict.Droid.Resource.Style.Animation_AppCompat_DropDownUp;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Animation_AppCompat_Tooltip = global::PoseSportsPredict.Droid.Resource.Style.Animation_AppCompat_Tooltip;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Animation_Design_BottomSheetDialog = global::PoseSportsPredict.Droid.Resource.Style.Animation_Design_BottomSheetDialog;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.AppCompatDialogStyle = global::PoseSportsPredict.Droid.Resource.Style.AppCompatDialogStyle;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Base_AlertDialog_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_AlertDialog_AppCompat;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Base_AlertDialog_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Base_Animation_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_Animation_AppCompat_Dialog;
@@ -11993,7 +12606,8 @@ namespace PoseSportsPredict.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView_Dark = global::PoseSportsPredict.Droid.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.CardView_Light = global::PoseSportsPredict.Droid.Resource.Style.CardView_Light;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewStyle = global::PoseSportsPredict.Droid.Resource.Style.collectionViewStyle;
-			global::Xamarin.Forms.Platform.Android.Resource.Style.NestedScrollBarStyle = global::PoseSportsPredict.Droid.Resource.Style.NestedScrollBarStyle;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.MainTheme = global::PoseSportsPredict.Droid.Resource.Style.MainTheme;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.MainTheme_Base = global::PoseSportsPredict.Droid.Resource.Style.MainTheme_Base;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Platform_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Platform_AppCompat;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Platform_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Platform_AppCompat_Light;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Platform_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.Platform_MaterialComponents;
@@ -14364,6 +14978,7 @@ namespace PoseSportsPredict.Droid
 			global::Xamarin.Forms.Platform.Resource.Style.Animation_AppCompat_DropDownUp = global::PoseSportsPredict.Droid.Resource.Style.Animation_AppCompat_DropDownUp;
 			global::Xamarin.Forms.Platform.Resource.Style.Animation_AppCompat_Tooltip = global::PoseSportsPredict.Droid.Resource.Style.Animation_AppCompat_Tooltip;
 			global::Xamarin.Forms.Platform.Resource.Style.Animation_Design_BottomSheetDialog = global::PoseSportsPredict.Droid.Resource.Style.Animation_Design_BottomSheetDialog;
+			global::Xamarin.Forms.Platform.Resource.Style.AppCompatDialogStyle = global::PoseSportsPredict.Droid.Resource.Style.AppCompatDialogStyle;
 			global::Xamarin.Forms.Platform.Resource.Style.Base_AlertDialog_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Base_AlertDialog_AppCompat;
 			global::Xamarin.Forms.Platform.Resource.Style.Base_AlertDialog_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light;
 			global::Xamarin.Forms.Platform.Resource.Style.Base_Animation_AppCompat_Dialog = global::PoseSportsPredict.Droid.Resource.Style.Base_Animation_AppCompat_Dialog;
@@ -14556,7 +15171,8 @@ namespace PoseSportsPredict.Droid
 			global::Xamarin.Forms.Platform.Resource.Style.CardView_Dark = global::PoseSportsPredict.Droid.Resource.Style.CardView_Dark;
 			global::Xamarin.Forms.Platform.Resource.Style.CardView_Light = global::PoseSportsPredict.Droid.Resource.Style.CardView_Light;
 			global::Xamarin.Forms.Platform.Resource.Style.collectionViewStyle = global::PoseSportsPredict.Droid.Resource.Style.collectionViewStyle;
-			global::Xamarin.Forms.Platform.Resource.Style.NestedScrollBarStyle = global::PoseSportsPredict.Droid.Resource.Style.NestedScrollBarStyle;
+			global::Xamarin.Forms.Platform.Resource.Style.MainTheme = global::PoseSportsPredict.Droid.Resource.Style.MainTheme;
+			global::Xamarin.Forms.Platform.Resource.Style.MainTheme_Base = global::PoseSportsPredict.Droid.Resource.Style.MainTheme_Base;
 			global::Xamarin.Forms.Platform.Resource.Style.Platform_AppCompat = global::PoseSportsPredict.Droid.Resource.Style.Platform_AppCompat;
 			global::Xamarin.Forms.Platform.Resource.Style.Platform_AppCompat_Light = global::PoseSportsPredict.Droid.Resource.Style.Platform_AppCompat_Light;
 			global::Xamarin.Forms.Platform.Resource.Style.Platform_MaterialComponents = global::PoseSportsPredict.Droid.Resource.Style.Platform_MaterialComponents;
@@ -26082,8 +26698,8 @@ namespace PoseSportsPredict.Droid
 			// aapt resource value: 0x7F0F00C6
 			public const int CardView_Light = 2131689670;
 			
-			// aapt resource value: 0x7F0F01FA
-			public const int collectionViewStyle = 2131689978;
+			// aapt resource value: 0x7F0F01F9
+			public const int collectionViewStyle = 2131689977;
 			
 			// aapt resource value: 0x7F0F00C7
 			public const int MainTheme = 2131689671;
@@ -26095,916 +26711,913 @@ namespace PoseSportsPredict.Droid
 			public const int MyTheme_Splash = 2131689673;
 			
 			// aapt resource value: 0x7F0F00CA
-			public const int NestedScrollBarStyle = 2131689674;
+			public const int Platform_AppCompat = 2131689674;
 			
 			// aapt resource value: 0x7F0F00CB
-			public const int Platform_AppCompat = 2131689675;
+			public const int Platform_AppCompat_Light = 2131689675;
 			
 			// aapt resource value: 0x7F0F00CC
-			public const int Platform_AppCompat_Light = 2131689676;
+			public const int Platform_MaterialComponents = 2131689676;
 			
 			// aapt resource value: 0x7F0F00CD
-			public const int Platform_MaterialComponents = 2131689677;
+			public const int Platform_MaterialComponents_Dialog = 2131689677;
 			
 			// aapt resource value: 0x7F0F00CE
-			public const int Platform_MaterialComponents_Dialog = 2131689678;
+			public const int Platform_MaterialComponents_Light = 2131689678;
 			
 			// aapt resource value: 0x7F0F00CF
-			public const int Platform_MaterialComponents_Light = 2131689679;
+			public const int Platform_MaterialComponents_Light_Dialog = 2131689679;
 			
 			// aapt resource value: 0x7F0F00D0
-			public const int Platform_MaterialComponents_Light_Dialog = 2131689680;
+			public const int Platform_ThemeOverlay_AppCompat = 2131689680;
 			
 			// aapt resource value: 0x7F0F00D1
-			public const int Platform_ThemeOverlay_AppCompat = 2131689681;
+			public const int Platform_ThemeOverlay_AppCompat_Dark = 2131689681;
 			
 			// aapt resource value: 0x7F0F00D2
-			public const int Platform_ThemeOverlay_AppCompat_Dark = 2131689682;
+			public const int Platform_ThemeOverlay_AppCompat_Light = 2131689682;
 			
 			// aapt resource value: 0x7F0F00D3
-			public const int Platform_ThemeOverlay_AppCompat_Light = 2131689683;
+			public const int Platform_V21_AppCompat = 2131689683;
 			
 			// aapt resource value: 0x7F0F00D4
-			public const int Platform_V21_AppCompat = 2131689684;
+			public const int Platform_V21_AppCompat_Light = 2131689684;
 			
 			// aapt resource value: 0x7F0F00D5
-			public const int Platform_V21_AppCompat_Light = 2131689685;
+			public const int Platform_V25_AppCompat = 2131689685;
 			
 			// aapt resource value: 0x7F0F00D6
-			public const int Platform_V25_AppCompat = 2131689686;
+			public const int Platform_V25_AppCompat_Light = 2131689686;
 			
 			// aapt resource value: 0x7F0F00D7
-			public const int Platform_V25_AppCompat_Light = 2131689687;
+			public const int Platform_Widget_AppCompat_Spinner = 2131689687;
 			
 			// aapt resource value: 0x7F0F00D8
-			public const int Platform_Widget_AppCompat_Spinner = 2131689688;
+			public const int RtlOverlay_DialogWindowTitle_AppCompat = 2131689688;
 			
 			// aapt resource value: 0x7F0F00D9
-			public const int RtlOverlay_DialogWindowTitle_AppCompat = 2131689689;
+			public const int RtlOverlay_Widget_AppCompat_ActionBar_TitleItem = 2131689689;
 			
 			// aapt resource value: 0x7F0F00DA
-			public const int RtlOverlay_Widget_AppCompat_ActionBar_TitleItem = 2131689690;
+			public const int RtlOverlay_Widget_AppCompat_DialogTitle_Icon = 2131689690;
 			
 			// aapt resource value: 0x7F0F00DB
-			public const int RtlOverlay_Widget_AppCompat_DialogTitle_Icon = 2131689691;
+			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem = 2131689691;
 			
 			// aapt resource value: 0x7F0F00DC
-			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem = 2131689692;
+			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup = 2131689692;
 			
 			// aapt resource value: 0x7F0F00DD
-			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup = 2131689693;
+			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_Shortcut = 2131689693;
 			
 			// aapt resource value: 0x7F0F00DE
-			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_Shortcut = 2131689694;
+			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_SubmenuArrow = 2131689694;
 			
 			// aapt resource value: 0x7F0F00DF
-			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_SubmenuArrow = 2131689695;
+			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_Text = 2131689695;
 			
 			// aapt resource value: 0x7F0F00E0
-			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_Text = 2131689696;
-			
-			// aapt resource value: 0x7F0F00E1
-			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_Title = 2131689697;
-			
-			// aapt resource value: 0x7F0F00E7
-			public const int RtlOverlay_Widget_AppCompat_SearchView_MagIcon = 2131689703;
-			
-			// aapt resource value: 0x7F0F00E2
-			public const int RtlOverlay_Widget_AppCompat_Search_DropDown = 2131689698;
-			
-			// aapt resource value: 0x7F0F00E3
-			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1 = 2131689699;
-			
-			// aapt resource value: 0x7F0F00E4
-			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2 = 2131689700;
-			
-			// aapt resource value: 0x7F0F00E5
-			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Query = 2131689701;
+			public const int RtlOverlay_Widget_AppCompat_PopupMenuItem_Title = 2131689696;
 			
 			// aapt resource value: 0x7F0F00E6
-			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Text = 2131689702;
+			public const int RtlOverlay_Widget_AppCompat_SearchView_MagIcon = 2131689702;
+			
+			// aapt resource value: 0x7F0F00E1
+			public const int RtlOverlay_Widget_AppCompat_Search_DropDown = 2131689697;
+			
+			// aapt resource value: 0x7F0F00E2
+			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1 = 2131689698;
+			
+			// aapt resource value: 0x7F0F00E3
+			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2 = 2131689699;
+			
+			// aapt resource value: 0x7F0F00E4
+			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Query = 2131689700;
+			
+			// aapt resource value: 0x7F0F00E5
+			public const int RtlOverlay_Widget_AppCompat_Search_DropDown_Text = 2131689701;
+			
+			// aapt resource value: 0x7F0F00E7
+			public const int RtlUnderlay_Widget_AppCompat_ActionButton = 2131689703;
 			
 			// aapt resource value: 0x7F0F00E8
-			public const int RtlUnderlay_Widget_AppCompat_ActionButton = 2131689704;
+			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131689704;
 			
 			// aapt resource value: 0x7F0F00E9
-			public const int RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = 2131689705;
+			public const int TextAppearance_AppCompat = 2131689705;
 			
 			// aapt resource value: 0x7F0F00EA
-			public const int TextAppearance_AppCompat = 2131689706;
+			public const int TextAppearance_AppCompat_Body1 = 2131689706;
 			
 			// aapt resource value: 0x7F0F00EB
-			public const int TextAppearance_AppCompat_Body1 = 2131689707;
+			public const int TextAppearance_AppCompat_Body2 = 2131689707;
 			
 			// aapt resource value: 0x7F0F00EC
-			public const int TextAppearance_AppCompat_Body2 = 2131689708;
+			public const int TextAppearance_AppCompat_Button = 2131689708;
 			
 			// aapt resource value: 0x7F0F00ED
-			public const int TextAppearance_AppCompat_Button = 2131689709;
+			public const int TextAppearance_AppCompat_Caption = 2131689709;
 			
 			// aapt resource value: 0x7F0F00EE
-			public const int TextAppearance_AppCompat_Caption = 2131689710;
+			public const int TextAppearance_AppCompat_Display1 = 2131689710;
 			
 			// aapt resource value: 0x7F0F00EF
-			public const int TextAppearance_AppCompat_Display1 = 2131689711;
+			public const int TextAppearance_AppCompat_Display2 = 2131689711;
 			
 			// aapt resource value: 0x7F0F00F0
-			public const int TextAppearance_AppCompat_Display2 = 2131689712;
+			public const int TextAppearance_AppCompat_Display3 = 2131689712;
 			
 			// aapt resource value: 0x7F0F00F1
-			public const int TextAppearance_AppCompat_Display3 = 2131689713;
+			public const int TextAppearance_AppCompat_Display4 = 2131689713;
 			
 			// aapt resource value: 0x7F0F00F2
-			public const int TextAppearance_AppCompat_Display4 = 2131689714;
+			public const int TextAppearance_AppCompat_Headline = 2131689714;
 			
 			// aapt resource value: 0x7F0F00F3
-			public const int TextAppearance_AppCompat_Headline = 2131689715;
+			public const int TextAppearance_AppCompat_Inverse = 2131689715;
 			
 			// aapt resource value: 0x7F0F00F4
-			public const int TextAppearance_AppCompat_Inverse = 2131689716;
+			public const int TextAppearance_AppCompat_Large = 2131689716;
 			
 			// aapt resource value: 0x7F0F00F5
-			public const int TextAppearance_AppCompat_Large = 2131689717;
+			public const int TextAppearance_AppCompat_Large_Inverse = 2131689717;
 			
 			// aapt resource value: 0x7F0F00F6
-			public const int TextAppearance_AppCompat_Large_Inverse = 2131689718;
+			public const int TextAppearance_AppCompat_Light_SearchResult_Subtitle = 2131689718;
 			
 			// aapt resource value: 0x7F0F00F7
-			public const int TextAppearance_AppCompat_Light_SearchResult_Subtitle = 2131689719;
+			public const int TextAppearance_AppCompat_Light_SearchResult_Title = 2131689719;
 			
 			// aapt resource value: 0x7F0F00F8
-			public const int TextAppearance_AppCompat_Light_SearchResult_Title = 2131689720;
+			public const int TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = 2131689720;
 			
 			// aapt resource value: 0x7F0F00F9
-			public const int TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = 2131689721;
+			public const int TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = 2131689721;
 			
 			// aapt resource value: 0x7F0F00FA
-			public const int TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = 2131689722;
+			public const int TextAppearance_AppCompat_Medium = 2131689722;
 			
 			// aapt resource value: 0x7F0F00FB
-			public const int TextAppearance_AppCompat_Medium = 2131689723;
+			public const int TextAppearance_AppCompat_Medium_Inverse = 2131689723;
 			
 			// aapt resource value: 0x7F0F00FC
-			public const int TextAppearance_AppCompat_Medium_Inverse = 2131689724;
+			public const int TextAppearance_AppCompat_Menu = 2131689724;
 			
 			// aapt resource value: 0x7F0F00FD
-			public const int TextAppearance_AppCompat_Menu = 2131689725;
+			public const int TextAppearance_AppCompat_SearchResult_Subtitle = 2131689725;
 			
 			// aapt resource value: 0x7F0F00FE
-			public const int TextAppearance_AppCompat_SearchResult_Subtitle = 2131689726;
+			public const int TextAppearance_AppCompat_SearchResult_Title = 2131689726;
 			
 			// aapt resource value: 0x7F0F00FF
-			public const int TextAppearance_AppCompat_SearchResult_Title = 2131689727;
+			public const int TextAppearance_AppCompat_Small = 2131689727;
 			
 			// aapt resource value: 0x7F0F0100
-			public const int TextAppearance_AppCompat_Small = 2131689728;
+			public const int TextAppearance_AppCompat_Small_Inverse = 2131689728;
 			
 			// aapt resource value: 0x7F0F0101
-			public const int TextAppearance_AppCompat_Small_Inverse = 2131689729;
+			public const int TextAppearance_AppCompat_Subhead = 2131689729;
 			
 			// aapt resource value: 0x7F0F0102
-			public const int TextAppearance_AppCompat_Subhead = 2131689730;
+			public const int TextAppearance_AppCompat_Subhead_Inverse = 2131689730;
 			
 			// aapt resource value: 0x7F0F0103
-			public const int TextAppearance_AppCompat_Subhead_Inverse = 2131689731;
+			public const int TextAppearance_AppCompat_Title = 2131689731;
 			
 			// aapt resource value: 0x7F0F0104
-			public const int TextAppearance_AppCompat_Title = 2131689732;
+			public const int TextAppearance_AppCompat_Title_Inverse = 2131689732;
 			
 			// aapt resource value: 0x7F0F0105
-			public const int TextAppearance_AppCompat_Title_Inverse = 2131689733;
+			public const int TextAppearance_AppCompat_Tooltip = 2131689733;
 			
 			// aapt resource value: 0x7F0F0106
-			public const int TextAppearance_AppCompat_Tooltip = 2131689734;
+			public const int TextAppearance_AppCompat_Widget_ActionBar_Menu = 2131689734;
 			
 			// aapt resource value: 0x7F0F0107
-			public const int TextAppearance_AppCompat_Widget_ActionBar_Menu = 2131689735;
+			public const int TextAppearance_AppCompat_Widget_ActionBar_Subtitle = 2131689735;
 			
 			// aapt resource value: 0x7F0F0108
-			public const int TextAppearance_AppCompat_Widget_ActionBar_Subtitle = 2131689736;
+			public const int TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = 2131689736;
 			
 			// aapt resource value: 0x7F0F0109
-			public const int TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = 2131689737;
+			public const int TextAppearance_AppCompat_Widget_ActionBar_Title = 2131689737;
 			
 			// aapt resource value: 0x7F0F010A
-			public const int TextAppearance_AppCompat_Widget_ActionBar_Title = 2131689738;
+			public const int TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = 2131689738;
 			
 			// aapt resource value: 0x7F0F010B
-			public const int TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = 2131689739;
+			public const int TextAppearance_AppCompat_Widget_ActionMode_Subtitle = 2131689739;
 			
 			// aapt resource value: 0x7F0F010C
-			public const int TextAppearance_AppCompat_Widget_ActionMode_Subtitle = 2131689740;
+			public const int TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse = 2131689740;
 			
 			// aapt resource value: 0x7F0F010D
-			public const int TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse = 2131689741;
+			public const int TextAppearance_AppCompat_Widget_ActionMode_Title = 2131689741;
 			
 			// aapt resource value: 0x7F0F010E
-			public const int TextAppearance_AppCompat_Widget_ActionMode_Title = 2131689742;
+			public const int TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse = 2131689742;
 			
 			// aapt resource value: 0x7F0F010F
-			public const int TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse = 2131689743;
+			public const int TextAppearance_AppCompat_Widget_Button = 2131689743;
 			
 			// aapt resource value: 0x7F0F0110
-			public const int TextAppearance_AppCompat_Widget_Button = 2131689744;
+			public const int TextAppearance_AppCompat_Widget_Button_Borderless_Colored = 2131689744;
 			
 			// aapt resource value: 0x7F0F0111
-			public const int TextAppearance_AppCompat_Widget_Button_Borderless_Colored = 2131689745;
+			public const int TextAppearance_AppCompat_Widget_Button_Colored = 2131689745;
 			
 			// aapt resource value: 0x7F0F0112
-			public const int TextAppearance_AppCompat_Widget_Button_Colored = 2131689746;
+			public const int TextAppearance_AppCompat_Widget_Button_Inverse = 2131689746;
 			
 			// aapt resource value: 0x7F0F0113
-			public const int TextAppearance_AppCompat_Widget_Button_Inverse = 2131689747;
+			public const int TextAppearance_AppCompat_Widget_DropDownItem = 2131689747;
 			
 			// aapt resource value: 0x7F0F0114
-			public const int TextAppearance_AppCompat_Widget_DropDownItem = 2131689748;
+			public const int TextAppearance_AppCompat_Widget_PopupMenu_Header = 2131689748;
 			
 			// aapt resource value: 0x7F0F0115
-			public const int TextAppearance_AppCompat_Widget_PopupMenu_Header = 2131689749;
+			public const int TextAppearance_AppCompat_Widget_PopupMenu_Large = 2131689749;
 			
 			// aapt resource value: 0x7F0F0116
-			public const int TextAppearance_AppCompat_Widget_PopupMenu_Large = 2131689750;
+			public const int TextAppearance_AppCompat_Widget_PopupMenu_Small = 2131689750;
 			
 			// aapt resource value: 0x7F0F0117
-			public const int TextAppearance_AppCompat_Widget_PopupMenu_Small = 2131689751;
+			public const int TextAppearance_AppCompat_Widget_Switch = 2131689751;
 			
 			// aapt resource value: 0x7F0F0118
-			public const int TextAppearance_AppCompat_Widget_Switch = 2131689752;
+			public const int TextAppearance_AppCompat_Widget_TextView_SpinnerItem = 2131689752;
 			
 			// aapt resource value: 0x7F0F0119
-			public const int TextAppearance_AppCompat_Widget_TextView_SpinnerItem = 2131689753;
+			public const int TextAppearance_Compat_Notification = 2131689753;
 			
 			// aapt resource value: 0x7F0F011A
-			public const int TextAppearance_Compat_Notification = 2131689754;
+			public const int TextAppearance_Compat_Notification_Info = 2131689754;
 			
 			// aapt resource value: 0x7F0F011B
-			public const int TextAppearance_Compat_Notification_Info = 2131689755;
+			public const int TextAppearance_Compat_Notification_Info_Media = 2131689755;
 			
 			// aapt resource value: 0x7F0F011C
-			public const int TextAppearance_Compat_Notification_Info_Media = 2131689756;
+			public const int TextAppearance_Compat_Notification_Line2 = 2131689756;
 			
 			// aapt resource value: 0x7F0F011D
-			public const int TextAppearance_Compat_Notification_Line2 = 2131689757;
+			public const int TextAppearance_Compat_Notification_Line2_Media = 2131689757;
 			
 			// aapt resource value: 0x7F0F011E
-			public const int TextAppearance_Compat_Notification_Line2_Media = 2131689758;
+			public const int TextAppearance_Compat_Notification_Media = 2131689758;
 			
 			// aapt resource value: 0x7F0F011F
-			public const int TextAppearance_Compat_Notification_Media = 2131689759;
+			public const int TextAppearance_Compat_Notification_Time = 2131689759;
 			
 			// aapt resource value: 0x7F0F0120
-			public const int TextAppearance_Compat_Notification_Time = 2131689760;
+			public const int TextAppearance_Compat_Notification_Time_Media = 2131689760;
 			
 			// aapt resource value: 0x7F0F0121
-			public const int TextAppearance_Compat_Notification_Time_Media = 2131689761;
+			public const int TextAppearance_Compat_Notification_Title = 2131689761;
 			
 			// aapt resource value: 0x7F0F0122
-			public const int TextAppearance_Compat_Notification_Title = 2131689762;
+			public const int TextAppearance_Compat_Notification_Title_Media = 2131689762;
 			
 			// aapt resource value: 0x7F0F0123
-			public const int TextAppearance_Compat_Notification_Title_Media = 2131689763;
+			public const int TextAppearance_Design_CollapsingToolbar_Expanded = 2131689763;
 			
 			// aapt resource value: 0x7F0F0124
-			public const int TextAppearance_Design_CollapsingToolbar_Expanded = 2131689764;
+			public const int TextAppearance_Design_Counter = 2131689764;
 			
 			// aapt resource value: 0x7F0F0125
-			public const int TextAppearance_Design_Counter = 2131689765;
+			public const int TextAppearance_Design_Counter_Overflow = 2131689765;
 			
 			// aapt resource value: 0x7F0F0126
-			public const int TextAppearance_Design_Counter_Overflow = 2131689766;
+			public const int TextAppearance_Design_Error = 2131689766;
 			
 			// aapt resource value: 0x7F0F0127
-			public const int TextAppearance_Design_Error = 2131689767;
+			public const int TextAppearance_Design_HelperText = 2131689767;
 			
 			// aapt resource value: 0x7F0F0128
-			public const int TextAppearance_Design_HelperText = 2131689768;
+			public const int TextAppearance_Design_Hint = 2131689768;
 			
 			// aapt resource value: 0x7F0F0129
-			public const int TextAppearance_Design_Hint = 2131689769;
+			public const int TextAppearance_Design_Snackbar_Message = 2131689769;
 			
 			// aapt resource value: 0x7F0F012A
-			public const int TextAppearance_Design_Snackbar_Message = 2131689770;
+			public const int TextAppearance_Design_Tab = 2131689770;
 			
 			// aapt resource value: 0x7F0F012B
-			public const int TextAppearance_Design_Tab = 2131689771;
+			public const int TextAppearance_MaterialComponents_Body1 = 2131689771;
 			
 			// aapt resource value: 0x7F0F012C
-			public const int TextAppearance_MaterialComponents_Body1 = 2131689772;
+			public const int TextAppearance_MaterialComponents_Body2 = 2131689772;
 			
 			// aapt resource value: 0x7F0F012D
-			public const int TextAppearance_MaterialComponents_Body2 = 2131689773;
+			public const int TextAppearance_MaterialComponents_Button = 2131689773;
 			
 			// aapt resource value: 0x7F0F012E
-			public const int TextAppearance_MaterialComponents_Button = 2131689774;
+			public const int TextAppearance_MaterialComponents_Caption = 2131689774;
 			
 			// aapt resource value: 0x7F0F012F
-			public const int TextAppearance_MaterialComponents_Caption = 2131689775;
+			public const int TextAppearance_MaterialComponents_Chip = 2131689775;
 			
 			// aapt resource value: 0x7F0F0130
-			public const int TextAppearance_MaterialComponents_Chip = 2131689776;
+			public const int TextAppearance_MaterialComponents_Headline1 = 2131689776;
 			
 			// aapt resource value: 0x7F0F0131
-			public const int TextAppearance_MaterialComponents_Headline1 = 2131689777;
+			public const int TextAppearance_MaterialComponents_Headline2 = 2131689777;
 			
 			// aapt resource value: 0x7F0F0132
-			public const int TextAppearance_MaterialComponents_Headline2 = 2131689778;
+			public const int TextAppearance_MaterialComponents_Headline3 = 2131689778;
 			
 			// aapt resource value: 0x7F0F0133
-			public const int TextAppearance_MaterialComponents_Headline3 = 2131689779;
+			public const int TextAppearance_MaterialComponents_Headline4 = 2131689779;
 			
 			// aapt resource value: 0x7F0F0134
-			public const int TextAppearance_MaterialComponents_Headline4 = 2131689780;
+			public const int TextAppearance_MaterialComponents_Headline5 = 2131689780;
 			
 			// aapt resource value: 0x7F0F0135
-			public const int TextAppearance_MaterialComponents_Headline5 = 2131689781;
+			public const int TextAppearance_MaterialComponents_Headline6 = 2131689781;
 			
 			// aapt resource value: 0x7F0F0136
-			public const int TextAppearance_MaterialComponents_Headline6 = 2131689782;
+			public const int TextAppearance_MaterialComponents_Overline = 2131689782;
 			
 			// aapt resource value: 0x7F0F0137
-			public const int TextAppearance_MaterialComponents_Overline = 2131689783;
+			public const int TextAppearance_MaterialComponents_Subtitle1 = 2131689783;
 			
 			// aapt resource value: 0x7F0F0138
-			public const int TextAppearance_MaterialComponents_Subtitle1 = 2131689784;
+			public const int TextAppearance_MaterialComponents_Subtitle2 = 2131689784;
 			
 			// aapt resource value: 0x7F0F0139
-			public const int TextAppearance_MaterialComponents_Subtitle2 = 2131689785;
+			public const int TextAppearance_MaterialComponents_Tab = 2131689785;
 			
 			// aapt resource value: 0x7F0F013A
-			public const int TextAppearance_MaterialComponents_Tab = 2131689786;
+			public const int TextAppearance_Widget_AppCompat_ExpandedMenu_Item = 2131689786;
 			
 			// aapt resource value: 0x7F0F013B
-			public const int TextAppearance_Widget_AppCompat_ExpandedMenu_Item = 2131689787;
+			public const int TextAppearance_Widget_AppCompat_Toolbar_Subtitle = 2131689787;
 			
 			// aapt resource value: 0x7F0F013C
-			public const int TextAppearance_Widget_AppCompat_Toolbar_Subtitle = 2131689788;
-			
-			// aapt resource value: 0x7F0F013D
-			public const int TextAppearance_Widget_AppCompat_Toolbar_Title = 2131689789;
-			
-			// aapt resource value: 0x7F0F016E
-			public const int ThemeOverlay_AppCompat = 2131689838;
-			
-			// aapt resource value: 0x7F0F016F
-			public const int ThemeOverlay_AppCompat_ActionBar = 2131689839;
-			
-			// aapt resource value: 0x7F0F0170
-			public const int ThemeOverlay_AppCompat_Dark = 2131689840;
-			
-			// aapt resource value: 0x7F0F0171
-			public const int ThemeOverlay_AppCompat_Dark_ActionBar = 2131689841;
-			
-			// aapt resource value: 0x7F0F0172
-			public const int ThemeOverlay_AppCompat_Dialog = 2131689842;
-			
-			// aapt resource value: 0x7F0F0173
-			public const int ThemeOverlay_AppCompat_Dialog_Alert = 2131689843;
-			
-			// aapt resource value: 0x7F0F0174
-			public const int ThemeOverlay_AppCompat_Light = 2131689844;
-			
-			// aapt resource value: 0x7F0F0175
-			public const int ThemeOverlay_MaterialComponents = 2131689845;
-			
-			// aapt resource value: 0x7F0F0176
-			public const int ThemeOverlay_MaterialComponents_ActionBar = 2131689846;
-			
-			// aapt resource value: 0x7F0F0177
-			public const int ThemeOverlay_MaterialComponents_Dark = 2131689847;
-			
-			// aapt resource value: 0x7F0F0178
-			public const int ThemeOverlay_MaterialComponents_Dark_ActionBar = 2131689848;
-			
-			// aapt resource value: 0x7F0F0179
-			public const int ThemeOverlay_MaterialComponents_Dialog = 2131689849;
-			
-			// aapt resource value: 0x7F0F017A
-			public const int ThemeOverlay_MaterialComponents_Dialog_Alert = 2131689850;
-			
-			// aapt resource value: 0x7F0F017B
-			public const int ThemeOverlay_MaterialComponents_Light = 2131689851;
-			
-			// aapt resource value: 0x7F0F017C
-			public const int ThemeOverlay_MaterialComponents_TextInputEditText = 2131689852;
-			
-			// aapt resource value: 0x7F0F017D
-			public const int ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox = 2131689853;
-			
-			// aapt resource value: 0x7F0F017E
-			public const int ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox_Dense = 2131689854;
-			
-			// aapt resource value: 0x7F0F017F
-			public const int ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox = 2131689855;
-			
-			// aapt resource value: 0x7F0F0180
-			public const int ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense = 2131689856;
-			
-			// aapt resource value: 0x7F0F013E
-			public const int Theme_AppCompat = 2131689790;
-			
-			// aapt resource value: 0x7F0F013F
-			public const int Theme_AppCompat_CompactMenu = 2131689791;
-			
-			// aapt resource value: 0x7F0F0140
-			public const int Theme_AppCompat_DayNight = 2131689792;
-			
-			// aapt resource value: 0x7F0F0141
-			public const int Theme_AppCompat_DayNight_DarkActionBar = 2131689793;
-			
-			// aapt resource value: 0x7F0F0142
-			public const int Theme_AppCompat_DayNight_Dialog = 2131689794;
-			
-			// aapt resource value: 0x7F0F0145
-			public const int Theme_AppCompat_DayNight_DialogWhenLarge = 2131689797;
-			
-			// aapt resource value: 0x7F0F0143
-			public const int Theme_AppCompat_DayNight_Dialog_Alert = 2131689795;
-			
-			// aapt resource value: 0x7F0F0144
-			public const int Theme_AppCompat_DayNight_Dialog_MinWidth = 2131689796;
-			
-			// aapt resource value: 0x7F0F0146
-			public const int Theme_AppCompat_DayNight_NoActionBar = 2131689798;
-			
-			// aapt resource value: 0x7F0F0147
-			public const int Theme_AppCompat_Dialog = 2131689799;
-			
-			// aapt resource value: 0x7F0F014A
-			public const int Theme_AppCompat_DialogWhenLarge = 2131689802;
-			
-			// aapt resource value: 0x7F0F0148
-			public const int Theme_AppCompat_Dialog_Alert = 2131689800;
-			
-			// aapt resource value: 0x7F0F0149
-			public const int Theme_AppCompat_Dialog_MinWidth = 2131689801;
-			
-			// aapt resource value: 0x7F0F014B
-			public const int Theme_AppCompat_Light = 2131689803;
-			
-			// aapt resource value: 0x7F0F014C
-			public const int Theme_AppCompat_Light_DarkActionBar = 2131689804;
-			
-			// aapt resource value: 0x7F0F014D
-			public const int Theme_AppCompat_Light_Dialog = 2131689805;
-			
-			// aapt resource value: 0x7F0F0150
-			public const int Theme_AppCompat_Light_DialogWhenLarge = 2131689808;
-			
-			// aapt resource value: 0x7F0F014E
-			public const int Theme_AppCompat_Light_Dialog_Alert = 2131689806;
-			
-			// aapt resource value: 0x7F0F014F
-			public const int Theme_AppCompat_Light_Dialog_MinWidth = 2131689807;
-			
-			// aapt resource value: 0x7F0F0151
-			public const int Theme_AppCompat_Light_NoActionBar = 2131689809;
-			
-			// aapt resource value: 0x7F0F0152
-			public const int Theme_AppCompat_NoActionBar = 2131689810;
-			
-			// aapt resource value: 0x7F0F0153
-			public const int Theme_Design = 2131689811;
-			
-			// aapt resource value: 0x7F0F0154
-			public const int Theme_Design_BottomSheetDialog = 2131689812;
-			
-			// aapt resource value: 0x7F0F0155
-			public const int Theme_Design_Light = 2131689813;
-			
-			// aapt resource value: 0x7F0F0156
-			public const int Theme_Design_Light_BottomSheetDialog = 2131689814;
-			
-			// aapt resource value: 0x7F0F0157
-			public const int Theme_Design_Light_NoActionBar = 2131689815;
-			
-			// aapt resource value: 0x7F0F0158
-			public const int Theme_Design_NoActionBar = 2131689816;
-			
-			// aapt resource value: 0x7F0F0159
-			public const int Theme_MaterialComponents = 2131689817;
-			
-			// aapt resource value: 0x7F0F015A
-			public const int Theme_MaterialComponents_BottomSheetDialog = 2131689818;
-			
-			// aapt resource value: 0x7F0F015B
-			public const int Theme_MaterialComponents_Bridge = 2131689819;
-			
-			// aapt resource value: 0x7F0F015C
-			public const int Theme_MaterialComponents_CompactMenu = 2131689820;
-			
-			// aapt resource value: 0x7F0F015D
-			public const int Theme_MaterialComponents_Dialog = 2131689821;
-			
-			// aapt resource value: 0x7F0F0160
-			public const int Theme_MaterialComponents_DialogWhenLarge = 2131689824;
-			
-			// aapt resource value: 0x7F0F015E
-			public const int Theme_MaterialComponents_Dialog_Alert = 2131689822;
-			
-			// aapt resource value: 0x7F0F015F
-			public const int Theme_MaterialComponents_Dialog_MinWidth = 2131689823;
-			
-			// aapt resource value: 0x7F0F0161
-			public const int Theme_MaterialComponents_Light = 2131689825;
-			
-			// aapt resource value: 0x7F0F0162
-			public const int Theme_MaterialComponents_Light_BottomSheetDialog = 2131689826;
-			
-			// aapt resource value: 0x7F0F0163
-			public const int Theme_MaterialComponents_Light_Bridge = 2131689827;
-			
-			// aapt resource value: 0x7F0F0164
-			public const int Theme_MaterialComponents_Light_DarkActionBar = 2131689828;
-			
-			// aapt resource value: 0x7F0F0165
-			public const int Theme_MaterialComponents_Light_DarkActionBar_Bridge = 2131689829;
-			
-			// aapt resource value: 0x7F0F0166
-			public const int Theme_MaterialComponents_Light_Dialog = 2131689830;
-			
-			// aapt resource value: 0x7F0F0169
-			public const int Theme_MaterialComponents_Light_DialogWhenLarge = 2131689833;
-			
-			// aapt resource value: 0x7F0F0167
-			public const int Theme_MaterialComponents_Light_Dialog_Alert = 2131689831;
-			
-			// aapt resource value: 0x7F0F0168
-			public const int Theme_MaterialComponents_Light_Dialog_MinWidth = 2131689832;
-			
-			// aapt resource value: 0x7F0F016A
-			public const int Theme_MaterialComponents_Light_NoActionBar = 2131689834;
-			
-			// aapt resource value: 0x7F0F016B
-			public const int Theme_MaterialComponents_Light_NoActionBar_Bridge = 2131689835;
-			
-			// aapt resource value: 0x7F0F016C
-			public const int Theme_MaterialComponents_NoActionBar = 2131689836;
+			public const int TextAppearance_Widget_AppCompat_Toolbar_Title = 2131689788;
 			
 			// aapt resource value: 0x7F0F016D
-			public const int Theme_MaterialComponents_NoActionBar_Bridge = 2131689837;
+			public const int ThemeOverlay_AppCompat = 2131689837;
+			
+			// aapt resource value: 0x7F0F016E
+			public const int ThemeOverlay_AppCompat_ActionBar = 2131689838;
+			
+			// aapt resource value: 0x7F0F016F
+			public const int ThemeOverlay_AppCompat_Dark = 2131689839;
+			
+			// aapt resource value: 0x7F0F0170
+			public const int ThemeOverlay_AppCompat_Dark_ActionBar = 2131689840;
+			
+			// aapt resource value: 0x7F0F0171
+			public const int ThemeOverlay_AppCompat_Dialog = 2131689841;
+			
+			// aapt resource value: 0x7F0F0172
+			public const int ThemeOverlay_AppCompat_Dialog_Alert = 2131689842;
+			
+			// aapt resource value: 0x7F0F0173
+			public const int ThemeOverlay_AppCompat_Light = 2131689843;
+			
+			// aapt resource value: 0x7F0F0174
+			public const int ThemeOverlay_MaterialComponents = 2131689844;
+			
+			// aapt resource value: 0x7F0F0175
+			public const int ThemeOverlay_MaterialComponents_ActionBar = 2131689845;
+			
+			// aapt resource value: 0x7F0F0176
+			public const int ThemeOverlay_MaterialComponents_Dark = 2131689846;
+			
+			// aapt resource value: 0x7F0F0177
+			public const int ThemeOverlay_MaterialComponents_Dark_ActionBar = 2131689847;
+			
+			// aapt resource value: 0x7F0F0178
+			public const int ThemeOverlay_MaterialComponents_Dialog = 2131689848;
+			
+			// aapt resource value: 0x7F0F0179
+			public const int ThemeOverlay_MaterialComponents_Dialog_Alert = 2131689849;
+			
+			// aapt resource value: 0x7F0F017A
+			public const int ThemeOverlay_MaterialComponents_Light = 2131689850;
+			
+			// aapt resource value: 0x7F0F017B
+			public const int ThemeOverlay_MaterialComponents_TextInputEditText = 2131689851;
+			
+			// aapt resource value: 0x7F0F017C
+			public const int ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox = 2131689852;
+			
+			// aapt resource value: 0x7F0F017D
+			public const int ThemeOverlay_MaterialComponents_TextInputEditText_FilledBox_Dense = 2131689853;
+			
+			// aapt resource value: 0x7F0F017E
+			public const int ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox = 2131689854;
+			
+			// aapt resource value: 0x7F0F017F
+			public const int ThemeOverlay_MaterialComponents_TextInputEditText_OutlinedBox_Dense = 2131689855;
+			
+			// aapt resource value: 0x7F0F013D
+			public const int Theme_AppCompat = 2131689789;
+			
+			// aapt resource value: 0x7F0F013E
+			public const int Theme_AppCompat_CompactMenu = 2131689790;
+			
+			// aapt resource value: 0x7F0F013F
+			public const int Theme_AppCompat_DayNight = 2131689791;
+			
+			// aapt resource value: 0x7F0F0140
+			public const int Theme_AppCompat_DayNight_DarkActionBar = 2131689792;
+			
+			// aapt resource value: 0x7F0F0141
+			public const int Theme_AppCompat_DayNight_Dialog = 2131689793;
+			
+			// aapt resource value: 0x7F0F0144
+			public const int Theme_AppCompat_DayNight_DialogWhenLarge = 2131689796;
+			
+			// aapt resource value: 0x7F0F0142
+			public const int Theme_AppCompat_DayNight_Dialog_Alert = 2131689794;
+			
+			// aapt resource value: 0x7F0F0143
+			public const int Theme_AppCompat_DayNight_Dialog_MinWidth = 2131689795;
+			
+			// aapt resource value: 0x7F0F0145
+			public const int Theme_AppCompat_DayNight_NoActionBar = 2131689797;
+			
+			// aapt resource value: 0x7F0F0146
+			public const int Theme_AppCompat_Dialog = 2131689798;
+			
+			// aapt resource value: 0x7F0F0149
+			public const int Theme_AppCompat_DialogWhenLarge = 2131689801;
+			
+			// aapt resource value: 0x7F0F0147
+			public const int Theme_AppCompat_Dialog_Alert = 2131689799;
+			
+			// aapt resource value: 0x7F0F0148
+			public const int Theme_AppCompat_Dialog_MinWidth = 2131689800;
+			
+			// aapt resource value: 0x7F0F014A
+			public const int Theme_AppCompat_Light = 2131689802;
+			
+			// aapt resource value: 0x7F0F014B
+			public const int Theme_AppCompat_Light_DarkActionBar = 2131689803;
+			
+			// aapt resource value: 0x7F0F014C
+			public const int Theme_AppCompat_Light_Dialog = 2131689804;
+			
+			// aapt resource value: 0x7F0F014F
+			public const int Theme_AppCompat_Light_DialogWhenLarge = 2131689807;
+			
+			// aapt resource value: 0x7F0F014D
+			public const int Theme_AppCompat_Light_Dialog_Alert = 2131689805;
+			
+			// aapt resource value: 0x7F0F014E
+			public const int Theme_AppCompat_Light_Dialog_MinWidth = 2131689806;
+			
+			// aapt resource value: 0x7F0F0150
+			public const int Theme_AppCompat_Light_NoActionBar = 2131689808;
+			
+			// aapt resource value: 0x7F0F0151
+			public const int Theme_AppCompat_NoActionBar = 2131689809;
+			
+			// aapt resource value: 0x7F0F0152
+			public const int Theme_Design = 2131689810;
+			
+			// aapt resource value: 0x7F0F0153
+			public const int Theme_Design_BottomSheetDialog = 2131689811;
+			
+			// aapt resource value: 0x7F0F0154
+			public const int Theme_Design_Light = 2131689812;
+			
+			// aapt resource value: 0x7F0F0155
+			public const int Theme_Design_Light_BottomSheetDialog = 2131689813;
+			
+			// aapt resource value: 0x7F0F0156
+			public const int Theme_Design_Light_NoActionBar = 2131689814;
+			
+			// aapt resource value: 0x7F0F0157
+			public const int Theme_Design_NoActionBar = 2131689815;
+			
+			// aapt resource value: 0x7F0F0158
+			public const int Theme_MaterialComponents = 2131689816;
+			
+			// aapt resource value: 0x7F0F0159
+			public const int Theme_MaterialComponents_BottomSheetDialog = 2131689817;
+			
+			// aapt resource value: 0x7F0F015A
+			public const int Theme_MaterialComponents_Bridge = 2131689818;
+			
+			// aapt resource value: 0x7F0F015B
+			public const int Theme_MaterialComponents_CompactMenu = 2131689819;
+			
+			// aapt resource value: 0x7F0F015C
+			public const int Theme_MaterialComponents_Dialog = 2131689820;
+			
+			// aapt resource value: 0x7F0F015F
+			public const int Theme_MaterialComponents_DialogWhenLarge = 2131689823;
+			
+			// aapt resource value: 0x7F0F015D
+			public const int Theme_MaterialComponents_Dialog_Alert = 2131689821;
+			
+			// aapt resource value: 0x7F0F015E
+			public const int Theme_MaterialComponents_Dialog_MinWidth = 2131689822;
+			
+			// aapt resource value: 0x7F0F0160
+			public const int Theme_MaterialComponents_Light = 2131689824;
+			
+			// aapt resource value: 0x7F0F0161
+			public const int Theme_MaterialComponents_Light_BottomSheetDialog = 2131689825;
+			
+			// aapt resource value: 0x7F0F0162
+			public const int Theme_MaterialComponents_Light_Bridge = 2131689826;
+			
+			// aapt resource value: 0x7F0F0163
+			public const int Theme_MaterialComponents_Light_DarkActionBar = 2131689827;
+			
+			// aapt resource value: 0x7F0F0164
+			public const int Theme_MaterialComponents_Light_DarkActionBar_Bridge = 2131689828;
+			
+			// aapt resource value: 0x7F0F0165
+			public const int Theme_MaterialComponents_Light_Dialog = 2131689829;
+			
+			// aapt resource value: 0x7F0F0168
+			public const int Theme_MaterialComponents_Light_DialogWhenLarge = 2131689832;
+			
+			// aapt resource value: 0x7F0F0166
+			public const int Theme_MaterialComponents_Light_Dialog_Alert = 2131689830;
+			
+			// aapt resource value: 0x7F0F0167
+			public const int Theme_MaterialComponents_Light_Dialog_MinWidth = 2131689831;
+			
+			// aapt resource value: 0x7F0F0169
+			public const int Theme_MaterialComponents_Light_NoActionBar = 2131689833;
+			
+			// aapt resource value: 0x7F0F016A
+			public const int Theme_MaterialComponents_Light_NoActionBar_Bridge = 2131689834;
+			
+			// aapt resource value: 0x7F0F016B
+			public const int Theme_MaterialComponents_NoActionBar = 2131689835;
+			
+			// aapt resource value: 0x7F0F016C
+			public const int Theme_MaterialComponents_NoActionBar_Bridge = 2131689836;
+			
+			// aapt resource value: 0x7F0F0180
+			public const int Widget_AppCompat_ActionBar = 2131689856;
 			
 			// aapt resource value: 0x7F0F0181
-			public const int Widget_AppCompat_ActionBar = 2131689857;
+			public const int Widget_AppCompat_ActionBar_Solid = 2131689857;
 			
 			// aapt resource value: 0x7F0F0182
-			public const int Widget_AppCompat_ActionBar_Solid = 2131689858;
+			public const int Widget_AppCompat_ActionBar_TabBar = 2131689858;
 			
 			// aapt resource value: 0x7F0F0183
-			public const int Widget_AppCompat_ActionBar_TabBar = 2131689859;
+			public const int Widget_AppCompat_ActionBar_TabText = 2131689859;
 			
 			// aapt resource value: 0x7F0F0184
-			public const int Widget_AppCompat_ActionBar_TabText = 2131689860;
+			public const int Widget_AppCompat_ActionBar_TabView = 2131689860;
 			
 			// aapt resource value: 0x7F0F0185
-			public const int Widget_AppCompat_ActionBar_TabView = 2131689861;
+			public const int Widget_AppCompat_ActionButton = 2131689861;
 			
 			// aapt resource value: 0x7F0F0186
-			public const int Widget_AppCompat_ActionButton = 2131689862;
+			public const int Widget_AppCompat_ActionButton_CloseMode = 2131689862;
 			
 			// aapt resource value: 0x7F0F0187
-			public const int Widget_AppCompat_ActionButton_CloseMode = 2131689863;
+			public const int Widget_AppCompat_ActionButton_Overflow = 2131689863;
 			
 			// aapt resource value: 0x7F0F0188
-			public const int Widget_AppCompat_ActionButton_Overflow = 2131689864;
+			public const int Widget_AppCompat_ActionMode = 2131689864;
 			
 			// aapt resource value: 0x7F0F0189
-			public const int Widget_AppCompat_ActionMode = 2131689865;
+			public const int Widget_AppCompat_ActivityChooserView = 2131689865;
 			
 			// aapt resource value: 0x7F0F018A
-			public const int Widget_AppCompat_ActivityChooserView = 2131689866;
+			public const int Widget_AppCompat_AutoCompleteTextView = 2131689866;
 			
 			// aapt resource value: 0x7F0F018B
-			public const int Widget_AppCompat_AutoCompleteTextView = 2131689867;
-			
-			// aapt resource value: 0x7F0F018C
-			public const int Widget_AppCompat_Button = 2131689868;
-			
-			// aapt resource value: 0x7F0F0192
-			public const int Widget_AppCompat_ButtonBar = 2131689874;
-			
-			// aapt resource value: 0x7F0F0193
-			public const int Widget_AppCompat_ButtonBar_AlertDialog = 2131689875;
-			
-			// aapt resource value: 0x7F0F018D
-			public const int Widget_AppCompat_Button_Borderless = 2131689869;
-			
-			// aapt resource value: 0x7F0F018E
-			public const int Widget_AppCompat_Button_Borderless_Colored = 2131689870;
-			
-			// aapt resource value: 0x7F0F018F
-			public const int Widget_AppCompat_Button_ButtonBar_AlertDialog = 2131689871;
-			
-			// aapt resource value: 0x7F0F0190
-			public const int Widget_AppCompat_Button_Colored = 2131689872;
+			public const int Widget_AppCompat_Button = 2131689867;
 			
 			// aapt resource value: 0x7F0F0191
-			public const int Widget_AppCompat_Button_Small = 2131689873;
+			public const int Widget_AppCompat_ButtonBar = 2131689873;
+			
+			// aapt resource value: 0x7F0F0192
+			public const int Widget_AppCompat_ButtonBar_AlertDialog = 2131689874;
+			
+			// aapt resource value: 0x7F0F018C
+			public const int Widget_AppCompat_Button_Borderless = 2131689868;
+			
+			// aapt resource value: 0x7F0F018D
+			public const int Widget_AppCompat_Button_Borderless_Colored = 2131689869;
+			
+			// aapt resource value: 0x7F0F018E
+			public const int Widget_AppCompat_Button_ButtonBar_AlertDialog = 2131689870;
+			
+			// aapt resource value: 0x7F0F018F
+			public const int Widget_AppCompat_Button_Colored = 2131689871;
+			
+			// aapt resource value: 0x7F0F0190
+			public const int Widget_AppCompat_Button_Small = 2131689872;
+			
+			// aapt resource value: 0x7F0F0193
+			public const int Widget_AppCompat_CompoundButton_CheckBox = 2131689875;
 			
 			// aapt resource value: 0x7F0F0194
-			public const int Widget_AppCompat_CompoundButton_CheckBox = 2131689876;
+			public const int Widget_AppCompat_CompoundButton_RadioButton = 2131689876;
 			
 			// aapt resource value: 0x7F0F0195
-			public const int Widget_AppCompat_CompoundButton_RadioButton = 2131689877;
+			public const int Widget_AppCompat_CompoundButton_Switch = 2131689877;
 			
 			// aapt resource value: 0x7F0F0196
-			public const int Widget_AppCompat_CompoundButton_Switch = 2131689878;
+			public const int Widget_AppCompat_DrawerArrowToggle = 2131689878;
 			
 			// aapt resource value: 0x7F0F0197
-			public const int Widget_AppCompat_DrawerArrowToggle = 2131689879;
+			public const int Widget_AppCompat_DropDownItem_Spinner = 2131689879;
 			
 			// aapt resource value: 0x7F0F0198
-			public const int Widget_AppCompat_DropDownItem_Spinner = 2131689880;
+			public const int Widget_AppCompat_EditText = 2131689880;
 			
 			// aapt resource value: 0x7F0F0199
-			public const int Widget_AppCompat_EditText = 2131689881;
+			public const int Widget_AppCompat_ImageButton = 2131689881;
 			
 			// aapt resource value: 0x7F0F019A
-			public const int Widget_AppCompat_ImageButton = 2131689882;
+			public const int Widget_AppCompat_Light_ActionBar = 2131689882;
 			
 			// aapt resource value: 0x7F0F019B
-			public const int Widget_AppCompat_Light_ActionBar = 2131689883;
+			public const int Widget_AppCompat_Light_ActionBar_Solid = 2131689883;
 			
 			// aapt resource value: 0x7F0F019C
-			public const int Widget_AppCompat_Light_ActionBar_Solid = 2131689884;
+			public const int Widget_AppCompat_Light_ActionBar_Solid_Inverse = 2131689884;
 			
 			// aapt resource value: 0x7F0F019D
-			public const int Widget_AppCompat_Light_ActionBar_Solid_Inverse = 2131689885;
+			public const int Widget_AppCompat_Light_ActionBar_TabBar = 2131689885;
 			
 			// aapt resource value: 0x7F0F019E
-			public const int Widget_AppCompat_Light_ActionBar_TabBar = 2131689886;
+			public const int Widget_AppCompat_Light_ActionBar_TabBar_Inverse = 2131689886;
 			
 			// aapt resource value: 0x7F0F019F
-			public const int Widget_AppCompat_Light_ActionBar_TabBar_Inverse = 2131689887;
+			public const int Widget_AppCompat_Light_ActionBar_TabText = 2131689887;
 			
 			// aapt resource value: 0x7F0F01A0
-			public const int Widget_AppCompat_Light_ActionBar_TabText = 2131689888;
+			public const int Widget_AppCompat_Light_ActionBar_TabText_Inverse = 2131689888;
 			
 			// aapt resource value: 0x7F0F01A1
-			public const int Widget_AppCompat_Light_ActionBar_TabText_Inverse = 2131689889;
+			public const int Widget_AppCompat_Light_ActionBar_TabView = 2131689889;
 			
 			// aapt resource value: 0x7F0F01A2
-			public const int Widget_AppCompat_Light_ActionBar_TabView = 2131689890;
+			public const int Widget_AppCompat_Light_ActionBar_TabView_Inverse = 2131689890;
 			
 			// aapt resource value: 0x7F0F01A3
-			public const int Widget_AppCompat_Light_ActionBar_TabView_Inverse = 2131689891;
+			public const int Widget_AppCompat_Light_ActionButton = 2131689891;
 			
 			// aapt resource value: 0x7F0F01A4
-			public const int Widget_AppCompat_Light_ActionButton = 2131689892;
+			public const int Widget_AppCompat_Light_ActionButton_CloseMode = 2131689892;
 			
 			// aapt resource value: 0x7F0F01A5
-			public const int Widget_AppCompat_Light_ActionButton_CloseMode = 2131689893;
+			public const int Widget_AppCompat_Light_ActionButton_Overflow = 2131689893;
 			
 			// aapt resource value: 0x7F0F01A6
-			public const int Widget_AppCompat_Light_ActionButton_Overflow = 2131689894;
+			public const int Widget_AppCompat_Light_ActionMode_Inverse = 2131689894;
 			
 			// aapt resource value: 0x7F0F01A7
-			public const int Widget_AppCompat_Light_ActionMode_Inverse = 2131689895;
+			public const int Widget_AppCompat_Light_ActivityChooserView = 2131689895;
 			
 			// aapt resource value: 0x7F0F01A8
-			public const int Widget_AppCompat_Light_ActivityChooserView = 2131689896;
+			public const int Widget_AppCompat_Light_AutoCompleteTextView = 2131689896;
 			
 			// aapt resource value: 0x7F0F01A9
-			public const int Widget_AppCompat_Light_AutoCompleteTextView = 2131689897;
+			public const int Widget_AppCompat_Light_DropDownItem_Spinner = 2131689897;
 			
 			// aapt resource value: 0x7F0F01AA
-			public const int Widget_AppCompat_Light_DropDownItem_Spinner = 2131689898;
+			public const int Widget_AppCompat_Light_ListPopupWindow = 2131689898;
 			
 			// aapt resource value: 0x7F0F01AB
-			public const int Widget_AppCompat_Light_ListPopupWindow = 2131689899;
+			public const int Widget_AppCompat_Light_ListView_DropDown = 2131689899;
 			
 			// aapt resource value: 0x7F0F01AC
-			public const int Widget_AppCompat_Light_ListView_DropDown = 2131689900;
+			public const int Widget_AppCompat_Light_PopupMenu = 2131689900;
 			
 			// aapt resource value: 0x7F0F01AD
-			public const int Widget_AppCompat_Light_PopupMenu = 2131689901;
+			public const int Widget_AppCompat_Light_PopupMenu_Overflow = 2131689901;
 			
 			// aapt resource value: 0x7F0F01AE
-			public const int Widget_AppCompat_Light_PopupMenu_Overflow = 2131689902;
+			public const int Widget_AppCompat_Light_SearchView = 2131689902;
 			
 			// aapt resource value: 0x7F0F01AF
-			public const int Widget_AppCompat_Light_SearchView = 2131689903;
+			public const int Widget_AppCompat_Light_Spinner_DropDown_ActionBar = 2131689903;
 			
 			// aapt resource value: 0x7F0F01B0
-			public const int Widget_AppCompat_Light_Spinner_DropDown_ActionBar = 2131689904;
+			public const int Widget_AppCompat_ListMenuView = 2131689904;
 			
 			// aapt resource value: 0x7F0F01B1
-			public const int Widget_AppCompat_ListMenuView = 2131689905;
+			public const int Widget_AppCompat_ListPopupWindow = 2131689905;
 			
 			// aapt resource value: 0x7F0F01B2
-			public const int Widget_AppCompat_ListPopupWindow = 2131689906;
+			public const int Widget_AppCompat_ListView = 2131689906;
 			
 			// aapt resource value: 0x7F0F01B3
-			public const int Widget_AppCompat_ListView = 2131689907;
+			public const int Widget_AppCompat_ListView_DropDown = 2131689907;
 			
 			// aapt resource value: 0x7F0F01B4
-			public const int Widget_AppCompat_ListView_DropDown = 2131689908;
+			public const int Widget_AppCompat_ListView_Menu = 2131689908;
 			
 			// aapt resource value: 0x7F0F01B5
-			public const int Widget_AppCompat_ListView_Menu = 2131689909;
+			public const int Widget_AppCompat_PopupMenu = 2131689909;
 			
 			// aapt resource value: 0x7F0F01B6
-			public const int Widget_AppCompat_PopupMenu = 2131689910;
+			public const int Widget_AppCompat_PopupMenu_Overflow = 2131689910;
 			
 			// aapt resource value: 0x7F0F01B7
-			public const int Widget_AppCompat_PopupMenu_Overflow = 2131689911;
+			public const int Widget_AppCompat_PopupWindow = 2131689911;
 			
 			// aapt resource value: 0x7F0F01B8
-			public const int Widget_AppCompat_PopupWindow = 2131689912;
+			public const int Widget_AppCompat_ProgressBar = 2131689912;
 			
 			// aapt resource value: 0x7F0F01B9
-			public const int Widget_AppCompat_ProgressBar = 2131689913;
+			public const int Widget_AppCompat_ProgressBar_Horizontal = 2131689913;
 			
 			// aapt resource value: 0x7F0F01BA
-			public const int Widget_AppCompat_ProgressBar_Horizontal = 2131689914;
+			public const int Widget_AppCompat_RatingBar = 2131689914;
 			
 			// aapt resource value: 0x7F0F01BB
-			public const int Widget_AppCompat_RatingBar = 2131689915;
+			public const int Widget_AppCompat_RatingBar_Indicator = 2131689915;
 			
 			// aapt resource value: 0x7F0F01BC
-			public const int Widget_AppCompat_RatingBar_Indicator = 2131689916;
+			public const int Widget_AppCompat_RatingBar_Small = 2131689916;
 			
 			// aapt resource value: 0x7F0F01BD
-			public const int Widget_AppCompat_RatingBar_Small = 2131689917;
+			public const int Widget_AppCompat_SearchView = 2131689917;
 			
 			// aapt resource value: 0x7F0F01BE
-			public const int Widget_AppCompat_SearchView = 2131689918;
+			public const int Widget_AppCompat_SearchView_ActionBar = 2131689918;
 			
 			// aapt resource value: 0x7F0F01BF
-			public const int Widget_AppCompat_SearchView_ActionBar = 2131689919;
+			public const int Widget_AppCompat_SeekBar = 2131689919;
 			
 			// aapt resource value: 0x7F0F01C0
-			public const int Widget_AppCompat_SeekBar = 2131689920;
+			public const int Widget_AppCompat_SeekBar_Discrete = 2131689920;
 			
 			// aapt resource value: 0x7F0F01C1
-			public const int Widget_AppCompat_SeekBar_Discrete = 2131689921;
+			public const int Widget_AppCompat_Spinner = 2131689921;
 			
 			// aapt resource value: 0x7F0F01C2
-			public const int Widget_AppCompat_Spinner = 2131689922;
+			public const int Widget_AppCompat_Spinner_DropDown = 2131689922;
 			
 			// aapt resource value: 0x7F0F01C3
-			public const int Widget_AppCompat_Spinner_DropDown = 2131689923;
+			public const int Widget_AppCompat_Spinner_DropDown_ActionBar = 2131689923;
 			
 			// aapt resource value: 0x7F0F01C4
-			public const int Widget_AppCompat_Spinner_DropDown_ActionBar = 2131689924;
+			public const int Widget_AppCompat_Spinner_Underlined = 2131689924;
 			
 			// aapt resource value: 0x7F0F01C5
-			public const int Widget_AppCompat_Spinner_Underlined = 2131689925;
+			public const int Widget_AppCompat_TextView_SpinnerItem = 2131689925;
 			
 			// aapt resource value: 0x7F0F01C6
-			public const int Widget_AppCompat_TextView_SpinnerItem = 2131689926;
+			public const int Widget_AppCompat_Toolbar = 2131689926;
 			
 			// aapt resource value: 0x7F0F01C7
-			public const int Widget_AppCompat_Toolbar = 2131689927;
+			public const int Widget_AppCompat_Toolbar_Button_Navigation = 2131689927;
 			
 			// aapt resource value: 0x7F0F01C8
-			public const int Widget_AppCompat_Toolbar_Button_Navigation = 2131689928;
+			public const int Widget_Compat_NotificationActionContainer = 2131689928;
 			
 			// aapt resource value: 0x7F0F01C9
-			public const int Widget_Compat_NotificationActionContainer = 2131689929;
+			public const int Widget_Compat_NotificationActionText = 2131689929;
 			
 			// aapt resource value: 0x7F0F01CA
-			public const int Widget_Compat_NotificationActionText = 2131689930;
+			public const int Widget_Design_AppBarLayout = 2131689930;
 			
 			// aapt resource value: 0x7F0F01CB
-			public const int Widget_Design_AppBarLayout = 2131689931;
+			public const int Widget_Design_BottomNavigationView = 2131689931;
 			
 			// aapt resource value: 0x7F0F01CC
-			public const int Widget_Design_BottomNavigationView = 2131689932;
+			public const int Widget_Design_BottomSheet_Modal = 2131689932;
 			
 			// aapt resource value: 0x7F0F01CD
-			public const int Widget_Design_BottomSheet_Modal = 2131689933;
+			public const int Widget_Design_CollapsingToolbar = 2131689933;
 			
 			// aapt resource value: 0x7F0F01CE
-			public const int Widget_Design_CollapsingToolbar = 2131689934;
+			public const int Widget_Design_FloatingActionButton = 2131689934;
 			
 			// aapt resource value: 0x7F0F01CF
-			public const int Widget_Design_FloatingActionButton = 2131689935;
+			public const int Widget_Design_NavigationView = 2131689935;
 			
 			// aapt resource value: 0x7F0F01D0
-			public const int Widget_Design_NavigationView = 2131689936;
+			public const int Widget_Design_ScrimInsetsFrameLayout = 2131689936;
 			
 			// aapt resource value: 0x7F0F01D1
-			public const int Widget_Design_ScrimInsetsFrameLayout = 2131689937;
+			public const int Widget_Design_Snackbar = 2131689937;
 			
 			// aapt resource value: 0x7F0F01D2
-			public const int Widget_Design_Snackbar = 2131689938;
+			public const int Widget_Design_TabLayout = 2131689938;
 			
 			// aapt resource value: 0x7F0F01D3
-			public const int Widget_Design_TabLayout = 2131689939;
+			public const int Widget_Design_TextInputLayout = 2131689939;
 			
 			// aapt resource value: 0x7F0F01D4
-			public const int Widget_Design_TextInputLayout = 2131689940;
+			public const int Widget_MaterialComponents_BottomAppBar = 2131689940;
 			
 			// aapt resource value: 0x7F0F01D5
-			public const int Widget_MaterialComponents_BottomAppBar = 2131689941;
+			public const int Widget_MaterialComponents_BottomAppBar_Colored = 2131689941;
 			
 			// aapt resource value: 0x7F0F01D6
-			public const int Widget_MaterialComponents_BottomAppBar_Colored = 2131689942;
+			public const int Widget_MaterialComponents_BottomNavigationView = 2131689942;
 			
 			// aapt resource value: 0x7F0F01D7
-			public const int Widget_MaterialComponents_BottomNavigationView = 2131689943;
+			public const int Widget_MaterialComponents_BottomNavigationView_Colored = 2131689943;
 			
 			// aapt resource value: 0x7F0F01D8
-			public const int Widget_MaterialComponents_BottomNavigationView_Colored = 2131689944;
+			public const int Widget_MaterialComponents_BottomSheet_Modal = 2131689944;
 			
 			// aapt resource value: 0x7F0F01D9
-			public const int Widget_MaterialComponents_BottomSheet_Modal = 2131689945;
+			public const int Widget_MaterialComponents_Button = 2131689945;
 			
 			// aapt resource value: 0x7F0F01DA
-			public const int Widget_MaterialComponents_Button = 2131689946;
+			public const int Widget_MaterialComponents_Button_Icon = 2131689946;
 			
 			// aapt resource value: 0x7F0F01DB
-			public const int Widget_MaterialComponents_Button_Icon = 2131689947;
+			public const int Widget_MaterialComponents_Button_OutlinedButton = 2131689947;
 			
 			// aapt resource value: 0x7F0F01DC
-			public const int Widget_MaterialComponents_Button_OutlinedButton = 2131689948;
+			public const int Widget_MaterialComponents_Button_OutlinedButton_Icon = 2131689948;
 			
 			// aapt resource value: 0x7F0F01DD
-			public const int Widget_MaterialComponents_Button_OutlinedButton_Icon = 2131689949;
+			public const int Widget_MaterialComponents_Button_TextButton = 2131689949;
 			
 			// aapt resource value: 0x7F0F01DE
-			public const int Widget_MaterialComponents_Button_TextButton = 2131689950;
+			public const int Widget_MaterialComponents_Button_TextButton_Dialog = 2131689950;
 			
 			// aapt resource value: 0x7F0F01DF
-			public const int Widget_MaterialComponents_Button_TextButton_Dialog = 2131689951;
+			public const int Widget_MaterialComponents_Button_TextButton_Dialog_Icon = 2131689951;
 			
 			// aapt resource value: 0x7F0F01E0
-			public const int Widget_MaterialComponents_Button_TextButton_Dialog_Icon = 2131689952;
+			public const int Widget_MaterialComponents_Button_TextButton_Icon = 2131689952;
 			
 			// aapt resource value: 0x7F0F01E1
-			public const int Widget_MaterialComponents_Button_TextButton_Icon = 2131689953;
+			public const int Widget_MaterialComponents_Button_UnelevatedButton = 2131689953;
 			
 			// aapt resource value: 0x7F0F01E2
-			public const int Widget_MaterialComponents_Button_UnelevatedButton = 2131689954;
+			public const int Widget_MaterialComponents_Button_UnelevatedButton_Icon = 2131689954;
 			
 			// aapt resource value: 0x7F0F01E3
-			public const int Widget_MaterialComponents_Button_UnelevatedButton_Icon = 2131689955;
-			
-			// aapt resource value: 0x7F0F01E4
-			public const int Widget_MaterialComponents_CardView = 2131689956;
-			
-			// aapt resource value: 0x7F0F01E9
-			public const int Widget_MaterialComponents_ChipGroup = 2131689961;
-			
-			// aapt resource value: 0x7F0F01E5
-			public const int Widget_MaterialComponents_Chip_Action = 2131689957;
-			
-			// aapt resource value: 0x7F0F01E6
-			public const int Widget_MaterialComponents_Chip_Choice = 2131689958;
-			
-			// aapt resource value: 0x7F0F01E7
-			public const int Widget_MaterialComponents_Chip_Entry = 2131689959;
+			public const int Widget_MaterialComponents_CardView = 2131689955;
 			
 			// aapt resource value: 0x7F0F01E8
-			public const int Widget_MaterialComponents_Chip_Filter = 2131689960;
+			public const int Widget_MaterialComponents_ChipGroup = 2131689960;
+			
+			// aapt resource value: 0x7F0F01E4
+			public const int Widget_MaterialComponents_Chip_Action = 2131689956;
+			
+			// aapt resource value: 0x7F0F01E5
+			public const int Widget_MaterialComponents_Chip_Choice = 2131689957;
+			
+			// aapt resource value: 0x7F0F01E6
+			public const int Widget_MaterialComponents_Chip_Entry = 2131689958;
+			
+			// aapt resource value: 0x7F0F01E7
+			public const int Widget_MaterialComponents_Chip_Filter = 2131689959;
+			
+			// aapt resource value: 0x7F0F01E9
+			public const int Widget_MaterialComponents_FloatingActionButton = 2131689961;
 			
 			// aapt resource value: 0x7F0F01EA
-			public const int Widget_MaterialComponents_FloatingActionButton = 2131689962;
+			public const int Widget_MaterialComponents_NavigationView = 2131689962;
 			
 			// aapt resource value: 0x7F0F01EB
-			public const int Widget_MaterialComponents_NavigationView = 2131689963;
+			public const int Widget_MaterialComponents_Snackbar = 2131689963;
 			
 			// aapt resource value: 0x7F0F01EC
-			public const int Widget_MaterialComponents_Snackbar = 2131689964;
+			public const int Widget_MaterialComponents_Snackbar_FullWidth = 2131689964;
 			
 			// aapt resource value: 0x7F0F01ED
-			public const int Widget_MaterialComponents_Snackbar_FullWidth = 2131689965;
+			public const int Widget_MaterialComponents_TabLayout = 2131689965;
 			
 			// aapt resource value: 0x7F0F01EE
-			public const int Widget_MaterialComponents_TabLayout = 2131689966;
+			public const int Widget_MaterialComponents_TabLayout_Colored = 2131689966;
 			
 			// aapt resource value: 0x7F0F01EF
-			public const int Widget_MaterialComponents_TabLayout_Colored = 2131689967;
+			public const int Widget_MaterialComponents_TextInputEditText_FilledBox = 2131689967;
 			
 			// aapt resource value: 0x7F0F01F0
-			public const int Widget_MaterialComponents_TextInputEditText_FilledBox = 2131689968;
+			public const int Widget_MaterialComponents_TextInputEditText_FilledBox_Dense = 2131689968;
 			
 			// aapt resource value: 0x7F0F01F1
-			public const int Widget_MaterialComponents_TextInputEditText_FilledBox_Dense = 2131689969;
+			public const int Widget_MaterialComponents_TextInputEditText_OutlinedBox = 2131689969;
 			
 			// aapt resource value: 0x7F0F01F2
-			public const int Widget_MaterialComponents_TextInputEditText_OutlinedBox = 2131689970;
+			public const int Widget_MaterialComponents_TextInputEditText_OutlinedBox_Dense = 2131689970;
 			
 			// aapt resource value: 0x7F0F01F3
-			public const int Widget_MaterialComponents_TextInputEditText_OutlinedBox_Dense = 2131689971;
+			public const int Widget_MaterialComponents_TextInputLayout_FilledBox = 2131689971;
 			
 			// aapt resource value: 0x7F0F01F4
-			public const int Widget_MaterialComponents_TextInputLayout_FilledBox = 2131689972;
+			public const int Widget_MaterialComponents_TextInputLayout_FilledBox_Dense = 2131689972;
 			
 			// aapt resource value: 0x7F0F01F5
-			public const int Widget_MaterialComponents_TextInputLayout_FilledBox_Dense = 2131689973;
+			public const int Widget_MaterialComponents_TextInputLayout_OutlinedBox = 2131689973;
 			
 			// aapt resource value: 0x7F0F01F6
-			public const int Widget_MaterialComponents_TextInputLayout_OutlinedBox = 2131689974;
+			public const int Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense = 2131689974;
 			
 			// aapt resource value: 0x7F0F01F7
-			public const int Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense = 2131689975;
+			public const int Widget_MaterialComponents_Toolbar = 2131689975;
 			
 			// aapt resource value: 0x7F0F01F8
-			public const int Widget_MaterialComponents_Toolbar = 2131689976;
-			
-			// aapt resource value: 0x7F0F01F9
-			public const int Widget_Support_CoordinatorLayout = 2131689977;
+			public const int Widget_Support_CoordinatorLayout = 2131689976;
 			
 			static Style()
 			{
