@@ -160,8 +160,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 AwayTeamStatistics = ShinyHost.Resolve<FixtureDetailToTeamStatistics>()
                 .Convert(server_result.League_AwayRecentFixtures, MatchInfo.AwayTeamId, 6, 3),
 
-                AwayRestPeriod = (DateTime.Now - (homeRecentMatches.FirstOrDefault()?.MatchTime ?? DateTime.Now)).Days,
-                HomeRestPeriod = (DateTime.Now - (awayRecentMatches.FirstOrDefault()?.MatchTime ?? DateTime.Now)).Days,
+                HomeRestPeriod = (MatchInfo.MatchTime.Date - (homeRecentMatches.FirstOrDefault()?.MatchTime.Date ?? MatchInfo.MatchTime.Date)).Days,
+                AwayRestPeriod = (MatchInfo.MatchTime.Date - (awayRecentMatches.FirstOrDefault()?.MatchTime.Date ?? MatchInfo.MatchTime.Date)).Days,
             };
 
             // RecentForm

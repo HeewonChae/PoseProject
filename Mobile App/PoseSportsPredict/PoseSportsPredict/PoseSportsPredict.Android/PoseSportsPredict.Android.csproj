@@ -48,6 +48,9 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="eliteKit">
+      <HintPath>..\..\..\..\Common Library\External\eliteKit.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -79,7 +82,7 @@
       <Version>1.1.0.1570</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.1.1</Version>
+      <Version>1.68.2.1</Version>
     </PackageReference>
     <PackageReference Include="SlideOverKit">
       <Version>2.1.6.2</Version>

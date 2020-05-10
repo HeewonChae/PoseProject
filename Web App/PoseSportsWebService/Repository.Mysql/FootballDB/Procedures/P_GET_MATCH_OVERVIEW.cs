@@ -50,7 +50,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                 $"WHERE (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime " +
                 $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 6;";
             LeagueFixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
-                $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime " +
+                $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND (f.{nameof(Fixture.home_team_id)} = @TeamId OR f.{nameof(Fixture.away_team_id)} = @TeamId) AND f.{nameof(Fixture.match_time)} < @MatchTime AND f.{nameof(Fixture.is_completed)} = 1 " +
                 $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 10;";
             StandingsQueryString = $"{DB_FootballStandingsDetail.SelectQuery} " +
                 $"WHERE s.{nameof(Standings.league_id)} = @LeagueId AND s.{nameof(Standings.team_id)} IN (@HomeTeamId, @AwayTeamId);";

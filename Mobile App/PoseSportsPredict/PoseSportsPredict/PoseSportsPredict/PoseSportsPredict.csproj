@@ -28,7 +28,7 @@
     <PackageReference Include="Sharpnado.Presentation.Forms" Version="1.6.0" />
     <PackageReference Include="Sharpnado.TaskLoaderView" Version="2.0.0" />
     <PackageReference Include="Shiny.Core" Version="1.1.0.1570" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.2.1" />
     <PackageReference Include="SlideOverKit" Version="2.1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.48" />
@@ -207,5 +207,11 @@
     <Folder Include="CustomViews\" />
     <Folder Include="Utilities\DataCaching\" />
     <Folder Include="ViewModels\Charts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="eliteKit">
+      <HintPath>..\..\..\..\Common Library\External\eliteKit.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
