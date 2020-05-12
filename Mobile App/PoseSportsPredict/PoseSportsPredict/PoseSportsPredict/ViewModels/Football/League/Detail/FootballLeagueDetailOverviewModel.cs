@@ -9,7 +9,7 @@ using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.ViewModels.Football.Standings;
+using PoseSportsPredict.ViewModels.Football.League.Standings;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.Views.Football.League.Detail;
 using Sharpnado.Presentation.Forms;

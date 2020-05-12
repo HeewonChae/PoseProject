@@ -14,7 +14,7 @@ using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.RecentForm;
-using PoseSportsPredict.ViewModels.Football.Standings;
+using PoseSportsPredict.ViewModels.Football.League.Standings;
 using PoseSportsPredict.ViewModels.Football.Team;
 using PoseSportsPredict.ViewModels.Football.Team.GoalStatistics;
 using PoseSportsPredict.Views;
@@ -73,6 +73,8 @@ namespace PoseSportsPredict
             services.AddSingleton<CoverageLeagueToLeagueInfo>();
             services.AddSingleton<MatchInfoToLeagueInfo>();
             services.AddSingleton<MatchInfoToTeamInfo>();
+            services.AddSingleton<MatchInfoToTeamStatistics>();
+            services.AddSingleton<MatchInfoToGoalLineChartData>();
         }
 
         private void MatchViewModels(IServiceCollection services)

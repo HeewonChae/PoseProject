@@ -21,7 +21,8 @@
         <StackLayout
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand">
-            <Grid BackgroundColor="{StaticResource SecondaryColor}">
+            <Grid
+                BackgroundColor="{StaticResource SecondaryColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -31,7 +32,7 @@
                 <!--Toolbar-->
                 <StackLayout
                     Grid.Row="0"
-                    Margin="15,5"
+                    Margin="10,5"
                     Orientation="Horizontal">
                     <ContentView
                         Padding="4"

@@ -65,6 +65,12 @@ namespace SportsWebService.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public Stream P_GET_MATCH_H2H(Stream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_GET_LEAGUE_OVERVIEW(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_LEAGUE_OVERVIEW>();

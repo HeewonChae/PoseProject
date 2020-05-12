@@ -10,7 +10,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.Standings"
+             xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.League.Standings"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailOverview">
 

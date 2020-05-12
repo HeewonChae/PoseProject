@@ -31,6 +31,8 @@
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.2.1" />
     <PackageReference Include="SlideOverKit" Version="2.1.6.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.48" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
@@ -116,7 +118,7 @@
     <EmbeddedResource Update="Views\Football\Match\RecentForm\FootballRecentFormView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Football\Standings\FootballStandingsView.xaml">
+    <EmbeddedResource Update="Views\Football\League\Standings\FootballStandingsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Team\FootballTeamDetailFinishedMatchesView.xaml">
@@ -206,7 +208,6 @@
   <ItemGroup>
     <Folder Include="CustomViews\" />
     <Folder Include="Utilities\DataCaching\" />
-    <Folder Include="ViewModels\Charts\" />
   </ItemGroup>
 
   <ItemGroup>

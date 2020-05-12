@@ -67,7 +67,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         var fixture = footballDB.Query<Fixture>($"SELECT * FROM fixture WHERE id={_input.FixtureId}").FirstOrDefault();
                         if (fixture == null)
                         {
-                            _output.Result = 2;
+                            _output.Result = 1;
                             return;
                         }
 

@@ -1,9 +1,10 @@
-﻿using PoseSportsPredict.Logics;
+﻿using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
@@ -15,7 +16,8 @@ namespace PoseSportsPredict.Views.CustomViews
             nameof(MaxValue),
             typeof(double),
             typeof(SimpleGaugeBar),
-            -1.0);
+            -1.0,
+            propertyChanged: OnPropertyChanged);
 
         public static readonly BindableProperty CurValueProperty = BindableProperty.Create(
             nameof(CurValue),
@@ -76,7 +78,6 @@ namespace PoseSportsPredict.Views.CustomViews
         private Grid _grid = new Grid();
         private BoxView _boxView1 = new BoxView();
         private BoxView _boxView2 = new BoxView();
-        //private Label _textLable = new Label();
 
         #endregion Fields
 
@@ -85,15 +86,24 @@ namespace PoseSportsPredict.Views.CustomViews
             _frame.Padding = 0;
             _frame.Margin = 0;
             _frame.HasShadow = false;
-            //_frame.CornerRadius = 5;
+            _frame.CornerRadius = 2;
 
             _grid = new Grid();
             _grid.ColumnSpacing = 0;
             _grid.ColumnDefinitions.Add(_column1);
             _grid.ColumnDefinitions.Add(_column2);
 
-            //_boxView1.CornerRadius = 5;
-            //_boxView2.CornerRadius = 5;
+            _boxView1.CornerRadius = 2;
+            _boxView2.CornerRadius = 2;
+
+            //_boxView1.HorizontalOptions = new LayoutOptions
+            //{
+            //    Alignment = LayoutAlignment.Start,
+            //};
+            //_boxView2.HorizontalOptions = new LayoutOptions
+            //{
+            //    Alignment = LayoutAlignment.End,
+            //};
 
             _grid.Children.Add(_boxView1, 0, 0);
             _grid.Children.Add(_boxView2, 1, 0);
@@ -106,8 +116,8 @@ namespace PoseSportsPredict.Views.CustomViews
 
         private void ReloadView()
         {
-            if (CurValue > MaxValue)
-                throw new Exception("CurValue is bigger than MaxValue");
+            if (CurValue == -1 || CurValue > MaxValue)
+                return;
 
             _frame.BackgroundColor = GaugeBackgroundColor;
 
@@ -128,15 +138,12 @@ namespace PoseSportsPredict.Views.CustomViews
 
             //if (IsAnimation && gaugeLenth.Value > 0)
             //{
-            //    var animation = new Animation(v =>
-            //    {
-            //        gaugeColumn.Width = new GridLength(v, GridUnitType.Star);
-            //    },
-            //    0,
-            //    gaugeLenth.Value,
-            //    Easing.Linear);
+            //    gaugeBox.WidthRequest = 0;
+            //    var screenWidth = DependencyService.Resolve<IScreenHelper>().ScreenSize.Width;
 
-            //    animation.Commit(this, "default animation", 8, 750, Easing.Linear);
+            //    await Task.Delay(500);
+            //    var animate = new Animation(d => gaugeBox.WidthRequest = d, 0, screenWidth / 2.0d, Easing.SinInOut);
+            //    animate.Commit(gaugeBox, "BarGraph", 16, 1000);
             //}
         }
     }

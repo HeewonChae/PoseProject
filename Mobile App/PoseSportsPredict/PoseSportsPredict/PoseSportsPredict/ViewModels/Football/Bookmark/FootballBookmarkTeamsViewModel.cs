@@ -1,8 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
@@ -199,7 +201,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             {
                 deleteTeamInfo.IsBookmarked = false;
 
-                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(deleteTeamInfo, SportsType.Football, BookMarkType.Team);
+                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(deleteTeamInfo, SportsType.Football, BookMarkType.Team, false);
             }
 
             _DeleteTeamList.Clear();
@@ -222,6 +224,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedTeam();
 
             IsEditMode = false;
+
+            UserDialogs.Instance.Toast(LocalizeString.Bookmark_Modification_Completed);
 
             SetIsBusy(false);
 

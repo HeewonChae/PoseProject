@@ -261,7 +261,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 {
                     var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == deletedIndex);
 
-                    await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match);
+                    await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match, false);
                 }
             }
 
@@ -286,7 +286,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deleteMatchInfo in _DeleteMatchList)
             {
                 deleteMatchInfo.IsBookmarked = false;
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, SportsType.Football, BookMarkType.Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, SportsType.Football, BookMarkType.Match, false);
             }
 
             _DeleteMatchList.Clear();
@@ -296,6 +296,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
 
             IsEditMode = false;
+
+            UserDialogs.Instance.Toast(LocalizeString.Bookmark_Modification_Completed);
 
             SetIsBusy(false);
 

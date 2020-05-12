@@ -66,7 +66,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 Avg = Matches.Count() == 0 ? 0 : Math.Round((double)totalGF / Matches.Count(), 2),
             };
 
-            returnValue.TotalAgainst = new FootballTeamStatistics.BaseInfo
+            returnValue.TotalGoalAgainst = new FootballTeamStatistics.BaseInfo
             {
                 Value = totalGA,
                 Avg = Matches.Count() == 0 ? 0 : Math.Round((double)totalGA / Matches.Count(), 2),
@@ -84,13 +84,13 @@ namespace PoseSportsPredict.Logics.Football.Converters
             returnValue.HomeGoalFor = new FootballTeamStatistics.BaseInfo
             {
                 Value = totalGF,
-                Avg = Matches.Count() == 0 ? 0 : Math.Round((double)totalGF / Matches.Count(), 2),
+                Avg = homeCampMatches.Count() == 0 ? 0 : Math.Round((double)totalGF / homeCampMatches.Count(), 2),
             };
 
             returnValue.HoemGoalAgainst = new FootballTeamStatistics.BaseInfo
             {
                 Value = totalGA,
-                Avg = Matches.Count() == 0 ? 0 : Math.Round((double)totalGA / Matches.Count(), 2),
+                Avg = homeCampMatches.Count() == 0 ? 0 : Math.Round((double)totalGA / homeCampMatches.Count(), 2),
             };
 
             //AwayCampGoal
@@ -105,13 +105,13 @@ namespace PoseSportsPredict.Logics.Football.Converters
             returnValue.AwayGoalFor = new FootballTeamStatistics.BaseInfo
             {
                 Value = totalGF,
-                Avg = Matches.Count() == 0 ? 0 : Math.Round((double)totalGF / Matches.Count(), 2),
+                Avg = awayCampMatches.Count() == 0 ? 0 : Math.Round((double)totalGF / awayCampMatches.Count(), 2),
             };
 
             returnValue.AwayGoalAgainst = new FootballTeamStatistics.BaseInfo
             {
                 Value = totalGA,
-                Avg = Matches.Count() == 0 ? 0 : Math.Round((double)totalGA / Matches.Count(), 2),
+                Avg = awayCampMatches.Count() == 0 ? 0 : Math.Round((double)totalGA / awayCampMatches.Count(), 2),
             };
 
             return returnValue;

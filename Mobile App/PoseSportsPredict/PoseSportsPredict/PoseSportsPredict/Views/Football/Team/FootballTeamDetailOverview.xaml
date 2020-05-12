@@ -78,7 +78,7 @@
                                                 IsClickable="True"
                                                 ClickCommand="{Binding Path=BindingContext.LeagueNameClickCommand, Source={x:Reference _participatingLeagues}}"
                                                 ClickCommandParameter="{Binding LeagueInfo}"
-                                                BackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                                BackgroundColor="{StaticResource DefaultButtonColor}"
                                                 VerticalOptions="Center">
                                                     <materialui:MaterialLabel
                                                     Padding="15,3"

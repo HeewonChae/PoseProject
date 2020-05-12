@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             mc:Ignorable="d"
              x:Class="PoseSportsPredict.Views.LoadingPage"
              BackgroundColor="White">
     <ContentPage.Content>
@@ -14,14 +12,14 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ffimageloading:CachedImage
+            <Image
                 Grid.RowSpan="3"
                 Margin="3,0"
                 Aspect="AspectFit"
                 HorizontalOptions="Center"
                 WidthRequest="314"
                 Source="img_poseidon_logo">
-            </ffimageloading:CachedImage>
+            </Image>
             <ActivityIndicator
                 x:Name="_loadingIndicator"
                 Grid.Row="2"

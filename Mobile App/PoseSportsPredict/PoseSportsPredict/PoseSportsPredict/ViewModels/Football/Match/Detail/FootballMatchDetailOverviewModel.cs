@@ -13,7 +13,7 @@ using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.RecentForm;
-using PoseSportsPredict.ViewModels.Football.Standings;
+using PoseSportsPredict.ViewModels.Football.League.Standings;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Sharpnado.Presentation.Forms;
 using Shiny;

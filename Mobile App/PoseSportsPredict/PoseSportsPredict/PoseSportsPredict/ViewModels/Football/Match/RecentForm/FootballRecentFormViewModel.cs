@@ -137,7 +137,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
             TaskLoaderNotifier.Load(InitData);
         }
 
-        private async Task<IReadOnlyCollection<FootballMatchInfo>> InitData()
+        private Task<IReadOnlyCollection<FootballMatchInfo>> InitData()
         {
             SetIsBusy(true);
 
@@ -148,7 +148,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 
             SetIsBusy(false);
 
-            return SelectedRecentForm;
+            return Task.FromResult(SelectedRecentForm as IReadOnlyCollection<FootballMatchInfo>);
 
             #endregion Methods
         }

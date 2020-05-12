@@ -52,6 +52,8 @@ namespace PoseSportsPredict.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Xam.Plugin.iOS.PopupEffect.Init();
             Syncfusion.XForms.iOS.TabView.SfTabViewRenderer.Init();
+            Syncfusion.XForms.iOS.Graphics.SfGradientViewRenderer.Init();
+            Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
         }
 
         private void InitShiny()

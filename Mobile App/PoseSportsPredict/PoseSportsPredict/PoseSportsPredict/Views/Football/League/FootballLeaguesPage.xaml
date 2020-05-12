@@ -62,7 +62,7 @@
                                 HorizontalOptions="EndAndExpand"
                                 HeightRequest="14"
                                 WidthRequest="14"
-                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_D}">
                             </Image>
                         </StackLayout>
                     </StackLayout>
@@ -107,7 +107,7 @@
                                 HorizontalOptions="EndAndExpand"
                                 HeightRequest="14"
                                 WidthRequest="14"
-                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                effects:ImageEffect.TintColor="{StaticResource CustomGrey_D}">
                             </Image>
                         </StackLayout>
                         <!--Inner List-->

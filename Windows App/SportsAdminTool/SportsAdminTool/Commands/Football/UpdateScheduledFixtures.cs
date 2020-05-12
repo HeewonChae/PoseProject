@@ -46,8 +46,8 @@ namespace SportsAdminTool.Commands.Football
                         continue;
 
                     // Check Already Updated
-                    if (db_league.upt_time.Date == DateTime.UtcNow.Date)
-                        continue;
+                    //if (db_league.upt_time.Date == DateTime.UtcNow.Date)
+                    //continue;
 
                     // Update League All Fixtures
                     LogicFacade.UpdateLeagueAllFixtures((short)api_groupingFixtures.Key);

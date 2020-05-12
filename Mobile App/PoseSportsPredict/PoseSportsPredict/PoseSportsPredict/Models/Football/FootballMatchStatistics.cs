@@ -12,7 +12,7 @@ namespace PoseSportsPredict.Models.Football
 
         public double TotalRecordPoints => (HomeTeamStatistics.RecentRecord.Points + AwayTeamStatistics.RecentRecord.Points);
         public double TotalGoalFor => (HomeTeamStatistics.TotalGoalFor.Avg + AwayTeamStatistics.TotalGoalFor.Avg);
-        public double TotalGoalAgainst => (HomeTeamStatistics.TotalAgainst.Avg + AwayTeamStatistics.TotalAgainst.Avg);
+        public double TotalGoalAgainst => (HomeTeamStatistics.TotalGoalAgainst.Avg + AwayTeamStatistics.TotalGoalAgainst.Avg);
         public double TotalCampGoalFor => (HomeTeamStatistics.HomeGoalFor.Avg + AwayTeamStatistics.AwayGoalFor.Avg);
         public double TotalCampGoalAgainst => (HomeTeamStatistics.HoemGoalAgainst.Avg + AwayTeamStatistics.AwayGoalAgainst.Avg);
 

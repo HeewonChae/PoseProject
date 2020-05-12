@@ -63,7 +63,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         _output.LeagueDetail = footballDB.Query<DB_FootballLeagueDetail>(LeagueQuery).FirstOrDefault();
                         if (_output.LeagueDetail == null)
                         {
-                            _output.Result = 2;
+                            _output.Result = 1;
                             return;
                         }
 

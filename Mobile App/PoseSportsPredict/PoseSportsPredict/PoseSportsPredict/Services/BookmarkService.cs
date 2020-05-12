@@ -48,7 +48,7 @@ namespace PoseSportsPredict.Services
             return true;
         }
 
-        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new()
+        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType, bool showToastMsg = true) where T : ISQLiteStorable, IBookmarkable, new()
         {
             item.Order = 0;
             item.StoredTime = DateTime.UtcNow;
@@ -60,7 +60,10 @@ namespace PoseSportsPredict.Services
             string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
             MessagingCenter.Send(this, message, item);
 
-            UserDialogs.Instance.Toast(LocalizeString.Delete_Bookmark);
+            if (showToastMsg)
+            {
+                UserDialogs.Instance.Toast(LocalizeString.Delete_Bookmark);
+            }
 
             return true;
         }

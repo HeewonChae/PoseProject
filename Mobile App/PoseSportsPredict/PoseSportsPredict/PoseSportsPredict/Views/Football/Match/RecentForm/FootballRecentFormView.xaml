@@ -6,13 +6,10 @@
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
              xmlns:enums="clr-namespace:PoseSportsPredict.Models.Enums"
-             xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              x:Class="PoseSportsPredict.Views.Football.Match.RecentForm.FootballRecentFormView">
     <ContentView.Content>
         <StackLayout Spacing="12">
@@ -41,7 +38,7 @@
                             IsClickable="True"
                             Margin="0"
                             Padding="0"
-                            CornerRadius="5"
+                            CornerRadius="0"
                             HorizontalOptions="FillAndExpand"
                             BackgroundColor="Transparent">
                             <materialui:MaterialLabel
@@ -75,7 +72,7 @@
                             IsClickable="True"
                             Margin="0"
                             Padding="0"
-                            CornerRadius="5"
+                            CornerRadius="0"
                             HorizontalOptions="FillAndExpand"
                             BackgroundColor="Transparent">
                             <materialui:MaterialLabel
@@ -119,7 +116,7 @@
                         <DataTemplate>
                             <StackLayout
                                 Spacing="0"
-                                Padding="10,12"
+                                Padding="10,11"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                 effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"

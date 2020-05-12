@@ -35,14 +35,14 @@ namespace PoseSportsPredict.Models.Football
 
         public RecordInfo RecentRecord { get; set; }
         public BaseInfo TotalGoalFor { get; set; }
-        public BaseInfo TotalAgainst { get; set; }
+        public BaseInfo TotalGoalAgainst { get; set; }
         public BaseInfo HomeGoalFor { get; set; }
         public BaseInfo HoemGoalAgainst { get; set; }
         public BaseInfo AwayGoalFor { get; set; }
         public BaseInfo AwayGoalAgainst { get; set; }
 
-        public double TotalGoal => (TotalGoalFor?.Value ?? 0 + TotalAgainst?.Value ?? 0);
-        public double TotalHomeGoal => (HomeGoalFor?.Value ?? 0 + HoemGoalAgainst?.Value ?? 0);
-        public double TotalAwayGoal => (AwayGoalFor?.Value ?? 0 + AwayGoalAgainst?.Value ?? 0);
+        public double TotalGoalAvg => TotalGoalFor.Avg + TotalGoalAgainst.Avg;
+        public double TotalHomeGoalAvg => HomeGoalFor.Avg + HoemGoalAgainst.Avg;
+        public double TotalAwayGoalAvg => AwayGoalFor.Avg + AwayGoalAgainst.Avg;
     }
 }

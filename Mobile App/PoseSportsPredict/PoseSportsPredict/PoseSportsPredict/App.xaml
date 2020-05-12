@@ -30,17 +30,19 @@
         <Color x:Key="TextColor_D">#212121</Color>
         <Color x:Key="TransparentWhite">#7dffffff</Color>
         <Color x:Key="TransparentBlack">#7d000000</Color>
-        <Color x:Key="ChartBackgroundBlack">#1d000000</Color>
+        <Color x:Key="ChartBackground">#100063cb</Color>
+        <Color x:Key="DefaultButtonColor">#15000000</Color>
         <Color x:Key="WinColor">#00c853</Color>
         <Color x:Key="LoseColor">#d50000</Color>
 
         <Color x:Key="PrimaryColor">#0091ea</Color>
+        <Color x:Key="PrimaryComplementaryColor">#ff5515</Color>
         <Color x:Key="PrimaryColor_L">#40c4ff</Color>
         <Color x:Key="PrimaryColor_D">#0064b7</Color>
         <Color x:Key="SecondaryColor">#0063cb</Color>
         <Color x:Key="SecondaryColor_L">#5c90ff</Color>
         <Color x:Key="SecondaryColor_D">#003a99</Color>
-        <Color x:Key="CustomGrey">#616161</Color>
+        <Color x:Key="CustomGrey">#6E6E6E</Color>
         <Color x:Key="CustomGrey_L">#a4a4a4</Color>
         <Color x:Key="CustomGrey_D">#424242</Color>
         <Color x:Key="BackgroundColor_Default">#fafafa</Color>

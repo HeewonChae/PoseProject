@@ -11,9 +11,6 @@
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
-             xmlns:footballmatchdetailviews="clr-namespace:PoseSportsPredict.Views.Football.Match.Detail"
-             xmlns:customs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.Presentation.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPage"
              NavigationPage.HasNavigationBar="False">
@@ -22,7 +19,8 @@
         <StackLayout
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand">
-            <Grid BackgroundColor="{StaticResource SecondaryColor}">
+            <Grid
+                BackgroundColor="{StaticResource SecondaryColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -32,7 +30,7 @@
                 <!--Toolbar-->
                 <StackLayout
                     Grid.Row="0"
-                    Margin="15,5"
+                    Margin="10,5"
                     Orientation="Horizontal">
                     <ContentView
                         Padding="4"

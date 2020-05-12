@@ -36,6 +36,10 @@ namespace SportsWebService.Services.Contract
         Stream P_GET_MATCH_OVERVIEW(Stream stream);
 
         [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "GetMatchH2H")]
+        Stream P_GET_MATCH_H2H(Stream stream);
+
+        [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "GetLeagueOverview")]
         Stream P_GET_LEAGUE_OVERVIEW(Stream stream);
 

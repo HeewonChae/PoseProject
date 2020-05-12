@@ -198,9 +198,6 @@
   <data name="Match_Sort_By_Time" xml:space="preserve">
     <value>시간순으로 정렬</value>
   </data>
-  <data name="Bookmarks" xml:space="preserve">
-    <value>북마크</value>
-  </data>
   <data name="Settings" xml:space="preserve">
     <value>설정</value>
   </data>
@@ -423,7 +420,22 @@
   <data name="Goal_Statistics" xml:space="preserve">
     <value>득점 통계</value>
   </data>
-  <data name="Goal_For_Against" xml:space="preserve">
-    <value>득/실점</value>
+  <data name="Goal_For_Against_Avg" xml:space="preserve">
+    <value>평균 득/실점</value>
+  </data>
+  <data name="Bookmark_Modification_Completed" xml:space="preserve">
+    <value>북마크 수정이 완료됐습니다.</value>
+  </data>
+  <data name="Bookmarks" xml:space="preserve">
+    <value>북마크</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>전체</value>
+  </data>
+  <data name="Goal_Against" xml:space="preserve">
+    <value>실점</value>
+  </data>
+  <data name="Goal_For" xml:space="preserve">
+    <value>득점</value>
   </data>
 </root>

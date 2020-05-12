@@ -142,6 +142,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bookmark modification has been completed..
+        /// </summary>
+        public static string Bookmark_Modification_Completed {
+            get {
+                return ResourceManager.GetString("Bookmark_Modification_Completed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmarks.
         /// </summary>
         public static string Bookmarks {
@@ -313,11 +322,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Goal For/Against.
+        ///   Looks up a localized string similar to Goal Against.
         /// </summary>
-        public static string Goal_For_Against {
+        public static string Goal_Against {
             get {
-                return ResourceManager.GetString("Goal_For_Against", resourceCulture);
+                return ResourceManager.GetString("Goal_Against", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goal For.
+        /// </summary>
+        public static string Goal_For {
+            get {
+                return ResourceManager.GetString("Goal_For", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goal For/Against Avg.
+        /// </summary>
+        public static string Goal_For_Against_Avg {
+            get {
+                return ResourceManager.GetString("Goal_For_Against_Avg", resourceCulture);
             }
         }
         
@@ -939,6 +966,15 @@ namespace PoseSportsPredict.Resources {
         public static string Tomorrow {
             get {
                 return ResourceManager.GetString("Tomorrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
             }
         }
         

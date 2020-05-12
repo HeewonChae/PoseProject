@@ -10,7 +10,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.Standings"
+             xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.League.Standings"
              xmlns:recentform="clr-namespace:PoseSportsPredict.Views.Football.Match.RecentForm"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOverview"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
@@ -93,7 +93,7 @@
                                     IsClickable="true"
                                     ClickCommand="{Binding LeagueNameClickCommand}"
                                     ClickCommandParameter="{Binding MatchInfo}"
-                                    BackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                    BackgroundColor="{StaticResource DefaultButtonColor}"
                                     VerticalOptions="Center">
                                     <materialui:MaterialLabel
                                         Padding="15,3"
@@ -223,7 +223,7 @@
                                         IsLeftStart="False"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalRecordPoints}"
                                         CurValue="{Binding MatchStatistics.HomeTeamStatistics.RecentRecord.Points}">
@@ -233,7 +233,7 @@
                                         IsLeftStart="True"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalRecordPoints}"
                                         CurValue="{Binding MatchStatistics.AwayTeamStatistics.RecentRecord.Points}">
@@ -288,7 +288,7 @@
                                         IsLeftStart="False"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalFor}"
                                         CurValue="{Binding MatchStatistics.HomeTeamStatistics.TotalGoalFor.Avg}">
@@ -298,7 +298,7 @@
                                         IsLeftStart="True"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalFor}"
                                         CurValue="{Binding MatchStatistics.AwayTeamStatistics.TotalGoalFor.Avg}">
@@ -319,7 +319,7 @@
                                     HorizontalTextAlignment="Start"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.HomeTeamStatistics.TotalAgainst.Text}">
+                                    Text="{Binding MatchStatistics.HomeTeamStatistics.TotalGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="1"
@@ -338,7 +338,7 @@
                                     HorizontalTextAlignment="End"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource CustomGrey_D}"
-                                    Text="{Binding MatchStatistics.AwayTeamStatistics.TotalAgainst.Text}">
+                                    Text="{Binding MatchStatistics.AwayTeamStatistics.TotalGoalAgainst.Text}">
                                     </materialui:MaterialLabel>
                                 </Grid>
                                 <Grid
@@ -353,20 +353,20 @@
                                         IsLeftStart="False"
                                         GaugeColor1="{StaticResource CustomGrey}"
                                         GaugeColor2="{StaticResource PrimaryColor}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
-                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.TotalAgainst.Avg}">
+                                        CurValue="{Binding MatchStatistics.HomeTeamStatistics.TotalGoalAgainst.Avg}">
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
                                         IsLeftStart="True"
                                         GaugeColor1="{StaticResource CustomGrey}"
                                         GaugeColor2="{StaticResource PrimaryColor}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
-                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.TotalAgainst.Avg}">
+                                        CurValue="{Binding MatchStatistics.AwayTeamStatistics.TotalGoalAgainst.Avg}">
                                     </customviews:SimpleGaugeBar>
                                 </Grid>
                                 <!--H/A 평균 득점-->
@@ -418,7 +418,7 @@
                                         IsLeftStart="False"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalCampGoalFor}"
                                         CurValue="{Binding MatchStatistics.HomeTeamStatistics.HomeGoalFor.Avg}">
@@ -428,7 +428,7 @@
                                         IsLeftStart="True"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalCampGoalFor}"
                                         CurValue="{Binding MatchStatistics.AwayTeamStatistics.AwayGoalFor.Avg}">
@@ -483,7 +483,7 @@
                                         IsLeftStart="False"
                                         GaugeColor1="{StaticResource CustomGrey}"
                                         GaugeColor2="{StaticResource PrimaryColor}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalCampGoalAgainst}"
                                         CurValue="{Binding MatchStatistics.HomeTeamStatistics.HoemGoalAgainst.Avg}">
@@ -493,7 +493,7 @@
                                         IsLeftStart="True"
                                         GaugeColor1="{StaticResource CustomGrey}"
                                         GaugeColor2="{StaticResource PrimaryColor}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalCampGoalAgainst}"
                                         CurValue="{Binding MatchStatistics.AwayTeamStatistics.AwayGoalAgainst.Avg}">
@@ -548,7 +548,7 @@
                                         IsLeftStart="False"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalRestPeriod}"
                                         CurValue="{Binding MatchStatistics.HomeRestPeriod}">
@@ -558,7 +558,7 @@
                                         IsLeftStart="True"
                                         GaugeColor1="{StaticResource PrimaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
-                                        GaugeBackgroundColor="{StaticResource ChartBackgroundBlack}"
+                                        GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalRestPeriod}"
                                         CurValue="{Binding MatchStatistics.AwayRestPeriod}">
