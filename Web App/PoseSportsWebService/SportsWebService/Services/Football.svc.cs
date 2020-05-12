@@ -67,7 +67,10 @@ namespace SportsWebService.Services
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_GET_MATCH_H2H(Stream stream)
         {
-            throw new NotImplementedException();
+            var input = stream.StreamDeserialize<I_GET_MATCH_H2H>();
+            var output = Commands.Football.P_GET_MATCH_H2H.Execute(input);
+
+            return output.SerializeToStream();
         }
 
         [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]

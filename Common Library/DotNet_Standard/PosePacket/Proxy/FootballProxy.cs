@@ -28,6 +28,8 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_MATCH_OVERVIEW = "GetMatchOverview";
         
+        private static string _P_GET_MATCH_H2H = "GetMatchH2H";
+        
         private static string _P_GET_LEAGUE_OVERVIEW = "GetLeagueOverview";
         
         private static string _P_GET_TEAM_OVERVIEW = "GetTeamOverview";
@@ -93,6 +95,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_MATCH_OVERVIEW;
+            }
+        }
+        
+        // MethodType: POST, Segment: GetMatchH2H 
+        // InputType: PosePacket.Service.Football.I_GET_MATCH_H2H 
+        // OutputType: PosePacket.Service.Football.O_GET_MATCH_H2H
+        public static string P_GET_MATCH_H2H
+        {
+            get
+            {
+                return _P_GET_MATCH_H2H;
             }
         }
         

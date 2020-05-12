@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 {
@@ -41,6 +42,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         private short _selectedTeamId;
         private TeamCampType _selectedTeamType;
         private ObservableList<FootballMatchInfo> _selectedRecentForm;
+        private Color _winColor;
+        private Color _loseColor;
+        private Color _drawColor;
 
         #endregion Fields
 
@@ -51,6 +55,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         public short SelectedTeamId { get => _selectedTeamId; set => SetValue(ref _selectedTeamId, value); }
         public TeamCampType SelectedTeamType { get => _selectedTeamType; set => SetValue(ref _selectedTeamType, value); }
         public ObservableList<FootballMatchInfo> SelectedRecentForm { get => _selectedRecentForm; set => SetValue(ref _selectedRecentForm, value); }
+        public Color WinColor { get => _winColor; set => SetValue(ref _winColor, value); }
+        public Color LoseColor { get => _loseColor; set => SetValue(ref _loseColor, value); }
+        public Color DrawColor { get => _drawColor; set => SetValue(ref _drawColor, value); }
 
         #endregion Properties
 
@@ -135,6 +142,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
             IsTeamSelectorVisible = _homeRecentForm != null && _awayRecentForm != null;
             SelectedTeamType = TeamCampType.Home;
             TaskLoaderNotifier.Load(InitData);
+        }
+
+        public void SetColor(Color winColor, Color drawColor, Color loseColor)
+        {
+            WinColor = winColor;
+            LoseColor = loseColor;
+            DrawColor = drawColor;
         }
 
         private Task<IReadOnlyCollection<FootballMatchInfo>> InitData()

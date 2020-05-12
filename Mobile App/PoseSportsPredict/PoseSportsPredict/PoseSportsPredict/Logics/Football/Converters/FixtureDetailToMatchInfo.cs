@@ -30,7 +30,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 League_CountryLogo = fixtureDetail.League.Country.Logo,
                 LeagueName = fixtureDetail.League.Name,
                 LeagueLogo = fixtureDetail.League.Logo,
-                Round = fixtureDetail.Round,
+                LeagueType = fixtureDetail.League.LeagueType,
 
                 HomeTeamId = fixtureDetail.HomeTeam.Id,
                 HomeName = fixtureDetail.HomeTeam.Name,
@@ -46,7 +46,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
                 MatchStatus = fixtureDetail.MatchStatus,
                 MatchTime = fixtureDetail.MatchTime.ToLocalTime(),
-                LeagueType = fixtureDetail.League.LeagueType,
+                Round = fixtureDetail.Round,
 
                 IsAlarmed = false,
                 IsBookmarked = false,

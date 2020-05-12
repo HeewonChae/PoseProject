@@ -228,6 +228,7 @@
     <Compile Include="Commands\Football\P_GET_TEAM_OVERVIEW.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
+    <Compile Include="Commands\Football\P_GET_MATCH_H2H.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballLeagueDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />

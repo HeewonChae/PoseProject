@@ -331,6 +331,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Goal Against Avg.
+        /// </summary>
+        public static string Goal_Against_Avg {
+            get {
+                return ResourceManager.GetString("Goal_Against_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Goal For.
         /// </summary>
         public static string Goal_For {
@@ -345,6 +354,15 @@ namespace PoseSportsPredict.Resources {
         public static string Goal_For_Against_Avg {
             get {
                 return ResourceManager.GetString("Goal_For_Against_Avg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goal For Avg.
+        /// </summary>
+        public static string Goal_For_Avg {
+            get {
+                return ResourceManager.GetString("Goal_For_Avg", resourceCulture);
             }
         }
         
@@ -750,6 +768,15 @@ namespace PoseSportsPredict.Resources {
         public static string Recent_Search {
             get {
                 return ResourceManager.GetString("Recent_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record.
+        /// </summary>
+        public static string Record {
+            get {
+                return ResourceManager.GetString("Record", resourceCulture);
             }
         }
         

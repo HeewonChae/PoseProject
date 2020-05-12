@@ -66,7 +66,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             MatchInfo = matchInfo;
 
             OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>().SetMatchInfo(MatchInfo);
-            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>();
+            H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>().SetMatchInfo(MatchInfo);
             OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>();
             PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
 

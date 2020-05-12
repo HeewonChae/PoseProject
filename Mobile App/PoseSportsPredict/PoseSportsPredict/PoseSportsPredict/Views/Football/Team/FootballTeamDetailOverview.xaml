@@ -6,9 +6,6 @@
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
-             xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
-             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailOverview">
@@ -171,7 +168,7 @@
                                     TextColor="{StaticResource CustomGrey_D}"
                                     Text="{x:Static localize:LocalizeString.Goal_Statistics}">
                                 </materialui:MaterialLabel>
-                                <goalstatistics:FootballTeamGoalStatisticsView BindingContext="{Binding TeamGoalStatisticsViewModel}" />
+                                <goalstatistics:FootballTeamGoalStatisticsView BindingContext="{Binding GoalStatisticsViewModel}" />
                             </StackLayout>
                         </materialui:MaterialCard>
                     </StackLayout>

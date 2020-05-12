@@ -3,6 +3,8 @@ using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Football.Enums;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.RecentForm;
@@ -35,37 +37,38 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
         #region Fields
 
         private FootballTeamInfo _teamInfo;
+        private FootballMatchInfo _matchInfo;
         private Dictionary<FootballLeagueInfo, List<FootballMatchInfo>> _matchesByLeague;
 
         private int _ddl_selectedIndex;
-        private ObservableList<FootballLeagueInfo> _ddlLeagues;
+        private List<FootballLeagueInfo> _ddlLeagues;
         private TeamCampType _selectedTeamType;
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _taskLoaderNotifier;
         private FootballRecentFormViewModel _recentFormViewModel;
-        private string _strGFScore;
-        private string _strGaScore;
-        private double _totalScoreAvg;
-        private double _GFScoreAvg;
-        private double _GaScoreAvg;
         private ObservableList<FootballGoalLineChartData> _goalForCahrtDatas;
         private ObservableList<FootballGoalLineChartData> _goalAgainstCahrtDatas;
+        private FootballGoalStatisticsType _goalStatisticsType;
+        private FootballTeamStatistics _teamStatistics;
+        private FootballMatchStatistics _matchStatistics;
+        private string _chartCategory1;
+        private string _chartCategory2;
 
         #endregion Fields
 
         #region Properties
 
         public int Ddl_selectedIndex { get => _ddl_selectedIndex; set => SetValue(ref _ddl_selectedIndex, value); }
-        public ObservableList<FootballLeagueInfo> Ddl_Leagues { get => _ddlLeagues; set => SetValue(ref _ddlLeagues, value); }
+        public List<FootballLeagueInfo> Ddl_Leagues { get => _ddlLeagues; set => SetValue(ref _ddlLeagues, value); }
         public TeamCampType SelectedTeamType { get => _selectedTeamType; set => SetValue(ref _selectedTeamType, value); }
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> TaskLoaderNotifier { get => _taskLoaderNotifier; set => SetValue(ref _taskLoaderNotifier, value); }
         public FootballRecentFormViewModel RecentFormViewModel { get => _recentFormViewModel; set => SetValue(ref _recentFormViewModel, value); }
-        public string StrGFScore { get => _strGFScore; set => SetValue(ref _strGFScore, value); }
-        public string StrGAScore { get => _strGaScore; set => SetValue(ref _strGaScore, value); }
-        public double TotalScoreAvg { get => _totalScoreAvg; set => SetValue(ref _totalScoreAvg, value); }
-        public double GFScoreAvg { get => _GFScoreAvg; set => SetValue(ref _GFScoreAvg, value); }
-        public double GAScoreAvg { get => _GaScoreAvg; set => SetValue(ref _GaScoreAvg, value); }
         public ObservableList<FootballGoalLineChartData> GoalForCahrtDatas { get => _goalForCahrtDatas; set => SetValue(ref _goalForCahrtDatas, value); }
         public ObservableList<FootballGoalLineChartData> GoalAgainstCahrtDatas { get => _goalAgainstCahrtDatas; set => SetValue(ref _goalAgainstCahrtDatas, value); }
+        public FootballTeamStatistics TeamStatistics { get => _teamStatistics; set => SetValue(ref _teamStatistics, value); }
+        public FootballMatchStatistics MatchStatistics { get => _matchStatistics; set => SetValue(ref _matchStatistics, value); }
+        public FootballGoalStatisticsType GoalStatisticsType { get => _goalStatisticsType; set => SetValue(ref _goalStatisticsType, value); }
+        public string ChartCategory1 { get => _chartCategory1; set => SetValue(ref _chartCategory1, value); }
+        public string ChartCategory2 { get => _chartCategory2; set => SetValue(ref _chartCategory2, value); }
 
         #endregion Properties
 
@@ -165,16 +168,38 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
 
         #region Methods
 
-        public void SetMember(Dictionary<FootballLeagueInfo, List<FootballMatchInfo>> matchesByLeague, FootballTeamInfo teamInfo)
+        public void SetMember(Dictionary<FootballLeagueInfo, List<FootballMatchInfo>> matchesByLeague, FootballTeamInfo teamInfo = null, FootballMatchInfo matchInfo = null, FootballGoalStatisticsType goalStatisticsType = FootballGoalStatisticsType.Team)
         {
             _matchesByLeague = matchesByLeague;
-            _teamInfo = teamInfo;
 
-            Ddl_Leagues = new ObservableList<FootballLeagueInfo>(
+            Ddl_Leagues = new List<FootballLeagueInfo>(
                 _matchesByLeague.Select(elem => elem.Key));
 
             Ddl_selectedIndex = 0;
             SelectedTeamType = TeamCampType.Total;
+            GoalStatisticsType = goalStatisticsType;
+
+            if (GoalStatisticsType == FootballGoalStatisticsType.Team)
+            {
+                _teamInfo = teamInfo;
+                ChartCategory1 = LocalizeString.Goal_For;
+                ChartCategory2 = LocalizeString.Goal_Against;
+            }
+            else if (GoalStatisticsType == FootballGoalStatisticsType.H2H)
+            {
+                _matchInfo = matchInfo;
+                _teamInfo = ShinyHost.Resolve<MatchInfoToTeamInfo>().Convert(_matchInfo, TeamCampType.Home);
+                ChartCategory1 = _matchInfo.HomeName;
+                ChartCategory2 = _matchInfo.AwayName;
+
+                var selectedLeague = Ddl_Leagues
+                    .FirstOrDefault(elem => elem.LeagueName == _matchInfo.LeagueName && elem.CountryName == _matchInfo.League_CountryName);
+
+                if (selectedLeague != null)
+                {
+                    Ddl_selectedIndex = Ddl_Leagues.FindIndex(elem => elem == selectedLeague);
+                }
+            }
 
             TaskLoaderNotifier.Load(InitData);
         }
@@ -198,22 +223,6 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
             var homeMatches = selectedLeague.Value.Where(elem => elem.HomeTeamId == _teamInfo.TeamId).Take(6);
             var awayMatches = selectedLeague.Value.Where(elem => elem.AwayTeamId == _teamInfo.TeamId).Take(6);
 
-            // TeamStatistic
-            var teamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
-                .Convert(selectedLeague.Value, _teamInfo.TeamId, 6, 6);
-
-            // 평균 득점
-            StrGFScore = SelectedTeamType == TeamCampType.Total ? teamStatistics.TotalGoalFor.Text :
-                    SelectedTeamType == TeamCampType.Home ? teamStatistics.HomeGoalFor.Text : teamStatistics.AwayGoalFor.Text;
-            StrGAScore = SelectedTeamType == TeamCampType.Total ? teamStatistics.TotalGoalAgainst.Text :
-                SelectedTeamType == TeamCampType.Home ? teamStatistics.HoemGoalAgainst.Text : teamStatistics.AwayGoalAgainst.Text;
-            TotalScoreAvg = SelectedTeamType == TeamCampType.Total ? teamStatistics.TotalGoalAvg :
-                SelectedTeamType == TeamCampType.Home ? teamStatistics.TotalHomeGoalAvg : teamStatistics.TotalAwayGoalAvg;
-            GFScoreAvg = SelectedTeamType == TeamCampType.Total ? teamStatistics.TotalGoalFor.Avg :
-                SelectedTeamType == TeamCampType.Home ? teamStatistics.HomeGoalFor.Avg : teamStatistics.AwayGoalFor.Avg;
-            GAScoreAvg = SelectedTeamType == TeamCampType.Total ? teamStatistics.TotalGoalAgainst.Avg :
-                SelectedTeamType == TeamCampType.Home ? teamStatistics.HoemGoalAgainst.Avg : teamStatistics.AwayGoalAgainst.Avg;
-
             var selectedMatches = SelectedTeamType == TeamCampType.Total ? totalMatches.ToList() :
                 SelectedTeamType == TeamCampType.Home ? homeMatches.ToList() : awayMatches.ToList();
 
@@ -221,6 +230,24 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
             {
                 SetIsBusy(false);
                 return selectedMatches;
+            }
+
+            // Statistic
+            if (GoalStatisticsType == FootballGoalStatisticsType.Team)
+            {
+                TeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
+                .Convert(selectedMatches, _teamInfo.TeamId, 6, 0);
+            }
+            else if (GoalStatisticsType == FootballGoalStatisticsType.H2H)
+            {
+                MatchStatistics = new FootballMatchStatistics
+                {
+                    HomeTeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
+                    .Convert(selectedMatches, _matchInfo.HomeTeamId, 6, 0),
+
+                    AwayTeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
+                    .Convert(selectedMatches, _matchInfo.AwayTeamId, 6, 0),
+                };
             }
 
             // chart

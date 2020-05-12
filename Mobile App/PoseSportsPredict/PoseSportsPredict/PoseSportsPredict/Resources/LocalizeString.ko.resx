@@ -438,4 +438,13 @@
   <data name="Goal_For" xml:space="preserve">
     <value>득점</value>
   </data>
+  <data name="Record" xml:space="preserve">
+    <value>전적</value>
+  </data>
+  <data name="Goal_Against_Avg" xml:space="preserve">
+    <value>평균 실점</value>
+  </data>
+  <data name="Goal_For_Avg" xml:space="preserve">
+    <value>평균 득점</value>
+  </data>
 </root>

@@ -38,7 +38,7 @@ namespace PoseSportsPredict.Views.CustomViews
             typeof(GoalLineChart),
             Color.Accent);
 
-        public static readonly BindableProperty ChartSelectedColorColorProperty = BindableProperty.Create(
+        public static readonly BindableProperty ChartSelectedColorProperty = BindableProperty.Create(
             nameof(ChartSelectedColor),
             typeof(Color),
             typeof(GoalLineChart),
@@ -54,7 +54,7 @@ namespace PoseSportsPredict.Views.CustomViews
         public IEnumerable<FootballGoalLineChartData> ItemsSource2 { get { return (IEnumerable<FootballGoalLineChartData>)GetValue(ItemsSource2Property); } set { SetValue(ItemsSource2Property, value); } }
         public Color Chart1Color { get { return (Color)GetValue(Chart1ColorProperty); } set { SetValue(Chart1ColorProperty, value); } }
         public Color Chart2Color { get { return (Color)GetValue(Chart2ColorProperty); } set { SetValue(Chart2ColorProperty, value); } }
-        public Color ChartSelectedColor { get { return (Color)GetValue(ChartSelectedColorColorProperty); } set { SetValue(ChartSelectedColorColorProperty, value); } }
+        public Color ChartSelectedColor { get { return (Color)GetValue(ChartSelectedColorProperty); } set { SetValue(ChartSelectedColorProperty, value); } }
         public ICommand SelectedCommand { get { return (ICommand)GetValue(SelectedCommandProperty); } set { SetValue(SelectedCommandProperty, value); } }
 
         #region Fields
@@ -74,7 +74,7 @@ namespace PoseSportsPredict.Views.CustomViews
 
             _primaryAxis.AxisLineOffset = 10;
             _primaryAxis.PlotOffset = 20;
-            _primaryAxis.ShowMajorGridLines = true;
+            _primaryAxis.ShowMajorGridLines = false;
 
             _secondaryAxis.Minimum = 0;
             _secondaryAxis.PlotOffset = 29;
@@ -114,7 +114,7 @@ namespace PoseSportsPredict.Views.CustomViews
 
         private void ItemsSource1Changed()
         {
-            int maxValue = Math.Max((int)(_secondaryAxis.Maximum ?? 0), ItemsSource1.Max(elem => elem.Score));
+            int maxValue = Math.Max(ItemsSource1?.Max(elem => elem.Score) ?? 0, ItemsSource2?.Max(elem => elem.Score) ?? 0);
             _secondaryAxis.Maximum = maxValue;
 
             _splineSeries1.ItemsSource = ItemsSource1;
@@ -125,7 +125,7 @@ namespace PoseSportsPredict.Views.CustomViews
 
         private void ItemsSource2Changed()
         {
-            int maxValue = Math.Max((int)(_secondaryAxis.Maximum ?? 0), ItemsSource2.Max(elem => elem.Score));
+            int maxValue = Math.Max(ItemsSource1?.Max(elem => elem.Score) ?? 0, ItemsSource2?.Max(elem => elem.Score) ?? 0);
             _secondaryAxis.Maximum = maxValue;
 
             _splineSeries2.ItemsSource = ItemsSource2;

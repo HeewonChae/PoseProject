@@ -5,6 +5,7 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Football.Enums;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
@@ -66,7 +67,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> OverviewTaskLoaderNotifier { get => _overviewTaskLoaderNotifier; set => SetValue(ref _overviewTaskLoaderNotifier, value); }
         public ObservableList<ParticipatingLeagueInfo> ParticipatingLeagues { get => _participatingLeagues; set => SetValue(ref _participatingLeagues, value); }
-        public FootballTeamGoalStatisticsViewModel TeamGoalStatisticsViewModel { get => _teamGoalStatisticsViewModel; set => SetValue(ref _teamGoalStatisticsViewModel, value); }
+        public FootballTeamGoalStatisticsViewModel GoalStatisticsViewModel { get => _teamGoalStatisticsViewModel; set => SetValue(ref _teamGoalStatisticsViewModel, value); }
 
         #endregion Properties
 
@@ -149,7 +150,10 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                 throw new Exception(LocalizeString.Occur_Error);
 
             if (server_result.FixtureDetailsByLeague.Count == 0)
+            {
+                SetIsBusy(false);
                 return null;
+            }
 
             _matches = new List<FootballMatchInfo>();
             var matchesByLeague = new Dictionary<FootballLeagueInfo, List<FootballMatchInfo>>();
@@ -193,8 +197,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             }
 
             // 팀 득점 통계
-            TeamGoalStatisticsViewModel = ShinyHost.Resolve<FootballTeamGoalStatisticsViewModel>();
-            TeamGoalStatisticsViewModel.SetMember(matchesByLeague, _teamInfo);
+            GoalStatisticsViewModel = ShinyHost.Resolve<FootballTeamGoalStatisticsViewModel>();
+            GoalStatisticsViewModel.SetMember(matchesByLeague, teamInfo: _teamInfo, goalStatisticsType: FootballGoalStatisticsType.Team);
 
             SetIsBusy(false);
 

@@ -4,4 +4,9 @@ using System.Text;
 
 namespace PoseSportsPredict.Models.Football.Enums
 {
+    public enum FootballGoalStatisticsType
+    {
+        Team,
+        H2H,
+    }
 }
