@@ -16,7 +16,7 @@
     <ContentView.Content>
         <StackLayout
             x:DataType="viewmodels:FootballRecentFormViewModel"
-            Spacing="15">
+            Spacing="13">
             <!--Team Selector-->
             <Grid
                 IsVisible="{Binding IsTeamSelectorVisible}">
@@ -120,7 +120,7 @@
                         <DataTemplate x:DataType="models:FootballMatchInfo">
                             <StackLayout
                                 Spacing="0"
-                                Padding="10,11"
+                                Padding="13,11"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                 effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"

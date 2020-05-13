@@ -85,7 +85,6 @@ namespace PoseSportsPredict.Droid
                 Name = "General",
                 Description = "General",
             });
-            Xamarin.KeyboardHelper.Platform.Droid.Effects.Init(this);
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
             ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);

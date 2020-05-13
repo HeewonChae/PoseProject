@@ -41,9 +41,10 @@
                                     Padding="0">
                                     <StackLayout
                                         Spacing="0"
-                                        Padding="15,5,15,0">
+                                        Padding="10,5,10,0">
                                         <!--Header-->
                                         <Grid
+                                            Padding="5,0"
                                             ColumnSpacing="15"
                                             RowSpacing="0">
                                             <Grid.RowDefinitions>
@@ -94,7 +95,6 @@
 
                                         <!--MatchInfo-->
                                         <Grid
-                                            Padding="5,0,5,0"
                                             ColumnSpacing="0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -157,7 +157,7 @@
                                             <Grid
                                                 Grid.Column="1"
                                                 VerticalOptions="FillAndExpand"
-                                                Padding="0,10"
+                                                Padding="10,12"
                                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                                 effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"

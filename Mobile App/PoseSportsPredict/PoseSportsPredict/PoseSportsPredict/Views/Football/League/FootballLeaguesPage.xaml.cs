@@ -2,7 +2,6 @@
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
-using Xamarin.KeyboardHelper;
 
 namespace PoseSportsPredict.Views.Football.League
 {

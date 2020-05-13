@@ -44,15 +44,12 @@ namespace PoseSportsPredict.iOS
         private void InitExternModule()
         {
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
-            Xamarin.KeyboardHelper.Platform.iOS.Effects.Init();
             XF.Material.iOS.Material.Init();
             ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
             Sharpnado.Presentation.Forms.iOS.SharpnadoInitializer.Initialize();
-            FFImageLoading.FormsHandler.Init(debug: false);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Xam.Plugin.iOS.PopupEffect.Init();
             Syncfusion.XForms.iOS.TabView.SfTabViewRenderer.Init();
-            Syncfusion.XForms.iOS.Graphics.SfGradientViewRenderer.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
         }
 

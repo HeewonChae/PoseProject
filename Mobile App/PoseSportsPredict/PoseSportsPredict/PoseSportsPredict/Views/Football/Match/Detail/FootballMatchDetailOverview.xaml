@@ -211,15 +211,15 @@
                                 </Grid>
                                 <Grid
                                     HeightRequest="12"
-                                    Margin="0,0,0,12">
+                                    Margin="0,0,0,11">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="0"
-                                        IsLeftStart="False"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="RightToLeft"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -228,8 +228,8 @@
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
-                                        IsLeftStart="True"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="LeftToRight"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -261,7 +261,7 @@
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text="{x:Static localize:LocalizeString.Recent_Goal_For}">
+                                    Text="{x:Static localize:LocalizeString.Goal_For}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="2"
@@ -276,15 +276,15 @@
                                 </Grid>
                                 <Grid
                                     HeightRequest="12"
-                                    Margin="0,0,0,12">
+                                    Margin="0,0,0,11">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="0"
-                                        IsLeftStart="False"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="RightToLeft"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -293,8 +293,8 @@
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
-                                        IsLeftStart="True"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="LeftToRight"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -326,7 +326,7 @@
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text="{x:Static localize:LocalizeString.Recent_Goal_Against}">
+                                    Text="{x:Static localize:LocalizeString.Goal_Against}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="2"
@@ -341,16 +341,16 @@
                                 </Grid>
                                 <Grid
                                     HeightRequest="12"
-                                    Margin="0,0,0,12">
+                                    Margin="0,0,0,11">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="0"
-                                        IsLeftStart="False"
+                                        FlowDirection="RightToLeft"
                                         GaugeColor1="{StaticResource CustomGrey}"
-                                        GaugeColor2="{StaticResource PrimaryColor}"
+                                        GaugeColor2="{StaticResource SecondaryColor}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
@@ -358,9 +358,9 @@
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
-                                        IsLeftStart="True"
+                                        FlowDirection="LeftToRight"
                                         GaugeColor1="{StaticResource CustomGrey}"
-                                        GaugeColor2="{StaticResource PrimaryColor}"
+                                        GaugeColor2="{StaticResource SecondaryColor}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
@@ -391,7 +391,7 @@
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text="{x:Static localize:LocalizeString.H_A_Recent_Goal_For}">
+                                    Text="{x:Static localize:LocalizeString.H_A_Goal_For}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="2"
@@ -406,15 +406,15 @@
                                 </Grid>
                                 <Grid
                                     HeightRequest="12"
-                                    Margin="0,0,0,12">
+                                    Margin="0,0,0,11">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="0"
-                                        IsLeftStart="False"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="RightToLeft"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -423,8 +423,8 @@
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
-                                        IsLeftStart="True"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="LeftToRight"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -456,7 +456,7 @@
                                     HorizontalTextAlignment="Center"
                                     VerticalTextAlignment="Center"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text="{x:Static localize:LocalizeString.H_A_Recent_Goal_Against}">
+                                    Text="{x:Static localize:LocalizeString.H_A_Goal_Against}">
                                     </materialui:MaterialLabel>
                                     <materialui:MaterialLabel
                                     Grid.Column="2"
@@ -471,16 +471,16 @@
                                 </Grid>
                                 <Grid
                                     HeightRequest="12"
-                                    Margin="0,0,0,12">
+                                    Margin="0,0,0,11">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="0"
-                                        IsLeftStart="False"
+                                        FlowDirection="RightToLeft"
                                         GaugeColor1="{StaticResource CustomGrey}"
-                                        GaugeColor2="{StaticResource PrimaryColor}"
+                                        GaugeColor2="{StaticResource SecondaryColor}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalCampGoalAgainst}"
@@ -488,9 +488,9 @@
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
-                                        IsLeftStart="True"
+                                        FlowDirection="LeftToRight"
                                         GaugeColor1="{StaticResource CustomGrey}"
-                                        GaugeColor2="{StaticResource PrimaryColor}"
+                                        GaugeColor2="{StaticResource SecondaryColor}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
                                         MaxValue="{Binding MatchStatistics.TotalCampGoalAgainst}"
@@ -536,15 +536,15 @@
                                 </Grid>
                                 <Grid
                                     HeightRequest="12"
-                                    Margin="0,0,0,12">
+                                    Margin="0,0,0,11">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="0"
-                                        IsLeftStart="False"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="RightToLeft"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"
@@ -553,8 +553,8 @@
                                     </customviews:SimpleGaugeBar>
                                     <customviews:SimpleGaugeBar
                                         Grid.Column="1"
-                                        IsLeftStart="True"
-                                        GaugeColor1="{StaticResource PrimaryColor}"
+                                        FlowDirection="LeftToRight"
+                                        GaugeColor1="{StaticResource SecondaryColor}"
                                         GaugeColor2="{StaticResource CustomGrey}"
                                         GaugeBackgroundColor="{StaticResource ChartBackground}"
                                         IsAnimation="True"

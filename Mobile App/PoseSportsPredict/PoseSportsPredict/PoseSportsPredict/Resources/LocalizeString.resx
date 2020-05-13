@@ -298,20 +298,14 @@
   <data name="League_Points" xml:space="preserve">
     <value>Points</value>
   </data>
-  <data name="Recent_Goal_For" xml:space="preserve">
-    <value>Recent Goal For</value>
-  </data>
-  <data name="Recent_Goal_Against" xml:space="preserve">
-    <value>Recent Goal Against</value>
-  </data>
   <data name="Rest_Period" xml:space="preserve">
     <value>Rest Period</value>
   </data>
-  <data name="H_A_Recent_Goal_Against" xml:space="preserve">
-    <value>H/A Recent Goal Against</value>
+  <data name="H_A_Goal_Against" xml:space="preserve">
+    <value>H/A Goal Against</value>
   </data>
-  <data name="H_A_Recent_Goal_For" xml:space="preserve">
-    <value>H/A Recent Goal For</value>
+  <data name="H_A_Goal_For" xml:space="preserve">
+    <value>H/A Goal For</value>
   </data>
   <data name="No_Data_Available" xml:space="preserve">
     <value>There are no data available.</value>
@@ -407,9 +401,6 @@
   <data name="Goal_Statistics" xml:space="preserve">
     <value>Goal Statistics</value>
   </data>
-  <data name="Goal_For_Against_Avg" xml:space="preserve">
-    <value>Goal For/Against Avg</value>
-  </data>
   <data name="Bookmark_Modification_Completed" xml:space="preserve">
     <value>Bookmark modification has been completed.</value>
   </data>
@@ -425,10 +416,7 @@
   <data name="Record" xml:space="preserve">
     <value>Record</value>
   </data>
-  <data name="Goal_For_Avg" xml:space="preserve">
-    <value>Goal For Avg</value>
-  </data>
-  <data name="Goal_Against_Avg" xml:space="preserve">
-    <value>Goal Against Avg</value>
+  <data name="Goal_For_Against_Avg" xml:space="preserve">
+    <value>Goal For/Against</value>
   </data>
 </root>

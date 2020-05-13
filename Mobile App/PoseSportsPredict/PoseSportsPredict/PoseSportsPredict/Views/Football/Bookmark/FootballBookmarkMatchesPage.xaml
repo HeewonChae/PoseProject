@@ -46,7 +46,7 @@
                         x:Name="lv_bookmarkedMatches"
                         EnableDragAndDrop="False"
                         ColumnCount="1"
-                        ItemHeight="106"
+                        ItemHeight="109"
                         ItemSpacing="0"
                         ListLayout="Grid"
                         ItemsSource="{Binding BookmarkedMatches}">
@@ -62,8 +62,9 @@
                                             Padding="0">
                                             <StackLayout
                                                 Spacing="0"
-                                                Padding="15,5,15,0">
+                                                Padding="10,5,10,0">
                                                 <Grid
+                                                    Padding="5,0"
                                                     ColumnSpacing="15"
                                                     RowSpacing="0">
                                                     <Grid.RowDefinitions>
@@ -132,7 +133,7 @@
                                                 </Grid>
                                                 <Grid
                                                     VerticalOptions="EndAndExpand"
-                                                    Padding="5,13,5,13"
+                                                    Padding="10,13,10,13"
                                                     effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_bookmarkedMatches}}"
                                                     effects:TapCommandEffect.TapParameter="{Binding .}"
                                                     effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_bookmarkedMatches}}"

@@ -327,7 +327,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
                         foreach (var bookmarkedLeague in bookmarkedLeagues)
                         {
-                            var matches = _matchList.Where(elem => elem.LeagueName.Equals(bookmarkedLeague.LeagueName)).ToArray();
+                            var matches = _matchList.Where(elem =>
+                                elem.League_CountryName.Equals(bookmarkedLeague.CountryName)
+                                && elem.LeagueName.Equals(bookmarkedLeague.LeagueName)).ToArray();
 
                             if (matches.Length > 0)
                             {
@@ -340,8 +342,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         foreach (var bookmarkedTeam in bookmarkedTeams)
                         {
                             var matches = _matchList.Where(elem =>
-                                elem.HomeName.Equals(bookmarkedTeam.TeamName)
-                                || elem.AwayName.Equals(bookmarkedTeam.TeamName)).ToArray();
+                                 (elem.Home_CountryName.Equals(bookmarkedTeam.CountryName)
+                                && elem.HomeName.Equals(bookmarkedTeam.TeamName))
+                                || (elem.Away_CountryName.Equals(bookmarkedTeam.CountryName)
+                                && elem.AwayName.Equals(bookmarkedTeam.TeamName))).ToArray();
 
                             if (matches.Length > 0)
                             {
@@ -349,7 +353,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                             }
                         }
 
-                        matchList = matchList.Distinct().OrderBy(elem => elem.MatchTime).ToList();
+                        matchList = matchList.Distinct().OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}").ToList();
                         isAllExpand = true;
                     }
                     break;
@@ -360,6 +364,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.FT
                         && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.AET
                         && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.PEN)
+                        .OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}")
                         .ToList();
 
                     isAllExpand = true;
@@ -371,7 +376,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     break;
 
                 case MatchFilterType.SortByLeague:
-                    matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
+                    matchList = _matchList.OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}").ToList();
                     break;
             }
 
@@ -391,10 +396,30 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             var grouppingMatches = MatchGroupingByFilterType(matchList, out string logo);
 
-            bool defaultExpand = grouppingMatches.Count > 10 ? false : true;
+            bool defaultExpand = matchList.Count > 9 ? false : true;
+
+            // World 데이터는 1순위로 등록
+            var InternationalLeagues = grouppingMatches.Where(elem => elem.Key.Contains("World. "));
+            foreach (var grouppingMatch in InternationalLeagues)
+            {
+                // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
+                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? defaultExpand : isAllExpand.Value;
+
+                var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
+                matchListViewModel.Title = grouppingMatch.Key;
+                matchListViewModel.TitleLogo = string.IsNullOrEmpty(logo) ? grouppingMatch.Value.FirstOrDefault()?.League_CountryLogo : logo;
+                matchListViewModel.AlarmEditMode = _alarmEditMode;
+                matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
+                matchListViewModel.Expanded = isExpand;
+
+                matchGroupCollection.Add(matchListViewModel);
+            }
 
             foreach (var grouppingMatch in grouppingMatches)
             {
+                if (grouppingMatch.Key.Contains("World. "))
+                    continue;
+
                 // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
                 bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? defaultExpand : isAllExpand.Value;
 
@@ -430,7 +455,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 case MatchFilterType.SortByTime:
                     logo = "img_world.png";
-                    result.Add(LocalizeString.Match_Sort_By_Time, matchList.OrderBy(elem => elem.MatchTime).ToArray());
+                    result.Add(LocalizeString.Match_Sort_By_Time, matchList.ToArray());
                     break;
 
                 default:

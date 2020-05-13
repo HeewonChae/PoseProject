@@ -12,7 +12,9 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+             xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
+             BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPage"
              NavigationPage.HasNavigationBar="False">
 
@@ -21,272 +23,286 @@
             x:DataType="viewmodels:FootballMatchDetailViewModel"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand">
-            <Grid
-                BackgroundColor="{StaticResource SecondaryColor}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <pancakeview:PancakeView
+                CornerRadius="0,0,37,37">
 
-                <!--Toolbar-->
-                <StackLayout
-                    Grid.Row="0"
-                    Margin="10,5"
-                    Orientation="Horizontal">
-                    <ContentView
-                        Padding="4"
-                        BackgroundColor="Transparent"
-                        VerticalOptions="Center"
-                        effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                        <Image
-                            HeightRequest="24"
-                            WidthRequest="24"
-                            Source="ic_arrow_back"
-                            Aspect="AspectFit"
-                            effects:ImageEffect.TintColor="White">
-                        </Image>
-                    </ContentView>
-                    <!--Toolbar button-->
+                <pancakeview:PancakeView.Shadow>
+                    <pancakeview:DropShadow Color="{StaticResource SecondaryColor_D}" />
+                </pancakeview:PancakeView.Shadow>
+
+                <pancakeview:PancakeView.BackgroundGradientStops>
+                    <pancakeview:GradientStopCollection>
+                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor_D}" Offset="0.0" />
+                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor}" Offset="0.7" />
+                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor}" Offset="1.0" />
+                    </pancakeview:GradientStopCollection>
+                </pancakeview:PancakeView.BackgroundGradientStops>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--Toolbar-->
                     <StackLayout
-                        Orientation="Horizontal"
-                        Spacing="9"
-                        HorizontalOptions="EndAndExpand"
-                        VerticalOptions="Center">
+                        Grid.Row="0"
+                        Margin="10,5"
+                        Orientation="Horizontal">
                         <ContentView
-                            Padding="5"
+                            Padding="4"
                             BackgroundColor="Transparent"
-                            effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}"
+                            VerticalOptions="Center"
+                            effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <Image
-                                HeightRequest="22"
-                                WidthRequest="22"
-                                Source="{Binding AlarmIcon.CurrentIcon}"
+                                HeightRequest="24"
+                                WidthRequest="24"
+                                Source="ic_arrow_back"
                                 Aspect="AspectFit"
-                                effects:ImageEffect.TintColor="{Binding AlarmIcon.CurrentColor}">
+                                effects:ImageEffect.TintColor="White">
                             </Image>
-                            <ContentView.Triggers>
+                        </ContentView>
+                        <!--Toolbar button-->
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="9"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="Center">
+                            <ContentView
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <Image
+                                    HeightRequest="22"
+                                    WidthRequest="22"
+                                    Source="{Binding AlarmIcon.CurrentIcon}"
+                                    Aspect="AspectFit"
+                                    effects:ImageEffect.TintColor="{Binding AlarmIcon.CurrentColor}">
+                                </Image>
+                                <ContentView.Triggers>
+                                    <DataTrigger
+                                        TargetType="ContentView"
+                                        Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                        Value="True">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+                                </ContentView.Triggers>
+                            </ContentView>
+                            <ContentView
+                                Padding="5"
+                                BackgroundColor="Transparent"
+                                effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <customviews:RatingView
+                                    VerticalOptions="Center"
+                                    WidthRequest="22.5"
+                                    HeightRequest="22.5"
+                                    StrokeWidth="0.8"
+                                    RatingType="Full"
+                                    ColorOn="{StaticResource IconActivated}"
+                                    OutlineOnColor="{StaticResource IconActivated}"
+                                    OutlineOffColor="{StaticResource TextColor_L}"
+                                    Path="{x:Static customviews:PathConstants.Star}"
+                                    Count="1"
+                                    Value="{Binding MatchInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
+                                </customviews:RatingView>
+                            </ContentView>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <!--Header-->
+                    <Grid Grid.Row="1"
+                          Margin="10,0"
+                          Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="0.1" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <!--Home Team-->
+                        <StackLayout
+                            Grid.Column="1"
+                            Spacing="0"
+                            HorizontalOptions="Center"
+                            effects:TapCommandEffect.Tap="{Binding HomeTeamLogoClickCommand}"
+                            effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFit"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="45"
+                                WidthRequest="45"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="img_football.png"
+                                ErrorPlaceholder="img_football.png"
+                                Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                WidthRequest="90"
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Body2"
+                                MaxLines="2"
+                                LineHeight="1"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{Binding MatchInfo.HomeName}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+
+                        <!--Match Summary-->
+                        <!--For NS Match-->
+                        <StackLayout
+                            Grid.Column="2"
+                            Spacing="0"
+                            VerticalOptions="CenterAndExpand"
+                            Margin="7,0">
+                            <StackLayout.Triggers>
                                 <DataTrigger
-                                    TargetType="ContentView"
+                                    TargetType="StackLayout"
                                     Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
                                     Value="True">
                                     <Setter Property="IsVisible" Value="False" />
                                 </DataTrigger>
-                            </ContentView.Triggers>
-                        </ContentView>
-                        <ContentView
-                            Padding="5"
-                            BackgroundColor="Transparent"
-                            effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                            <customviews:RatingView
-                                VerticalOptions="Center"
-                                WidthRequest="22.5"
-                                HeightRequest="22.5"
-                                StrokeWidth="0.8"
-                                RatingType="Full"
-                                ColorOn="{StaticResource IconActivated}"
-                                OutlineOnColor="{StaticResource IconActivated}"
-                                OutlineOffColor="{StaticResource TextColor_L}"
-                                Path="{x:Static customviews:PathConstants.Star}"
-                                Count="1"
-                                Value="{Binding MatchInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
-                            </customviews:RatingView>
-                        </ContentView>
-                    </StackLayout>
-                </StackLayout>
-
-                <!--Header-->
-                <Grid Grid.Row="1"
-                      Margin="10,0"
-                      Padding="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="0.1" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <!--Home Team-->
-                    <StackLayout
-                        Grid.Column="1"
-                        Spacing="0"
-                        HorizontalOptions="Center"
-                        effects:TapCommandEffect.Tap="{Binding HomeTeamLogoClickCommand}"
-                        effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                        <ffimageloading:CachedImage
-                            Aspect="AspectFit"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            HeightRequest="45"
-                            WidthRequest="45"
-                            DownsampleHeight="90"
-                            DownsampleToViewSize="True"
-                            LoadingPlaceholder="img_football.png"
-                            ErrorPlaceholder="img_football.png"
-                            Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
-                        </ffimageloading:CachedImage>
-                        <materialui:MaterialLabel
-                            WidthRequest="90"
+                            </StackLayout.Triggers>
+                            <materialui:MaterialLabel
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Subtitle1"
+                                TextColor="{StaticResource TransparentWhite}"
+                                Text="{Binding MatchInfo.LeagueName}"
+                                effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
+                                effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialLabel
+                                HorizontalTextAlignment="Center"
+                                TypeScale="H5"
+                                FontAttributes="None"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{Binding MatchInfo.MatchTime, StringFormat='{0:tt hh:mm}'}">
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialLabel
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Subtitle2"
+                                FontAttributes="None"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                        <!--For Started Match-->
+                        <StackLayout
+                            Grid.Column="2"
+                            Spacing="0"
                             VerticalOptions="CenterAndExpand"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
-                            MaxLines="2"
-                            LineHeight="1"
-                            TextColor="{StaticResource TextColor_L}"
-                            Text="{Binding MatchInfo.HomeName}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
+                            Margin="7,0">
+                            <StackLayout.Triggers>
+                                <DataTrigger
+                                    TargetType="StackLayout"
+                                    Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
+                                    Value="False">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+                            <materialui:MaterialLabel
+                                MaxLines="1"
+                                LineBreakMode="TailTruncation"
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Subtitle1"
+                                TextColor="{StaticResource TransparentWhite}"
+                                Text="{Binding MatchInfo.LeagueName}"
+                                effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
+                                effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialLabel
+                                HorizontalOptions="Center"
+                                TypeScale="H5"
+                                FontAttributes="None"
+                                TextColor="{StaticResource TextColor_L}">
+                                <materialui:MaterialLabel.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding MatchInfo.HomeScore}" />
+                                        <Span Text="   :   " />
+                                        <Span Text="{Binding MatchInfo.AwayScore}" />
+                                    </FormattedString>
+                                </materialui:MaterialLabel.FormattedText>
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialLabel
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Subtitle2"
+                                FontAttributes="None"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
 
-                    <!--Match Summary-->
-                    <!--For NS Match-->
-                    <StackLayout
-                        Grid.Column="2"
-                        Spacing="0"
-                        VerticalOptions="CenterAndExpand"
-                        Margin="7,0">
-                        <StackLayout.Triggers>
-                            <DataTrigger
-                                TargetType="StackLayout"
-                                Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
-                                Value="True">
-                                <Setter Property="IsVisible" Value="False" />
-                            </DataTrigger>
-                        </StackLayout.Triggers>
-                        <materialui:MaterialLabel
-                            MaxLines="1"
-                            LineBreakMode="TailTruncation"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Subtitle1"
-                            TextColor="{StaticResource TransparentWhite}"
-                            Text="{Binding MatchInfo.LeagueName}"
-                            effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
+                        <!--Away Team-->
+                        <StackLayout
+                            Grid.Column="3"
+                            Spacing="0"
+                            HorizontalOptions="Start"
+                            effects:TapCommandEffect.Tap="{Binding AwayTeamLogoClickCommand}"
                             effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                        </materialui:MaterialLabel>
-                        <materialui:MaterialLabel
-                            HorizontalTextAlignment="Center"
-                            TypeScale="H5"
-                            FontAttributes="None"
-                            TextColor="{StaticResource TextColor_L}"
-                            Text="{Binding MatchInfo.MatchTime, StringFormat='{0:tt hh:mm}'}">
-                        </materialui:MaterialLabel>
-                        <materialui:MaterialLabel
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Subtitle2"
-                            FontAttributes="None"
-                            TextColor="{StaticResource TextColor_L}"
-                            Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
-                    <!--For Started Match-->
-                    <StackLayout
-                        Grid.Column="2"
-                        Spacing="0"
-                        VerticalOptions="CenterAndExpand"
-                        Margin="7,0">
-                        <StackLayout.Triggers>
-                            <DataTrigger
-                                TargetType="StackLayout"
-                                Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
-                                Value="False">
-                                <Setter Property="IsVisible" Value="False" />
-                            </DataTrigger>
-                        </StackLayout.Triggers>
-                        <materialui:MaterialLabel
-                            MaxLines="1"
-                            LineBreakMode="TailTruncation"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Subtitle1"
-                            TextColor="{StaticResource TransparentWhite}"
-                            Text="{Binding MatchInfo.LeagueName}"
-                            effects:TapCommandEffect.Tap="{Binding LeagueNameClickCommand}"
-                            effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                        </materialui:MaterialLabel>
-                        <materialui:MaterialLabel
-                            HorizontalOptions="Center"
-                            TypeScale="H5"
-                            FontAttributes="None"
-                            TextColor="{StaticResource TextColor_L}">
-                            <materialui:MaterialLabel.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding MatchInfo.HomeScore}" />
-                                    <Span Text="   :   " />
-                                    <Span Text="{Binding MatchInfo.AwayScore}" />
-                                </FormattedString>
-                            </materialui:MaterialLabel.FormattedText>
-                        </materialui:MaterialLabel>
-                        <materialui:MaterialLabel
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Subtitle2"
-                            FontAttributes="None"
-                            TextColor="{StaticResource TextColor_L}"
-                            Text="{Binding MatchInfo.MatchStatus, Converter={StaticResource footballMatchStatusToStringConverter}}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFit"
+                                HeightRequest="45"
+                                WidthRequest="45"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="img_football.png"
+                                ErrorPlaceholder="img_football.png"
+                                Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                WidthRequest="90"
+                                VerticalOptions="CenterAndExpand"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Body2"
+                                MaxLines="2"
+                                LineHeight="1"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{Binding MatchInfo.AwayName}">
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.ColumnSpan="5"
+                            HeightRequest="0.5"
+                            Color="{StaticResource TransparentWhite}">
+                        </BoxView>
+                    </Grid>
 
-                    <!--Away Team-->
-                    <StackLayout
-                        Grid.Column="3"
-                        Spacing="0"
-                        HorizontalOptions="Start"
-                        effects:TapCommandEffect.Tap="{Binding AwayTeamLogoClickCommand}"
-                        effects:TapCommandEffect.TapParameter="{Binding MatchInfo}"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                        <ffimageloading:CachedImage
-                            Aspect="AspectFit"
-                            HeightRequest="45"
-                            WidthRequest="45"
-                            DownsampleHeight="90"
-                            DownsampleToViewSize="True"
-                            LoadingPlaceholder="img_football.png"
-                            ErrorPlaceholder="img_football.png"
-                            Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
-                        </ffimageloading:CachedImage>
-                        <materialui:MaterialLabel
-                            WidthRequest="90"
-                            VerticalOptions="CenterAndExpand"
-                            VerticalTextAlignment="Center"
-                            HorizontalTextAlignment="Center"
-                            TypeScale="Body2"
-                            MaxLines="2"
-                            LineHeight="1"
-                            TextColor="{StaticResource TextColor_L}"
-                            Text="{Binding MatchInfo.AwayName}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
-                    <BoxView
-                        Grid.Row="1"
-                        Grid.ColumnSpan="5"
-                        HeightRequest="0.5"
-                        Color="{StaticResource TransparentWhite}">
-                    </BoxView>
+                    <!--TabHostView-->
+                    <tabs:TabHostView
+                        Grid.Row="2"
+                        TabType="Fixed"
+                        HeightRequest="37"
+                        Margin="0,-9,0,0"
+                        SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
+                        <tabs:TabHostView.Tabs>
+                            <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" />
+                            <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}" />
+                            <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}" />
+                            <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}" />
+                        </tabs:TabHostView.Tabs>
+                    </tabs:TabHostView>
                 </Grid>
-
-                <!--TabHostView-->
-                <tabs:TabHostView
-                    Grid.Row="2"
-                    TabType="Fixed"
-                    HeightRequest="43"
-                    Margin="0,-7,0,0"
-                    ShadowType="Bottom"
-                    SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
-                    <tabs:TabHostView.Tabs>
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.H2H}" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Odds}" />
-                        <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Predictions}" />
-                    </tabs:TabHostView.Tabs>
-                </tabs:TabHostView>
-            </Grid>
+            </pancakeview:PancakeView>
 
             <!--ContentView-->
             <tabView:SfTabView

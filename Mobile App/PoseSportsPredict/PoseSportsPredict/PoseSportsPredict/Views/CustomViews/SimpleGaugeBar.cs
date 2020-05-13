@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.Views.CustomViews
@@ -25,12 +26,6 @@ namespace PoseSportsPredict.Views.CustomViews
             typeof(SimpleGaugeBar),
             -1.0,
             propertyChanged: OnPropertyChanged);
-
-        public static readonly BindableProperty IsLeftStartProperty = BindableProperty.Create(
-            nameof(IsLeftStart),
-            typeof(bool),
-            typeof(SimpleGaugeBar),
-            true);
 
         public static readonly BindableProperty IsAnimationProperty = BindableProperty.Create(
             nameof(IsAnimation),
@@ -64,7 +59,6 @@ namespace PoseSportsPredict.Views.CustomViews
 
         public double MaxValue { get { return (double)GetValue(MaxValueProperty); } set { SetValue(MaxValueProperty, value); } }
         public double CurValue { get { return (double)GetValue(CurValueProperty); } set { SetValue(CurValueProperty, value); } }
-        public bool IsLeftStart { get { return (bool)GetValue(IsLeftStartProperty); } set { SetValue(IsLeftStartProperty, value); } }
         public bool IsAnimation { get { return (bool)GetValue(IsAnimationProperty); } set { SetValue(IsAnimationProperty, value); } }
         public Color GaugeColor1 { get { return (Color)GetValue(GaugeColor1Property); } set { SetValue(GaugeColor1Property, value); } }
         public Color GaugeColor2 { get { return (Color)GetValue(GaugeColor2Property); } set { SetValue(GaugeColor2Property, value); } }
@@ -74,10 +68,10 @@ namespace PoseSportsPredict.Views.CustomViews
 
         private ColumnDefinition _column1 = new ColumnDefinition();
         private ColumnDefinition _column2 = new ColumnDefinition();
-        private Frame _frame = new Frame();
+        private PancakeView _frame = new PancakeView();
         private Grid _grid = new Grid();
-        private BoxView _boxView1 = new BoxView();
-        private BoxView _boxView2 = new BoxView();
+        private PancakeView _gaugeBar = new PancakeView();
+        private BoxView _boxView = new BoxView();
 
         #endregion Fields
 
@@ -85,16 +79,13 @@ namespace PoseSportsPredict.Views.CustomViews
         {
             _frame.Padding = 0;
             _frame.Margin = 0;
-            _frame.HasShadow = false;
-            _frame.CornerRadius = 2;
 
             _grid = new Grid();
             _grid.ColumnSpacing = 0;
             _grid.ColumnDefinitions.Add(_column1);
             _grid.ColumnDefinitions.Add(_column2);
 
-            _boxView1.CornerRadius = 2;
-            _boxView2.CornerRadius = 2;
+            _boxView.Color = Color.Transparent;
 
             //_boxView1.HorizontalOptions = new LayoutOptions
             //{
@@ -105,8 +96,8 @@ namespace PoseSportsPredict.Views.CustomViews
             //    Alignment = LayoutAlignment.End,
             //};
 
-            _grid.Children.Add(_boxView1, 0, 0);
-            _grid.Children.Add(_boxView2, 1, 0);
+            _grid.Children.Add(_gaugeBar, 0, 0);
+            _grid.Children.Add(_boxView, 1, 0);
 
             _frame.Content = _grid;
             Content = _frame;
@@ -125,16 +116,16 @@ namespace PoseSportsPredict.Views.CustomViews
             GridLength gaugeLenth = new GridLength(gaugeRate, GridUnitType.Star);
             GridLength ungaugeLenth = new GridLength((1 - gaugeRate), GridUnitType.Star);
 
-            ColumnDefinition gaugeColumn = IsLeftStart ? _column1 : _column2;
-            ColumnDefinition ungaugeColumn = IsLeftStart ? _column2 : _column1;
+            ColumnDefinition gaugeColumn = _column1;
+            ColumnDefinition ungaugeColumn = _column2;
             gaugeColumn.Width = gaugeLenth;
             ungaugeColumn.Width = ungaugeLenth;
 
             // Gauge
-            BoxView gaugeBox = IsLeftStart ? _boxView1 : _boxView2;
-            BoxView ungaugeBox = IsLeftStart ? _boxView2 : _boxView1;
-            gaugeBox.Color = gaugeRate == 0.5 ? AppResourcesHelper.GetResourceColor("CustomGrey") : gaugeRate > 0.5 ? GaugeColor1 : GaugeColor2;
-            ungaugeBox.Color = Color.Transparent;
+            _gaugeBar.BackgroundColor = gaugeRate > 0.5 ? GaugeColor1 : GaugeColor2;
+
+            _frame.CornerRadius = FlowDirection == FlowDirection.LeftToRight ? new CornerRadius(0, 5, 0, 5) : new CornerRadius(5, 0, 5, 0);
+            _gaugeBar.CornerRadius = FlowDirection == FlowDirection.LeftToRight ? new CornerRadius(0, 5, 0, 5) : new CornerRadius(5, 0, 5, 0);
 
             //if (IsAnimation && gaugeLenth.Value > 0)
             //{

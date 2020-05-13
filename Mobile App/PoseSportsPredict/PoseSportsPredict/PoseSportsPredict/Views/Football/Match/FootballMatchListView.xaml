@@ -20,7 +20,7 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate x:DataType="models:FootballMatchInfo">
                     <Grid
-                        Padding="20, 0"
+                        Padding="10, 0"
                         ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -84,7 +84,7 @@
                             x:Name="_grid"
                             Grid.Column="1"
                             Margin="0"
-                            Padding="0,20"
+                            Padding="10,20"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"
