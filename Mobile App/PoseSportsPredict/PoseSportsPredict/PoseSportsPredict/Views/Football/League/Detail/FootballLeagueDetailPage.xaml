@@ -8,17 +8,17 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
-             xmlns:leaguedetails="clr-namespace:PoseSportsPredict.Views.Football.League.Detail"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League.Detail"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailPage"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <StackLayout
+            x:DataType="viewmodels:FootballLeagueDetailViewModel"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand">
             <Grid

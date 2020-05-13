@@ -9,10 +9,11 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:poseauthenums="PosePacket.Service.Auth.Models.Enums"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
              BackgroundColor="White">
 
     <ContentPage.Content>
-        <Grid>
+        <Grid x:DataType="viewmodels:LoginViewModel">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -34,14 +35,14 @@
                     CornerRadius="5"
                     Elevation="3"
                     Padding="0"
-                    BackgroundColor="{StaticResource BackgroundColor_Default}">
+                    BackgroundColor="{StaticResource BackgroundColor_Default}"
+                    IsClickable="True"
+                    ClickCommand="{Binding ExternLoginCommand}"
+                    ClickCommandParameter="Google">
                     <StackLayout
                         Orientation="Horizontal"
                         Spacing="15"
-                        Padding="10,5"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
-                        effects:TapCommandEffect.Tap="{Binding ExternLoginCommand}"
-                        effects:TapCommandEffect.TapParameter="Google">
+                        Padding="10,5">
                         <Image
                             Aspect="AspectFit"
                             WidthRequest="27"
@@ -61,14 +62,14 @@
                     CornerRadius="5"
                     Elevation="3"
                     Padding="0"
-                    BackgroundColor="{StaticResource BackgroundColor_Default}">
+                    BackgroundColor="{StaticResource BackgroundColor_Default}"
+                    IsClickable="True"
+                    ClickCommand="{Binding ExternLoginCommand}"
+                    ClickCommandParameter="Facebook">
                     <StackLayout
                         Orientation="Horizontal"
                         Spacing="15"
-                        Padding="10,5"
-                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
-                        effects:TapCommandEffect.Tap="{Binding ExternLoginCommand}"
-                        effects:TapCommandEffect.TapParameter="Facebook">
+                        Padding="10,5">
                         <Image
                             Aspect="AspectFit"
                             WidthRequest="27"

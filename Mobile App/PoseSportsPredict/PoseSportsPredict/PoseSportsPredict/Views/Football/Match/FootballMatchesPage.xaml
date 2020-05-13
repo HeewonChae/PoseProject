@@ -10,6 +10,7 @@
              xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
+             xmlns:matchviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Football.Match"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesPage"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
@@ -22,7 +23,9 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="collapsedTemplate">
+            <DataTemplate
+                x:Key="collapsedTemplate"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
                 <ViewCell>
                     <materialui:MaterialCard
                         CornerRadius="5"
@@ -33,7 +36,7 @@
                             <StackLayout
                                 VerticalOptions="Center"
                                 Orientation="Horizontal"
-                                Padding="20,11"
+                                Padding="15,11"
                                 Spacing="15"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -42,8 +45,8 @@
                                     Aspect="AspectFit"
                                     HorizontalOptions="Center"
                                     VerticalOptions="Center"
-                                    HeightRequest="29"
-                                    WidthRequest="29"
+                                    HeightRequest="27"
+                                    WidthRequest="27"
                                     DownsampleHeight="90"
                                     DownsampleToViewSize="True"
                                     LoadingPlaceholder="img_world.png"
@@ -91,7 +94,9 @@
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
-            <DataTemplate x:Key="expandedTamplete">
+            <DataTemplate
+                x:Key="expandedTamplete"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
                 <ViewCell>
                     <materialui:MaterialCard
                         CornerRadius="5"
@@ -102,7 +107,7 @@
                             <StackLayout
                                 VerticalOptions="Center"
                                 Orientation="Horizontal"
-                                Padding="20,11"
+                                Padding="15,11"
                                 Spacing="15"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -158,7 +163,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout
+            x:DataType="matchviewmodel:FootballMatchesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="CenterAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -166,10 +172,14 @@
                 EmptyStateMessage="{x:Static localize:LocalizeString.No_Match_datas}">
                 <ListView
                     x:Name="lv_matches"
-                    ItemsSource="{Binding MatchListViewModels}"
-                    HasUnevenRows="True"
-                    IsPullToRefreshEnabled="False"
                     SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    SelectionMode="None"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsListViewRefrashing}"
+                    RefreshCommand="{Binding PullToRefreshCommand}"
+                    RefreshControlColor="{StaticResource PrimaryColor}"
+                    ItemsSource="{Binding MatchListViewModels}"
                     ItemTemplate="{StaticResource matchDataTemplateSelector}">
                 </ListView>
             </loader:TaskLoaderView>

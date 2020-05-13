@@ -56,13 +56,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public override void OnAppearing(params object[] datas)
         {
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
-#if DEBUG
-            if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 1) // 1분 마다 갱신
-                return;
-#else
+
             if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
                 return;
-#endif
+
             MatchesTaskLoaderNotifier.Load(InitMatchesAsync);
         }
 
@@ -85,6 +82,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private DateTime _lastUpdateTime;
         private bool _alarmEditMode;
         private MatchFilterType _curMatchFilterType;
+        private bool _isListViewRefrashing;
 
         #endregion Fields
 
@@ -92,6 +90,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
         public ObservableCollection<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
+        public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
 
         #endregion Properties
 
@@ -181,6 +180,24 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             }
 
             MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
+        }
+
+        public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }
+
+        private async void PullToRefresh()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+
+            if (timeSpan.TotalMinutes > 5) // 5분 마다 갱신
+                await InitMatchesAsync();
+
+            SetIsBusy(false);
+            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands
@@ -373,10 +390,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             matchGroupCollection = new ObservableCollection<FootballMatchListViewModel>();
 
             var grouppingMatches = MatchGroupingByFilterType(matchList, out string logo);
+
+            bool defaultExpand = grouppingMatches.Count > 10 ? false : true;
+
             foreach (var grouppingMatch in grouppingMatches)
             {
                 // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
-                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? false : isAllExpand.Value;
+                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? defaultExpand : isAllExpand.Value;
 
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
                 matchListViewModel.Title = grouppingMatch.Key;

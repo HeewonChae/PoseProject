@@ -7,6 +7,7 @@ using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
@@ -53,13 +54,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
             IsEditMode = false;
 
-#if DEBUG
-            if (_matchList?.Count > 0 && timeSpan.TotalMinutes < 1) // 1분 마다 갱신
-                return;
-#else
             if (_matchList?.Count > 0 && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
                 return;
-#endif
 
             BookmarkedMatchesTaskLoaderNotifier.Load(InitBookmarkedMatchesAsync);
         }
@@ -86,6 +82,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         private DateTime _lastUpdateTime;
         private bool _IsEditMode;
         private readonly List<FootballMatchInfo> _DeleteMatchList = new List<FootballMatchInfo>();
+        private bool _isListViewRefrashing;
 
         #endregion Fields
 
@@ -93,6 +90,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> BookmarkedMatchesTaskLoaderNotifier { get => _bookmarkedMatchesTaskLoaderNotifier; set => SetValue(ref _bookmarkedMatchesTaskLoaderNotifier, value); }
         public ObservableCollection<FootballMatchInfo> BookmarkedMatches { get => _bookmarkedMatches; set => SetValue(ref _bookmarkedMatches, value); }
+        public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
 
         public bool IsEditMode
         {
@@ -123,6 +121,20 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             SetIsBusy(true);
 
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectMatch_LongTapCommand { get => new RelayCommand<FootballMatchInfo>((e) => SelectMatch_LongTap(e)); }
+
+        private void SelectMatch_LongTap(FootballMatchInfo matchInfo)
+        {
+            if (IsBusy || IsEditMode)
+                return;
+
+            SetIsBusy(true);
+
+            MatchInfoLongTapPopup.Execute(matchInfo);
 
             SetIsBusy(false);
         }
@@ -171,6 +183,24 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             _DeleteMatchList.Add(matchInfo);
             _bookmarkedMatches.Remove(matchInfo);
+        }
+
+        public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }
+
+        private async void PullToRefresh()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+
+            if (timeSpan.TotalMinutes > 5) // 갱신 주기: 5분
+                await InitBookmarkedMatchesAsync();
+
+            SetIsBusy(false);
+            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands

@@ -6,17 +6,19 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              BackgroundColor="White"
              x:Class="PoseSportsPredict.Views.Football.League.FootballLeagueListView">
     <ContentView.Content>
         <StackLayout
+            x:DataType="viewmodels:FootballLeagueListViewModel"
             x:Name="lv_leagues"
             Spacing="0"
             BindableLayout.ItemsSource="{Binding Leagues}">
             <BindableLayout.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:FootballLeagueInfo">
                     <StackLayout
                         Margin="20,0"
                         Orientation="Horizontal">

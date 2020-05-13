@@ -10,10 +10,12 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Team"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailScheduledMatchesView">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:DataType="viewmodels:FootballTeamDetailScheduledMatchesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -21,12 +23,16 @@
                 TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}">
                 <ListView
                     x:Name="lv_matches"
-                    ItemsSource="{Binding Matches}"
                     HasUnevenRows="True"
-                    IsPullToRefreshEnabled="False"
-                    SeparatorVisibility="None">
+                    SeparatorVisibility="None"
+                    SelectionMode="None"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsListViewRefrashing}"
+                    RefreshCommand="{Binding PullToRefreshCommand}"
+                    RefreshControlColor="{StaticResource PrimaryColor}"
+                    ItemsSource="{Binding Matches}">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:FootballMatchInfo">
                             <ViewCell>
                                 <materialui:MaterialCard
                                     CornerRadius="5"

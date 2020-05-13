@@ -13,6 +13,7 @@
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League"
              material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              material:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
@@ -24,7 +25,9 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="collapsedTemplate">
+            <DataTemplate
+                x:Key="collapsedTemplate"
+                x:DataType="viewmodels:FootballLeagueListViewModel">
                 <ViewCell>
                     <StackLayout Spacing="0">
                         <StackLayout
@@ -68,7 +71,9 @@
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
-            <DataTemplate x:Key="expandedTamplete">
+            <DataTemplate
+                x:Key="expandedTamplete"
+                x:DataType="viewmodels:FootballLeagueListViewModel">
                 <ViewCell>
                     <StackLayout Spacing="0">
                         <StackLayout
@@ -123,6 +128,7 @@
 
     <ContentPage.Content>
         <StackLayout
+            x:DataType="viewmodels:FootballLeaguesViewModel"
             Spacing="0">
             <materialui:MaterialCard
                 Margin="25,10"

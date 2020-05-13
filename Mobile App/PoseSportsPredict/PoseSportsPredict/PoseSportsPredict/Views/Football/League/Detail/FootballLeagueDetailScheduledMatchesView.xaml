@@ -8,15 +8,18 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
              xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League.Detail"
+             xmlns:matcheviewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailScheduledMatchesView">
 
     <ContentView.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="collapsedTemplate">
+            <DataTemplate 
+                x:Key="collapsedTemplate"
+                x:DataType="matcheviewmodels:FootballMatchListViewModel">
                 <ViewCell>
                     <materialui:MaterialCard
                         CornerRadius="5"
@@ -82,7 +85,9 @@
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
-            <DataTemplate x:Key="expandedTamplete">
+            <DataTemplate 
+                x:Key="expandedTamplete"
+                x:DataType="matcheviewmodels:FootballMatchListViewModel">
                 <ViewCell>
                     <materialui:MaterialCard
                         CornerRadius="5"
@@ -165,7 +170,7 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:DataType="viewmodels:FootballLeagueDetailScheduledMatchesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -173,10 +178,14 @@
                 TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}">
                 <ListView
                     x:Name="lv_matches"
-                    ItemsSource="{Binding MatchListViewModels}"
                     HasUnevenRows="True"
-                    IsPullToRefreshEnabled="False"
                     SeparatorVisibility="None"
+                    SelectionMode="None"
+                    IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsListViewRefrashing}"
+                    RefreshCommand="{Binding PullToRefreshCommand}"
+                    RefreshControlColor="{StaticResource PrimaryColor}"
+                    ItemsSource="{Binding MatchListViewModels}"
                     ItemTemplate="{StaticResource matchDataTemplateSelector}">
                 </ListView>
             </loader:TaskLoaderView>

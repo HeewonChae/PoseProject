@@ -8,17 +8,17 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match"
              xmlns:models ="clr-namespace:PoseSportsPredict.Models.Football"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchListView">
     <ContentView.Content>
         <StackLayout
             x:Name="lv_matches"
+            x:DataType="viewmodels:FootballMatchListViewModel"
             Spacing="0"
             BindableLayout.ItemsSource="{Binding Matches}">
             <BindableLayout.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:FootballMatchInfo">
                     <Grid
                         Padding="20, 0"
                         ColumnSpacing="0">

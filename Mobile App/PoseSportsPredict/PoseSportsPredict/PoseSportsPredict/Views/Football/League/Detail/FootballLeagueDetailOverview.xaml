@@ -11,16 +11,21 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.League.Standings"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League.Detail"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailOverview">
 
     <ContentView.Resources>
         <ResourceDictionary>
             <!--Participating Team Templete-->
-            <DataTemplate x:Key="ParticipatingTeamTemplete">
+            <DataTemplate 
+                x:Key="ParticipatingTeamTemplete"
+                x:DataType="models:FootballTeamInfo">
                 <StackLayout
-                    Orientation="Horizontal"
                     Spacing="15"
+                    Orientation="Horizontal"
+                    HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center"
                     effects:TapCommandEffect.Tap="{Binding Path=BindingContext.ParticipatingTeamClickCommand, Source={x:Reference _participatingTeams}}"
                     effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -54,7 +59,8 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout
+            x:DataType="viewmodels:FootballLeagueDetailOverviewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -66,11 +72,11 @@
                         <!--기본 정보 (시즌 시작, 종료)-->
                         <materialui:MaterialCard
                             Margin="7,6"
-                            Padding="20,10"
+                            Padding="10,5"
                             Elevation="3"
                             CornerRadius="5">
                             <Grid
-                                Margin="0"
+                                Margin="10,5"
                                 RowSpacing="10">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -151,7 +157,7 @@
                                     TextColor="{StaticResource CustomGrey_D}"
                                     Text="{x:Static localize:LocalizeString.Participating_Teams}">
                                 </materialui:MaterialLabel>
-                                <Grid Margin="0,10">
+                                <Grid Margin="0,0,0,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
@@ -165,8 +171,6 @@
                                     </StackLayout>
                                     <BoxView
                                         Grid.Column="1"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="FillAndExpand"
                                         WidthRequest="0.5"
                                         Color="{StaticResource CustomGrey_L}">
                                     </BoxView>

@@ -11,12 +11,14 @@
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPage"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <StackLayout
+            x:DataType="viewmodels:FootballMatchDetailViewModel"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="FillAndExpand">
             <Grid

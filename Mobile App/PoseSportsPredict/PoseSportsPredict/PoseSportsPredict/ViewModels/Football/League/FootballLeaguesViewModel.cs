@@ -9,7 +9,6 @@ using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.ViewModels.Football.League;
 using PoseSportsPredict.Views.Football.League;
 using Sharpnado.Presentation.Forms;
 using Shiny;
@@ -22,7 +21,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
-namespace PoseSportsPredict.ViewModels.Football
+namespace PoseSportsPredict.ViewModels.Football.League
 {
     public class FootballLeaguesViewModel : NavigableViewModel, IIconChange
     {

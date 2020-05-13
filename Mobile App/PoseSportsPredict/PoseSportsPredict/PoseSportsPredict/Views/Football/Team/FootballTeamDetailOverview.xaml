@@ -7,10 +7,12 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Team"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailOverview">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:DataType="viewmodels:FootballTeamDetailOverviewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -27,7 +29,7 @@
                             <StackLayout
                                 Spacing="0">
                                 <materialui:MaterialLabel
-                                    Margin="0,0,0,7"
+                                    Margin="0,0,0,11"
                                     MaxLines="1"
                                     LineBreakMode="TailTruncation"
                                     TypeScale="Subtitle2"
@@ -35,12 +37,12 @@
                                     Text="{x:Static localize:LocalizeString.Participating_Leagues}">
                                 </materialui:MaterialLabel>
                                 <StackLayout
-                                x:Name="_participatingLeagues"
-                                Margin="10,5"
-                                Spacing="10"
-                                BindableLayout.ItemsSource="{Binding ParticipatingLeagues}">
+                                    x:Name="_participatingLeagues"
+                                    Margin="10,0"
+                                    Spacing="10"
+                                    BindableLayout.ItemsSource="{Binding ParticipatingLeagues}">
                                     <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
+                                        <DataTemplate x:DataType="models:ParticipatingLeagueInfo">
                                             <Grid
                                             Margin="0"
                                             RowSpacing="5">
@@ -50,42 +52,42 @@
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 <materialui:MaterialLabel
-                                                Grid.Row="0"
-                                                Grid.Column="0"
-                                                VerticalTextAlignment="Center"
-                                                HorizontalTextAlignment="End"
-                                                TypeScale="Body2"
-                                                TextColor="{StaticResource TextColor_D}"
-                                                Text="{x:Static localize:LocalizeString.League}">
-                                                </materialui:MaterialLabel>
-                                                <materialui:MaterialLabel
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                VerticalTextAlignment="Center"
-                                                TypeScale="Body2"
-                                                TextColor="{StaticResource TextColor_D}"
-                                                Text=" : ">
-                                                </materialui:MaterialLabel>
-                                                <materialui:MaterialCard
-                                                Grid.Row="0"
-                                                Grid.Column="2"
-                                                Margin="3,0"
-                                                Padding="0"
-                                                CornerRadius="5"
-                                                IsClickable="True"
-                                                ClickCommand="{Binding Path=BindingContext.LeagueNameClickCommand, Source={x:Reference _participatingLeagues}}"
-                                                ClickCommandParameter="{Binding LeagueInfo}"
-                                                BackgroundColor="{StaticResource DefaultButtonColor}"
-                                                VerticalOptions="Center">
-                                                    <materialui:MaterialLabel
-                                                    Padding="15,3"
+                                                    Grid.Row="0"
+                                                    Grid.Column="0"
                                                     VerticalTextAlignment="Center"
-                                                    HorizontalTextAlignment="Center"
-                                                    MaxLines="1"
-                                                    LineBreakMode="TailTruncation"
+                                                    HorizontalTextAlignment="End"
                                                     TypeScale="Body2"
                                                     TextColor="{StaticResource TextColor_D}"
-                                                    Text="{Binding LeagueInfo.LeagueName}">
+                                                    Text="{x:Static localize:LocalizeString.League}">
+                                                </materialui:MaterialLabel>
+                                                <materialui:MaterialLabel
+                                                    Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    VerticalTextAlignment="Center"
+                                                    TypeScale="Body2"
+                                                    TextColor="{StaticResource TextColor_D}"
+                                                    Text=" : ">
+                                                </materialui:MaterialLabel>
+                                                <materialui:MaterialCard
+                                                    Grid.Row="0"
+                                                    Grid.Column="2"
+                                                    Margin="3,0"
+                                                    Padding="0"
+                                                    CornerRadius="5"
+                                                    IsClickable="True"
+                                                    ClickCommand="{Binding Path=BindingContext.LeagueNameClickCommand, Source={x:Reference _participatingLeagues}}"
+                                                    ClickCommandParameter="{Binding LeagueInfo}"
+                                                    BackgroundColor="{StaticResource DefaultButtonColor}"
+                                                    VerticalOptions="End">
+                                                    <materialui:MaterialLabel
+                                                        Padding="15,3"
+                                                        VerticalTextAlignment="Center"
+                                                        HorizontalTextAlignment="Center"
+                                                        MaxLines="1"
+                                                        LineBreakMode="TailTruncation"
+                                                        TypeScale="Body2"
+                                                        TextColor="{StaticResource TextColor_D}"
+                                                        Text="{Binding LeagueInfo.LeagueName}">
                                                     </materialui:MaterialLabel>
                                                 </materialui:MaterialCard>
 
@@ -114,7 +116,7 @@
                                                 Spacing="9"
                                                 BindableLayout.ItemsSource="{Binding RecentForm}">
                                                     <BindableLayout.ItemTemplate>
-                                                        <DataTemplate>
+                                                        <DataTemplate x:DataType="models:FootballFormInfo">
                                                             <StackLayout
                                                                 Spacing="3">
                                                                 <materialui:MaterialCard
@@ -161,7 +163,7 @@
                             CornerRadius="5">
                             <StackLayout Spacing="0">
                                 <materialui:MaterialLabel
-                                    Margin="0,0,0,3"
+                                    Margin="0,0,0,1"
                                     MaxLines="1"
                                     LineBreakMode="TailTruncation"
                                     TypeScale="Subtitle2"

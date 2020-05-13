@@ -93,6 +93,8 @@ namespace PoseSportsPredict.Views.CustomViews
                 DataMarker = _dataMarker,
                 SplineType = SplineType.Monotonic,
                 StrokeWidth = 1,
+                EnableAnimation = true,
+                AnimationDuration = 1.0,
             };
 
             _splineSeries2 = new SplineSeries
@@ -102,6 +104,8 @@ namespace PoseSportsPredict.Views.CustomViews
                 DataMarker = _dataMarker,
                 SplineType = SplineType.Monotonic,
                 StrokeWidth = 1,
+                EnableAnimation = true,
+                AnimationDuration = 1.0,
             };
 
             _chart.Series.Add(_splineSeries1);

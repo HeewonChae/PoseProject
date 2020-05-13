@@ -8,34 +8,44 @@
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:DataType="viewmodels:FootballMatchDetailH2HViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
                 EmptyStateMessage="{x:Static localize:LocalizeString.No_Data_Available}"
                 TaskLoaderNotifier="{Binding H2HTaskLoaderNotifier}">
                 <ScrollView>
-                    <!--Team Goal Statistics-->
-                    <materialui:MaterialCard
-                        Margin="7,6"
-                        Padding="10,5"
-                        Elevation="3"
-                        CornerRadius="5">
-                        <StackLayout Spacing="0">
-                            <materialui:MaterialLabel
-                                Margin="0,0,0,3"
+                    <StackLayout>
+                        <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="10"
+                            Elevation="3"
+                            CornerRadius="5">
+                        </materialui:MaterialCard>
+
+                        <!--Team Goal Statistics-->
+                        <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="10,5"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <StackLayout Spacing="0">
+                                <materialui:MaterialLabel
+                                Margin="0,0,0,1"
                                 MaxLines="1"
                                 LineBreakMode="TailTruncation"
                                 TypeScale="Subtitle2"
                                 TextColor="{StaticResource CustomGrey_D}"
                                 Text="{x:Static localize:LocalizeString.Goal_Statistics}">
-                            </materialui:MaterialLabel>
-                            <goalstatistics:FootballTeamGoalStatisticsView BindingContext="{Binding GoalStatisticsViewModel}" />
-                        </StackLayout>
-                    </materialui:MaterialCard>
+                                </materialui:MaterialLabel>
+                                <goalstatistics:FootballTeamGoalStatisticsView BindingContext="{Binding GoalStatisticsViewModel}" />
+                            </StackLayout>
+                        </materialui:MaterialCard>
+                    </StackLayout>
                 </ScrollView>
             </loader:TaskLoaderView>
         </StackLayout>

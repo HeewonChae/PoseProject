@@ -59,6 +59,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         #region Fields
 
+        private DateTime _lastUpdateTime;
+        private bool _isListViewRefrashing;
         private bool _alarmEditMode;
         private FootballTeamInfo _teamInfo;
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _matchesTaskLoaderNotifier;
@@ -72,6 +74,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
         public FootballTeamInfo TeamInfo { get => _teamInfo; set => SetValue(ref _teamInfo, value); }
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
         public ObservableList<FootballMatchInfo> Matches { get => _matches; set => SetValue(ref _matches, value); }
+        public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
 
         #endregion Properties
 
@@ -156,6 +159,24 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             SetIsBusy(false);
         }
 
+        public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }
+
+        private async void PullToRefresh()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+
+            if (timeSpan.TotalMinutes > 5) // 5분 마다 갱신
+                await InitMatchDatas();
+
+            SetIsBusy(false);
+            IsListViewRefrashing = IsBusy;
+        }
+
         #endregion Commands
 
         #region Constructors
@@ -234,6 +255,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
                 Matches.Add(convertedMatchInfo);
             }
+
+            _lastUpdateTime = DateTime.UtcNow;
 
             SetIsBusy(false);
 

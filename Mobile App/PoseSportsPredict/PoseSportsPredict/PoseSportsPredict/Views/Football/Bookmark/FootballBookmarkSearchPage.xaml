@@ -6,7 +6,6 @@
                  x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarkSearchPage"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-                 xmlns:kbdhelper="clr-namespace:Xamarin.KeyboardHelper;assembly=Xamarin.KeyboardHelper"
                  xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
                  xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                  xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
@@ -14,11 +13,12 @@
                  xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                  xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                  xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
+                 xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Bookmark"
+                 xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
                  material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
                  material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
-                 BackgroundColor="#88000000"
+                 BackgroundColor="{StaticResource TransparentBlack}"
                  NavigationPage.HasNavigationBar="False">
 
     <pages:PopupPage.Animation>
@@ -34,7 +34,7 @@
             HasBackgroundAnimation="True" />
     </pages:PopupPage.Animation>
 
-    <RelativeLayout>
+    <RelativeLayout x:DataType="viewmodels:FootballBookmarkSearchViewModel">
         <Grid
             RelativeLayout.WidthConstraint="{ConstraintExpression
                 Type=RelativeToParent,
@@ -58,31 +58,30 @@
                 <RowDefinition Height="0.02*" />
             </Grid.RowDefinitions>
             <materialui:MaterialCard
-            Grid.Column="1"
-            Grid.Row="1"
-            Margin="0"
-            Padding="15,5"
-            CornerRadius="5"
-            BackgroundColor="{StaticResource BackgroundColor_Default}">
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="0"
+                Padding="15,5"
+                CornerRadius="5"
+                BackgroundColor="{StaticResource BackgroundColor_Default}">
 
                 <!--Ignore cancle command-->
                 <materialui:MaterialCard.GestureRecognizers>
                     <TapGestureRecognizer />
                 </materialui:MaterialCard.GestureRecognizers>
 
-                <StackLayout
-                Spacing="0">
+                <StackLayout Spacing="0">
                     <materialui:MaterialCard
-                    Margin="3,3,3,5"
-                    Padding="0"
-                    CornerRadius="25"
-                    Elevation="3">
+                        Margin="3,3,3,5"
+                        Padding="0"
+                        CornerRadius="25"
+                        Elevation="3">
                         <SearchBar
-                        x:Name="_searchBar"
-                        Margin ="15,4"
-                        HeightRequest="35"
-                        FontSize="Body"
-                        Placeholder="{x:Static localize:LocalizeString.Search_Bookmark}">
+                            x:Name="_searchBar"
+                            Margin ="15,4"
+                            HeightRequest="35"
+                            FontSize="Body"
+                            Placeholder="{x:Static localize:LocalizeString.Search_Bookmark}">
                             <SearchBar.Behaviors>
                                 <logics:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchBarTextChangedCommand}">
                                 </logics:EventToCommandBehavior>
@@ -91,18 +90,19 @@
                     </materialui:MaterialCard>
 
                     <loader:TaskLoaderView
-                    Style="{StaticResource PoseTaskLoader}"
-                    TaskLoaderNotifier="{Binding BookmarkSearchTaskLoaderNotifier}"
-                    EmptyStateMessage="{x:Static localize:LocalizeString.No_Search_Results}"
-                    IsVisible="{Binding IsSearching}">
+                        VerticalOptions="FillAndExpand"
+                        Style="{StaticResource PoseTaskLoader}"
+                        TaskLoaderNotifier="{Binding BookmarkSearchTaskLoaderNotifier}"
+                        EmptyStateMessage="{x:Static localize:LocalizeString.No_Search_Results}"
+                        IsVisible="{Binding IsSearching}">
                         <ScrollView Scrolled="lv_Scrolled">
-                            <Grid
-                            Margin="0,3">
+                            <Grid Margin="0,3">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
+
                                 <!--Match Search Result-->
                                 <StackLayout
                                     Grid.Row="0"
@@ -114,7 +114,7 @@
                                     </StackLayout.Triggers>
                                     <materialui:MaterialLabel
                                     TypeScale="Caption"
-                                    TextColor="{StaticResource CustomGrey}">
+                                    TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{x:Static localize:LocalizeString.Matches}" />
@@ -130,18 +130,18 @@
                                         x:Name="lv_searched_matches"
                                         BindableLayout.ItemsSource="{Binding SearchedMatches}">
                                         <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="models:FootballMatchInfo">
                                                 <materialui:MaterialCard
                                                     CornerRadius="5"
                                                     Elevation="3"
                                                     Margin="3"
-                                                    Padding="0">
+                                                    Padding="0"
+                                                    IsClickable="True"
+                                                    ClickCommand="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_searched_matches}}"
+                                                    ClickCommandParameter="{Binding .}">
                                                     <StackLayout
                                                         Spacing="0"
-                                                        Padding="8,5,8,0"
-                                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_searched_matches}}"
-                                                        effects:TapCommandEffect.TapParameter="{Binding .}"
-                                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                        Padding="15,5,15,0">
                                                         <!--SubTitle-->
                                                         <Grid
                                                             ColumnSpacing="15"
@@ -195,7 +195,7 @@
                                                         <!--MatchInfo-->
                                                         <Grid
                                                             VerticalOptions="FillAndExpand"
-                                                            Padding="10">
+                                                            Padding="5,10">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="*" />
                                                                 <ColumnDefinition Width="Auto" />
@@ -299,7 +299,7 @@
                                     </StackLayout.Triggers>
                                     <materialui:MaterialLabel
                                     TypeScale="Caption"
-                                    TextColor="{StaticResource CustomGrey}">
+                                    TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{x:Static localize:LocalizeString.Leagues}" />
@@ -315,21 +315,21 @@
                                     x:Name="lv_searched_leagues"
                                     BindableLayout.ItemsSource="{Binding SearchedLeagues}">
                                         <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="models:FootballLeagueInfo">
                                                 <materialui:MaterialCard
                                                     BackgroundColor="White"
                                                     CornerRadius="5"
                                                     Elevation="3"
                                                     Margin="3"
-                                                    Padding="0">
+                                                    Padding="0"
+                                                    IsClickable="True"
+                                                    ClickCommand="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_searched_leagues}}"
+                                                    ClickCommandParameter="{Binding .}">
                                                     <StackLayout
                                                         VerticalOptions="FillAndExpand"
                                                         Orientation="Horizontal"
-                                                        Padding="15,10"
-                                                        Spacing="15"
-                                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_searched_leagues}}"
-                                                        effects:TapCommandEffect.TapParameter="{Binding .}"
-                                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                        Padding="15,5"
+                                                        Spacing="15">
                                                         <ffimageloading:CachedImage
                                                             Aspect="AspectFit"
                                                             HorizontalOptions="Center"
@@ -377,7 +377,7 @@
                                     </StackLayout.Triggers>
                                     <materialui:MaterialLabel
                                     TypeScale="Caption"
-                                    TextColor="{StaticResource CustomGrey}">
+                                    TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{x:Static localize:LocalizeString.Teams}" />
@@ -393,21 +393,21 @@
                                     x:Name="lv_searched_teams"
                                     BindableLayout.ItemsSource="{Binding SearchedTeams}">
                                         <BindableLayout.ItemTemplate>
-                                            <DataTemplate>
+                                            <DataTemplate x:DataType="models:FootballTeamInfo">
                                                 <materialui:MaterialCard
                                                     BackgroundColor="White"
                                                     CornerRadius="5"
                                                     Elevation="3"
                                                     Margin="3"
-                                                    Padding="0">
+                                                    Padding="0"
+                                                    IsClickable="True"
+                                                    ClickCommand="{Binding Path=BindingContext.SelectTeamCommand, Source={x:Reference lv_searched_teams}}"
+                                                    ClickCommandParameter="{Binding .}">
                                                     <StackLayout
                                                         VerticalOptions="FillAndExpand"
                                                         Orientation="Horizontal"
-                                                        Padding="15,10"
-                                                        Spacing="15"
-                                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectTeamCommand, Source={x:Reference lv_searched_teams}}"
-                                                        effects:TapCommandEffect.TapParameter="{Binding .}"
-                                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                        Padding="15,5"
+                                                        Spacing="15">
                                                         <ffimageloading:CachedImage
                                                             Aspect="AspectFit"
                                                             HorizontalOptions="Center"
@@ -446,11 +446,11 @@
 
                     <!--Recent Search Keywords-->
                     <StackLayout
-                    Margin="5"
-                    IsVisible="{Binding IsSearching, Converter={StaticResource inverseBoolConverter}}">
+                        Margin="5"
+                        IsVisible="{Binding IsSearching, Converter={StaticResource inverseBoolConverter}}">
                         <materialui:MaterialLabel
                             TypeScale="Caption"
-                            TextColor="{StaticResource CustomGrey}"
+                            TextColor="{StaticResource CustomGrey_D}"
                             Text="{x:Static localize:LocalizeString.Recent_Search}">
                         </materialui:MaterialLabel>
                         <ListView
@@ -461,7 +461,7 @@
                             IsPullToRefreshEnabled="False"
                             SeparatorVisibility="None">
                             <ListView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="models:FootballRecentSearch">
                                     <ViewCell>
                                         <StackLayout
                                             Spacing="0"

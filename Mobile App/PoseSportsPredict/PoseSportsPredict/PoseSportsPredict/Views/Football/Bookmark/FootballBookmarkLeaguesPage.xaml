@@ -9,9 +9,10 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Bookmark"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              Title="{x:Static localize:LocalizeString.Leagues}"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
@@ -29,110 +30,115 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <loader:TaskLoaderView
+        <StackLayout x:DataType="viewmodels:FootballBookmarkLeaguesViewModel">
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
                 TaskLoaderNotifier="{Binding BookmarkedLeaguesTaskLoaderNotifier}"
                 EmptyStateMessage="{x:Static localize:LocalizeString.No_Bookmarked_Leagues}">
-            <renderedviews:HorizontalListView
-                x:Name="lv_bookmarkedLeagues"
-                EnableDragAndDrop="True"
-                ColumnCount="1"
-                ItemHeight="67"
-                ItemSpacing="0"
-                ListLayout="Grid"
-                ItemsSource="{Binding BookmarkedLeagues}"
-                TapCommand="{Binding SelectLeagueCommand}">
-                <renderedviews:HorizontalListView.ItemTemplate>
-                    <DataTemplate>
-                        <renderedviews:DraggableViewCell
-                            x:Name="_draggableViewCell"
-                            IsDraggable="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedLeagues}}">
-                            <ContentView
-                                BackgroundColor="{StaticResource BackgroundColor_Default}">
-                                <materialui:MaterialCard
-                                    BackgroundColor="White"
-                                    CornerRadius="5"
-                                    Elevation="3"
-                                    Margin="7,4"
-                                    Padding="15,0">
-                                    <materialui:MaterialCard.Triggers>
-                                        <DataTrigger Binding="{Binding Source={x:Reference _draggableViewCell}, Path=IsDragAndDropping}"
-                                             TargetType="materialui:MaterialCard"
-                                             Value="True">
-                                            <Setter Property="BorderColor" Value="{StaticResource PrimaryColor_L}" />
-                                        </DataTrigger>
-                                    </materialui:MaterialCard.Triggers>
-                                    <StackLayout
-                                        VerticalOptions="FillAndExpand"
-                                        Orientation="Horizontal"
-                                        Spacing="15">
-                                        <ffimageloading:CachedImage
-                                            Aspect="AspectFit"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center"
-                                            HeightRequest="31"
-                                            WidthRequest="31"
-                                            DownsampleHeight="90"
-                                            DownsampleToViewSize="True"
-                                            LoadingPlaceholder="img_world.png"
-                                            ErrorPlaceholder="img_world.png"
-                                            Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                        </ffimageloading:CachedImage>
+                <renderedviews:HorizontalListView
+                    x:Name="lv_bookmarkedLeagues"
+                    EnableDragAndDrop="True"
+                    ColumnCount="1"
+                    ItemHeight="67"
+                    ItemSpacing="0"
+                    ListLayout="Grid"
+                    ItemsSource="{Binding BookmarkedLeagues}">
+                    <renderedviews:HorizontalListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FootballLeagueInfo">
+                            <renderedviews:DraggableViewCell
+                                x:Name="_draggableViewCell"
+                                IsDraggable="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedLeagues}}">
+                                <ContentView
+                                    BackgroundColor="{StaticResource BackgroundColor_Default}">
+                                    <materialui:MaterialCard
+                                        BackgroundColor="White"
+                                        CornerRadius="5"
+                                        Elevation="3"
+                                        Margin="7,4"
+                                        IsClickable="True"
+                                        ClickCommand="{Binding Path=BindingContext.SelectLeagueCommand, Source={x:Reference lv_bookmarkedLeagues}}"
+                                        ClickCommandParameter="{Binding .}"
+                                        Padding="15,0">
+                                        <materialui:MaterialCard.Triggers>
+                                            <DataTrigger Binding="{Binding Source={x:Reference _draggableViewCell}, Path=IsDragAndDropping}"
+                                                 TargetType="materialui:MaterialCard"
+                                                 Value="True">
+                                                <Setter Property="BorderColor" Value="{StaticResource PrimaryColor_L}" />
+                                            </DataTrigger>
+                                        </materialui:MaterialCard.Triggers>
                                         <StackLayout
-                                            Spacing="0"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="FillAndExpand">
-                                            <materialui:MaterialLabel
-                                                LineBreakMode="TailTruncation"
-                                                Text="{Binding LeagueName}"
-                                                TypeScale="Body1"
-                                                TextColor="{StaticResource TextColor_D}">
-                                            </materialui:MaterialLabel>
-                                            <materialui:MaterialLabel
-                                                LineBreakMode="TailTruncation"
-                                                TextColor="{StaticResource CustomGrey}"
-                                                TypeScale="Body2"
-                                                Text="{Binding CountryName}">
-                                            </materialui:MaterialLabel>
-                                        </StackLayout>
-
-                                        <StackLayout
-                                            VerticalOptions="Center"
+                                            VerticalOptions="FillAndExpand"
                                             Orientation="Horizontal"
-                                            HorizontalOptions="End"
-                                            IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedLeagues}}">
-                                            <ContentView
-                                                Padding="7"
-                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
-                                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteLeagueCommand, Source={x:Reference lv_bookmarkedLeagues}}"
-                                                effects:TapCommandEffect.TapParameter="{Binding .}">
-                                                <Image
-                                                    HeightRequest="20"
-                                                    WidthRequest="20"
-                                                    Aspect="AspectFit"
-                                                    Source="ic_delete.png"
-                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
-                                                </Image>
-                                            </ContentView>
-                                            <ContentView
-                                                Padding="7"
-                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                                                <Image
-                                                    HeightRequest="20"
-                                                    WidthRequest="20"
-                                                    Aspect="AspectFit"
-                                                    Source="ic_sort.png"
-                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
-                                                </Image>
-                                            </ContentView>
+                                            Spacing="15">
+                                            <ffimageloading:CachedImage
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                HeightRequest="31"
+                                                WidthRequest="31"
+                                                DownsampleHeight="90"
+                                                DownsampleToViewSize="True"
+                                                LoadingPlaceholder="img_world.png"
+                                                ErrorPlaceholder="img_world.png"
+                                                Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                            </ffimageloading:CachedImage>
+                                            <StackLayout
+                                                Spacing="0"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="FillAndExpand">
+                                                <materialui:MaterialLabel
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="{Binding LeagueName}"
+                                                    TypeScale="Body1"
+                                                    TextColor="{StaticResource TextColor_D}">
+                                                </materialui:MaterialLabel>
+                                                <materialui:MaterialLabel
+                                                    LineBreakMode="TailTruncation"
+                                                    TextColor="{StaticResource CustomGrey}"
+                                                    TypeScale="Body2"
+                                                    Text="{Binding CountryName}">
+                                                </materialui:MaterialLabel>
+                                            </StackLayout>
+
+                                            <StackLayout
+                                                VerticalOptions="Center"
+                                                Orientation="Horizontal"
+                                                HorizontalOptions="End"
+                                                IsVisible="{Binding Path=BindingContext.IsEditMode, Source={x:Reference lv_bookmarkedLeagues}}">
+                                                <ContentView
+                                                    Padding="7"
+                                                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                                    effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteLeagueCommand, Source={x:Reference lv_bookmarkedLeagues}}"
+                                                    effects:TapCommandEffect.TapParameter="{Binding .}">
+                                                    <Image
+                                                        HeightRequest="20"
+                                                        WidthRequest="20"
+                                                        Aspect="AspectFit"
+                                                        Source="ic_delete.png"
+                                                        effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                                    </Image>
+                                                </ContentView>
+                                                <ContentView
+                                                    Padding="7"
+                                                    effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                    <Image
+                                                        HeightRequest="20"
+                                                        WidthRequest="20"
+                                                        Aspect="AspectFit"
+                                                        Source="ic_sort.png"
+                                                        effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                                    </Image>
+                                                </ContentView>
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                                </materialui:MaterialCard>
-                            </ContentView>
-                        </renderedviews:DraggableViewCell>
-                    </DataTemplate>
-                </renderedviews:HorizontalListView.ItemTemplate>
-            </renderedviews:HorizontalListView>
-        </loader:TaskLoaderView>
+                                    </materialui:MaterialCard>
+                                </ContentView>
+                            </renderedviews:DraggableViewCell>
+                        </DataTemplate>
+                    </renderedviews:HorizontalListView.ItemTemplate>
+                </renderedviews:HorizontalListView>
+            </loader:TaskLoaderView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

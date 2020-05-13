@@ -5,15 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League.Standings"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              x:Class="PoseSportsPredict.Views.Football.League.Standings.FootballStandingsView">
     <ContentView.Content>
-        <StackLayout Margin="0">
+        <StackLayout
+            Margin="0"
+            x:DataType="viewmodels:FootballStandingsViewModel">
             <StackLayout
                 Padding="10,0"
                 Spacing="20"
@@ -28,7 +31,7 @@
                     TextColor="{StaticResource TextColor_D}"
                     DataSource="{Binding Ddl_Groups}">
                     <combobox:SfComboBox.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="x:String">
                             <StackLayout
                                 Padding="10,5"
                                 Orientation="Horizontal">
@@ -136,13 +139,13 @@
                             ColumnSpacing="0"
                             IsVisible="{Binding IsViewForm, Converter={StaticResource inverseBoolConverter}}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="0.48*" />
+                                <ColumnDefinition Width="0.48*" />
+                                <ColumnDefinition Width="0.48*" />
+                                <ColumnDefinition Width="0.48*" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="0.5*" />
-                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="0.48*" />
+                                <ColumnDefinition Width="0.48*" />
                             </Grid.ColumnDefinitions>
                             <materialui:MaterialLabel
                                 Grid.Column="0"
@@ -235,10 +238,10 @@
                             Spacing="0"
                             BindableLayout.ItemsSource="{Binding StandingsInfos}">
                             <BindableLayout.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="models:FootballStandingsInfo">
                                     <StackLayout Spacing="0">
                                         <StackLayout
-                                            HeightRequest="49"
+                                            HeightRequest="55"
                                             Spacing="0"
                                             HorizontalOptions="Center"
                                             Orientation="Horizontal">
@@ -286,10 +289,10 @@
                             Spacing="0"
                             BindableLayout.ItemsSource="{Binding StandingsInfos}">
                             <BindableLayout.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="models:FootballStandingsInfo">
                                     <StackLayout Spacing="0">
                                         <StackLayout
-                                            HeightRequest="49"
+                                            HeightRequest="55"
                                             Orientation="Horizontal"
                                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TeamNameClickCommand, Source={x:Reference _gd_leagueTable}}"
                                             effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -334,21 +337,21 @@
                             BindableLayout.ItemsSource="{Binding StandingsInfos}"
                             IsVisible="{Binding Path=BindingContext.IsViewForm, Source={x:Reference _gd_leagueTable}, Converter={StaticResource inverseBoolConverter}}">
                             <BindableLayout.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="models:FootballStandingsInfo">
                                     <StackLayout Spacing="0">
                                         <StackLayout
-                                            HeightRequest="49"
+                                            HeightRequest="55"
                                             Orientation="Horizontal"
                                             IsVisible="{Binding Path=BindingContext.IsViewForm, Source={x:Reference _gd_leagueTable}, Converter={StaticResource inverseBoolConverter}}">
                                             <Grid ColumnSpacing="0">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.5*" />
-                                                    <ColumnDefinition Width="0.5*" />
-                                                    <ColumnDefinition Width="0.5*" />
-                                                    <ColumnDefinition Width="0.5*" />
+                                                    <ColumnDefinition Width="0.48*" />
+                                                    <ColumnDefinition Width="0.48*" />
+                                                    <ColumnDefinition Width="0.48*" />
+                                                    <ColumnDefinition Width="0.48*" />
                                                     <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="0.5*" />
-                                                    <ColumnDefinition Width="0.5*" />
+                                                    <ColumnDefinition Width="0.48*" />
+                                                    <ColumnDefinition Width="0.48*" />
                                                 </Grid.ColumnDefinitions>
                                                 <materialui:MaterialLabel
                                                     Grid.Column="0"
@@ -384,7 +387,7 @@
                                                 </materialui:MaterialLabel>
                                                 <materialui:MaterialLabel
                                                     Grid.Column="4"
-                                                    WidthRequest="58"
+                                                    WidthRequest="59"
                                                     VerticalTextAlignment="Center"
                                                     HorizontalTextAlignment="Center"
                                                     TypeScale="Body2"
@@ -432,11 +435,11 @@
                             IsVisible="{Binding Path=BindingContext.IsViewForm, Source={x:Reference _gd_leagueTable}}"
                             BindableLayout.ItemsSource="{Binding StandingsInfos}">
                             <BindableLayout.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="models:FootballStandingsInfo">
                                     <StackLayout Spacing="0">
                                         <StackLayout
                                             Margin="7,0"
-                                            HeightRequest="49"
+                                            HeightRequest="55"
                                             Orientation="Horizontal"
                                             HorizontalOptions="Center">
                                             <StackLayout
@@ -444,7 +447,7 @@
                                                 Orientation="Horizontal"
                                                 BindableLayout.ItemsSource="{Binding Form}">
                                                 <BindableLayout.ItemTemplate>
-                                                    <DataTemplate>
+                                                    <DataTemplate x:DataType="models:FootballFormInfo">
                                                         <StackLayout
                                                             IsVisible="{Binding Path=BindingContext.IsViewForm, Source={x:Reference _gd_leagueTable}}"
                                                             Orientation="Horizontal">
@@ -486,7 +489,7 @@
                         Margin="10,7"
                         BindableLayout.ItemsSource="{Binding StandingsDescription}">
                         <BindableLayout.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="models:FootballStandingsDescription">
                                 <StackLayout Orientation="Horizontal" Spacing="10">
                                     <materialui:MaterialCard
                                         Margin="0"

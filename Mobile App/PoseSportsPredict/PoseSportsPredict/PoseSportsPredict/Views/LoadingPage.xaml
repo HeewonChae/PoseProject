@@ -4,9 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="PoseSportsPredict.Views.LoadingPage"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
              BackgroundColor="White">
     <ContentPage.Content>
-        <Grid>
+        <Grid x:DataType="viewmodels:LoadingViewModel">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -18,7 +19,7 @@
                 Aspect="AspectFit"
                 HorizontalOptions="Center"
                 WidthRequest="314"
-                Source="img_poseidon_logo">
+                Source="img_poseidon_logo.png">
             </Image>
             <ActivityIndicator
                 x:Name="_loadingIndicator"

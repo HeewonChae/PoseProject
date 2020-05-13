@@ -99,12 +99,14 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public ICommand SelectSearchKeywordCommand { get => new RelayCommand<FootballRecentSearch>(e => SelectSearchKeyword(e)); }
 
-        private void SelectSearchKeyword(FootballRecentSearch item)
+        private async void SelectSearchKeyword(FootballRecentSearch item)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
+
+            await InsertSearchKeywordAsync(item.Keyword, item.Logo);
 
             var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
             searchBar.Text = item.PrimaryKey;

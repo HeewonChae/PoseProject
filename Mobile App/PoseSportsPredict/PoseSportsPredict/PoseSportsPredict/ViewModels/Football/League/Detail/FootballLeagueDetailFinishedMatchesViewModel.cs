@@ -55,11 +55,13 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Fields
 
+        private DateTime _lastUpdateTime;
         private bool _alarmEditMode;
         private FootballLeagueInfo _leagueInfo;
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _matchesTaskLoaderNotifier;
         public List<FootballMatchInfo> _matchList;
         private ObservableList<FootballMatchListViewModel> _matchListViewModels;
+        private bool _isListViewRefrashing;
 
         #endregion Fields
 
@@ -67,6 +69,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
         public ObservableList<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
+        public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
 
         #endregion Properties
 
@@ -82,6 +85,24 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             groupInfo.Expanded = !groupInfo.Expanded;
 
             MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
+        }
+
+        public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }
+
+        private async void PullToRefresh()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+
+            if (timeSpan.TotalMinutes > 5) // 5분 마다 갱신
+                await InitMatchDatas();
+
+            SetIsBusy(false);
+            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands
@@ -206,6 +227,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             }
 
             UpdateMatcheGroups(_matchList);
+
+            _lastUpdateTime = DateTime.UtcNow;
 
             SetIsBusy(false);
 

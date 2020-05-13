@@ -7,16 +7,14 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
-             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.League.Standings"
              xmlns:recentform="clr-namespace:PoseSportsPredict.Views.Football.Match.RecentForm"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOverview"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout x:DataType="viewmodels:FootballMatchDetailOverviewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -576,7 +574,7 @@
                             CornerRadius="5">
                             <StackLayout>
                                 <materialui:MaterialLabel
-                                Margin="0"
+                                Margin="0,0,0,2"
                                 MaxLines="1"
                                 LineBreakMode="TailTruncation"
                                 TypeScale="Subtitle2"
