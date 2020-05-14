@@ -90,6 +90,7 @@
     <Compile Include="Utility\Alarm.cs" />
     <Compile Include="Utility\Collection\MaxHeap.cs" />
     <Compile Include="Utility\Collection\MinHeap.cs" />
+    <Compile Include="Utility\Comparer\EnumComparer.cs" />
     <Compile Include="Utility\Pool\IPoolable.cs" />
     <Compile Include="Utility\LogicTime.cs" />
     <Compile Include="Utility\Pool\LightPool.cs" />

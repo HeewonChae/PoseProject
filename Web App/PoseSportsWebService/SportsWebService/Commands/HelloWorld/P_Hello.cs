@@ -1,6 +1,7 @@
 ﻿using PosePacket;
 using PosePacket.Service.HelloWorld;
 using SportsWebService.Infrastructure;
+using SportsWebService.Logics;
 using SportsWebService.Utilities;
 using System.ComponentModel;
 using System.ServiceModel;

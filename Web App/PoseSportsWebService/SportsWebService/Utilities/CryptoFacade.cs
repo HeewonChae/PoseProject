@@ -2,6 +2,7 @@
 using PoseCrypto._AES;
 using PoseCrypto._RSA;
 using SportsWebService.Authentication;
+using SportsWebService.Logics;
 using System;
 using System.Collections.Generic;
 using System.Configuration;

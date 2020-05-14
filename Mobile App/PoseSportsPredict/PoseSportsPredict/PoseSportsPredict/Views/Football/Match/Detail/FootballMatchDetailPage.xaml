@@ -38,7 +38,8 @@
                     </pancakeview:GradientStopCollection>
                 </pancakeview:PancakeView.BackgroundGradientStops>
 
-                <Grid>
+                <Grid
+                    RowSpacing="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -140,8 +141,8 @@
                                 Aspect="AspectFit"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
-                                HeightRequest="45"
-                                WidthRequest="45"
+                                HeightRequest="43"
+                                WidthRequest="43"
                                 DownsampleHeight="90"
                                 DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
@@ -259,8 +260,8 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HeightRequest="45"
-                                WidthRequest="45"
+                                HeightRequest="43"
+                                WidthRequest="43"
                                 DownsampleHeight="90"
                                 DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
@@ -291,8 +292,8 @@
                     <tabs:TabHostView
                         Grid.Row="2"
                         TabType="Fixed"
-                        HeightRequest="37"
-                        Margin="0,-9,0,0"
+                        HeightRequest="40"
+                        Margin="0,-6,0,0"
                         SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
                         <tabs:TabHostView.Tabs>
                             <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" />

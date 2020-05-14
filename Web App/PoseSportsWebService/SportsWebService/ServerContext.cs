@@ -1,6 +1,7 @@
 ﻿using LogicCore.Utility;
 using PosePacket.Header;
 using SportsWebService.Authentication;
+using SportsWebService.Logics;
 using SportsWebService.Utilities;
 using System.Net;
 using System.ServiceModel;

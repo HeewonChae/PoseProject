@@ -17,6 +17,6 @@ namespace PosePacket.Service.Football
     public class O_GET_TEAM_OVERVIEW
     {
         [Key(0)]
-        public IDictionary<FootballLeagueDetail, IEnumerable<FootballFixtureDetail>> FixtureDetailsByLeague { get; set; }
+        public FootballFixtureDetail[] FixtureDetails { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace SportsWebService.WebBehavior.Server.ErrorHandler
         /// <returns>처리 여부</returns>
         public bool HandleError(Exception exception)
         {
-            Utilities.ErrorHandler.WriteErrorLog(exception);
+            Logics.ErrorHandler.WriteErrorLog(exception);
             return true;
         }
 

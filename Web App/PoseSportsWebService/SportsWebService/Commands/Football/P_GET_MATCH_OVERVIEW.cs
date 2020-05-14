@@ -2,6 +2,8 @@
 using PosePacket;
 using PosePacket.Service.Football;
 using SportsWebService.Infrastructure;
+using SportsWebService.Logics;
+using SportsWebService.Logics.Comparer;
 using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
@@ -61,28 +63,24 @@ namespace SportsWebService.Commands.Football
             var footballFixtureDetailConverter = Singleton.Get<FootballFixtureDetailConverter>();
             var footballStandingsDetailConverter = Singleton.Get<FootballStandingsDetailConverter>();
 
-            var homeFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
+            var fixtureDetails = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output.HomeRecntFixtures)
             {
-                homeFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
+                fixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
-
-            var AwayFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output.AwayRecentFixtures)
             {
-                AwayFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
+                fixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
 
-            var league_homeFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
+            var league_FixtureDetails = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output.League_HomeRecentFixtures)
             {
-                league_homeFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
+                league_FixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
-
-            var league_AwayFixtureDetails = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output.League_AwayRecentFixtures)
             {
-                league_AwayFixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
+                league_FixtureDetails.Add(footballFixtureDetailConverter.Convert(dbFixtureDetail));
             }
 
             var standingsDetail = new List<PacketModels.FootballStandingsDetail>();
@@ -91,13 +89,15 @@ namespace SportsWebService.Commands.Football
                 standingsDetail.Add(footballStandingsDetailConverter.Convert(dbStandingsDetail));
             }
 
+            // 중복 경기 삭제
+            fixtureDetails.Distinct(Singleton.Get<FootballFixtureEqualityComparer>());
+            league_FixtureDetails.Distinct(Singleton.Get<FootballFixtureEqualityComparer>());
+
             return new O_GET_MATCH_OVERVIEW
             {
-                HomeRecentFixtures = homeFixtureDetails,
-                AwayRecentFixtures = AwayFixtureDetails,
-                League_HomeRecentFixtures = league_homeFixtureDetails,
-                League_AwayRecentFixtures = league_AwayFixtureDetails,
-                StandingsDetails = standingsDetail,
+                RecentFixtures = fixtureDetails.ToArray(),
+                League_RecentFixtures = league_FixtureDetails.ToArray(),
+                StandingsDetails = standingsDetail.ToArray(),
             };
         }
     }

@@ -139,26 +139,26 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 throw new Exception(LocalizeString.Occur_Error);
 
             // All Form
-            var homeRecentMatches = new List<FootballMatchInfo>();
-            foreach (var fixture in server_result.HomeRecentFixtures)
+            var allRecentMatches = new List<FootballMatchInfo>();
+            foreach (var fixture in server_result.RecentFixtures)
             {
-                homeRecentMatches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
+                allRecentMatches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
 
-            var awayRecentMatches = new List<FootballMatchInfo>();
-            foreach (var fixture in server_result.AwayRecentFixtures)
-            {
-                awayRecentMatches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
-            }
+            var homeRecentMatches = allRecentMatches.Where(elem =>
+            elem.HomeTeamId == _matchInfo.HomeTeamId || elem.AwayTeamId == _matchInfo.HomeTeamId);
+
+            var awayRecentMatches = allRecentMatches.Where(elem =>
+            elem.HomeTeamId == _matchInfo.AwayTeamId || elem.AwayTeamId == _matchInfo.AwayTeamId);
 
             // 기본정보 (평균 득실점, 회복기간)
             MatchStatistics = new FootballMatchStatistics
             {
                 HomeTeamStatistics = ShinyHost.Resolve<FixtureDetailToTeamStatistics>()
-                .Convert(server_result.League_HomeRecentFixtures, MatchInfo.HomeTeamId, 6, 3),
+                .Convert(server_result.League_RecentFixtures, MatchInfo.HomeTeamId, 6, 3),
 
                 AwayTeamStatistics = ShinyHost.Resolve<FixtureDetailToTeamStatistics>()
-                .Convert(server_result.League_AwayRecentFixtures, MatchInfo.AwayTeamId, 6, 3),
+                .Convert(server_result.League_RecentFixtures, MatchInfo.AwayTeamId, 6, 3),
 
                 HomeRestPeriod = (MatchInfo.MatchTime.Date - (homeRecentMatches.FirstOrDefault()?.MatchTime.Date ?? MatchInfo.MatchTime.Date)).Days,
                 AwayRestPeriod = (MatchInfo.MatchTime.Date - (awayRecentMatches.FirstOrDefault()?.MatchTime.Date ?? MatchInfo.MatchTime.Date)).Days,
@@ -166,7 +166,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             // RecentForm
             RecentFormViewModel = ShinyHost.Resolve<FootballRecentFormViewModel>();
-            RecentFormViewModel.SetMembers(homeRecentMatches, _matchInfo.HomeTeamId, awayRecentMatches, _matchInfo.AwayTeamId);
+            RecentFormViewModel.SetMembers(homeRecentMatches.ToList(), _matchInfo.HomeTeamId, awayRecentMatches.ToList(), _matchInfo.AwayTeamId);
 
             // League Standings Table
             List<FootballStandingsInfo> standingsInfos = new List<FootballStandingsInfo>();

@@ -9,7 +9,7 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
-             BackgroundColor="White"
+             BackgroundColor="{StaticResource TransparentPrimary}"
              x:Class="PoseSportsPredict.Views.Football.League.FootballLeagueListView">
     <ContentView.Content>
         <StackLayout
@@ -20,10 +20,9 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate x:DataType="models:FootballLeagueInfo">
                     <StackLayout
-                        Margin="20,0"
                         Orientation="Horizontal">
                         <StackLayout
-                            Padding="18,15"
+                            Padding="38,15"
                             Spacing="15"
                             Orientation="Horizontal"
                             HorizontalOptions="FillAndExpand"
@@ -51,7 +50,8 @@
                             </materialui:MaterialLabel>
                         </StackLayout>
                         <ContentView
-                            Padding="7"
+                            Margin="0,0,18,0"
+                            Padding="9"
                             HorizontalOptions="End"
                             VerticalOptions="Center"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_leagues}}"

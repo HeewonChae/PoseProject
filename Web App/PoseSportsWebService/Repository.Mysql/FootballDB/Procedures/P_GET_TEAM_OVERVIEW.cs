@@ -13,8 +13,7 @@ namespace Repository.Mysql.FootballDB.Procedures
     public class P_GET_TEAM_OVERVIEW : MysqlQuery<P_GET_TEAM_OVERVIEW.Input, P_GET_TEAM_OVERVIEW.Output>
     {
         public string ParticipatingLeaguesQueryString;
-        public string HomeFixturesQueryString;
-        public string AwayFixturesQueryString;
+        public string FixturesQueryString;
 
         public struct Input
         {
@@ -23,7 +22,7 @@ namespace Repository.Mysql.FootballDB.Procedures
 
         public class Output
         {
-            public IDictionary<DB_FootballLeagueDetail, IEnumerable<DB_FootballFixtureDetail>> DB_FixtureDetailsByLeague { get; set; }
+            public List<DB_FootballFixtureDetail> DB_FixtureDetails { get; set; }
 
             public int Result { get; set; }
         }
@@ -45,13 +44,9 @@ namespace Repository.Mysql.FootballDB.Procedures
                 $"WHERE (f.{nameof(Fixture.home_team_id)} = {_input.TeamId} OR f.{nameof(Fixture.away_team_id)} = {_input.TeamId}) AND l.{nameof(League.is_current)} = 1 " +
                 $"GROUP BY l.{nameof(League.id)};";
 
-            HomeFixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
-                $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND f.{nameof(Fixture.home_team_id)} = @TeamId AND f.{nameof(Fixture.is_completed)} = 1 " +
-                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 6";
-
-            AwayFixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
-                $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND f.{nameof(Fixture.away_team_id)} = @TeamId AND f.{nameof(Fixture.is_completed)} = 1 " +
-                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 6";
+            FixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
+                $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND ( f.{nameof(Fixture.home_team_id)} = {_input.TeamId} OR  f.{nameof(Fixture.away_team_id)} = {_input.TeamId} ) AND f.{nameof(Fixture.is_completed)} = 1 " +
+                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 18";
         }
 
         public override P_GET_TEAM_OVERVIEW.Output OnQuery()
@@ -62,7 +57,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                     null,
                     (Contexts.FootballDB footballDB) =>
                     {
-                        _output.DB_FixtureDetailsByLeague = new Dictionary<DB_FootballLeagueDetail, IEnumerable<DB_FootballFixtureDetail>>();
+                        _output.DB_FixtureDetails = new List<DB_FootballFixtureDetail>();
 
                         var leagueDetails = footballDB.Query<DB_FootballLeagueDetail>(ParticipatingLeaguesQueryString).ToList();
                         if (leagueDetails == null || leagueDetails.Count() == 0)
@@ -85,10 +80,8 @@ namespace Repository.Mysql.FootballDB.Procedures
 
                         foreach (var league in leagues)
                         {
-                            var homeFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(HomeFixturesQueryString, new { LeagueId = league.Id, _input.TeamId });
-                            var awayFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(AwayFixturesQueryString, new { LeagueId = league.Id, _input.TeamId });
-
-                            _output.DB_FixtureDetailsByLeague.Add(league, homeFixtureDetails.Concat(awayFixtureDetails));
+                            var homeFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(FixturesQueryString, new { LeagueId = league.Id });
+                            _output.DB_FixtureDetails.AddRange(homeFixtureDetails);
                         }
                     },
                     this.OnError);

@@ -15,6 +15,7 @@ namespace SportsWebService.Commands.Football
     using SportsWebService.Utilities;
     using LogicCore.Utility;
     using SportsWebService.Logics.Converters;
+    using SportsWebService.Logics;
 
     [WebModelType(InputType = typeof(I_GET_MATCH_H2H), OutputType = typeof(O_GET_MATCH_H2H))]
     public static class P_GET_MATCH_H2H
@@ -69,7 +70,7 @@ namespace SportsWebService.Commands.Football
 
             return new O_GET_MATCH_H2H
             {
-                H2HFixtures = fixtureDetails,
+                H2HFixtures = fixtureDetails.ToArray(),
             };
         }
     }

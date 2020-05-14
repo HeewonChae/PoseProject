@@ -229,6 +229,7 @@
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_H2H.cs" />
+    <Compile Include="Logics\Comparer\FootballFixtureEqualityComparer.cs" />
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballLeagueDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
@@ -252,7 +253,7 @@
     </Compile>
     <Compile Include="Services\Contract\IFootball.cs" />
     <Compile Include="Utilities\CryptoFacade.cs" />
-    <Compile Include="Utilities\ErrorHandler.cs" />
+    <Compile Include="Logics\ErrorHandler.cs" />
     <Compile Include="Logics\TableLoader.cs" />
     <Compile Include="Infrastructure\WebModelTypeAttribute.cs" />
     <Compile Include="Utilities\RawContentTypeMapper.cs" />

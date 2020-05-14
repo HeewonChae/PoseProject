@@ -38,7 +38,8 @@
                     </pancakeview:GradientStopCollection>
                 </pancakeview:PancakeView.BackgroundGradientStops>
 
-                <Grid>
+                <Grid
+                    RowSpacing="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -176,9 +177,8 @@
                     <tabs:TabHostView
                         Grid.Row="2"
                         TabType="Fixed"
-                        HeightRequest="43"
-                        Margin="0,-7,0,0"
-                        ShadowType="Bottom"
+                        HeightRequest="40"
+                        Margin="0,-6,0,0"
                         SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
                         <tabs:TabHostView.Tabs>
                             <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" />

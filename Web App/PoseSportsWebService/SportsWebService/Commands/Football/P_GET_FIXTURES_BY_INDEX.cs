@@ -2,6 +2,7 @@
 using PosePacket;
 using PosePacket.Service.Football;
 using SportsWebService.Infrastructure;
+using SportsWebService.Logics;
 using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
@@ -51,16 +52,13 @@ namespace SportsWebService.Commands.Football
             var fixtureDetails = new List<PacketModels.FootballFixtureDetail>();
             foreach (var dbFixtureDetail in db_output)
             {
-                if (dbFixtureDetail == null)
-                    continue;
-
                 var fixtureDetail = Singleton.Get<FootballFixtureDetailConverter>().Convert(dbFixtureDetail);
                 fixtureDetails.Add(fixtureDetail);
             }
 
             return new O_GET_FIXTURES_BY_INDEX
             {
-                Fixtures = fixtureDetails,
+                Fixtures = fixtureDetails.ToArray(),
             };
         }
     }

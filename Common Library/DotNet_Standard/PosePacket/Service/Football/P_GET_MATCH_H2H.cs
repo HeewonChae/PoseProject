@@ -23,6 +23,6 @@ namespace PosePacket.Service.Football
     public class O_GET_MATCH_H2H
     {
         [Key(0)]
-        public List<FootballFixtureDetail> H2HFixtures { get; set; }
+        public FootballFixtureDetail[] H2HFixtures { get; set; }
     }
 }

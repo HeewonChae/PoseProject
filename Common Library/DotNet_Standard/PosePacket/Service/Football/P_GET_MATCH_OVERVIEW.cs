@@ -17,18 +17,12 @@ namespace PosePacket.Service.Football
     public class O_GET_MATCH_OVERVIEW
     {
         [Key(0)]
-        public List<FootballFixtureDetail> HomeRecentFixtures { get; set; }
+        public FootballFixtureDetail[] RecentFixtures { get; set; }
 
         [Key(1)]
-        public List<FootballFixtureDetail> AwayRecentFixtures { get; set; }
+        public FootballFixtureDetail[] League_RecentFixtures { get; set; }
 
         [Key(2)]
-        public List<FootballFixtureDetail> League_HomeRecentFixtures { get; set; }
-
-        [Key(3)]
-        public List<FootballFixtureDetail> League_AwayRecentFixtures { get; set; }
-
-        [Key(4)]
-        public List<FootballStandingsDetail> StandingsDetails { get; set; }
+        public FootballStandingsDetail[] StandingsDetails { get; set; }
     }
 }

@@ -30,7 +30,9 @@
         <Color x:Key="TextColor_D">#212121</Color>
         <Color x:Key="TransparentWhite">#7dffffff</Color>
         <Color x:Key="TransparentBlack">#7d000000</Color>
-        <Color x:Key="ChartBackground">#130069db</Color>
+        <Color x:Key="TransparentPrimary">#120091ea</Color>
+        <Color x:Key="ChartBackground">#120069db</Color>
+
         <Color x:Key="DefaultButtonColor">#15000000</Color>
         <Color x:Key="WinColor">#6cc72a</Color>
         <Color x:Key="LoseColor">#d95d1c</Color>

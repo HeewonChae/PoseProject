@@ -290,7 +290,7 @@
                                 HorizontalTextAlignment="Center"
                                 VerticalTextAlignment="Center"
                                 TextColor="{StaticResource TextColor_D}"
-                                Text="{x:Static localize:LocalizeString.Record}">
+                                Text="{x:Static localize:LocalizeString.Recent_Record}">
                             </materialui:MaterialLabel>
                             <materialui:MaterialLabel
                                 Grid.Column="2"

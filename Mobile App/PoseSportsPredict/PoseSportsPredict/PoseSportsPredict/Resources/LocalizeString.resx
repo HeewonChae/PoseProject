@@ -188,10 +188,10 @@
     <value>Please click 'BACK' again to exit.</value>
   </data>
   <data name="Scheduled_Matches" xml:space="preserve">
-    <value>Scheduled Matches</value>
+    <value>Sched Matches</value>
   </data>
   <data name="Finished_Matches" xml:space="preserve">
-    <value>Finished Matches</value>
+    <value>Fined Matches</value>
   </data>
   <data name="Standings" xml:space="preserve">
     <value>Standings</value>

@@ -149,29 +149,26 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
-            if (server_result.FixtureDetailsByLeague.Count == 0)
+            if (server_result.FixtureDetails.Length == 0)
             {
                 SetIsBusy(false);
                 return null;
             }
 
             _matches = new List<FootballMatchInfo>();
-            var matchesByLeague = new Dictionary<FootballLeagueInfo, List<FootballMatchInfo>>();
-            foreach (var keyValue in server_result.FixtureDetailsByLeague)
+            foreach (var fixture in server_result.FixtureDetails)
             {
-                var matches = new List<FootballMatchInfo>();
-                foreach (var fixture in keyValue.Value)
-                {
-                    matches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
-                }
-
-                var league = ShinyHost.Resolve<LeagueDetailToLeagueInfo>().Convert(keyValue.Key);
-                matchesByLeague.Add(league, matches.OrderByDescending(elem => elem.MatchTime).ToList());
-
-                _matches.AddRange(matches);
+                _matches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
 
-            matchesByLeague = matchesByLeague.OrderByDescending(elem => $"{elem.Key.LeagueType}:{elem.Key.CountryName}").ToDictionary(elem => elem.Key, elem => elem.Value);
+            var matchesByleagues = _matches.GroupBy(elem => $"{elem.LeagueType}:{elem.LeagueName}:{elem.League_CountryName}");
+            var orderedMatchGroups = matchesByleagues.OrderByDescending(elem => elem.Key);
+            var matchesByLeague = new Dictionary<FootballLeagueInfo, List<FootballMatchInfo>>();
+            foreach (var orderedMatchGroup in orderedMatchGroups)
+            {
+                var leagueInfo = ShinyHost.Resolve<MatchInfoToLeagueInfo>().Convert(orderedMatchGroup.First());
+                matchesByLeague.Add(leagueInfo, orderedMatchGroup.OrderByDescending(elem => elem.MatchTime).ToList());
+            }
 
             // 참가중인 리그
             ParticipatingLeagues = new ObservableList<ParticipatingLeagueInfo>();

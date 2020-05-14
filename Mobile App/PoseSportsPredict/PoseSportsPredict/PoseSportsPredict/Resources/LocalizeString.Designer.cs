@@ -295,7 +295,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Finished Matches.
+        ///   Looks up a localized string similar to Fined Matches.
         /// </summary>
         public static string Finished_Matches {
             get {
@@ -790,7 +790,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scheduled Matches.
+        ///   Looks up a localized string similar to Sched Matches.
         /// </summary>
         public static string Scheduled_Matches {
             get {

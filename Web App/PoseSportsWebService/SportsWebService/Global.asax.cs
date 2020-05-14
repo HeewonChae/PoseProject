@@ -1,5 +1,6 @@
 ﻿using LogicCore.Utility;
 using SportsWebService.Logics;
+using SportsWebService.Logics.Comparer;
 using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
@@ -27,6 +28,9 @@ namespace SportsWebService
             Singleton.Register<FootballStandingsDetailConverter>();
             Singleton.Register<FootballLeagueDetailConverter>();
             Singleton.Register<FootballTeamDetailConverter>();
+
+            // Register Comparer
+            Singleton.Register<FootballFixtureEqualityComparer>();
 
             // Load Table
             string tableRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data");

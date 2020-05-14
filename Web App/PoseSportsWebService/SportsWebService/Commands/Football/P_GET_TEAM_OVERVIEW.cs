@@ -3,6 +3,7 @@ using PosePacket;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models;
 using SportsWebService.Infrastructure;
+using SportsWebService.Logics;
 using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
@@ -60,26 +61,17 @@ namespace SportsWebService.Commands.Football
         private static O_GET_TEAM_OVERVIEW ConvertOutput(FootballDB.Procedures.P_GET_TEAM_OVERVIEW.Output db_output)
         {
             var footballFixtureDetailConverter = Singleton.Get<FootballFixtureDetailConverter>();
-            var footballLeagueDetailConverter = Singleton.Get<FootballLeagueDetailConverter>();
 
-            var fixtureDetailsByLeague = new Dictionary<FootballLeagueDetail, IEnumerable<FootballFixtureDetail>>();
+            var fixtureDetails = new List<FootballFixtureDetail>();
 
-            foreach (var keyValue in db_output.DB_FixtureDetailsByLeague)
+            foreach (var fixtureDetail in db_output.DB_FixtureDetails)
             {
-                var leagueDetail = footballLeagueDetailConverter.Convert(keyValue.Key);
-
-                var fixtureDetails = new List<FootballFixtureDetail>();
-                foreach (var db_fixture in keyValue.Value)
-                {
-                    fixtureDetails.Add(footballFixtureDetailConverter.Convert(db_fixture));
-                }
-
-                fixtureDetailsByLeague.Add(leagueDetail, fixtureDetails);
+                fixtureDetails.Add(footballFixtureDetailConverter.Convert(fixtureDetail));
             }
 
             return new O_GET_TEAM_OVERVIEW
             {
-                FixtureDetailsByLeague = fixtureDetailsByLeague,
+                FixtureDetails = fixtureDetails.ToArray(),
             };
         }
     }

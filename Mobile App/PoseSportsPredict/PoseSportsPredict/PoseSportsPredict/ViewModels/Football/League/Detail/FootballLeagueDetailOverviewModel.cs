@@ -142,7 +142,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             // 참가중인 팀
             var teamInfos = new List<FootballTeamInfo>();
-            if (server_result.ParticipatingTeams.Count > 0)
+            if (server_result.ParticipatingTeams.Length > 0)
             {
                 foreach (var teamDetail in server_result.ParticipatingTeams)
                 {

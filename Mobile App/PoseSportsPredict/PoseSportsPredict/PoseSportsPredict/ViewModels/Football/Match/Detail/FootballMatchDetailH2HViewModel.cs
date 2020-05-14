@@ -107,7 +107,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
-            if (server_result.H2HFixtures.Count == 0)
+            if (server_result.H2HFixtures.Length == 0)
             {
                 SetIsBusy(false);
                 return null;

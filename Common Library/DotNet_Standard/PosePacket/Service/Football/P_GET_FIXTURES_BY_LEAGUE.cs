@@ -24,6 +24,6 @@ namespace PosePacket.Service.Football
     public class O_GET_FIXTURES_BY_LEAGUE
     {
         [Key(0)]
-        public List<FootballFixtureDetail> Fixtures { get; set; }
+        public FootballFixtureDetail[] Fixtures { get; set; }
     }
 }

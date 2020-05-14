@@ -23,9 +23,9 @@ namespace PosePacket.Service.Football
         public FootballLeagueDetail LeagueDetail { get; set; }
 
         [Key(1)]
-        public List<FootballTeamDetail> ParticipatingTeams { get; set; }
+        public FootballTeamDetail[] ParticipatingTeams { get; set; }
 
         [Key(2)]
-        public List<FootballStandingsDetail> StandingsDetails { get; set; }
+        public FootballStandingsDetail[] StandingsDetails { get; set; }
     }
 }

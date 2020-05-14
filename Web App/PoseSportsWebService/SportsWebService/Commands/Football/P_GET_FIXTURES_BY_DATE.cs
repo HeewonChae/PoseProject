@@ -4,6 +4,7 @@ using PosePacket;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using SportsWebService.Infrastructure;
+using SportsWebService.Logics;
 using SportsWebService.Logics.Converters;
 using SportsWebService.Utilities;
 using System;
@@ -58,7 +59,7 @@ namespace SportsWebService.Commands.Football
 
             return new O_GET_FIXTURES_BY_DATE
             {
-                Fixtures = fixtures,
+                Fixtures = fixtures.ToArray(),
             };
         }
     }

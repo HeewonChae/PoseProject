@@ -16,7 +16,7 @@
     <ContentView.Content>
         <StackLayout
             x:DataType="viewmodels:FootballRecentFormViewModel"
-            Spacing="13">
+            Spacing="17">
             <!--Team Selector-->
             <Grid
                 IsVisible="{Binding IsTeamSelectorVisible}">
