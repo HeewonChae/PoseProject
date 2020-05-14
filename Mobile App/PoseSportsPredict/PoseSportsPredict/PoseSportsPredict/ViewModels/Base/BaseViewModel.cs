@@ -32,7 +32,7 @@ namespace PoseSportsPredict.ViewModels.Base
 
         #region Proterties
 
-        public bool IsBusy { get => _isBusy; set => SetValue(ref _isBusy, value); }
+        public bool IsBusy { get => _isBusy; private set => SetValue(ref _isBusy, value); }
 
         #endregion Proterties
 

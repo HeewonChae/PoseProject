@@ -87,14 +87,12 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         private async void TouchBackButton()
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
 
             await PageSwitcher.PopPopupAsync();
-
-            SetIsBusy(false);
         }
 
         public ICommand SelectSearchKeywordCommand { get => new RelayCommand<FootballRecentSearch>(e => SelectSearchKeyword(e)); }

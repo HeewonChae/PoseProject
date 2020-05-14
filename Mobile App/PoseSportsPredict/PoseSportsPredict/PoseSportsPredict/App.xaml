@@ -17,7 +17,9 @@
         <converters:ExceptionToImageSourceConverter x:Key="exceptionToImageSourceConverter" />
         <converters:BoolToDoubleConverter x:Key="boolToDoubleConverter" />
         <converters:DateToStringConverter x:Key="dateToStringConverter" />
-        <converters:IsFootballMatchStartedConverter x:Key="isFootballMatchStartedConverter" />
+        <converters:IsMatchNotStartedConverter x:Key="isMatchNotStartedConverter" />
+        <converters:IsMatchStartedConverter x:Key="isMatchStartedConverter" />
+        <converters:IsFootballMatchOngoingConverter x:Key="isFootballMatchOngoingConverter" />
         <converters:FootballMatchStatusToStringConverter x:Key="footballMatchStatusToStringConverter" />
         <converters:InverseBoolConverter x:Key="inverseBoolConverter" />
         <converters:MatchAlarmColorConverter x:Key="matchAlarmColorConverter" />
@@ -25,17 +27,6 @@
         <converters:MatchResultToStringConverter x:Key="matchResultToStringConverter" />
         <converters:MatchResultToColorConverter x:Key="matchResultToColorConverter" />
         <converters:NullValueBoolConverter x:Key="nullValueBoolConverter" />
-
-        <Color x:Key="TextColor_L">#fafafa</Color>
-        <Color x:Key="TextColor_D">#212121</Color>
-        <Color x:Key="TransparentWhite">#7dffffff</Color>
-        <Color x:Key="TransparentBlack">#7d000000</Color>
-        <Color x:Key="TransparentPrimary">#120091ea</Color>
-        <Color x:Key="ChartBackground">#120069db</Color>
-
-        <Color x:Key="DefaultButtonColor">#15000000</Color>
-        <Color x:Key="WinColor">#6cc72a</Color>
-        <Color x:Key="LoseColor">#d95d1c</Color>
 
         <Color x:Key="PrimaryColor">#0091ea</Color>
         <Color x:Key="PrimaryColor_L">#40c4ff</Color>
@@ -46,8 +37,20 @@
         <Color x:Key="CustomGrey">#6E6E6E</Color>
         <Color x:Key="CustomGrey_L">#a4a4a4</Color>
         <Color x:Key="CustomGrey_D">#424242</Color>
+
+        <Color x:Key="TextColor_L">#fafafa</Color>
+        <Color x:Key="TextColor_D">#212121</Color>
+
+        <Color x:Key="TransparentWhite">#7dffffff</Color>
+        <Color x:Key="TransparentBlack">#7d000000</Color>
+        <Color x:Key="TransparentPrimary">#120091ea</Color>
+
         <Color x:Key="BackgroundColor_Default">#fafafa</Color>
-        <Color x:Key="FacebookLogoColor">#3b5998</Color>
+        <Color x:Key="ChartBackground">#120069db</Color>
+        <Color x:Key="DefaultButtonColor">#15000000</Color>
+
+        <Color x:Key="WinColor">#6cc72a</Color>
+        <Color x:Key="LoseColor">#d95d1c</Color>
         <Color x:Key="IconActivated">#ffd700</Color>
 
         <!--Control Style-->

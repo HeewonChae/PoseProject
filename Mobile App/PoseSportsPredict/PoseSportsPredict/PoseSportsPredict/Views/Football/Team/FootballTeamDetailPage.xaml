@@ -72,14 +72,14 @@
                             HorizontalOptions="EndAndExpand"
                             VerticalOptions="Center">
                             <ContentView
-                                Padding="5"
+                                Padding="4"
                                 BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <customviews:RatingView
                                     VerticalOptions="Center"
-                                    WidthRequest="22"
-                                    HeightRequest="22"
+                                    WidthRequest="23"
+                                    HeightRequest="23"
                                     StrokeWidth="0.8"
                                     RatingType="Full"
                                     ColorOn="{StaticResource IconActivated}"
@@ -89,18 +89,18 @@
                                     Count="1"
                                     Value="{Binding TeamInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
                                 </customviews:RatingView>
-                            </ContentView>
+                            </ContentView> 
                             <ContentView
                                 x:Name="_moreButton"
                                 IsVisible="{Binding IsMoreButtonVisible}"
-                                Padding="5,0"
+                                Padding="4,0"
                                 BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding MoreButtonCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
                                     Aspect="AspectFit"
-                                    HeightRequest="18"
-                                    WidthRequest="18"
+                                    HeightRequest="19"
+                                    WidthRequest="19"
                                     Source="ic_more"
                                     effects:ImageEffect.TintColor="White">
                                 </Image>
@@ -150,7 +150,7 @@
                             <materialui:MaterialLabel
                                 HorizontalTextAlignment="Start"
                                 LineBreakMode="TailTruncation"
-                                TypeScale="H6"
+                                TypeScale="H5"
                                 FontAttributes="None"
                                 MaxLines="1"
                                 TextColor="{StaticResource TextColor_L}"
@@ -159,7 +159,8 @@
                             <materialui:MaterialLabel
                                 HorizontalTextAlignment="Start"
                                 LineBreakMode="TailTruncation"
-                                TypeScale="Body2"
+                                TypeScale="Subtitle1"
+                                FontAttributes="None"
                                 MaxLines="1"
                                 TextColor="{StaticResource TransparentWhite}"
                                 Text="{Binding TeamInfo.CountryName}">

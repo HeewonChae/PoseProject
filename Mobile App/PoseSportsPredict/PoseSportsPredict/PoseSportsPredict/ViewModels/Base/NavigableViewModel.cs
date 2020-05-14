@@ -10,6 +10,8 @@ namespace PoseSportsPredict.ViewModels.Base
         private Page _coupledPage;
         public Page CoupledPage => _coupledPage;
 
+        public bool IsPageSwitched { get; private set; }
+
         protected NavigableViewModel(Page coupledPage)
         {
             _coupledPage = coupledPage;
@@ -22,6 +24,11 @@ namespace PoseSportsPredict.ViewModels.Base
             _coupledPage = page;
             if (_coupledPage != null)
                 _coupledPage.BindingContext = this;
+        }
+
+        public void SetIsPageSwitched(bool isPageSwitched)
+        {
+            IsPageSwitched = isPageSwitched;
         }
     }
 }

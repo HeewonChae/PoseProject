@@ -1,5 +1,7 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PosePacket.Proxy;
+using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -21,6 +23,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WebServiceShare.ServiceContext;
+using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
@@ -92,12 +96,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Services
 
+        private IWebApiService _webApiService;
         private IBookmarkService _bookmarkService;
         private INotificationService _notificationService;
 
         #endregion Services
 
         #region Fields
+
+        private DateTime _LastUpdateTime = DateTime.Now;
 
         private FootballMatchInfo _matchInfo;
         private int _selectedViewIndex;
@@ -129,10 +136,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private async void TouchBackButton()
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
 
             var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
             MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
@@ -141,6 +148,18 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
 
             await PageSwitcher.PopNavPageAsync();
+        }
+
+        public ICommand TouchRefrashButtonCommand { get => new RelayCommand(TouchRefrashButton); }
+
+        private async void TouchRefrashButton()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            MatchInfo = await UpdateMatchInfo();
 
             SetIsBusy(false);
         }
@@ -245,8 +264,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public FootballMatchDetailViewModel(
             FootballMatchDetailPage page,
             IBookmarkService bookmarkService,
-            INotificationService notificationService) : base(page)
+            INotificationService notificationService,
+            IWebApiService webApiService) : base(page)
         {
+            _webApiService = webApiService;
             _notificationService = notificationService;
             _bookmarkService = bookmarkService;
 
@@ -279,6 +300,49 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 MatchInfo.IsAlarmed = item.IsAlarmed;
                 AlarmIcon.IsSelected = item.IsAlarmed;
             }
+        }
+
+        private async Task<FootballMatchInfo> UpdateMatchInfo()
+        {
+            SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            var timeSpan = DateTime.Now - _LastUpdateTime;
+            if (timeSpan.TotalMinutes < 5)
+            {
+                SetIsBusy(false);
+                return MatchInfo;
+            }
+
+            // call server
+            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
+            {
+                SerializeType = SerializeType.MessagePack,
+                MethodType = WebMethodType.POST,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = FootballProxy.ServiceUrl,
+                SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_INDEX,
+                PostData = new I_GET_FIXTURES_BY_INDEX
+                {
+                    FixtureIds = new int[] { MatchInfo.Id },
+                }
+            });
+
+            if (server_result == null || server_result.Fixtures.Length == 0)
+            {
+                SetIsBusy(false);
+                return MatchInfo;
+            }
+
+            var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(server_result.Fixtures[0]);
+            matchInfo.IsBookmarked = MatchInfo.IsBookmarked;
+            matchInfo.IsAlarmed = MatchInfo.IsAlarmed;
+            AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
+
+            _LastUpdateTime = DateTime.Now;
+
+            return matchInfo;
         }
 
         #endregion Methods

@@ -68,39 +68,57 @@
                         <!--Toolbar button-->
                         <StackLayout
                             Orientation="Horizontal"
-                            Spacing="9"
+                            Spacing="10"
                             HorizontalOptions="EndAndExpand"
                             VerticalOptions="Center">
+
                             <ContentView
-                                Padding="5"
+                                Padding="6"
                                 BackgroundColor="Transparent"
+                                effects:TapCommandEffect.Tap="{Binding TouchRefrashButtonCommand}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <StackLayout Orientation="Horizontal" Spacing="0" Margin="0" Padding="0">
+                                    <Image
+                                         IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}"
+                                        HeightRequest="21"
+                                        WidthRequest="21"
+                                        Source="ic_refresh.png"
+                                        Aspect="AspectFit">
+                                    </Image>
+                                    <ActivityIndicator
+                                        IsVisible="{Binding IsBusy}"
+                                        IsRunning="{Binding IsBusy}"
+                                        Color="{StaticResource PrimaryColor_L}"
+                                        WidthRequest="21"
+                                        HeightRequest="21">
+                                    </ActivityIndicator>
+                                </StackLayout>
+                            </ContentView>
+
+                            <ContentView
+                                Padding="4"
+                                BackgroundColor="Transparent"
+                                IsVisible="{Binding MatchInfo.MatchTime, Converter={StaticResource isMatchNotStartedConverter}}"
                                 effects:TapCommandEffect.Tap="{Binding TouchAlarmButtonCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
-                                    HeightRequest="22"
-                                    WidthRequest="22"
+                                    HeightRequest="23"
+                                    WidthRequest="23"
                                     Source="{Binding AlarmIcon.CurrentIcon}"
                                     Aspect="AspectFit"
                                     effects:ImageEffect.TintColor="{Binding AlarmIcon.CurrentColor}">
                                 </Image>
-                                <ContentView.Triggers>
-                                    <DataTrigger
-                                        TargetType="ContentView"
-                                        Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
-                                        Value="True">
-                                        <Setter Property="IsVisible" Value="False" />
-                                    </DataTrigger>
-                                </ContentView.Triggers>
                             </ContentView>
+
                             <ContentView
-                                Padding="5"
+                                Padding="4"
                                 BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding TouchBookmarkButtonCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <customviews:RatingView
                                     VerticalOptions="Center"
-                                    WidthRequest="22.5"
-                                    HeightRequest="22.5"
+                                    WidthRequest="23"
+                                    HeightRequest="23"
                                     StrokeWidth="0.8"
                                     RatingType="Full"
                                     ColorOn="{StaticResource IconActivated}"
@@ -116,18 +134,17 @@
 
                     <!--Header-->
                     <Grid Grid.Row="1"
-                          Margin="10,0"
                           Padding="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="0.1" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="27" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="27" />
                         </Grid.ColumnDefinitions>
                         <!--Home Team-->
                         <StackLayout
@@ -167,16 +184,9 @@
                         <StackLayout
                             Grid.Column="2"
                             Spacing="0"
+                            IsVisible="{Binding MatchInfo.MatchTime, Converter={StaticResource isMatchNotStartedConverter}}"
                             VerticalOptions="CenterAndExpand"
                             Margin="7,0">
-                            <StackLayout.Triggers>
-                                <DataTrigger
-                                    TargetType="StackLayout"
-                                    Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
-                                    Value="True">
-                                    <Setter Property="IsVisible" Value="False" />
-                                </DataTrigger>
-                            </StackLayout.Triggers>
                             <materialui:MaterialLabel
                                 MaxLines="1"
                                 LineBreakMode="TailTruncation"
@@ -207,16 +217,9 @@
                         <StackLayout
                             Grid.Column="2"
                             Spacing="0"
+                            IsVisible="{Binding MatchInfo.MatchTime, Converter={StaticResource isMatchStartedConverter}}"
                             VerticalOptions="CenterAndExpand"
                             Margin="7,0">
-                            <StackLayout.Triggers>
-                                <DataTrigger
-                                    TargetType="StackLayout"
-                                    Binding="{Binding MatchInfo.MatchTime, Converter={StaticResource isFootballMatchStartedConverter}}"
-                                    Value="False">
-                                    <Setter Property="IsVisible" Value="False" />
-                                </DataTrigger>
-                            </StackLayout.Triggers>
                             <materialui:MaterialLabel
                                 MaxLines="1"
                                 LineBreakMode="TailTruncation"

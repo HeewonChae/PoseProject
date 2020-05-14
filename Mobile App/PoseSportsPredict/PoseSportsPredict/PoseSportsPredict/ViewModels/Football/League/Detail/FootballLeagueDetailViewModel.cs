@@ -117,10 +117,10 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         private async void TouchBackButton()
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
 
             string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
             MessagingCenter.Unsubscribe<BookmarkService, FootballLeagueInfo>(this, message);
@@ -132,8 +132,6 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
 
             await PageSwitcher.PopNavPageAsync();
-
-            SetIsBusy(false);
         }
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand(TouchBookmarkButton); }
