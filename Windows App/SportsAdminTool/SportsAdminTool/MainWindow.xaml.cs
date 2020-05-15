@@ -164,8 +164,7 @@ namespace SportsAdminTool
 
             // Error처리
             await FootballLogic.LogicFacade.SolveErrors(_lbl_check_completed_fixtures);
-
-            await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "CheckCompletedFixtures.json");
+            // await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "CheckCompletedFixtures.json");
 
             // 텍스트 원래대로 변경
             this._lbl_check_completed_fixtures.Content = org_bannerText;
