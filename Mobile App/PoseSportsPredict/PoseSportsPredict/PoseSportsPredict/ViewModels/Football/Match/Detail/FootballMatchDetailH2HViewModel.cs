@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
@@ -51,6 +52,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _H2HTaskLoaderNotifier;
         private FootballTeamGoalStatisticsViewModel _teamGoalStatisticsViewModel;
+        private FootballTeamStatistics.RecordInfo _h2hRecordInfo;
+        private double _recordGaugeHeight;
 
         #endregion Fields
 
@@ -58,6 +61,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> H2HTaskLoaderNotifier { get => _H2HTaskLoaderNotifier; set => SetValue(ref _H2HTaskLoaderNotifier, value); }
         public FootballTeamGoalStatisticsViewModel GoalStatisticsViewModel { get => _teamGoalStatisticsViewModel; set => SetValue(ref _teamGoalStatisticsViewModel, value); }
+        public FootballTeamStatistics.RecordInfo H2HRecordInfo { get => _h2hRecordInfo; set => SetValue(ref _h2hRecordInfo, value); }
+        public double RecordGaugeHeight { get => _recordGaugeHeight; set => SetValue(ref _recordGaugeHeight, value); }
 
         #endregion Properties
 
@@ -118,6 +123,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             {
                 matches.Add(ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture));
             }
+
+            var screenHelper = DependencyService.Resolve<IScreenHelper>();
+            var screenWidth = screenHelper.ScreenSize.Width / 8.9d;
+            RecordGaugeHeight = screenHelper.DpToPixels(screenWidth);
+
+            // Total Record
+            var homeTeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>().Convert(matches, _matchInfo.HomeTeamId, matches.Count, 0);
+            H2HRecordInfo = homeTeamStatistics.RecentRecord;
 
             var matchesByGroups = matches.GroupBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.LeagueType}");
             var matchesByLeague = new Dictionary<FootballLeagueInfo, List<FootballMatchInfo>>();

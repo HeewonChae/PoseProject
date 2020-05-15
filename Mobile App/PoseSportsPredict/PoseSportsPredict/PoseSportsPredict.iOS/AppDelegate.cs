@@ -1,4 +1,6 @@
 ﻿using Foundation;
+using Shiny;
+using System;
 using UIKit;
 
 namespace PoseSportsPredict.iOS
@@ -51,12 +53,19 @@ namespace PoseSportsPredict.iOS
             Xam.Plugin.iOS.PopupEffect.Init();
             Syncfusion.XForms.iOS.TabView.SfTabViewRenderer.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
+            Syncfusion.SfGauge.XForms.iOS.SfGaugeRenderer.Init();
+            Plugin.LocalNotification.NotificationCenter.AskPermission();
         }
 
         private void InitShiny()
         {
             Shiny.iOSShinyHost.ValidateScopes = false;
             Shiny.iOSShinyHost.Init(new ShinyAppStartup());
+        }
+
+        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            Shiny.Jobs.JobManager.OnBackgroundFetch(completionHandler);
         }
     }
 }

@@ -72,6 +72,9 @@ namespace PoseSportsPredict.Services
 
         public async Task<bool> AddNotification(NotificationInfo item)
         {
+            // For Debugging
+            // item.NotifyTime = DateTime.Now.AddMinutes(2);
+
             var ret = await _sqliteService.InsertOrUpdateAsync<NotificationInfo>(item);
             Debug.Assert(ret != 0);
 

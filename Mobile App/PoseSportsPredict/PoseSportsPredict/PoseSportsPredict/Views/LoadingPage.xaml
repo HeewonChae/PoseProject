@@ -7,17 +7,17 @@
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
              BackgroundColor="White">
     <ContentPage.Content>
-        <Grid x:DataType="viewmodels:LoadingViewModel">
+        <Grid x:DataType="viewmodels:LoadingViewModel"
+              RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2.0*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Image
                 Grid.RowSpan="3"
-                Margin="3,0"
                 Aspect="AspectFit"
-                HorizontalOptions="Center"
+                HorizontalOptions="CenterAndExpand"
                 WidthRequest="314"
                 Source="img_poseidon_logo.png">
             </Image>

@@ -6,6 +6,7 @@
   <item>
     <bitmap
         android:src="@drawable/img_poseidon_logo"
-        android:gravity="center" />
+        android:tileMode="disabled"
+        android:gravity="center"/>
   </item>
 </layer-list>

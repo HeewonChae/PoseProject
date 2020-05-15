@@ -21,15 +21,19 @@ namespace PoseSportsPredict.Models.Football
 
         public class RecordInfo
         {
+            public int Played => Win + Draw + Lose;
             public int Win { get; set; }
-            public int Darw { get; set; }
+            public int Draw { get; set; }
             public int Lose { get; set; }
-            public int Points => (Win * 3) + (Darw * 1);
+            public int Points => (Win * 3) + (Draw * 1);
             public string Text => ToString();
+            public string HomeText => $"{Win} {LocalizeString.Win_Initial}";
+            public string DrawText => $"{Draw} {LocalizeString.Draw_Initial}";
+            public string AwayText => $"{Lose} {LocalizeString.Win_Initial}";
 
             public override string ToString()
             {
-                return $"{Win}{LocalizeString.Win_Initial} {Darw}{LocalizeString.Draw_Initial} {Lose}{LocalizeString.Lose_Initial}";
+                return $"{Win}{LocalizeString.Win_Initial} {Draw}{LocalizeString.Draw_Initial} {Lose}{LocalizeString.Lose_Initial}";
             }
         }
 

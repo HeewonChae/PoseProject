@@ -15,8 +15,8 @@
     <ContentPage.Content>
         <Grid x:DataType="viewmodels:LoginViewModel">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2.0*" />
+                <RowDefinition Height="1.3*" />
             </Grid.RowDefinitions>
             <Image
                 Grid.Row="0"
@@ -27,7 +27,7 @@
             </Image>
 
             <StackLayout
-                VerticalOptions="Center"
+                VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand"
                 Grid.Row="1"
                 Spacing="20">

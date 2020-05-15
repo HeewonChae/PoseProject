@@ -68,13 +68,14 @@
                         <!--Toolbar button-->
                         <StackLayout
                             Orientation="Horizontal"
-                            Spacing="10"
+                            Spacing="12"
                             HorizontalOptions="EndAndExpand"
                             VerticalOptions="Center">
 
                             <ContentView
                                 Padding="6"
                                 BackgroundColor="Transparent"
+                                IsVisible="{Binding MatchInfo, Converter={StaticResource isFootballMatchOngoingConverter}}"
                                 effects:TapCommandEffect.Tap="{Binding TouchRefrashButtonCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <StackLayout Orientation="Horizontal" Spacing="0" Margin="0" Padding="0">

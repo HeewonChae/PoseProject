@@ -34,6 +34,7 @@
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="18.1.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.48" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.PopupMenu" Version="1.1.0" />

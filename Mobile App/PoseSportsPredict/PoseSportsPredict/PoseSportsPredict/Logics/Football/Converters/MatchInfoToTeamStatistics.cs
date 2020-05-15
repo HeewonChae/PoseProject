@@ -29,7 +29,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
             {
                 if (match.HomeScore == match.AwayScore)
                 {
-                    returnValue.RecentRecord.Darw++;
+                    returnValue.RecentRecord.Draw++;
                 }
                 else if (match.HomeScore > match.AwayScore)
                 {

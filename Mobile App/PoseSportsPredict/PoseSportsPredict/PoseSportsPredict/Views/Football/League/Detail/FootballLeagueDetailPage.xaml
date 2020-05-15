@@ -149,7 +149,7 @@
                             <materialui:MaterialLabel
                                 HorizontalTextAlignment="Start"
                                 LineBreakMode="TailTruncation"
-                                TypeScale="H5"
+                                TypeScale="H6"
                                 FontAttributes="None"
                                 MaxLines="1"
                                 TextColor="{StaticResource TextColor_L}"

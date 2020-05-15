@@ -52,6 +52,7 @@
       <HintPath>..\..\..\..\Common Library\External\eliteKit.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Android.Export" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -97,6 +98,9 @@
       <Version>18.1.0.48</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
+      <Version>18.1.0.48</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfGauge">
       <Version>18.1.0.48</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
@@ -288,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\default_screen.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

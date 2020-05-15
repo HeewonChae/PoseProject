@@ -32,5 +32,9 @@
 	<false/>
 	<key>UIRequiresFullScreen</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 </dict>
 </plist>

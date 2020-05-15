@@ -30,9 +30,30 @@ using PoseSportsPredict.Views.Football.Team.GoalStatistics;
 using Shiny;
 using System;
 using WebServiceShare.ExternAuthentication;
+using System.Threading.Tasks;
+using Shiny.Jobs;
+using System.Threading;
 
 namespace PoseSportsPredict
 {
+    //public class LocalNotificationJob : Shiny.Jobs.IJob
+    //{
+    //    private readonly INotificationService _notificationService;
+
+    //    public LocalNotificationJob(INotificationService notificationService)
+    //    {
+    //        _notificationService = notificationService;
+    //    }
+
+    //    public async Task<bool> Run(JobInfo jobInfo, CancellationToken cancelToken)
+    //    {
+    //        // Notify Init
+    //        await _notificationService.Initialize();
+
+    //        return true;
+    //    }
+    //}
+
     public class ShinyAppStartup : ShinyStartup
     {
         public override void ConfigureServices(IServiceCollection services)
@@ -44,6 +65,15 @@ namespace PoseSportsPredict
             RegisterServices(services);
             RegisterConverters(services);
             MatchViewModels(services);
+
+            //var notificationjob = new JobInfo(typeof(LocalNotificationJob), "LocalNotificationJob")
+            //{
+            //    // these are criteria that must be met in order for your job to run
+            //    RequiredInternetAccess = InternetAccess.Any,
+            //    Repeat = false //defaults to true, set to false to run once OR set it inside a job to cancel further execution
+            //};
+
+            //services.RegisterJob(notificationjob);
         }
 
         private void RegisterComparer(IServiceCollection services)

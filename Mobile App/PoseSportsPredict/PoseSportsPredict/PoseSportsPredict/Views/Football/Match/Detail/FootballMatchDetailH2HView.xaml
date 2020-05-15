@@ -9,8 +9,10 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
+
     <ContentView.Content>
         <StackLayout x:DataType="viewmodels:FootballMatchDetailH2HViewModel">
             <loader:TaskLoaderView
@@ -22,9 +24,57 @@
                     <StackLayout>
                         <materialui:MaterialCard
                             Margin="7,6"
-                            Padding="10"
+                            Padding="5,0"
                             Elevation="3"
                             CornerRadius="5">
+                            <Grid
+                                ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2.3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2.3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2.3*" />
+                                </Grid.ColumnDefinitions>
+                                <customviews:CircularGauge
+                                    Grid.Column="0"
+                                    GaugeHeight="{Binding RecordGaugeHeight}"
+                                    GaugeColor="{StaticResource WinColor}"
+                                    UngaugeColor="{StaticResource ChartBackground}"
+                                    HeaderSize="23"
+                                    GaugeThickness="12"
+                                    Text="{Binding H2HRecordInfo.HomeText}"
+                                    TextSize="16"
+                                    MaxValue="{Binding H2HRecordInfo.Played}"
+                                    CurValue="{Binding H2HRecordInfo.Win}">
+                                </customviews:CircularGauge>
+
+                                <customviews:CircularGauge
+                                    Grid.Column="2"
+                                    GaugeHeight="{Binding RecordGaugeHeight}"
+                                    GaugeColor="{StaticResource CustomGrey}"
+                                    UngaugeColor="{StaticResource ChartBackground}"
+                                    HeaderSize="23"
+                                    GaugeThickness="12"
+                                    Text="{Binding H2HRecordInfo.DrawText}"
+                                    TextSize="16"
+                                    MaxValue="{Binding H2HRecordInfo.Played}"
+                                    CurValue="{Binding H2HRecordInfo.Draw}">
+                                </customviews:CircularGauge>
+
+                                <customviews:CircularGauge
+                                    Grid.Column="4"
+                                    GaugeHeight="{Binding RecordGaugeHeight}"
+                                    GaugeColor="{StaticResource LoseColor}"
+                                    UngaugeColor="{StaticResource ChartBackground}"
+                                    HeaderSize="23"
+                                    GaugeThickness="12"
+                                    Text="{Binding H2HRecordInfo.AwayText}"
+                                    TextSize="16"
+                                    MaxValue="{Binding H2HRecordInfo.Played}"
+                                    CurValue="{Binding H2HRecordInfo.Lose}">
+                                </customviews:CircularGauge>
+                            </Grid>
                         </materialui:MaterialCard>
 
                         <!--Team Goal Statistics-->

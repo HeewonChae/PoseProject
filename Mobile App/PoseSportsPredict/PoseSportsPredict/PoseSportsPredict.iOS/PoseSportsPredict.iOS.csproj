@@ -180,6 +180,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox">
       <Version>18.1.0.48</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfGauge">
+      <Version>18.1.0.48</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
       <Version>18.1.0.48</Version>
     </PackageReference>

@@ -27,11 +27,10 @@ namespace PoseSportsPredict
             InitializeComponent();
 
             XF.Material.Forms.Material.Init(this);
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppConfig.SyncfusionKey);
 
             // Local Notification tap event listener
             NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;
-
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppConfig.SyncfusionKey);
 
             MainPage = ShinyHost.Resolve<LoadingViewModel>().CoupledPage;
         }

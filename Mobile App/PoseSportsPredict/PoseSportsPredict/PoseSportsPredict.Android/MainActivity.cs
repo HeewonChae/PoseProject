@@ -4,18 +4,23 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Android.Views;
 using Android.Widget;
+using Microsoft.Extensions.DependencyInjection;
 using Plugin.LocalNotification;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.ViewModels;
 using Shiny;
 using System.Linq;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 using static Acr.UserDialogs.Resource;
 
 namespace PoseSportsPredict.Droid
 {
     [Activity(Label = "PoseSportsPredict",
         Icon = "@mipmap/icon_round",
-        Theme = "@style/MyTheme.Splash",
+        Theme = "@style/SplashTheme",
         MainLauncher = true,
         //ScreenOrientation = ScreenOrientation.Portrait,
         LaunchMode = LaunchMode.SingleInstance,
@@ -31,6 +36,7 @@ namespace PoseSportsPredict.Droid
             Android.Manifest.Permission.AccessNotificationPolicy,
             Android.Manifest.Permission.BindNotificationListenerService,
             Android.Manifest.Permission.AccessNotificationPolicy,
+            Android.Manifest.Permission.ReceiveBootCompleted,
         };
 
         private int PermissionReqId = 0;
@@ -39,14 +45,11 @@ namespace PoseSportsPredict.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            //base.Window.RequestFeature(WindowFeatures.ActionBar);
-
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             Xam.Plugin.Droid.PopupEffect.Init();
 
             base.SetTheme(Resource.Style.MainTheme);
-
             base.OnCreate(savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
@@ -62,6 +65,9 @@ namespace PoseSportsPredict.Droid
             // Initialize extern module
             this.InitExternModule(savedInstanceState);
 
+            // LoadingComplete Message
+            //MessagingCenter.Subscribe<LoadingViewModel>(this, "LoadingComplete", (s) => LoadingCompleteHandler());
+
             LoadApplication(new App());
 
             NotificationCenter.NotifyNotificationTapped(this.Intent);
@@ -73,29 +79,6 @@ namespace PoseSportsPredict.Droid
         //    base.OnNewIntent(intent);
         //}
 
-        private void InitExternModule(Bundle savedInstanceState)
-        {
-            XF.Material.Droid.Material.Init(this, savedInstanceState);
-            Android.Glide.Forms.Init(this, debug: false);
-            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
-            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
-            {
-                Id = AppConfig.Psoe_Noti_Channel_01,
-                Importance = NotificationImportance.High,
-                Name = "General",
-                Description = "General",
-            });
-            Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
-            ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
-            UserDialogs.Init(this);
-        }
-
-        private void InitShiny()
-        {
-            Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
-        }
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -103,6 +86,36 @@ namespace PoseSportsPredict.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        private void InitShiny()
+        {
+            Shiny.AndroidShinyHost.ValidateScopes = false;
+            Shiny.AndroidShinyHost.Init(this.Application, new ShinyAppStartup());
+        }
+
+        private void InitExternModule(Bundle savedInstanceState)
+        {
+            XF.Material.Droid.Material.Init(this, savedInstanceState);
+            Android.Glide.Forms.Init(this, debug: false);
+            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+            Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
+            ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+            UserDialogs.Init(this);
+
+            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
+            {
+                Id = AppConfig.Psoe_Noti_Channel_01,
+                Importance = NotificationImportance.High,
+                Name = "General",
+                Description = "General",
+            });
+        }
+
+        //public void LoadingCompleteHandler()
+        //{
+        //    base.SetTheme(Resource.Style.MainTheme);
+        //}
 
         public async override void OnBackPressed()
         {

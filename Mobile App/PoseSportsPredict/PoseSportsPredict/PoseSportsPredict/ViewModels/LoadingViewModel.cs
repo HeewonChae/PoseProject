@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels
@@ -22,13 +23,13 @@ namespace PoseSportsPredict.ViewModels
 
         public override bool OnInitializeView(params object[] datas)
         {
-            _isLoaded = false;
-
             return true;
         }
 
         public override async void OnAppearing(params object[] datas)
         {
+            IsLoaded = false;
+
             while (!await WebApiService.CheckInternetConnection()) { }
 
             // Table Loader
@@ -66,11 +67,11 @@ namespace PoseSportsPredict.ViewModels
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin(false))
             {
                 await _OAuthService.Logout();
-                return;
             }
 
-            _isLoaded = true;
+            IsLoaded = true;
             OnPropertyChanged("IsLoaded");
+            MessagingCenter.Send(this, "LoadingComplete");
         }
 
         #endregion BaseViewModel
@@ -91,7 +92,7 @@ namespace PoseSportsPredict.ViewModels
 
         #region Properties
 
-        public bool IsLoaded { get => _isLoaded; }
+        public bool IsLoaded { get => _isLoaded; set => SetValue(ref _isLoaded, value); }
 
         #endregion Properties
 
