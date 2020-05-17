@@ -34,6 +34,8 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_TEAM_OVERVIEW = "GetTeamOverview";
         
+        private static string _P_GET_MATCH_ODDS = "GetMatchOdds";
+        
         // Service base url
         public static string ServiceUrl
         {
@@ -128,6 +130,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_TEAM_OVERVIEW;
+            }
+        }
+        
+        // MethodType: POST, Segment: GetMatchOdds 
+        // InputType: PosePacket.Service.Football.I_GET_MATCH_ODDS 
+        // OutputType: PosePacket.Service.Football.O_GET_MATCH_ODDS
+        public static string P_GET_MATCH_ODDS
+        {
+            get
+            {
+                return _P_GET_MATCH_ODDS;
             }
         }
     }

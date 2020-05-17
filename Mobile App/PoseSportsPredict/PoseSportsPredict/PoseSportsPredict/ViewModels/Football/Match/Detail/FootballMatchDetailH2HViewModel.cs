@@ -125,8 +125,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             }
 
             var screenHelper = DependencyService.Resolve<IScreenHelper>();
-            var screenWidth = screenHelper.ScreenSize.Width / 8.9d;
-            RecordGaugeHeight = screenHelper.DpToPixels(screenWidth);
+            RecordGaugeHeight = screenHelper.ScreenSize.Width / 9.0 * 2.7;
 
             // Total Record
             var homeTeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>().Convert(matches, _matchInfo.HomeTeamId, matches.Count, 0);

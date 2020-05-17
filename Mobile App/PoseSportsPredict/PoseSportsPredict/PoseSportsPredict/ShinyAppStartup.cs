@@ -99,6 +99,7 @@ namespace PoseSportsPredict
             services.AddSingleton<StandingsDetailToStandingsInfo>();
             services.AddSingleton<LeagueDetailToLeagueInfo>();
             services.AddSingleton<TeamDetailToTeamInfo>();
+            services.AddSingleton<OddsDetailToOddsInfo>();
 
             services.AddSingleton<CoverageLeagueToLeagueInfo>();
             services.AddSingleton<MatchInfoToLeagueInfo>();

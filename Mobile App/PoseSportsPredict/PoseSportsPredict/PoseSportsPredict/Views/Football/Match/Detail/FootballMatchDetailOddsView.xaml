@@ -3,11 +3,191 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+             BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOddsView">
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
+        <StackLayout x:DataType="viewmodels:FootballMatchDetailOddsViewModel">
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Data_Available}"
+                TaskLoaderNotifier="{Binding OddsTaskLoaderNotifier}">
+                <ScrollView>
+                    <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="0,0,0,12"
+                            Elevation="3"
+                            CornerRadius="5">
+                        <Grid
+                            x:Name="_gd_oddsTable"
+                            ColumnSpacing="0"
+                            RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.0*" />
+                                <ColumnDefinition Width="3.0*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!--Header-->
+                            <materialui:MaterialLabel
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Padding="0,6"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                TypeScale="Body2"
+                                FontAttributes="Bold"
+                                BackgroundColor="{StaticResource CustomGrey}"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{x:Static localize:LocalizeString.Bookmaker}">
+                            </materialui:MaterialLabel>
+                            <Grid
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <materialui:MaterialLabel
+                                    Grid.Column="0"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Center"
+                                    TypeScale="Body2"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Win_Initial}">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Center"
+                                    TypeScale="Body2"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Draw_Initial}">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Column="2"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Center"
+                                    TypeScale="Body2"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource CustomGrey}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Lose_Initial}">
+                                </materialui:MaterialLabel>
+                            </Grid>
+
+                            <!--Bookmaker-->
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Spacing="0"
+                                BindableLayout.ItemsSource="{Binding OddsInfos}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="models:FootballOddsInfo">
+                                        <StackLayout Spacing="0">
+                                            <materialui:MaterialCard
+                                                x:Name="_rankCard"
+                                                Grid.Column="0"
+                                                Padding="7,0"
+                                                Elevation="0"
+                                                BackgroundColor="Transparent"
+                                                HeightRequest="{Binding Path=BindingContext.OddsBookmakerHeight, Source={x:Reference _gd_oddsTable}}">
+                                                <Image
+                                                    Aspect="AspectFit"
+                                                    Source="{Binding BookmakerImageUrl}">
+                                                </Image>
+                                            </materialui:MaterialCard>
+                                            <BoxView
+                                                HeightRequest="0.5"
+                                                Color="{StaticResource CustomGrey_L}">
+                                            </BoxView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+
+                            <StackLayout
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Spacing="0"
+                                BindableLayout.ItemsSource="{Binding OddsInfos}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="models:FootballOddsInfo">
+                                        <StackLayout Spacing="0">
+                                            <Grid ColumnSpacing="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <customviews:CircularGauge
+                                                    Grid.Column="0"
+                                                    Margin="11,0"
+                                                    GaugeHeight="{Binding Path=BindingContext.OddsBookmakerHeight, Source={x:Reference _gd_oddsTable}}"
+                                                    GaugeColor="{StaticResource WinColor}"
+                                                    UngaugeColor="{StaticResource ChartBackground}"
+                                                    HeaderSize="19"
+                                                    GaugeThickness="10"
+                                                    Text="{Binding WinOdds}"
+                                                    TextSize="15"
+                                                    MaxValue="{Binding WinOdds}"
+                                                    CurValue="{Binding RefundRate}">
+                                                </customviews:CircularGauge>
+
+                                                <customviews:CircularGauge
+                                                    Grid.Column="1"
+                                                    Margin="11,0"
+                                                    GaugeHeight="{Binding Path=BindingContext.OddsBookmakerHeight, Source={x:Reference _gd_oddsTable}}"
+                                                    GaugeColor="{StaticResource CustomGrey}"
+                                                    UngaugeColor="{StaticResource ChartBackground}"
+                                                    HeaderSize="19"
+                                                    GaugeThickness="10"
+                                                    Text="{Binding DrawOdds}"
+                                                    TextSize="15"
+                                                    MaxValue="{Binding DrawOdds}"
+                                                    CurValue="{Binding RefundRate}">
+                                                </customviews:CircularGauge>
+
+                                                <customviews:CircularGauge
+                                                    Grid.Column="2"
+                                                    Margin="11,0"
+                                                    GaugeHeight="{Binding Path=BindingContext.OddsBookmakerHeight, Source={x:Reference _gd_oddsTable}}"
+                                                    GaugeColor="{StaticResource LoseColor}"
+                                                    UngaugeColor="{StaticResource ChartBackground}"
+                                                    HeaderSize="19"
+                                                    GaugeThickness="10"
+                                                    Text="{Binding LoseOdds}"
+                                                    TextSize="15"
+                                                    MaxValue="{Binding LoseOdds}"
+                                                    CurValue="{Binding RefundRate}">
+                                                </customviews:CircularGauge>
+                                            </Grid>
+                                            <BoxView
+                                                HeightRequest="0.5"
+                                                Color="{StaticResource CustomGrey_L}">
+                                            </BoxView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </Grid>
+                    </materialui:MaterialCard>
+                </ScrollView>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

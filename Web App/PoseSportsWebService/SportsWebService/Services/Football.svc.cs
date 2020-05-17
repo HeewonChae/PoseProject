@@ -93,6 +93,16 @@ namespace SportsWebService.Services
             return output.SerializeToStream();
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public Stream P_GET_MATCH_ODDS(Stream stream)
+        {
+            var input = stream.StreamDeserialize<I_GET_MATCH_ODDS>();
+
+            var output = Commands.Football.P_GET_MATCH_ODDS.Execute(input);
+
+            return output.SerializeToStream();
+        }
+
         #region For Benchmark
 
         //[PrincipalPermission(SecurityAction.Demand, Authenticated = true)]

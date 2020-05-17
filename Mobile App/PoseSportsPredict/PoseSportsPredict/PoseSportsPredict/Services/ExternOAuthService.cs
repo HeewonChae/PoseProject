@@ -156,7 +156,7 @@ namespace PoseSportsPredict.Services
             _authenticatedUser = null;
             LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
 
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>());
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
         }
     }
 }

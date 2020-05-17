@@ -7,10 +7,10 @@
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:poseauthenums="PosePacket.Service.Auth.Models.Enums"
-             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
-             BackgroundColor="White">
+             materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
         <Grid x:DataType="viewmodels:LoginViewModel">

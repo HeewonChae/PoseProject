@@ -34,10 +34,15 @@ namespace RapidAPI.Models.Football.Enums
     {
         _NONE_,
         TenBet = 1,
+        Marathonbet = 2,
+        Betfair = 3,
         Bwin = 6,
+        WilliamHill = 7,
         Bet365 = 8,
         Dafabet = 9,
+        Ladbrokes = 10,
         OnexBet = 11,
+        Interwetten = 15,
         _MAX_
     }
 

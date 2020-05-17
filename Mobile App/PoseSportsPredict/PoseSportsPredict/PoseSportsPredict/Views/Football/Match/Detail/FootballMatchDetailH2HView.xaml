@@ -9,7 +9,6 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
-             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
 
@@ -44,7 +43,7 @@
                                     HeaderSize="23"
                                     GaugeThickness="12"
                                     Text="{Binding H2HRecordInfo.HomeText}"
-                                    TextSize="16"
+                                    TextSize="18"
                                     MaxValue="{Binding H2HRecordInfo.Played}"
                                     CurValue="{Binding H2HRecordInfo.Win}">
                                 </customviews:CircularGauge>
@@ -57,7 +56,7 @@
                                     HeaderSize="23"
                                     GaugeThickness="12"
                                     Text="{Binding H2HRecordInfo.DrawText}"
-                                    TextSize="16"
+                                    TextSize="18"
                                     MaxValue="{Binding H2HRecordInfo.Played}"
                                     CurValue="{Binding H2HRecordInfo.Draw}">
                                 </customviews:CircularGauge>
@@ -70,7 +69,7 @@
                                     HeaderSize="23"
                                     GaugeThickness="12"
                                     Text="{Binding H2HRecordInfo.AwayText}"
-                                    TextSize="16"
+                                    TextSize="18"
                                     MaxValue="{Binding H2HRecordInfo.Played}"
                                     CurValue="{Binding H2HRecordInfo.Lose}">
                                 </customviews:CircularGauge>

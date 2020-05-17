@@ -133,6 +133,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bookmaker.
+        /// </summary>
+        public static string Bookmaker {
+            get {
+                return ResourceManager.GetString("Bookmaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmark Management.
         /// </summary>
         public static string Bookmark_Management {

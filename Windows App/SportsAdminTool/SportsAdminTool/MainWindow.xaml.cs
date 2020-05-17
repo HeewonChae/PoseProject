@@ -102,7 +102,7 @@ namespace SportsAdminTool
             this._lbl_initialize_footballdb.Content = org_bannerText;
             this._progRing_initialize_footballdb.IsActive = false;
 
-            await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateLeagueAndTeam_Errors.json");
+            //await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateLeagueAndTeam_Errors.json");
 
             // 다음 업데이트 알람
             TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후

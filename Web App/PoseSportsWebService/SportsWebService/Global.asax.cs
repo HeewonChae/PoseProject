@@ -28,6 +28,7 @@ namespace SportsWebService
             Singleton.Register<FootballStandingsDetailConverter>();
             Singleton.Register<FootballLeagueDetailConverter>();
             Singleton.Register<FootballTeamDetailConverter>();
+            Singleton.Register<FootballOddsDetailConverter>();
 
             // Register Comparer
             Singleton.Register<FootballFixtureEqualityComparer>();

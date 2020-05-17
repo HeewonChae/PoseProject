@@ -81,7 +81,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
         private bool _alarmEditMode;
-        private MatchFilterType _curMatchFilterType;
+        private MatchFilterType _curMatchFilterType = MatchFilterType.SortByLeague;
         private bool _isListViewRefrashing;
 
         #endregion Fields
@@ -289,7 +289,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 _matchList.Add(convertedMatchInfo);
             }
 
-            _curMatchFilterType = MatchFilterType.SortByLeague;
             var filteredMatch = await UpdateFilteredMatchesAsync();
 
             _lastUpdateTime = DateTime.UtcNow;

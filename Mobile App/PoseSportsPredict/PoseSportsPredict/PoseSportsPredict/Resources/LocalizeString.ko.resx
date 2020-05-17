@@ -435,4 +435,7 @@
   <data name="Goal_For_Against_Avg" xml:space="preserve">
     <value>득/실점</value>
   </data>
+  <data name="Bookmaker" xml:space="preserve">
+    <value>북메이커</value>
+  </data>
 </root>

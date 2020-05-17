@@ -209,10 +209,10 @@
                                                     <materialui:MaterialChip
                                                         HorizontalOptions="Center"
                                                         VerticalOptions="StartAndExpand"
-                                                        FontSize="13"
+                                                        FontSize="14"
                                                         TextColor="{StaticResource TextColor_L}"
                                                         Text="{Binding Path=BindingContext.TeamInfo.TeamId, Source={x:Reference lv_matches}}"
-                                                        HeightRequest="18">
+                                                        HeightRequest="19">
                                                         <materialui:MaterialChip.Triggers>
                                                             <EventTrigger Event="BindingContextChanged">
                                                                 <triggers:MatchStatusColorTrigger />

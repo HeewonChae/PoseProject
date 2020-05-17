@@ -419,4 +419,7 @@
   <data name="Goal_For_Against_Avg" xml:space="preserve">
     <value>Goal For/Against</value>
   </data>
+  <data name="Bookmaker" xml:space="preserve">
+    <value>Bookmaker</value>
+  </data>
 </root>

@@ -20,7 +20,7 @@ namespace PoseSportsPredict.Droid
 {
     [Activity(Label = "PoseSportsPredict",
         Icon = "@mipmap/icon_round",
-        Theme = "@style/SplashTheme",
+        Theme = "@style/LoadingTheme",
         MainLauncher = true,
         //ScreenOrientation = ScreenOrientation.Portrait,
         LaunchMode = LaunchMode.SingleInstance,
