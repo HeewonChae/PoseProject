@@ -19,27 +19,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override bool OnInitializeView(params object[] datas)
         {
-            IsSelected = false;
-            _curDate = DateTime.Now.Date;
-
-            var tabbedPage = this.CoupledPage as TabbedPage;
-            tabbedPage.Children.Clear();
-
-            for (int i = -3; i <= 3; i++)
-            {
-                tabbedPage.Children.Add(
-                    ShinyHost.Resolve<FootballMatchesViewModel>()
-                    .SetMatchDate(_curDate.AddDays(i)).CoupledPage);
-            }
-
-            tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today
-
-            return base.OnInitializeView(datas);
+            return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
             IsSelected = true;
+
+            CheckDateChanged();
 
             if (this.CoupledPage is TabbedPage tabbedpage)
             {
@@ -57,7 +44,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region IIconChange
 
-        private bool _isSelected;
+        private bool _isSelected = false;
 
         public NavigationPage NavigationPage { get; set; }
 
@@ -152,5 +139,29 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        public void CheckDateChanged()
+        {
+            if (_curDate.Date != DateTime.Now.Date)
+            {
+                _curDate = DateTime.Now.Date;
+
+                var tabbedPage = this.CoupledPage as TabbedPage;
+                tabbedPage.Children.Clear();
+
+                for (int i = -3; i <= 3; i++)
+                {
+                    tabbedPage.Children.Add(
+                        ShinyHost.Resolve<FootballMatchesViewModel>()
+                        .SetMatchDate(_curDate.AddDays(i)).CoupledPage);
+                }
+
+                tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today
+            }
+        }
+
+        #endregion Methods
     }
 }

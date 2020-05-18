@@ -32,10 +32,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override void OnAppearing(params object[] datas)
         {
-            if (!H2HTaskLoaderNotifier.IsNotStarted)
-                return;
-
-            H2HTaskLoaderNotifier.Load(InitH2HData);
+            if (H2HTaskLoaderNotifier.IsNotStarted)
+                H2HTaskLoaderNotifier.Load(InitH2HData);
         }
 
         #endregion BaseViewModel

@@ -42,10 +42,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override void OnAppearing(params object[] datas)
         {
-            if (!OverviewTaskLoaderNotifier.IsNotStarted)
-                return;
-
-            OverviewTaskLoaderNotifier.Load(InitOverviewData);
+            if (OverviewTaskLoaderNotifier.IsNotStarted)
+                OverviewTaskLoaderNotifier.Load(InitOverviewData);
         }
 
         #endregion BaseViewModel

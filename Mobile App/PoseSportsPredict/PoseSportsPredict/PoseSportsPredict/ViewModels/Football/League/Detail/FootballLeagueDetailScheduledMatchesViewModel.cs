@@ -3,6 +3,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
@@ -39,10 +40,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override void OnAppearing(params object[] datas)
         {
-            if (!MatchesTaskLoaderNotifier.IsNotStarted)
-                return;
-
-            MatchesTaskLoaderNotifier.Load(InitMatcheDatas);
+            if (MatchesTaskLoaderNotifier.IsNotStarted)
+                MatchesTaskLoaderNotifier.Load(InitMatcheDatas);
         }
 
         #endregion BaseViewModel
@@ -97,14 +96,14 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                 return;
 
             SetIsBusy(true);
+            IsListViewRefrashing = true;
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
-
-            if (timeSpan.TotalMinutes > 5) // 5분 마다 갱신
+            if (timeSpan.TotalMinutes > 1) // 1분 마다 갱신
                 await InitMatcheDatas();
 
+            IsListViewRefrashing = false;
             SetIsBusy(false);
-            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands

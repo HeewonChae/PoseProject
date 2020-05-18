@@ -1,10 +1,10 @@
-﻿using Acr.UserDialogs;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Proxy;
 using PosePacket.Service.Football;
+using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
+using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
@@ -13,7 +13,6 @@ using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
-using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Match;
 using Sharpnado.Presentation.Forms;
 using Shiny;
@@ -21,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -39,8 +37,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override bool OnInitializeView(params object[] datas)
         {
-            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
-
             string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
@@ -48,19 +44,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
 
             _alarmEditMode = false;
-            _lastUpdateTime = DateTime.MinValue;
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
-            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
-
-            if (!MatchesTaskLoaderNotifier.IsNotStarted && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
+            if (MatchesTaskLoaderNotifier.IsSuccessfullyCompleted)
+            {
+                PullToRefresh();
                 return;
+            }
 
-            MatchesTaskLoaderNotifier.Load(InitMatchesAsync);
+            if (MatchesTaskLoaderNotifier.IsNotStarted)
+                MatchesTaskLoaderNotifier.Load(InitMatchesAsync);
         }
 
         #endregion NavigableViewModel
@@ -190,14 +187,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 return;
 
             SetIsBusy(true);
+            IsListViewRefrashing = true;
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+            if (timeSpan.TotalMinutes > 1) // 1분 마다 갱신
+                await RefreshMatchesAsync();
 
-            if (timeSpan.TotalMinutes > 5) // 5분 마다 갱신
-                await InitMatchesAsync();
-
+            IsListViewRefrashing = false;
             SetIsBusy(false);
-            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands
@@ -226,8 +223,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (_matchDate == date)
                 return this;
 
+            MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
+            MatchListViewModels = null;
             _matchDate = date;
-            _lastUpdateTime = DateTime.MinValue;
 
             if (_matchDate == DateTime.Now.Date.AddDays(-1))
             {
@@ -251,6 +249,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchesAsync()
         {
             this.SetIsBusy(true);
+
+            await Task.Delay(300);
 
             var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
             {
@@ -296,6 +296,41 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             this.SetIsBusy(false);
 
             return filteredMatch;
+        }
+
+        private async Task RefreshMatchesAsync()
+        {
+            this.SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
+                   && elem.MatchStatus != FootballMatchStatusType.FT
+                   && elem.MatchStatus != FootballMatchStatusType.AET
+                   && elem.MatchStatus != FootballMatchStatusType.PEN)
+                   .Select(elem => elem.Id).ToList();
+
+            var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
+            foreach (var match in updatedMatches)
+            {
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == match.Id);
+                _matchList.RemoveAt(foundIdx);
+
+                _matchList.Add(match);
+                needRefrashMatchIndexes.Remove(match.Id);
+            }
+
+            foreach (var deletedIndex in needRefrashMatchIndexes)
+            {
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == deletedIndex);
+                _matchList.RemoveAt(foundIdx);
+            }
+
+            var filteredMatch = await UpdateFilteredMatchesAsync();
+
+            _lastUpdateTime = DateTime.UtcNow;
+
+            this.SetIsBusy(false);
         }
 
         private async Task<IReadOnlyCollection<FootballMatchInfo>> UpdateFilteredMatchesAsync()
@@ -359,10 +394,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 case MatchFilterType.Ongoing:
                     matchList = _matchList.Where(elem =>
-                        elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.NS
-                        && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.FT
-                        && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.AET
-                        && elem.MatchStatus != PacketModels.Enums.FootballMatchStatusType.PEN)
+                        elem.MatchStatus != FootballMatchStatusType.NS
+                        && elem.MatchStatus != FootballMatchStatusType.FT
+                        && elem.MatchStatus != FootballMatchStatusType.AET
+                        && elem.MatchStatus != FootballMatchStatusType.PEN)
                         .OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}")
                         .ToList();
 

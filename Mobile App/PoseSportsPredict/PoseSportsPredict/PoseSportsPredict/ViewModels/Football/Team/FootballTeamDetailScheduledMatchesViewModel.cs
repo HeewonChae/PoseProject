@@ -40,10 +40,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public override void OnAppearing(params object[] datas)
         {
-            if (!MatchesTaskLoaderNotifier.IsNotStarted)
-                return;
-
-            MatchesTaskLoaderNotifier.Load(InitMatchDatas);
+            if (MatchesTaskLoaderNotifier.IsNotStarted)
+                MatchesTaskLoaderNotifier.Load(InitMatchDatas);
         }
 
         #endregion BaseViewModel
@@ -166,14 +164,14 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                 return;
 
             SetIsBusy(true);
+            IsListViewRefrashing = true;
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
-
-            if (timeSpan.TotalMinutes > 5) // 5분 마다 갱신
+            if (timeSpan.TotalMinutes > 1) // 1분 마다 갱신
                 await InitMatchDatas();
 
+            IsListViewRefrashing = false;
             SetIsBusy(false);
-            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands

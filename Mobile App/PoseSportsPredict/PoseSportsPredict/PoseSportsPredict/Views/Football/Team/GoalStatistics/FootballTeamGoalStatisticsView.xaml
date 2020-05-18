@@ -443,20 +443,22 @@
                             <customviews:SimpleGaugeBar
                                 Grid.Column="0"
                                 FlowDirection="RightToLeft"
-                                GaugeColor1="{StaticResource CustomGrey}"
-                                GaugeColor2="{StaticResource SecondaryColor}"
+                                GaugeColor1="{StaticResource SecondaryColor}"
+                                GaugeColor2="{StaticResource CustomGrey}"
                                 GaugeBackgroundColor="{StaticResource ChartBackground}"
                                 IsAnimation="True"
+                                IsReverse="True"
                                 MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
                                 CurValue="{Binding MatchStatistics.HomeTeamStatistics.TotalGoalAgainst.Avg}">
                             </customviews:SimpleGaugeBar>
                             <customviews:SimpleGaugeBar
                                 Grid.Column="1"
                                 FlowDirection="LeftToRight"
-                                GaugeColor1="{StaticResource CustomGrey}"
-                                GaugeColor2="{StaticResource SecondaryColor}"
+                                GaugeColor1="{StaticResource SecondaryColor}"
+                                GaugeColor2="{StaticResource CustomGrey}"
                                 GaugeBackgroundColor="{StaticResource ChartBackground}"
                                 IsAnimation="True"
+                                IsReverse="True"
                                 MaxValue="{Binding MatchStatistics.TotalGoalAgainst}"
                                 CurValue="{Binding MatchStatistics.AwayTeamStatistics.TotalGoalAgainst.Avg}">
                             </customviews:SimpleGaugeBar>

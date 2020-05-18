@@ -51,13 +51,16 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override void OnAppearing(params object[] datas)
         {
-            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
             IsEditMode = false;
 
-            if (_matchList?.Count > 0 && timeSpan.TotalMinutes < 15) // 15분 마다 갱신
+            if (BookmarkedMatchesTaskLoaderNotifier.IsSuccessfullyCompleted)
+            {
+                PullToRefresh();
                 return;
+            }
 
-            BookmarkedMatchesTaskLoaderNotifier.Load(InitBookmarkedMatchesAsync);
+            if (BookmarkedMatchesTaskLoaderNotifier.IsNotStarted)
+                BookmarkedMatchesTaskLoaderNotifier.Load(InitBookmarkedMatchesAsync);
         }
 
         public override void OnDisAppearing(params object[] datas)
@@ -193,14 +196,14 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 return;
 
             SetIsBusy(true);
+            IsListViewRefrashing = true;
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
-
-            if (timeSpan.TotalMinutes > 5) // 갱신 주기: 5분
+            if (timeSpan.TotalMinutes > 1) // 갱신 주기: 1분
                 await InitBookmarkedMatchesAsync();
 
+            IsListViewRefrashing = false;
             SetIsBusy(false);
-            IsListViewRefrashing = IsBusy;
         }
 
         #endregion Commands
@@ -252,47 +255,20 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                   .Select(elem => elem.Id).ToList();
             }
 
-            if (needRefrashMatchIndexes.Count > 0)
+            var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
+
+            // Update Matches
+            foreach (var match in updatedMatches)
             {
-                // call server
-                var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
-                {
-                    SerializeType = SerializeType.MessagePack,
-                    MethodType = WebMethodType.POST,
-                    BaseUrl = AppConfig.PoseWebBaseUrl,
-                    ServiceUrl = FootballProxy.ServiceUrl,
-                    SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_INDEX,
-                    PostData = new I_GET_FIXTURES_BY_INDEX
-                    {
-                        FixtureIds = needRefrashMatchIndexes.ToArray(),
-                    }
-                });
+                await _bookmarkService.UpdateBookmark<FootballMatchInfo>(match);
+                needRefrashMatchIndexes.Remove(match.Id);
+            }
 
-                if (server_result == null)
-                    throw new Exception(LocalizeString.Occur_Error);
-
-                // Update Matches
-                foreach (var fixtureDetail in server_result.Fixtures)
-                {
-                    var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixtureDetail);
-
-                    var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == fixtureDetail.FixtureId);
-                    foundMatchInfo.MatchStatus = convertedMatchInfo.MatchStatus;
-                    foundMatchInfo.MatchTime = convertedMatchInfo.MatchTime;
-                    foundMatchInfo.HomeScore = convertedMatchInfo.HomeScore;
-                    foundMatchInfo.AwayScore = convertedMatchInfo.AwayScore;
-
-                    await _bookmarkService.UpdateBookmark<FootballMatchInfo>(foundMatchInfo);
-                    needRefrashMatchIndexes.Remove(foundMatchInfo.Id);
-                }
-
-                // Delete Invalid Matches
-                foreach (var deletedIndex in needRefrashMatchIndexes)
-                {
-                    var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == deletedIndex);
-
-                    await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match, false);
-                }
+            // Delete Invalid Matches
+            foreach (var deletedIndex in needRefrashMatchIndexes)
+            {
+                var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == deletedIndex);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match, false);
             }
 
             _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())

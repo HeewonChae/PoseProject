@@ -104,8 +104,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Fields
 
-        private DateTime _LastUpdateTime = DateTime.Now;
-
+        private DateTime _LastUpdateTime = DateTime.UtcNow;
         private FootballMatchInfo _matchInfo;
         private int _selectedViewIndex;
         private FootballMatchDetailOverviewModel _overviewModel;
@@ -159,7 +158,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            MatchInfo = await UpdateMatchInfo();
+            var timeSpan = DateTime.UtcNow - _LastUpdateTime;
+            if (timeSpan.TotalMinutes > 1)
+                await UpdateMatchInfo();
 
             SetIsBusy(false);
         }
@@ -302,18 +303,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             }
         }
 
-        private async Task<FootballMatchInfo> UpdateMatchInfo()
+        private async Task UpdateMatchInfo()
         {
             SetIsBusy(true);
 
             await Task.Delay(300);
-
-            var timeSpan = DateTime.Now - _LastUpdateTime;
-            if (timeSpan.TotalMinutes < 5)
-            {
-                SetIsBusy(false);
-                return MatchInfo;
-            }
 
             // call server
             var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
@@ -329,20 +323,21 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 }
             });
 
+            _LastUpdateTime = DateTime.UtcNow;
+
             if (server_result == null || server_result.Fixtures.Length == 0)
             {
                 SetIsBusy(false);
-                return MatchInfo;
+                return;
             }
 
             var matchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(server_result.Fixtures[0]);
             matchInfo.IsBookmarked = MatchInfo.IsBookmarked;
             matchInfo.IsAlarmed = MatchInfo.IsAlarmed;
-            AlarmIcon.IsSelected = MatchInfo.IsAlarmed;
 
-            _LastUpdateTime = DateTime.Now;
+            MatchInfo = matchInfo;
 
-            return matchInfo;
+            SetIsBusy(false);
         }
 
         #endregion Methods

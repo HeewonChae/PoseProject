@@ -18,14 +18,14 @@ namespace PoseSportsPredict.Views.CustomViews
             typeof(double),
             typeof(SimpleGaugeBar),
             -1.0,
-            propertyChanged: OnPropertyChanged);
+            propertyChanged: (bindable, oldValue, newValue) => (bindable as SimpleGaugeBar).ReloadView());
 
         public static readonly BindableProperty CurValueProperty = BindableProperty.Create(
             nameof(CurValue),
             typeof(double),
             typeof(SimpleGaugeBar),
             -1.0,
-            propertyChanged: OnPropertyChanged);
+            propertyChanged: (bindable, oldValue, newValue) => (bindable as SimpleGaugeBar).ReloadView());
 
         public static readonly BindableProperty IsAnimationProperty = BindableProperty.Create(
             nameof(IsAnimation),
@@ -51,11 +51,11 @@ namespace PoseSportsPredict.Views.CustomViews
             typeof(SimpleGaugeBar),
             Color.Gray);
 
-        private static void OnPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as SimpleGaugeBar;
-            view.ReloadView();
-        }
+        public static readonly BindableProperty IsReverseProperty = BindableProperty.Create(
+            nameof(IsReverse),
+            typeof(bool),
+            typeof(SimpleGaugeBar),
+            false);
 
         public double MaxValue { get { return (double)GetValue(MaxValueProperty); } set { SetValue(MaxValueProperty, value); } }
         public double CurValue { get { return (double)GetValue(CurValueProperty); } set { SetValue(CurValueProperty, value); } }
@@ -63,6 +63,7 @@ namespace PoseSportsPredict.Views.CustomViews
         public Color GaugeColor1 { get { return (Color)GetValue(GaugeColor1Property); } set { SetValue(GaugeColor1Property, value); } }
         public Color GaugeColor2 { get { return (Color)GetValue(GaugeColor2Property); } set { SetValue(GaugeColor2Property, value); } }
         public Color GaugeBackgroundColor { get { return (Color)GetValue(GaugeBackgroundColorProperty); } set { SetValue(GaugeBackgroundColorProperty, value); } }
+        public bool IsReverse { get { return (bool)GetValue(IsReverseProperty); } set { SetValue(IsReverseProperty, value); } }
 
         #region Fields
 
@@ -113,16 +114,17 @@ namespace PoseSportsPredict.Views.CustomViews
             _frame.BackgroundColor = GaugeBackgroundColor;
 
             var gaugeRate = MaxValue == 0 ? 0 : CurValue / MaxValue;
-            GridLength gaugeLenth = new GridLength(gaugeRate, GridUnitType.Star);
-            GridLength ungaugeLenth = new GridLength((1 - gaugeRate), GridUnitType.Star);
-
-            ColumnDefinition gaugeColumn = _column1;
-            ColumnDefinition ungaugeColumn = _column2;
-            gaugeColumn.Width = gaugeLenth;
-            ungaugeColumn.Width = ungaugeLenth;
+            _column1.Width = new GridLength(gaugeRate, GridUnitType.Star);
+            _column2.Width = new GridLength((1 - gaugeRate), GridUnitType.Star);
 
             // Gauge
-            _gaugeBar.BackgroundColor = gaugeRate > 0.5 ? GaugeColor1 : GaugeColor2;
+            if (gaugeRate == 0.5)
+                _gaugeBar.BackgroundColor = GaugeColor2;
+            else
+                _gaugeBar.BackgroundColor =
+                    gaugeRate > 0.5 ?
+                    IsReverse ? GaugeColor2 : GaugeColor1 :
+                    IsReverse ? GaugeColor1 : GaugeColor2;
 
             _frame.CornerRadius = FlowDirection == FlowDirection.LeftToRight ? new CornerRadius(0, 5, 0, 5) : new CornerRadius(5, 0, 5, 0);
             _gaugeBar.CornerRadius = FlowDirection == FlowDirection.LeftToRight ? new CornerRadius(0, 5, 0, 5) : new CornerRadius(5, 0, 5, 0);

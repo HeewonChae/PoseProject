@@ -142,7 +142,7 @@ namespace SportsAdminTool
             this._progRing_collectDatasAndPredict.IsActive = false;
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(3) - DateTime.Now; // 2시간 후
+            TimeSpan ts = DateTime.Now.AddHours(3) - DateTime.Now; // 3시간 후
             alarm.SetAlarm((long)ts.TotalMilliseconds);
         }
 
@@ -170,7 +170,7 @@ namespace SportsAdminTool
             this._lbl_check_completed_fixtures.Content = org_bannerText;
             this._progRing_check_completed_fixtures.IsActive = false;
 
-            TimeSpan ts = DateTime.Now.AddMinutes(5) - DateTime.Now; // 5분 후
+            TimeSpan ts = DateTime.Now.AddMinutes(2) - DateTime.Now; // 2분 후
             Singleton.Get<FootballAlarm.CheckCompletedFixtures>().SetAlarm((long)ts.TotalMilliseconds);
         }
 

@@ -272,6 +272,13 @@
       "CountryName": "Belgium",
       "ConvertTeamId": 5817,
       "ConvertTeamName": "Harelbeke"
+    },
+    {
+      "Index": 42,
+      "TeamName": "Kopetdag Asgabat",
+      "CountryName": "Turkmenistan",
+      "ConvertTeamId": 13159,
+      "ConvertTeamName": "Aşgabat"
     }
   ]
 }

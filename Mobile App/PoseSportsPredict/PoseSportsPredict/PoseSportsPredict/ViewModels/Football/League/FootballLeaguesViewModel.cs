@@ -43,10 +43,8 @@ namespace PoseSportsPredict.ViewModels.Football.League
         {
             IsSelected = true;
 
-            if (!LeaguesTaskLoaderNotifier.IsNotStarted)
-                return;
-
-            LeaguesTaskLoaderNotifier.Load(InitLeaguesAsync);
+            if (LeaguesTaskLoaderNotifier.IsNotStarted)
+                LeaguesTaskLoaderNotifier.Load(InitLeaguesAsync);
         }
 
         public override void OnDisAppearing(params object[] datas)
