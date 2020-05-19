@@ -36,16 +36,16 @@ namespace SportsWebService.Commands.Football
                 ErrorHandler.OccurException(RowCode.Invalid_Input);
 
             IEnumerable<FootballDB.OutputModels.DB_FootballFixtureDetail> db_output;
-            using (var P_SELECT_FIXTURES_DETAIL_BY_INDEX = new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_INDEX())
+            using (var P_SELECT_FIXTURES_BY_INDEX = new FootballDB.Procedures.P_SELECT_FIXTURES_BY_INDEX())
             {
-                P_SELECT_FIXTURES_DETAIL_BY_INDEX.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_INDEX.Input
+                P_SELECT_FIXTURES_BY_INDEX.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_BY_INDEX.Input
                 {
                     Indexes = input.FixtureIds.ToArray(),
                 });
 
-                db_output = P_SELECT_FIXTURES_DETAIL_BY_INDEX.OnQuery();
+                db_output = P_SELECT_FIXTURES_BY_INDEX.OnQuery();
 
-                if (P_SELECT_FIXTURES_DETAIL_BY_INDEX.EntityStatus != null || db_output == null)
+                if (P_SELECT_FIXTURES_BY_INDEX.EntityStatus != null || db_output == null)
                     ErrorHandler.OccurException(RowCode.DB_Failed_Error);
             }
 

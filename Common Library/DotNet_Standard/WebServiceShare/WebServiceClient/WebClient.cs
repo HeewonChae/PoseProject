@@ -66,6 +66,38 @@ namespace WebServiceShare.WebServiceClient
                 return await SendAsync<TOut>(flurlRequest, requestContext);
         }
 
+        /// <summary>
+        /// Get Packet RawData
+        /// </summary>
+        /// <param name="requestContext"></param>
+        /// <param name="headers"></param>
+        /// <returns></returns>
+        public static async Task<byte[]> RequestRawAsync(WebRequestContext requestContext, params (string name, object value)[] headers)
+        {
+            var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
+            var flurlRequest = new FlurlClient(endPointAddr).Request();
+
+            if (headers != null)
+            {
+                foreach (var (name, value) in headers)
+                {
+                    flurlRequest.WithHeader(name, value);
+                }
+            }
+
+            var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
+            flurlRequest.AppendPathSegments(convertedSegments);
+
+            List<(string, string)> convertedParams = ConvertQueryParams(requestContext.QueryParamGroup, requestContext.QueryParamData);
+            foreach (var (name, value) in convertedParams)
+            {
+                flurlRequest.SetQueryParam(name, value);
+            }
+
+            requestContext.DataSerialize();
+            return await SendAsync(flurlRequest, requestContext);
+        }
+
         private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
         {
             TOut result = default;
@@ -116,6 +148,40 @@ namespace WebServiceShare.WebServiceClient
             }
 
             return result;
+        }
+
+        private static async Task<byte[]> SendAsync(IFlurlRequest flurlRequest, WebRequestContext requestContext)
+        {
+            byte[] rawData = null;
+
+            try
+            {
+                requestContext.AttemptCnt++;
+
+                if (requestContext.MethodType == WebMethodType.GET)
+                {
+                    rawData = await flurlRequest.GetBytesAsync();
+                }
+                else if (requestContext.MethodType == WebMethodType.POST)
+                {
+                    rawData = await flurlRequest
+                        .PostAsync(new ByteArrayContent(requestContext))
+                        .ReceiveBytes();
+                }
+            }
+            catch (FlurlHttpException flurlException)
+            {
+                if (requestContext.AttemptCnt < WebConfig.ReTryCount)
+                    rawData = await RequestRetryPolicy(flurlException, flurlRequest, requestContext);
+                else
+                    await _exceptionHandler?.Invoke(flurlException);
+            }
+            catch (Exception ex)
+            {
+                await _exceptionHandler?.Invoke(ex);
+            }
+
+            return rawData;
         }
 
         private static async Task<TOut> EncryptSendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
@@ -220,14 +286,30 @@ namespace WebServiceShare.WebServiceClient
                 && flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
             {
                 _exceptionHandler?.Invoke(flurlException);
-                return result;
             }
             else if (flurlException.Call.Response != null)// 재시도
             {
                 if (requestContext.NeedEncrypt)
-                    return await EncryptSendAsync<TOut>(flurlRequest, requestContext);
+                    result = await EncryptSendAsync<TOut>(flurlRequest, requestContext);
                 else
-                    return await SendAsync<TOut>(flurlRequest, requestContext);
+                    result = await SendAsync<TOut>(flurlRequest, requestContext);
+            }
+
+            return result;
+        }
+
+        private static async Task<byte[]> RequestRetryPolicy(FlurlHttpException flurlException, IFlurlRequest flurlRequest, WebRequestContext requestContext)
+        {
+            byte[] result = default;
+
+            if (flurlException.Call.Response != null
+                && flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)
+            {
+                _exceptionHandler?.Invoke(flurlException);
+            }
+            else if (flurlException.Call.Response != null)// 재시도
+            {
+                result = await SendAsync(flurlRequest, requestContext);
             }
 
             return result;

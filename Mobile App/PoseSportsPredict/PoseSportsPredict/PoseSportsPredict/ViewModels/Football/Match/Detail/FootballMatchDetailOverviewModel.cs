@@ -26,6 +26,8 @@ using System.Windows.Input;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
+using PoseSportsPredict.InfraStructure.Cache;
+using PoseSportsPredict.Services.Cache.Loader;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
@@ -50,7 +52,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -96,9 +98,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public FootballMatchDetailOverviewModel(
             FootballMatchDetailOverview view,
-            IWebApiService webApiService) : base(view)
+            ICacheService cacheService) : base(view)
         {
-            _webApiService = webApiService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -120,18 +122,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_MATCH_OVERVIEW>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_MATCH_OVERVIEW,
-                PostData = new I_GET_MATCH_OVERVIEW
-                {
-                    FixtureId = _matchInfo.Id,
-                }
-            });
+            var server_result = await _cacheService.GetAsync<O_GET_MATCH_OVERVIEW>(
+              loader: () =>
+              {
+                  return FootballDataLoader.MatchOverview(_matchInfo.Id);
+              },
+              key: $"P_GET_MATCH_OVERVIEW:{_matchInfo.PrimaryKey}",
+              expireTime: DateTime.Now.Date.AddDays(1) - DateTime.Now,
+              serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);

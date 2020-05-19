@@ -30,8 +30,11 @@ namespace Pose_sports_statistics.Controls
                     RedisKeyMaker.FootballInterestedFixture()
                 );
 
+            if (interestedFixtures == null)
+                return null;
+
             // step1. 시간 순으로 정렬
-            var sortedByStartDate = interestedFixtures.OrderBy(elem => elem.MatchTime);
+            var sortedByStartDate = interestedFixtures?.OrderBy(elem => elem.MatchTime);
 
             // step2. 데이터를 리그, 시작시간으로 그룹화
             var group_query = sortedByStartDate.GroupBy(elem => new { League = elem.LeagueId, StartTime = elem.MatchTime });

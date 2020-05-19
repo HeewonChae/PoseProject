@@ -1,9 +1,11 @@
 ﻿using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Sharpnado.Presentation.Forms;
@@ -38,7 +40,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -66,9 +68,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public FootballMatchDetailOddsViewModel(
             FootballMatchDetailOddsView view,
-            IWebApiService webApiService) : base(view)
+            ICacheService cacheService) : base(view)
         {
-            _webApiService = webApiService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -90,18 +92,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_MATCH_ODDS>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_MATCH_ODDS,
-                PostData = new I_GET_MATCH_ODDS
-                {
-                    FixtureId = _matchInfo.Id,
-                }
-            });
+            var server_result = await _cacheService.GetAsync<O_GET_MATCH_ODDS>(
+              loader: () =>
+              {
+                  return FootballDataLoader.MatchOdds(_matchInfo.Id);
+              },
+              key: $"P_GET_MATCH_ODDS:{_matchInfo.PrimaryKey}",
+              expireTime: DateTime.Now.Date.AddDays(1) - DateTime.Now,
+              serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);

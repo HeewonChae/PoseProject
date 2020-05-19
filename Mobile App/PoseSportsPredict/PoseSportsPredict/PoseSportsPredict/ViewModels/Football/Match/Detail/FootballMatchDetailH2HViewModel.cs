@@ -1,10 +1,12 @@
 ﻿using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Football.Enums;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Team.GoalStatistics;
 using PoseSportsPredict.Views.Football.Match.Detail;
@@ -40,7 +42,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -68,9 +70,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public FootballMatchDetailH2HViewModel(
             FootballMatchDetailH2HView view,
-            IWebApiService webApiService) : base(view)
+            ICacheService cacheService) : base(view)
         {
-            _webApiService = webApiService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -92,20 +94,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_MATCH_H2H>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_MATCH_H2H,
-                PostData = new I_GET_MATCH_H2H
-                {
-                    FixtureId = _matchInfo.Id,
-                    HomeTeamId = _matchInfo.HomeTeamId,
-                    AwayTeamId = _matchInfo.AwayTeamId,
-                }
-            });
+            var server_result = await _cacheService.GetAsync<O_GET_MATCH_H2H>(
+               loader: () =>
+               {
+                   return FootballDataLoader.MatchH2H(
+                       _matchInfo.Id,
+                       _matchInfo.HomeTeamId,
+                       _matchInfo.AwayTeamId);
+               },
+               key: $"P_GET_MATCH_H2H:{_matchInfo.PrimaryKey}",
+               expireTime: DateTime.Now.Date.AddDays(1) - DateTime.Now,
+               serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);

@@ -3,6 +3,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -11,6 +12,7 @@ using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Match;
@@ -64,9 +66,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         #region Services
 
-        private IWebApiService _webApiService;
         private IBookmarkService _bookmarkService;
         private INotificationService _notificationService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -78,7 +80,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
         private bool _alarmEditMode;
-        private MatchFilterType _curMatchFilterType = MatchFilterType.SortByLeague;
+        private MatchFilterType _curMatchFilterType;
         private bool _isListViewRefrashing;
 
         #endregion Fields
@@ -203,13 +205,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public FootballMatchesViewModel(
             FootballMatchesPage page,
-            IWebApiService webApiService,
             IBookmarkService bookmarkService,
-            INotificationService notificationService) : base(page)
+            INotificationService notificationService,
+            ICacheService cacheService) : base(page)
         {
-            _webApiService = webApiService;
             _bookmarkService = bookmarkService;
             _notificationService = notificationService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -220,13 +222,21 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public FootballMatchesViewModel SetMatchDate(DateTime date)
         {
-            if (_matchDate == date)
+            if (_matchDate == date.Date)
                 return this;
 
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
             MatchListViewModels = null;
-            _matchDate = date;
+            _curMatchFilterType = MatchFilterType.SortByLeague;
+            _matchDate = date.Date;
 
+            UpdatePageTitle();
+
+            return this;
+        }
+
+        public void UpdatePageTitle()
+        {
             if (_matchDate == DateTime.Now.Date.AddDays(-1))
             {
                 this.CoupledPage.Title = LocalizeString.Yesterday;
@@ -243,7 +253,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             {
                 this.CoupledPage.Title = _matchDate.ToString("ddd dd MMM");
             }
-            return this;
         }
 
         private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchesAsync()
@@ -252,19 +261,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             await Task.Delay(300);
 
-            var result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_DATE>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_DATE,
-                PostData = new I_GET_FIXTURES_BY_DATE
+            TimeSpan expireTime = _matchDate == DateTime.Now.Date ? TimeSpan.FromMinutes(1) : DateTime.Now.Date.AddDays(1) - DateTime.Now;
+            var result = await _cacheService.GetAsync<O_GET_FIXTURES_BY_DATE>(
+                loader: () =>
                 {
-                    StartTime = _matchDate.ToUniversalTime(),
-                    EndTime = _matchDate.ToUniversalTime().AddDays(1).AddSeconds(-1),
-                }
-            });
+                    return FootballDataLoader.FixturesByDate(
+                        _matchDate.ToUniversalTime(),
+                        _matchDate.AddDays(1).ToUniversalTime());
+                },
+                key: $"P_GET_FIXTURES_BY_DATE:{_matchDate.ToString("yyyyMMdd")}",
+                expireTime: expireTime,
+                serializeType: SerializeType.MessagePack);
 
             if (result == null)
                 throw new Exception(LocalizeString.Occur_Error);
@@ -309,6 +316,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                    && elem.MatchStatus != FootballMatchStatusType.AET
                    && elem.MatchStatus != FootballMatchStatusType.PEN)
                    .Select(elem => elem.Id).ToList();
+
+            if (needRefrashMatchIndexes.Count() == 0)
+            {
+                _lastUpdateTime = DateTime.UtcNow;
+                this.SetIsBusy(false);
+                return;
+            }
 
             var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
             foreach (var match in updatedMatches)

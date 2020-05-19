@@ -2,11 +2,13 @@
 using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Football.Enums;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -46,7 +48,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -107,9 +109,9 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public FootballTeamDetailOverviewModel(
             FootballTeamDetailOverview view,
-            IWebApiService webApiService) : base(view)
+            ICacheService cacheService) : base(view)
         {
-            _webApiService = webApiService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -131,18 +133,14 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_TEAM_OVERVIEW>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_TEAM_OVERVIEW,
-                PostData = new I_GET_TEAM_OVERVIEW
+            var server_result = await _cacheService.GetAsync<O_GET_TEAM_OVERVIEW>(
+                loader: () =>
                 {
-                    TeamId = _teamInfo.TeamId,
-                }
-            });
+                    return FootballDataLoader.TeamOverview(_teamInfo.TeamId);
+                },
+                key: $"P_GET_TEAM_OVERVIEW:{_teamInfo.PrimaryKey}",
+                expireTime: DateTime.Now.Date.AddDays(1) - DateTime.Now,
+                serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);

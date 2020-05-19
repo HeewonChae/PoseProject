@@ -2,12 +2,14 @@
 using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.League.Standings;
 using PoseSportsPredict.ViewModels.Football.Team;
@@ -48,7 +50,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -94,9 +96,9 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public FootballLeagueDetailOverviewModel(
             FootballLeagueDetailOverview view,
-            IWebApiService webApiService) : base(view)
+            ICacheService cacheService) : base(view)
         {
-            _webApiService = webApiService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -118,19 +120,16 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_LEAGUE_OVERVIEW>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_LEAGUE_OVERVIEW,
-                PostData = new I_GET_LEAGUE_OVERVIEW
+            var server_result = await _cacheService.GetAsync<O_GET_LEAGUE_OVERVIEW>(
+                loader: () =>
                 {
-                    CountryName = LeagueInfo.CountryName,
-                    LeagueName = LeagueInfo.LeagueName
-                }
-            });
+                    return FootballDataLoader.LeagueOverview(
+                        _leagueInfo.CountryName,
+                        _leagueInfo.LeagueName);
+                },
+                key: $"P_GET_LEAGUE_OVERVIEW:{_leagueInfo.PrimaryKey}",
+                expireTime: DateTime.Now.Date.AddDays(1) - DateTime.Now,
+                serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);

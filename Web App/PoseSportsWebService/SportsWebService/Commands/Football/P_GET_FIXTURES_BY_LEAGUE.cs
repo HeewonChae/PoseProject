@@ -38,19 +38,19 @@ namespace SportsWebService.Commands.Football
                 || string.IsNullOrEmpty(input.LeagueName))
                 ErrorHandler.OccurException(RowCode.Invalid_Input);
 
-            FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.Output db_output;
-            using (var P_SELECT_FIXTURES_DETAIL_BY_LEAGUE = new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_LEAGUE())
+            FootballDB.Procedures.P_SELECT_FIXTURES_BY_LEAGUE.Output db_output;
+            using (var P_SELECT_FIXTURES_BY_LEAGUE = new FootballDB.Procedures.P_SELECT_FIXTURES_BY_LEAGUE())
             {
-                P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.Input
+                P_SELECT_FIXTURES_BY_LEAGUE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_BY_LEAGUE.Input
                 {
                     SearchFixtureStatusType = input.SearchFixtureStatusType,
                     CountryName = input.CountryName,
                     LeagueName = input.LeagueName,
                 });
 
-                db_output = P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.OnQuery();
+                db_output = P_SELECT_FIXTURES_BY_LEAGUE.OnQuery();
 
-                if (P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.EntityStatus != null || db_output.Result != 0)
+                if (P_SELECT_FIXTURES_BY_LEAGUE.EntityStatus != null || db_output.Result != 0)
                     ErrorHandler.OccurException(RowCode.DB_Failed_Error + db_output.Result);
             }
 

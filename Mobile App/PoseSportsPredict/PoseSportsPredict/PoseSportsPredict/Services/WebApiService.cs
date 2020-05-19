@@ -140,6 +140,18 @@ namespace PoseSportsPredict.Services
             return result;
         }
 
+        public async Task<byte[]> RequestRawAsyncWithToken(WebRequestContext reqContext)
+        {
+            byte[] result = null;
+
+            if (!await CheckInternetConnection() || !await RefrashToken())
+                return result;
+
+            result = await WebClient.RequestRawAsync(reqContext, (PoseHeader.HEADER_NAME, ClientContext.Header));
+
+            return result;
+        }
+
         #endregion IWebApiService
 
         public static async Task<bool> CheckInternetConnection()

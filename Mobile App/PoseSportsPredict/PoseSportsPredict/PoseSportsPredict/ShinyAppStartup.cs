@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PoseCrypto;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -26,13 +25,14 @@ using PoseSportsPredict.Views.Football.League.Detail;
 using PoseSportsPredict.Views.Football.Match;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Team;
-using PoseSportsPredict.Views.Football.Team.GoalStatistics;
 using Shiny;
 using System;
 using WebServiceShare.ExternAuthentication;
 using System.Threading.Tasks;
 using Shiny.Jobs;
 using System.Threading;
+using PoseSportsPredict.Services.Cache;
+using PoseSportsPredict.InfraStructure.Cache;
 
 namespace PoseSportsPredict
 {
@@ -89,6 +89,7 @@ namespace PoseSportsPredict
             services.AddSingleton<IOAuthService, ExternOAuthService>();
             services.AddSingleton<IBookmarkService, BookmarkService>();
             services.AddSingleton<INotificationService, NotificationService>();
+            services.AddSingleton<ICacheService, CacheService>();
         }
 
         private void RegisterConverters(IServiceCollection services)

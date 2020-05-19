@@ -1,6 +1,6 @@
-﻿using PoseSportsPredict.InfraStructure;
-using PoseSportsPredict.InfraStructure.SQLite;
+﻿using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Models;
+using PoseSportsPredict.Models.Cache;
 using PoseSportsPredict.Models.Football;
 using SQLite;
 using System;
@@ -26,6 +26,7 @@ namespace PoseSportsPredict.Utilities.SQLite.SQLiteConnection
             Connection.CreateTableAsync<FootballTeamInfo>().Wait();
             Connection.CreateTableAsync<FootballRecentSearch>().Wait();
             Connection.CreateTableAsync<NotificationInfo>().Wait();
+            Connection.CreateTableAsync<AppCacheData>().Wait();
         }
 
         public SQLiteContext()

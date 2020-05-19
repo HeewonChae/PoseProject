@@ -94,12 +94,12 @@
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_H2H.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_ODDS.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_TEAM_OVERVIEW.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_LEAGUE.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_LEAGUE.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_OVERVIEW.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_DATE.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_INDEX.cs" />
-    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_DETAIL_BY_TEAM.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_DATE.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_INDEX.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_TEAM.cs" />
     <Compile Include="FootballDB\Tables\Country.cs" />
     <Compile Include="FootballDB\Tables\LeagueCoverage.cs" />
     <Compile Include="FootballDB\Tables\Fixture.cs" />

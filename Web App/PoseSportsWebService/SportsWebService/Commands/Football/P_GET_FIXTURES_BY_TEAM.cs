@@ -37,18 +37,18 @@ namespace SportsWebService.Commands.Football
                 || input.TeamId == 0)
                 ErrorHandler.OccurException(RowCode.Invalid_Input);
 
-            FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_TEAM.Output db_output;
-            using (var P_SELECT_FIXTURES_DETAIL_BY_TEAM = new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_TEAM())
+            FootballDB.Procedures.P_SELECT_FIXTURES_BY_TEAM.Output db_output;
+            using (var P_SELECT_FIXTURES_BY_TEAM = new FootballDB.Procedures.P_SELECT_FIXTURES_BY_TEAM())
             {
-                P_SELECT_FIXTURES_DETAIL_BY_TEAM.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_TEAM.Input
+                P_SELECT_FIXTURES_BY_TEAM.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_BY_TEAM.Input
                 {
                     SearchFixtureStatusType = input.SearchFixtureStatusType,
                     TeamId = input.TeamId,
                 });
 
-                db_output = P_SELECT_FIXTURES_DETAIL_BY_TEAM.OnQuery();
+                db_output = P_SELECT_FIXTURES_BY_TEAM.OnQuery();
 
-                if (P_SELECT_FIXTURES_DETAIL_BY_TEAM.EntityStatus != null || db_output.Result != 0)
+                if (P_SELECT_FIXTURES_BY_TEAM.EntityStatus != null || db_output.Result != 0)
                     ErrorHandler.OccurException(RowCode.DB_Failed_Error + db_output.Result);
             }
 

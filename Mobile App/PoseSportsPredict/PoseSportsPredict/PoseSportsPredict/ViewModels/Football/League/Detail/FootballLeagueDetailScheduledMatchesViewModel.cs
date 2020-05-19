@@ -3,11 +3,13 @@ using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.Views.Football.League.Detail;
@@ -48,7 +50,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
         private IBookmarkService _bookmarkService;
         private INotificationService _notificationService;
 
@@ -112,13 +114,13 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public FootballLeagueDetailScheduledMatchesViewModel(
             FootballLeagueDetailScheduledMatchesView view,
-            IWebApiService webApiService,
             IBookmarkService bookmarkService,
-            INotificationService notificationService) : base(view)
+            INotificationService notificationService,
+            ICacheService cacheService) : base(view)
         {
-            _webApiService = webApiService;
             _bookmarkService = bookmarkService;
             _notificationService = notificationService;
+            _cacheService = cacheService;
 
             OnInitializeView();
         }
@@ -197,20 +199,17 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_LEAGUE>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_LEAGUE,
-                PostData = new I_GET_FIXTURES_BY_LEAGUE
+            var server_result = await _cacheService.GetAsync<O_GET_FIXTURES_BY_LEAGUE>(
+                loader: () =>
                 {
-                    SearchFixtureStatusType = SearchFixtureStatusType.Scheduled,
-                    CountryName = _leagueInfo.CountryName,
-                    LeagueName = _leagueInfo.LeagueName,
-                }
-            });
+                    return FootballDataLoader.FixturesByLeague(
+                        _leagueInfo.CountryName,
+                        _leagueInfo.LeagueName,
+                        SearchFixtureStatusType.Scheduled);
+                },
+                key: $"P_GET_FIXTURES_BY_LEAGUE:{_leagueInfo.PrimaryKey}:{SearchFixtureStatusType.Scheduled}",
+                expireTime: TimeSpan.FromMinutes(1),
+                serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);

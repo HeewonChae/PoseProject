@@ -36,9 +36,9 @@ namespace SportsWebService.Commands.Football
                 ErrorHandler.OccurException(RowCode.Invalid_Input);
 
             IEnumerable<FootballDB.OutputModels.DB_FootballFixtureDetail> db_output;
-            using (var P_SELECT_FIXTURES_BY_DATE = new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_DATE())
+            using (var P_SELECT_FIXTURES_BY_DATE = new FootballDB.Procedures.P_SELECT_FIXTURES_BY_DATE())
             {
-                P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_DETAIL_BY_DATE.Input
+                P_SELECT_FIXTURES_BY_DATE.SetInput(new FootballDB.Procedures.P_SELECT_FIXTURES_BY_DATE.Input
                 {
                     StartTime = input.StartTime,
                     EndTime = input.EndTime,

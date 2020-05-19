@@ -19,6 +19,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override bool OnInitializeView(params object[] datas)
         {
+            _curDate = DateTime.Now.Date;
+
+            var tabbedPage = this.CoupledPage as TabbedPage;
+            tabbedPage.Children.Clear();
+
+            for (int i = -3; i <= 3; i++)
+            {
+                tabbedPage.Children.Add(
+                    ShinyHost.Resolve<FootballMatchesViewModel>()
+                    .SetMatchDate(_curDate.AddDays(i)).CoupledPage);
+            }
+
+            tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today
+
             return true;
         }
 
@@ -149,16 +163,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 _curDate = DateTime.Now.Date;
 
                 var tabbedPage = this.CoupledPage as TabbedPage;
-                tabbedPage.Children.Clear();
-
-                for (int i = -3; i <= 3; i++)
+                foreach (var page in tabbedPage.Children)
                 {
-                    tabbedPage.Children.Add(
-                        ShinyHost.Resolve<FootballMatchesViewModel>()
-                        .SetMatchDate(_curDate.AddDays(i)).CoupledPage);
+                    if (page.BindingContext is FootballMatchesViewModel viewModel)
+                    {
+                        viewModel.UpdatePageTitle();
+                    }
                 }
-
-                tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today
             }
         }
 

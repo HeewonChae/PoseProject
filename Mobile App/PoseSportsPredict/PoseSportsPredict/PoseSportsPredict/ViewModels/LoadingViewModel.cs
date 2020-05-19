@@ -1,6 +1,7 @@
 ﻿using PoseCrypto;
 using PosePacket.Proxy;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
@@ -63,6 +64,9 @@ namespace PoseSportsPredict.ViewModels
             // Notify Init
             await _notificationService.Initialize();
 
+            // Delete ExpiredCachedData
+            await _cacheService.DeleteExpiredCachedDataAsync();
+
             if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin(false))
             {
@@ -81,6 +85,7 @@ namespace PoseSportsPredict.ViewModels
         private IWebApiService _webApiService;
         private IOAuthService _OAuthService;
         private INotificationService _notificationService;
+        private ICacheService _cacheService;
 
         #endregion Services
 
@@ -100,11 +105,13 @@ namespace PoseSportsPredict.ViewModels
             LoadingPage coupledPage,
             IWebApiService webApiService,
             IOAuthService OAuthService,
-            INotificationService notificationService) : base(coupledPage)
+            INotificationService notificationService,
+            ICacheService cacheService) : base(coupledPage)
         {
             _notificationService = notificationService;
             _webApiService = webApiService;
             _OAuthService = OAuthService;
+            _cacheService = cacheService;
 
             if (OnInitializeView())
             {

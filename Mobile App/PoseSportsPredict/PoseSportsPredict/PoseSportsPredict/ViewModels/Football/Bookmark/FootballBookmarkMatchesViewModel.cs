@@ -200,7 +200,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
             if (timeSpan.TotalMinutes > 1) // 갱신 주기: 1분
-                await InitBookmarkedMatchesAsync();
+                await RefrashBookmarkedMatchesAsync();
 
             IsListViewRefrashing = false;
             SetIsBusy(false);
@@ -237,23 +237,11 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             var oldBookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
 
             // Need Refrash MatchInfo
-            List<int> needRefrashMatchIndexes = null;
-            if (_matchList?.Count > 0)
-            {
-                needRefrashMatchIndexes = oldBookmarkedMatches.Where(elem => elem.MatchTime < DateTime.Now
-                   && elem.MatchStatus != FootballMatchStatusType.FT
-                   && elem.MatchStatus != FootballMatchStatusType.AET
-                   && elem.MatchStatus != FootballMatchStatusType.PEN)
-                   .Select(elem => elem.Id).ToList();
-            }
-            else
-            {
-                needRefrashMatchIndexes = oldBookmarkedMatches.Where(elem =>
+            var needRefrashMatchIndexes = oldBookmarkedMatches.Where(elem =>
                   elem.MatchStatus != FootballMatchStatusType.FT
                   && elem.MatchStatus != FootballMatchStatusType.AET
                   && elem.MatchStatus != FootballMatchStatusType.PEN)
                   .Select(elem => elem.Id).ToList();
-            }
 
             var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
 
@@ -276,11 +264,54 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
 
             _lastUpdateTime = DateTime.UtcNow;
-            IsEditMode = false;
 
             SetIsBusy(false);
 
             return _matchList;
+        }
+
+        private async Task RefrashBookmarkedMatchesAsync()
+        {
+            SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
+               && elem.MatchStatus != FootballMatchStatusType.FT
+               && elem.MatchStatus != FootballMatchStatusType.AET
+               && elem.MatchStatus != FootballMatchStatusType.PEN)
+               .Select(elem => elem.Id).ToList();
+
+            if (needRefrashMatchIndexes.Count() == 0)
+            {
+                _lastUpdateTime = DateTime.UtcNow;
+                this.SetIsBusy(false);
+                return;
+            }
+
+            var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
+
+            // Update Matches
+            foreach (var match in updatedMatches)
+            {
+                await _bookmarkService.UpdateBookmark<FootballMatchInfo>(match);
+                needRefrashMatchIndexes.Remove(match.Id);
+            }
+
+            // Delete Invalid Matches
+            foreach (var deletedIndex in needRefrashMatchIndexes)
+            {
+                var foundMatchInfo = _matchList.Find(elem => elem.Id == deletedIndex);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match, false);
+            }
+
+            _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
+                .OrderBy(elem => elem.MatchTime).ToList();
+            BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
+
+            _lastUpdateTime = DateTime.UtcNow;
+
+            SetIsBusy(false);
         }
 
         private async Task<IReadOnlyCollection<FootballMatchInfo>> UpdateBookmarkedMatchesAsync()

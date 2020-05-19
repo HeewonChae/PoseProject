@@ -3,6 +3,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
@@ -10,6 +11,7 @@ using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
@@ -48,7 +50,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         #region Services
 
-        private IWebApiService _webApiService;
+        private ICacheService _cacheService;
         private IBookmarkService _bookmarkService;
         private INotificationService _notificationService;
 
@@ -180,11 +182,11 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
         public FootballTeamDetailScheduledMatchesViewModel(
             FootballTeamDetailScheduledMatchesView view,
-            IWebApiService webApiService,
+            ICacheService cacheService,
             INotificationService notificationService,
             IBookmarkService bookmarkService) : base(view)
         {
-            _webApiService = webApiService;
+            _cacheService = cacheService;
             _notificationService = notificationService;
             _bookmarkService = bookmarkService;
 
@@ -222,19 +224,16 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             await Task.Delay(300);
 
             // call server
-            var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_TEAM>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_TEAM,
-                PostData = new I_GET_FIXTURES_BY_TEAM
-                {
-                    SearchFixtureStatusType = SearchFixtureStatusType.Scheduled,
-                    TeamId = TeamInfo.TeamId,
-                }
-            });
+            var server_result = await _cacheService.GetAsync<O_GET_FIXTURES_BY_TEAM>(
+               loader: () =>
+               {
+                   return FootballDataLoader.FixturesByTeam(
+                       TeamInfo.TeamId,
+                       SearchFixtureStatusType.Scheduled);
+               },
+               key: $"P_GET_FIXTURES_BY_TEAM:{TeamInfo.PrimaryKey}:{SearchFixtureStatusType.Scheduled}",
+               expireTime: TimeSpan.FromMinutes(1),
+               serializeType: SerializeType.MessagePack);
 
             var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
                .Where(elem => elem.HomeTeamId == _teamInfo.TeamId || elem.AwayTeamId == _teamInfo.TeamId);

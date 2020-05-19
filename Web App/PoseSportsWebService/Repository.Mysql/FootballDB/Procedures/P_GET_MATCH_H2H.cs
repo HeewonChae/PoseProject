@@ -53,7 +53,9 @@ namespace Repository.Mysql.FootballDB.Procedures
                     (Contexts.FootballDB footballDB) =>
                     {
                         var fixture = footballDB.Query<Fixture>($"SELECT * FROM fixture WHERE id = {_input.FixtureId}").FirstOrDefault();
-                        if (fixture == null)
+                        if (fixture == null
+                        || fixture.home_team_id != _input.HomeTeamId
+                        || fixture.away_team_id != _input.AwayTeamId)
                         {
                             _output.Result = 1;
                             return;
