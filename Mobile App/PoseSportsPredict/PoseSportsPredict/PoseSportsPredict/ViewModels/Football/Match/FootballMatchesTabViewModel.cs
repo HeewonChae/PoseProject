@@ -1,12 +1,13 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.Views.Football.Match;
 using Shiny;
 using System;
-using System.Diagnostics;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
@@ -32,6 +33,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             }
 
             tabbedPage.CurrentPage = tabbedPage.Children[3]; // Today
+
+            MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this, AppConfig.CULTURE_CHANGED_MSG, OnCultureChanged);
 
             return true;
         }
@@ -169,6 +172,19 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     {
                         viewModel.UpdatePageTitle();
                     }
+                }
+            }
+        }
+
+        private void OnCultureChanged(object sender, CoverageLanguage cl)
+        {
+            var tabbedPage = this.CoupledPage as TabbedPage;
+            foreach (var page in tabbedPage.Children)
+            {
+                if (page.BindingContext is FootballMatchesViewModel viewModel)
+                {
+                    viewModel.UpdatePageTitle();
+                    viewModel.CultureInfoChanged();
                 }
             }
         }

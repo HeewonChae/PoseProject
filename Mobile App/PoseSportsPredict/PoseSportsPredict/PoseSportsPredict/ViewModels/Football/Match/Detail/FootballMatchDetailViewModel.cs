@@ -158,9 +158,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            var timeSpan = DateTime.UtcNow - _LastUpdateTime;
-            if (timeSpan.TotalMinutes > 1)
-                await UpdateMatchInfo();
+            await UpdateMatchInfo();
 
             SetIsBusy(false);
         }
@@ -308,6 +306,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             SetIsBusy(true);
 
             await Task.Delay(300);
+
+            var timeSpan = DateTime.UtcNow - _LastUpdateTime;
+            if (timeSpan.TotalMinutes < 1)
+            {
+                SetIsBusy(false);
+                return;
+            }
 
             // call server
             var server_result = await _webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext

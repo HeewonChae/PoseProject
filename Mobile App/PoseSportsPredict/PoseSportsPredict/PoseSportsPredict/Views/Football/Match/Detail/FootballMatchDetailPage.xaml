@@ -135,17 +135,18 @@
 
                     <!--Header-->
                     <Grid Grid.Row="1"
+                          Margin="10,0"
                           Padding="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="0.1" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="27" />
+                            <ColumnDefinition Width="17" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="27" />
+                            <ColumnDefinition Width="17" />
                         </Grid.ColumnDefinitions>
                         <!--Home Team-->
                         <StackLayout

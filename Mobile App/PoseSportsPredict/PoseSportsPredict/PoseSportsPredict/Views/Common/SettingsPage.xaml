@@ -3,20 +3,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
-             material:MaterialNavigationPage.AppBarTitleTextFontSize="20"
-             material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
-             material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
-             material:MaterialNavigationPage.HasShadow="False"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
+             xmlns:resmodels ="clr-namespace:PoseSportsPredict.Models.Resources.Common"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
+             materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
+             materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
+             materialui:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
+             materialui:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Common.SettingsPage"
-             Title="{x:Static localize:LocalizeString.Settings}">
+             Title="{Binding [Settings], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+             BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+            <!--Language-->
+            <materialui:MaterialCard
+                Elevation="0"
+                Margin="0"
+                Padding="0"
+                IsClickable="True"
+                HeightRequest="71"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <Frame
+                        Margin="15,0"
+                        Padding="7"
+                        CornerRadius="59"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="#29b6f6">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="29"
+                            HeightRequest="29"
+                            Source="ic_global.png">
+                        </Image>
+                    </Frame>
+                    <StackLayout
+                        Margin="0,0,15,0"
+                        Spacing="0"
+                        HorizontalOptions="FillAndExpand">
+                        <materialui:MaterialLabel
+                            VerticalOptions="EndAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="End"
+                            TypeScale="Caption"
+                            TextColor="{StaticResource CustomGrey}"
+                            Text="{Binding [Select_Interface_Language], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
+                        <combobox:SfComboBox
+                            Margin="0,-5,0,0"
+                            VerticalOptions="StartAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="37"
+                            TextSize="14"
+                            SelectedIndex="{Binding Ddl_selectedIndex, Mode=TwoWay}"
+                            DropDownBorderColor="{StaticResource PrimaryColor}"
+                            TextColor="{StaticResource TextColor_D}"
+                            DisplayMemberPath="NativeName"
+                            DataSource="{Binding Ddl_Groups}">
+                            <combobox:SfComboBox.ItemTemplate>
+                                <DataTemplate x:DataType="resmodels:CoverageLanguage">
+                                    <StackLayout
+                                        Padding="10,5"
+                                        Orientation="Horizontal">
+                                        <materialui:MaterialLabel
+                                        Padding="0,4"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Start"
+                                        TypeScale="Body2"
+                                        LineHeight="1"
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation"
+                                        TextColor="{StaticResource TextColor_D}"
+                                        Text="{Binding NativeName}">
+                                        </materialui:MaterialLabel>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </combobox:SfComboBox.ItemTemplate>
+                            <combobox:SfComboBox.Behaviors>
+                                <logics:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding LanguageSelectionChangedCommand}">
+                                </logics:EventToCommandBehavior>
+                            </combobox:SfComboBox.Behaviors>
+                        </combobox:SfComboBox>
+                    </StackLayout>
+                </StackLayout>
+            </materialui:MaterialCard>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -15,7 +15,12 @@ namespace PoseSportsPredict
         // Syncfusion v18.1.0.46
         public static string SyncfusionKey = "MjQ4OTA2QDMxMzgyZTMxMmUzMGRHQ1NJem5RNmgrYTBwQ0Z3TDdXcm9NdW81TVdDLzcveHordTVYOE5UQWM9";
 
-        //LocalNoti Channel
+        // LocalNoti Channel
         public static string Psoe_Noti_Channel_01 = "psoe_channel_01";
+
+        // For Culture
+        public const string DEFAULT_LANGUAGE = "en";
+
+        public const string CULTURE_CHANGED_MSG = "UICultureChanged";
     }
 }

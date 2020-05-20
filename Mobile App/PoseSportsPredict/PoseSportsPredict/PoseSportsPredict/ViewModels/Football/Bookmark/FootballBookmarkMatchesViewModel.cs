@@ -11,9 +11,11 @@ using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.ViewModels.Football.Match;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Football.Bookmark;
@@ -45,6 +47,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
+            MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this, AppConfig.CULTURE_CHANGED_MSG, OnCultureChanged);
 
             return true;
         }
@@ -55,7 +58,11 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             if (BookmarkedMatchesTaskLoaderNotifier.IsSuccessfullyCompleted)
             {
-                PullToRefresh();
+                if (BookmarkedMatchesTaskLoaderNotifier.Result.Count == 0)
+                    BookmarkedMatchesTaskLoaderNotifier.Load(UpdateBookmarkedMatchesAsync);
+                else
+                    PullToRefresh();
+
                 return;
             }
 
@@ -314,7 +321,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             SetIsBusy(false);
         }
 
-        private async Task<IReadOnlyCollection<FootballMatchInfo>> UpdateBookmarkedMatchesAsync()
+        public async Task<IReadOnlyCollection<FootballMatchInfo>> UpdateBookmarkedMatchesAsync()
         {
             SetIsBusy(true);
 
@@ -326,15 +333,16 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
                 await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, SportsType.Football, BookMarkType.Match, false);
             }
 
-            _DeleteMatchList.Clear();
-
             _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
                 .OrderBy(elem => elem.MatchTime).ToList();
             BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
 
             IsEditMode = false;
 
-            UserDialogs.Instance.Toast(LocalizeString.Bookmark_Modification_Completed);
+            if (_DeleteMatchList.Count > 0)
+                UserDialogs.Instance.Toast(LocalizeString.Bookmark_Modification_Completed);
+
+            _DeleteMatchList.Clear();
 
             SetIsBusy(false);
 
@@ -361,10 +369,21 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
                     _matchList.Remove(foundItem);
                     BookmarkedMatches.Remove(foundItem);
+
+                    if (_matchList.Count == 0)
+                        BookmarkedMatchesTaskLoaderNotifier.Load(UpdateBookmarkedMatchesAsync);
                 }
             }
 
             SetIsBusy(false);
+        }
+
+        private void OnCultureChanged(object sender, CoverageLanguage cl)
+        {
+            if (_matchList?.Count > 0)
+            {
+                BookmarkedMatches = new ObservableCollection<FootballMatchInfo>(_matchList);
+            }
         }
 
         #endregion Methods

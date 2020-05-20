@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              material:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
              material:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesTabPage"
-             Title="{x:Static localize:LocalizeString.Matches}">
+             Title="{Binding [Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
     <TabbedPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_calendar.png" Command="{Binding SelectMatchDateCommand}" />
     </TabbedPage.ToolbarItems>

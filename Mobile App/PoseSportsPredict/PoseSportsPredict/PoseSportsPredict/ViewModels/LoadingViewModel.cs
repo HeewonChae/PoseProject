@@ -7,6 +7,7 @@ using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views;
+using PoseSportsPredict.Utilities.LocalStorage;
 using Shiny;
 using System;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
+using System.Globalization;
+using PoseSportsPredict.Models.Resources.Common;
+using System.Linq;
+using PoseSportsPredict.Logics.LocalizedRes;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -35,6 +40,38 @@ namespace PoseSportsPredict.ViewModels
 
             // Table Loader
             TableLoader.Init(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+
+            // Check Language
+            {
+                LocalStorage.Storage.GetValueOrDefault<string>(LocalStorageKey.UserLanguageId, out string userLanguageId);
+                if (userLanguageId == null)
+                {
+                    userLanguageId = CultureInfo.CurrentUICulture.Name.Split('-')[0];
+                    if (!CoverageLanguage.CoverageLanguages.ContainsKey(userLanguageId))
+                    {
+                        // Default Language : EN
+                        userLanguageId = AppConfig.DEFAULT_LANGUAGE;
+                    }
+
+                    LocalStorage.Storage.AddOrUpdateValue<string>(LocalStorageKey.UserLanguageId, userLanguageId);
+                }
+
+                CultureInfo.CurrentCulture = new CultureInfo(userLanguageId);
+                CultureInfo.CurrentUICulture = new CultureInfo(userLanguageId);
+            }
+
+            // Check Timezone
+            {
+                LocalStorage.Storage.GetValueOrDefault<string>(LocalStorageKey.UserTimeZoneId, out string userTimeZoneId);
+
+                // Delete ExpiredCachedData
+                if (TimeZoneInfo.Local.Id.Equals(userTimeZoneId))
+                    await _cacheService.DeleteExpiredCachedDataAsync();
+                else
+                    await _cacheService.DeleteAllCachedDataAsync();
+
+                LocalStorage.Storage.AddOrUpdateValue<string>(LocalStorageKey.UserTimeZoneId, TimeZoneInfo.Local.Id);
+            }
 
             string serverPubKey = await _webApiService.RequestAsync<string>(new WebRequestContext
             {
@@ -63,9 +100,6 @@ namespace PoseSportsPredict.ViewModels
 
             // Notify Init
             await _notificationService.Initialize();
-
-            // Delete ExpiredCachedData
-            await _cacheService.DeleteExpiredCachedDataAsync();
 
             if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin(false))

@@ -11,6 +11,7 @@ using Plugin.LocalNotification;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.ViewModels;
 using Shiny;
+using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -65,9 +66,6 @@ namespace PoseSportsPredict.Droid
             // Initialize extern module
             this.InitExternModule(savedInstanceState);
 
-            // LoadingComplete Message
-            //MessagingCenter.Subscribe<LoadingViewModel>(this, "LoadingComplete", (s) => LoadingCompleteHandler());
-
             LoadApplication(new App());
 
             NotificationCenter.NotifyNotificationTapped(this.Intent);
@@ -111,11 +109,6 @@ namespace PoseSportsPredict.Droid
                 Description = "General",
             });
         }
-
-        //public void LoadingCompleteHandler()
-        //{
-        //    base.SetTheme(Resource.Style.MainTheme);
-        //}
 
         public async override void OnBackPressed()
         {

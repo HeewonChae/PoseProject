@@ -7,7 +7,7 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:appviews="clr-namespace:PoseSportsPredict.Views"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
@@ -92,11 +92,11 @@
                         HorizontalOptions="FillAndExpand"
                         LineBreakMode="TailTruncation"
                         FontSize="11"
-                        TextColor="{StaticResource CustomGrey_D}">
+                        TextColor="{StaticResource CustomGrey}">
                         <materialui:MaterialLabel.FormattedText>
                             <FormattedString>
-                                <Span Text="{x:Static localize:LocalizeString.Last_Login}" />
-                                <Span Text=" " />
+                                <Span Text="{Binding [Last_Login], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
+                                <Span Text=" :  " />
                                 <Span Text="{Binding LastLoginTime, StringFormat='{0:yyyy.MM.dd HH:mm}'}" />
                             </FormattedString>
                         </materialui:MaterialLabel.FormattedText>

@@ -9,7 +9,7 @@
                  xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
                  xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                  xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
-                 xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+                 xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
                  xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                  xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -81,7 +81,7 @@
                             Margin ="15,4"
                             HeightRequest="35"
                             FontSize="Body"
-                            Placeholder="{x:Static localize:LocalizeString.Search_Bookmark}">
+                            Placeholder="{Binding [Search_Bookmark], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                             <SearchBar.Behaviors>
                                 <logics:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchBarTextChangedCommand}">
                                 </logics:EventToCommandBehavior>
@@ -93,7 +93,7 @@
                         VerticalOptions="FillAndExpand"
                         Style="{StaticResource PoseTaskLoader}"
                         TaskLoaderNotifier="{Binding BookmarkSearchTaskLoaderNotifier}"
-                        EmptyStateMessage="{x:Static localize:LocalizeString.No_Search_Results}"
+                        EmptyStateMessage="{Binding [No_Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
                         IsVisible="{Binding IsSearching}">
                         <ScrollView Scrolled="lv_Scrolled">
                             <Grid Margin="0,3">
@@ -117,11 +117,11 @@
                                     TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{x:Static localize:LocalizeString.Matches}" />
+                                                <Span Text="{Binding [Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=" (" />
-                                                <Span Text="{x:Static localize:LocalizeString.Search_Results}" />
+                                                <Span Text="{Binding [Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding SearchedMatches.Count}" />
+                                                <Span Text="{Binding [Count], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=")" />
                                             </FormattedString>
                                         </materialui:MaterialLabel.FormattedText>
@@ -302,11 +302,11 @@
                                     TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{x:Static localize:LocalizeString.Leagues}" />
+                                                <Span Text="{Binding [Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=" (" />
-                                                <Span Text="{x:Static localize:LocalizeString.Search_Results}" />
+                                                <Span Text="{Binding [Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding SearchedLeagues.Count}" />
+                                                <Span Text="{Binding [Count], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=")" />
                                             </FormattedString>
                                         </materialui:MaterialLabel.FormattedText>
@@ -380,11 +380,11 @@
                                     TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{x:Static localize:LocalizeString.Teams}" />
+                                                <Span Text="{Binding [Teams], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=" (" />
-                                                <Span Text="{x:Static localize:LocalizeString.Search_Results}" />
+                                                <Span Text="{Binding [Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding SearchedTeams.Count}" />
+                                                <Span Text="{Binding [Count], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=")" />
                                             </FormattedString>
                                         </materialui:MaterialLabel.FormattedText>
@@ -451,7 +451,7 @@
                         <materialui:MaterialLabel
                             TypeScale="Caption"
                             TextColor="{StaticResource CustomGrey_D}"
-                            Text="{x:Static localize:LocalizeString.Recent_Search}">
+                            Text="{Binding [Recent_Search], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                         </materialui:MaterialLabel>
                         <ListView
                             x:Name="lv_recent_search"

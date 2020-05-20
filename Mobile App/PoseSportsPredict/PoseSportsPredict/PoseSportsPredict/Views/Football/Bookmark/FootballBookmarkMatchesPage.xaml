@@ -14,7 +14,8 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Bookmark"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
-             Title="{x:Static localize:LocalizeString.Matches}"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             Title="{Binding [Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Name="_page">
 
@@ -23,10 +24,12 @@
                                          IsVisible="{Binding IsEditMode, Converter={StaticResource inverseBoolConverter}}"
                                          Command="{Binding EditButtonClickCommand}" />
 
-        <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Cancel}"  Priority="3"
+        <customviews:HideableToolbarItem Text="{Binding [Cancel], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+                                         Priority="3"
                                          IsVisible="{Binding IsEditMode}"
                                          Command="{Binding CancelButtonClickCommand}" />
-        <customviews:HideableToolbarItem Text="{x:Static localize:LocalizeString.Save}" Priority="4"
+        <customviews:HideableToolbarItem Text="{Binding [Save], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+                                         Priority="4"
                                          IsVisible="{Binding IsEditMode}"
                                          Command="{Binding SaveButtonClickCommand}" />
     </ContentPage.ToolbarItems>
@@ -37,7 +40,7 @@
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
                 TaskLoaderNotifier="{Binding BookmarkedMatchesTaskLoaderNotifier}"
-                EmptyStateMessage="{x:Static localize:LocalizeString.No_Bookmarked_Matches}">
+                EmptyStateMessage="{Binding [No_Bookmarked_Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                 <RefreshView
                     IsRefreshing="{Binding IsListViewRefrashing}"
                     RefreshColor="{StaticResource PrimaryColor}"

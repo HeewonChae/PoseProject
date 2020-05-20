@@ -3,8 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             x:Class="PoseSportsPredict.Views.Football.FootballMainPage"
-             Title="{x:Static localize:LocalizeString.Football}"
-             IconImageSource="img_football">
+             x:Class="PoseSportsPredict.Views.Football.FootballMainPage">
 </TabbedPage>

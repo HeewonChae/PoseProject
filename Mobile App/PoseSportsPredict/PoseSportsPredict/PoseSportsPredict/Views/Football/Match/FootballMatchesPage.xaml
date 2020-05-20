@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -16,9 +16,9 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" />
-        <ToolbarItem Text="{x:Static localize:LocalizeString.Add_Delete_Matches_Alarm}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
-        <ToolbarItem Text="{x:Static localize:LocalizeString.Expand_All_Leagues}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
-        <ToolbarItem Text="{x:Static localize:LocalizeString.Collapse_All_Leagues}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
+        <ToolbarItem Text="{Binding [Add_Delete_Matches_Alarm], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
+        <ToolbarItem Text="{Binding [Expand_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
+        <ToolbarItem Text="{Binding [Collapse_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -169,7 +169,7 @@
                 VerticalOptions="CenterAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
                 TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}"
-                EmptyStateMessage="{x:Static localize:LocalizeString.No_Match_datas}">
+                EmptyStateMessage="{Binding [No_Match_datas], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                 <ListView
                     x:Name="lv_matches"
                     SeparatorVisibility="None"

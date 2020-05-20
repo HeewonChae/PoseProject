@@ -9,6 +9,6 @@ namespace PoseSportsPredict.Models.Football
         public int FixtureId { get; set; }
         public int Score { get; set; }
         public DateTime MatchTime { get; set; }
-        public string Category => MatchTime.ToString("dd MMM");
+        public string Category => MatchTime.ToString("ddd MM-dd");
     }
 }

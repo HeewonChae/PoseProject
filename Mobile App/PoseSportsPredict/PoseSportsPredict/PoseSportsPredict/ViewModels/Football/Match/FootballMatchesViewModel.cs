@@ -251,8 +251,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             }
             else
             {
-                this.CoupledPage.Title = _matchDate.ToString("ddd dd MMM");
+                this.CoupledPage.Title = _matchDate.ToString("ddd MM-dd");
             }
+        }
+
+        public void CultureInfoChanged()
+        {
+            if (MatchListViewModels?.Count > 0)
+                MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchesAsync()
@@ -296,13 +302,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 _matchList.Add(convertedMatchInfo);
             }
 
-            var filteredMatch = await UpdateFilteredMatchesAsync();
+            if (_matchList.Count > 0)
+                await UpdateFilteredMatchesAsync();
 
             _lastUpdateTime = DateTime.UtcNow;
 
             this.SetIsBusy(false);
 
-            return filteredMatch;
+            return _matchList;
         }
 
         private async Task RefreshMatchesAsync()

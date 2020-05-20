@@ -93,6 +93,8 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             SetIsPageSwitched(true);
 
             await PageSwitcher.PopPopupAsync();
+
+            SetIsPageSwitched(false);
         }
 
         public ICommand SelectSearchKeywordCommand { get => new RelayCommand<FootballRecentSearch>(e => SelectSearchKeyword(e)); }

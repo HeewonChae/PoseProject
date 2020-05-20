@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PoseSportsPredict.Logics.LocalizedRes;
+using PoseSportsPredict.Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -33,6 +35,7 @@ namespace PoseSportsPredict.ViewModels.Base
         #region Proterties
 
         public bool IsBusy { get => _isBusy; private set => SetValue(ref _isBusy, value); }
+        public static LocalizeStringRes LocalizeStringRes { get; private set; } = new LocalizeStringRes(typeof(LocalizeString));
 
         #endregion Proterties
 
@@ -86,6 +89,7 @@ namespace PoseSportsPredict.ViewModels.Base
         protected BaseViewModel(View coupledView)
         {
             _coupledView = coupledView;
+
             if (_coupledView != null)
                 _coupledView.BindingContext = this;
         }

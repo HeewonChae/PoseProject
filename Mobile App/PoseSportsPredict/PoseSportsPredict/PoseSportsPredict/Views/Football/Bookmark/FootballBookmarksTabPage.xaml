@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              material:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
@@ -12,7 +12,7 @@
              material:MaterialNavigationPage.HasShadow="False"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              x:Class="PoseSportsPredict.Views.Football.Bookmark.FootballBookmarksTabPage"
-             Title="{x:Static localize:LocalizeString.Bookmarks}">
+             Title="{Binding [Bookmarks], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
 
     <TabbedPage.ToolbarItems>
         <customviews:HideableToolbarItem IconImageSource="ic_search.png" Priority="2"

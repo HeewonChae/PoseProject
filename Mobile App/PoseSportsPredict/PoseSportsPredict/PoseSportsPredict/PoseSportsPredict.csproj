@@ -6,12 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Common\CoverageLanguage.json" />
     <None Remove="Resources\Football\CoverageLeagues.json" />
     <None Remove="Resources\Football\StandingsDescription.json" />
     <None Remove="Resources\Football\StandingsRankColor.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Common\CoverageLanguage.json" />
     <EmbeddedResource Include="Resources\Football\CoverageLeagues.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

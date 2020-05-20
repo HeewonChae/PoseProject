@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.Views;
@@ -44,37 +45,49 @@ namespace PoseSportsPredict.Logics
                 System.Diagnostics.Debug.WriteLine("found resource: " + res);
             }
 #endif
+            // Common
+            Load_Common_CoverageLanguage(rootPath);
+
             // Football
             Load_Football_CoverageLeagues(rootPath);
             Load_Football_StandingsDescription(rootPath);
             Load_Football_StandingsRankColor(rootPath);
         }
 
+        private static void Load_Common_CoverageLanguage(string rootPath)
+        {
+            var coverageLanguage = LoadJson<CoverageLanguage[]>("Resources.Common.CoverageLanguage.json");
+
+            Debug.Assert(coverageLanguage.Length != 0);
+
+            CoverageLanguage.Load(coverageLanguage);
+        }
+
         private static void Load_Football_CoverageLeagues(string rootPath)
         {
-            var CoverageLeagues = LoadJson<CoverageLeague[]>("Resources.Football.CoverageLeagues.json");
+            var coverageLeagues = LoadJson<CoverageLeague[]>("Resources.Football.CoverageLeagues.json");
 
-            Debug.Assert(CoverageLeagues.Length != 0);
+            Debug.Assert(coverageLeagues.Length != 0);
 
-            CoverageLeague.Load(CoverageLeagues);
+            CoverageLeague.Load(coverageLeagues);
         }
 
         private static void Load_Football_StandingsDescription(string rootPath)
         {
-            var StandginsDescriptions = LoadJson<StandginsDescription[]>("Resources.Football.StandingsDescription.json");
+            var standginsDescriptions = LoadJson<StandginsDescription[]>("Resources.Football.StandingsDescription.json");
 
-            Debug.Assert(StandginsDescriptions.Length != 0);
+            Debug.Assert(standginsDescriptions.Length != 0);
 
-            StandginsDescription.Load(StandginsDescriptions);
+            StandginsDescription.Load(standginsDescriptions);
         }
 
         private static void Load_Football_StandingsRankColor(string rootPath)
         {
-            var StandingsRankColors = LoadJson<StandingsRankColor[]>("Resources.Football.StandingsRankColor.json");
+            var standingsRankColors = LoadJson<StandingsRankColor[]>("Resources.Football.StandingsRankColor.json");
 
-            Debug.Assert(StandingsRankColors.Length != 0);
+            Debug.Assert(standingsRankColors.Length != 0);
 
-            StandingsRankColor.Load(StandingsRankColors);
+            StandingsRankColor.Load(standingsRankColors);
         }
 
         #region JsonLoader

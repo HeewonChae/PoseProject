@@ -38,7 +38,7 @@ namespace PoseSportsPredict.ViewModels
             return Task.FromResult(true);
         }
 
-        public override async void OnAppearing(params object[] datas)
+        public override void OnAppearing(params object[] datas)
         {
             if (this.CoupledPage is AppMasterPage masterPage)
             {

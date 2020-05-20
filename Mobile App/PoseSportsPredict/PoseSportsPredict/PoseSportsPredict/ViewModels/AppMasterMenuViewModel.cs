@@ -8,7 +8,9 @@ using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football;
+using PoseSportsPredict.ViewModels.Football.Bookmark;
 using PoseSportsPredict.Views;
+using PoseSportsPredict.Views.Football;
 using Shiny;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ExternAuthentication;
+using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels
@@ -33,8 +36,8 @@ namespace PoseSportsPredict.ViewModels
             {
                 new AppMenuDetailItem
                 {
-                    Title = footballPage.Title,
-                    IconSource = footballPage.IconImageSource.ToString().Replace("File: ", ""),
+                    Title = LocalizeString.Football,
+                    IconSource = "img_football.png",
                     SourcePage = footballPage,
                     SportsType = SportsType.Football,
                 }
@@ -184,6 +187,21 @@ namespace PoseSportsPredict.ViewModels
             BookmarkedLeauges.Items = new ObservableCollection<IBookmarkMenuItem>(leagues);
 
             SetIsBusy(false);
+        }
+
+        public void UpdateCultureInfo()
+        {
+            // Menu
+            BookmarkedLeauges.Title = LocalizeString.Favorite_Leagues;
+            BookmarkedTeams.Title = LocalizeString.Favorite_Teams;
+
+            // Football
+            SportsCategories[0].Title = LocalizeString.Football;
+            var footballMainPage = SportsCategories[0].SourcePage as FootballMainPage;
+            footballMainPage.Children[0].Title = LocalizeString.Matches;
+            footballMainPage.Children[1].Title = LocalizeString.Leagues;
+            footballMainPage.Children[2].Title = LocalizeString.Bookmarks;
+            footballMainPage.Children[3].Title = LocalizeString.Settings;
         }
 
         #endregion Methods

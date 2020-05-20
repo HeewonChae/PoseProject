@@ -422,4 +422,7 @@
   <data name="Bookmaker" xml:space="preserve">
     <value>Bookmaker</value>
   </data>
+  <data name="Select_Interface_Language" xml:space="preserve">
+    <value>Select Interface Language</value>
+  </data>
 </root>

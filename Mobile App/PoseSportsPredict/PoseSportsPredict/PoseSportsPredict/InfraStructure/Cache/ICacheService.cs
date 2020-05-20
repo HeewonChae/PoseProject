@@ -13,5 +13,7 @@ namespace PoseSportsPredict.InfraStructure.Cache
         Task<T> GetAsync<T>(Func<Task<object>> loader, string key, TimeSpan expireTime, SerializeType serializeType) where T : class;
 
         Task DeleteExpiredCachedDataAsync();
+
+        Task DeleteAllCachedDataAsync();
     }
 }

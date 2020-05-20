@@ -438,4 +438,7 @@
   <data name="Bookmaker" xml:space="preserve">
     <value>북메이커</value>
   </data>
+  <data name="Select_Interface_Language" xml:space="preserve">
+    <value>인터페이스 언어 선택</value>
+  </data>
 </root>

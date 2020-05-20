@@ -862,6 +862,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Interface Language.
+        /// </summary>
+        public static string Select_Interface_Language {
+            get {
+                return ResourceManager.GetString("Select_Interface_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selected.
         /// </summary>
         public static string Selected {

@@ -7,6 +7,7 @@ using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using Shiny;
+using System.Globalization;
 using Xamarin.Forms;
 using XF.Material.Forms.Resources;
 using XF.Material.Forms.Resources.Typography;
@@ -15,13 +16,6 @@ namespace PoseSportsPredict
 {
     public partial class App : Application
     {
-        // Localize String Check
-        //var culutreName = CultureInfo.CurrentUICulture.Name;
-        //var str = LocalizeString.Check_Internet_Connection;
-        //CultureInfo.CurrentUICulture = new CultureInfo("en");
-        //culutreName = CultureInfo.CurrentUICulture.Name;
-        //str = LocalizeString.Check_Internet_Connection;
-
         public App()
         {
             InitializeComponent();

@@ -29,6 +29,11 @@ namespace PoseSportsPredict.Services.Cache
             }
         }
 
+        public async Task DeleteAllCachedDataAsync()
+        {
+            await _sqliteService.DeleteAllAsync<AppCacheData>();
+        }
+
         #endregion ICacheService
 
         private ISQLiteService _sqliteService;

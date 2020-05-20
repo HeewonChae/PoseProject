@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "en",
+    "name": "English",
+    "nativeName": "English"
+  },
+  {
+    "Id": "ko",
+    "name": "Korean",
+    "nativeName": "한국어"
+  },
+  {
+    "Id": "ja",
+    "name": "Japanese",
+    "nativeName": "日本語"
+  }
+]
