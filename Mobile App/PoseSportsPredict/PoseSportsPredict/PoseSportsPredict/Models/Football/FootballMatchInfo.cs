@@ -57,5 +57,6 @@ namespace PoseSportsPredict.Models.Football
         public DateTime MatchTime { get; set; }
         public bool IsBookmarked { get; set; }
         public bool IsAlarmed { get; set; }
+        public bool IsLastMatch { get; set; }
     }
 }

@@ -449,8 +449,9 @@
                                                 <BindableLayout.ItemTemplate>
                                                     <DataTemplate x:DataType="models:FootballFormInfo">
                                                         <StackLayout
-                                                            IsVisible="{Binding Path=BindingContext.IsViewForm, Source={x:Reference _gd_leagueTable}}"
-                                                            Orientation="Horizontal">
+                                                            Spacing="4"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            IsVisible="{Binding Path=BindingContext.IsViewForm, Source={x:Reference _gd_leagueTable}}">
                                                             <materialui:MaterialCard
                                                                 WidthRequest="21"
                                                                 HeightRequest="21"
@@ -469,6 +470,12 @@
                                                                     Text="{Binding Result, Converter={StaticResource matchResultToStringConverter}}">
                                                                 </materialui:MaterialLabel>
                                                             </materialui:MaterialCard>
+                                                            <BoxView
+                                                                WidthRequest="21"
+                                                                HeightRequest="1.5"
+                                                                IsVisible="{Binding IsLastMatch}"
+                                                                Color="{Binding Result, Converter={StaticResource matchResultToColorConverter}}">
+                                                            </BoxView>
                                                         </StackLayout>
                                                     </DataTemplate>
                                                 </BindableLayout.ItemTemplate>

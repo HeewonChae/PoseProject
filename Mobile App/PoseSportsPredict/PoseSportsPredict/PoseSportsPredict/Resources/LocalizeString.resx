@@ -272,7 +272,7 @@
     <value>Ok</value>
   </data>
   <data name="Do_You_Want_Logout" xml:space="preserve">
-    <value>Do you want to log out?</value>
+    <value>Do you want to logout?</value>
   </data>
   <data name="App_Title" xml:space="preserve">
     <value>Poseidon Picks</value>
@@ -424,5 +424,14 @@
   </data>
   <data name="Select_Interface_Language" xml:space="preserve">
     <value>Select Interface Language</value>
+  </data>
+  <data name="My_Profile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="VIP_Club" xml:space="preserve">
+    <value>VIP Club</value>
+  </data>
+  <data name="Check_For_Updates" xml:space="preserve">
+    <value>Check For Updates</value>
   </data>
 </root>

@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="PoseSportsPredict.Views.LoadingPage"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
+             x:Class="PoseSportsPredict.Views.LoadingPage"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Content>
         <Grid
@@ -15,9 +17,9 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="24" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackLayout
                 Grid.Row="2">
@@ -33,12 +35,23 @@
 
             <ActivityIndicator
                 x:Name="_loadingIndicator"
-                Grid.Row="5"
-                Color="White"
+                Grid.Row="3"
+                Grid.RowSpan="2"
+                Color="{StaticResource TextColor_L}"
                 IsRunning="{Binding IsLoaded, Converter={StaticResource inverseBoolConverter}}"
                 HorizontalOptions="Center"
-                VerticalOptions="Start">
+                VerticalOptions="Center">
             </ActivityIndicator>
+
+            <materialui:MaterialLabel
+                Grid.Row="5"
+                Margin="0,10"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
+                TypeScale="H6"
+                TextColor="{StaticResource TextColor_L}"
+                Text="{x:Static localize:LocalizeString.App_Title}">
+            </materialui:MaterialLabel>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

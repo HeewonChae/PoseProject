@@ -1,12 +1,14 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Service.Auth.Models;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common.Detail;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.ViewModels.Football.Bookmark;
 using PoseSportsPredict.Views;
@@ -114,6 +116,20 @@ namespace PoseSportsPredict.ViewModels
 
             if (isLogout.HasValue && isLogout.Value)
                 await _OAuthService.Logout();
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectMyProfileCommand { get => new RelayCommand(SelectMyProfile); }
+
+        private async void SelectMyProfile()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<MyProfileViewModel>());
 
             SetIsBusy(false);
         }

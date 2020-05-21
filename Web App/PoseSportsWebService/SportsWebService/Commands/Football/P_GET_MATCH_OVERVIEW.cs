@@ -89,14 +89,11 @@ namespace SportsWebService.Commands.Football
                 standingsDetail.Add(footballStandingsDetailConverter.Convert(dbStandingsDetail));
             }
 
-            // 중복 경기 삭제
-            fixtureDetails.Distinct(Singleton.Get<FootballFixtureEqualityComparer>());
-            league_FixtureDetails.Distinct(Singleton.Get<FootballFixtureEqualityComparer>());
-
             return new O_GET_MATCH_OVERVIEW
             {
-                RecentFixtures = fixtureDetails.ToArray(),
-                League_RecentFixtures = league_FixtureDetails.ToArray(),
+                // 중복 경기 삭제
+                RecentFixtures = fixtureDetails.Distinct(Singleton.Get<FootballFixtureEqualityComparer>()).ToArray(),
+                League_RecentFixtures = league_FixtureDetails.Distinct(Singleton.Get<FootballFixtureEqualityComparer>()).ToArray(),
                 StandingsDetails = standingsDetail.ToArray(),
             };
         }

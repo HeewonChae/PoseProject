@@ -187,6 +187,7 @@
                                         Grid.Column="2"
                                         Spacing="0">
                                         <materialui:MaterialChip
+                                            x:Name="_chip_result"
                                             HorizontalOptions="Center"
                                             VerticalOptions="CenterAndExpand"
                                             FontSize="14"
@@ -199,6 +200,12 @@
                                                 </EventTrigger>
                                             </materialui:MaterialChip.Triggers>
                                         </materialui:MaterialChip>
+                                        <BoxView
+                                            HeightRequest="1.5"
+                                            Margin="6,-9,6,0"
+                                            IsVisible="{Binding IsLastMatch}"
+                                            Color="{Binding Path=BindingContext.LastMatchResult, Converter={StaticResource matchResultToColorConverter}, Source={x:Reference lv_matches}}">
+                                        </BoxView>
                                     </StackLayout>
                                     <ffimageloading:CachedImage
                                         Grid.Column="3"

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
              x:Class="PoseSportsPredict.Views.BookmarkMenuListView"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
@@ -12,7 +11,7 @@
         <StackLayout
             Spacing="0">
             <StackLayout
-                Padding="0,7"
+                Padding="0,12"
                 Orientation="Horizontal"
                 effects:TapCommandEffect.Tap="{Binding SelectGroupHeaderCommand}"
                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
@@ -40,7 +39,7 @@
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <StackLayout
-                            Padding="10"
+                            Padding="5,9"
                             Spacing="15"
                             HorizontalOptions="FillAndExpand"
                             Orientation="Horizontal"

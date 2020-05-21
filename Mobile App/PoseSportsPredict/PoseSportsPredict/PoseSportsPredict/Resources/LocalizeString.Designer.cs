@@ -187,6 +187,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check For Updates.
+        /// </summary>
+        public static string Check_For_Updates {
+            get {
+                return ResourceManager.GetString("Check_For_Updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please check your internet connection..
         /// </summary>
         public static string Check_Internet_Connection {
@@ -250,7 +259,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to log out?.
+        ///   Looks up a localized string similar to Do you want to logout?.
         /// </summary>
         public static string Do_You_Want_Logout {
             get {
@@ -552,6 +561,15 @@ namespace PoseSportsPredict.Resources {
         public static string Matches {
             get {
                 return ResourceManager.GetString("Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Profile.
+        /// </summary>
+        public static string My_Profile {
+            get {
+                return ResourceManager.GetString("My_Profile", resourceCulture);
             }
         }
         
@@ -1002,6 +1020,15 @@ namespace PoseSportsPredict.Resources {
         public static string View_Form {
             get {
                 return ResourceManager.GetString("View_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Club.
+        /// </summary>
+        public static string VIP_Club {
+            get {
+                return ResourceManager.GetString("VIP_Club", resourceCulture);
             }
         }
         

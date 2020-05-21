@@ -5,7 +5,9 @@ namespace PoseSportsPredict
     public static class AppConfig
     {
         // Pose WebService
+#if DEBUG
         public static string PoseWebBaseUrl = "http://192.168.0.157:8888/";
+#endif
 
         // SQLite
         public static string SQLiteServicePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);

@@ -15,7 +15,8 @@
              BackgroundColor="White">
     <StackLayout x:DataType="viewmodels:AppMasterMenuViewModel">
         <Grid
-            Margin="15,5"
+            Margin="10,5"
+            RowSpacing="0"
             VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -40,79 +41,83 @@
 
             <!--User Info-->
             <StackLayout
+                Spacing="0"
                 Grid.Row="1">
                 <Grid
-                    RowSpacing="0"
-                    ColumnSpacing="10"
-                    Margin="0,5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                    ColumnSpacing="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <ffimageloading:CachedImage
-                        Grid.RowSpan="2"
-                        Grid.Column="0"
-                        Aspect="AspectFit"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        DownsampleHeight="90"
-                        DownsampleToViewSize="True"
-                        LoadingPlaceholder="ic_profile.png"
-                        ErrorPlaceholder="ic_profile.png"
-                        Source="{Binding AuthUser.PictureUrl, Converter={StaticResource svgImageSourceConverter}}">
-                        <ffimageloading:CachedImage.Transformations>
-                            <fftransformations:CircleTransformation />
-                        </ffimageloading:CachedImage.Transformations>
-                    </ffimageloading:CachedImage>
-                    <materialui:MaterialLabel
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        HorizontalOptions="FillAndExpand"
-                        LineBreakMode="TailTruncation"
-                        TypeScale="Body2"
-                        TextColor="{StaticResource TextColor_D}">
-                        <materialui:MaterialLabel.FormattedText>
-                            <FormattedString>
-                                <Span Text="{Binding AuthUser.FirstName}" />
-                                <Span Text=" " />
-                                <Span Text="{Binding AuthUser.LastName}" />
-                            </FormattedString>
-                        </materialui:MaterialLabel.FormattedText>
-                    </materialui:MaterialLabel>
-                    <materialui:MaterialLabel
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        HorizontalOptions="FillAndExpand"
-                        LineBreakMode="TailTruncation"
-                        FontSize="11"
-                        TextColor="{StaticResource CustomGrey}">
-                        <materialui:MaterialLabel.FormattedText>
-                            <FormattedString>
-                                <Span Text="{Binding [Last_Login], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
-                                <Span Text=" :  " />
-                                <Span Text="{Binding LastLoginTime, StringFormat='{0:yyyy.MM.dd HH:mm}'}" />
-                            </FormattedString>
-                        </materialui:MaterialLabel.FormattedText>
-                    </materialui:MaterialLabel>
+                    <materialui:MaterialCard
+                        BackgroundColor="Transparent"
+                        Margin="0"
+                        Padding="0,7"
+                        Elevation="0"
+                        IsClickable="True"
+                        ClickCommand="{Binding SelectMyProfileCommand}"
+                        Grid.Column="0">
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="15">
+                            <ffimageloading:CachedImage
+                                Aspect="AspectFit"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                DownsampleHeight="90"
+                                DownsampleToViewSize="True"
+                                LoadingPlaceholder="ic_profile.png"
+                                ErrorPlaceholder="ic_profile.png"
+                                Source="{Binding AuthUser.PictureUrl, Converter={StaticResource svgImageSourceConverter}}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            <StackLayout Spacing="0">
+                                <materialui:MaterialLabel
+                                    VerticalOptions="EndAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}">
+                                    <materialui:MaterialLabel.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding AuthUser.FirstName}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding AuthUser.LastName}" />
+                                        </FormattedString>
+                                    </materialui:MaterialLabel.FormattedText>
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    VerticalOptions="StartAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    LineBreakMode="TailTruncation"
+                                    FontSize="Caption"
+                                    TextColor="{StaticResource CustomGrey}">
+                                    <materialui:MaterialLabel.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding [Last_Login], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
+                                            <Span Text=" :  " />
+                                            <Span Text="{Binding LastLoginTime, StringFormat='{0:yyyy.MM.dd HH:mm}'}" />
+                                        </FormattedString>
+                                    </materialui:MaterialLabel.FormattedText>
+                                </materialui:MaterialLabel>
+                            </StackLayout>
+                        </StackLayout>
+                    </materialui:MaterialCard>
                     <ContentView
-                        Grid.RowSpan="2"
-                        Grid.Column="2"
-                        Padding="8"
+                        Grid.Column="1"
+                        Padding="5"
                         HorizontalOptions="End"
                         VerticalOptions="Center"
                         effects:TapCommandEffect.Tap="{Binding LogoutCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <Image
                             Aspect="AspectFit"
-                            WidthRequest="18"
-                            HeightRequest="18"
+                            WidthRequest="21"
+                            HeightRequest="21"
                             Source="ic_logout.png"
                             effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                         </Image>
@@ -126,7 +131,7 @@
 
             <!--Bookmark Info-->
             <ScrollView Grid.Row="2">
-                <StackLayout Spacing="15">
+                <StackLayout Spacing="10">
                     <appviews:BookmarkMenuListView BindingContext="{Binding BookmarkedLeauges}" />
                     <appviews:BookmarkMenuListView BindingContext="{Binding BookmarkedTeams}" />
                 </StackLayout>

@@ -33,6 +33,8 @@ using Shiny.Jobs;
 using System.Threading;
 using PoseSportsPredict.Services.Cache;
 using PoseSportsPredict.InfraStructure.Cache;
+using PoseSportsPredict.ViewModels.Common.Detail;
+using PoseSportsPredict.Views.Common.Detail;
 
 namespace PoseSportsPredict
 {
@@ -125,9 +127,18 @@ namespace PoseSportsPredict
             services.AddSingleton<AppMasterMenuViewModel>();
             services.AddSingleton<BookmarkMenuListViewModel>();
 
-            // Common - Settings
+            // Settings
             services.AddSingleton<SettingsPage>();
             services.AddSingleton<SettingsViewModel>();
+            // Settings - My Profile
+            services.AddTransient<MyProfilePage>();
+            services.AddTransient<MyProfileViewModel>();
+            // Settings - VIP Club
+            services.AddTransient<VipClubPage>();
+            services.AddTransient<VIPClubViewModel>();
+            // Settings - Check For Updates
+            services.AddTransient<CheckForUpdatesPage>();
+            services.AddTransient<CheckForUpdatesViewModel>();
 
             // Football
             services.AddSingleton<FootballMainPage>();

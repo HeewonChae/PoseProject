@@ -44,7 +44,11 @@ namespace PoseSportsPredict.Models.Cache
             PrimaryKey = cachingKey;
             StoredTime = DateTime.UtcNow;
             SerializeType = serializeType;
+#if DEBUG
+            ExpireTime = StoredTime.Add(TimeSpan.Zero);
+#else
             ExpireTime = StoredTime.Add(expireTimeSpan);
+#endif
 
             if (SerializeType == SerializeType.Json)
                 CachedData = cachingData.JsonSerialize();

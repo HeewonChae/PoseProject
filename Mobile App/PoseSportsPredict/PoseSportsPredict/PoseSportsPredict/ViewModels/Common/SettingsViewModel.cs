@@ -1,10 +1,12 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.LocalizedRes;
 using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common.Detail;
 using PoseSportsPredict.Views.Common;
 using Shiny;
 using System;
@@ -102,6 +104,48 @@ namespace PoseSportsPredict.ViewModels.Common
 
             var seletedLanguage = Ddl_Groups[Ddl_selectedIndex];
             MessagingCenter.Send(this, AppConfig.CULTURE_CHANGED_MSG, seletedLanguage);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectMyProfileCommand { get => new RelayCommand(SelectMyProfile); }
+
+        private async void SelectMyProfile()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<MyProfileViewModel>());
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectVipClubCommand { get => new RelayCommand(SelectVipClub); }
+
+        private async void SelectVipClub()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectCheckUpdatesCommand { get => new RelayCommand(SelectCheckUpdates); }
+
+        private async void SelectCheckUpdates()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<CheckForUpdatesViewModel>());
 
             SetIsBusy(false);
         }

@@ -17,13 +17,15 @@
              Title="{Binding [Settings], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
              BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <!--Language-->
+        <StackLayout Spacing="0">
+
+            <!--My Profile-->
             <materialui:MaterialCard
                 Elevation="0"
                 Margin="0"
                 Padding="0"
                 IsClickable="True"
+                ClickCommand="{Binding SelectMyProfileCommand}"
                 HeightRequest="71"
                 HorizontalOptions="FillAndExpand">
                 <StackLayout
@@ -35,11 +37,93 @@
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        BackgroundColor="#29b6f6">
+                        BackgroundColor="#4caf50">
                         <Image
                             Aspect="AspectFit"
-                            WidthRequest="29"
-                            HeightRequest="29"
+                            WidthRequest="27"
+                            HeightRequest="27"
+                            Source="ic_profile.png">
+                        </Image>
+                    </Frame>
+                    <StackLayout
+                        Margin="0,0,15,0"
+                        Spacing="0"
+                        HorizontalOptions="FillAndExpand">
+                        <materialui:MaterialLabel
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
+                            TypeScale="Body1"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{Binding [My_Profile], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
+                    </StackLayout>
+                </StackLayout>
+            </materialui:MaterialCard>
+
+            <!--VIP Club-->
+            <materialui:MaterialCard
+                Elevation="0"
+                Margin="0"
+                Padding="0"
+                IsClickable="True"
+                ClickCommand="{Binding SelectVipClubCommand}"
+                HeightRequest="71"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <Frame
+                        Margin="15,0"
+                        Padding="7"
+                        CornerRadius="59"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="Gold">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="27"
+                            HeightRequest="27"
+                            Source="ic_vip.png">
+                        </Image>
+                    </Frame>
+                    <StackLayout
+                        Margin="0,0,15,0"
+                        Spacing="0"
+                        HorizontalOptions="FillAndExpand">
+                        <materialui:MaterialLabel
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
+                            TypeScale="Body1"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{Binding [VIP_Club], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
+                    </StackLayout>
+                </StackLayout>
+            </materialui:MaterialCard>
+
+            <!--Language-->
+            <materialui:MaterialCard
+                Elevation="0"
+                Margin="0"
+                Padding="0"
+                HeightRequest="71"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <Frame
+                        Margin="15,0"
+                        Padding="7"
+                        CornerRadius="59"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="#7e57c2">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="27"
+                            HeightRequest="27"
                             Source="ic_global.png">
                         </Image>
                     </Frame>
@@ -90,6 +174,48 @@
                                 </logics:EventToCommandBehavior>
                             </combobox:SfComboBox.Behaviors>
                         </combobox:SfComboBox>
+                    </StackLayout>
+                </StackLayout>
+            </materialui:MaterialCard>
+
+            <!--Update-->
+            <materialui:MaterialCard
+                Elevation="0"
+                Margin="0"
+                Padding="0"
+                IsClickable="True"
+                ClickCommand="{Binding SelectCheckUpdatesCommand}"
+                HeightRequest="71"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <Frame
+                        Margin="15,0"
+                        Padding="7"
+                        CornerRadius="59"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="#00acc1">
+                        <Image
+                            Aspect="AspectFit"
+                            WidthRequest="27"
+                            HeightRequest="27"
+                            Source="ic_check_update.png">
+                        </Image>
+                    </Frame>
+                    <StackLayout
+                        Margin="0,0,15,0"
+                        Spacing="0"
+                        HorizontalOptions="FillAndExpand">
+                        <materialui:MaterialLabel
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
+                            TypeScale="Body1"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{Binding [Check_For_Updates], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
                     </StackLayout>
                 </StackLayout>
             </materialui:MaterialCard>

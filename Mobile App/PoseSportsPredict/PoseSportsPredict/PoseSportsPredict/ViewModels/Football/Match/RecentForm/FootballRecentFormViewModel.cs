@@ -42,9 +42,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         private short _selectedTeamId;
         private TeamCampType _selectedTeamType;
         private ObservableList<FootballMatchInfo> _selectedRecentForm;
-        private Color _winColor;
-        private Color _loseColor;
-        private Color _drawColor;
+        private MatchResultType _lastMatchResult;
 
         #endregion Fields
 
@@ -55,9 +53,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         public short SelectedTeamId { get => _selectedTeamId; set => SetValue(ref _selectedTeamId, value); }
         public TeamCampType SelectedTeamType { get => _selectedTeamType; set => SetValue(ref _selectedTeamType, value); }
         public ObservableList<FootballMatchInfo> SelectedRecentForm { get => _selectedRecentForm; set => SetValue(ref _selectedRecentForm, value); }
-        public Color WinColor { get => _winColor; set => SetValue(ref _winColor, value); }
-        public Color LoseColor { get => _loseColor; set => SetValue(ref _loseColor, value); }
-        public Color DrawColor { get => _drawColor; set => SetValue(ref _drawColor, value); }
+        public MatchResultType LastMatchResult { get => _lastMatchResult; set => SetValue(ref _lastMatchResult, value); }
 
         #endregion Properties
 
@@ -136,19 +132,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
         {
             _homeTeamId = homeTeamId;
             _awayTeamId = awayTeamId;
-            _homeRecentForm = homeMatches;
-            _awayRecentForm = awayMatches;
+            _homeRecentForm = homeMatches.OrderByDescending(elem => elem.MatchTime).ToList();
+            _awayRecentForm = awayMatches?.OrderByDescending(elem => elem.MatchTime).ToList() ?? null;
 
             IsTeamSelectorVisible = _homeRecentForm != null && _awayRecentForm != null;
             SelectedTeamType = TeamCampType.Home;
             TaskLoaderNotifier.Load(InitData);
-        }
-
-        public void SetColor(Color winColor, Color drawColor, Color loseColor)
-        {
-            WinColor = winColor;
-            LoseColor = loseColor;
-            DrawColor = drawColor;
         }
 
         private Task<IReadOnlyCollection<FootballMatchInfo>> InitData()
@@ -157,8 +146,23 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 
             SelectedTeamId = SelectedTeamType == TeamCampType.Home ? _homeTeamId : _awayTeamId;
 
-            SelectedRecentForm = new ObservableList<FootballMatchInfo>(
-                SelectedTeamType == TeamCampType.Home ? _homeRecentForm : _awayRecentForm);
+            var selectedRecentForm = SelectedTeamType == TeamCampType.Home ? _homeRecentForm : _awayRecentForm;
+
+            if (selectedRecentForm?.Count > 0)
+            {
+                var lastMatch = selectedRecentForm.First();
+                lastMatch.IsLastMatch = true;
+
+                bool isDraw = lastMatch.HomeScore == lastMatch.AwayScore;
+                bool isWin = lastMatch.HomeTeamId == SelectedTeamId ? lastMatch.HomeScore > lastMatch.AwayScore : lastMatch.HomeScore < lastMatch.AwayScore;
+
+                LastMatchResult =
+                    isDraw ?
+                    MatchResultType.Draw :
+                    isWin ? MatchResultType.Win : MatchResultType.Lose;
+            }
+
+            SelectedRecentForm = new ObservableList<FootballMatchInfo>(selectedRecentForm);
 
             SetIsBusy(false);
 

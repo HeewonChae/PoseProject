@@ -441,4 +441,13 @@
   <data name="Select_Interface_Language" xml:space="preserve">
     <value>인터페이스 언어 선택</value>
   </data>
+  <data name="My_Profile" xml:space="preserve">
+    <value>내정보</value>
+  </data>
+  <data name="VIP_Club" xml:space="preserve">
+    <value>VIP 클럽</value>
+  </data>
+  <data name="Check_For_Updates" xml:space="preserve">
+    <value>업데이트 확인</value>
+  </data>
 </root>

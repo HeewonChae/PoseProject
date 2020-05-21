@@ -38,7 +38,7 @@ namespace PoseSportsPredict.Logics
             if (!await viewModel.OnPrepareViewAsync(prepareData))
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
-            await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage);
+            await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage, true);
 
             return true;
         }

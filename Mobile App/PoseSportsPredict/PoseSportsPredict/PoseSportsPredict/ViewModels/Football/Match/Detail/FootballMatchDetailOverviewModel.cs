@@ -122,13 +122,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             await Task.Delay(300);
 
             // call server
+            TimeSpan expireTime = _matchInfo.MatchTime.Date > DateTime.Now.Date ? TimeSpan.FromMinutes(15) : DateTime.Now.Date.AddDays(1) - DateTime.Now;
             var server_result = await _cacheService.GetAsync<O_GET_MATCH_OVERVIEW>(
               loader: () =>
               {
                   return FootballDataLoader.MatchOverview(_matchInfo.Id);
               },
               key: $"P_GET_MATCH_OVERVIEW:{_matchInfo.PrimaryKey}",
-              expireTime: DateTime.Now.Date.AddDays(1) - DateTime.Now,
+              expireTime: expireTime,
               serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
