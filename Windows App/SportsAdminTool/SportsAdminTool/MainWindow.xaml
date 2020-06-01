@@ -181,14 +181,9 @@
                         Margin="10 0"
                         Width="250"
                         Height="30"
-                        FontSize="14">
+                        FontSize="14"
+                        SelectionChanged="LeagueCoverage_LeagueName_SelectionChanged">
                     </ComboBox>
-                    <Button
-                        Width="80"
-                        FontSize="12"
-                        Content="Select"
-                        Click="Button_LeagueCoverage_Select">
-                    </Button>
                 </StackPanel>
                 <ScrollViewer
                     Margin="0 5">

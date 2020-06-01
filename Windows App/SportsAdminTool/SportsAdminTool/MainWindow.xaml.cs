@@ -207,7 +207,7 @@ namespace SportsAdminTool
             string selectedCountry = e.AddedItems[0] as string;
 
             var queryLeagues = Logic.Database.FootballDBFacade.SelectLeagues(
-                where: $"country_name = \"{selectedCountry}\" AND is_current = 1");
+                where: $"country_name = \"{selectedCountry}\" ", groupBy: "name, type");
 
             _cb_leagueName.ItemsSource = queryLeagues.Select(elem => elem.name);
 
@@ -215,7 +215,7 @@ namespace SportsAdminTool
                 _cb_leagueName.SelectedIndex = 0;
         }
 
-        private void Button_LeagueCoverage_Select(object sender, RoutedEventArgs e)
+        private void LeagueCoverage_LeagueName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedCountry = _cb_countryName_for_leagueCoverage.SelectedItem as string;
             string selectedLeague = _cb_leagueName.SelectedItem as string;
@@ -223,15 +223,17 @@ namespace SportsAdminTool
             if (string.IsNullOrEmpty(selectedCountry) || string.IsNullOrEmpty(selectedLeague))
             {
                 _lbl_manage_leagueCoverage_result.Content = "Please select country or league.";
+                _sfdg_leagueCoverage.ItemsSource = null;
                 return;
             }
 
             var selectedLeauges = Logic.Database.FootballDBFacade.SelectLeagues(
-                where: $"country_name = \"{selectedCountry}\" AND name = \"{selectedLeague}\" AND is_current = 1");
+                where: $"country_name = \"{selectedCountry}\" AND name = \"{selectedLeague}\" ");
 
             if (selectedLeauges.Count() == 0)
             {
                 _lbl_manage_leagueCoverage_result.Content = "Not found league.";
+                _sfdg_leagueCoverage.ItemsSource = null;
                 return;
             }
 
@@ -243,12 +245,6 @@ namespace SportsAdminTool
                 {
                     leagueCoverages.AddRange(selectedLeagueCoverage);
                 }
-            }
-
-            if (leagueCoverages.Count() == 0)
-            {
-                _lbl_manage_leagueCoverage_result.Content = "Not found leagueCoverage.";
-                return;
             }
 
             _sfdg_leagueCoverage.ItemsSource = leagueCoverages;
@@ -264,7 +260,7 @@ namespace SportsAdminTool
             if (!result)
                 _lbl_manage_leagueCoverage_result.Content = "Update leagueCoverage failed.";
 
-            Button_LeagueCoverage_Select(null, null);
+            LeagueCoverage_LeagueName_SelectionChanged(null, null);
 
             _lbl_manage_leagueCoverage_result.Content = "Update complete !";
         }
@@ -290,7 +286,7 @@ namespace SportsAdminTool
                 return;
             }
 
-            var selectedLeauges = Logic.Database.FootballDBFacade.SelectLeagues(where: $"country_name = \"{selectedCountry}\"");
+            var selectedLeauges = Logic.Database.FootballDBFacade.SelectLeagues(where: $"country_name = \"{selectedCountry}\" AND is_current = 1");
             if (selectedLeauges.Count() == 0)
             {
                 _lbl_manage_leagueFixtures_result.Content = "Not found any leagues";
