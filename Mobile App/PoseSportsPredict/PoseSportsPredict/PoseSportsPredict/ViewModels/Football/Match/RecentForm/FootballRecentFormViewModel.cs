@@ -150,6 +150,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.RecentForm
 
             if (selectedRecentForm?.Count > 0)
             {
+                selectedRecentForm.ForEach(elem => elem.IsLastMatch = false);
+
                 var lastMatch = selectedRecentForm.First();
                 lastMatch.IsLastMatch = true;
 

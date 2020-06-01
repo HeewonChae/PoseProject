@@ -17,6 +17,9 @@ using System.Collections.Generic;
 using FootballDB = Repository.Mysql.FootballDB;
 using System.Linq;
 using System.Drawing;
+using SportsAdminTool.Logic.WebAPI;
+
+using SportsAdminTool.Logic.Football;
 
 namespace SportsAdminTool
 {
@@ -87,7 +90,7 @@ namespace SportsAdminTool
             if (this._progRing_initialize_footballdb.IsActive)
                 return;
 
-            // 해당 로직에 알람이 이미 설정되 있는 상황이면 삭제
+            // 해당 로직에 알람이 이미 설정돼 있는 상황이면 삭제
             Singleton.Get<FootballAlarm.InitializeDatabase>().CancelReservation();
 
             string org_bannerText = this._lbl_initialize_footballdb.Content.ToString();
@@ -117,7 +120,7 @@ namespace SportsAdminTool
             if (this._progRing_collectDatasAndPredict.IsActive)
                 return;
 
-            // 해당 로직에 알람이 이미 설정되 있는 상황이면 삭제
+            // 해당 로직에 알람이 이미 설정돼 있는 상황이면 삭제
             var alarm = Singleton.Get<FootballAlarm.CollectDatasAndPredict>();
             alarm.CancelReservation();
 
@@ -154,7 +157,7 @@ namespace SportsAdminTool
             if (this._progRing_check_completed_fixtures.IsActive)
                 return;
 
-            // 해당 로직에 알람이 이미 설정되 있는 상황이면 삭제
+            // 해당 로직에 알람이 이미 설정돼 있는 상황이면 삭제
             Singleton.Get<FootballAlarm.CheckCompletedFixtures>().CancelReservation();
 
             string org_bannerText = this._lbl_check_completed_fixtures.Content.ToString();
@@ -196,7 +199,7 @@ namespace SportsAdminTool
         {
             var allCountries = Logic.Database.FootballDBFacade.SelectCountries(orderBy: "name");
 
-            _cb_countryName.ItemsSource = allCountries.Select(elem => elem.name);
+            _cb_countryName_for_leagueCoverage.ItemsSource = allCountries.Select(elem => elem.name);
         }
 
         private void LeagueCoverage_CountryName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -214,7 +217,7 @@ namespace SportsAdminTool
 
         private void Button_LeagueCoverage_Select(object sender, RoutedEventArgs e)
         {
-            string selectedCountry = _cb_countryName.SelectedItem as string;
+            string selectedCountry = _cb_countryName_for_leagueCoverage.SelectedItem as string;
             string selectedLeague = _cb_leagueName.SelectedItem as string;
 
             if (string.IsNullOrEmpty(selectedCountry) || string.IsNullOrEmpty(selectedLeague))
@@ -223,23 +226,32 @@ namespace SportsAdminTool
                 return;
             }
 
-            var selectedLeauge = Logic.Database.FootballDBFacade.SelectLeagues(
-                where: $"name = \"{selectedLeague}\"  AND country_name = \"{selectedCountry}\" AND is_current = 1").FirstOrDefault();
+            var selectedLeauges = Logic.Database.FootballDBFacade.SelectLeagues(
+                where: $"country_name = \"{selectedCountry}\" AND name = \"{selectedLeague}\" AND is_current = 1");
 
-            if (selectedLeauge == null)
+            if (selectedLeauges.Count() == 0)
             {
                 _lbl_manage_leagueCoverage_result.Content = "Not found league.";
                 return;
             }
 
-            var selectedLeagueCoverage = Logic.Database.FootballDBFacade.SelectCoverages(where: $"league_id = {selectedLeauge.id}");
-            if (selectedLeagueCoverage.Count() == 0)
+            List<FootballDB.Tables.LeagueCoverage> leagueCoverages = new List<FootballDB.Tables.LeagueCoverage>();
+            foreach (var league in selectedLeauges)
+            {
+                var selectedLeagueCoverage = Logic.Database.FootballDBFacade.SelectCoverages(where: $"league_id = {league.id}");
+                if (selectedLeagueCoverage.Count() != 0)
+                {
+                    leagueCoverages.AddRange(selectedLeagueCoverage);
+                }
+            }
+
+            if (leagueCoverages.Count() == 0)
             {
                 _lbl_manage_leagueCoverage_result.Content = "Not found leagueCoverage.";
                 return;
             }
 
-            _sfdg_leagueCoverage.ItemsSource = selectedLeagueCoverage;
+            _sfdg_leagueCoverage.ItemsSource = leagueCoverages;
 
             _lbl_manage_leagueCoverage_result.Content = "Select complete!";
         }
@@ -258,5 +270,53 @@ namespace SportsAdminTool
         }
 
         #endregion Manage LeagueCoverageTable
+
+        #region Manage League Fixtrues
+
+        private void League_CountryName_Initialized(object sender, EventArgs e)
+        {
+            var allCountries = Logic.Database.FootballDBFacade.SelectCountries(orderBy: "name");
+
+            _cb_countryName_for_league_fixtures.ItemsSource = allCountries.Select(elem => elem.name);
+        }
+
+        private void League_CountryName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedCountry = _cb_countryName_for_league_fixtures.SelectedItem as string;
+
+            if (string.IsNullOrEmpty(selectedCountry))
+            {
+                _lbl_manage_leagueFixtures_result.Content = "Please select country.";
+                return;
+            }
+
+            var selectedLeauges = Logic.Database.FootballDBFacade.SelectLeagues(where: $"country_name = \"{selectedCountry}\"");
+            if (selectedLeauges.Count() == 0)
+            {
+                _lbl_manage_leagueFixtures_result.Content = "Not found any leagues";
+                return;
+            }
+
+            _sfdg_league_fixtures.ItemsSource = selectedLeauges;
+
+            _lbl_manage_leagueFixtures_result.Content = "Select complete!";
+        }
+
+        private async void Button_LeagueRefresh_Select(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var refreshingLeague = (button.Tag as Syncfusion.UI.Xaml.Grid.Cells.DataContextHelper).Value as FootballDB.Tables.League;
+            if (refreshingLeague == null)
+                return;
+
+            button.Content = "Refreshing...";
+
+            var ret = await AsyncHelper.Async(() => Logic.Database.FootballDBFacade.DeleteFixtures(where: $"league_id = {refreshingLeague.id}"));
+            await AsyncHelper.Async(() => LogicFacade.UpdateAllFixturesByLeague(refreshingLeague.id));
+
+            button.Content = "Ready";
+        }
+
+        #endregion Manage League Fixtrues
     }
 }

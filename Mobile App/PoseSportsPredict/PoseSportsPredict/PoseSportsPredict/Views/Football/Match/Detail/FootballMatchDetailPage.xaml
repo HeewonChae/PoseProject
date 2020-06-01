@@ -142,11 +142,11 @@
                             <RowDefinition Height="0.1" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="17" />
+                            <ColumnDefinition Width="10" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="17" />
+                            <ColumnDefinition Width="10" />
                         </Grid.ColumnDefinitions>
                         <!--Home Team-->
                         <StackLayout
@@ -169,7 +169,7 @@
                                 Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
-                                WidthRequest="90"
+                                WidthRequest="85"
                                 VerticalOptions="CenterAndExpand"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center"
@@ -274,7 +274,7 @@
                                 Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
-                                WidthRequest="90"
+                                WidthRequest="85"
                                 VerticalOptions="CenterAndExpand"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center"

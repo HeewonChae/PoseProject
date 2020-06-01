@@ -62,7 +62,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         }
 
                         var SearchStartTime = new DateTime(fixture.match_time.Year - 10, 1, 1);
-                        var SearchEndTime = fixture.match_time;
+                        var SearchEndTime = fixture.match_time.AddMinutes(-1);
 
                         _output.H2HFixtures = footballDB.Query<DB_FootballFixtureDetail>(FixturesQueryString,
                             new { _input.HomeTeamId, _input.AwayTeamId, SearchStartTime, SearchEndTime });

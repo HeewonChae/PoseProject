@@ -273,7 +273,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 {
                     return FootballDataLoader.FixturesByDate(
                         _matchDate.ToUniversalTime(),
-                        _matchDate.AddDays(1).ToUniversalTime());
+                        _matchDate.AddDays(1).AddMinutes(-1).ToUniversalTime());
                 },
                 key: $"P_GET_FIXTURES_BY_DATE:{_matchDate.ToString("yyyyMMdd")}",
                 expireTime: expireTime,
@@ -285,9 +285,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             _matchList = new List<FootballMatchInfo>();
 
             var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
-                .Where(elem => _matchDate.AddDays(-1) < elem.MatchTime && elem.MatchTime < _matchDate.AddDays(1));
+                .Where(elem => _matchDate <= elem.MatchTime && elem.MatchTime < _matchDate.AddDays(1));
             var notifications = (await _notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart))
-                .Where(elem => _matchDate.AddDays(-1) < elem.NotifyTime && elem.NotifyTime < _matchDate.AddDays(1));
+                .Where(elem => _matchDate <= elem.NotifyTime && elem.NotifyTime < _matchDate.AddDays(1));
 
             foreach (var fixture in result.Fixtures)
             {

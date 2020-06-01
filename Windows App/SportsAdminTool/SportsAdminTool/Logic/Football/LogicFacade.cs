@@ -20,7 +20,7 @@ namespace SportsAdminTool.Logic.Football
 {
     public static class LogicFacade
     {
-        public static void UpdateLeagueAllFixtures(short leagueId)
+        public static void UpdateAllFixturesByLeague(short leagueId)
         {
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
@@ -122,11 +122,6 @@ namespace SportsAdminTool.Logic.Football
                     if (api_league != null)
                     {
                         // DB Save
-                        api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type)
-                           || api_league.Coverage.FixtureCoverage.Statistics
-                           || (api_league.Coverage.Players
-                           && api_league.Coverage.FixtureCoverage.Lineups);
-
                         Database.FootballDBFacade.UpdateCoverage(api_league);
                         Database.FootballDBFacade.UpdateLeague(api_league);
 

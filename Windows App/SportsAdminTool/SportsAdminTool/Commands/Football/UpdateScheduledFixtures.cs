@@ -46,7 +46,7 @@ namespace SportsAdminTool.Commands.Football
                         continue;
 
                     // Update League All Fixtures
-                    LogicFacade.UpdateLeagueAllFixtures((short)api_groupingFixtures.Key);
+                    LogicFacade.UpdateAllFixturesByLeague((short)api_groupingFixtures.Key);
 
                     // is_predict_coverage 참인 리그만 업데이트
                     if (db_leagueCoverage.predictions)

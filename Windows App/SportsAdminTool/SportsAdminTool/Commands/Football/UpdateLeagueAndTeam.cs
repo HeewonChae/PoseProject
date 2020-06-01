@@ -35,25 +35,24 @@ namespace SportsAdminTool.Commands.Football
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, $"Update Leagues ({loop}/{leagueCnt})");
 
-                    // 전체 경기 다 가져오고 싶을땐 해당 코드 주석처리
-                    if (api_league.IsCurrent != 1)
-                        continue;
-
                     // Update League
-                    api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type)
-                    || api_league.Coverage.FixtureCoverage.Statistics
-                    || (api_league.Coverage.Players
-                    && api_league.Coverage.FixtureCoverage.Lineups);
+                    api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type);
+                    //|| api_league.Coverage.FixtureCoverage.Statistics
+                    //|| (api_league.Coverage.Players && api_league.Coverage.FixtureCoverage.Lineups);
 
                     Logic.Database.FootballDBFacade.UpdateCoverage(api_league);
                     Logic.Database.FootballDBFacade.UpdateLeague(api_league);
+
+                    // 전체 경기 다 가져오고 싶을땐 해당 코드 주석처리
+                    if (api_league.IsCurrent == 0)
+                        continue;
 
                     // Update All Teams
                     var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueId((short)api_league.LeagueId);
                     Logic.Database.FootballDBFacade.UpdateTeam((short)api_league.LeagueId, api_teams.ToArray());
 
                     // Update All Fixtures
-                    LogicFacade.UpdateLeagueAllFixtures((short)api_league.LeagueId);
+                    LogicFacade.UpdateAllFixturesByLeague((short)api_league.LeagueId);
                     LogicFacade.UpdateStandings((short)api_league.LeagueId);
                 }
 
