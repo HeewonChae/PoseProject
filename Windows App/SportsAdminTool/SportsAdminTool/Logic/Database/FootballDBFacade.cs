@@ -582,17 +582,9 @@ namespace SportsAdminTool.Logic.Database
 
             for (int k = 0; k < bookMakerInfos.Length; k++)
             {
-                if (k != 0)
-                    sb.Append(", ");
-
                 var bookMaker = bookMakerInfos[k];
                 for (int i = 0; i < bookMaker.BetInfos.Length && bookMaker.BetInfos[i].BetValues.Length > 0; i++)
                 {
-                    if (i != 0)
-                    {
-                        sb.Append(", ");
-                    }
-
                     var betInfo = bookMaker.BetInfos[i];
                     //if (betInfo.LabelType == RapidAPI.Models.Football.Enums.OddsLabelType.Goals_Over_Under)
                     //{
@@ -649,11 +641,13 @@ namespace SportsAdminTool.Logic.Database
                         }
                     }
 
-                    sb.Append($"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                    sb.Append($"\"{upt_time.ToString("yyyyMMddTHHmmss")}\" ),");
                 }
             }
 
-            sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
         }
@@ -684,24 +678,14 @@ namespace SportsAdminTool.Logic.Database
 
             for (int h = 0; h < oddsList.Count(); h++)
             {
-                if (h != 0)
-                    sb.Append(", ");
-
                 var odds = oddsList[h];
 
                 for (int k = 0; k < odds.Bookmakers.Length; k++)
                 {
-                    if (k != 0)
-                        sb.Append(", ");
-
                     var bookMaker = odds.Bookmakers[k];
+
                     for (int i = 0; i < bookMaker.BetInfos.Length && bookMaker.BetInfos[i].BetValues.Length > 0; i++)
                     {
-                        if (i != 0)
-                        {
-                            sb.Append(", ");
-                        }
-
                         var betInfo = bookMaker.BetInfos[i];
                         sb.Append($"({odds.FixtureMini.FixtureId}, " +
                                $"\"{bookMaker.BookmakerType}\", " +
@@ -720,12 +704,17 @@ namespace SportsAdminTool.Logic.Database
                             }
                         }
 
-                        sb.Append($"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                        sb.Append($"\"{upt_time.ToString("yyyyMMddTHHmmss")}\"),");
                     }
                 }
             }
 
-            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)}), " +
+                $"{nameof(FootballDB.Tables.Odds.odds_1)} = VALUES({nameof(FootballDB.Tables.Odds.odds_1)}), " +
+                $"{nameof(FootballDB.Tables.Odds.odds_2)} = VALUES({nameof(FootballDB.Tables.Odds.odds_2)}), " +
+                $"{nameof(FootballDB.Tables.Odds.odds_3)} = VALUES({nameof(FootballDB.Tables.Odds.odds_3)});");
 
             return ExecuteQuery(sb.ToString());
         }
@@ -875,7 +864,7 @@ namespace SportsAdminTool.Logic.Database
                 P_EXECUTE_QUERY.SetInput(query);
                 P_EXECUTE_QUERY.OnQuery();
 
-                Dev.Assert(P_EXECUTE_QUERY.EntityStatus == null);
+                Dev.Assert(P_EXECUTE_QUERY.EntityStatus == null, query);
             }
 
             return true;

@@ -79,9 +79,7 @@ namespace SportsAdminTool.Logic.Football
             {
                 // DB Save
                 Database.FootballDBFacade.UpdateFixture(api_fixture);
-
                 UpdateFixtureStatistics(api_fixture.FixtureId);
-                UpdateOdds(api_fixture.FixtureId);
             }
         }
 
@@ -95,9 +93,7 @@ namespace SportsAdminTool.Logic.Football
             {
                 // DB Save
                 Database.FootballDBFacade.UpdateFixture(api_fixture);
-
                 UpdateFixtureStatistics(api_fixture.FixtureId);
-                UpdateOdds(api_fixture.FixtureId);
             }
         }
 
