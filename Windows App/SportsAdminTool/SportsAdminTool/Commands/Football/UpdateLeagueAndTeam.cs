@@ -1,4 +1,5 @@
 ﻿using LogicCore.Utility;
+using Repository.Mysql.FootballDB.Tables;
 using SportsAdminTool.Logic.Football;
 using SportsAdminTool.Model.Resource.Football;
 using System;
@@ -11,6 +12,11 @@ using ApiLogic = SportsAdminTool.Logic.WebAPI;
 
 namespace SportsAdminTool.Commands.Football
 {
+    // CoverageLeague.json table 없을때..
+    // api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type);
+    //|| api_league.Coverage.FixtureCoverage.Statistics
+    //|| (api_league.Coverage.Players && api_league.Coverage.FixtureCoverage.Lineups);
+
     public static class UpdateLeagueAndTeam
     {
         public static Task<bool> Execute()
@@ -36,9 +42,9 @@ namespace SportsAdminTool.Commands.Football
                     mainWindow.Set_Lable(mainWindow._lbl_initialize_footballdb, $"Update Leagues ({loop}/{leagueCnt})");
 
                     // Update League
-                    api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type);
-                    //|| api_league.Coverage.FixtureCoverage.Statistics
-                    //|| (api_league.Coverage.Players && api_league.Coverage.FixtureCoverage.Lineups);
+                    Singleton.Get<CheckValidation>().IsValidLeague((short)api_league.LeagueId, api_league.Name, api_league.Country, out League league, out LeagueCoverage leagueCoverage);
+                    if (league != null && leagueCoverage != null)
+                        api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type) && leagueCoverage.predictions;
 
                     Logic.Database.FootballDBFacade.UpdateCoverage(api_league);
                     Logic.Database.FootballDBFacade.UpdateLeague(api_league);

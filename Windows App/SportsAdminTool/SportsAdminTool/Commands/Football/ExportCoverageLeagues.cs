@@ -33,7 +33,8 @@ namespace SportsAdminTool.Commands.Football
 
                 foreach (var coverageLeague in db_coverageLeagues)
                 {
-                    Dev.Assert(coverageLeague.LeagueType.TryParseEnum(out FootballLeagueType leagueType));
+                    FootballLeagueType leagueType = FootballLeagueType._NONE_;
+                    Dev.Assert(coverageLeague.LeagueType.TryParseEnum(out leagueType));
 
                     coverageLeagueList.Add(new footballRes.CoverageLeague(
                         coverageLeague.LeagueName,

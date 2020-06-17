@@ -7,9 +7,7 @@ namespace LogicCore.Debug
     public static class Dev
     {
         [Conditional("DEBUG")]
-        public static void DebugString(string message, ConsoleColor foregroundColor = ConsoleColor.White,
-            [System.Runtime.CompilerServices.CallerLineNumber] int line = 0,
-            [System.Runtime.CompilerServices.CallerFilePath] string fileName = "")
+        public static void DebugString(string message, ConsoleColor foregroundColor = ConsoleColor.White)
         {
             var orgColor = Console.ForegroundColor;
 
@@ -20,6 +18,7 @@ namespace LogicCore.Debug
             Console.ForegroundColor = orgColor;
         }
 
+        [Conditional("DEBUG")]
         public static void Assert(bool condition, string message = "",
             [System.Runtime.CompilerServices.CallerLineNumber] int line = 0,
             [System.Runtime.CompilerServices.CallerFilePath] string fileName = "")
@@ -27,9 +26,10 @@ namespace LogicCore.Debug
             if (condition == true)
                 return;
 
-            Log4Net.WriteLog(message, Log4Net.Level.FATAL, line, fileName);
-
             message = $"DEV ASSERT FALSE : {fileName} - line:{line}, msg:{message}";
+            DebugString(message, ConsoleColor.Red);
+            Log4Net.WriteLog(message, Log4Net.Level.FATAL, 0, "");
+
             throw new Exception(message);
         }
     }

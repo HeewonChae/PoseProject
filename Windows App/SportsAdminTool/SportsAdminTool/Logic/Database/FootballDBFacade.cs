@@ -647,7 +647,13 @@ namespace SportsAdminTool.Logic.Database
 
             sb.Remove(sb.Length - 1, 1);
 
-            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)});");
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)}), " +
+                $"{nameof(FootballDB.Tables.Odds.subtitle_1)} = VALUES({nameof(FootballDB.Tables.Odds.subtitle_1)}), " +
+                $"{nameof(FootballDB.Tables.Odds.odds_1)} = VALUES({nameof(FootballDB.Tables.Odds.odds_1)}), " +
+                $"{nameof(FootballDB.Tables.Odds.subtitle_2)} = VALUES({nameof(FootballDB.Tables.Odds.subtitle_2)}), " +
+                $"{nameof(FootballDB.Tables.Odds.odds_2)} = VALUES({nameof(FootballDB.Tables.Odds.odds_2)}), " +
+                $"{nameof(FootballDB.Tables.Odds.subtitle_3)} = VALUES({nameof(FootballDB.Tables.Odds.subtitle_3)}), " +
+                $"{nameof(FootballDB.Tables.Odds.odds_3)} = VALUES({nameof(FootballDB.Tables.Odds.odds_3)});");
 
             return ExecuteQuery(sb.ToString());
         }
@@ -712,8 +718,11 @@ namespace SportsAdminTool.Logic.Database
             sb.Remove(sb.Length - 1, 1);
 
             sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Odds.upt_time)} = VALUES({nameof(FootballDB.Tables.Odds.upt_time)}), " +
+                $"{nameof(FootballDB.Tables.Odds.subtitle_1)} = VALUES({nameof(FootballDB.Tables.Odds.subtitle_1)}), " +
                 $"{nameof(FootballDB.Tables.Odds.odds_1)} = VALUES({nameof(FootballDB.Tables.Odds.odds_1)}), " +
+                $"{nameof(FootballDB.Tables.Odds.subtitle_2)} = VALUES({nameof(FootballDB.Tables.Odds.subtitle_2)}), " +
                 $"{nameof(FootballDB.Tables.Odds.odds_2)} = VALUES({nameof(FootballDB.Tables.Odds.odds_2)}), " +
+                $"{nameof(FootballDB.Tables.Odds.subtitle_3)} = VALUES({nameof(FootballDB.Tables.Odds.subtitle_3)}), " +
                 $"{nameof(FootballDB.Tables.Odds.odds_3)} = VALUES({nameof(FootballDB.Tables.Odds.odds_3)});");
 
             return ExecuteQuery(sb.ToString());

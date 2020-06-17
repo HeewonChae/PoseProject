@@ -62,7 +62,7 @@ namespace LogicCore.Utility.ThirdPartyLog
             if (_Ilog == null)
                 return;
 
-            message = $"[fileName: {fileName}] [line: {line}] [message: {message}]";
+            message = $"[fileName: {fileName.Split('\\').LastOrDefault()}] [line: {line}] [message: {message}]";
 
             switch (logLevel)
             {
