@@ -88,8 +88,6 @@ namespace PoseSportsPredict.ViewModels
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
                     DialogConfiguration.DefaultAlterDialogConfiguration);
-
-                throw new Exception("Load fail \'P_PUBLISH_KEY\'");
             }
 
             CryptoFacade.Instance.RSA_FromXmlString(serverPubKey);

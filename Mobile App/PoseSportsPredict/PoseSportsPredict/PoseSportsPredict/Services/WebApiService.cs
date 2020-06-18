@@ -103,8 +103,8 @@ namespace PoseSportsPredict.Services
                         LocalizeString.Ok,
                         DialogConfiguration.DefaultAlterDialogConfiguration);
 #else
-					await UserDialogs.Instance.AlertAsync(httpEx.Call.Response.StatusCode.ToString(),
-					    $"Service ErrorCode: {flurlException.Call.Response.StatusCode}",
+                    await MaterialDialog.Instance.AlertAsync(flurlException.Call.Response.StatusCode.ToString(),
+                        $"Service ErrorCode: {flurlException.Call.Response.StatusCode}",
                         LocalizeString.Ok,
                         DialogConfiguration.DefaultAlterDialogConfiguration);
 #endif
