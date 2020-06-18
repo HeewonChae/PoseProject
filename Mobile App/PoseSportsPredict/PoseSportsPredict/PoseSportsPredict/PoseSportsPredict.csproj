@@ -11,6 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CustomViews\**" />
+    <Compile Remove="Utilities\DataCaching\**" />
+    <EmbeddedResource Remove="CustomViews\**" />
+    <EmbeddedResource Remove="Utilities\DataCaching\**" />
+    <None Remove="CustomViews\**" />
+    <None Remove="Utilities\DataCaching\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Common\CoverageLanguage.json" />
     <None Remove="Resources\Football\CoverageLeagues.json" />
     <None Remove="Resources\Football\StandingsDescription.json" />
@@ -220,11 +229,6 @@
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CustomViews\" />
-    <Folder Include="Utilities\DataCaching\" />
   </ItemGroup>
 
   <ItemGroup>
