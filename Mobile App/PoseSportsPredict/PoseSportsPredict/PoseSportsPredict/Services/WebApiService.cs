@@ -43,8 +43,6 @@ namespace PoseSportsPredict.Services
                         LocalizeString.Ok,
                         DialogConfiguration.DefaultAlterDialogConfiguration);
 
-                    // 로그인 화면으로 이동
-                    await ShinyHost.Resolve<IOAuthService>().Logout();
                     return;
                 }
                 else if (flurlException.Call.Response.StatusCode == System.Net.HttpStatusCode.ServiceUnavailable)

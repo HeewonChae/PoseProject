@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "217594391151",
+    "firebase_url": "https://poseidon-picks-dev.firebaseio.com",
+    "project_id": "poseidon-picks-dev",
+    "storage_bucket": "poseidon-picks-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217594391151:android:31768c7a2b00e2e9247b9a",
+        "android_client_info": {
+          "package_name": "com.pose.poseidon.picks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217594391151-gl0lpqtlobfgfot73g5jhv2ibb4q2ue1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pose.poseidon.picks",
+            "certificate_hash": "fe534032f125abe40c45b09b09d86aba1c97489c"
+          }
+        },
+        {
+          "client_id": "217594391151-pa5j7tp9qr63ctpke5gruflmgntcl229.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8pd9Q0_k8VaGOwzw4CV0quUHjeBnzCP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217594391151-pa5j7tp9qr63ctpke5gruflmgntcl229.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

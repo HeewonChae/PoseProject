@@ -81,7 +81,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private DateTime _lastUpdateTime;
         private bool _alarmEditMode;
         private MatchFilterType _curMatchFilterType;
-        private bool _isListViewRefrashing;
+        private bool _isListViewRefrashing = false;
 
         #endregion Fields
 

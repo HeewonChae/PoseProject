@@ -11,24 +11,18 @@ namespace PosePacket.Service.Auth.Models
         public string Id { get; set; }
 
         [Key(1)]
-        public string Token { get; set; }
-
-        [Key(2)]
         public string FirstName { get; set; }
 
-        [Key(3)]
+        [Key(2)]
         public string LastName { get; set; }
 
-        [Key(4)]
+        [Key(3)]
         public string Email { get; set; }
 
-        [Key(5)]
+        [Key(4)]
         public string PictureUrl { get; set; }
 
-        [Key(6)]
+        [Key(5)]
         public SNSProviderType SNSProvider { get; set; }
-
-        [Key(7)]
-        public DateTime ExpiresIn { get; set; }
     }
 }

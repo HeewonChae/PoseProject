@@ -12,6 +12,9 @@ namespace PoseSportsPredict.Utilities.ExternOAuth.Providers
             {
                 case SNSProviderType.Facebook:
                     return FacebookOAuth.Instance;
+
+                case SNSProviderType.Google:
+                    return GoogleOAuth.Instance;
             }
 
             return null;

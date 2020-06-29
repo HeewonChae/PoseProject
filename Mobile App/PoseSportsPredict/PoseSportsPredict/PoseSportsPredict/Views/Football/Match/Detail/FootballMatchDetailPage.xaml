@@ -173,7 +173,6 @@
                                 VerticalOptions="CenterAndExpand"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center"
-                                TypeScale="Body2"
                                 MaxLines="2"
                                 LineHeight="1"
                                 TextColor="{StaticResource TextColor_L}"
@@ -202,7 +201,7 @@
                             </materialui:MaterialLabel>
                             <materialui:MaterialLabel
                                 HorizontalTextAlignment="Center"
-                                TypeScale="H5"
+                                TypeScale="H6"
                                 FontAttributes="None"
                                 TextColor="{StaticResource TextColor_L}"
                                 Text="{Binding MatchInfo.MatchTime, StringFormat='{0:tt hh:mm}'}">
@@ -278,7 +277,6 @@
                                 VerticalOptions="CenterAndExpand"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center"
-                                TypeScale="Body2"
                                 MaxLines="2"
                                 LineHeight="1"
                                 TextColor="{StaticResource TextColor_L}"

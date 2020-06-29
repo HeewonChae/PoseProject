@@ -1,21 +1,12 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using Microsoft.Extensions.DependencyInjection;
 using Plugin.LocalNotification;
 using PoseSportsPredict.Resources;
-using PoseSportsPredict.ViewModels;
 using Shiny;
-using System.Globalization;
-using System.Linq;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
-using static Acr.UserDialogs.Resource;
 
 namespace PoseSportsPredict.Droid
 {
@@ -96,6 +87,8 @@ namespace PoseSportsPredict.Droid
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             Android.Glide.Forms.Init(this, debug: false);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
+            global::Xamarin.Auth.CustomTabsConfiguration.CustomTabsClosingMessage = null;
+            //global::Xamarin.Auth.WebViewConfiguration.Android.UserAgent = "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36";
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
             ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);

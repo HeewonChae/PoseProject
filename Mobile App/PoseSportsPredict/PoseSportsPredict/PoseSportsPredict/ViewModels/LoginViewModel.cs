@@ -106,51 +106,24 @@ namespace PoseSportsPredict.ViewModels
 
         #region Methods
 
-        public async Task<bool> PoseLogin(bool showIndicator = true)
+        public async Task<bool> PoseLogin()
         {
-            SetIsBusy(true);
-
-            O_Login loginResult = null;
-
-            if (showIndicator)
+            var loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
             {
-                using (UserDialogs.Instance.Loading(LocalizeString.Loginning))
+                SerializeType = SerializeType.MessagePack,
+                MethodType = WebMethodType.POST,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = AuthProxy.ServiceUrl,
+                SegmentGroup = AuthProxy.P_E_Login,
+                NeedEncrypt = true,
+                PostData = new I_Login
                 {
-                    loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
-                    {
-                        SerializeType = SerializeType.MessagePack,
-                        MethodType = WebMethodType.POST,
-                        BaseUrl = AppConfig.PoseWebBaseUrl,
-                        ServiceUrl = AuthProxy.ServiceUrl,
-                        SegmentGroup = AuthProxy.P_E_Login,
-                        NeedEncrypt = true,
-                        PostData = new I_Login
-                        {
-                            PlatformId = _OAuthService.AuthenticatedUser.Id,
-                        }
-                    });
+                    PlatformId = _OAuthService.AuthenticatedUser.Id,
                 }
-            }
-            else
-            {
-                loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
-                {
-                    SerializeType = SerializeType.MessagePack,
-                    MethodType = WebMethodType.POST,
-                    BaseUrl = AppConfig.PoseWebBaseUrl,
-                    ServiceUrl = AuthProxy.ServiceUrl,
-                    SegmentGroup = AuthProxy.P_E_Login,
-                    NeedEncrypt = true,
-                    PostData = new I_Login
-                    {
-                        PlatformId = _OAuthService.AuthenticatedUser.Id,
-                    }
-                });
-            }
+            });
 
             if (loginResult == null)
             {
-                SetIsBusy(false);
                 return false;
             }
 
@@ -170,8 +143,17 @@ namespace PoseSportsPredict.ViewModels
                 await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), notiIntentData);
             }
 
-            SetIsBusy(false);
             return true;
+        }
+
+        public override void SetIsBusy(bool isBusy)
+        {
+            base.SetIsBusy(isBusy);
+
+            if (isBusy)
+                UserDialogs.Instance.ShowLoading(LocalizeString.Loginning);
+            else
+                UserDialogs.Instance.HideLoading();
         }
 
         #endregion Methods

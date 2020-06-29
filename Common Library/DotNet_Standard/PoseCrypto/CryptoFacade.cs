@@ -1,4 +1,5 @@
 ﻿using PoseCrypto._AES;
+using PoseCrypto._Hash;
 using PoseCrypto._RSA;
 using System;
 using System.Collections.Generic;
@@ -30,10 +31,14 @@ namespace PoseCrypto
 
         private RSA _RSACrypto;
         private RSAOAEPKeyExchangeFormatter _RSAFormatter;
+        private SHA_256 _SHA256;
+
+        public SHA_256 SHA_256 => _SHA256;
 
         private CryptoFacade()
         {
             _AESCrypto = new Cryptography<RijndaelManaged>();
+            _SHA256 = new SHA_256();
         }
 
         public void RSA_FromXmlString(string pub_key)

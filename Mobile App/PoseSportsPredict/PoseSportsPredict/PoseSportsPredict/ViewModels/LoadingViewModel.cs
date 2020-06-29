@@ -101,7 +101,7 @@ namespace PoseSportsPredict.ViewModels
             await _notificationService.Initialize();
 
             if (!await _OAuthService.IsAuthenticatedAndValid()
-                || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin(false))
+                || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
             {
                 await _OAuthService.Logout();
             }

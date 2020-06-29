@@ -11,6 +11,9 @@ namespace SportsWebService.Authentication.ExternOAuth
             {
                 case SNSProviderType.Facebook:
                     return FacebookOAuth.Instance;
+
+                case SNSProviderType.Google:
+                    return GoogleOAuth.Instance;
             }
 
             return null;

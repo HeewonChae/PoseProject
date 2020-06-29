@@ -33,31 +33,9 @@ namespace PoseSportsPredict.Utilities.ExternOAuth.Providers
 
         #region Implement Abstract Method
 
-        public override async Task<ExternAuthUser> GetUserInfoAsync(string token)
+        public override Task<ExternAuthUser> GetUserInfoAsync(string token)
         {
-            // Get user information
-            var facebookUser = await _webService.RequestAsync<FacebookUser>(new WebRequestContext()
-            {
-                SerializeType = SerializeType.Json,
-                MethodType = WebMethodType.GET,
-                BaseUrl = UserInfoUrl,
-                QueryParamGroup = "fields={fields}&access_token={access_token}",
-                QueryParamData = new { fields = "email,picture,first_name,last_name", access_token = token },
-            });
-
-            if (facebookUser == null)
-                return null;
-
-            return new ExternAuthUser
-            {
-                Id = facebookUser.Id,
-                Token = token,
-                FirstName = facebookUser.FirstName,
-                LastName = facebookUser.LastName,
-                Email = facebookUser.Email,
-                PictureUrl = facebookUser.Picture.Data.Url,
-                SNSProvider = SNSProviderType.Facebook,
-            };
+            return null;
         }
 
         #endregion Implement Abstract Method

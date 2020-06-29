@@ -35,24 +35,29 @@
                     CornerRadius="5"
                     Elevation="3"
                     Padding="0"
-                    BackgroundColor="{StaticResource BackgroundColor_Default}"
+                    BackgroundColor="#f44336"
                     IsClickable="True"
                     ClickCommand="{Binding ExternLoginCommand}"
                     ClickCommandParameter="Google">
                     <StackLayout
                         Orientation="Horizontal"
-                        Spacing="15"
-                        Padding="10,5">
+                        Spacing="10"
+                        Padding="10,7">
                         <Image
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
                             Source="ic_google.png">
                         </Image>
+                        <BoxView
+                            Color="{StaticResource TransparentWhite}"
+                            HeightRequest="1"
+                            WidthRequest="0.5">
+                        </BoxView>
                         <materialui:MaterialLabel
                             VerticalOptions="Center"
                             TypeScale="Body1"
-                            TextColor="{StaticResource TextColor_D}"
+                            TextColor="{StaticResource TextColor_L}"
                             Text="{x:Static localize:LocalizeString.Login_With_Google}">
                         </materialui:MaterialLabel>
                     </StackLayout>
@@ -62,24 +67,29 @@
                     CornerRadius="5"
                     Elevation="3"
                     Padding="0"
-                    BackgroundColor="{StaticResource BackgroundColor_Default}"
+                    BackgroundColor="#3b5999"
                     IsClickable="True"
                     ClickCommand="{Binding ExternLoginCommand}"
                     ClickCommandParameter="Facebook">
                     <StackLayout
                         Orientation="Horizontal"
-                        Spacing="15"
-                        Padding="10,5">
+                        Spacing="10"
+                        Padding="10,7">
                         <Image
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
                             Source="ic_facebook.png">
                         </Image>
+                        <BoxView
+                            Color="{StaticResource TransparentWhite}"
+                            HeightRequest="1"
+                            WidthRequest="0.5">
+                        </BoxView>
                         <materialui:MaterialLabel
                             VerticalOptions="Center"
                             TypeScale="Body1"
-                            TextColor="{StaticResource TextColor_D}"
+                            TextColor="{StaticResource TextColor_L}"
                             Text="{x:Static localize:LocalizeString.Login_With_Facebook}">
                         </materialui:MaterialLabel>
                     </StackLayout>

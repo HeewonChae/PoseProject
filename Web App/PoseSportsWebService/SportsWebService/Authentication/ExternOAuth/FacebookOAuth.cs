@@ -1,4 +1,5 @@
-﻿using PosePacket.Service.Auth.Models;
+﻿using PoseCrypto;
+using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
 using System;
 using System.Configuration;
@@ -25,24 +26,23 @@ namespace SportsWebService.Authentication.ExternOAuth
         private FacebookOAuth() : base()
         {
             ClientSecret = ConfigurationManager.AppSettings["Facebook_ClientSecret"];
-            Scope = "email";
         }
 
         #region Implement Abstract Method
 
         public override async Task<ExternAuthUser> GetUserInfoAsync(string token)
         {
-            // Refresh token
-            var refreshInfo = await WebClient.RequestAsync<RefreshResponse>(new WebRequestContext()
-            {
-                MethodType = WebMethodType.GET,
-                BaseUrl = RequestTokenUrl,
-                QueryParamGroup = "grant_type=fb_exchange_token&client_id={client_id}&client_secret={client_secret}&fb_exchange_token={fb_exchange_token}",
-                QueryParamData = new { client_id = ClientId, client_secret = ClientSecret, fb_exchange_token = token },
-            });
+            //// Refresh token
+            //var refreshInfo = await WebClient.RequestAsync<RefreshResponse>(new WebRequestContext()
+            //{
+            //    MethodType = WebMethodType.GET,
+            //    BaseUrl = RequestTokenUrl,
+            //    QueryParamGroup = "grant_type=fb_exchange_token&client_id={client_id}&client_secret={client_secret}&fb_exchange_token={fb_exchange_token}",
+            //    QueryParamData = new { client_id = ClientId, client_secret = ClientSecret, fb_exchange_token = token },
+            //});
 
-            if (refreshInfo == null)
-                return null;
+            //if (refreshInfo == null)
+            //    return null;
 
             // Get user information
             var facebookUser = await WebClient.RequestAsync<FacebookUser>(new WebRequestContext()
@@ -58,14 +58,12 @@ namespace SportsWebService.Authentication.ExternOAuth
 
             return new ExternAuthUser
             {
-                Id = facebookUser.Id,
-                Token = token,
+                Id = CryptoFacade.Instance.SHA_256.ComputeHash(facebookUser.Id),
                 FirstName = facebookUser.FirstName,
                 LastName = facebookUser.LastName,
                 Email = facebookUser.Email,
                 PictureUrl = facebookUser.Picture.Data.Url,
                 SNSProvider = SNSProviderType.Facebook,
-                ExpiresIn = DateTime.UtcNow.AddSeconds(refreshInfo.ExpiresIn),
             };
 
             #endregion Implement Abstract Method

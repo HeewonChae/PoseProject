@@ -140,7 +140,10 @@ namespace WebServiceShare.WebServiceClient
                 if (requestContext.AttemptCnt < WebConfig.ReTryCount)
                     result = await RequestRetryPolicy<TOut>(flurlException, flurlRequest, requestContext);
                 else
-                    await _exceptionHandler?.Invoke(flurlException);
+                {
+                    if (_exceptionHandler != null)
+                        await _exceptionHandler?.Invoke(flurlException);
+                }
             }
             catch (Exception ex)
             {

@@ -10,9 +10,7 @@ namespace SportsWebService.Utilities
     {
         public override WebContentFormat GetMessageFormatForContentType(string contentType)
         {
-#if DEBUG
-            LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(contentType, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.INFO);
-#endif
+            LogicCore.Utility.ThirdPartyLog.Log4Net.WriteLog(contentType, LogicCore.Utility.ThirdPartyLog.Log4Net.Level.DEBUG);
 
             if (contentType.Contains("application/octet-stream"))
             {
