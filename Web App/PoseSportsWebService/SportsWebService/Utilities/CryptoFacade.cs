@@ -1,5 +1,6 @@
 ﻿using LogicCore.Utility;
 using PoseCrypto._AES;
+using PoseCrypto._Hash;
 using PoseCrypto._RSA;
 using SportsWebService.Authentication;
 using SportsWebService.Logics;
@@ -18,6 +19,9 @@ namespace SportsWebService.Utilities
         private readonly Cryptography<RijndaelManaged> _AESCrypto;
         private readonly RSAOAEPKeyExchangeFormatter _RSAFormatter;
         private readonly RSAOAEPKeyExchangeDeformatter _RSADeformatter;
+        private readonly SHA_256 _SHA256;
+
+        public SHA_256 SHA_256 => _SHA256;
 
         public CryptoFacade()
         {
@@ -26,6 +30,10 @@ namespace SportsWebService.Utilities
             _AESCrypto = new Cryptography<RijndaelManaged>();
             _RSAFormatter = new RSAOAEPKeyExchangeFormatter(_RSACrypto);
             _RSADeformatter = new RSAOAEPKeyExchangeDeformatter(_RSACrypto);
+
+            string hashSalt = ConfigurationManager.AppSettings["Hash_Salt"];
+            _SHA256 = new SHA_256();
+            _SHA256.SetSalt(hashSalt);
         }
 
         #region AES

@@ -1,15 +1,10 @@
-﻿using Flurl.Http;
-using PoseCrypto;
+﻿using LogicCore.Utility;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
-using RestSharp;
+using SportsWebService.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using WebServiceShare.ExternAuthentication.Providers;
 using WebServiceShare.ExternAuthentication.Users;
 using WebServiceShare.ServiceContext;
@@ -53,7 +48,7 @@ namespace SportsWebService.Authentication.ExternOAuth
             return new ExternAuthUser
             {
                 SNSProvider = SNSProviderType.Google,
-                Id = CryptoFacade.Instance.SHA_256.ComputeHash(googleUser.Id),
+                Id = Singleton.Get<CryptoFacade>().SHA_256.ComputeHash(googleUser.Id),
                 Email = googleUser.Email,
                 FirstName = googleUser.FirstName,
                 LastName = googleUser.LastName,

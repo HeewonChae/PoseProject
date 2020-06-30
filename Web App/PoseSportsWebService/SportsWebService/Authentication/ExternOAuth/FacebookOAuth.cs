@@ -1,6 +1,7 @@
-﻿using PoseCrypto;
+﻿using LogicCore.Utility;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
+using SportsWebService.Utilities;
 using System;
 using System.Configuration;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace SportsWebService.Authentication.ExternOAuth
 
             return new ExternAuthUser
             {
-                Id = CryptoFacade.Instance.SHA_256.ComputeHash(facebookUser.Id),
+                Id = Singleton.Get<CryptoFacade>().SHA_256.ComputeHash(facebookUser.Id),
                 FirstName = facebookUser.FirstName,
                 LastName = facebookUser.LastName,
                 Email = facebookUser.Email,
