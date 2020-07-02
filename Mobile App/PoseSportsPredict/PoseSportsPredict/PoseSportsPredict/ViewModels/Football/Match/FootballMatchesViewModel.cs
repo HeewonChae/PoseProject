@@ -328,7 +328,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             if (needRefrashMatchIndexes.Count() == 0)
             {
+                await UpdateFilteredMatchesAsync();
+
                 _lastUpdateTime = DateTime.UtcNow;
+
                 this.SetIsBusy(false);
                 return;
             }
@@ -349,7 +352,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 _matchList.RemoveAt(foundIdx);
             }
 
-            var filteredMatch = await UpdateFilteredMatchesAsync();
+            await UpdateFilteredMatchesAsync();
 
             _lastUpdateTime = DateTime.UtcNow;
 
@@ -399,10 +402,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         foreach (var bookmarkedTeam in bookmarkedTeams)
                         {
                             var matches = _matchList.Where(elem =>
-                                 (elem.Home_CountryName.Equals(bookmarkedTeam.CountryName)
-                                && elem.HomeName.Equals(bookmarkedTeam.TeamName))
-                                || (elem.Away_CountryName.Equals(bookmarkedTeam.CountryName)
-                                && elem.AwayName.Equals(bookmarkedTeam.TeamName))).ToArray();
+                                 elem.HomeTeamId == bookmarkedTeam.TeamId
+                                || elem.AwayTeamId == bookmarkedTeam.TeamId).ToArray();
 
                             if (matches.Length > 0)
                             {
@@ -513,27 +514,29 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 case MatchFilterType.SortByLeague:
                     {
                         var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, League = elem.LeagueName });
-                        var bookmarked = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
+                        var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
+                        var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
 
-                        var bookmarkLeagues = new Dictionary<string, FootballMatchInfo[]>();
-                        var recommendLeagues = new Dictionary<string, FootballMatchInfo[]>();
-                        var otherLeagues = new Dictionary<string, FootballMatchInfo[]>();
+                        var bookmarked = new Dictionary<string, FootballMatchInfo[]>();
+                        var recommend = new Dictionary<string, FootballMatchInfo[]>();
+                        var other = new Dictionary<string, FootballMatchInfo[]>();
 
                         foreach (var data in grouping)
                         {
-                            // 1순위 북마크, 2순위 추천 리그, 3순위 나머지
-                            if (bookmarked.FirstOrDefault(elem => elem.CountryName == data.Key.Country && elem.LeagueName == data.Key.League) != null)
-                                bookmarkLeagues.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                            // 1순위 북마크(리그, 팀), 2순위 추천 리그, 3순위 나머지
+                            if (bookmarkedLeagues.FirstOrDefault(elem => elem.CountryName == data.Key.Country && elem.LeagueName == data.Key.League) != null
+                                || bookmarkedTeams.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem.TeamId == elem2.HomeTeamId || elem.TeamId == elem2.AwayTeamId) != null) != null)
+                                bookmarked.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
                             else if (RecommendedLeague.HasLeague(data.Key.Country, data.Key.League))
-                                recommendLeagues.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                                recommend.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
                             else
-                                otherLeagues.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                                other.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
                         }
 
-                        recommendLeagues.ForEach(elem => bookmarkLeagues.Add(elem.Key, elem.Value));
-                        otherLeagues.ForEach(elem => bookmarkLeagues.Add(elem.Key, elem.Value));
+                        recommend.ForEach(elem => bookmarked.Add(elem.Key, elem.Value));
+                        other.ForEach(elem => bookmarked.Add(elem.Key, elem.Value));
 
-                        result = bookmarkLeagues;
+                        result = bookmarked;
                     }
                     break;
 

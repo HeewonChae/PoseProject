@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Check_Internet_Connection" xml:space="preserve">
-    <value>インターネットの状態を確認してください.</value>
+    <value>インターネットの状態を確認してください</value>
   </data>
   <data name="Service_Not_Available" xml:space="preserve">
-    <value>サービスがご利用出来ません.</value>
+    <value>サービスがご利用出来ません</value>
   </data>
   <data name="Not_Authenticated_Credencials" xml:space="preserve">
-    <value>認証されていないアカウントです.</value>
+    <value>認証されていないアカウントです</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>今日</value>
@@ -145,7 +145,7 @@
     <value>リーグ</value>
   </data>
   <data name="Occur_Error" xml:space="preserve">
-    <value>エラーが発生しました.</value>
+    <value>エラーが発生しました</value>
   </data>
   <data name="Loginning" xml:space="preserve">
     <value>ログイン中...</value>
@@ -154,28 +154,28 @@
     <value>リトライ</value>
   </data>
   <data name="No_Match_datas" xml:space="preserve">
-    <value>予測された試合がありません.</value>
+    <value>予測された試合がありません</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>ようこそ！</value>
   </data>
   <data name="Set_Alarm" xml:space="preserve">
-    <value>アラームが設定されました.</value>
+    <value>アラームが設定されました</value>
   </data>
   <data name="Set_Bookmark" xml:space="preserve">
-    <value>ブックマークにセーブしました.</value>
+    <value>ブックマークにセーブしました</value>
   </data>
   <data name="Cancle_Alarm" xml:space="preserve">
-    <value>アラームが消されました.</value>
+    <value>アラームが消されました</value>
   </data>
   <data name="Delete_Bookmark" xml:space="preserve">
-    <value>ブックマークが削除されました.</value>
+    <value>ブックマークが削除されました</value>
   </data>
   <data name="Overview" xml:space="preserve">
     <value>概要</value>
   </data>
   <data name="H2H" xml:space="preserve">
-    <value>戦績</value>
+    <value>対戦戦績</value>
   </data>
   <data name="Predictions" xml:space="preserve">
     <value>予測</value>
@@ -190,10 +190,10 @@
     <value>終了</value>
   </data>
   <data name="Match_Ongoing" xml:space="preserve">
-    <value>進行中</value>
+    <value>配信中</value>
   </data>
   <data name="Match_Filter_By_Bookmark" xml:space="preserve">
-    <value>私の試合</value>
+    <value>僕の試合</value>
   </data>
   <data name="Match_Sort_By_Time" xml:space="preserve">
     <value>時間整列</value>
@@ -205,10 +205,10 @@
     <value>設定</value>
   </data>
   <data name="Facebook" xml:space="preserve">
-    <value>Facebook</value>
+    <value>フェースブック</value>
   </data>
   <data name="Google" xml:space="preserve">
-    <value>Google</value>
+    <value>グーグル</value>
   </data>
   <data name="Login_With_Facebook" xml:space="preserve">
     <value>Login with Facebook</value>
@@ -218,5 +218,239 @@
   </data>
   <data name="App_Title" xml:space="preserve">
     <value>Poseidon Picks</value>
+  </data>
+  <data name="PressBack_Twice_To_Exit" xml:space="preserve">
+    <value>’戻る’ボタンをもう一度押すと閉じます</value>
+  </data>
+  <data name="Scheduled_Matches" xml:space="preserve">
+    <value>試合日程</value>
+  </data>
+  <data name="Finished_Matches" xml:space="preserve">
+    <value>試合終了</value>
+  </data>
+  <data name="Standings" xml:space="preserve">
+    <value>順位</value>
+  </data>
+  <data name="Match_Sort_By_League" xml:space="preserve">
+    <value>リーグ順にソート</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>チーム</value>
+  </data>
+  <data name="No_Bookmarked_Leagues" xml:space="preserve">
+    <value>ブックマークされたリーグがありません</value>
+  </data>
+  <data name="No_Bookmarked_Teams" xml:space="preserve">
+    <value>ブックマークされたチームがありません</value>
+  </data>
+  <data name="No_Bookmarked_Matches" xml:space="preserve">
+    <value>ブックマークされた試合がありません</value>
+  </data>
+  <data name="Search_League_Country" xml:space="preserve">
+    <value>国、リーグ検索</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>セーブ</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="Expand_All_Leagues" xml:space="preserve">
+    <value>すべてのリーク拡大</value>
+  </data>
+  <data name="Collapse_All_Leagues" xml:space="preserve">
+    <value>すべてのリーク縮小</value>
+  </data>
+  <data name="Add_Delete_Matches_Alarm" xml:space="preserve">
+    <value>試合アラーム追加/削除</value>
+  </data>
+  <data name="Ongoing_matches" xml:space="preserve">
+    <value>ライブ配信中</value>
+  </data>
+  <data name="Select_Filter" xml:space="preserve">
+    <value>試合フィルター選択</value>
+  </data>
+  <data name="Match_Begin_Soon" xml:space="preserve">
+    <value>試合がすぐはじまります</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>選択完了</value>
+  </data>
+  <data name="Applying" xml:space="preserve">
+    <value>適用中</value>
+  </data>
+  <data name="No_Search_Results" xml:space="preserve">
+    <value>検索結果がありません</value>
+  </data>
+  <data name="Search_Bookmark" xml:space="preserve">
+    <value>ブックマーク検索</value>
+  </data>
+  <data name="Recent_Search" xml:space="preserve">
+    <value>最近検索</value>
+  </data>
+  <data name="Search_Results" xml:space="preserve">
+    <value>検索結果がありません</value>
+  </data>
+  <data name="Last_Login" xml:space="preserve">
+    <value>最終の接続</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Do_You_Want_Logout" xml:space="preserve">
+    <value>ログアウトしますか？</value>
+  </data>
+  <data name="Favorite_Leagues" xml:space="preserve">
+    <value>お気に入りリーグ</value>
+  </data>
+  <data name="Favorite_Teams" xml:space="preserve">
+    <value>お気に入りチーム</value>
+  </data>
+  <data name="Remember_Account" xml:space="preserve">
+    <value>ログイン状態を保持</value>
+  </data>
+  <data name="Recent_Form" xml:space="preserve">
+    <value>最近記録</value>
+  </data>
+  <data name="League_Points" xml:space="preserve">
+    <value>勝ち点</value>
+  </data>
+  <data name="Rest_Period" xml:space="preserve">
+    <value>休憩期間</value>
+  </data>
+  <data name="H_A_Goal_Against" xml:space="preserve">
+    <value>H/A 失点</value>
+  </data>
+  <data name="H_A_Goal_For" xml:space="preserve">
+    <value>H/A 得点</value>
+  </data>
+  <data name="No_Data_Available" xml:space="preserve">
+    <value>利用できるデータがありません</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>通計</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="League" xml:space="preserve">
+    <value>リーグ</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>ラウンド</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>記録</value>
+  </data>
+  <data name="View_Form" xml:space="preserve">
+    <value>記録見る</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>チーム</value>
+  </data>
+  <data name="Win_Initial" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="Draw_Initial" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="Lose_Initial" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="Played_Initial" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="Points_Initial" xml:space="preserve">
+    <value>Pts</value>
+  </data>
+  <data name="Recent_Record" xml:space="preserve">
+    <value>最近の試合結果</value>
+  </data>
+  <data name="Season_StartDate" xml:space="preserve">
+    <value>シーズン開始日</value>
+  </data>
+  <data name="Season_EndDate" xml:space="preserve">
+    <value>シーズン終了日</value>
+  </data>
+  <data name="Participating_Teams" xml:space="preserve">
+    <value>参加しているチーム</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>アウェイ</value>
+  </data>
+  <data name="Add_Match" xml:space="preserve">
+    <value>試合追加</value>
+  </data>
+  <data name="Delete_Match" xml:space="preserve">
+    <value>試合削除</value>
+  </data>
+  <data name="Add_League" xml:space="preserve">
+    <value>リーグ追加</value>
+  </data>
+  <data name="Delete_League" xml:space="preserve">
+    <value>リーグ削除</value>
+  </data>
+  <data name="Add_Home_Team" xml:space="preserve">
+    <value>ホームチーム追加</value>
+  </data>
+  <data name="Delete_Home_Team" xml:space="preserve">
+    <value>ホームチーム削除</value>
+  </data>
+  <data name="Add_Away_Team" xml:space="preserve">
+    <value>アウェイ追加</value>
+  </data>
+  <data name="Delete_Away_Team" xml:space="preserve">
+    <value>アウェイ削除</value>
+  </data>
+  <data name="Bookmark_Management" xml:space="preserve">
+    <value>ブックマーク管理</value>
+  </data>
+  <data name="Participating_Leagues" xml:space="preserve">
+    <value>参加しているリーグ</value>
+  </data>
+  <data name="Goal_Statistics" xml:space="preserve">
+    <value>得点通計</value>
+  </data>
+  <data name="Bookmark_Modification_Completed" xml:space="preserve">
+    <value>ブックマークの修正が完了しました</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>全体</value>
+  </data>
+  <data name="Goal_For" xml:space="preserve">
+    <value>得点</value>
+  </data>
+  <data name="Goal_Against" xml:space="preserve">
+    <value>失点</value>
+  </data>
+  <data name="Record" xml:space="preserve">
+    <value>対戦成績</value>
+  </data>
+  <data name="Goal_For_Against_Avg" xml:space="preserve">
+    <value>得/失</value>
+  </data>
+  <data name="Bookmaker" xml:space="preserve">
+    <value>ブックメーカー</value>
+  </data>
+  <data name="Select_Interface_Language" xml:space="preserve">
+    <value>インタフェース言語選択</value>
+  </data>
+  <data name="My_Profile" xml:space="preserve">
+    <value>マイ情報</value>
+  </data>
+  <data name="VIP_Club" xml:space="preserve">
+    <value>VIPクラブ</value>
+  </data>
+  <data name="Check_For_Updates" xml:space="preserve">
+    <value>アップデート確認</value>
+  </data>
+  <data name="Suggested_Leagues" xml:space="preserve">
+    <value>お勧めリーグ</value>
   </data>
 </root>

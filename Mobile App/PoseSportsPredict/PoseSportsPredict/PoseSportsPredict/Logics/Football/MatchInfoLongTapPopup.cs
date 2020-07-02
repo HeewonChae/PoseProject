@@ -36,10 +36,10 @@ namespace PoseSportsPredict.Logics.Football
             var bookmarkedAwayTeam = await bookmarkService.GetBookmark<FootballTeamInfo>(awayTeamInfo.PrimaryKey);
             awayTeamInfo.IsBookmarked = bookmarkedAwayTeam?.IsBookmarked ?? false;
 
-            string strMatchBookmark = matchInfo.IsBookmarked ? LocalizeString.Delete_The_Match : LocalizeString.Add_The_Match;
-            string strLeagueBookmark = leagueInfo.IsBookmarked ? LocalizeString.Delete_The_League : LocalizeString.Add_The_League;
-            string strHomeTeamBookmark = homeTeamInfo.IsBookmarked ? LocalizeString.Delete_The_Home_Team : LocalizeString.Add_The_Home_Team;
-            string strAwayTeamBookmark = awayTeamInfo.IsBookmarked ? LocalizeString.Delete_The_Away_Team : LocalizeString.Add_The_Away_Team;
+            string strMatchBookmark = matchInfo.IsBookmarked ? LocalizeString.Delete_Match : LocalizeString.Add_Match;
+            string strLeagueBookmark = leagueInfo.IsBookmarked ? LocalizeString.Delete_League : LocalizeString.Add_League;
+            string strHomeTeamBookmark = homeTeamInfo.IsBookmarked ? LocalizeString.Delete_Home_Team : LocalizeString.Add_Home_Team;
+            string strAwayTeamBookmark = awayTeamInfo.IsBookmarked ? LocalizeString.Delete_Away_Team : LocalizeString.Add_Away_Team;
 
             var actions = new string[]
             {

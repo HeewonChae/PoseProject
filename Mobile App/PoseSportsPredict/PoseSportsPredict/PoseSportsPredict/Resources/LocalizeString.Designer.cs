@@ -61,6 +61,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add away team.
+        /// </summary>
+        public static string Add_Away_Team {
+            get {
+                return ResourceManager.GetString("Add_Away_Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add/Delete a match alarm.
         /// </summary>
         public static string Add_Delete_Matches_Alarm {
@@ -70,38 +79,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add the away team.
+        ///   Looks up a localized string similar to Add home team.
         /// </summary>
-        public static string Add_The_Away_Team {
+        public static string Add_Home_Team {
             get {
-                return ResourceManager.GetString("Add_The_Away_Team", resourceCulture);
+                return ResourceManager.GetString("Add_Home_Team", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add the home team.
+        ///   Looks up a localized string similar to Add league.
         /// </summary>
-        public static string Add_The_Home_Team {
+        public static string Add_League {
             get {
-                return ResourceManager.GetString("Add_The_Home_Team", resourceCulture);
+                return ResourceManager.GetString("Add_League", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add the league.
+        ///   Looks up a localized string similar to Add match.
         /// </summary>
-        public static string Add_The_League {
+        public static string Add_Match {
             get {
-                return ResourceManager.GetString("Add_The_League", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add the match.
-        /// </summary>
-        public static string Add_The_Match {
-            get {
-                return ResourceManager.GetString("Add_The_Match", resourceCulture);
+                return ResourceManager.GetString("Add_Match", resourceCulture);
             }
         }
         
@@ -214,6 +214,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete away team.
+        /// </summary>
+        public static string Delete_Away_Team {
+            get {
+                return ResourceManager.GetString("Delete_Away_Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmark have been deleted..
         /// </summary>
         public static string Delete_Bookmark {
@@ -223,38 +232,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete the away team.
+        ///   Looks up a localized string similar to Delete home team.
         /// </summary>
-        public static string Delete_The_Away_Team {
+        public static string Delete_Home_Team {
             get {
-                return ResourceManager.GetString("Delete_The_Away_Team", resourceCulture);
+                return ResourceManager.GetString("Delete_Home_Team", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete the home team.
+        ///   Looks up a localized string similar to Delete league.
         /// </summary>
-        public static string Delete_The_Home_Team {
+        public static string Delete_League {
             get {
-                return ResourceManager.GetString("Delete_The_Home_Team", resourceCulture);
+                return ResourceManager.GetString("Delete_League", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete the league.
+        ///   Looks up a localized string similar to Delete match.
         /// </summary>
-        public static string Delete_The_League {
+        public static string Delete_Match {
             get {
-                return ResourceManager.GetString("Delete_The_League", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete the match.
-        /// </summary>
-        public static string Delete_The_Match {
-            get {
-                return ResourceManager.GetString("Delete_The_Match", resourceCulture);
+                return ResourceManager.GetString("Delete_Match", resourceCulture);
             }
         }
         
