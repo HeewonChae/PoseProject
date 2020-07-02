@@ -104,7 +104,6 @@ namespace PoseSportsPredict
             services.AddSingleton<TeamDetailToTeamInfo>();
             services.AddSingleton<OddsDetailToOddsInfo>();
 
-            services.AddSingleton<CoverageLeagueToLeagueInfo>();
             services.AddSingleton<MatchInfoToLeagueInfo>();
             services.AddSingleton<MatchInfoToTeamInfo>();
             services.AddSingleton<MatchInfoToTeamStatistics>();

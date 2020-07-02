@@ -1,0 +1,79 @@
+[
+  {
+    "LeagueName": "Primera Division",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/140.png",
+    "LeagueType": "League",
+    "CountryName": "Spain",
+    "CountryLogo": "https://media.api-sports.io/flags/es.svg"
+  },
+  {
+    "LeagueName": "Premier League",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/39.png",
+    "LeagueType": "League",
+    "CountryName": "England",
+    "CountryLogo": "https://media.api-sports.io/flags/gb.svg"
+  },
+  {
+    "LeagueName": "Serie A",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/135.png",
+    "LeagueType": "League",
+    "CountryName": "Italy",
+    "CountryLogo": "https://media.api-sports.io/flags/it.svg"
+  },
+  {
+    "LeagueName": "Bundesliga 1",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/78.png",
+    "LeagueType": "League",
+    "CountryName": "Germany",
+    "CountryLogo": "https://media.api-sports.io/flags/de.svg"
+  },
+  {
+    "LeagueName": "Ligue 1",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/61.png",
+    "LeagueType": "League",
+    "CountryName": "France",
+    "CountryLogo": "https://media.api-sports.io/flags/fr.svg"
+  },
+  {
+    "LeagueName": "Eredivisie",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/88.png",
+    "LeagueType": "League",
+    "CountryName": "Netherlands",
+    "CountryLogo": "https://media.api-sports.io/flags/nl.svg"
+  },
+  {
+    "LeagueName": "Primeira Liga",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/94.png",
+    "LeagueType": "League",
+    "CountryName": "Portugal",
+    "CountryLogo": "https://media.api-sports.io/flags/pt.svg"
+  },
+  {
+    "LeagueName": "Premier League",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/235.png",
+    "LeagueType": "League",
+    "CountryName": "Russia",
+    "CountryLogo": "https://media.api-sports.io/flags/ru.svg"
+  },
+  {
+    "LeagueName": "Jupiler Pro League",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/144.png",
+    "LeagueType": "League",
+    "CountryName": "Belgium",
+    "CountryLogo": "https://media.api-sports.io/flags/be.svg"
+  },
+  {
+    "LeagueName": "Super Lig",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/203.png",
+    "LeagueType": "League",
+    "CountryName": "Turkey",
+    "CountryLogo": "https://media.api-sports.io/flags/tr.svg"
+  },
+  {
+    "LeagueName": "Tipp3 Bundesliga",
+    "LeagueLogo": "https://media.api-sports.io/football/leagues/218.png",
+    "LeagueType": "League",
+    "CountryName": "Austria",
+    "CountryLogo": "https://media.api-sports.io/flags/at.svg"
+  }
+]

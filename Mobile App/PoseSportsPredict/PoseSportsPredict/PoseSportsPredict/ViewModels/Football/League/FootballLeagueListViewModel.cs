@@ -53,6 +53,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         #region Properties
 
+        public bool IsRecommendLeagues;
         public ObservableCollection<FootballLeagueInfo> Leagues { get; set; }
 
         #endregion Properties

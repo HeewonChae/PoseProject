@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PoseSportsPredict.Models.Resources.Common
 {
-    internal class CoverageLanguage
+    public class CoverageLanguage
     {
         public string Id { get; set; }
         public string Name { get; set; }

@@ -5,10 +5,12 @@ using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Models.Resources.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.Views.Football.League;
 using Sharpnado.Presentation.Forms;
 using Shiny;
@@ -35,6 +37,9 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
             string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.BookmarkMessageHandler(e));
+
+            MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this,
+                AppConfig.CULTURE_CHANGED_MSG, OnUpdateCultureInfo);
 
             return true;
         }
@@ -87,6 +92,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         private TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>> _leaguesTaskLoaderNotifier;
         private List<FootballLeagueInfo> _leagueList;
+        private List<FootballLeagueInfo> _recommendedleagueList;
         private ObservableCollection<FootballLeagueListViewModel> _orgLeagueGroups;
         private ObservableCollection<FootballLeagueListViewModel> _leagueGroups;
         private string _searchText;
@@ -160,10 +166,18 @@ namespace PoseSportsPredict.ViewModels.Football.League
         {
             await Task.Delay(300);
 
-            _leagueList = CoverageLeague.CoverageLeagues.Values.ToList();
-
             var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
+
+            _leagueList = CoverageLeague.CoverageLeagues.Values.ToList();
             foreach (var league in _leagueList)
+            {
+                var bookmarkedLeague = bookmarkedLeagues.Find(elem => elem.PrimaryKey == league.PrimaryKey);
+
+                league.IsBookmarked = bookmarkedLeague?.IsBookmarked ?? false;
+            }
+
+            _recommendedleagueList = RecommendedLeague.RecommendedLeagues.Values.ToList();
+            foreach (var league in _recommendedleagueList)
             {
                 var bookmarkedLeague = bookmarkedLeagues.Find(elem => elem.PrimaryKey == league.PrimaryKey);
 
@@ -194,13 +208,13 @@ namespace PoseSportsPredict.ViewModels.Football.League
                 searchedLeague = _leagueList.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())
                             || elem.CountryName.ToLower().Contains(searchText.ToLower())).ToList();
 
-                UpdateLeagueGroups(searchedLeague, true);
+                UpdateLeagueGroups(searchedLeague, true, searchText);
             }
 
             return searchedLeague;
         }
 
-        private void UpdateLeagueGroups(List<FootballLeagueInfo> leagueList, bool isAllExpanded)
+        private void UpdateLeagueGroups(List<FootballLeagueInfo> leagueList, bool isAllExpanded, string searchText = "")
         {
             if (leagueList == null || leagueList.Count == 0)
                 LeagueGroups = new ObservableCollection<FootballLeagueListViewModel>();
@@ -210,14 +224,27 @@ namespace PoseSportsPredict.ViewModels.Football.League
             // Group by country
             var leaguesGroupByCountry = leagueList.GroupBy(elem => elem.CountryName);
 
-            // World 데이터는 1순위로 등록
-            var InternationalLeagues = leaguesGroupByCountry.FirstOrDefault(elem => elem.Key == "World");
-            if (InternationalLeagues != null)
+            // 추천 리그 등록
+            if (_recommendedleagueList.Count > 0 && searchText.Length == 0)
             {
                 var leagueListViewModel = ShinyHost.Resolve<FootballLeagueListViewModel>();
-                leagueListViewModel.Title = InternationalLeagues.Key;
-                leagueListViewModel.TitleLogo = InternationalLeagues.First().CountryLogo;
-                leagueListViewModel.Leagues = new ObservableCollection<FootballLeagueInfo>(InternationalLeagues.ToArray());
+                leagueListViewModel.Title = LocalizeString.Suggested_Leagues;
+                leagueListViewModel.TitleLogo = "ic_recommend.png";
+                leagueListViewModel.Leagues = new ObservableCollection<FootballLeagueInfo>(_recommendedleagueList);
+                leagueListViewModel.Expanded = true;
+                leagueListViewModel.IsRecommendLeagues = true;
+
+                leagueGroupsCollection.Add(leagueListViewModel);
+            }
+
+            // World 리그 등록
+            var internationalLeagues = leaguesGroupByCountry.FirstOrDefault(elem => elem.Key == "World");
+            if (internationalLeagues != null)
+            {
+                var leagueListViewModel = ShinyHost.Resolve<FootballLeagueListViewModel>();
+                leagueListViewModel.Title = internationalLeagues.Key;
+                leagueListViewModel.TitleLogo = internationalLeagues.First().CountryLogo;
+                leagueListViewModel.Leagues = new ObservableCollection<FootballLeagueInfo>(internationalLeagues.ToArray());
                 leagueListViewModel.Expanded = isAllExpanded;
 
                 leagueGroupsCollection.Add(leagueListViewModel);
@@ -242,11 +269,27 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         private void BookmarkMessageHandler(FootballLeagueInfo item)
         {
-            var foundLeague = _leagueList?.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
-            if (foundLeague != null)
+            var foundLeagues = _leagueList?.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
+            if (foundLeagues != null)
             {
-                foundLeague.IsBookmarked = item.IsBookmarked;
-                foundLeague.OnPropertyChanged("IsBookmarked");
+                foundLeagues.IsBookmarked = item.IsBookmarked;
+                foundLeagues.OnPropertyChanged("IsBookmarked");
+            }
+
+            foundLeagues = _recommendedleagueList?.FirstOrDefault(elem => elem.PrimaryKey == item.PrimaryKey);
+            if (foundLeagues != null)
+            {
+                foundLeagues.IsBookmarked = item.IsBookmarked;
+                foundLeagues.OnPropertyChanged("IsBookmarked");
+            }
+        }
+
+        public void OnUpdateCultureInfo(object sender, CoverageLanguage cl)
+        {
+            var recommendedLeagueGroup = LeagueGroups?.FirstOrDefault(elem => elem.IsRecommendLeagues == true);
+            if (recommendedLeagueGroup != null)
+            {
+                recommendedLeagueGroup.Title = LocalizeString.Suggested_Leagues;
             }
         }
 

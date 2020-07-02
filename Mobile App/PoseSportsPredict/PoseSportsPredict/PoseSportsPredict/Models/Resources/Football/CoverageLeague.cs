@@ -30,19 +30,27 @@ namespace PoseSportsPredict.Models.Resources.Football
 
         public static void Load(params CoverageLeague[] coverageLeagues)
         {
-            foreach (var covaerageLeague in coverageLeagues)
+            foreach (var coverageLeague in coverageLeagues)
             {
-                string key = MakeCoverageLeagueKey(covaerageLeague.CountryName, covaerageLeague.LeagueName);
+                string key = MakeCoverageLeagueKey(coverageLeague.CountryName, coverageLeague.LeagueName);
 
-                Debug.Assert(!CoverageLeagues.ContainsKey(key), $"Alread exist key in Dic_leagueCoverage key: {key}");
+                Debug.Assert(!CoverageLeagues.ContainsKey(key), $"Alread exist key in Dic_CoverageLeagues key: {key}");
 
                 // 기본 이미지 설정
-                if (string.IsNullOrEmpty(covaerageLeague.CountryLogo))
-                    covaerageLeague.CountryLogo = "img_world.png";
-                if (string.IsNullOrEmpty(covaerageLeague.LeagueLogo))
-                    covaerageLeague.LeagueLogo = covaerageLeague.CountryLogo;
+                if (string.IsNullOrEmpty(coverageLeague.CountryLogo))
+                    coverageLeague.CountryLogo = "img_world.png";
+                if (string.IsNullOrEmpty(coverageLeague.LeagueLogo))
+                    coverageLeague.LeagueLogo = coverageLeague.CountryLogo;
 
-                var leagueInfo = ShinyHost.Resolve<CoverageLeagueToLeagueInfo>().Convert(covaerageLeague);
+                var leagueInfo = new FootballLeagueInfo
+                {
+                    CountryName = coverageLeague.CountryName,
+                    CountryLogo = coverageLeague.CountryLogo,
+                    LeagueName = coverageLeague.LeagueName,
+                    LeagueLogo = coverageLeague.LeagueLogo,
+                    LeagueType = coverageLeague.LeagueType,
+                    IsBookmarked = false,
+                };
 
                 CoverageLeagues.Add(key, leagueInfo);
             }

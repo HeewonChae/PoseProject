@@ -450,4 +450,7 @@
   <data name="Check_For_Updates" xml:space="preserve">
     <value>업데이트 확인</value>
   </data>
+  <data name="Suggested_Leagues" xml:space="preserve">
+    <value>추천 리그</value>
+  </data>
 </root>

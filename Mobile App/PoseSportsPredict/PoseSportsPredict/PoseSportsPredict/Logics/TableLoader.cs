@@ -50,6 +50,7 @@ namespace PoseSportsPredict.Logics
 
             // Football
             Load_Football_CoverageLeagues(rootPath);
+            Load_Football_RecommendedLeagues(rootPath);
             Load_Football_StandingsDescription(rootPath);
             Load_Football_StandingsRankColor(rootPath);
         }
@@ -70,6 +71,15 @@ namespace PoseSportsPredict.Logics
             Debug.Assert(coverageLeagues.Length != 0);
 
             CoverageLeague.Load(coverageLeagues);
+        }
+
+        private static void Load_Football_RecommendedLeagues(string rootPath)
+        {
+            var recommendedLeagues = LoadJson<RecommendedLeague[]>("Resources.Football.RecommendedLeagues.json");
+
+            Debug.Assert(recommendedLeagues.Length != 0);
+
+            RecommendedLeague.Load(recommendedLeagues);
         }
 
         private static void Load_Football_StandingsDescription(string rootPath)

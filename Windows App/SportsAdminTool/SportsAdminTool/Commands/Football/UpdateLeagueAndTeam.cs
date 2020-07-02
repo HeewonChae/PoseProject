@@ -44,7 +44,7 @@ namespace SportsAdminTool.Commands.Football
                     // Update League
                     Singleton.Get<CheckValidation>().IsValidLeague((short)api_league.LeagueId, api_league.Name, api_league.Country, out League league, out LeagueCoverage leagueCoverage);
                     if (league != null && leagueCoverage != null)
-                        api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type) && leagueCoverage.predictions;
+                        api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type) || leagueCoverage.predictions;
 
                     Logic.Database.FootballDBFacade.UpdateCoverage(api_league);
                     Logic.Database.FootballDBFacade.UpdateLeague(api_league);

@@ -41,7 +41,6 @@ namespace PoseSportsPredict.Logics.LocalizedRes
             CultureInfo.CurrentUICulture = new CultureInfo(cl.Id);
 
             LocalStorage.Storage.AddOrUpdateValue<string>(LocalStorageKey.UserLanguageId, cl.Id);
-            ShinyHost.Resolve<AppMasterMenuViewModel>().UpdateCultureInfo();
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         }

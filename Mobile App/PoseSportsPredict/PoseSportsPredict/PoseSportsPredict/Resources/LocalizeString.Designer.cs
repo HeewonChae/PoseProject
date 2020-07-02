@@ -952,6 +952,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Suggested.
+        /// </summary>
+        public static string Suggested_Leagues {
+            get {
+                return ResourceManager.GetString("Suggested_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Team.
         /// </summary>
         public static string Team {

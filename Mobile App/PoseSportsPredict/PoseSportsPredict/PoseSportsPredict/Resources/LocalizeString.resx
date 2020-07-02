@@ -434,4 +434,7 @@
   <data name="Check_For_Updates" xml:space="preserve">
     <value>Check For Updates</value>
   </data>
+  <data name="Suggested_Leagues" xml:space="preserve">
+    <value>Suggested</value>
+  </data>
 </root>

@@ -5,9 +5,11 @@ using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Common;
 using PoseSportsPredict.ViewModels.Common.Detail;
 using PoseSportsPredict.ViewModels.Football;
 using PoseSportsPredict.ViewModels.Football.Bookmark;
@@ -32,6 +34,9 @@ namespace PoseSportsPredict.ViewModels
 
         public override bool OnInitializeView(params object[] datas)
         {
+            MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this,
+                AppConfig.CULTURE_CHANGED_MSG, OnUpdateCultureInfo);
+
             var footballPage = ShinyHost.Resolve<FootballMainViewModel>().CoupledPage;
 
             SportsCategories = new ObservableCollection<Models.AppMenuDetailItem>
@@ -205,7 +210,7 @@ namespace PoseSportsPredict.ViewModels
             SetIsBusy(false);
         }
 
-        public void UpdateCultureInfo()
+        public void OnUpdateCultureInfo(object sender, CoverageLanguage cl)
         {
             // Menu
             BookmarkedLeauges.Title = LocalizeString.Favorite_Leagues;
