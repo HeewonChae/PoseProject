@@ -19,9 +19,9 @@
 	<key>CFBundleDisplayName</key>
 	<string>Poseidon Picks</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pose-sports-statistics</string>
+	<string>com.pose.poseidon.picks</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1.0</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -36,5 +36,7 @@
 	<array>
 		<string>fetch</string>
 	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>1</string>
 </dict>
 </plist>

@@ -352,16 +352,16 @@
     <value>チーム</value>
   </data>
   <data name="Win_Initial" xml:space="preserve">
-    <value>W</value>
+    <value>勝</value>
   </data>
   <data name="Draw_Initial" xml:space="preserve">
-    <value>D</value>
+    <value>分</value>
   </data>
   <data name="Lose_Initial" xml:space="preserve">
-    <value>L</value>
+    <value>敗</value>
   </data>
   <data name="Played_Initial" xml:space="preserve">
-    <value>P</value>
+    <value>試合</value>
   </data>
   <data name="Points_Initial" xml:space="preserve">
     <value>Pts</value>
