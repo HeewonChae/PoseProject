@@ -91,6 +91,8 @@ namespace PoseSportsPredict.Services
                         await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
                             DialogConfiguration.DefaultAlterDialogConfiguration);
                     }
+
+                    return;
                 }
                 else
                 {
@@ -102,12 +104,20 @@ namespace PoseSportsPredict.Services
                         DialogConfiguration.DefaultAlterDialogConfiguration);
 #else
                     await MaterialDialog.Instance.AlertAsync(flurlException.Call.Response.StatusCode.ToString(),
-                        $"Service ErrorCode: {flurlException.Call.Response.StatusCode}",
+                        $"ErrorCode: {flurlException.Call.Response.StatusCode}",
                         LocalizeString.Ok,
                         DialogConfiguration.DefaultAlterDialogConfiguration);
 #endif
+                    return;
                 }
             }
+
+            await MaterialDialog.Instance.AlertAsync(exception.Message,
+                        LocalizeString.App_Title,
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
+
+            return;
         }
 
         #endregion Exception Handler
@@ -121,7 +131,7 @@ namespace PoseSportsPredict.Services
             if (!await CheckInternetConnection())
                 return result;
 
-            result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.Header));
+            result = await WebClient.RequestAsync<TOut>(reqContext, ClientContext.Token);
 
             return result;
         }
@@ -133,7 +143,7 @@ namespace PoseSportsPredict.Services
             if (!await CheckInternetConnection() || !await RefrashToken())
                 return result;
 
-            result = await WebClient.RequestAsync<TOut>(reqContext, (PoseHeader.HEADER_NAME, ClientContext.Header));
+            result = await WebClient.RequestAsync<TOut>(reqContext, ClientContext.Token);
 
             return result;
         }
@@ -145,7 +155,7 @@ namespace PoseSportsPredict.Services
             if (!await CheckInternetConnection() || !await RefrashToken())
                 return result;
 
-            result = await WebClient.RequestRawAsync(reqContext, (PoseHeader.HEADER_NAME, ClientContext.Header));
+            result = await WebClient.RequestRawAsync(reqContext, ClientContext.Token);
 
             return result;
         }

@@ -9,7 +9,7 @@ namespace WebServiceShare.ServiceContext
 
         private static PoseHeader _header;
 
-        public static PoseHeader Header
+        public static string Token
         {
             get
             {
@@ -20,7 +20,7 @@ namespace WebServiceShare.ServiceContext
                 _header.eSignatureIV = eSignatureIV;
                 _header.eCredentials = eCredentials;
 
-                return _header;
+                return _header.ToString();
             }
         }
 

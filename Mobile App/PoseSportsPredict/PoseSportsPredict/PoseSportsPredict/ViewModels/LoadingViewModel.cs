@@ -82,17 +82,12 @@ namespace PoseSportsPredict.ViewModels
                 SegmentGroup = AuthProxy.P_PUBLISH_KEY,
             });
 
-            if (string.IsNullOrEmpty(serverPubKey))
+            if (!string.IsNullOrEmpty(serverPubKey))
             {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
-                    LocalizeString.App_Title,
-                    LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                CryptoFacade.Instance.RSA_FromXmlString(serverPubKey);
+                ClientContext.eSignature = CryptoFacade.Instance.GetEncryptedSignature();
+                ClientContext.eSignatureIV = CryptoFacade.Instance.GetEncryptedSignatureIV();
             }
-
-            CryptoFacade.Instance.RSA_FromXmlString(serverPubKey);
-            ClientContext.eSignature = CryptoFacade.Instance.GetEncryptedSignature();
-            ClientContext.eSignatureIV = CryptoFacade.Instance.GetEncryptedSignatureIV();
 
             // Prepare SingletonPage
             ShinyHost.Resolve<AppMasterViewModel>();

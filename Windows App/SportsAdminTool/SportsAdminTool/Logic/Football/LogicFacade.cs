@@ -119,6 +119,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         // TODO: 추가된 리그 메시지로 전송
 
+                        api_league.Coverage.Predictions = false;
+
                         // DB Save
                         Database.FootballDBFacade.UpdateCoverage(api_league);
                         Database.FootballDBFacade.UpdateLeague(api_league);

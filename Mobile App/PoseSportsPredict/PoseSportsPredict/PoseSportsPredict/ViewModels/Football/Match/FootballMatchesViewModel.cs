@@ -516,6 +516,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, League = elem.LeagueName });
                         var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
                         var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
+                        var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>()).Where(elem => elem.MatchTime >= _matchDate && _matchDate.AddDays(1) > elem.MatchTime);
 
                         var bookmarked = new Dictionary<string, FootballMatchInfo[]>();
                         var recommend = new Dictionary<string, FootballMatchInfo[]>();
@@ -523,14 +524,21 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                         foreach (var data in grouping)
                         {
-                            // 1순위 북마크(리그, 팀), 2순위 추천 리그, 3순위 나머지
+                            // 1순위 북마크(리그, 경기, 팀), 2순위 추천 리그, 3순위 나머지
                             if (bookmarkedLeagues.FirstOrDefault(elem => elem.CountryName == data.Key.Country && elem.LeagueName == data.Key.League) != null
+                                || bookmarkedMatches.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem2.PrimaryKey == elem.PrimaryKey) != null) != null
                                 || bookmarkedTeams.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem.TeamId == elem2.HomeTeamId || elem.TeamId == elem2.AwayTeamId) != null) != null)
+                            {
                                 bookmarked.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                            }
                             else if (RecommendedLeague.HasLeague(data.Key.Country, data.Key.League))
+                            {
                                 recommend.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                            }
                             else
+                            {
                                 other.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                            }
                         }
 
                         recommend.ForEach(elem => bookmarked.Add(elem.Key, elem.Value));

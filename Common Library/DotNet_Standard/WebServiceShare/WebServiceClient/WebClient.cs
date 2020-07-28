@@ -32,18 +32,20 @@ namespace WebServiceShare.WebServiceClient
 
         #endregion Exception Handle Delegate
 
-        public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, params (string name, object value)[] headers)
+        public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, string token = "")
         {
             var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
             var flurlRequest = new FlurlClient(endPointAddr).Request();
 
-            if (headers != null)
-            {
-                foreach (var (name, value) in headers)
-                {
-                    flurlRequest.WithHeader(name, value);
-                }
-            }
+            //if (headers != null && headers.Length > 0)
+            //{
+            //    foreach (var (name, value) in headers)
+            //    {
+            //        flurlRequest.WithHeader(name, value);
+            //    }
+            //}
+
+            flurlRequest.WithOAuthBearerToken(token);
 
             var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
             flurlRequest.AppendPathSegments(convertedSegments);
@@ -72,18 +74,20 @@ namespace WebServiceShare.WebServiceClient
         /// <param name="requestContext"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static async Task<byte[]> RequestRawAsync(WebRequestContext requestContext, params (string name, object value)[] headers)
+        public static async Task<byte[]> RequestRawAsync(WebRequestContext requestContext, string token = "")
         {
             var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
             var flurlRequest = new FlurlClient(endPointAddr).Request();
 
-            if (headers != null)
-            {
-                foreach (var (name, value) in headers)
-                {
-                    flurlRequest.WithHeader(name, value);
-                }
-            }
+            //if (headers != null && headers.Length > 0)
+            //{
+            //    foreach (var (name, value) in headers)
+            //    {
+            //        flurlRequest.WithHeader(name, value);
+            //    }
+            //}
+
+            flurlRequest.WithOAuthBearerToken(token);
 
             var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
             flurlRequest.AppendPathSegments(convertedSegments);
@@ -142,12 +146,13 @@ namespace WebServiceShare.WebServiceClient
                 else
                 {
                     if (_exceptionHandler != null)
-                        await _exceptionHandler?.Invoke(flurlException);
+                        await _exceptionHandler.Invoke(flurlException);
                 }
             }
             catch (Exception ex)
             {
-                await _exceptionHandler?.Invoke(ex);
+                if (_exceptionHandler != null)
+                    await _exceptionHandler.Invoke(ex);
             }
 
             return result;
@@ -177,11 +182,15 @@ namespace WebServiceShare.WebServiceClient
                 if (requestContext.AttemptCnt < WebConfig.ReTryCount)
                     rawData = await RequestRetryPolicy(flurlException, flurlRequest, requestContext);
                 else
-                    await _exceptionHandler?.Invoke(flurlException);
+                {
+                    if (_exceptionHandler != null)
+                        await _exceptionHandler.Invoke(flurlException);
+                }
             }
             catch (Exception ex)
             {
-                await _exceptionHandler?.Invoke(ex);
+                if (_exceptionHandler != null)
+                    await _exceptionHandler.Invoke(ex);
             }
 
             return rawData;
@@ -214,11 +223,15 @@ namespace WebServiceShare.WebServiceClient
                 if (requestContext.AttemptCnt < WebConfig.ReTryCount)
                     result = await RequestRetryPolicy<TOut>(flurlException, flurlRequest, requestContext);
                 else
-                    await _exceptionHandler?.Invoke(flurlException);
+                {
+                    if (_exceptionHandler != null)
+                        await _exceptionHandler.Invoke(flurlException);
+                }
             }
             catch (Exception ex)
             {
-                await _exceptionHandler?.Invoke(ex);
+                if (_exceptionHandler != null)
+                    await _exceptionHandler.Invoke(ex);
             }
 
             return result;

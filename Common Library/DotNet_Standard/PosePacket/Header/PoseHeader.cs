@@ -5,7 +5,7 @@ namespace PosePacket.Header
 {
     public class PoseHeader
     {
-        public const string HEADER_NAME = "EncryptData";
+        public const string HEADER_NAME = "Authorization";
         public const string HEADER_NAMESPACE = "http://pose-sports-predict.com";
 
         public byte[] eSignature { get; set; }
@@ -38,6 +38,7 @@ namespace PosePacket.Header
 
         public static PoseHeader ParseFromBase64(string base64String)
         {
+            base64String = base64String.Substring(7);
             PoseHeader result = new PoseHeader();
 
             byte[] buffer = Convert.FromBase64String(base64String);

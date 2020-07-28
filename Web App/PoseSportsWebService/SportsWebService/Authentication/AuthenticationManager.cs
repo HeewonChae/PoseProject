@@ -13,7 +13,7 @@ namespace SportsWebService.Authentication
         public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
         {
             // Read Header
-            PoseHeaderMessage.ReadHeader(message);
+            PoseHeaderMessage.ReadAuthorization(message);
 
             // Check Credentials
             var credentials = CheckCredentialValid();

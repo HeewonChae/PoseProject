@@ -31,14 +31,14 @@ namespace SportsWebService.WebBehavior.Common.HeaderProcess
             get { return (PoseHeader.HEADER_NAMESPACE); }
         }
 
-        public static void ReadHeader(Message request)
+        public static void ReadAuthorization(Message request)
         {
             HttpRequestMessageProperty properties = request.Properties["httpRequest"] as HttpRequestMessageProperty;
-            var headerString = properties.Headers.Get(PoseHeader.HEADER_NAME);
+            var token = properties.Headers.Get(PoseHeader.HEADER_NAME);
 
             PoseHeader headerData = null;
-            if (!string.IsNullOrEmpty(headerString))
-                headerData = PoseHeader.ParseFromBase64(headerString);
+            if (!string.IsNullOrEmpty(token) && token.StartsWith("Bearer "))
+                headerData = PoseHeader.ParseFromBase64(token);
 
             ServerContext serverContext = new ServerContext(headerData);
             serverContext.Attach(OperationContext.Current);
