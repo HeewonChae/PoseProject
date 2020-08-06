@@ -1,6 +1,6 @@
 ﻿using MessagePack;
+using PosePacket.Service.Enum;
 using PosePacket.Service.Football.Models;
-using PosePacket.Service.Football.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

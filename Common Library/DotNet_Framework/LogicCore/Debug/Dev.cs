@@ -14,6 +14,7 @@ namespace LogicCore.Debug
             Console.ForegroundColor = foregroundColor;
 
             Console.WriteLine(message);
+            Log4Net.WriteLog(message, Log4Net.Level.DEBUG, 0, "");
 
             Console.ForegroundColor = orgColor;
         }

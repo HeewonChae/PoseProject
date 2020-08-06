@@ -2,6 +2,7 @@
 using LogicCore.Utility;
 using Repository.Mysql.FootballDB.Procedures;
 using Repository.Mysql.FootballDB.Tables;
+using SportsAdminTool.Logic.WebAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,10 +41,11 @@ namespace SportsAdminTool.Commands.Football
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Predict fixtrues ({loop}/{fixtureCnt})");
 
-                    db_fixture.is_predicted = true;
+                    var pred_data = Singleton.Get<FootballPredictorAPI>().PredictFixture(db_fixture.id);
 
                     // DB Save
-                    Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
+                    //db_fixture.is_predicted = true;
+                    //Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
                 }
             });
         }

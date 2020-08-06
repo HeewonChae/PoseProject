@@ -193,12 +193,14 @@
     <Compile Include="Logic\Football\Alarm\CheckCompletedFixtures.cs" />
     <Compile Include="Logic\Football\Alarm\CollectDatasAndPredict.cs" />
     <Compile Include="Logic\Football\Alarm\InitializeDatabase.cs" />
+    <Compile Include="Logic\Football\PredictionFacade.cs" />
     <Compile Include="Logic\LogicAlarmBase.cs" />
     <Compile Include="Logic\Football\CheckValidation.cs" />
     <Compile Include="Logic\Football\DataConverter.cs" />
     <Compile Include="Logic\Football\LogicFacade.cs" />
     <Compile Include="Logic\LogicStatic.cs" />
     <Compile Include="Logic\TableLoader.cs" />
+    <Compile Include="Logic\WebAPI\FootballPredictorAPI.cs" />
     <Compile Include="Logic\WebAPI\FootballWebAPI.cs" />
     <Compile Include="Logic\WebAPI\RequestExtensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -259,6 +261,10 @@
       <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
       <Name>LogicCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\PredictorAPI\PredictorAPI.csproj">
+      <Project>{1E5697F4-1EE8-469A-867E-B87FB39C9F65}</Project>
+      <Name>PredictorAPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\RapidAPI\RapidAPI.csproj">
       <Project>{0310E278-EBFC-4DD8-8A36-27321A01C52F}</Project>
       <Name>RapidAPI</Name>
@@ -266,6 +272,10 @@
     <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\Repository\Repository.csproj">
       <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
       <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj">
+      <Project>{F12C31F7-74E0-407D-947A-AA4C42CD1C5B}</Project>
+      <Name>PosePacket</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Web App\PoseSportsWebService\Repository.Mysql\Repository.Mysql.csproj">
       <Project>{300d85b2-91dd-42c9-89c0-4a2900aa9993}</Project>

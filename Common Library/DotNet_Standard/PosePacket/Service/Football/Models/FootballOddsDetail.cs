@@ -13,10 +13,10 @@ namespace PosePacket.Service.Football.Models
         public int FixtureId { get; set; }
 
         [Key(1)]
-        public BookmakerType BoomakerType { get; set; }
+        public FootballBookmakerType BoomakerType { get; set; }
 
         [Key(2)]
-        public OddsLabelType OddsLabelType { get; set; }
+        public FootballOddsLabelType OddsLabelType { get; set; }
 
         [Key(3)]
         public float Odds1 { get; set; }

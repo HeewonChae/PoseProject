@@ -10,6 +10,8 @@ namespace SportsAdminTool.Logic.WebAPI
 {
     public static class RequestExtensions
     {
+        #region IRapidAPI
+
         public static void RequestEx<T1, T2, T3>(this IRapidAPI rapidAPI, Func<T1, IList<IList<T2>>> requsetMethod, T1 param, out IList<IList<T3>> result)
             where T3 : new()
         {
@@ -110,5 +112,7 @@ namespace SportsAdminTool.Logic.WebAPI
 
             result = DataMapper.Map<T3, T4>(response);
         }
+
+        #endregion IRapidAPI
     }
 }

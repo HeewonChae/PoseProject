@@ -1,4 +1,4 @@
-﻿using PosePacket.Service.Football.Models.Enums;
+﻿using PosePacket.Service.Enum;
 using Repository.Mysql.Dapper;
 using Repository.Mysql.FootballDB.OutputModels;
 using Repository.Mysql.FootballDB.Tables;

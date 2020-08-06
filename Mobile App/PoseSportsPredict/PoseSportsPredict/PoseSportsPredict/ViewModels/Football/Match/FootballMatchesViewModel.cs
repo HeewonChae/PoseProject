@@ -434,7 +434,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     break;
 
                 case MatchFilterType.SortByLeague:
-                    matchList = _matchList.OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}").ToList();
+                    // matchList = _matchList.OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}").ToList();
+                    matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
                     break;
             }
 

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Mysql", "..\..\W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PosePacket", "..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj", "{F12C31F7-74E0-407D-947A-AA4C42CD1C5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PredictorAPI", "..\..\Common Library\DotNet_Framework\PredictorAPI\PredictorAPI.csproj", "{1E5697F4-1EE8-469A-867E-B87FB39C9F65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{F12C31F7-74E0-407D-947A-AA4C42CD1C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12C31F7-74E0-407D-947A-AA4C42CD1C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12C31F7-74E0-407D-947A-AA4C42CD1C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E5697F4-1EE8-469A-867E-B87FB39C9F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E5697F4-1EE8-469A-867E-B87FB39C9F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E5697F4-1EE8-469A-867E-B87FB39C9F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E5697F4-1EE8-469A-867E-B87FB39C9F65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

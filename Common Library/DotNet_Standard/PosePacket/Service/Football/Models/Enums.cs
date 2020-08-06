@@ -36,7 +36,7 @@ namespace PosePacket.Service.Football.Models.Enums
         _MAX_
     }
 
-    public enum BookmakerType
+    public enum FootballBookmakerType
     {
         _NONE_,
         TenBet = 1,
@@ -52,7 +52,7 @@ namespace PosePacket.Service.Football.Models.Enums
         _MAX_
     }
 
-    public enum OddsLabelType
+    public enum FootballOddsLabelType
     {
         _NONE_,
         Match_Winner = 1,
@@ -63,9 +63,20 @@ namespace PosePacket.Service.Football.Models.Enums
     // Goals_Over_Under = 5,
     // Double_Chance = 12,
 
-    public enum SearchFixtureStatusType
+    public enum FootballPredictLabelType
     {
-        Finished,
-        Scheduled,
+        Final_Score = 1,
+        Match_Winner = 2,
+        Both_Teams_to_Score = 3,
+        Under_Over = 4,
+    }
+
+    public enum FootballUnderOverType
+    {
+        UO_1_5 = 1,
+        UO_2_5 = 2,
+        UO_3_5 = 3,
+        UO_4_5 = 4,
+        UO_5_5 = 5
     }
 }

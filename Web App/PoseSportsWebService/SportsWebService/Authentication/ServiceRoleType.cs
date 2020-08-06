@@ -4,10 +4,8 @@
     public enum ServiceRoleType
     {
         _NONE_,
-        User = int.MaxValue - 4000,
-        VIP = int.MaxValue - 3000,
-        VVIP = int.MaxValue - 2000,
-        Manager = int.MaxValue - 1000,
-        Admin = int.MaxValue,
+        User = 1 << 0,
+        VIP = 1 << 15,
+        Admin = 1 << 30,
     }
 }

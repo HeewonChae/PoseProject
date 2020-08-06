@@ -1,6 +1,7 @@
 ﻿using LogicCore.Converter;
 using LogicCore.Debug;
 using Newtonsoft.Json;
+using PosePacket.Service.Football.Models.Enums;
 using SportsAdminTool.Model.Football.Enums;
 using System;
 using System.Collections.Generic;
@@ -33,8 +34,7 @@ namespace SportsAdminTool.Commands.Football
 
                 foreach (var coverageLeague in db_coverageLeagues)
                 {
-                    FootballLeagueType leagueType = FootballLeagueType._NONE_;
-                    Dev.Assert(coverageLeague.LeagueType.TryParseEnum(out leagueType));
+                    coverageLeague.LeagueType.TryParseEnum(out FootballLeagueType leagueType);
 
                     coverageLeagueList.Add(new footballRes.CoverageLeague(
                         coverageLeague.LeagueName,

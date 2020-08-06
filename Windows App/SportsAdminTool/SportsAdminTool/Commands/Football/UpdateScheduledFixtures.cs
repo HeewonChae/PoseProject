@@ -31,11 +31,8 @@ namespace SportsAdminTool.Commands.Football
                     , DateTime.UtcNow.AddDays(3)
                     , DateTime.UtcNow.AddDays(4));
 
-                // 취소, 연기된 경기 필터링
-                var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
-
                 // grouping by leagueID
-                var api_groupingbyLeague = api_filteredFixtures.GroupBy(elem => elem.LeagueId);
+                var api_groupingbyLeague = api_fixtures.GroupBy(elem => elem.LeagueId);
                 int loop = 0;
                 foreach (var api_groupingFixtures in api_groupingbyLeague)
                 {
@@ -55,9 +52,12 @@ namespace SportsAdminTool.Commands.Football
                         if (db_league.upt_time.Date == DateTime.UtcNow.Date)
                             continue;
 
+                        // 취소, 연기된 경기 필터링
+                        var api_filteredFixtures = api_groupingFixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
+
                         // Update Fixtures, Odds, Statistics,
                         int innerloop = 0;
-                        foreach (var fixture in api_groupingFixtures)
+                        foreach (var fixture in api_filteredFixtures)
                         {
                             innerloop++;
                             mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled fixtures ({innerloop}/{api_groupingFixtures.Count()})");

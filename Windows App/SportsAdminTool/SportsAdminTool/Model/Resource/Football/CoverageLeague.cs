@@ -3,6 +3,7 @@ using LogicCore.Debug;
 using LogicCore.File;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PosePacket.Service.Football.Models.Enums;
 using SportsAdminTool.Model.Football.Enums;
 using System;
 using System.Collections.Generic;

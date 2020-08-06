@@ -49,8 +49,7 @@ namespace ReferenceText.NetCore
                 BaseUrl = ServiceBaseUrl,
                 ServiceUrl = AuthProxy.ServiceUrl,
                 SegmentGroup = AuthProxy.P_PUBLISH_KEY,
-            },
-             (PoseHeader.HEADER_NAME, ClientContext.Header)).Result;
+            }, ClientContext.Token).Result;
 
             CryptoFacade.Instance.RSA_FromXmlString(serverPubKey);
             ClientContext.eSignature = CryptoFacade.Instance.GetEncryptedSignature();
@@ -69,8 +68,7 @@ namespace ReferenceText.NetCore
                 {
                     PlatformId = "test",
                 }
-            },
-             (PoseHeader.HEADER_NAME, ClientContext.Header)).Result;
+            }, ClientContext.Token).Result;
 
             ClientContext.SetCredentialsFrom(login_output.PoseToken);
             ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(login_output.TokenExpireIn);

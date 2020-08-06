@@ -127,16 +127,16 @@ namespace SportsAdminTool
             string org_bannerText = this._lbl_collectDatasAndPredict.Content.ToString();
             this._progRing_collectDatasAndPredict.IsActive = true;
 
-            if (await FootballCommands.UpdateScheduledFixtures.Execute())
-            {
-                await FootballCommands.PredictFixtures.Execute();
-            }
-            else
-            {
-                // Error처리
-                await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
-                alarm.SetAlarm(30000); // 30초 후 다시 시작
-            }
+            //bool update_ret = await FootballCommands.UpdateScheduledFixtures.Execute();
+
+            await FootballCommands.PredictFixtures.Execute();
+
+            //if (!update_ret)
+            //{
+            //    // Error처리
+            //    await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
+            //    alarm.SetAlarm(30000); // 30초 후 다시 시작
+            //}
 
             await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateScheduledFixtures_Errors.json");
 
