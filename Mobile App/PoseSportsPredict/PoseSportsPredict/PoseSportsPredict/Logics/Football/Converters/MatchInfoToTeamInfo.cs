@@ -16,7 +16,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
             if (matchInfo == null)
                 throw new ArgumentException("matchInfo");
 
-            if (teamType == TeamCampType.Total)
+            if (teamType == TeamCampType.Any)
                 throw new ArgumentException("teamType");
 
             var returnValue = new FootballTeamInfo

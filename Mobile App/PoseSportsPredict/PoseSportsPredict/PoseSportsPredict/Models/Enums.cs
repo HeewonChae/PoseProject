@@ -7,7 +7,7 @@
 
     public enum TeamCampType
     {
-        Total,
+        Any,
         Home,
         Away,
     }

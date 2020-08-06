@@ -9,8 +9,8 @@ namespace PoseSportsPredict.Models.Football
     public class FootballOddsInfo
     {
         public int FixtureId { get; set; }
-        public BookmakerType BookmakerType { get; set; }
-        public OddsLabelType OddsLabelType { get; set; }
+        public FootballBookmakerType BookmakerType { get; set; }
+        public FootballOddsLabelType OddsLabelType { get; set; }
         public string BookmakerImageUrl { get; set; }
         public Color BookmakerColor { get; set; }
         public double RefundRate { get; set; }

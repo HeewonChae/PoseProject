@@ -73,10 +73,19 @@ namespace PosePacket.Service.Football.Models.Enums
 
     public enum FootballUnderOverType
     {
-        UO_1_5 = 1,
-        UO_2_5 = 2,
-        UO_3_5 = 3,
-        UO_4_5 = 4,
-        UO_5_5 = 5
+        UNDER_1_5,
+        OVER_1_5,
+        UO_2_5,
+        UO_3_5,
+    }
+
+    public enum FootballMatchWinnerType
+    {
+        Win,
+        Draw,
+        Lose,
+        WinOrDraw,
+        WinOrLose,
+        DrawOrLose
     }
 }

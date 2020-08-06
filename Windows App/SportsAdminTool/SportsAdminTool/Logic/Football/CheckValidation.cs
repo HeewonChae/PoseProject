@@ -35,7 +35,7 @@ namespace SportsAdminTool.Logic.Football
         public string TeamName;
         public short LeagueId;
         public string CountryName;
-        public int ReasonType;
+        public InvalidType ReasonType;
 
         public string TeamKey => $"{TeamId}:{CountryName}:{TeamName}";
     }
@@ -45,7 +45,7 @@ namespace SportsAdminTool.Logic.Football
         public short LeagueId;
         public string LeagueName;
         public string CountryName;
-        public int ReasonType;
+        public InvalidType ReasonType;
         public string LeagueKey => $"{LeagueId}:{CountryName}:{LeagueName}";
     }
 
@@ -70,7 +70,7 @@ namespace SportsAdminTool.Logic.Football
                     LeagueId = (short)leagueId,
                     LeagueName = leagueName,
                     CountryName = countryName,
-                    ReasonType = (int)InvalidType.NotExistInDB,
+                    ReasonType = InvalidType.NotExistInDB,
                 });
             }
 
@@ -88,7 +88,7 @@ namespace SportsAdminTool.Logic.Football
                     TeamName = teamName,
                     LeagueId = leagueId,
                     CountryName = countryName,
-                    ReasonType = (int)InvalidType.Zero,
+                    ReasonType = InvalidType.Zero,
                 });
             }
 
@@ -104,7 +104,7 @@ namespace SportsAdminTool.Logic.Football
                         TeamName = teamName,
                         LeagueId = leagueId,
                         CountryName = countryName,
-                        ReasonType = (int)InvalidType.NotExistInDB,
+                        ReasonType = InvalidType.NotExistInDB,
                     });
                 }
             }
@@ -180,7 +180,7 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                var result = _invalidLeauges.Values.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
+                var result = _invalidLeauges.Values.Where(elem => elem.ReasonType == invalidType).ToArray();
 
                 if (isRemove)
                 {
@@ -206,7 +206,7 @@ namespace SportsAdminTool.Logic.Football
         {
             lock (_lockObject)
             {
-                var result = _invalidTeams.Values.Where(elem => elem.ReasonType == (int)invalidType).ToArray();
+                var result = _invalidTeams.Values.Where(elem => elem.ReasonType == invalidType).ToArray();
 
                 if (isRemove)
                 {

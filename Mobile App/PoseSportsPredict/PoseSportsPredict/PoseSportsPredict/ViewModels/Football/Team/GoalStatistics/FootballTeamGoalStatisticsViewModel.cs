@@ -91,12 +91,12 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
         private void TotalClick()
         {
             if (IsBusy
-                || SelectedTeamType == TeamCampType.Total)
+                || SelectedTeamType == TeamCampType.Any)
                 return;
 
             SetIsBusy(true);
 
-            SelectedTeamType = TeamCampType.Total;
+            SelectedTeamType = TeamCampType.Any;
             TaskLoaderNotifier.Load(InitData);
         }
 
@@ -176,7 +176,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
                 _matchesByLeague.Select(elem => elem.Key));
 
             Ddl_selectedIndex = 0;
-            SelectedTeamType = TeamCampType.Total;
+            SelectedTeamType = TeamCampType.Any;
             GoalStatisticsType = goalStatisticsType;
 
             if (GoalStatisticsType == FootballGoalStatisticsType.Team)
@@ -223,7 +223,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
             var homeMatches = selectedLeague.Value.Where(elem => elem.HomeTeamId == _teamInfo.TeamId).Take(6);
             var awayMatches = selectedLeague.Value.Where(elem => elem.AwayTeamId == _teamInfo.TeamId).Take(6);
 
-            var selectedMatches = SelectedTeamType == TeamCampType.Total ? totalMatches.ToList() :
+            var selectedMatches = SelectedTeamType == TeamCampType.Any ? totalMatches.ToList() :
                 SelectedTeamType == TeamCampType.Home ? homeMatches.ToList() : awayMatches.ToList();
 
             if (selectedMatches.Count == 0)

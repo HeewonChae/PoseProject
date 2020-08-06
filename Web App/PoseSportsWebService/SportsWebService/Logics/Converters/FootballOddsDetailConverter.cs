@@ -20,10 +20,10 @@ namespace SportsWebService.Logics.Converters
             {
                 result.FixtureId = db_odds.fixture_id;
 
-                db_odds.bookmaker_type.TryParseEnum(out BookmakerType bookmakerType);
+                db_odds.bookmaker_type.TryParseEnum(out FootballBookmakerType bookmakerType);
                 result.BoomakerType = bookmakerType;
 
-                db_odds.label_type.TryParseEnum(out OddsLabelType oddsLabelType);
+                db_odds.label_type.TryParseEnum(out FootballOddsLabelType oddsLabelType);
                 result.OddsLabelType = oddsLabelType;
 
                 SetOdds(db_odds.subtitle_1, db_odds.odds_1, result);

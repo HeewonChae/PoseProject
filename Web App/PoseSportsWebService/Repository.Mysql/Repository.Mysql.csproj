@@ -106,6 +106,7 @@
     <Compile Include="FootballDB\Tables\FixtureStatistics.cs" />
     <Compile Include="FootballDB\Tables\League.cs" />
     <Compile Include="FootballDB\Tables\Odds.cs" />
+    <Compile Include="FootballDB\Tables\Predict.cs" />
     <Compile Include="FootballDB\Tables\Standings.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
     <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.cs" />

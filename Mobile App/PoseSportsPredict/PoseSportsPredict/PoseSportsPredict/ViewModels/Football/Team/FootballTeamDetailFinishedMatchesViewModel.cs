@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Proxy;
+using PosePacket.Service.Enum;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
