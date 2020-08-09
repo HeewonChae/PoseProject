@@ -63,29 +63,38 @@ namespace PosePacket.Service.Football.Models.Enums
     // Goals_Over_Under = 5,
     // Double_Chance = 12,
 
-    public enum FootballPredictLabelType
+    public enum FootballPredictionType
     {
+        _NONE_,
         Final_Score = 1,
         Match_Winner = 2,
         Both_Teams_to_Score = 3,
         Under_Over = 4,
+        _MAX_
     }
 
     public enum FootballUnderOverType
     {
+        _NONE_,
         UNDER_1_5,
         OVER_1_5,
-        UO_2_5,
-        UO_3_5,
+        UNDER_2_5,
+        OVER_2_5,
+        UNDER_3_5,
+        OVER_3_5,
+        UNDER_4_5,
+        OVER_4_5,
+        _MAX_
     }
 
     public enum FootballMatchWinnerType
     {
+        _NONE_,
         Win,
-        Draw,
         Lose,
         WinOrDraw,
         WinOrLose,
-        DrawOrLose
+        DrawOrLose,
+        _MAX_,
     }
 }

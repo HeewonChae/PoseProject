@@ -36,52 +36,52 @@ namespace PoseSportsPredict.Logics.Football.Converters
         {
             switch (oddsInfo.BookmakerType)
             {
-                case BookmakerType.TenBet:
+                case FootballBookmakerType.TenBet:
                     oddsInfo.BookmakerImageUrl = "img_10Bet.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.Marathonbet:
+                case FootballBookmakerType.Marathonbet:
                     oddsInfo.BookmakerImageUrl = "img_Marathonbet.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.Betfair:
+                case FootballBookmakerType.Betfair:
                     oddsInfo.BookmakerImageUrl = "img_betfair.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.Bwin:
+                case FootballBookmakerType.Bwin:
                     oddsInfo.BookmakerImageUrl = "img_bwin.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.WilliamHill:
+                case FootballBookmakerType.WilliamHill:
                     oddsInfo.BookmakerImageUrl = "img_williamhill.jpg";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.Bet365:
+                case FootballBookmakerType.Bet365:
                     oddsInfo.BookmakerImageUrl = "img_bet365.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.Dafabet:
+                case FootballBookmakerType.Dafabet:
                     oddsInfo.BookmakerImageUrl = "img_dafabet.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;
 
-                case BookmakerType.Ladbrokes:
+                case FootballBookmakerType.Ladbrokes:
                     oddsInfo.BookmakerImageUrl = "img_ladbrokes.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ec1f25");
                     break;
 
-                case BookmakerType.OnexBet:
+                case FootballBookmakerType.OnexBet:
                     oddsInfo.BookmakerImageUrl = "img_1xbet.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#1a5685");
                     break;
 
-                case BookmakerType.Interwetten:
+                case FootballBookmakerType.Interwetten:
                     oddsInfo.BookmakerImageUrl = "img_Interwetten.png";
                     oddsInfo.BookmakerColor = Color.FromHex("#ffffff");
                     break;

@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight.Command;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Enums;

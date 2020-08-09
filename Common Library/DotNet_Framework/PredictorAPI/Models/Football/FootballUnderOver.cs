@@ -17,17 +17,20 @@ namespace PredictorAPI.Models.Football
 
         [JsonProperty("over_3_5")]
         public UnderOverProba UO_3_5 { get; set; }
+
+        [JsonProperty("over_4_5")]
+        public UnderOverProba UO_4_5 { get; set; }
     }
 
     public class UnderOverProba
     {
         [JsonProperty("knn")]
-        public ProbaWinner KNN { get; set; }
+        public ProbaYN KNN { get; set; }
 
         [JsonProperty("sgd")]
-        public ProbaWinner SGD { get; set; }
+        public ProbaYN SGD { get; set; }
 
         [JsonProperty("sub")]
-        public ProbaWinner Sub { get; set; }
+        public ProbaYN Sub { get; set; }
     }
 }

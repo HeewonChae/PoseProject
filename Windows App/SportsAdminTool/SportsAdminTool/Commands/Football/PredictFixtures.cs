@@ -2,6 +2,7 @@
 using LogicCore.Utility;
 using Repository.Mysql.FootballDB.Procedures;
 using Repository.Mysql.FootballDB.Tables;
+using SportsAdminTool.Logic.Football;
 using SportsAdminTool.Logic.WebAPI;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,9 @@ namespace SportsAdminTool.Commands.Football
                 {
                     P_SELECT_PREDICTABLE_FIXTURES.SetInput(new FootballDB.Procedures.P_SELECT_PREDICTABLE_FIXTURES.Input
                     {
-                        WHERE = $"f.is_predicted = 0 AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMdd")}\" AND \"{DateTime.UtcNow.AddDays(4).ToString("yyyyMMdd")}\" AND lc.{nameof(LeagueCoverage.predictions)} = 1",
+                        WHERE = $"f.is_completed = 0 " +
+                        $"AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND \"{DateTime.UtcNow.AddDays(6).ToString("yyyyMMdd")}\" " +
+                        $"AND lc.{nameof(LeagueCoverage.predictions)} = 1 ",
                     });
                     db_fixtures = P_SELECT_PREDICTABLE_FIXTURES.OnQuery();
 
@@ -42,10 +45,21 @@ namespace SportsAdminTool.Commands.Football
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Predict fixtrues ({loop}/{fixtureCnt})");
 
                     var pred_data = Singleton.Get<FootballPredictorAPI>().PredictFixture(db_fixture.id);
+                    if (pred_data == null)
+                        continue;
+
+                    // Predict Fixture
+                    List<FootballDB.Tables.Prediction> db_predictions = new List<FootballDB.Tables.Prediction>();
+                    db_predictions.AddRange(PredictionFacade.PredictFinalScore(db_fixture.id, pred_data));
+                    db_predictions.AddRange(PredictionFacade.PredictMatchWinner(db_fixture.id, pred_data));
+                    db_predictions.AddRange(PredictionFacade.PredictBothToScore(db_fixture.id, pred_data));
+                    db_predictions.AddRange(PredictionFacade.PredictUnderOver(db_fixture.id, pred_data));
 
                     // DB Save
-                    //db_fixture.is_predicted = true;
-                    //Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
+                    db_fixture.is_predicted = true;
+                    db_fixture.is_recommended = db_predictions.Any(elem => elem.is_recommended = true);
+                    Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
+                    Logic.Database.FootballDBFacade.UpdatePrediction(db_predictions.ToArray());
                 }
             });
         }

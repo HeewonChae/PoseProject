@@ -7,6 +7,11 @@ using System.Text;
 /// </summary>
 namespace PosePacket.Service.Enum
 {
+    public enum SportsType
+    {
+        Football,
+    }
+
     public enum MatchResultType
     {
         Win,
@@ -18,5 +23,18 @@ namespace PosePacket.Service.Enum
     {
         Finished,
         Scheduled,
+    }
+
+    public enum TeamCampType
+    {
+        Any,
+        Home,
+        Away,
+    }
+
+    public enum YesNoType
+    {
+        Yes,
+        No,
     }
 }

@@ -20,5 +20,11 @@ namespace PredictorAPI.Models.Football
 
         [JsonProperty("under_over")]
         public FootballUnderOver UnderOver { get; set; }
+
+        [JsonProperty("home_stat")]
+        public FootballTeamStat HomeStat { get; set; }
+
+        [JsonProperty("away_stat")]
+        public FootballTeamStat AwayStat { get; set; }
     }
 }

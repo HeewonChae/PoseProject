@@ -77,6 +77,10 @@ namespace Repository.Mysql.FootballDB.Tables
         public bool is_completed { get; set; }
 
         [Required]
+        [SqlDefaultValue(DefaultValue = "0")]
+        public bool is_recommended { get; set; }
+
+        [Required]
         public DateTime upt_time { get; set; }
     }
 }

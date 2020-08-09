@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Plugin.LocalNotification;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;

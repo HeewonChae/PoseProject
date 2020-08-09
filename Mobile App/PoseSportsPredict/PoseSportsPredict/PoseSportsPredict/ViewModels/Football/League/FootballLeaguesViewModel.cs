@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;

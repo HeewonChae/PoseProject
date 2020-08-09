@@ -1,17 +1,5 @@
 ﻿namespace PoseSportsPredict.Models.Enums
 {
-    public enum SportsType
-    {
-        Football,
-    }
-
-    public enum TeamCampType
-    {
-        Any,
-        Home,
-        Away,
-    }
-
     public enum MatchFilterType
     {
         Bookmark,
@@ -30,13 +18,6 @@
     public enum NotificationType
     {
         MatchStart
-    }
-
-    public enum MatchResultType
-    {
-        Win,
-        Draw,
-        Lose,
     }
 
     public enum StandingsDescCategoryType

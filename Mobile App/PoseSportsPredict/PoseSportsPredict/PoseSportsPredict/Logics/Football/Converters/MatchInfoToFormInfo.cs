@@ -1,4 +1,5 @@
-﻿using PosePacket.Service.Football.Models;
+﻿using PosePacket.Service.Enum;
+using PosePacket.Service.Football.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using System;

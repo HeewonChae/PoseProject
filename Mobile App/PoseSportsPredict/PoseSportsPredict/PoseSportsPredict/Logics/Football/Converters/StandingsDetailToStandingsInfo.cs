@@ -1,4 +1,5 @@
-﻿using PosePacket.Service.Football.Models;
+﻿using PosePacket.Service.Enum;
+using PosePacket.Service.Football.Models;
 using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Football;
@@ -65,15 +66,15 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
                 if (form.Equals('W'))
                 {
-                    footballForm.Result = Models.Enums.MatchResultType.Win;
+                    footballForm.Result = MatchResultType.Win;
                 }
                 else if (form.Equals('L'))
                 {
-                    footballForm.Result = Models.Enums.MatchResultType.Lose;
+                    footballForm.Result = MatchResultType.Lose;
                 }
                 else
                 {
-                    footballForm.Result = Models.Enums.MatchResultType.Draw;
+                    footballForm.Result = MatchResultType.Draw;
                 }
 
                 returnValue.Form.Add(footballForm);

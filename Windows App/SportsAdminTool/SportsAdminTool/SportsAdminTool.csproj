@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="Commands\Football\CheckCompletedFixtures.cs" />
     <Compile Include="Commands\Football\ExportCoverageLeagues.cs" />
+    <Compile Include="Commands\Football\NotiryFootballPredictions.cs" />
     <Compile Include="Commands\Football\UpdateLeagueAndTeam.cs" />
     <Compile Include="Commands\Football\PredictFixtures.cs" />
     <Compile Include="Commands\Football\UpdateScheduledFixtures.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Logic\TableLoader.cs" />
     <Compile Include="Logic\WebAPI\FootballPredictorAPI.cs" />
     <Compile Include="Logic\WebAPI\FootballWebAPI.cs" />
+    <Compile Include="Logic\WebAPI\LineNotifyAPI.cs" />
     <Compile Include="Logic\WebAPI\RequestExtensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -257,6 +259,10 @@
     <Resource Include="mahapps.metro.logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LineNotify\LineNotify.csproj">
+      <Project>{100ECE24-7E39-4CE9-99D1-529B9362492D}</Project>
+      <Name>LineNotify</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
       <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
       <Name>LogicCore</Name>

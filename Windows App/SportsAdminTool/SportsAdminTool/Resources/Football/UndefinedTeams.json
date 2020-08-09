@@ -279,6 +279,13 @@
       "CountryName": "Turkmenistan",
       "ConvertTeamId": 13159,
       "ConvertTeamName": "Aşgabat"
+    },
+    {
+      "Index": 43,
+      "TeamName": "Alania Vladikavkaz",
+      "CountryName": "Russia",
+      "ConvertTeamId": 10136,
+      "ConvertTeamName": "Alaniya II"
     }
   ]
 }

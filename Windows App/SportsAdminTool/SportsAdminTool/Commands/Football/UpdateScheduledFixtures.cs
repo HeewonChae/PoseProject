@@ -23,16 +23,13 @@ namespace SportsAdminTool.Commands.Football
 
                 mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update scheduled fixtures");
 
-                // Call API (5일치 경기)
-                var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByDate(
-                    DateTime.UtcNow
-                    , DateTime.UtcNow.AddDays(1)
-                    , DateTime.UtcNow.AddDays(2)
-                    , DateTime.UtcNow.AddDays(3)
-                    , DateTime.UtcNow.AddDays(4));
+                // 5일치 경기
+                var db_fixtures = Logic.Database.FootballDBFacade.SelectFixtures(
+                    where: $"is_completed = 0 " +
+                    $"AND match_time BETWEEN '{DateTime.UtcNow.ToString("yyyyMMdd")}' AND '{DateTime.UtcNow.AddDays(6).ToString("yyyyMMdd")}'");
 
                 // grouping by leagueID
-                var api_groupingbyLeague = api_fixtures.GroupBy(elem => elem.LeagueId);
+                var api_groupingbyLeague = db_fixtures.GroupBy(elem => elem.league_id);
                 int loop = 0;
                 foreach (var api_groupingFixtures in api_groupingbyLeague)
                 {
@@ -42,39 +39,33 @@ namespace SportsAdminTool.Commands.Football
                     if (!Singleton.Get<CheckValidation>().IsValidLeague((short)api_groupingFixtures.Key, null, null, out League db_league, out LeagueCoverage db_leagueCoverage))
                         continue;
 
-                    // Update League All Fixtures
-                    LogicFacade.UpdateAllFixturesByLeague((short)api_groupingFixtures.Key);
-
-                    // is_predict_coverage 참인 리그만 업데이트
-                    if (db_leagueCoverage.predictions)
+                    // Update Fixtures, Odds, Statistics,
+                    int innerloop = 0;
+                    foreach (var fixture in api_groupingFixtures)
                     {
-                        // Check Already Updated
-                        if (db_league.upt_time.Date == DateTime.UtcNow.Date)
-                            continue;
+                        innerloop++;
+                        mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled fixtures ({innerloop}/{api_groupingFixtures.Count()})");
 
-                        // 취소, 연기된 경기 필터링
-                        var api_filteredFixtures = api_groupingFixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
-
-                        // Update Fixtures, Odds, Statistics,
-                        int innerloop = 0;
-                        foreach (var fixture in api_filteredFixtures)
+                        // 취소, 연기된 경기 삭제
+                        var api_fixture = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByFixtureId(fixture.id);
+                        if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status, api_fixture.MatchTime))
                         {
-                            innerloop++;
-                            mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled fixtures ({innerloop}/{api_groupingFixtures.Count()})");
+                            Logic.Database.FootballDBFacade.DeleteFixtures(where: $"id = {fixture.id}");
+                            Logic.Database.FootballDBFacade.DeletePrediction(where: $"fixture_id = {fixture.id}");
+                            continue;
+                        }
 
-                            LogicFacade.UpdateTeamLastFixtures((short)fixture.HomeTeam.TeamId, 30);
-                            LogicFacade.UpdateTeamLastFixtures((short)fixture.AwayTeam.TeamId, 30);
-                            LogicFacade.UpdateH2H((short)fixture.HomeTeam.TeamId, (short)fixture.AwayTeam.TeamId);
-                            LogicFacade.UpdateOdds(fixture.FixtureId);
+                        if (db_leagueCoverage.predictions)
+                        {
+                            //LogicFacade.UpdateTeamLastFixtures(fixture.home_team_id, 10);
+                            //LogicFacade.UpdateTeamLastFixtures(fixture.away_team_id, 10);
+                            //LogicFacade.UpdateH2H(fixture.home_team_id, fixture.away_team_id);
+                            LogicFacade.UpdateOdds(fixture.id);
                         }
                     }
 
                     // Update League Standings
-                    if (!LogicFacade.UpdateStandings((short)api_groupingFixtures.Key))
-                        continue;
-
-                    db_league.upt_time = DateTime.UtcNow;
-                    Logic.Database.FootballDBFacade.UpdateLeague(db_league);
+                    LogicFacade.UpdateStandings((short)api_groupingFixtures.Key);
                 }
 
                 return !Singleton.Get<CheckValidation>().IsExistError(InvalidType.NotExistInDB);

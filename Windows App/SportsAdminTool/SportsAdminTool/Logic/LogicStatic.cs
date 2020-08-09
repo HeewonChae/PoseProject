@@ -27,6 +27,7 @@ namespace SportsAdminTool.Logic
             // Register singleton
             Singleton.Register(new ApiLogic.FootballWebAPI());
             Singleton.Register(new ApiLogic.FootballPredictorAPI());
+            Singleton.Register(new ApiLogic.LineNotifyAPI());
             Singleton.Register(new FootballLogic.CheckValidation());
             Singleton.Register(new LogicThread.Message.Consumer.Singular());
             Singleton.Register(new LogicThread.Timeout());

@@ -31,6 +31,8 @@ namespace PredictorAPI
                 new { fixture_id });
 
             var response = apiClient.ExecuteEx<string>(request);
+            if (response == null)
+                return null;
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {

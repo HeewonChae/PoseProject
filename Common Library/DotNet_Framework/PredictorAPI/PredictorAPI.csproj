@@ -53,6 +53,7 @@
     <Compile Include="Models\Football\FootballBothToScore.cs" />
     <Compile Include="Models\Football\FootballMatchWinner.cs" />
     <Compile Include="Models\Football\FootballPrediction.cs" />
+    <Compile Include="Models\Football\FootballTeamStat.cs" />
     <Compile Include="Models\Football\FootballUnderOver.cs" />
     <Compile Include="Models\MatchScore.cs" />
     <Compile Include="Models\ProbaWinner.cs" />

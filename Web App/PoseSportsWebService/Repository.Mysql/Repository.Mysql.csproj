@@ -70,17 +70,9 @@
   <ItemGroup>
     <Compile Include="Contexts\FootballDB.cs" />
     <Compile Include="Contexts\PoseGlobalDB.cs" />
-    <Compile Include="FootballDBMigrations\202004180850356_Initialize.cs" />
-    <Compile Include="FootballDBMigrations\202004180850356_Initialize.designer.cs">
-      <DependentUpon>202004180850356_Initialize.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202004260834499_LeagueTableIndexAlter.cs" />
-    <Compile Include="FootballDBMigrations\202004260834499_LeagueTableIndexAlter.designer.cs">
-      <DependentUpon>202004260834499_LeagueTableIndexAlter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202004260838385_LeagueTableLogoNullable.cs" />
-    <Compile Include="FootballDBMigrations\202004260838385_LeagueTableLogoNullable.designer.cs">
-      <DependentUpon>202004260838385_LeagueTableLogoNullable.cs</DependentUpon>
+    <Compile Include="FootballDBMigrations\202008082030177_InitiateFootballDB.cs" />
+    <Compile Include="FootballDBMigrations\202008082030177_InitiateFootballDB.designer.cs">
+      <DependentUpon>202008082030177_InitiateFootballDB.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
@@ -106,7 +98,7 @@
     <Compile Include="FootballDB\Tables\FixtureStatistics.cs" />
     <Compile Include="FootballDB\Tables\League.cs" />
     <Compile Include="FootballDB\Tables\Odds.cs" />
-    <Compile Include="FootballDB\Tables\Predict.cs" />
+    <Compile Include="FootballDB\Tables\Prediction.cs" />
     <Compile Include="FootballDB\Tables\Standings.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
     <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.cs" />
@@ -141,14 +133,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FootballDBMigrations\202004180850356_Initialize.resx">
-      <DependentUpon>202004180850356_Initialize.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202004260834499_LeagueTableIndexAlter.resx">
-      <DependentUpon>202004260834499_LeagueTableIndexAlter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202004260838385_LeagueTableLogoNullable.resx">
-      <DependentUpon>202004260838385_LeagueTableLogoNullable.cs</DependentUpon>
+    <EmbeddedResource Include="FootballDBMigrations\202008082030177_InitiateFootballDB.resx">
+      <DependentUpon>202008082030177_InitiateFootballDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

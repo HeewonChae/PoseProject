@@ -10,7 +10,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
-             xmlns:enums="clr-namespace:PoseSportsPredict.Models.Enums"
+             xmlns:enums="clr-namespace:PosePacket.Service.Enum;assembly=PosePacket"
              xmlns:footballenums="clr-namespace:PoseSportsPredict.Models.Football.Enums"
              xmlns:recentform="clr-namespace:PoseSportsPredict.Views.Football.Match.RecentForm"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Team.GoalStatistics"
@@ -98,7 +98,7 @@
                             <DataTrigger
                                 TargetType="materialui:MaterialLabel"
                                 Binding="{Binding SelectedTeamType}"
-                                Value="{x:Static enums:TeamCampType.Total}">
+                                Value="{x:Static enums:TeamCampType.Any}">
                                 <Setter Property="TextColor" Value="{StaticResource TextColor_L}" />
                             </DataTrigger>
                         </materialui:MaterialLabel.Triggers>
@@ -107,7 +107,7 @@
                         <DataTrigger
                             TargetType="materialui:MaterialCard"
                             Binding="{Binding SelectedTeamType}"
-                            Value="{x:Static enums:TeamCampType.Total}">
+                            Value="{x:Static enums:TeamCampType.Any}">
                             <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}" />
                         </DataTrigger>
                     </materialui:MaterialCard.Triggers>

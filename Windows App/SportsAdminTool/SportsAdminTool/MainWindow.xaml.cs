@@ -20,6 +20,7 @@ using System.Drawing;
 using SportsAdminTool.Logic.WebAPI;
 
 using SportsAdminTool.Logic.Football;
+using SportsAdminTool.Commands.Football;
 
 namespace SportsAdminTool
 {
@@ -28,6 +29,8 @@ namespace SportsAdminTool
     /// </summary>
     public partial class MainWindow : MetroWindow, Singleton.INode
     {
+        private DateTime _last_noti_picks_time = DateTime.MinValue;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -108,7 +111,7 @@ namespace SportsAdminTool
             //await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateLeagueAndTeam_Errors.json");
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(24) - DateTime.Now; // 24시간 후
+            TimeSpan ts = DateTime.Now.AddHours(9) - DateTime.Now; // 9시간 후
             Singleton.Get<FootballAlarm.InitializeDatabase>().SetAlarm((long)ts.TotalMilliseconds);
         }
 
@@ -127,16 +130,19 @@ namespace SportsAdminTool
             string org_bannerText = this._lbl_collectDatasAndPredict.Content.ToString();
             this._progRing_collectDatasAndPredict.IsActive = true;
 
-            //bool update_ret = await FootballCommands.UpdateScheduledFixtures.Execute();
+            if (!await FootballCommands.UpdateScheduledFixtures.Execute())
+            {
+                // Error처리
+                await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
+            }
 
             await FootballCommands.PredictFixtures.Execute();
 
-            //if (!update_ret)
-            //{
-            //    // Error처리
-            //    await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
-            //    alarm.SetAlarm(30000); // 30초 후 다시 시작
-            //}
+            if (_last_noti_picks_time.Date != DateTime.UtcNow.Date)
+            {
+                await NotifyFootballPredictions.Execute();
+                _last_noti_picks_time = DateTime.UtcNow;
+            }
 
             await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateScheduledFixtures_Errors.json");
 
@@ -145,7 +151,7 @@ namespace SportsAdminTool
             this._progRing_collectDatasAndPredict.IsActive = false;
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(3) - DateTime.Now; // 3시간 후
+            TimeSpan ts = DateTime.Now.AddHours(6) - DateTime.Now; // 6시간 후
             alarm.SetAlarm((long)ts.TotalMilliseconds);
         }
 
@@ -165,15 +171,11 @@ namespace SportsAdminTool
 
             await FootballCommands.CheckCompletedFixtures.Execute();
 
-            // Error처리
-            await FootballLogic.LogicFacade.SolveErrors(_lbl_check_completed_fixtures);
-            // await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "CheckCompletedFixtures.json");
-
             // 텍스트 원래대로 변경
             this._lbl_check_completed_fixtures.Content = org_bannerText;
             this._progRing_check_completed_fixtures.IsActive = false;
 
-            TimeSpan ts = DateTime.Now.AddMinutes(2) - DateTime.Now; // 2분 후
+            TimeSpan ts = DateTime.Now.AddMinutes(3) - DateTime.Now; // 3분 후
             Singleton.Get<FootballAlarm.CheckCompletedFixtures>().SetAlarm((long)ts.TotalMilliseconds);
         }
 

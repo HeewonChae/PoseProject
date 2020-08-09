@@ -1,4 +1,5 @@
-﻿using PoseSportsPredict.InfraStructure;
+﻿using PosePacket.Service.Enum;
+using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
 using System;

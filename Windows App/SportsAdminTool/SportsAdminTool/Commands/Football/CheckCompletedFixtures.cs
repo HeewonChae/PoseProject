@@ -36,6 +36,7 @@ namespace SportsAdminTool.Commands.Football
                     if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixtureStatus(api_fixture.Status, api_fixture.MatchTime))
                     {
                         Logic.Database.FootballDBFacade.DeleteFixtures(where: $"id = {db_fixture.id}");
+                        Logic.Database.FootballDBFacade.DeletePrediction(where: $"fixture_id = {db_fixture.id}");
                         continue;
                     }
 
@@ -44,10 +45,15 @@ namespace SportsAdminTool.Commands.Football
                         || api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
                         || api_fixture.Status == ApiModel.Football.Enums.FixtureStatusType.PEN)// 승부차기 후 종료
                     {
-                        db_fixture.is_completed = true;
+                        // 예측된 경기 적중 처리
+                        if (db_fixture.is_predicted)
+                            LogicFacade.DiscernPrediction(api_fixture);
 
                         // Update statistics
                         LogicFacade.UpdateFixtureStatistics(db_fixture.id);
+                        LogicFacade.UpdateStandings(db_fixture.league_id);
+
+                        db_fixture.is_completed = true;
                     }
 
                     // DB Save

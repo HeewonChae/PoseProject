@@ -87,3 +87,20 @@ SELECT l.id, l.name, l.type, l.country_name, lc.standings, lc.predictions, lc.od
 inner join footballdb.league_coverage as lc on l.id = lc.league_id
 where lc.predictions = 1 and l.is_current = 1
 group by l.name, l.country_name order by l.country_name;
+
+
+// select prediction
+SELECT f.id, l.country_name, l.name as league, ht.name as home_team, at.name as away_team, f.match_time FROM footballdb.fixture as f
+inner join footballdb.league as l on f.league_id = l.id
+inner join footballdb.team as ht on f.home_team_id = ht.id
+inner join footballdb.team as at on f.away_team_id = at.id
+where f.id in (SELECT fixture_id FROM footballdb.prediction where is_recommend = 1 group by fixture_id);
+
+SELECT f.id, l.country_name, l.name as league, ht.name as home_team, at.name as away_team, f.match_time FROM footballdb.fixture as f
+inner join footballdb.league as l on f.league_id = l.id
+inner join footballdb.team as ht on f.home_team_id = ht.id
+inner join footballdb.team as at on f.away_team_id = at.id
+inner join footballdb.league_coverage as lc on l.id = lc.league_id
+where f.is_predicted = 1 and f.match_time between '20200808' and '20200813';
+
+SELECT * FROM footballdb.prediction where fixture_id = 292863; 

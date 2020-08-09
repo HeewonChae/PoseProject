@@ -49,5 +49,6 @@ namespace Repository.Mysql.Contexts
         public virtual DbSet<Fixture> Fixture { get; set; }
         public virtual DbSet<FixtureStatistics> FixtureStatistic { get; set; }
         public virtual DbSet<Odds> Odds { get; set; }
+        public virtual DbSet<Prediction> Predict { get; set; }
     }
 }

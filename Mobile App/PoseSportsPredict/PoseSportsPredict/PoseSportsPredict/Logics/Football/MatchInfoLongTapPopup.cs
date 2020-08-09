@@ -1,4 +1,5 @@
 ﻿using Plugin.Vibrate;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;

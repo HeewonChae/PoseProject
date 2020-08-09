@@ -9,7 +9,7 @@
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
-             xmlns:enums="clr-namespace:PoseSportsPredict.Models.Enums"
+             xmlns:enums="clr-namespace:PosePacket.Service.Enum;assembly=PosePacket"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.RecentForm"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              x:Class="PoseSportsPredict.Views.Football.Match.RecentForm.FootballRecentFormView">

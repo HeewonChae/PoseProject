@@ -15,6 +15,12 @@ using System.Windows.Controls;
 using SportsAdminTool.Model.Resource.Football;
 using LogicCore.Debug;
 using RapidAPI.Models.Football.Enums;
+using SportsAdminTool.Model.Football;
+using LogicCore.Converter;
+using PosePacket.Service.Football.Models.Enums;
+using PosePacket.Service.Enum;
+
+using SportsAdminTool.Logic.WebAPI;
 
 namespace SportsAdminTool.Logic.Football
 {
@@ -31,7 +37,7 @@ namespace SportsAdminTool.Logic.Football
             // DB Save
             Database.FootballDBFacade.DeleteFixtures(api_deleteFixtures.ToArray());
             Database.FootballDBFacade.UpdateFixture(api_filteredFixtures.ToArray());
-            Database.FootballDBFacade.UpdateOdds(api_odds.ToArray());
+            //Database.FootballDBFacade.UpdateOdds(api_odds.ToArray());
         }
 
         public static void UpdateOdds(int fixtureId)
@@ -46,6 +52,51 @@ namespace SportsAdminTool.Logic.Football
 
             // DB Save
             Database.FootballDBFacade.UpdateOdds(fixtureId, api_odds.Bookmakers);
+        }
+
+        /// <summary>
+        /// 예측 데이터 적중 판별
+        /// </summary>
+        /// <param name="fixtureId"></param>
+        public static void DiscernPrediction(Fixture api_fixture)
+        {
+            var db_predictions = Database.FootballDBFacade.SelectPredictions(where: $"fixture_id = {api_fixture.FixtureId}");
+            foreach (var db_prediction in db_predictions)
+            {
+                ((int)db_prediction.main_label).TryParseEnum(out FootballPredictionType predictionType);
+                bool isHit = false;
+                switch (predictionType)
+                {
+                    case FootballPredictionType.Match_Winner:
+                        ((int)db_prediction.sub_label).TryParseEnum(out FootballMatchWinnerType matchWinnerSubType);
+                        isHit = PredictionFacade.DiscernMatchWinner(matchWinnerSubType, api_fixture.GoalsHomeTeam, api_fixture.GoalsAwayTeam);
+                        break;
+
+                    case FootballPredictionType.Both_Teams_to_Score:
+                        ((int)db_prediction.sub_label).TryParseEnum(out YesNoType bothToScoreSubType);
+                        isHit = PredictionFacade.DiscernBothToScore(bothToScoreSubType, api_fixture.GoalsHomeTeam, api_fixture.GoalsAwayTeam);
+                        break;
+
+                    case FootballPredictionType.Under_Over:
+                        ((int)db_prediction.sub_label).TryParseEnum(out FootballUnderOverType underOverSubType);
+                        isHit = PredictionFacade.DiscernUnderOver(underOverSubType, api_fixture.GoalsHomeTeam, api_fixture.GoalsAwayTeam);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                db_prediction.is_hit = isHit;
+                Logic.Database.FootballDBFacade.UpdatePrediction(db_prediction);
+
+                if (db_prediction.is_recommended && db_prediction.is_hit)
+                {
+                    string notiMSG = Logic.Football.PredictionFacade.MakeHitNotificationMessage(api_fixture, db_prediction);
+
+                    if (!string.IsNullOrEmpty(notiMSG))
+                        Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Football_Picks, notiMSG);
+                }
+            }
         }
 
         public static void UpdateFixtureStatistics(int fixtureId)
@@ -121,9 +172,17 @@ namespace SportsAdminTool.Logic.Football
 
                         api_league.Coverage.Predictions = false;
 
-                        // DB Save
+                        // Update League
                         Database.FootballDBFacade.UpdateCoverage(api_league);
                         Database.FootballDBFacade.UpdateLeague(api_league);
+
+                        // Update All Teams
+                        var api_teams = Singleton.Get<ApiLogic.FootballWebAPI>().GetAllTeamsByLeagueId((short)api_league.LeagueId);
+                        Logic.Database.FootballDBFacade.UpdateTeam((short)api_league.LeagueId, api_teams.ToArray());
+
+                        // Update All Fixtures
+                        LogicFacade.UpdateAllFixturesByLeague((short)api_league.LeagueId);
+                        LogicFacade.UpdateStandings((short)api_league.LeagueId);
 
                         Singleton.Get<CheckValidation>().DeleteErrorLeague(errorLeague);
                     }

@@ -1,4 +1,5 @@
 ﻿using PosePacket.Proxy;
+using PosePacket.Service.Enum;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;

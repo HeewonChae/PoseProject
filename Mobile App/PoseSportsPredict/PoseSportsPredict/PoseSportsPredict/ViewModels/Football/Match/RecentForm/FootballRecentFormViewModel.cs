@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football;
 using PoseSportsPredict.Models.Enums;

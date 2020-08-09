@@ -98,7 +98,8 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.League.logo)} = VALUES({nameof(FootballDB.Tables.League.logo)}), " +
                 $"{nameof(FootballDB.Tables.League.season_start)} = VALUES({nameof(FootballDB.Tables.League.season_start)}), " +
                 $"{nameof(FootballDB.Tables.League.season_end)} = VALUES({nameof(FootballDB.Tables.League.season_end)}), " +
-                $"{nameof(FootballDB.Tables.League.is_current)} = VALUES({nameof(FootballDB.Tables.League.is_current)});");
+                $"{nameof(FootballDB.Tables.League.is_current)} = VALUES({nameof(FootballDB.Tables.League.is_current)}), " +
+                $"{nameof(FootballDB.Tables.League.upt_time)} = VALUES({nameof(FootballDB.Tables.League.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
         }
@@ -430,10 +431,11 @@ namespace SportsAdminTool.Logic.Database
             }
 
             sb.Append($"ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Fixture.status)} = VALUES({nameof(FootballDB.Tables.Fixture.status)}), " +
+                    $"{nameof(FootballDB.Tables.Fixture.league_id)} = VALUES({nameof(FootballDB.Tables.Fixture.league_id)}), " +
                     $"{nameof(FootballDB.Tables.Fixture.home_score)} = VALUES({nameof(FootballDB.Tables.Fixture.home_score)}), " +
                     $"{nameof(FootballDB.Tables.Fixture.away_score)} = VALUES({nameof(FootballDB.Tables.Fixture.away_score)}), " +
+                    $"{nameof(FootballDB.Tables.Fixture.round)} = VALUES({nameof(FootballDB.Tables.Fixture.round)}), " +
                     $"{nameof(FootballDB.Tables.Fixture.match_time)} = VALUES({nameof(FootballDB.Tables.Fixture.match_time)}), " +
-                    $"{nameof(FootballDB.Tables.Fixture.is_completed)} = VALUES({nameof(FootballDB.Tables.Fixture.is_completed)}), " +
                     $"{nameof(FootballDB.Tables.Fixture.upt_time)} = VALUES({nameof(FootballDB.Tables.Fixture.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
@@ -461,6 +463,7 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.Fixture.away_score)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.is_completed)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.is_predicted)}`, " +
+                $"`{nameof(FootballDB.Tables.Fixture.is_recommended)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.upt_time)}`)");
             sb.Append("VALUES");
 
@@ -481,6 +484,7 @@ namespace SportsAdminTool.Logic.Database
                     $"{fixture.away_score}, " +
                     $"{fixture.is_completed}, " +
                     $"{fixture.is_predicted}, " +
+                    $"{fixture.is_recommended}, " +
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
@@ -490,6 +494,7 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.Fixture.match_time)} = VALUES({nameof(FootballDB.Tables.Fixture.match_time)}), " +
                 $"{nameof(FootballDB.Tables.Fixture.is_completed)} = VALUES({nameof(FootballDB.Tables.Fixture.is_completed)}), " +
                 $"{nameof(FootballDB.Tables.Fixture.is_predicted)} = VALUES({nameof(FootballDB.Tables.Fixture.is_predicted)}), " +
+                $"{nameof(FootballDB.Tables.Fixture.is_recommended)} = VALUES({nameof(FootballDB.Tables.Fixture.is_recommended)}), " +
                 $"{nameof(FootballDB.Tables.Fixture.upt_time)} = VALUES({nameof(FootballDB.Tables.Fixture.upt_time)});");
 
             return ExecuteQuery(sb.ToString());
@@ -728,6 +733,61 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
+        public static bool UpdatePrediction(params FootballDB.Tables.Prediction[] predictions)
+        {
+            if (predictions.Length == 0)
+                return false;
+
+            Dev.DebugString("Call DB - FootballFacade.UpdatePrediction");
+
+            DateTime upt_time = DateTime.Now.ToUniversalTime();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" INSERT INTO prediction");
+            sb.Append($" (`{nameof(FootballDB.Tables.Prediction.fixture_id)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.main_label)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.sub_label)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.value1)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.value2)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.value3)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.value4)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.grade)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.is_recommended)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.is_hit)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.upt_time)}`)");
+            sb.Append("VALUES");
+
+            for (int i = 0; i < predictions.Length; i++)
+            {
+                if (i != 0)
+                    sb.Append(", ");
+
+                var prediction = predictions[i];
+                sb.Append($"({prediction.fixture_id}, " +
+                    $"{prediction.main_label}, " +
+                    $"{prediction.sub_label}, " +
+                    $"{prediction.value1}, " +
+                    $"{prediction.value2}, " +
+                    $"{prediction.value3}, " +
+                    $"{prediction.value4}, " +
+                    $"{prediction.grade}, " +
+                    $"{prediction.is_recommended}, " +
+                    $"{prediction.is_hit}, " +
+                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+            }
+
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Prediction.value1)} = VALUES({nameof(FootballDB.Tables.Prediction.value1)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.value2)} = VALUES({nameof(FootballDB.Tables.Prediction.value2)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.value3)} = VALUES({nameof(FootballDB.Tables.Prediction.value3)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.value4)} = VALUES({nameof(FootballDB.Tables.Prediction.value4)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.grade)} = VALUES({nameof(FootballDB.Tables.Prediction.grade)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.is_recommended)} = VALUES({nameof(FootballDB.Tables.Prediction.is_recommended)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.is_hit)} = VALUES({nameof(FootballDB.Tables.Prediction.is_hit)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.upt_time)} = VALUES({nameof(FootballDB.Tables.Prediction.upt_time)});");
+
+            return ExecuteQuery(sb.ToString());
+        }
+
         #endregion Update
 
         #region Select
@@ -778,6 +838,19 @@ namespace SportsAdminTool.Logic.Database
             return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Fixture>.Input
             {
                 Query = "SELECT * FROM fixture",
+                Where = where,
+                GroupBy = groupBy,
+                OrderBy = orderBy,
+            });
+        }
+
+        public static IEnumerable<FootballDB.Tables.Prediction> SelectPredictions(string where = null, string groupBy = null, string orderBy = null)
+        {
+            Dev.DebugString("Call DB - FootballFacade.SelectFixtures");
+
+            return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Prediction>.Input
+            {
+                Query = "SELECT * FROM prediction",
                 Where = where,
                 GroupBy = groupBy,
                 OrderBy = orderBy,
@@ -845,6 +918,13 @@ namespace SportsAdminTool.Logic.Database
             Dev.DebugString("Call DB - FootballFacade.DeleteFixtures");
 
             return ExecuteQuery($"DELETE FROM fixture WHERE {where}");
+        }
+
+        public static bool DeletePrediction(string where)
+        {
+            Dev.DebugString("Call DB - FootballFacade.DeleteFixtures");
+
+            return ExecuteQuery($"DELETE FROM prediction WHERE {where}");
         }
 
         public static bool DeleteFixtures(params AppModel.Football.Fixture[] fixtures)
