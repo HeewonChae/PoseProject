@@ -26,7 +26,7 @@ namespace SportsAdminTool.Commands.Football
                 // 5일치 경기
                 var db_fixtures = Logic.Database.FootballDBFacade.SelectFixtures(
                     where: $"is_completed = 0 " +
-                    $"AND match_time BETWEEN '{DateTime.UtcNow.ToString("yyyyMMdd")}' AND '{DateTime.UtcNow.AddDays(6).ToString("yyyyMMdd")}'");
+                    $"AND match_time BETWEEN '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}' AND '{DateTime.UtcNow.AddDays(6).ToString("yyyyMMddTHHmmss")}'");
 
                 // grouping by leagueID
                 var api_groupingbyLeague = db_fixtures.GroupBy(elem => elem.league_id);

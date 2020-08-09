@@ -159,7 +159,7 @@ namespace SportsAdminTool.Logic.Football
             var yes_grade = GetBothToScoreGrade(data, YesNoType.Yes, out bool isRecommend_yes);
             var no_grade = GetBothToScoreGrade(data, YesNoType.No, out bool isRecommend_no);
 
-            if (yes_grade > no_grade)
+            if (yes_grade >= no_grade)
             {
                 predictions.Add(new FootballTable.Prediction()
                 {
@@ -262,7 +262,7 @@ namespace SportsAdminTool.Logic.Football
             under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_3_5, out isRecommend_under);
             over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_3_5, out isRecommend_over);
 
-            if (under_grade > over_grade)
+            if (under_grade >= over_grade)
             {
                 predictions.Add(new FootballTable.Prediction()
                 {
@@ -290,36 +290,36 @@ namespace SportsAdminTool.Logic.Football
             }
 
             // 4.5 under over
-            //meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
-            //under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_4_5, out isRecommend_under);
-            //over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_4_5, out isRecommend_over);
+            meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
+            under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_4_5, out isRecommend_under);
+            over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_4_5, out isRecommend_over);
 
-            //if (under_grade > over_grade)
-            //{
-            //    predictions.Add(new FootballTable.Prediction()
-            //    {
-            //        fixture_id = fixtureId,
-            //        main_label = (short)FootballPredictionType.Under_Over,
-            //        sub_label = (short)FootballUnderOverType.UNDER_4_5,
-            //        value1 = meanProbas[0],
-            //        value2 = meanProbas[1],
-            //        grade = (short)under_grade,
-            //        is_recommend = false,
-            //    });
-            //}
-            //else
-            //{
-            //    predictions.Add(new FootballTable.Prediction()
-            //    {
-            //        fixture_id = fixtureId,
-            //        main_label = (short)FootballPredictionType.Under_Over,
-            //        sub_label = (short)FootballUnderOverType.OVER_4_5,
-            //        value1 = meanProbas[0],
-            //        value2 = meanProbas[1],
-            //        grade = (short)over_grade,
-            //        is_recommend = isRecommend_over,
-            //    });
-            //}
+            if (under_grade >= over_grade)
+            {
+                predictions.Add(new FootballTable.Prediction()
+                {
+                    fixture_id = fixtureId,
+                    main_label = (short)FootballPredictionType.Under_Over,
+                    sub_label = (short)FootballUnderOverType.UNDER_4_5,
+                    value1 = meanProbas[0],
+                    value2 = meanProbas[1],
+                    grade = (short)under_grade,
+                    is_recommended = false,
+                });
+            }
+            else
+            {
+                predictions.Add(new FootballTable.Prediction()
+                {
+                    fixture_id = fixtureId,
+                    main_label = (short)FootballPredictionType.Under_Over,
+                    sub_label = (short)FootballUnderOverType.OVER_4_5,
+                    value1 = meanProbas[0],
+                    value2 = meanProbas[1],
+                    grade = (short)over_grade,
+                    is_recommended = isRecommend_over,
+                });
+            }
 
             return predictions;
         }
@@ -809,7 +809,7 @@ namespace SportsAdminTool.Logic.Football
                     break;
             }
 
-            isRecommend = grade >= 8;
+            isRecommend = grade >= 7;
 
             return grade > 10 ? 0 :
                 grade < 0 ? 0 : grade;
@@ -831,7 +831,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 2 ? 4 : 0;
+                        grade += (meanHomeScore + meanAwayScore) < 1.5 ? 3 : 0;
                     }
                     break;
 
@@ -841,7 +841,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) >= 2 ? 1 : 0;
+                        grade += (meanHomeScore + meanAwayScore) > 1.5 ? 1 : 0;
                     }
                     break;
 
@@ -851,7 +851,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 3 ? 2 : 0;
+                        grade += (meanHomeScore + meanAwayScore) < 2.5 ? 2 : 0;
                     }
                     break;
 
@@ -861,7 +861,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) >= 3 ? 1 : 0;
+                        grade += (meanHomeScore + meanAwayScore) > 2.5 ? 2 : 0;
                     }
                     break;
 
@@ -871,7 +871,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 4 ? 1 : 0;
+                        grade += (meanHomeScore + meanAwayScore) < 3.5 ? 0 : -2;
                     }
                     break;
 
@@ -881,7 +881,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) >= 4 ? 2 : 0;
+                        grade += (meanHomeScore + meanAwayScore) > 3.5 ? 2 : 0;
                     }
                     break;
 
@@ -891,7 +891,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 5 ? 1 : 0;
+                        grade += (meanHomeScore + meanAwayScore) < 4.5 ? 1 : 0;
                     }
                     break;
 
@@ -901,7 +901,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) >= 5 ? 4 : 0;
+                        grade += (meanHomeScore + meanAwayScore) > 4.5 ? 3 : 0;
                     }
                     break;
 
@@ -909,7 +909,7 @@ namespace SportsAdminTool.Logic.Football
                     break;
             }
 
-            isRecommend = grade >= 8;
+            isRecommend = grade >= 7;
 
             return grade > 10 ? 10 :
                 grade < 0 ? 0 : grade;
@@ -949,7 +949,7 @@ namespace SportsAdminTool.Logic.Football
                     break;
             }
 
-            isRecommend = grade >= 8;
+            isRecommend = grade >= 7;
 
             return grade > 10 ? 10 :
                 grade < 0 ? 0 : grade;

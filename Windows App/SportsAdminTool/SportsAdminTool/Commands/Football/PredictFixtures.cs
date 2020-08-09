@@ -29,7 +29,7 @@ namespace SportsAdminTool.Commands.Football
                     P_SELECT_PREDICTABLE_FIXTURES.SetInput(new FootballDB.Procedures.P_SELECT_PREDICTABLE_FIXTURES.Input
                     {
                         WHERE = $"f.is_completed = 0 " +
-                        $"AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND \"{DateTime.UtcNow.AddDays(6).ToString("yyyyMMdd")}\" " +
+                        $"AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND \"{DateTime.UtcNow.AddDays(6).ToString("yyyyMMddTHHmmss")}\" " +
                         $"AND lc.{nameof(LeagueCoverage.predictions)} = 1 ",
                     });
                     db_fixtures = P_SELECT_PREDICTABLE_FIXTURES.OnQuery();
@@ -57,7 +57,7 @@ namespace SportsAdminTool.Commands.Football
 
                     // DB Save
                     db_fixture.is_predicted = true;
-                    db_fixture.is_recommended = db_predictions.Any(elem => elem.is_recommended = true);
+                    db_fixture.is_recommended = db_predictions.Any(elem => elem.grade >= 8);
                     Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
                     Logic.Database.FootballDBFacade.UpdatePrediction(db_predictions.ToArray());
                 }

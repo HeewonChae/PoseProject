@@ -24,8 +24,7 @@ namespace SportsAdminTool.Commands.Football
 
                 var db_fixtures = Logic.Database.FootballDBFacade.SelectFixtures(
                     where: $"is_predicted = 1 " +
-                    $"AND match_time BETWEEN '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}' AND '{DateTime.UtcNow.AddDays(3).ToString("yyyyMMdd")}' " +
-                    $"AND is_recommended = 1",
+                    $"AND match_time BETWEEN '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}' AND '{DateTime.UtcNow.AddDays(1).ToString("yyyyMMddTHHmmss")}' ",
                     orderBy: "match_time ASC ");
 
                 int fixtureCnt = db_fixtures.Count();

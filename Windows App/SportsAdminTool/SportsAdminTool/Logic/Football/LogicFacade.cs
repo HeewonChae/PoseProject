@@ -32,7 +32,7 @@ namespace SportsAdminTool.Logic.Football
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
             var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
             var api_deleteFixtures = api_fixtures.Except(api_filteredFixtures);
-            var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByLeagueIdAndLabelId(leagueId, (int)OddsLabelType.Match_Winner);
+            //var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByLeagueIdAndLabelId(leagueId, (int)OddsLabelType.Match_Winner);
 
             // DB Save
             Database.FootballDBFacade.DeleteFixtures(api_deleteFixtures.ToArray());
