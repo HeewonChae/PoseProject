@@ -93,7 +93,7 @@ namespace PosePacket.Service.Football.Models.Enums
         Win,
         Lose,
         WinOrDraw,
-        WinOrLose,
+        WinOrLose, // 사용안함
         DrawOrLose,
         _MAX_,
     }

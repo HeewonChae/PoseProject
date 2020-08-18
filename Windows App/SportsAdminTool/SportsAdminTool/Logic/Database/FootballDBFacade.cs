@@ -745,6 +745,7 @@ namespace SportsAdminTool.Logic.Database
             StringBuilder sb = new StringBuilder();
             sb.Append(" INSERT INTO prediction");
             sb.Append($" (`{nameof(FootballDB.Tables.Prediction.fixture_id)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.pred_seq)}`, " +
                 $"`{nameof(FootballDB.Tables.Prediction.main_label)}`, " +
                 $"`{nameof(FootballDB.Tables.Prediction.sub_label)}`, " +
                 $"`{nameof(FootballDB.Tables.Prediction.value1)}`, " +
@@ -764,6 +765,7 @@ namespace SportsAdminTool.Logic.Database
 
                 var prediction = predictions[i];
                 sb.Append($"({prediction.fixture_id}, " +
+                    $"{prediction.pred_seq}, " +
                     $"{prediction.main_label}, " +
                     $"{prediction.sub_label}, " +
                     $"{prediction.value1}, " +
@@ -776,7 +778,9 @@ namespace SportsAdminTool.Logic.Database
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
-            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Prediction.value1)} = VALUES({nameof(FootballDB.Tables.Prediction.value1)}), " +
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Prediction.main_label)} = VALUES({nameof(FootballDB.Tables.Prediction.main_label)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.sub_label)} = VALUES({nameof(FootballDB.Tables.Prediction.sub_label)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.value1)} = VALUES({nameof(FootballDB.Tables.Prediction.value1)}), " +
                 $"{nameof(FootballDB.Tables.Prediction.value2)} = VALUES({nameof(FootballDB.Tables.Prediction.value2)}), " +
                 $"{nameof(FootballDB.Tables.Prediction.value3)} = VALUES({nameof(FootballDB.Tables.Prediction.value3)}), " +
                 $"{nameof(FootballDB.Tables.Prediction.value4)} = VALUES({nameof(FootballDB.Tables.Prediction.value4)}), " +

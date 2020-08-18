@@ -95,6 +95,7 @@ inner join footballdb.league as l on f.league_id = l.id
 inner join footballdb.team as ht on f.home_team_id = ht.id
 inner join footballdb.team as at on f.away_team_id = at.id
 left join footballdb.prediction as p on f.id = p.fixture_id
-where f.is_completed = 1 
-and  f.match_time between '20200807' and '20200811' 
+where f.is_predicted = 1 
+and  f.match_time between '20200809' and '20200815'
+and f.is_completed = 1 
 and p.is_recommended = 1;

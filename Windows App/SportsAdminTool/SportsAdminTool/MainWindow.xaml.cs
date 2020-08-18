@@ -29,8 +29,6 @@ namespace SportsAdminTool
     /// </summary>
     public partial class MainWindow : MetroWindow, Singleton.INode
     {
-        private DateTime _last_noti_picks_time = DateTime.MinValue;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -138,11 +136,7 @@ namespace SportsAdminTool
 
             await FootballCommands.PredictFixtures.Execute();
 
-            if (_last_noti_picks_time.Date != DateTime.UtcNow.Date)
-            {
-                await NotifyFootballPredictions.Execute();
-                _last_noti_picks_time = DateTime.UtcNow;
-            }
+            await NotifyFootballPredictions.Execute();
 
             await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateScheduledFixtures_Errors.json");
 

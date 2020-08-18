@@ -14,17 +14,22 @@ namespace Repository.Mysql.FootballDB.Tables
     {
         [Key]
         [Column(Order = 1, TypeName = "INT")]
+        [Index("IDX_ID_MAIN_LABEL", Order = 1, IsUnique = false)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int fixture_id { get; set; }
 
         [Key]
         [Column(Order = 2, TypeName = "MEDIUMINT")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public short pred_seq { get; set; }
+
+        [Required]
+        [Column(TypeName = "MEDIUMINT")]
+        [Index("IDX_ID_MAIN_LABEL", Order = 2, IsUnique = false)]
         public short main_label { get; set; }
 
-        [Key]
-        [Column(Order = 3, TypeName = "MEDIUMINT")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
+        [Column(TypeName = "MEDIUMINT")]
         public short sub_label { get; set; }
 
         [SqlDefaultValue(DefaultValue = "0")]

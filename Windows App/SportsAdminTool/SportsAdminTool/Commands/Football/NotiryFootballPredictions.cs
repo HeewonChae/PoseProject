@@ -29,6 +29,10 @@ namespace SportsAdminTool.Commands.Football
 
                 int fixtureCnt = db_fixtures.Count();
                 int loop = 0;
+
+                Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Football_Picks,
+                    $"-----{DateTime.Now.ToString("yyyy.MM.dd HH:mm")}-----");
+
                 foreach (var db_fixture in db_fixtures)
                 {
                     loop++;

@@ -70,9 +70,9 @@
   <ItemGroup>
     <Compile Include="Contexts\FootballDB.cs" />
     <Compile Include="Contexts\PoseGlobalDB.cs" />
-    <Compile Include="FootballDBMigrations\202008082030177_InitiateFootballDB.cs" />
-    <Compile Include="FootballDBMigrations\202008082030177_InitiateFootballDB.designer.cs">
-      <DependentUpon>202008082030177_InitiateFootballDB.cs</DependentUpon>
+    <Compile Include="FootballDBMigrations\202008101047066_InitiateFootballDB.cs" />
+    <Compile Include="FootballDBMigrations\202008101047066_InitiateFootballDB.designer.cs">
+      <DependentUpon>202008101047066_InitiateFootballDB.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
@@ -133,8 +133,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FootballDBMigrations\202008082030177_InitiateFootballDB.resx">
-      <DependentUpon>202008082030177_InitiateFootballDB.cs</DependentUpon>
+    <EmbeddedResource Include="FootballDBMigrations\202008101047066_InitiateFootballDB.resx">
+      <DependentUpon>202008101047066_InitiateFootballDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

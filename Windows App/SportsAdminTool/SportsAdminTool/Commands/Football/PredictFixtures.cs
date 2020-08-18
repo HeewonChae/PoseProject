@@ -57,7 +57,7 @@ namespace SportsAdminTool.Commands.Football
 
                     // DB Save
                     db_fixture.is_predicted = true;
-                    db_fixture.is_recommended = db_predictions.Any(elem => elem.grade >= 8);
+                    db_fixture.is_recommended = db_predictions.Any(elem => elem.is_recommended);
                     Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
                     Logic.Database.FootballDBFacade.UpdatePrediction(db_predictions.ToArray());
                 }
