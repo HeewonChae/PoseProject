@@ -378,5 +378,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_recommend.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_cinema.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

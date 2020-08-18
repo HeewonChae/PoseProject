@@ -6,7 +6,7 @@ namespace PoseSportsPredict
     {
         // Pose WebService
 #if DEBUG
-        public static string PoseWebBaseUrl = "http://114.206.30.173:8888/";
+        public static string PoseWebBaseUrl = "http://172.17.138.113:8888/";
 #else
         public static string PoseWebBaseUrl = "http://114.206.30.173:8888/";
 #endif

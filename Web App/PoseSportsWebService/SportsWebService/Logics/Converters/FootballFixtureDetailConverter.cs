@@ -52,6 +52,9 @@ namespace SportsWebService.Logics.Converters
                 result.MatchTime = db_fixtureDetail.MatchTime;
                 result.HomeTeamScore = db_fixtureDetail.HomeTeamScore;
                 result.AwayTeamScore = db_fixtureDetail.AwayTeamScore;
+
+                result.IsPredicted = db_fixtureDetail.IsPredicted;
+                result.IsRecommeded = db_fixtureDetail.IsRecommended;
             }
             return result;
         }

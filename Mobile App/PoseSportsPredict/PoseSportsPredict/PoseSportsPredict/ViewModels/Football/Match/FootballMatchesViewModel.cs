@@ -347,9 +347,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 needRefrashMatchIndexes.Remove(match.Id);
             }
 
-            foreach (var deletedIndex in needRefrashMatchIndexes)
+            foreach (var remainIndex in needRefrashMatchIndexes)
             {
-                var foundIdx = _matchList.FindIndex(elem => elem.Id == deletedIndex);
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == remainIndex);
                 _matchList.RemoveAt(foundIdx);
             }
 
@@ -367,53 +367,19 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             await Task.Delay(300);
 
             List<FootballMatchInfo> matchList = null;
-            bool? isAllExpand = null;
-
             switch (_curMatchFilterType)
             {
                 case MatchFilterType.Bookmark:
                     {
-                        matchList = new List<FootballMatchInfo>();
-
-                        // Match
-                        var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
-                        foreach (var bookmarkedMatch in bookmarkedMatches)
-                        {
-                            var match = _matchList.FirstOrDefault(elem => elem.PrimaryKey.Equals(bookmarkedMatch.PrimaryKey));
-                            if (match != null)
-                                matchList.Add(match);
-                        }
-
-                        // League
                         var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
-                        foreach (var bookmarkedLeague in bookmarkedLeagues)
-                        {
-                            var matches = _matchList.Where(elem =>
-                                elem.League_CountryName.Equals(bookmarkedLeague.CountryName)
-                                && elem.LeagueName.Equals(bookmarkedLeague.LeagueName)).ToArray();
-
-                            if (matches.Length > 0)
-                            {
-                                matchList.AddRange(matches);
-                            }
-                        }
-
-                        // Team
                         var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
-                        foreach (var bookmarkedTeam in bookmarkedTeams)
-                        {
-                            var matches = _matchList.Where(elem =>
-                                 elem.HomeTeamId == bookmarkedTeam.TeamId
-                                || elem.AwayTeamId == bookmarkedTeam.TeamId).ToArray();
+                        var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>()).Where(elem => elem.MatchTime >= _matchDate && _matchDate.AddDays(1) > elem.MatchTime);
 
-                            if (matches.Length > 0)
-                            {
-                                matchList.AddRange(matches);
-                            }
-                        }
-
-                        matchList = matchList.Distinct().OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}").ToList();
-                        isAllExpand = true;
+                        matchList = _matchList.Where(elem =>
+                            bookmarkedMatches.FirstOrDefault(innerElem => innerElem.PrimaryKey == elem.PrimaryKey) != null
+                            || bookmarkedLeagues.FirstOrDefault(innerElem => innerElem.CountryName == elem.League_CountryName && innerElem.LeagueName == elem.LeagueName) != null
+                            || bookmarkedTeams.FirstOrDefault(innerElem => innerElem.TeamId == elem.HomeTeamId || innerElem.TeamId == elem.AwayTeamId) != null)
+                            .OrderBy(elem => elem.MatchTime).ToList();
                     }
                     break;
 
@@ -423,33 +389,25 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         && elem.MatchStatus != FootballMatchStatusType.FT
                         && elem.MatchStatus != FootballMatchStatusType.AET
                         && elem.MatchStatus != FootballMatchStatusType.PEN)
-                        .OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}")
-                        .ToList();
-
-                    isAllExpand = true;
+                        .OrderBy(elem => elem.MatchTime).ToList();
                     break;
 
                 case MatchFilterType.SortByTime:
-                    matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
-                    isAllExpand = true;
-                    break;
-
                 case MatchFilterType.SortByLeague:
-                    // matchList = _matchList.OrderBy(elem => $"{elem.League_CountryName}:{elem.LeagueName}:{elem.MatchTime.ToString("HH:mm")}").ToList();
                     matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
                     break;
             }
 
             Debug.Assert(matchList != null);
 
-            UpdateMatcheGroups(matchList, isAllExpand);
+            UpdateMatcheGroups(matchList);
 
             this.SetIsBusy(false);
 
             return matchList;
         }
 
-        private async void UpdateMatcheGroups(List<FootballMatchInfo> matchList, bool? isAllExpand = null)
+        private async void UpdateMatcheGroups(List<FootballMatchInfo> matchList)
         {
             ObservableCollection<FootballMatchListViewModel> matchGroupCollection;
             matchGroupCollection = new ObservableCollection<FootballMatchListViewModel>();
@@ -458,37 +416,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             bool defaultExpand = matchList.Count > 9 ? false : true;
 
-            // World 데이터는 1순위로 등록
-            var InternationalLeagues = grouppingMatches.Where(elem => elem.Key.StartsWith("World. "));
-            foreach (var grouppingMatch in InternationalLeagues)
-            {
-                // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
-                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? defaultExpand : isAllExpand.Value;
-
-                var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
-                matchListViewModel.Title = grouppingMatch.Key;
-                matchListViewModel.TitleLogo = "img_world.png";
-                matchListViewModel.AlarmEditMode = _alarmEditMode;
-                matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
-                matchListViewModel.Expanded = isExpand;
-
-                matchGroupCollection.Add(matchListViewModel);
-            }
-
             foreach (var grouppingMatch in grouppingMatches)
             {
-                if (grouppingMatch.Key.StartsWith("World. "))
-                    continue;
-
-                // isAllExpand 값이 null 이면 기존 groups의 expanded 값 사용
-                bool isExpand = isAllExpand == null ? MatchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key)?.Expanded ?? defaultExpand : isAllExpand.Value;
-
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
                 matchListViewModel.Title = grouppingMatch.Key;
-                matchListViewModel.TitleLogo = _curMatchFilterType == MatchFilterType.SortByTime ? "img_world.png" : grouppingMatch.Value.FirstOrDefault()?.League_CountryLogo;
+                matchListViewModel.TitleLogo = grouppingMatch.GroupLogo;
                 matchListViewModel.AlarmEditMode = _alarmEditMode;
-                matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Value);
-                matchListViewModel.Expanded = isExpand;
+                matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Matches);
+                matchListViewModel.Expanded = grouppingMatch.IsExpanded;
 
                 matchGroupCollection.Add(matchListViewModel);
             }
@@ -496,62 +431,109 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             MatchListViewModels = matchGroupCollection;
         }
 
-        private async Task<Dictionary<string, FootballMatchInfo[]>> MatchGroupingByFilterType(List<FootballMatchInfo> matchList)
+        private async Task<List<FootballMatchGroupInfo>> MatchGroupingByFilterType(List<FootballMatchInfo> matchList)
         {
-            var result = new Dictionary<string, FootballMatchInfo[]>();
+            var result = new List<FootballMatchGroupInfo>();
 
             switch (_curMatchFilterType)
             {
                 case MatchFilterType.Bookmark:
-                case MatchFilterType.Ongoing:
                     {
-                        var grouping = matchList.GroupBy(elem => $"{elem.League_CountryName}. {elem.LeagueName}");
+                        var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, CountryLogo = elem.League_CountryLogo, League = elem.LeagueName });
                         foreach (var data in grouping)
                         {
-                            result.Add(data.Key, data.ToArray());
+                            result.Add(new FootballMatchGroupInfo
+                            {
+                                Country = data.Key.Country,
+                                League = data.Key.League,
+                                GroupLogo = data.Key.CountryLogo,
+                                Matches = data.ToArray(),
+                                IsExpanded = true
+                            });
                         }
                     }
                     break;
 
+                case MatchFilterType.Ongoing:
                 case MatchFilterType.SortByLeague:
                     {
-                        var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, League = elem.LeagueName });
+                        var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, CountryLogo = elem.League_CountryLogo, League = elem.LeagueName });
                         var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
                         var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
                         var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>()).Where(elem => elem.MatchTime >= _matchDate && _matchDate.AddDays(1) > elem.MatchTime);
 
-                        var bookmarked = new Dictionary<string, FootballMatchInfo[]>();
-                        var recommend = new Dictionary<string, FootballMatchInfo[]>();
-                        var other = new Dictionary<string, FootballMatchInfo[]>();
+                        var bookmarked = new List<FootballMatchGroupInfo>();
+                        var recommend = new List<FootballMatchGroupInfo>();
+                        var world = new List<FootballMatchGroupInfo>();
+                        var other = new List<FootballMatchGroupInfo>();
 
+                        // 1순위 북마크(리그, 경기, 팀), 2순위 추천 리그, 3순위 월드리그, 4순위 나머지
                         foreach (var data in grouping)
                         {
-                            // 1순위 북마크(리그, 경기, 팀), 2순위 추천 리그, 3순위 나머지
                             if (bookmarkedLeagues.FirstOrDefault(elem => elem.CountryName == data.Key.Country && elem.LeagueName == data.Key.League) != null
                                 || bookmarkedMatches.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem2.PrimaryKey == elem.PrimaryKey) != null) != null
                                 || bookmarkedTeams.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem.TeamId == elem2.HomeTeamId || elem.TeamId == elem2.AwayTeamId) != null) != null)
                             {
-                                bookmarked.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                                bookmarked.Add(new FootballMatchGroupInfo
+                                {
+                                    Country = data.Key.Country,
+                                    League = data.Key.League,
+                                    GroupLogo = data.Key.CountryLogo,
+                                    Matches = data.ToArray(),
+                                    IsExpanded = true
+                                });
                             }
                             else if (RecommendedLeague.HasLeague(data.Key.Country, data.Key.League))
                             {
-                                recommend.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                                recommend.Add(new FootballMatchGroupInfo
+                                {
+                                    Country = data.Key.Country,
+                                    League = data.Key.League,
+                                    GroupLogo = data.Key.CountryLogo,
+                                    Matches = data.ToArray(),
+                                    IsExpanded = true
+                                });
+                            }
+                            else if (data.Key.Country == "World")
+                            {
+                                world.Add(new FootballMatchGroupInfo
+                                {
+                                    Country = data.Key.Country,
+                                    League = data.Key.League,
+                                    GroupLogo = data.Key.CountryLogo,
+                                    Matches = data.ToArray(),
+                                    IsExpanded = false
+                                });
                             }
                             else
                             {
-                                other.Add($"{data.Key.Country}. {data.Key.League}", data.ToArray());
+                                other.Add(new FootballMatchGroupInfo
+                                {
+                                    Country = data.Key.Country,
+                                    League = data.Key.League,
+                                    GroupLogo = data.Key.CountryLogo,
+                                    Matches = data.ToArray(),
+                                    IsExpanded = false
+                                });
                             }
                         }
 
-                        recommend.ForEach(elem => bookmarked.Add(elem.Key, elem.Value));
-                        other.ForEach(elem => bookmarked.Add(elem.Key, elem.Value));
+                        bookmarked.AddRange(recommend);
+                        bookmarked.AddRange(world);
+                        bookmarked.AddRange(other);
 
                         result = bookmarked;
                     }
                     break;
 
                 case MatchFilterType.SortByTime:
-                    result.Add(LocalizeString.Match_Sort_By_Time, matchList.ToArray());
+                    result.Add(new FootballMatchGroupInfo
+                    {
+                        Country = LocalizeString.Match_Sort_By_Time,
+                        GroupLogo = "img_world.png",
+                        Matches = matchList.ToArray(),
+                        IsExpanded = true
+                    });
                     break;
 
                 default:

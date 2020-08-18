@@ -34,6 +34,9 @@ namespace Repository.Mysql.FootballDB.OutputModels
         public short HomeTeamScore { get; set; }
         public short AwayTeamScore { get; set; }
 
+        public bool IsPredicted { get; set; }
+        public bool IsRecommended { get; set; }
+
         #region Select Query
 
         private static string _selectQuery;
@@ -52,7 +55,8 @@ namespace Repository.Mysql.FootballDB.OutputModels
                     sb.Append($"ht.{nameof(Team.country_name)} as {nameof(HomeTeam_CountryName)}, at.{nameof(Team.country_name)} as {nameof(AwayTeam_CountryName)}, ");
                     sb.Append($"f.{nameof(Fixture.home_score)} as {nameof(HomeTeamScore)}, f.{nameof(Fixture.away_score)} as {nameof(AwayTeamScore)}, ");
                     sb.Append($"f.{nameof(Fixture.id)} as {nameof(FixtureId)}, f.{nameof(Fixture.status)} as {nameof(MatchStatus)}, ");
-                    sb.Append($"f.{nameof(Fixture.match_time)} as {nameof(MatchTime)}, l.{nameof(League.type)} as {nameof(LeagueType)} ");
+                    sb.Append($"f.{nameof(Fixture.match_time)} as {nameof(MatchTime)}, l.{nameof(League.type)} as {nameof(LeagueType)}, ");
+                    sb.Append($"f.{nameof(Fixture.is_predicted)} as {nameof(IsPredicted)}, f.{nameof(Fixture.is_recommended)} as {nameof(IsRecommended)} ");
                     sb.Append("FROM fixture as f ");
                     sb.Append($"INNER JOIN league as l on f.{nameof(Fixture.league_id)} = l.{nameof(League.id)} ");
                     sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");

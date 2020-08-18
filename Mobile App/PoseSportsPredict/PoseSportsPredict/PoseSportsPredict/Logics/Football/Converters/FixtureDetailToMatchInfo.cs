@@ -50,6 +50,9 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
                 IsAlarmed = false,
                 IsBookmarked = false,
+
+                IsPredicted = fixtureDetail.IsPredicted,
+                IsRecommended = fixtureDetail.IsRecommeded,
             };
 
             return returnValue;

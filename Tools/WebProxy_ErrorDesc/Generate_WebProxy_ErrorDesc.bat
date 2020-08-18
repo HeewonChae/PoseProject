@@ -2,11 +2,11 @@
 
 rem 경로 셋팅
 SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin
-SET ProjectPath=C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator
-SET OutputPath1=C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator\bin\Release\Proxy
-SET OutputPath2=C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator\bin\Release\ErrorDescription
-SET CopyPath1=C:\PoseProject_Git\Common Library\DotNet_Standard\PosePacket\Proxy
-SET CopyPath2=C:\PoseProject_Git\Web App\PoseSportsWebService\SportsWebService\App_Data
+SET ProjectPath=C:\PoseProject_Git\PoseProject\Web App\PoseSportsWebService\CodeGenerator
+SET OutputPath1=C:\PoseProject_Git\PoseProject\Web App\PoseSportsWebService\CodeGenerator\bin\Release\Proxy
+SET OutputPath2=C:\PoseProject_Git\PoseProject\Web App\PoseSportsWebService\CodeGenerator\bin\Release\ErrorDescription
+SET CopyPath1=C:\PoseProject_Git\PoseProject\Common Library\DotNet_Standard\PosePacket\Proxy
+SET CopyPath2=C:\PoseProject_Git\PoseProject\Web App\PoseSportsWebService\SportsWebService\App_Data
 
 @echo 1. Build
 @echo Clean CodeGenerator.sin

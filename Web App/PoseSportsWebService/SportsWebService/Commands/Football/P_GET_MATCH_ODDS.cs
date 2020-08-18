@@ -15,6 +15,7 @@ namespace SportsWebService.Commands.Football
     using LogicCore.Utility;
     using SportsWebService.Logics.Converters;
     using SportsWebService.Logics;
+    using SportsWebService.Services;
 
     [WebModelType(InputType = typeof(I_GET_MATCH_ODDS), OutputType = typeof(O_GET_MATCH_ODDS))]
     public static class P_GET_MATCH_ODDS

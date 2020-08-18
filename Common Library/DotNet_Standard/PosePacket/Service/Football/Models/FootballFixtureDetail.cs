@@ -33,5 +33,11 @@ namespace PosePacket.Service.Football.Models
 
         [Key(8)]
         public short AwayTeamScore { get; set; }
+
+        [Key(9)]
+        public bool IsPredicted { get; set; }
+
+        [Key(10)]
+        public bool IsRecommeded { get; set; }
     }
 }

@@ -240,6 +240,7 @@
     <Compile Include="Logics\Converters\FootballOddsDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballTeamDetailConverter.cs" />
+    <Compile Include="Services\ServiceErrorCode.cs" />
     <Compile Include="Utilities\StreamExtensions.cs" />
     <Compile Include="ServerContext.cs" />
     <Compile Include="Global.asax.cs">
