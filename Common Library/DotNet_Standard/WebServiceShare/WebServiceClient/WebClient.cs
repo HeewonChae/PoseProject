@@ -5,6 +5,7 @@ using PoseCrypto;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using WebServiceShare.ServiceContext;
 
@@ -226,6 +227,16 @@ namespace WebServiceShare.WebServiceClient
                 {
                     if (_exceptionHandler != null)
                         await _exceptionHandler.Invoke(flurlException);
+                }
+            }
+            catch (CryptographicException cryptoEx)
+            {
+                if (requestContext.AttemptCnt < WebConfig.ReTryCount)
+                    result = await EncryptSendAsync<TOut>(flurlRequest, requestContext);
+                else
+                {
+                    if (_exceptionHandler != null)
+                        await _exceptionHandler.Invoke(cryptoEx);
                 }
             }
             catch (Exception ex)

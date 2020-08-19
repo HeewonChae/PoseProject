@@ -62,7 +62,7 @@ namespace PoseSportsPredict.Services
                             length = errorString.IndexOf("</Message>") - startIndex;
                             var errorMessage = errorString.Substring(startIndex, length);
 
-                            if (errorCode == (ServiceErrorCode.Authenticate.Credentials + 1))
+                            if (errorCode == 101000001) // ServiceErrorCode.Authenticate.Credentials + 1
                             {
                                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials,
                                     LocalizeString.App_Title,
@@ -193,9 +193,7 @@ namespace PoseSportsPredict.Services
                 });
 
                 if (refreshToken == null)
-                {
                     return false;
-                }
 
                 ClientContext.SetCredentialsFrom(refreshToken.PoseToken);
                 ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(refreshToken.TokenExpireIn);

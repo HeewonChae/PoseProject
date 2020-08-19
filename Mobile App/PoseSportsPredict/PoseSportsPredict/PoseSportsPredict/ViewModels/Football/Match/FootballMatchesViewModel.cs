@@ -329,10 +329,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             if (needRefrashMatchIndexes.Count() == 0)
             {
-                await UpdateFilteredMatchesAsync();
-
                 _lastUpdateTime = DateTime.UtcNow;
-
                 this.SetIsBusy(false);
                 return;
             }
@@ -414,8 +411,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
 
-            bool defaultExpand = matchList.Count > 9 ? false : true;
-
             foreach (var grouppingMatch in grouppingMatches)
             {
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
@@ -423,7 +418,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchListViewModel.TitleLogo = grouppingMatch.GroupLogo;
                 matchListViewModel.AlarmEditMode = _alarmEditMode;
                 matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Matches);
-                matchListViewModel.Expanded = grouppingMatch.IsExpanded;
+
+                var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
+                matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;
 
                 matchGroupCollection.Add(matchListViewModel);
             }
@@ -502,7 +499,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                                     League = data.Key.League,
                                     GroupLogo = data.Key.CountryLogo,
                                     Matches = data.ToArray(),
-                                    IsExpanded = false
+                                    IsExpanded = _curMatchFilterType == MatchFilterType.Ongoing
                                 });
                             }
                             else
@@ -513,7 +510,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                                     League = data.Key.League,
                                     GroupLogo = data.Key.CountryLogo,
                                     Matches = data.ToArray(),
-                                    IsExpanded = false
+                                    IsExpanded = _curMatchFilterType == MatchFilterType.Ongoing
                                 });
                             }
                         }
