@@ -23,11 +23,13 @@
                         Padding="10, 0"
                         ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="11" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="11" />
                         </Grid.ColumnDefinitions>
                         <StackLayout
-                            Grid.Column="0"
+                            Grid.Column="1"
                             Orientation="Horizontal"
                             Padding="0"
                             Spacing="0"
@@ -75,7 +77,7 @@
                         </StackLayout>
                         <Grid
                             x:Name="_grid"
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Margin="0"
                             Padding="10,20"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
@@ -171,6 +173,18 @@
                                 Text="{Binding AwayName}">
                             </materialui:MaterialLabel>
                         </Grid>
+                        <materialui:MaterialCard
+                            Grid.Column="3"
+                            Padding="0"
+                            Margin="0"
+                            IsVisible="{Binding IsPredicted}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HeightRequest="11"
+                            WidthRequest="11"
+                            CornerRadius="11"
+                            BackgroundColor="{StaticResource IconActivated}">
+                        </materialui:MaterialCard>
                     </Grid>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>

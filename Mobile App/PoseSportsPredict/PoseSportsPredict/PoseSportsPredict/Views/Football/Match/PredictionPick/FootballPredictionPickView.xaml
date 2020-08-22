@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.PredictionPick"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             x:Class="PoseSportsPredict.Views.Football.Match.PredictionPick.FootballPredictionPickView">
+    <ContentView.Content>
+        <StackLayout
+            x:DataType="viewmodels:FootballPredictionPickViewModel"
+            Spacing="0"
+            BindableLayout.ItemsSource="{Binding PredictionPicks}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="models:FootballPredictionPickInfo">
+                    <materialui:MaterialCard
+                        Margin="0,6"
+                        Padding="0"
+                        Elevation="0"
+                        CornerRadius="5">
+                        <StackLayout Spacing="0" Orientation="Horizontal">
+                            <ContentView
+                                Padding="10,0,0,0"
+                                IsVisible="{Binding IsRecommend}"
+                                BackgroundColor="{StaticResource SecondaryColor}">
+                                <Image
+                                    Aspect="AspectFit"
+                                    Source="ic_recommend.png"
+                                    HeightRequest="23"
+                                    WidthRequest="23">
+                                </Image>
+                            </ContentView>
+                            <materialui:MaterialLabel
+                                Padding="10,5"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Start"
+                                TypeScale="Body2"
+                                FontAttributes="Bold"
+                                BackgroundColor="{StaticResource SecondaryColor}"
+                                TextColor="{StaticResource TextColor_L}"
+                                Text="{Binding Title}">
+                            </materialui:MaterialLabel>
+                            <ContentView
+                                Padding="7,0"
+                                HorizontalOptions="End"
+                                BackgroundColor="{StaticResource SecondaryColor_L}">
+                                <customviews:RatingView
+                                    VerticalOptions="Center"
+                                    WidthRequest="95"
+                                    HeightRequest="19"
+                                    StrokeWidth="0.8"
+                                    RatingType="Full"
+                                    ColorOn="{StaticResource IconActivated}"
+                                    OutlineOnColor="{StaticResource IconActivated}"
+                                    OutlineOffColor="{StaticResource IconActivated}"
+                                    Path="{x:Static customviews:PathConstants.Star}"
+                                    Count="5"
+                                    Value="{Binding Rate}">
+                                </customviews:RatingView>
+                            </ContentView>
+                        </StackLayout>
+                    </materialui:MaterialCard>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

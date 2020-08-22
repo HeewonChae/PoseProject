@@ -10,5 +10,17 @@ namespace PoseSportsPredict.Views.Football.Match
         {
             InitializeComponent();
         }
+
+        private void _coverFlow_UserInteracted(PanCardView.CardsView view, PanCardView.EventArgs.UserInteractedEventArgs args)
+        {
+            if (args.Status == PanCardView.Enums.UserInteractionStatus.Started)
+            {
+                FootballMatchesTabPage.DisableSwipe();
+            }
+            if (args.Status == PanCardView.Enums.UserInteractionStatus.Ended)
+            {
+                FootballMatchesTabPage.EnableSwipe();
+            }
+        }
     }
 }

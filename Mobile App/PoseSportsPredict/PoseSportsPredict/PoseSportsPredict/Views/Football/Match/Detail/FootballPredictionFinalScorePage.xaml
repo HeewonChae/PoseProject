@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 mc:Ignorable="d"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                 xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+                 xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+                 xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+                 BackgroundColor="{StaticResource TransparentBlack}"
+                 NavigationPage.HasNavigationBar="False"
+                 x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballPredictionFinalScorePage">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
+    <RelativeLayout x:DataType="viewmodels:FootballPredictionFinalScoreViewModel">
+        <Grid
+            RelativeLayout.WidthConstraint="{ConstraintExpression
+                Type=RelativeToParent,
+                Property=Width,
+                Factor=1}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression
+                Type=RelativeToParent,
+                Property=Height,
+                Factor=1}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TouchBackButtonCommand}" />
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.02*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.02*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.02*" />
+            </Grid.RowDefinitions>
+            <materialui:MaterialCard
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="0"
+                Padding="15,5"
+                CornerRadius="5"
+                BackgroundColor="{StaticResource BackgroundColor_Default}">
+
+                <!--Ignore cancel command-->
+                <materialui:MaterialCard.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </materialui:MaterialCard.GestureRecognizers>
+
+                <!--Contents-->
+                <ScrollView>
+                    <StackLayout Spacing="0">
+                        <materialui:MaterialCard
+                            Margin="7,6"
+                            Padding="10,5,10,10"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <StackLayout Spacing="9">
+                                <materialui:MaterialLabel
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"
+                                    TypeScale="Subtitle1"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding [Final_Score], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                                </materialui:MaterialLabel>
+                                <Grid
+                                    ColumnSpacing="0"
+                                    RowSpacing="0"
+                                    VerticalOptions="CenterAndExpand"
+                                    HorizontalOptions="FillAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView
+                                        Grid.Row="0"
+                                        Grid.ColumnSpan="7"
+                                        HeightRequest="0.5"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <BoxView
+                                        Grid.Row="2"
+                                        Grid.ColumnSpan="7"
+                                        HeightRequest="0.5"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <BoxView
+                                        Grid.Row="4"
+                                        Grid.ColumnSpan="7"
+                                        HeightRequest="0.5"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <BoxView
+                                        Grid.Column="0"
+                                        Grid.RowSpan="5"
+                                        WidthRequest="0.5"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <BoxView
+                                        Grid.Row="2"
+                                        Grid.Column="3"
+                                        Grid.RowSpan="2"
+                                        WidthRequest="0.5"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <BoxView
+                                        Grid.Column="6"
+                                        Grid.RowSpan="5"
+                                        WidthRequest="0.5"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <materialui:MaterialLabel
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Padding="0,3"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TypeScale="Body2"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="{StaticResource CustomGrey}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        Text="{Binding [Home], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                                    </materialui:MaterialLabel>
+                                    <materialui:MaterialLabel
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        Padding="0,3"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="End"
+                                        TypeScale="Body2"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="{StaticResource CustomGrey}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        Text="V">
+                                    </materialui:MaterialLabel>
+                                    <BoxView
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        WidthRequest="0.5"
+                                        HeightRequest="0"
+                                        Color="{StaticResource CustomGrey}">
+                                    </BoxView>
+                                    <materialui:MaterialLabel
+                                        Grid.Row="1"
+                                        Grid.Column="4"
+                                        Padding="0,3"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Start"
+                                        TypeScale="Body2"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="{StaticResource CustomGrey}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        Text="S">
+                                    </materialui:MaterialLabel>
+                                    <materialui:MaterialLabel
+                                        Grid.Row="1"
+                                        Grid.Column="5"
+                                        Padding="0,3"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TypeScale="Body2"
+                                        FontAttributes="Bold"
+                                        BackgroundColor="{StaticResource CustomGrey}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        Text="{Binding [Away], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                                    </materialui:MaterialLabel>
+
+                                    <!--HomeScore-->
+                                    <materialui:MaterialLabel
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Padding="0, 33"
+                                        IsVisible="{Binding IsHomeScoreCountOne, Converter={StaticResource inverseBoolConverter}}"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TypeScale="H4"
+                                        TextColor="{StaticResource TextColor_D}">
+                                        <materialui:MaterialLabel.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding HomeScoreMinValue}" />
+                                                <Span Text=" ~ " />
+                                                <Span Text="{Binding HomeScoreMaxValue}" />
+                                            </FormattedString>
+                                        </materialui:MaterialLabel.FormattedText>
+                                    </materialui:MaterialLabel>
+                                    <materialui:MaterialLabel
+                                        Grid.Row="3"
+                                        Grid.Column="1"
+                                        Padding="0, 33"
+                                        IsVisible="{Binding IsHomeScoreCountOne}"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TypeScale="H4"
+                                        TextColor="{StaticResource TextColor_D}"
+                                        Text="{Binding HomeScoreMaxValue}">
+                                    </materialui:MaterialLabel>
+
+                                    <!--AwayScore-->
+                                    <materialui:MaterialLabel
+                                        Grid.Row="3"
+                                        Grid.Column="5"
+                                        Padding="0, 33"
+                                        IsVisible="{Binding IsAwayScoreCountOne, Converter={StaticResource inverseBoolConverter}}"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TypeScale="H4"
+                                        TextColor="{StaticResource TextColor_D}">
+                                        <materialui:MaterialLabel.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding AwayScoreMinValue}" />
+                                                <Span Text=" ~ " />
+                                                <Span Text="{Binding AwayScoreMaxValue}" />
+                                            </FormattedString>
+                                        </materialui:MaterialLabel.FormattedText>
+                                    </materialui:MaterialLabel>
+                                    <materialui:MaterialLabel
+                                        Grid.Row="3"
+                                        Grid.Column="5"
+                                        Padding="0, 33"
+                                        IsVisible="{Binding IsAwayScoreCountOne}"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center"
+                                        TypeScale="H4"
+                                        TextColor="{StaticResource TextColor_D}"
+                                        Text="{Binding AwayScoreMaxValue}">
+                                    </materialui:MaterialLabel>
+                                </Grid>
+                            </StackLayout>
+                        </materialui:MaterialCard>
+                    </StackLayout>
+                </ScrollView>
+            </materialui:MaterialCard>
+        </Grid>
+        <!--Close button-->
+        <materialui:MaterialCard
+            Margin="0"
+            Padding="0"
+            WidthRequest="25"
+            HeightRequest="25"
+            CornerRadius="25"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.98, Constant=-23}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.00, Constant=120}">
+            <ContentView
+                Padding="7"
+                effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
+                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                <Image
+                    Aspect="AspectFill"
+                    Source="ic_close.png"
+                    effects:ImageEffect.TintColor="{StaticResource TextColor_L}">
+                </Image>
+            </ContentView>
+        </materialui:MaterialCard>
+    </RelativeLayout>
+</pages:PopupPage>

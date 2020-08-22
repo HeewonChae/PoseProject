@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F65C9EF8-A682-43DA-A3E0-6AC282A7E06D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PredictionBackTesting</RootNamespace>
+    <AssemblyName>PredictionBackTesting</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\PredictFixtureAndCheckHit.cs" />
+    <Compile Include="Commands\SaveJsonPredictionPercentage.cs" />
+    <Compile Include="Commands\SelecltPredictedFixtures.cs" />
+    <Compile Include="Models\PredictionHitInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\LogicCore\LogicCore.csproj">
+      <Project>{4375d35a-ccb4-4714-be12-7828a548c543}</Project>
+      <Name>LogicCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\PredictorAPI\PredictorAPI.csproj">
+      <Project>{1e5697f4-1ee8-469a-867e-b87fb39c9f65}</Project>
+      <Name>PredictorAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Framework\Repository\Repository.csproj">
+      <Project>{e798b808-207e-48f7-a509-6473fb43eae2}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common Library\DotNet_Standard\PosePacket\PosePacket.csproj">
+      <Project>{F12C31F7-74E0-407D-947A-AA4C42CD1C5B}</Project>
+      <Name>PosePacket</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Web App\PoseSportsWebService\Repository.Mysql\Repository.Mysql.csproj">
+      <Project>{300d85b2-91dd-42c9-89c0-4a2900aa9993}</Project>
+      <Name>Repository.Mysql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportsAdminTool\SportsAdminTool.csproj">
+      <Project>{89fbe610-4cf5-4748-81c5-7768698e36f0}</Project>
+      <Name>SportsAdminTool</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

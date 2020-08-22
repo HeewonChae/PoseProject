@@ -55,6 +55,7 @@ namespace SportsWebService.Logics.Converters
 
                 result.IsPredicted = db_fixtureDetail.IsPredicted;
                 result.IsRecommeded = db_fixtureDetail.IsRecommended;
+                result.MaxGrade = (byte)db_fixtureDetail.MaxGrade;
             }
             return result;
         }

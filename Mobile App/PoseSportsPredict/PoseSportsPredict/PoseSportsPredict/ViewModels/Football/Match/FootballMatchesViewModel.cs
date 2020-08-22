@@ -409,15 +409,29 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             ObservableCollection<FootballMatchListViewModel> matchGroupCollection;
             matchGroupCollection = new ObservableCollection<FootballMatchListViewModel>();
 
+            // 추천 경기
+            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended).ToArray();
+            if (recommendedMatches.Length > 0)
+            {
+                var recommendedMatchesViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
+                recommendedMatchesViewModel.CurrentIndex = MatchListViewModels?.First().CurrentIndex ?? 0;
+                recommendedMatchesViewModel.GroupType = MatchGroupType.Recommand;
+                recommendedMatchesViewModel.AlarmEditMode = _alarmEditMode;
+                recommendedMatchesViewModel.Matches = new ObservableCollection<FootballMatchInfo>(recommendedMatches.OrderBy(elem => elem.MatchTime));
+                matchGroupCollection.Add(recommendedMatchesViewModel);
+            }
+
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
 
             foreach (var grouppingMatch in grouppingMatches)
             {
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
+                matchListViewModel.GroupType = MatchGroupType.Default;
                 matchListViewModel.Title = grouppingMatch.Key;
                 matchListViewModel.TitleLogo = grouppingMatch.GroupLogo;
                 matchListViewModel.AlarmEditMode = _alarmEditMode;
                 matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Matches);
+                matchListViewModel.IsPredicted = grouppingMatch.Matches.Any(elem => elem.IsPredicted);
 
                 var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
                 matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;

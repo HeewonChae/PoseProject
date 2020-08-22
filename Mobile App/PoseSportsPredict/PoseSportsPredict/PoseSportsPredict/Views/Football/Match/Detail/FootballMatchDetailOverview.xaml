@@ -168,7 +168,8 @@
                                     Margin="0,0,0,12"
                                     MaxLines="1"
                                     LineBreakMode="TailTruncation"
-                                    TypeScale="Subtitle2"
+                                    TypeScale="Subtitle1"
+                                    FontAttributes="Bold"
                                     TextColor="{StaticResource CustomGrey_D}"
                                     Text="{x:Static localize:LocalizeString.Statistics}">
                                 </materialui:MaterialLabel>
@@ -578,12 +579,13 @@
                             CornerRadius="5">
                             <StackLayout>
                                 <materialui:MaterialLabel
-                                Margin="0,0,0,6"
-                                MaxLines="1"
-                                LineBreakMode="TailTruncation"
-                                TypeScale="Subtitle2"
-                                TextColor="{StaticResource CustomGrey_D}"
-                                Text="{x:Static localize:LocalizeString.Recent_Form}">
+                                    Margin="0,0,0,6"
+                                    MaxLines="1"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Subtitle1"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource CustomGrey_D}"
+                                    Text="{x:Static localize:LocalizeString.Recent_Form}">
                                 </materialui:MaterialLabel>
                                 <recentform:FootballRecentFormView
                                     BindingContext="{Binding RecentFormViewModel}">

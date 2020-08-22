@@ -35,6 +35,7 @@ using PoseSportsPredict.Services.Cache;
 using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.ViewModels.Common.Detail;
 using PoseSportsPredict.Views.Common.Detail;
+using PoseSportsPredict.ViewModels.Football.Match.PredictionPick;
 
 namespace PoseSportsPredict
 {
@@ -108,6 +109,7 @@ namespace PoseSportsPredict
             services.AddSingleton<MatchInfoToTeamInfo>();
             services.AddSingleton<MatchInfoToTeamStatistics>();
             services.AddSingleton<MatchInfoToGoalLineChartData>();
+            services.AddSingleton<PredictionDetailsToPredictionGroup>();
         }
 
         private void MatchViewModels(IServiceCollection services)
@@ -157,8 +159,22 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchDetailPredictionsViewModel>();
             services.AddTransient<FootballMatchDetailOddsView>();
             services.AddTransient<FootballMatchDetailOddsViewModel>();
+
+            // Football - Prediction Pupup
+            services.AddSingleton<FootballPredictionFinalScorePage>();
+            services.AddSingleton<FootballPredictionFinalScoreViewModel>();
+            services.AddSingleton<FootballPredictionMatchWinnerPage>();
+            services.AddSingleton<FootballPredictionMatchWinnerViewModel>();
+            services.AddSingleton<FootballPredictionBothToScorePage>();
+            services.AddSingleton<FootballPredictionBothToScoreViewModel>();
+            services.AddSingleton<FootballPredictionUnderOverPage>();
+            services.AddSingleton<FootballPredictionUnderOverViewModel>();
+
             // Football - RecentForm
             services.AddTransient<FootballRecentFormViewModel>();
+
+            // Football - PredictionPick
+            services.AddTransient<FootballPredictionPickViewModel>();
 
             // Football - League
             services.AddTransient<FootballLeaguesPage>();

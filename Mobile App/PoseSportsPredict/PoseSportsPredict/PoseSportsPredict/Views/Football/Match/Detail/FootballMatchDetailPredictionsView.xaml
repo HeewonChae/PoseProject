@@ -4,10 +4,357 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPredictionsView">
+             x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPredictionsView"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             BackgroundColor="{StaticResource BackgroundColor_Default}">
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
+        <StackLayout x:DataType="viewmodels:FootballMatchDetailPredictionsViewModel">
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.Not_Enough_Data_Predict}"
+                TaskLoaderNotifier="{Binding PredictionsTaskLoaderNotifier}">
+                <ScrollView>
+                    <StackLayout>
+                        <!--FinalScore-->
+                        <materialui:MaterialCard
+                        VerticalOptions="Start"
+                        Margin="7,6"
+                        Padding="0"
+                        Elevation="3"
+                        CornerRadius="5">
+                            <Grid
+                                ColumnSpacing="0"
+                                RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="69" />
+                                </Grid.RowDefinitions>
+                                <!--FinalScore Header-->
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="15,3"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"
+                                    TypeScale="Body1"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Final_Score}">
+                                </materialui:MaterialLabel>
+                                <AbsoluteLayout
+                                    Grid.Row="1"
+                                    Margin="0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource TransparentSecondary}">
+                                    <materialui:MaterialChip
+                                        AbsoluteLayout.LayoutBounds="0.5,0.5"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                                        BackgroundColor="{StaticResource CustomGrey_D}"
+                                        FontSize="14"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        effects:TapCommandEffect.Tap="{Binding FinalScoreUnlockCommand}"
+                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        <materialui:MaterialChip.Triggers>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsFinalScoreUnlocked}" Value="True">
+                                                <Setter Property="Image" Value="ic_unlock.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlocked}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsFinalScoreUnlocked}" Value="False">
+                                                <Setter Property="Image" Value="ic_cinema.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlock}" />
+                                            </DataTrigger>
+                                        </materialui:MaterialChip.Triggers>
+                                    </materialui:MaterialChip>
+                                </AbsoluteLayout>
+                            </Grid>
+                        </materialui:MaterialCard>
+
+                        <!--Match Winner-->
+                        <materialui:MaterialCard
+                            VerticalOptions="Start"
+                            Margin="7,6"
+                            Padding="0"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <Grid
+                                ColumnSpacing="0"
+                                RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="69" />
+                                </Grid.RowDefinitions>
+                                <!--Match Winner Header-->
+                                <ContentView
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="10,0,0,0"
+                                    IsVisible="{Binding MatchWinnerPredictions.IsRecommand}"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        Source="ic_recommend.png"
+                                        HeightRequest="23"
+                                        WidthRequest="23">
+                                    </Image>
+                                </ContentView>
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Padding="10,3"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"
+                                    TypeScale="Body1"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Match_Winner}">
+                                </materialui:MaterialLabel>
+                                <ContentView
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}">
+                                    <customviews:RatingView
+                                        VerticalOptions="Center"
+                                        WidthRequest="95"
+                                        HeightRequest="19"
+                                        StrokeWidth="0.8"
+                                        RatingType="Full"
+                                        ColorOn="{StaticResource IconActivated}"
+                                        OutlineOnColor="{StaticResource IconActivated}"
+                                        OutlineOffColor="{StaticResource IconActivated}"
+                                        Path="{x:Static customviews:PathConstants.Star}"
+                                        Count="5"
+                                        Value="{Binding MatchWinnerPredictions.Rate}">
+                                    </customviews:RatingView>
+                                </ContentView>
+                                <AbsoluteLayout
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource TransparentSecondary}">
+                                    <materialui:MaterialChip
+                                        AbsoluteLayout.LayoutBounds="0.5,0.5"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                                        FontSize="14"
+                                        BackgroundColor="{StaticResource CustomGrey_D}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        effects:TapCommandEffect.Tap="{Binding MatchWinnerUnlockCommand}"
+                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        <materialui:MaterialChip.Triggers>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsMatchWinnerUnlocked}" Value="True">
+                                                <Setter Property="Image" Value="ic_unlock.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlocked}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsMatchWinnerUnlocked}" Value="False">
+                                                <Setter Property="Image" Value="ic_cinema.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlock}" />
+                                            </DataTrigger>
+                                        </materialui:MaterialChip.Triggers>
+                                    </materialui:MaterialChip>
+                                </AbsoluteLayout>
+                            </Grid>
+                        </materialui:MaterialCard>
+
+                        <!--Both To Score-->
+                        <materialui:MaterialCard
+                            VerticalOptions="Start"
+                            Margin="7,6"
+                            Padding="0"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <Grid
+                                ColumnSpacing="0"
+                                RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="69" />
+                                </Grid.RowDefinitions>
+                                <!--Both To Score Header-->
+                                <ContentView
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="10,0,0,0"
+                                    IsVisible="{Binding BothToScorePredictions.IsRecommand}"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        Source="ic_recommend.png"
+                                        HeightRequest="23"
+                                        WidthRequest="23">
+                                    </Image>
+                                </ContentView>
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Padding="10,3"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"
+                                    TypeScale="Body1"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Both_To_Score}">
+                                </materialui:MaterialLabel>
+                                <ContentView
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}">
+                                    <customviews:RatingView
+                                        VerticalOptions="Center"
+                                        WidthRequest="95"
+                                        HeightRequest="19"
+                                        StrokeWidth="0.8"
+                                        RatingType="Full"
+                                        ColorOn="{StaticResource IconActivated}"
+                                        OutlineOnColor="{StaticResource IconActivated}"
+                                        OutlineOffColor="{StaticResource IconActivated}"
+                                        Path="{x:Static customviews:PathConstants.Star}"
+                                        Count="5"
+                                        Value="{Binding BothToScorePredictions.Rate}">
+                                    </customviews:RatingView>
+                                </ContentView>
+                                <AbsoluteLayout
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource TransparentSecondary}">
+                                    <materialui:MaterialChip
+                                        AbsoluteLayout.LayoutBounds="0.5,0.5"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                                        FontSize="14"
+                                        BackgroundColor="{StaticResource CustomGrey_D}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        effects:TapCommandEffect.Tap="{Binding BothToScoreUnlockCommand}"
+                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        <materialui:MaterialChip.Triggers>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsBothToScoreUnlocked}" Value="True">
+                                                <Setter Property="Image" Value="ic_unlock.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlocked}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsBothToScoreUnlocked}" Value="False">
+                                                <Setter Property="Image" Value="ic_cinema.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlock}" />
+                                            </DataTrigger>
+                                        </materialui:MaterialChip.Triggers>
+                                    </materialui:MaterialChip>
+                                </AbsoluteLayout>
+                            </Grid>
+                        </materialui:MaterialCard>
+
+                        <!--Under Over-->
+                        <materialui:MaterialCard
+                            VerticalOptions="Start"
+                            Margin="7,6"
+                            Padding="0"
+                            Elevation="3"
+                            CornerRadius="5">
+                            <Grid
+                                ColumnSpacing="0"
+                                RowSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="69" />
+                                </Grid.RowDefinitions>
+                                <!--Match Winner Header-->
+                                <ContentView
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="10,0,0,0"
+                                    IsVisible="{Binding UnderOverPredictions.IsRecommand}"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        Source="ic_recommend.png"
+                                        HeightRequest="23"
+                                        WidthRequest="23">
+                                    </Image>
+                                </ContentView>
+                                <materialui:MaterialLabel
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Padding="10,3"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="Start"
+                                    TypeScale="Body1"
+                                    FontAttributes="Bold"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}"
+                                    TextColor="{StaticResource TextColor_L}"
+                                    Text="{x:Static localize:LocalizeString.Under_Over}">
+                                </materialui:MaterialLabel>
+                                <ContentView
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    BackgroundColor="{StaticResource SecondaryColor_L}">
+                                    <customviews:RatingView
+                                        VerticalOptions="Center"
+                                        WidthRequest="95"
+                                        HeightRequest="19"
+                                        StrokeWidth="0.8"
+                                        RatingType="Full"
+                                        ColorOn="{StaticResource IconActivated}"
+                                        OutlineOnColor="{StaticResource IconActivated}"
+                                        OutlineOffColor="{StaticResource IconActivated}"
+                                        Path="{x:Static customviews:PathConstants.Star}"
+                                        Count="5"
+                                        Value="{Binding UnderOverPredictions.Rate}">
+                                    </customviews:RatingView>
+                                </ContentView>
+                                <AbsoluteLayout
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="0"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource TransparentSecondary}">
+                                    <materialui:MaterialChip
+                                        AbsoluteLayout.LayoutBounds="0.5,0.5"
+                                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                                        FontSize="14"
+                                        BackgroundColor="{StaticResource CustomGrey_D}"
+                                        TextColor="{StaticResource TextColor_L}"
+                                        effects:TapCommandEffect.Tap="{Binding UnderOverUnlockCommand}"
+                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        <materialui:MaterialChip.Triggers>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsUnderOverUnlocked}" Value="True">
+                                                <Setter Property="Image" Value="ic_unlock.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlocked}" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsUnderOverUnlocked}" Value="False">
+                                                <Setter Property="Image" Value="ic_cinema.png" />
+                                                <Setter Property="Text" Value="{x:Static localize:LocalizeString.Unlock}" />
+                                            </DataTrigger>
+                                        </materialui:MaterialChip.Triggers>
+                                    </materialui:MaterialChip>
+                                </AbsoluteLayout>
+                            </Grid>
+                        </materialui:MaterialCard>
+                    </StackLayout>
+                </ScrollView>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

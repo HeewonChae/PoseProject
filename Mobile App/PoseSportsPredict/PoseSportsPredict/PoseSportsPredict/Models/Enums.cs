@@ -27,4 +27,11 @@
         Neutral,
         Negative,
     }
+
+    public enum MatchGroupType
+    {
+        Default,
+        Ads,
+        Recommand,
+    }
 }

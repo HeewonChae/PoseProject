@@ -221,7 +221,7 @@ namespace SportsAdminTool.Logic.Football
                     sub_label = (short)FootballUnderOverType.OVER_1_5,
                     value1 = meanProbas[0],
                     value2 = meanProbas[1],
-                    grade = 0,
+                    grade = (short)over_grade,
                     is_recommended = isRecommend_over,
                 });
             }
@@ -309,7 +309,7 @@ namespace SportsAdminTool.Logic.Football
                     sub_label = (short)FootballUnderOverType.UNDER_4_5,
                     value1 = meanProbas[0],
                     value2 = meanProbas[1],
-                    grade = 0,
+                    grade = (short)under_grade,
                     is_recommended = isRecommend_under,
                 });
             }
@@ -780,9 +780,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.Winner_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore - meanAwayScore) > 0 ? meanHomeScore - meanAwayScore : -2;
+                        grade += (meanHomeScore - meanAwayScore) > 0 ? (meanHomeScore - meanAwayScore) * 1.5 : -2;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
+                        isRecommend = grade >= 7;
                     }
                     break;
 
@@ -790,8 +790,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[2] - PredictionFacade.Winner_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanAwayScore - meanHomeScore) > 0 ? meanAwayScore - meanHomeScore : -1;
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
+                        grade += (meanAwayScore - meanHomeScore) > 0 ? (meanAwayScore - meanHomeScore) * 1.5 : -2;
+                        isRecommend = grade >= 7;
                     }
                     break;
 
@@ -836,13 +836,13 @@ namespace SportsAdminTool.Logic.Football
             {
                 case FootballUnderOverType.UNDER_1_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_1_5.KNN, data.UnderOver.UO_1_5.SGD, data.UnderOver.UO_1_5.Sub);
+                        //int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_1_5.KNN, data.UnderOver.UO_1_5.SGD, data.UnderOver.UO_1_5.Sub);
 
-                        int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 1.5 ? 3 : 0;
+                        //int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
+                        //grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
+                        //grade += (meanHomeScore + meanAwayScore) < 1.5 ? 3 : 0;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
+                        isRecommend = false;
                     }
                     break;
 
@@ -852,9 +852,9 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) > 1.5 ? 1 : 0;
+                        grade += (meanHomeScore + meanAwayScore) > 2 ? 1 : -2;
 
-                        isRecommend = false;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -863,10 +863,10 @@ namespace SportsAdminTool.Logic.Football
                         int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.KNN, data.UnderOver.UO_2_5.SGD, data.UnderOver.UO_2_5.Sub);
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 2 ? 1.5 : -1;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
+                        grade += (meanHomeScore + meanAwayScore) < 2.5 ? 2 : -1;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
+                        isRecommend = grade >= 7;
                     }
                     break;
 
@@ -875,10 +875,10 @@ namespace SportsAdminTool.Logic.Football
                         int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.KNN, data.UnderOver.UO_2_5.SGD, data.UnderOver.UO_2_5.Sub);
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 3.5 : 0;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
                         grade += (meanHomeScore + meanAwayScore) > 2.5 ? 2 : -1;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 6;
+                        isRecommend = grade >= 7;
                     }
                     break;
 
@@ -886,33 +886,33 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.KNN, data.UnderOver.UO_3_5.SGD, data.UnderOver.UO_3_5.Sub);
 
-                        int probaDiff = meanProbas[0] - (PredictionFacade.YN_Proba_Criteria + 10);
+                        int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
                         grade += (meanHomeScore + meanAwayScore) < 3 ? 1 : -2;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
                 case FootballUnderOverType.OVER_3_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.KNN, data.UnderOver.UO_3_5.SGD, data.UnderOver.UO_3_5.Sub);
+                        //int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.KNN, data.UnderOver.UO_3_5.SGD, data.UnderOver.UO_3_5.Sub);
 
-                        int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 3.5 : 0;
-                        grade += (meanHomeScore + meanAwayScore) > 3 ? 2 : -1;
+                        //int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
+                        //grade += probaDiff > 0 ? probaDiff / 3.5 : 0;
+                        //grade += (meanHomeScore + meanAwayScore) > 3 ? 1.5 : -1;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 6;
+                        isRecommend = false;
                     }
                     break;
 
                 case FootballUnderOverType.UNDER_4_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
+                        //int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
 
-                        int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 4.5 ? 1 : 0;
+                        //int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
+                        //grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
+                        //grade += (meanHomeScore + meanAwayScore) < 4 ? 1 : -3;
 
                         isRecommend = false;
                     }
@@ -920,13 +920,13 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.OVER_4_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
+                        //int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
 
-                        int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) > 4.5 ? 3 : 0;
+                        //int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
+                        //grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
+                        //grade += (meanHomeScore + meanAwayScore) > 4.5 ? 3 : 0;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
+                        isRecommend = false;
                     }
                     break;
 
@@ -948,34 +948,37 @@ namespace SportsAdminTool.Logic.Football
             double meanAwayScore = awayScoreSet.Average();
 
             double grade = 0.0;
+            isRecommend = false;
             switch (subType)
             {
                 case YesNoType.No:
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 3.5 : 0;
-                        grade += meanHomeScore < 1 ? 1.5 : -0.5;
-                        grade += meanAwayScore < 1 ? 1.5 : -0.5;
+                        grade += probaDiff > 0 ? probaDiff / 10 : -1;
+                        grade += meanHomeScore < 1 ? 3 : -1;
+                        grade += meanAwayScore < 1 ? 3 : -1;
+
+                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
                     }
                     break;
 
                 case YesNoType.Yes:
                     {
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 3.5 : 0;
-                        grade += meanHomeScore >= 1 ? 1 : -0.5;
-                        grade += meanAwayScore >= 1 ? 1 : -0.5;
+                        grade += probaDiff > 0 ? probaDiff / 10 : 0;
+                        grade += meanHomeScore >= 1.5 ? 2 : -1;
+                        grade += meanAwayScore >= 1.5 ? 2 : -1;
 
-                        grade += meanHomeScore >= 2 ? 1 : 0;
-                        grade += meanAwayScore >= 2 ? 1 : 0;
+                        grade += meanHomeScore >= 2 ? 2 : 0;
+                        grade += meanAwayScore >= 2 ? 2 : 0;
+
+                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
                     }
                     break;
 
                 default:
                     break;
             }
-
-            isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 7;
 
             return grade > 10 ? 10 :
                 grade < 0 ? 0 : grade;

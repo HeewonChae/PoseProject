@@ -25,7 +25,7 @@ namespace SportsAdminTool.Logic.WebAPI
 
         public FootballPrediction PredictFixture(int fixture_id)
         {
-            Dev.DebugString($"Call API - FootballPredictorAPI.PredictFixture, fixture_id = {fixture_id}");
+            //Dev.DebugString($"Call API - FootballPredictorAPI.PredictFixture, fixture_id = {fixture_id}");
 
             return _api.PredictFixture(fixture_id);
         }

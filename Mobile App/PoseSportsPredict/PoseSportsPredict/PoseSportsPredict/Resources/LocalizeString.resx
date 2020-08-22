@@ -437,4 +437,100 @@
   <data name="Suggested_Leagues" xml:space="preserve">
     <value>Suggested</value>
   </data>
+  <data name="Not_Enough_Data_Predict" xml:space="preserve">
+    <value>There is not enough data to predict</value>
+  </data>
+  <data name="Final_Score" xml:space="preserve">
+    <value>Final Score</value>
+  </data>
+  <data name="Match_Winner" xml:space="preserve">
+    <value>Match Winner</value>
+  </data>
+  <data name="Both_To_Score" xml:space="preserve">
+    <value>Both Teams To Score</value>
+  </data>
+  <data name="Under_Over" xml:space="preserve">
+    <value>Under Over</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="Unlocked" xml:space="preserve">
+    <value>Unlocked</value>
+  </data>
+  <data name="Collapse_All_Matches" xml:space="preserve">
+    <value>Collapse all matches</value>
+  </data>
+  <data name="Expand_All_Matches" xml:space="preserve">
+    <value>Expand all matches</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="Lose" xml:space="preserve">
+    <value>Lose</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Under" xml:space="preserve">
+    <value>Under</value>
+  </data>
+  <data name="Over" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="Predicted_Picks" xml:space="preserve">
+    <value>Predicted Picks</value>
+  </data>
+  <data name="Match_Winner_Win" xml:space="preserve">
+    <value>Home - Win</value>
+  </data>
+  <data name="Match_Winner_Lose" xml:space="preserve">
+    <value>Home - Lose</value>
+  </data>
+  <data name="Match_Winner_Win_Or_Draw" xml:space="preserve">
+    <value>Home - Win or Draw</value>
+  </data>
+  <data name="Match_Winner_Lose_Or_Draw" xml:space="preserve">
+    <value>Home- Draw or Lose</value>
+  </data>
+  <data name="Both_To_Score_Yes" xml:space="preserve">
+    <value>Both Teams To Score - Yes</value>
+  </data>
+  <data name="Both_To_Score_No" xml:space="preserve">
+    <value>Both Teams To Score - No</value>
+  </data>
+  <data name="Under_1_5" xml:space="preserve">
+    <value>1.5 Goal Under</value>
+  </data>
+  <data name="Over_1_5" xml:space="preserve">
+    <value>1.5 Goal Over</value>
+  </data>
+  <data name="Under_2_5" xml:space="preserve">
+    <value>2.5 Goal Under</value>
+  </data>
+  <data name="Over_2_5" xml:space="preserve">
+    <value>2.5 Goal Over</value>
+  </data>
+  <data name="Under_3_5" xml:space="preserve">
+    <value>3.5 Goal Under</value>
+  </data>
+  <data name="Over_3_5" xml:space="preserve">
+    <value>3.5 Goal Over</value>
+  </data>
+  <data name="Under_4_5" xml:space="preserve">
+    <value>4.5 Goal Under</value>
+  </data>
+  <data name="Over_4_5" xml:space="preserve">
+    <value>4.5 Goal Over</value>
+  </data>
+  <data name="Recommended_Matches" xml:space="preserve">
+    <value>Recommended Matches</value>
+  </data>
 </root>

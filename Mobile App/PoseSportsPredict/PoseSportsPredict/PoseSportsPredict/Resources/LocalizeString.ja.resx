@@ -453,4 +453,13 @@
   <data name="Suggested_Leagues" xml:space="preserve">
     <value>お勧めリーグ</value>
   </data>
+  <data name="Win" xml:space="preserve">
+    <value>勝</value>
+  </data>
+  <data name="Lose" xml:space="preserve">
+    <value>敗</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>分</value>
+  </data>
 </root>

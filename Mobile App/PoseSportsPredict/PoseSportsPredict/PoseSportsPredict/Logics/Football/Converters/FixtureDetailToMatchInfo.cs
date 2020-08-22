@@ -53,6 +53,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
                 IsPredicted = fixtureDetail.IsPredicted,
                 IsRecommended = fixtureDetail.IsRecommeded,
+                MaxRating = fixtureDetail.MaxGrade / 2.0
             };
 
             return returnValue;

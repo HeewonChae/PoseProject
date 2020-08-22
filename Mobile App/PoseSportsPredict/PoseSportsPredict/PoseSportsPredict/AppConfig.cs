@@ -6,9 +6,9 @@ namespace PoseSportsPredict
     {
         // Pose WebService
 #if DEBUG
-        public static string PoseWebBaseUrl = "http://172.17.138.113:8888/";
+        public static string PoseWebBaseUrl = "http://121.142.201.8:8888/";
 #else
-        public static string PoseWebBaseUrl = "http://172.17.138.113:8888/";
+        public static string PoseWebBaseUrl = "http://121.142.201.8:8888/";
 #endif
 
         // SQLite
@@ -26,5 +26,7 @@ namespace PoseSportsPredict
         public const string DEFAULT_LANGUAGE = "en";
 
         public const string CULTURE_CHANGED_MSG = "UICultureChanged";
+
+        public const int Prediction_Unlocked_Time = 1; // Hour
     }
 }

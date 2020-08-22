@@ -92,6 +92,24 @@ namespace PoseSportsPredict.Services.Cache.Loader
             });
         }
 
+        public static async Task<object> MatchPredictions(int fixtureId)
+        {
+            var webApiService = ShinyHost.Resolve<IWebApiService>();
+
+            return await webApiService.RequestRawAsyncWithToken(new WebRequestContext
+            {
+                SerializeType = SerializeType.MessagePack,
+                MethodType = WebMethodType.POST,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = FootballProxy.ServiceUrl,
+                SegmentGroup = FootballProxy.P_GET_MATCH_PREDICTIONS,
+                PostData = new I_GET_MATCH_PREDICTIONS
+                {
+                    FixtureId = fixtureId,
+                }
+            });
+        }
+
         #endregion Match
 
         #region League

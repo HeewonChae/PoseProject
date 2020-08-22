@@ -14,7 +14,7 @@ namespace PoseSportsPredict.Droid
         Icon = "@mipmap/icon_round",
         Theme = "@style/LoadingTheme",
         MainLauncher = true,
-        //ScreenOrientation = ScreenOrientation.Portrait,
+        ScreenOrientation = ScreenOrientation.Portrait,
         LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity

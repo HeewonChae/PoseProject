@@ -167,8 +167,8 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             PopupMenuList = new List<string>()
             {
                 LocalizeString.Add_Delete_Matches_Alarm,
-                LocalizeString.Expand_All_Leagues,
-                LocalizeString.Collapse_All_Leagues,
+                LocalizeString.Expand_All_Matches,
+                LocalizeString.Collapse_All_Matches,
             };
 
             _popup.BindingContext = this;

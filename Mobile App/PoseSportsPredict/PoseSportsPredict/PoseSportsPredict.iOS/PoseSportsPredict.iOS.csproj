@@ -144,6 +144,9 @@
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.1.0.442</Version>
     </PackageReference>
+    <PackageReference Include="CardsView">
+      <Version>2.6.3</Version>
+    </PackageReference>
     <PackageReference Include="Naxam.TopTabbedPage.Forms">
       <Version>0.0.3.5</Version>
     </PackageReference>

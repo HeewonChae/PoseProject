@@ -13,6 +13,7 @@
                  xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                  xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                  xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
                  xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Bookmark"
                  xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
@@ -65,7 +66,7 @@
                 CornerRadius="5"
                 BackgroundColor="{StaticResource BackgroundColor_Default}">
 
-                <!--Ignore cancle command-->
+                <!--Ignore cancel command-->
                 <materialui:MaterialCard.GestureRecognizers>
                     <TapGestureRecognizer />
                 </materialui:MaterialCard.GestureRecognizers>
@@ -113,15 +114,16 @@
                                         </DataTrigger>
                                     </StackLayout.Triggers>
                                     <materialui:MaterialLabel
-                                    TypeScale="Caption"
-                                    TextColor="{StaticResource CustomGrey_D}">
+                                        TypeScale="Subtitle1"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding [Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=" (" />
                                                 <Span Text="{Binding [Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding [Count], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
+                                                <Span Text="{Binding SearchedMatches.Count}" />
                                                 <Span Text=")" />
                                             </FormattedString>
                                         </materialui:MaterialLabel.FormattedText>
@@ -166,7 +168,10 @@
                                                                 DownsampleToViewSize="True"
                                                                 LoadingPlaceholder="img_world.png"
                                                                 ErrorPlaceholder="img_world.png"
-                                                                Source="{Binding LeagueLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                                Source="{Binding League_CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                                <ffimageloading:CachedImage.Transformations>
+                                                                    <fftransformations:CircleTransformation />
+                                                                </ffimageloading:CachedImage.Transformations>
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
                                                                 Grid.Row="0"
@@ -174,10 +179,12 @@
                                                                 LineBreakMode="TailTruncation"
                                                                 TextColor="{StaticResource CustomGrey_D}"
                                                                 TypeScale="Subtitle2"
-                                                                FontAttributes="None"
+                                                                FontAttributes="Bold"
                                                                 VerticalOptions="CenterAndExpand">
                                                                 <materialui:MaterialLabel.FormattedText>
                                                                     <FormattedString>
+                                                                        <Span Text="{Binding League_CountryName}" />
+                                                                        <Span Text=". " />
                                                                         <Span Text="{Binding LeagueName}" />
                                                                     </FormattedString>
                                                                 </materialui:MaterialLabel.FormattedText>
@@ -186,7 +193,7 @@
                                                                 Grid.Row="1"
                                                                 Grid.Column="1"
                                                                 TextColor="{StaticResource CustomGrey_D}"
-                                                                TypeScale="Caption"
+                                                                TypeScale="Subtitle2"
                                                                 FontAttributes="None"
                                                                 Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
                                                             </materialui:MaterialLabel>
@@ -298,15 +305,16 @@
                                         </DataTrigger>
                                     </StackLayout.Triggers>
                                     <materialui:MaterialLabel
-                                    TypeScale="Caption"
-                                    TextColor="{StaticResource CustomGrey_D}">
+                                        TypeScale="Subtitle1"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding [Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=" (" />
                                                 <Span Text="{Binding [Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding [Count], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
+                                                <Span Text="{Binding SearchedLeagues.Count}" />
                                                 <Span Text=")" />
                                             </FormattedString>
                                         </materialui:MaterialLabel.FormattedText>
@@ -376,15 +384,16 @@
                                         </DataTrigger>
                                     </StackLayout.Triggers>
                                     <materialui:MaterialLabel
-                                    TypeScale="Caption"
-                                    TextColor="{StaticResource CustomGrey_D}">
+                                        TypeScale="Subtitle1"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource CustomGrey_D}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding [Teams], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=" (" />
                                                 <Span Text="{Binding [Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
                                                 <Span Text=": " />
-                                                <Span Text="{Binding [Count], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
+                                                <Span Text="{Binding SearchedTeams.Count}" />
                                                 <Span Text=")" />
                                             </FormattedString>
                                         </materialui:MaterialLabel.FormattedText>
@@ -449,7 +458,8 @@
                         Margin="5"
                         IsVisible="{Binding IsSearching, Converter={StaticResource inverseBoolConverter}}">
                         <materialui:MaterialLabel
-                            TypeScale="Caption"
+                            TypeScale="Subtitle1"
+                            FontAttributes="Bold"
                             TextColor="{StaticResource CustomGrey_D}"
                             Text="{Binding [Recent_Search], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                         </materialui:MaterialLabel>

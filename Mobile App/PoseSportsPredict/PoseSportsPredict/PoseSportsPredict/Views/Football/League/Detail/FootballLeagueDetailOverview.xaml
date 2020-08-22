@@ -153,7 +153,8 @@
                                     Margin="0,0,0,12"
                                     MaxLines="1"
                                     LineBreakMode="TailTruncation"
-                                    TypeScale="Subtitle2"
+                                    TypeScale="Subtitle1"
+                                    FontAttributes="Bold"
                                     TextColor="{StaticResource CustomGrey_D}"
                                     Text="{x:Static localize:LocalizeString.Participating_Teams}">
                                 </materialui:MaterialLabel>

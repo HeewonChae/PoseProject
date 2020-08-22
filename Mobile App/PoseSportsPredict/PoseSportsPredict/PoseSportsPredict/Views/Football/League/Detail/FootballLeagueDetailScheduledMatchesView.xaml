@@ -17,7 +17,7 @@
 
     <ContentView.Resources>
         <ResourceDictionary>
-            <DataTemplate 
+            <DataTemplate
                 x:Key="collapsedTemplate"
                 x:DataType="matcheviewmodels:FootballMatchListViewModel">
                 <ViewCell>
@@ -55,6 +55,13 @@
                                     TextColor="{StaticResource TextColor_D}"
                                     Text="{Binding Title}">
                                 </materialui:MaterialLabel>
+                                <Image
+                                    Source="ic_prediction.png"
+                                    IsVisible="{Binding IsPredicted}"
+                                    HeightRequest="25"
+                                    WidthRequest="25"
+                                    effects:ImageEffect.TintColor="{StaticResource IconActivated}">
+                                </Image>
                                 <materialui:MaterialCard
                                     Padding="0"
                                     HorizontalOptions="Center"
@@ -85,7 +92,7 @@
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
-            <DataTemplate 
+            <DataTemplate
                 x:Key="expandedTamplete"
                 x:DataType="matcheviewmodels:FootballMatchListViewModel">
                 <ViewCell>

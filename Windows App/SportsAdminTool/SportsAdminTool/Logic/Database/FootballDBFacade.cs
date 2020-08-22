@@ -792,6 +792,65 @@ namespace SportsAdminTool.Logic.Database
             return ExecuteQuery(sb.ToString());
         }
 
+        public static bool UpdatePredictionBackTesting(params FootballDB.Tables.PredictionBackTesting[] predictionBackTestings)
+        {
+            if (predictionBackTestings.Length == 0)
+                return false;
+
+            Dev.DebugString("Call DB - FootballFacade.UpdatePredictionBackTesting");
+
+            DateTime upt_time = DateTime.Now.ToUniversalTime();
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append($" INSERT INTO prediction_back_testing ");
+            sb.Append($" (`{nameof(FootballDB.Tables.PredictionBackTesting.fixture_id)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.pred_seq)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.main_label)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.sub_label)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.value1)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.value2)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.value3)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.value4)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.grade)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.is_recommended)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.is_hit)}`, " +
+                $"`{nameof(FootballDB.Tables.PredictionBackTesting.upt_time)}`)");
+            sb.Append("VALUES");
+
+            for (int i = 0; i < predictionBackTestings.Length; i++)
+            {
+                if (i != 0)
+                    sb.Append(", ");
+
+                var prediction = predictionBackTestings[i];
+                sb.Append($"({prediction.fixture_id}, " +
+                    $"{prediction.pred_seq}, " +
+                    $"{prediction.main_label}, " +
+                    $"{prediction.sub_label}, " +
+                    $"{prediction.value1}, " +
+                    $"{prediction.value2}, " +
+                    $"{prediction.value3}, " +
+                    $"{prediction.value4}, " +
+                    $"{prediction.grade}, " +
+                    $"{prediction.is_recommended}, " +
+                    $"{prediction.is_hit}, " +
+                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+            }
+
+            sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Prediction.main_label)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.main_label)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.sub_label)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.sub_label)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.value1)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.value1)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.value2)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.value2)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.value3)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.value3)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.value4)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.value4)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.grade)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.grade)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.is_recommended)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.is_recommended)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.is_hit)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.is_hit)}), " +
+                $"{nameof(FootballDB.Tables.PredictionBackTesting.upt_time)} = VALUES({nameof(FootballDB.Tables.PredictionBackTesting.upt_time)});");
+
+            return ExecuteQuery(sb.ToString());
+        }
+
         #endregion Update
 
         #region Select

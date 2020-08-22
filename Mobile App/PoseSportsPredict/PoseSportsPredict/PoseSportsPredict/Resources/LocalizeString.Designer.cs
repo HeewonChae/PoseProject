@@ -169,6 +169,33 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Both Teams To Score.
+        /// </summary>
+        public static string Both_To_Score {
+            get {
+                return ResourceManager.GetString("Both_To_Score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both Teams To Score - No.
+        /// </summary>
+        public static string Both_To_Score_No {
+            get {
+                return ResourceManager.GetString("Both_To_Score_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both Teams To Score - Yes.
+        /// </summary>
+        public static string Both_To_Score_Yes {
+            get {
+                return ResourceManager.GetString("Both_To_Score_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -210,6 +237,15 @@ namespace PoseSportsPredict.Resources {
         public static string Collapse_All_Leagues {
             get {
                 return ResourceManager.GetString("Collapse_All_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collapse all matches.
+        /// </summary>
+        public static string Collapse_All_Matches {
+            get {
+                return ResourceManager.GetString("Collapse_All_Matches", resourceCulture);
             }
         }
         
@@ -268,6 +304,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Draw.
+        /// </summary>
+        public static string Draw {
+            get {
+                return ResourceManager.GetString("Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to D.
         /// </summary>
         public static string Draw_Initial {
@@ -282,6 +327,15 @@ namespace PoseSportsPredict.Resources {
         public static string Expand_All_Leagues {
             get {
                 return ResourceManager.GetString("Expand_All_Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expand all matches.
+        /// </summary>
+        public static string Expand_All_Matches {
+            get {
+                return ResourceManager.GetString("Expand_All_Matches", resourceCulture);
             }
         }
         
@@ -309,6 +363,15 @@ namespace PoseSportsPredict.Resources {
         public static string Favorite_Teams {
             get {
                 return ResourceManager.GetString("Favorite_Teams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Final Score.
+        /// </summary>
+        public static string Final_Score {
+            get {
+                return ResourceManager.GetString("Final_Score", resourceCulture);
             }
         }
         
@@ -484,6 +547,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lose.
+        /// </summary>
+        public static string Lose {
+            get {
+                return ResourceManager.GetString("Lose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to L.
         /// </summary>
         public static string Lose_Initial {
@@ -556,6 +628,51 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match Winner.
+        /// </summary>
+        public static string Match_Winner {
+            get {
+                return ResourceManager.GetString("Match_Winner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home - Lose.
+        /// </summary>
+        public static string Match_Winner_Lose {
+            get {
+                return ResourceManager.GetString("Match_Winner_Lose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home- Draw or Lose.
+        /// </summary>
+        public static string Match_Winner_Lose_Or_Draw {
+            get {
+                return ResourceManager.GetString("Match_Winner_Lose_Or_Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home - Win.
+        /// </summary>
+        public static string Match_Winner_Win {
+            get {
+                return ResourceManager.GetString("Match_Winner_Win", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home - Win or Draw.
+        /// </summary>
+        public static string Match_Winner_Win_Or_Draw {
+            get {
+                return ResourceManager.GetString("Match_Winner_Win_Or_Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Matches.
         /// </summary>
         public static string Matches {
@@ -570,6 +687,15 @@ namespace PoseSportsPredict.Resources {
         public static string My_Profile {
             get {
                 return ResourceManager.GetString("My_Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -637,6 +763,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is not enough data to predict.
+        /// </summary>
+        public static string Not_Enough_Data_Predict {
+            get {
+                return ResourceManager.GetString("Not_Enough_Data_Predict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error has occurred..
         /// </summary>
         public static string Occur_Error {
@@ -669,6 +804,51 @@ namespace PoseSportsPredict.Resources {
         public static string Ongoing_matches {
             get {
                 return ResourceManager.GetString("Ongoing_matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Over.
+        /// </summary>
+        public static string Over {
+            get {
+                return ResourceManager.GetString("Over", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.5 Goal Over.
+        /// </summary>
+        public static string Over_1_5 {
+            get {
+                return ResourceManager.GetString("Over_1_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2.5 Goal Over.
+        /// </summary>
+        public static string Over_2_5 {
+            get {
+                return ResourceManager.GetString("Over_2_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3.5 Goal Over.
+        /// </summary>
+        public static string Over_3_5 {
+            get {
+                return ResourceManager.GetString("Over_3_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4.5 Goal Over.
+        /// </summary>
+        public static string Over_4_5 {
+            get {
+                return ResourceManager.GetString("Over_4_5", resourceCulture);
             }
         }
         
@@ -718,6 +898,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predicted Picks.
+        /// </summary>
+        public static string Predicted_Picks {
+            get {
+                return ResourceManager.GetString("Predicted_Picks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Predictions.
         /// </summary>
         public static string Predictions {
@@ -759,6 +948,15 @@ namespace PoseSportsPredict.Resources {
         public static string Recent_Search {
             get {
                 return ResourceManager.GetString("Recent_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recommended Matches.
+        /// </summary>
+        public static string Recommended_Matches {
+            get {
+                return ResourceManager.GetString("Recommended_Matches", resourceCulture);
             }
         }
         
@@ -1015,11 +1213,83 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Under.
+        /// </summary>
+        public static string Under {
+            get {
+                return ResourceManager.GetString("Under", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.5 Goal Under.
+        /// </summary>
+        public static string Under_1_5 {
+            get {
+                return ResourceManager.GetString("Under_1_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2.5 Goal Under.
+        /// </summary>
+        public static string Under_2_5 {
+            get {
+                return ResourceManager.GetString("Under_2_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3.5 Goal Under.
+        /// </summary>
+        public static string Under_3_5 {
+            get {
+                return ResourceManager.GetString("Under_3_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4.5 Goal Under.
+        /// </summary>
+        public static string Under_4_5 {
+            get {
+                return ResourceManager.GetString("Under_4_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Under Over.
+        /// </summary>
+        public static string Under_Over {
+            get {
+                return ResourceManager.GetString("Under_Over", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Undo.
         /// </summary>
         public static string Undo {
             get {
                 return ResourceManager.GetString("Undo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock.
+        /// </summary>
+        public static string Unlock {
+            get {
+                return ResourceManager.GetString("Unlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlocked.
+        /// </summary>
+        public static string Unlocked {
+            get {
+                return ResourceManager.GetString("Unlocked", resourceCulture);
             }
         }
         
@@ -1051,11 +1321,29 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Win.
+        /// </summary>
+        public static string Win {
+            get {
+                return ResourceManager.GetString("Win", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to W.
         /// </summary>
         public static string Win_Initial {
             get {
                 return ResourceManager.GetString("Win_Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         

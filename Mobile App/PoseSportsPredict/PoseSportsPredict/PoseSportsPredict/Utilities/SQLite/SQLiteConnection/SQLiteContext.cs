@@ -24,6 +24,7 @@ namespace PoseSportsPredict.Utilities.SQLite.SQLiteConnection
             Connection.CreateTableAsync<FootballMatchInfo>().Wait();
             Connection.CreateTableAsync<FootballLeagueInfo>().Wait();
             Connection.CreateTableAsync<FootballTeamInfo>().Wait();
+            Connection.CreateTableAsync<FootballPredictionGroup>().Wait();
             Connection.CreateTableAsync<FootballRecentSearch>().Wait();
             Connection.CreateTableAsync<NotificationInfo>().Wait();
             Connection.CreateTableAsync<AppCacheData>().Wait();

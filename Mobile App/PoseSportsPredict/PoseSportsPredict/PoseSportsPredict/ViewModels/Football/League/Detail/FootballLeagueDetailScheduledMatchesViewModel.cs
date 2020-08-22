@@ -259,6 +259,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                 matchListViewModel.AlarmEditMode = _alarmEditMode;
                 matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.ToArray());
                 matchListViewModel.Expanded = isExpand;
+                matchListViewModel.IsPredicted = grouppingMatch.Any(elem => elem.IsPredicted);
 
                 matchGroupCollection.Add(matchListViewModel);
             }

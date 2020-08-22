@@ -73,7 +73,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             OverviewModel = ShinyHost.Resolve<FootballMatchDetailOverviewModel>().SetMatchInfo(MatchInfo);
             H2HViewModel = ShinyHost.Resolve<FootballMatchDetailH2HViewModel>().SetMatchInfo(MatchInfo);
             OddsViewModel = ShinyHost.Resolve<FootballMatchDetailOddsViewModel>().SetMatchInfo(MatchInfo);
-            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>();
+            PredictionsViewModel = ShinyHost.Resolve<FootballMatchDetailPredictionsViewModel>().SetMatchInfo(MatchInfo);
 
             TabContents = new ObservableCollection<BaseViewModel>
             {

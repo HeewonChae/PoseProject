@@ -20,6 +20,8 @@ using System.Globalization;
 using PoseSportsPredict.Models.Resources.Common;
 using System.Linq;
 using PoseSportsPredict.Logics.LocalizedRes;
+using PoseSportsPredict.InfraStructure.SQLite;
+using PoseSportsPredict.Models.Football;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -101,6 +103,14 @@ namespace PoseSportsPredict.ViewModels
                 await _OAuthService.Logout();
             }
 
+            // Delete expired predictionGroup
+            var allPredictionGroups = await _sqliteService.SelectAllAsync<FootballPredictionGroup>();
+            foreach (var predictionGroup in allPredictionGroups)
+            {
+                if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
+                    await _sqliteService.DeleteAsync<FootballPredictionGroup>(predictionGroup.PrimaryKey);
+            }
+
             IsLoaded = true;
             OnPropertyChanged("IsLoaded");
             MessagingCenter.Send(this, "LoadingComplete");
@@ -113,6 +123,7 @@ namespace PoseSportsPredict.ViewModels
         private IWebApiService _webApiService;
         private IOAuthService _OAuthService;
         private INotificationService _notificationService;
+        private ISQLiteService _sqliteService;
         private ICacheService _cacheService;
 
         #endregion Services
@@ -134,12 +145,14 @@ namespace PoseSportsPredict.ViewModels
             IWebApiService webApiService,
             IOAuthService OAuthService,
             INotificationService notificationService,
-            ICacheService cacheService) : base(coupledPage)
+            ICacheService cacheService,
+            ISQLiteService sqliteService) : base(coupledPage)
         {
             _notificationService = notificationService;
             _webApiService = webApiService;
             _OAuthService = OAuthService;
             _cacheService = cacheService;
+            _sqliteService = sqliteService;
 
             if (OnInitializeView())
             {

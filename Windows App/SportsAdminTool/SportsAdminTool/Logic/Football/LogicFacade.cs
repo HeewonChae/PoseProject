@@ -58,7 +58,7 @@ namespace SportsAdminTool.Logic.Football
         /// 예측 데이터 적중 판별
         /// </summary>
         /// <param name="fixtureId"></param>
-        public static void DiscernPrediction(Fixture api_fixture)
+        public static void DiscernPrediction(Fixture api_fixture, bool isNotify = true)
         {
             var db_predictions = Database.FootballDBFacade.SelectPredictions(where: $"fixture_id = {api_fixture.FixtureId}");
             foreach (var db_prediction in db_predictions)
@@ -89,13 +89,44 @@ namespace SportsAdminTool.Logic.Football
                 db_prediction.is_hit = isHit;
                 Logic.Database.FootballDBFacade.UpdatePrediction(db_prediction);
 
-                if (db_prediction.is_recommended && db_prediction.is_hit)
+                if (db_prediction.is_recommended && db_prediction.is_hit && isNotify)
                 {
                     string notiMSG = Logic.Football.PredictionFacade.MakeHitNotificationMessage(api_fixture, db_prediction);
 
                     if (!string.IsNullOrEmpty(notiMSG))
                         Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Football_Picks, notiMSG);
                 }
+            }
+        }
+
+        public static void DiscernPrediction(FootballDB.Tables.Prediction[] db_predictions, int home_score, int away_score)
+        {
+            foreach (var db_prediction in db_predictions)
+            {
+                ((int)db_prediction.main_label).TryParseEnum(out FootballPredictionType predictionType);
+                bool isHit = false;
+                switch (predictionType)
+                {
+                    case FootballPredictionType.Match_Winner:
+                        ((int)db_prediction.sub_label).TryParseEnum(out FootballMatchWinnerType matchWinnerSubType);
+                        isHit = PredictionFacade.DiscernMatchWinner(matchWinnerSubType, home_score, away_score);
+                        break;
+
+                    case FootballPredictionType.Both_Teams_to_Score:
+                        ((int)db_prediction.sub_label).TryParseEnum(out YesNoType bothToScoreSubType);
+                        isHit = PredictionFacade.DiscernBothToScore(bothToScoreSubType, home_score, away_score);
+                        break;
+
+                    case FootballPredictionType.Under_Over:
+                        ((int)db_prediction.sub_label).TryParseEnum(out FootballUnderOverType underOverSubType);
+                        isHit = PredictionFacade.DiscernUnderOver(underOverSubType, home_score, away_score);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                db_prediction.is_hit = isHit;
             }
         }
 

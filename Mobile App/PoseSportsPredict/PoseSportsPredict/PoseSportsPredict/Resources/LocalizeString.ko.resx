@@ -453,4 +453,100 @@
   <data name="Suggested_Leagues" xml:space="preserve">
     <value>추천 리그</value>
   </data>
+  <data name="Not_Enough_Data_Predict" xml:space="preserve">
+    <value>예측을 위한 데이터가 부족합니다</value>
+  </data>
+  <data name="Final_Score" xml:space="preserve">
+    <value>최종 점수</value>
+  </data>
+  <data name="Match_Winner" xml:space="preserve">
+    <value>승 무 패</value>
+  </data>
+  <data name="Both_To_Score" xml:space="preserve">
+    <value>양 팀 득점</value>
+  </data>
+  <data name="Under_Over" xml:space="preserve">
+    <value>언더 오버</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>잠금 해제</value>
+  </data>
+  <data name="Unlocked" xml:space="preserve">
+    <value>해제됨</value>
+  </data>
+  <data name="Collapse_All_Matches" xml:space="preserve">
+    <value>모든 경기 축소</value>
+  </data>
+  <data name="Expand_All_Matches" xml:space="preserve">
+    <value>모든 경기 확대</value>
+  </data>
+  <data name="Lose" xml:space="preserve">
+    <value>패</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>무</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>승</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>예</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>아니오</value>
+  </data>
+  <data name="Under" xml:space="preserve">
+    <value>언더</value>
+  </data>
+  <data name="Over" xml:space="preserve">
+    <value>오버</value>
+  </data>
+  <data name="Predicted_Picks" xml:space="preserve">
+    <value>예측 픽</value>
+  </data>
+  <data name="Match_Winner_Win" xml:space="preserve">
+    <value>홈 - 승</value>
+  </data>
+  <data name="Match_Winner_Lose" xml:space="preserve">
+    <value>홈 - 패</value>
+  </data>
+  <data name="Match_Winner_Win_Or_Draw" xml:space="preserve">
+    <value>홈 - 승 또는 무</value>
+  </data>
+  <data name="Match_Winner_Lose_Or_Draw" xml:space="preserve">
+    <value>홈 - 무 또는 패</value>
+  </data>
+  <data name="Both_To_Score_Yes" xml:space="preserve">
+    <value>양 팀 득점 - 예</value>
+  </data>
+  <data name="Both_To_Score_No" xml:space="preserve">
+    <value>양 팀 득점 - 아니오</value>
+  </data>
+  <data name="Under_1_5" xml:space="preserve">
+    <value>1.5 골 언더</value>
+  </data>
+  <data name="Over_1_5" xml:space="preserve">
+    <value>1.5 골 오버</value>
+  </data>
+  <data name="Under_2_5" xml:space="preserve">
+    <value>2.5 골 언더</value>
+  </data>
+  <data name="Under_3_5" xml:space="preserve">
+    <value>3.5 골 언더</value>
+  </data>
+  <data name="Under_4_5" xml:space="preserve">
+    <value>4.5 골 언더</value>
+  </data>
+  <data name="Over_2_5" xml:space="preserve">
+    <value>2.5 골 오버</value>
+  </data>
+  <data name="Over_3_5" xml:space="preserve">
+    <value>3.5 골 오버</value>
+  </data>
+  <data name="Over_4_5" xml:space="preserve">
+    <value>4.5 골 오버</value>
+  </data>
+  <data name="Recommended_Matches" xml:space="preserve">
+    <value>추천 경기</value>
+  </data>
 </root>

@@ -39,5 +39,8 @@ namespace PosePacket.Service.Football.Models
 
         [Key(10)]
         public bool IsRecommeded { get; set; }
+
+        [Key(11)]
+        public byte MaxGrade { get; set; }
     }
 }

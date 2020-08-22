@@ -37,6 +37,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private string _title;
         private string _titleLogo;
 
+        public MatchGroupType GroupType { get; set; }
         public string Title { get => _title; set => SetValue(ref _title, value); }
         public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
         public string TitleLogo { get => _titleLogo; set => SetValue(ref _titleLogo, value); }
@@ -60,6 +61,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Fields
 
         private bool _alarmEditMode;
+        private bool _isPredicted;
+        private int _selectedIndex; // 추천 경기용
 
         #endregion Fields
 
@@ -67,7 +70,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public int MatchCount => Matches?.Count ?? 0;
         public bool AlarmEditMode { get => _alarmEditMode; set => SetValue(ref _alarmEditMode, value); }
+        public bool IsPredicted { get => _isPredicted; set => SetValue(ref _isPredicted, value); }
         public ObservableCollection<FootballMatchInfo> Matches { get; set; }
+        public int CurrentIndex { get => _selectedIndex; set => SetValue(ref _selectedIndex, value); }
 
         #endregion Properties
 

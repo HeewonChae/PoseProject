@@ -230,6 +230,7 @@
     <Compile Include="Commands\Football\P_GET_LEAGUE_OVERVIEW.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_ODDS.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_OVERVIEW.cs" />
+    <Compile Include="Commands\Football\P_GET_MATCH_PREDICTIONS.cs" />
     <Compile Include="Commands\Football\P_GET_TEAM_OVERVIEW.cs" />
     <Compile Include="Commands\HelloWorld\P_Hello.cs" />
     <Compile Include="Authentication\PoseCredentials.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Logics\Converters\FootballFixtureDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballLeagueDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballOddsDetailConverter.cs" />
+    <Compile Include="Logics\Converters\FootballPredictionDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballTeamDetailConverter.cs" />
     <Compile Include="Services\ServiceErrorCode.cs" />

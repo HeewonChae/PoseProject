@@ -74,6 +74,10 @@
     <Compile Include="FootballDBMigrations\202008101047066_InitiateFootballDB.designer.cs">
       <DependentUpon>202008101047066_InitiateFootballDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.cs" />
+    <Compile Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.designer.cs">
+      <DependentUpon>202008221327234_AddPredictionBackTestingTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballLeagueDetail.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_H2H.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_ODDS.cs" />
+    <Compile Include="FootballDB\Procedures\P_GET_MATCH_PREDICTIONS.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_TEAM_OVERVIEW.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_LEAGUE.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_LEAGUE_OVERVIEW.cs" />
@@ -99,6 +104,7 @@
     <Compile Include="FootballDB\Tables\League.cs" />
     <Compile Include="FootballDB\Tables\Odds.cs" />
     <Compile Include="FootballDB\Tables\Prediction.cs" />
+    <Compile Include="FootballDB\Tables\PredictionBackTesting.cs" />
     <Compile Include="FootballDB\Tables\Standings.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
     <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.cs" />
@@ -135,6 +141,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FootballDBMigrations\202008101047066_InitiateFootballDB.resx">
       <DependentUpon>202008101047066_InitiateFootballDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.resx">
+      <DependentUpon>202008221327234_AddPredictionBackTestingTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

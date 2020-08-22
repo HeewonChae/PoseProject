@@ -40,8 +40,8 @@ namespace Repository.Mysql.Contexts
         }
 
         // tables
-        public virtual DbSet<Country> Country { get; set; }
 
+        public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<League> League { get; set; }
         public virtual DbSet<LeagueCoverage> Coverage { get; set; }
         public virtual DbSet<Team> Team { get; set; }
@@ -49,6 +49,7 @@ namespace Repository.Mysql.Contexts
         public virtual DbSet<Fixture> Fixture { get; set; }
         public virtual DbSet<FixtureStatistics> FixtureStatistic { get; set; }
         public virtual DbSet<Odds> Odds { get; set; }
-        public virtual DbSet<Prediction> Predict { get; set; }
+        public virtual DbSet<Prediction> Prediction { get; set; }
+        public virtual DbSet<PredictionBackTesting> PredictionBackTesting { get; set; }
     }
 }

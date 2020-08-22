@@ -26,10 +26,12 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 @echo call exe
-pushd "C:\PoseProject_Git\Web App\PoseSportsWebService\CodeGenerator\bin\Release"
+pushd "C:\PoseProject_Git\PoseProject\Web App\PoseSportsWebService\CodeGenerator\bin\Release"
 	CodeGenerator.exe
 popd
 
 @echo 2. Copy to work dir
 xcopy /s /e /y /k /r "%OutputPath1%" "%CopyPath1%"
 xcopy /s /e /y /k /r "%OutputPath2%" "%CopyPath2%"
+
+pause

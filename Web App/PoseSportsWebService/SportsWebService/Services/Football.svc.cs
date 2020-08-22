@@ -103,6 +103,15 @@ namespace SportsWebService.Services
             return output.SerializeToStream();
         }
 
+        public Stream P_GET_MATCH_PREDICTIONS(Stream stream)
+        {
+            var input = stream.StreamDeserialize<I_GET_MATCH_PREDICTIONS>();
+
+            var output = Commands.Football.P_GET_MATCH_PREDICTIONS.Execute(input);
+
+            return output.SerializeToStream();
+        }
+
         #region For Benchmark
 
         //[PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
