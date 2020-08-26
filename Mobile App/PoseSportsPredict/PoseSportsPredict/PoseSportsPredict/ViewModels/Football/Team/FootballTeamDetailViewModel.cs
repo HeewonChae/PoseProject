@@ -163,7 +163,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
             PopupMenuList = new List<string>()
             {
-                LocalizeString.Add_Delete_Matches_Alarm,
+                LocalizeString.Add_Delete_Matches_Bookmark,
             };
 
             _popup.BindingContext = this;

@@ -31,7 +31,13 @@
     public enum MatchGroupType
     {
         Default,
-        Ads,
+        NativeAds,
         Recommand,
+    }
+
+    public enum NativeAdsSizeType
+    {
+        Small,
+        Medium,
     }
 }

@@ -17,12 +17,13 @@
              xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesPage"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" />
-        <ToolbarItem Text="{Binding [Add_Delete_Matches_Alarm], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
+        <ToolbarItem Text="{Binding [Add_Delete_Matches_Bookmark], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
         <ToolbarItem Text="{Binding [Expand_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
         <ToolbarItem Text="{Binding [Collapse_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
     </ContentPage.ToolbarItems>
@@ -409,10 +410,44 @@
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
+            <DataTemplate
+                x:Key="nativeMediumAdsTamplete"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="5"
+                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
+                        <nativeads:AdmobMediumNativeAdsView
+                            x:Name="_native_ads">
+                        </nativeads:AdmobMediumNativeAdsView>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate
+                x:Key="nativeSmallAdsTamplete"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="5"
+                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
+                        <nativeads:AdmobSmallNativeAdsView
+                            x:Name="_native_ads">
+                        </nativeads:AdmobSmallNativeAdsView>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
             <templeteselectors:GroupListTempleteSelector x:Key="matchDataTemplateSelector"
                 CollapsedTemplate="{StaticResource collapsedTemplate}"
                 ExpandedTamplete="{StaticResource expandedTamplete}"
-                RecommendTamplete="{StaticResource recommendTamplete}" />
+                RecommendTamplete="{StaticResource recommendTamplete}"
+                MediumAdsTamplete="{StaticResource nativeMediumAdsTamplete}"
+                SmallAdsTamplete="{StaticResource nativeSmallAdsTamplete}" />
         </ResourceDictionary>
     </ContentPage.Resources>
 

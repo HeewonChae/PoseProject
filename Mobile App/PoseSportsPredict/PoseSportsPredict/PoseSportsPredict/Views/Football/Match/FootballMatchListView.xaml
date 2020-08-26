@@ -35,7 +35,7 @@
                             Spacing="0"
                             IsVisible="{Binding Path=BindingContext.AlarmEditMode, Source={x:Reference lv_matches}}">
                             <!--Alarm-->
-                            <ContentView
+                            <!--<ContentView
                                 Padding="7"
                                 VerticalOptions="Center"
                                 BackgroundColor="Transparent"
@@ -50,7 +50,7 @@
                                     Aspect="AspectFit"
                                     effects:ImageEffect.TintColor="{Binding IsAlarmed, Converter={StaticResource matchAlarmColorConverter}}">
                                 </Image>
-                            </ContentView>
+                            </ContentView>-->
                             <!--Bookmark-->
                             <ContentView
                                 Padding="7"

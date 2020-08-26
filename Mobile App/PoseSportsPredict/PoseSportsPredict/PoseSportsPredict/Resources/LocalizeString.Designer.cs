@@ -70,11 +70,11 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add/Delete a match alarm.
+        ///   Looks up a localized string similar to Add/Delete a bookmark.
         /// </summary>
-        public static string Add_Delete_Matches_Alarm {
+        public static string Add_Delete_Matches_Bookmark {
             get {
-                return ResourceManager.GetString("Add_Delete_Matches_Alarm", resourceCulture);
+                return ResourceManager.GetString("Add_Delete_Matches_Bookmark", resourceCulture);
             }
         }
         

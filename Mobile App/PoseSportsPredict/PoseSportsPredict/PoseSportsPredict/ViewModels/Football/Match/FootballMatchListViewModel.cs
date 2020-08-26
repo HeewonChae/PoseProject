@@ -22,7 +22,7 @@ using XF.Material.Forms.UI;
 
 namespace PoseSportsPredict.ViewModels.Football.Match
 {
-    public class FootballMatchListViewModel : BaseViewModel, IExpandable
+    public class FootballMatchListViewModel : BaseViewModel, IExpandable, ITempletable
     {
         #region Services
 
@@ -38,6 +38,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private string _titleLogo;
 
         public MatchGroupType GroupType { get; set; }
+        public NativeAdsSizeType NativeAdsType { get; set; }
         public string Title { get => _title; set => SetValue(ref _title, value); }
         public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
         public string TitleLogo { get => _titleLogo; set => SetValue(ref _titleLogo, value); }

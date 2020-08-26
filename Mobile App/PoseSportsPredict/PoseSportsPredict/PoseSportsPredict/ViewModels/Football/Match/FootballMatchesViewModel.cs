@@ -421,6 +421,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchGroupCollection.Add(recommendedMatchesViewModel);
             }
 
+            // 미디움 네이티브 광고
+            var nativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
+            nativeAds.GroupType = MatchGroupType.NativeAds;
+            nativeAds.NativeAdsType = NativeAdsSizeType.Medium;
+            matchGroupCollection.Add(nativeAds);
+
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
 
             foreach (var grouppingMatch in grouppingMatches)
@@ -438,6 +444,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 matchGroupCollection.Add(matchListViewModel);
             }
+
+            // 스몰 네이티브 광고
+            int totalGroupCnt = grouppingMatches.Count;
+            var smlllNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
+            smlllNativeAds.GroupType = MatchGroupType.NativeAds;
+            smlllNativeAds.NativeAdsType = NativeAdsSizeType.Small;
+
+            if (totalGroupCnt > 12)
+            {
+                int insertedIndex = totalGroupCnt / 2;
+                matchGroupCollection.Insert(insertedIndex, smlllNativeAds);
+            }
+            else
+                matchGroupCollection.Add(smlllNativeAds);
 
             MatchListViewModels = matchGroupCollection;
         }

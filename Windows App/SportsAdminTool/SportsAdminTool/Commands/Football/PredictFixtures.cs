@@ -57,11 +57,13 @@ namespace SportsAdminTool.Commands.Football
 
                     // DB Save
                     db_fixture.is_predicted = true;
-                    db_fixture.is_recommended = db_predictions.Any(elem =>
-                        (elem.main_label == 2 && elem.is_recommended)
-                        || (elem.main_label == 3 && elem.is_recommended)
-                        || (elem.main_label == 4 && elem.sub_label == 3 && elem.is_recommended)
-                        || (elem.main_label == 4 && elem.sub_label == 4 && elem.is_recommended));
+                    //db_fixture.is_recommended = db_predictions.Any(elem =>
+                    //    (elem.main_label == 2 && elem.is_recommended)
+                    //    || (elem.main_label == 3 && elem.is_recommended)
+                    //    || (elem.main_label == 4 && elem.sub_label == 3 && elem.is_recommended)
+                    //    || (elem.main_label == 4 && elem.sub_label == 4 && elem.is_recommended)
+                    //    || (elem.main_label == 4 && elem.sub_label == 5 && elem.is_recommended));
+                    db_fixture.is_recommended = db_predictions.Any(elem => elem.is_recommended);
                     Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
                     Logic.Database.FootballDBFacade.UpdatePrediction(db_predictions.ToArray());
                 }

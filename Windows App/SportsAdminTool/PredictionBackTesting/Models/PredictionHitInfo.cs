@@ -9,6 +9,7 @@ namespace PredictionBackTesting.Models
     public class PredictionHitInfo
     {
         public string PredictionType { get; set; }
+        public string SubLabelType { get; set; }
         public int TotalCount { get; set; }
         public int TotalHitCount { get; set; }
         public double TotalHitPercentage { get; set; }

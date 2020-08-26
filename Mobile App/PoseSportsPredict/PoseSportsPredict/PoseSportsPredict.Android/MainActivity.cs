@@ -23,9 +23,6 @@ namespace PoseSportsPredict.Droid
         {
             Android.Manifest.Permission.Internet,
             Android.Manifest.Permission.AccessNetworkState,
-            Android.Manifest.Permission.WriteExternalStorage,
-            Android.Manifest.Permission.ReadExternalStorage,
-            Android.Manifest.Permission.AccessNotificationPolicy,
             Android.Manifest.Permission.BindNotificationListenerService,
             Android.Manifest.Permission.AccessNotificationPolicy,
             Android.Manifest.Permission.ReceiveBootCompleted,

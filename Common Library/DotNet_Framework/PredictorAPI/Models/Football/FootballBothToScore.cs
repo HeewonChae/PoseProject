@@ -9,6 +9,7 @@ namespace PredictorAPI.Models.Football
 {
     public class FootballBothToScore
     {
+        [Obsolete]
         [JsonProperty("knn")]
         public ProbaYN KNN { get; set; }
 

@@ -21,7 +21,7 @@ using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels
 {
-    public class BookmarkMenuListViewModel : BaseViewModel, IExpandable
+    public class BookmarkMenuListViewModel : BaseViewModel, IExpandable, ITempletable
     {
         #region BaseViewModel
 
@@ -51,6 +51,7 @@ namespace PoseSportsPredict.ViewModels
         #region Properties
 
         public MatchGroupType GroupType { get; set; }
+        public NativeAdsSizeType NativeAdsType { get; set; }
         public BookMarkType BookMarkType { get; set; }
         public ObservableCollection<IBookmarkMenuItem> Items { get => _items; set => SetValue(ref _items, value); }
         public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";

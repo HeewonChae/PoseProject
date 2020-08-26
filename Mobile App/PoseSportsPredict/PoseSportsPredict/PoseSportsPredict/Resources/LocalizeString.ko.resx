@@ -246,8 +246,8 @@
   <data name="Collapse_All_Leagues" xml:space="preserve">
     <value>모든 리그 축소</value>
   </data>
-  <data name="Add_Delete_Matches_Alarm" xml:space="preserve">
-    <value>경기 알람 추가/삭제</value>
+  <data name="Add_Delete_Matches_Bookmark" xml:space="preserve">
+    <value>북마크 추가/삭제</value>
   </data>
   <data name="Ongoing_matches" xml:space="preserve">
     <value>진행중인 경기</value>

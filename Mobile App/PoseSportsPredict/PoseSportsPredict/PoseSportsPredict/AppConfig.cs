@@ -6,9 +6,9 @@ namespace PoseSportsPredict
     {
         // Pose WebService
 #if DEBUG
-        public static string PoseWebBaseUrl = "http://121.142.201.8:8888/";
+        public static string PoseWebBaseUrl = "http://112.172.16.53:8888/";
 #else
-        public static string PoseWebBaseUrl = "http://121.142.201.8:8888/";
+        public static string PoseWebBaseUrl = "http://112.172.16.53:8888/";
 #endif
 
         // SQLite

@@ -7,7 +7,6 @@ namespace PoseSportsPredict.InfraStructure
 {
     public interface IExpandable
     {
-        MatchGroupType GroupType { get; set; }
         string TitleLogo { get; set; }
         string Title { get; set; }
         bool Expanded { get; set; }

@@ -18,7 +18,7 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Football.League
 {
-    public class FootballLeagueListViewModel : BaseViewModel, IExpandable
+    public class FootballLeagueListViewModel : BaseViewModel, IExpandable, ITempletable
     {
         #region IExpandable
 
@@ -56,6 +56,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         public bool IsRecommendLeagues;
         public MatchGroupType GroupType { get; set; }
+        public NativeAdsSizeType NativeAdsType { get; set; }
         public ObservableCollection<FootballLeagueInfo> Leagues { get; set; }
 
         #endregion Properties

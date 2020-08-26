@@ -15,16 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "217594391151-gl0lpqtlobfgfot73g5jhv2ibb4q2ue1.apps.googleusercontent.com",
+          "client_id": "217594391151-mnpcen26krhd9mpipcnabg68sslsehjo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pose.poseidon.picks",
             "certificate_hash": "fe534032f125abe40c45b09b09d86aba1c97489c"
           }
-        },
-        {
-          "client_id": "217594391151-pa5j7tp9qr63ctpke5gruflmgntcl229.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -36,7 +32,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "217594391151-pa5j7tp9qr63ctpke5gruflmgntcl229.apps.googleusercontent.com",
+              "client_id": "217594391151-3abvvp6gbboo7mrt9bc5o3uef2epv27v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
