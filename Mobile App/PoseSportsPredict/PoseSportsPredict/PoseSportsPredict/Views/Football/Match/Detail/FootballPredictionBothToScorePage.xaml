@@ -10,6 +10,7 @@
                  xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
                  xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
                  xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+                 xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
                  BackgroundColor="{StaticResource TransparentBlack}"
                  NavigationPage.HasNavigationBar="False"
                  xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
@@ -208,6 +209,18 @@
                                     BindingContext="{Binding PredictionPickViewModel}">
                                 </predictionPick:FootballPredictionPickView>
                             </StackLayout>
+                        </materialui:MaterialCard>
+
+                        <materialui:MaterialCard
+                            CornerRadius="5"
+                            Elevation="3"
+                            Margin="7,6"
+                            Padding="5"
+                            IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
+                            <nativeads:AdmobSmallNativeAdsView
+                                x:Name="_native_midium_ads"
+                                ButtonColor="{StaticResource SecondaryColor}">
+                            </nativeads:AdmobSmallNativeAdsView>
                         </materialui:MaterialCard>
                     </StackLayout>
                 </ScrollView>

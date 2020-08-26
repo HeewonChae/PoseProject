@@ -28,5 +28,11 @@ namespace PoseSportsPredict
         public const string CULTURE_CHANGED_MSG = "UICultureChanged";
 
         public const int Prediction_Unlocked_Time = 1; // Hour
+
+        // Ads
+
+        public const string ADMOB_NATIVE_ADS_ID = "ca-app-pub-3381862928005780/5854172385";
+        public const string ADMOB_BANNER_ADS_ID = "ca-app-pub-3381862928005780/2467669138";
+        public const string ADMOB_REWARD_ADS_ID = "ca-app-pub-3381862928005780/8292633466";
     }
 }

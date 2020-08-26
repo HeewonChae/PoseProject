@@ -10,6 +10,7 @@
              xmlns:standings ="clr-namespace:PoseSportsPredict.Views.Football.League.Standings"
              xmlns:recentform="clr-namespace:PoseSportsPredict.Views.Football.Match.RecentForm"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+             xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailOverview"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
@@ -154,6 +155,18 @@
                                     </materialui:MaterialLabel.Triggers>
                                 </materialui:MaterialLabel>
                             </Grid>
+                        </materialui:MaterialCard>
+
+                        <materialui:MaterialCard
+                            CornerRadius="5"
+                            Elevation="3"
+                            Margin="7,6"
+                            Padding="5"
+                            IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
+                            <nativeads:AdmobSmallNativeAdsView
+                                x:Name="_native_midium_ads"
+                                ButtonColor="{StaticResource SecondaryColor}">
+                            </nativeads:AdmobSmallNativeAdsView>
                         </materialui:MaterialCard>
 
                         <!--기본 정보 (평균 득실점, 회복기간)-->

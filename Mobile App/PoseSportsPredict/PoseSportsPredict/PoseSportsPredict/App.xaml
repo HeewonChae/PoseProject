@@ -10,6 +10,7 @@
              xmlns:mtrltypo="clr-namespace:XF.Material.Forms.Resources.Typography;assembly=XF.Material"
              xmlns:mtrl="clr-namespace:XF.Material.Forms.Resources;assembly=XF.Material"
              xmlns:tabs="clr-namespace:Sharpnado.Presentation.Forms.CustomViews.Tabs;assembly=Sharpnado.Presentation.Forms"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
             x:Class="PoseSportsPredict.App">
     <Application.Resources>
         <ffimageloadingsvg:SvgImageSourceConverter x:Key="svgImageSourceConverter" />
@@ -67,6 +68,15 @@
             <Setter Property="RetryButtonText" Value="{x:Static localize:LocalizeString.Retry}" />
             <Setter Property="ErrorMessageConverter" Value="{StaticResource exceptionToErrorMessageConverter}" />
             <Setter Property="ErrorImageConverter" Value="{StaticResource exceptionToImageSourceConverter}" />
+        </Style>
+
+        <Style x:Key="PoseAdsBanner" TargetType="admobads:MTAdView">
+            <Setter Property="HeightRequest">
+                <Setter.Value>
+                    <x:OnIdiom Phone="50" Tablet="90" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsVisible" Value="False" />
         </Style>
     </Application.Resources>
 </Application>

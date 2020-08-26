@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarcTron.Plugin.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace PoseSportsPredict.Views.Football.Bookmark
         public FootballBookmarkMatchesPage()
         {
             InitializeComponent();
+        }
+
+        private void MTAdView_AdsLoaded(object sender, EventArgs e)
+        {
+            _AdMob.IsVisible = true;
         }
     }
 }

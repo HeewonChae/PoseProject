@@ -8,6 +8,6 @@ namespace PoseSportsPredict.InfraStructure
     public interface ITempletable
     {
         MatchGroupType GroupType { get; set; }
-        NativeAdsSizeType NativeAdsType { get; set; }
+        AdsBannerType AdsBannerType { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
         public bool IsRecommendLeagues;
         public MatchGroupType GroupType { get; set; }
-        public NativeAdsSizeType NativeAdsType { get; set; }
+        public AdsBannerType AdsBannerType { get; set; }
         public ObservableCollection<FootballLeagueInfo> Leagues { get; set; }
 
         #endregion Properties

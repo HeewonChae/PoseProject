@@ -421,7 +421,25 @@
                         Padding="5"
                         IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
                         <nativeads:AdmobMediumNativeAdsView
-                            x:Name="_native_ads">
+                            x:Name="_native_ads"
+                            ButtonColor="{StaticResource PrimaryColor}">
+                        </nativeads:AdmobMediumNativeAdsView>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate
+                x:Key="nativeMediumAds2Tamplete"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="5"
+                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
+                        <nativeads:AdmobMediumNativeAdsView
+                            x:Name="_native_ads"
+                            ButtonColor="{StaticResource PrimaryColor}">
                         </nativeads:AdmobMediumNativeAdsView>
                     </materialui:MaterialCard>
                 </ViewCell>
@@ -437,7 +455,8 @@
                         Padding="5"
                         IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
                         <nativeads:AdmobSmallNativeAdsView
-                            x:Name="_native_ads">
+                            x:Name="_native_ads"
+                            ButtonColor="{StaticResource PrimaryColor}">
                         </nativeads:AdmobSmallNativeAdsView>
                     </materialui:MaterialCard>
                 </ViewCell>
@@ -447,6 +466,7 @@
                 ExpandedTamplete="{StaticResource expandedTamplete}"
                 RecommendTamplete="{StaticResource recommendTamplete}"
                 MediumAdsTamplete="{StaticResource nativeMediumAdsTamplete}"
+                MediumAds2Tamplete="{StaticResource nativeMediumAds2Tamplete}"
                 SmallAdsTamplete="{StaticResource nativeSmallAdsTamplete}" />
         </ResourceDictionary>
     </ContentPage.Resources>

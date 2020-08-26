@@ -13,6 +13,7 @@
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Bookmark"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              Title="{Binding [Teams], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
@@ -141,6 +142,13 @@
                     </renderedviews:HorizontalListView.ItemTemplate>
                 </renderedviews:HorizontalListView>
             </loader:TaskLoaderView>
+            <!--banner-->
+            <admobads:MTAdView
+                x:Name="_AdMob"
+                AdsLoaded="MTAdView_AdsLoaded"
+                VerticalOptions="End"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

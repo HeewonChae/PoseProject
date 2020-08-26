@@ -96,7 +96,7 @@
                                 </StackLayout>
                             </ContentView>
 
-                            <ContentView
+                            <!--<ContentView
                                 Padding="4"
                                 BackgroundColor="Transparent"
                                 IsVisible="{Binding MatchInfo.MatchTime, Converter={StaticResource isMatchNotStartedConverter}}"
@@ -109,7 +109,7 @@
                                     Aspect="AspectFit"
                                     effects:ImageEffect.TintColor="{Binding AlarmIcon.CurrentColor}">
                                 </Image>
-                            </ContentView>
+                            </ContentView>-->
 
                             <ContentView
                                 Padding="4"

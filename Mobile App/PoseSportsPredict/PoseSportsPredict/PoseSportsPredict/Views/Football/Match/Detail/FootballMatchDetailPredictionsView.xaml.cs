@@ -12,5 +12,14 @@ namespace PoseSportsPredict.Views.Football.Match.Detail
         {
             InitializeComponent();
         }
+
+        private void _AdMob_AdsLoaded()
+        {
+        }
+
+        private void _AdMob_AdsLoaded(object sender, System.EventArgs e)
+        {
+            this._AdMob.IsVisible = true;
+        }
     }
 }

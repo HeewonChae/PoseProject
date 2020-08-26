@@ -9,6 +9,7 @@ namespace PoseSportsPredict.Logics.View.TempleteSelectors
         public DataTemplate CollapsedTemplate { get; set; }
         public DataTemplate ExpandedTamplete { get; set; }
         public DataTemplate MediumAdsTamplete { get; set; }
+        public DataTemplate MediumAds2Tamplete { get; set; }
         public DataTemplate SmallAdsTamplete { get; set; }
         public DataTemplate RecommendTamplete { get; set; }
 
@@ -30,7 +31,12 @@ namespace PoseSportsPredict.Logics.View.TempleteSelectors
                     break;
 
                 case Models.Enums.MatchGroupType.NativeAds:
-                    result = group.NativeAdsType == Models.Enums.NativeAdsSizeType.Medium ? MediumAdsTamplete : SmallAdsTamplete;
+                    if (group.AdsBannerType == Models.Enums.AdsBannerType.NativeMedium)
+                        result = MediumAdsTamplete;
+                    else if (group.AdsBannerType == Models.Enums.AdsBannerType.NativeMedium2)
+                        result = MediumAds2Tamplete;
+                    else if (group.AdsBannerType == Models.Enums.AdsBannerType.NativeSmall)
+                        result = SmallAdsTamplete;
                     break;
 
                 default:

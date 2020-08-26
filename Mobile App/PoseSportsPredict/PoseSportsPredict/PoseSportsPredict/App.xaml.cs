@@ -1,4 +1,5 @@
-﻿using Plugin.LocalNotification;
+﻿using MarcTron.Plugin;
+using Plugin.LocalNotification;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Services;
@@ -22,6 +23,9 @@ namespace PoseSportsPredict
 
             XF.Material.Forms.Material.Init(this);
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(AppConfig.SyncfusionKey);
+
+            CrossMTAdmob.Current.UserPersonalizedAds = false; // 사용자 맞춤광고
+            CrossMTAdmob.Current.AdsId = AppConfig.ADMOB_BANNER_ADS_ID;
 
             // Local Notification tap event listener
             NotificationCenter.Current.NotificationTapped += OnLocalNotificationTapped;

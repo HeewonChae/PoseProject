@@ -12,6 +12,7 @@
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
              xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
     <ContentView.Content>
         <StackLayout x:DataType="viewmodels:FootballMatchDetailPredictionsViewModel">
@@ -355,6 +356,13 @@
                     </StackLayout>
                 </ScrollView>
             </loader:TaskLoaderView>
+            <!--banner-->
+            <admobads:MTAdView
+                x:Name="_AdMob"
+                AdsLoaded="_AdMob_AdsLoaded"
+                VerticalOptions="End"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

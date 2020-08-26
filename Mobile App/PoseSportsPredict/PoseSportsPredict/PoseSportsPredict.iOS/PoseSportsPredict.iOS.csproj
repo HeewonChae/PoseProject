@@ -147,6 +147,9 @@
     <PackageReference Include="CardsView">
       <Version>2.6.3</Version>
     </PackageReference>
+    <PackageReference Include="MarcTron.Admob">
+      <Version>1.5.7</Version>
+    </PackageReference>
     <PackageReference Include="Naxam.TopTabbedPage.Forms">
       <Version>0.0.3.5</Version>
     </PackageReference>

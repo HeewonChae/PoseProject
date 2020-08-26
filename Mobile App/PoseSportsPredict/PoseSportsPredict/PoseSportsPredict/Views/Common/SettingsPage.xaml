@@ -8,6 +8,7 @@
              xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
              xmlns:resmodels ="clr-namespace:PoseSportsPredict.Models.Resources.Common"
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
@@ -219,6 +220,13 @@
                     </StackLayout>
                 </StackLayout>
             </materialui:MaterialCard>
+            <!--banner-->
+            <admobads:MTAdView
+                x:Name="_AdMob"
+                AdsLoaded="_AdMob_AdsLoaded"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

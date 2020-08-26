@@ -40,6 +40,7 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.442" />
     <PackageReference Include="CardsView" Version="2.6.3" />
+    <PackageReference Include="MarcTron.Admob" Version="1.5.7" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naxam.TopTabbedPage.Forms" Version="0.0.3.5" />
     <PackageReference Include="Plugin.Google" Version="1.0.1" />

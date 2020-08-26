@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿ 
 <com.google.android.gms.ads.formats.UnifiedNativeAdView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:hardwareAccelerated="false"
-    android:layout_height="wrap_content"
+    android:layout_height="95dp"
     android:layout_width="match_parent"
     android:layout_centerInParent="true"
     android:id="@+id/native_ad_view">
@@ -18,11 +18,10 @@
 
           android:layout_width="@dimen/gnt_no_size"
           android:layout_height="@dimen/gnt_no_size"
-          android:layout_marginEnd="@dimen/gnt_default_margin"
-          android:layout_marginStart="@dimen/gnt_default_margin"
-          android:layout_marginTop="5dp"
-          android:layout_marginBottom="5dp"
-          app:layout_constraintDimensionRatio="H,4:1"
+          android:layout_marginEnd="3dp"
+          android:layout_marginStart="3dp"
+          android:layout_marginTop="@dimen/gnt_no_margin"
+          android:layout_marginBottom="@dimen/gnt_no_margin"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
@@ -35,11 +34,10 @@
             android:layout_width="0dp"
             android:layout_weight="0"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/gnt_no_margin"
+            android:layout_marginTop="3dp"
             android:layout_marginStart="@dimen/gnt_no_margin"
-            android:layout_marginBottom="@dimen/gnt_no_margin"
+            android:layout_marginBottom="3dp"
             android:layout_marginEnd="@dimen/gnt_no_margin"
-            app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,8 +46,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="@dimen/gnt_no_size"
             android:layout_height="@dimen/gnt_no_size"
-            android:layout_marginTop="@dimen/gnt_default_margin"
-            android:layout_marginBottom="@dimen/gnt_default_margin"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="11dp"
             android:layout_marginStart="@dimen/gnt_default_margin"
             android:layout_marginEnd="@dimen/gnt_default_margin"
             android:orientation="vertical"

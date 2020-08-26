@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:hardwareAccelerated="false"
-    android:layout_height="220dp"
+    android:layout_height="222dp"
     android:layout_width="match_parent"
     android:id="@+id/native_ad_view"
     android:background="@layout/gnt_outline_shape">

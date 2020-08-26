@@ -16,5 +16,15 @@ namespace PoseSportsPredict.Views.Common
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        private void _AdMob_AdsLoaded(object sender, EventArgs e)
+        {
+            _AdMob.IsVisible = true;
+        }
     }
 }

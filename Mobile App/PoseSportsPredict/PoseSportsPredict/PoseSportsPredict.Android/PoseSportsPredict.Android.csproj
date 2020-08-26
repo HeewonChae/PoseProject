@@ -46,9 +46,7 @@
     <AndroidSigningStorePass>vhtp1037015!</AndroidSigningStorePass>
     <JavaMaximumHeapSize>
     </JavaMaximumHeapSize>
-    <AndroidLinkTool>r8</AndroidLinkTool>
     <AndroidDexTool>d8</AndroidDexTool>
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -94,6 +92,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.3.4.3" />
+    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.2.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.2" />
     <PackageReference Include="Acr.UserDialogs">
       <Version>7.1.0.442</Version>
     </PackageReference>
@@ -102,6 +103,9 @@
     </PackageReference>
     <PackageReference Include="glidex.forms">
       <Version>2.0.1.394</Version>
+    </PackageReference>
+    <PackageReference Include="MarcTron.Admob">
+      <Version>1.5.7</Version>
     </PackageReference>
     <PackageReference Include="Plugin.LocalNotification">
       <Version>4.1.4</Version>
@@ -192,6 +196,9 @@
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>1.4.2</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Google.Android.Material">
+      <Version>1.0.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
       <Version>71.1610.4</Version>
     </PackageReference>
@@ -202,6 +209,7 @@
   <ItemGroup>
     <Compile Include="DependencyImpl\ScreenHelper.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderer\AdmobMediumNativeAdsView2Randerer.cs" />
     <Compile Include="Renderer\AdmobMediumNativeAdsViewRenderer.cs" />
     <Compile Include="Renderer\AdmobSmallNativeAdsViewRenderer.cs" />
     <Compile Include="Renderer\OAuthPageRenderer.cs" />

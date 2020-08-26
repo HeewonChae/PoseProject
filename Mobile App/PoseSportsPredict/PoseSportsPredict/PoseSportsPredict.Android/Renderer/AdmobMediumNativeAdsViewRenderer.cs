@@ -12,6 +12,7 @@ using Android.Widget;
 using AndroidX.ConstraintLayout.Widget;
 using PoseSportsPredict.Droid.Renderer;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Views.Common.Ads;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -31,6 +32,7 @@ namespace PoseSportsPredict.Droid.Renderer
 
         private MediaView mediaView;
         private Android.Widget.Button callToActionView;
+        private Android.Graphics.Color ButtonColor;
 
         public AdmobNativeAdsViewRenderer(Context context) : base(context)
         {
@@ -42,7 +44,7 @@ namespace PoseSportsPredict.Droid.Renderer
 
             if (Control == null)
             {
-                var adLoader = new AdLoader.Builder(Context, "ca-app-pub-3381862928005780/5854172385");
+                var adLoader = new AdLoader.Builder(Context, AppConfig.ADMOB_NATIVE_ADS_ID);
 
                 var listener = new UnifiedNativeAdLoadedListener();
                 listener.OnNativeAdLoaded += (s, ad) =>
@@ -50,29 +52,17 @@ namespace PoseSportsPredict.Droid.Renderer
                     // Load ad Completed
                     try
                     {
+                        ButtonColor = (e.NewElement as AdmobMediumNativeAdsView).ButtonColor.ToAndroid();
                         nativeAd = ad;
                         var root = new UnifiedNativeAdView(Context);
                         var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
 
-                        UnifiedNativeAdView nativeAdView = null;
-                        if (e.NewElement.BindingContext is ITempletable templetable)
-                        {
-                            if (templetable.NativeAdsType == Models.Enums.NativeAdsSizeType.Medium)
-                            {
-                                nativeAdView = (UnifiedNativeAdView)inflater.Inflate(Resource.Layout.gnt_medium_template_view, root);
-                                e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(84);
-                            }
-                            else if (templetable.NativeAdsType == Models.Enums.NativeAdsSizeType.Small)
-                            {
-                                nativeAdView = (UnifiedNativeAdView)inflater.Inflate(Resource.Layout.gnt_small_template_view, root);
-                                e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(39);
-                            }
-                        }
+                        var nativeAdView = (UnifiedNativeAdView)inflater.Inflate(Resource.Layout.gnt_medium_template_view, root);
 
                         populateUnifiedNativeAdView(ad, nativeAdView);
-
                         SetNativeControl(nativeAdView);
 
+                        e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(85);
                         e.NewElement.IsVisible = true;
                     }
                     catch
@@ -86,15 +76,8 @@ namespace PoseSportsPredict.Droid.Renderer
             }
             else
             {
-                if (e.NewElement.BindingContext is ITempletable templetable)
-                {
-                    e.NewElement.IsVisible = true;
-
-                    if (templetable.NativeAdsType == Models.Enums.NativeAdsSizeType.Medium)
-                        e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(84);
-                    else if (templetable.NativeAdsType == Models.Enums.NativeAdsSizeType.Small)
-                        e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(39);
-                }
+                e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(85);
+                e.NewElement.IsVisible = true;
             }
         }
 
@@ -149,6 +132,7 @@ namespace PoseSportsPredict.Droid.Renderer
 
             // CallToActionView
             callToActionView.Text = cta;
+            callToActionView.SetBackgroundColor(ButtonColor);
 
             //  Set the secondary view to be the star rating if available.
             if (starRating > 0)

@@ -10,6 +10,7 @@
                  xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
                  xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
                  xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+                 xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
                  BackgroundColor="{StaticResource TransparentBlack}"
                  NavigationPage.HasNavigationBar="False"
                  x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballPredictionFinalScorePage">
@@ -254,6 +255,18 @@
                                     </materialui:MaterialLabel>
                                 </Grid>
                             </StackLayout>
+                        </materialui:MaterialCard>
+
+                        <materialui:MaterialCard
+                            CornerRadius="5"
+                            Elevation="3"
+                            Margin="7,6"
+                            Padding="5"
+                            IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
+                            <nativeads:AdmobMediumNativeAdsView
+                                x:Name="_native_midium_ads"
+                                ButtonColor="{StaticResource PrimaryColor}">
+                            </nativeads:AdmobMediumNativeAdsView>
                         </materialui:MaterialCard>
                     </StackLayout>
                 </ScrollView>

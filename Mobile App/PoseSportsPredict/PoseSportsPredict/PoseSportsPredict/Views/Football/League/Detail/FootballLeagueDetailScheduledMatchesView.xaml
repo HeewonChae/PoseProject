@@ -12,6 +12,7 @@
              xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.League.Detail"
              xmlns:matcheviewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.League.Detail.FootballLeagueDetailScheduledMatchesView">
 
@@ -196,6 +197,13 @@
                     ItemTemplate="{StaticResource matchDataTemplateSelector}">
                 </ListView>
             </loader:TaskLoaderView>
+            <!--banner-->
+            <admobads:MTAdView
+                x:Name="_AdMob"
+                AdsLoaded="_AdMob_AdsLoaded"
+                VerticalOptions="End"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

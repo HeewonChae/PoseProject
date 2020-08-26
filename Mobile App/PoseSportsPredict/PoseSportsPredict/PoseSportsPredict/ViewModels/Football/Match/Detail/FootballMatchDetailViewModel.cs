@@ -93,6 +93,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             _tabContents[SelectedViewIndex].OnAppearing();
         }
 
+        public override void OnDisAppearing(params object[] datas)
+        {
+            _tabContents[3].OnDisAppearing(); // prediction view
+        }
+
         #endregion NavigableViewModel
 
         #region Services
@@ -274,10 +279,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (OnInitializeView())
             {
                 CoupledPage.Appearing += (s, e) => OnAppearing();
+                CoupledPage.Disappearing += (s, e) => OnDisAppearing();
             }
 
-            this.CoupledPage.FindByName<SfTabView>("_tabView").SelectionChanged
-                += (s, e) => _tabContents[SelectedViewIndex].OnAppearing();
+            this.CoupledPage.FindByName<SfTabView>("_tabView").SelectionChanged += (s, e) =>
+            {
+                _tabContents[SelectedViewIndex].OnAppearing();
+            };
         }
 
         #endregion Constructors

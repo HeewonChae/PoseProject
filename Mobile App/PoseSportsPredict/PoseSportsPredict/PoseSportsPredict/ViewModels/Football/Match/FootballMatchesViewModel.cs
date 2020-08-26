@@ -421,10 +421,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchGroupCollection.Add(recommendedMatchesViewModel);
             }
 
-            // 미디움 네이티브 광고
+            // 네이티브 광고
             var nativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
             nativeAds.GroupType = MatchGroupType.NativeAds;
-            nativeAds.NativeAdsType = NativeAdsSizeType.Medium;
+            nativeAds.AdsBannerType = AdsBannerType.NativeSmall;
             matchGroupCollection.Add(nativeAds);
 
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
@@ -445,19 +445,31 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchGroupCollection.Add(matchListViewModel);
             }
 
-            // 스몰 네이티브 광고
+            // 그룹 개수에 따라 동적으로 광고 처리
             int totalGroupCnt = grouppingMatches.Count;
-            var smlllNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
-            smlllNativeAds.GroupType = MatchGroupType.NativeAds;
-            smlllNativeAds.NativeAdsType = NativeAdsSizeType.Small;
-
-            if (totalGroupCnt > 12)
+            if (totalGroupCnt > 28)
             {
-                int insertedIndex = totalGroupCnt / 2;
-                matchGroupCollection.Insert(insertedIndex, smlllNativeAds);
+                var mediumNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
+                mediumNativeAds.GroupType = MatchGroupType.NativeAds;
+                mediumNativeAds.AdsBannerType = AdsBannerType.NativeMedium;
+                matchGroupCollection.Insert(14, mediumNativeAds);
+
+                var mediumNativeAds2 = ShinyHost.Resolve<FootballMatchListViewModel>();
+                mediumNativeAds2.GroupType = MatchGroupType.NativeAds;
+                mediumNativeAds2.AdsBannerType = AdsBannerType.NativeMedium2;
+                matchGroupCollection.Insert(14 + (totalGroupCnt - 14) / 2, mediumNativeAds2);
             }
             else
-                matchGroupCollection.Add(smlllNativeAds);
+            {
+                var mediumNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
+                mediumNativeAds.GroupType = MatchGroupType.NativeAds;
+                mediumNativeAds.AdsBannerType = AdsBannerType.NativeMedium;
+
+                if (totalGroupCnt > 14)
+                    matchGroupCollection.Insert(totalGroupCnt / 2, mediumNativeAds);
+                else
+                    matchGroupCollection.Insert(totalGroupCnt, mediumNativeAds);
+            }
 
             MatchListViewModels = matchGroupCollection;
         }

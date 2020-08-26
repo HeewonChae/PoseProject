@@ -35,9 +35,10 @@
         Recommand,
     }
 
-    public enum NativeAdsSizeType
+    public enum AdsBannerType
     {
-        Small,
-        Medium,
+        NativeSmall,
+        NativeMedium,
+        NativeMedium2,
     }
 }

@@ -12,6 +12,7 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Team"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailScheduledMatchesView">
     <ContentView.Content>
@@ -260,6 +261,13 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </loader:TaskLoaderView>
+            <!--banner-->
+            <admobads:MTAdView
+                x:Name="_AdMob"
+                AdsLoaded="_AdMob_AdsLoaded"
+                VerticalOptions="End"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

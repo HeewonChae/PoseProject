@@ -9,6 +9,7 @@
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Team"
              xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+             xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailOverview">
     <ContentView.Content>
@@ -154,6 +155,18 @@
                                     </BindableLayout.ItemTemplate>
                                 </StackLayout>
                             </StackLayout>
+                        </materialui:MaterialCard>
+
+                        <materialui:MaterialCard
+                            CornerRadius="5"
+                            Elevation="3"
+                            Margin="7,6"
+                            Padding="5"
+                            IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
+                            <nativeads:AdmobSmallNativeAdsView
+                                x:Name="_native_midium_ads"
+                                ButtonColor="{StaticResource SecondaryColor}">
+                            </nativeads:AdmobSmallNativeAdsView>
                         </materialui:MaterialCard>
 
                         <!--Team Goal Statistics-->

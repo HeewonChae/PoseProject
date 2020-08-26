@@ -9,6 +9,7 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
+             xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
 
@@ -74,6 +75,18 @@
                                     CurValue="{Binding H2HRecordInfo.Lose}">
                                 </customviews:CircularGauge>
                             </Grid>
+                        </materialui:MaterialCard>
+
+                        <materialui:MaterialCard
+                            CornerRadius="5"
+                            Elevation="3"
+                            Margin="7,0"
+                            Padding="5"
+                            IsVisible="{Binding Source={x:Reference _native_small_ads},Path=IsVisible}">
+                            <nativeads:AdmobSmallNativeAdsView
+                                x:Name="_native_small_ads"
+                                ButtonColor="{StaticResource SecondaryColor}">
+                            </nativeads:AdmobSmallNativeAdsView>
                         </materialui:MaterialCard>
 
                         <!--Team Goal Statistics-->

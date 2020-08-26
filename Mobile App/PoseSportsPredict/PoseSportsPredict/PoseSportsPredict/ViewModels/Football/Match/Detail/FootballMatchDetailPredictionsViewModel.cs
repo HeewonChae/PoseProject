@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight.Command;
+using MarcTron.Plugin;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
@@ -21,6 +23,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.WebServiceClient;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 {
@@ -31,6 +34,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public override bool OnInitializeView(params object[] datas)
         {
             PredictionsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>>();
+
+            _adsLoaded = false;
+            CrossMTAdmob.Current.OnRewardedVideoAdLoaded += OnRewardedVideoAdLoaded;
+            CrossMTAdmob.Current.OnRewarded += OnRewarded;
+            CrossMTAdmob.Current.OnRewardedVideoAdClosed += OnRewardedVideoAdClosed;
+            CrossMTAdmob.Current.OnRewardedVideoAdFailedToLoad += OnRewardedVideoAdFailedToLoad;
             return true;
         }
 
@@ -38,6 +47,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         {
             if (PredictionsTaskLoaderNotifier.IsNotStarted)
                 PredictionsTaskLoaderNotifier.Load(InitPredictionData);
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
+            if (!_adsLoaded)
+            {
+                CrossMTAdmob.Current.OnRewardedVideoAdLoaded -= OnRewardedVideoAdLoaded;
+                CrossMTAdmob.Current.OnRewarded -= OnRewarded;
+                CrossMTAdmob.Current.OnRewardedVideoAdClosed -= OnRewardedVideoAdClosed;
+                CrossMTAdmob.Current.OnRewardedVideoAdFailedToLoad -= OnRewardedVideoAdFailedToLoad;
+            }
         }
 
         #endregion BaseViewModel
@@ -54,6 +74,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         private FootballMatchInfo _matchInfo;
         private TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>> _predictionsTaskLoaderNotifier;
         private List<FootballPredictionInfo> _allPredictions;
+        private FootballPredictionGroup _selectedPrediction;
+        private bool _adsLoaded;
 
         private FootballPredictionGroup _finalScorePredictions;
         private FootballPredictionGroup _matchWinnerPredictions;
@@ -93,9 +115,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            IsFinalScoreUnlocked = await UnlockProcess(FinalScorePredictions, IsFinalScoreUnlocked);
+            var isUnlock = UnlockProcess(FinalScorePredictions);
 
-            if (IsFinalScoreUnlocked)
+            if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionFinalScoreViewModel>(), FinalScorePredictions);
 
             SetIsBusy(false);
@@ -110,9 +132,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            IsMatchWinnerUnlocked = await UnlockProcess(MatchWinnerPredictions, IsMatchWinnerUnlocked);
+            var isUnlock = UnlockProcess(MatchWinnerPredictions);
 
-            if (IsMatchWinnerUnlocked)
+            if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionMatchWinnerViewModel>(), MatchWinnerPredictions);
 
             SetIsBusy(false);
@@ -127,9 +149,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            IsBothToScoreUnlocked = await UnlockProcess(BothToScorePredictions, IsBothToScoreUnlocked);
+            var isUnlock = UnlockProcess(BothToScorePredictions);
 
-            if (IsBothToScoreUnlocked)
+            if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionBothToScoreViewModel>(), BothToScorePredictions);
 
             SetIsBusy(false);
@@ -144,9 +166,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            IsUnderOverUnlocked = await UnlockProcess(UnderOverPredictions, IsUnderOverUnlocked);
+            var isUnlock = UnlockProcess(UnderOverPredictions);
 
-            if (IsUnderOverUnlocked)
+            if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionUnderOverViewModel>(), UnderOverPredictions);
 
             SetIsBusy(false);
@@ -171,20 +193,131 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Methods
 
-        public async Task<bool> UnlockProcess(FootballPredictionGroup predictionGroup, bool isUnlocked)
+        public bool UnlockProcess(FootballPredictionGroup predictionGroup)
         {
-            bool result = isUnlocked;
-            if (!isUnlocked || predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
-            {
-                // TODO: 동영상 광고
-                predictionGroup.UnlockedTime = DateTime.UtcNow;
-                result = true;
+            _selectedPrediction = predictionGroup;
 
-                // Save SQLite
-                await _sqliteService.InsertOrUpdateAsync(predictionGroup);
+            if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
+            {
+                // 동영상 광고
+                _adsLoaded = true;
+                UserDialogs.Instance.ShowLoading("loading...");
+                CrossMTAdmob.Current.LoadRewardedVideo(AppConfig.ADMOB_REWARD_ADS_ID);
+
+                return false;
             }
 
-            return result;
+            return true;
+        }
+
+        /// <summary>s
+        /// OnReward event handler
+        /// </summary>
+        /// <param name="matchInfo"></param>
+        /// <returns></returns>
+        private void OnRewardedVideoAdLoaded(object sender, EventArgs e)
+        {
+            CrossMTAdmob.Current.ShowRewardedVideo();
+        }
+
+        private async void OnRewarded(object sender, EventArgs e)
+        {
+            // Save SQLite
+            _selectedPrediction.UnlockedTime = DateTime.UtcNow;
+            await _sqliteService.InsertOrUpdateAsync(_selectedPrediction);
+
+            switch (_selectedPrediction.MainLabel)
+            {
+                case FootballPredictionType.Final_Score:
+                    IsFinalScoreUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Match_Winner:
+                    IsMatchWinnerUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Both_Teams_to_Score:
+                    IsBothToScoreUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Under_Over:
+                    IsUnderOverUnlocked = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private async void OnRewardedVideoAdClosed(object sender, EventArgs e)
+        {
+            _adsLoaded = false;
+            UserDialogs.Instance.HideLoading();
+
+#if DEBUG
+            _selectedPrediction.UnlockedTime = DateTime.UtcNow;
+            await _sqliteService.InsertOrUpdateAsync(_selectedPrediction);
+
+            switch (_selectedPrediction.MainLabel)
+            {
+                case FootballPredictionType.Final_Score:
+                    IsFinalScoreUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Match_Winner:
+                    IsMatchWinnerUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Both_Teams_to_Score:
+                    IsBothToScoreUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Under_Over:
+                    IsUnderOverUnlocked = true;
+                    break;
+
+                default:
+                    break;
+            }
+#endif
+        }
+
+        private async void OnRewardedVideoAdFailedToLoad(object sender, EventArgs e)
+        {
+            _adsLoaded = false;
+            UserDialogs.Instance.HideLoading();
+
+            await MaterialDialog.Instance.AlertAsync(LocalizeString.Occur_Error,
+                    LocalizeString.App_Title,
+                    LocalizeString.Ok,
+                    DialogConfiguration.DefaultAlterDialogConfiguration);
+
+#if DEBUG
+            _selectedPrediction.UnlockedTime = DateTime.UtcNow;
+            await _sqliteService.InsertOrUpdateAsync(_selectedPrediction);
+
+            switch (_selectedPrediction.MainLabel)
+            {
+                case FootballPredictionType.Final_Score:
+                    IsFinalScoreUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Match_Winner:
+                    IsMatchWinnerUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Both_Teams_to_Score:
+                    IsBothToScoreUnlocked = true;
+                    break;
+
+                case FootballPredictionType.Under_Over:
+                    IsUnderOverUnlocked = true;
+                    break;
+
+                default:
+                    break;
+            }
+#endif
         }
 
         public FootballMatchDetailPredictionsViewModel SetMatchInfo(FootballMatchInfo matchInfo)

@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Google.MobileAds;
 using Shiny;
 using System;
 using UIKit;
@@ -55,6 +56,11 @@ namespace PoseSportsPredict.iOS
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
             Syncfusion.SfGauge.XForms.iOS.SfGaugeRenderer.Init();
             Plugin.LocalNotification.NotificationCenter.AskPermission();
+            MobileAds.SharedInstance.Start(CompletionHandler);
+        }
+
+        private void CompletionHandler(InitializationStatus status)
+        {
         }
 
         private void InitShiny()

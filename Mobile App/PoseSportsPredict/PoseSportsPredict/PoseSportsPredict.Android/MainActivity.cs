@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
+using Android.Gms.Ads;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
@@ -42,6 +43,7 @@ namespace PoseSportsPredict.Droid
             base.OnCreate(savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            MobileAds.Initialize(ApplicationContext, "ca-app-pub-3381862928005780~9770007298");
 
             //Initialize shiny
             this.InitShiny();
