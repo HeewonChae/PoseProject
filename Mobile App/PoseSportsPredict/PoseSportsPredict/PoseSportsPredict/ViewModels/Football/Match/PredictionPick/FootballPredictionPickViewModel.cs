@@ -28,12 +28,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match.PredictionPick
 
         private FootballPredictionGroup _predictionGroup;
         private ObservableList<FootballPredictionPickInfo> _predictionPicks;
+        private bool _isExistPrediction;
 
         #endregion Fields
 
         #region Properties
 
         public ObservableList<FootballPredictionPickInfo> PredictionPicks { get => _predictionPicks; set => SetValue(ref _predictionPicks, value); }
+        public bool IsExistPrediction { get => _isExistPrediction; set => SetValue(ref _isExistPrediction, value); }
 
         #endregion Properties
 
@@ -71,6 +73,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.PredictionPick
                 default:
                     break;
             }
+
+            IsExistPrediction = PredictionPicks.Count > 0;
         }
 
         private FootballPredictionInfo[] SortByGrade(FootballPredictionInfo[] predictionInfos)

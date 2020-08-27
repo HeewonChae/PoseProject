@@ -459,16 +459,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 mediumNativeAds2.AdsBannerType = AdsBannerType.NativeMedium2;
                 matchGroupCollection.Insert(14 + (totalGroupCnt - 14) / 2, mediumNativeAds2);
             }
-            else
+            else if (totalGroupCnt > 14)
             {
                 var mediumNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
                 mediumNativeAds.GroupType = MatchGroupType.NativeAds;
                 mediumNativeAds.AdsBannerType = AdsBannerType.NativeMedium;
 
-                if (totalGroupCnt > 14)
-                    matchGroupCollection.Insert(totalGroupCnt / 2, mediumNativeAds);
-                else
-                    matchGroupCollection.Insert(totalGroupCnt, mediumNativeAds);
+                matchGroupCollection.Insert(12, mediumNativeAds);
             }
 
             MatchListViewModels = matchGroupCollection;
