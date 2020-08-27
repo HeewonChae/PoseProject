@@ -65,6 +65,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
         private bool _alarmEditMode;
         private FootballTeamInfo _teamInfo;
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _matchesTaskLoaderNotifier;
+        private List<FootballMatchInfo> _matchList;
         private ObservableList<FootballMatchInfo> _matches;
 
         #endregion Fields
@@ -172,7 +173,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
             if (timeSpan.TotalMinutes > 1) // 1분 마다 갱신
-                await InitMatchDatas();
+                await RefreshMatchesAsync();
 
             IsListViewRefrashing = false;
             SetIsBusy(false);
@@ -234,7 +235,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                         SearchFixtureStatusType.Finished);
                 },
                 key: $"P_GET_FIXTURES_BY_TEAM:{TeamInfo.PrimaryKey}:{SearchFixtureStatusType.Finished}",
-                expireTime: TimeSpan.FromMinutes(1),
+                expireTime: TimeSpan.Zero,
                 serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
@@ -243,7 +244,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
                .Where(elem => elem.HomeTeamId == _teamInfo.TeamId || elem.AwayTeamId == _teamInfo.TeamId);
 
-            Matches = new ObservableList<FootballMatchInfo>();
+            _matchList = new List<FootballMatchInfo>();
             foreach (var fixture in server_result.Fixtures)
             {
                 var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
@@ -251,14 +252,58 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                 var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
                 convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
 
-                Matches.Add(convertedMatchInfo);
+                _matchList.Add(convertedMatchInfo);
             }
+
+            Matches = new ObservableList<FootballMatchInfo>(_matchList);
 
             _lastUpdateTime = DateTime.UtcNow;
 
             SetIsBusy(false);
 
-            return Matches;
+            return _matchList;
+        }
+
+        private async Task RefreshMatchesAsync()
+        {
+            this.SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
+                   && elem.MatchStatus != FootballMatchStatusType.FT
+                   && elem.MatchStatus != FootballMatchStatusType.AET
+                   && elem.MatchStatus != FootballMatchStatusType.PEN)
+                   .Select(elem => elem.Id).ToList();
+
+            if (needRefrashMatchIndexes.Count() == 0)
+            {
+                _lastUpdateTime = DateTime.UtcNow;
+                this.SetIsBusy(false);
+                return;
+            }
+
+            var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
+            foreach (var match in updatedMatches)
+            {
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == match.Id);
+                _matchList.RemoveAt(foundIdx);
+
+                _matchList.Add(match);
+                needRefrashMatchIndexes.Remove(match.Id);
+            }
+
+            foreach (var remainIndex in needRefrashMatchIndexes)
+            {
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == remainIndex);
+                _matchList.RemoveAt(foundIdx);
+            }
+
+            Matches = new ObservableList<FootballMatchInfo>(_matchList);
+
+            _lastUpdateTime = DateTime.UtcNow;
+
+            this.SetIsBusy(false);
         }
 
         #endregion Methods

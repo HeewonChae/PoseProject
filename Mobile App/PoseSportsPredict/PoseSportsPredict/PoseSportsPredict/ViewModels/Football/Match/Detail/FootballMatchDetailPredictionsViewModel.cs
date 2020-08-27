@@ -34,12 +34,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public override bool OnInitializeView(params object[] datas)
         {
             PredictionsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>>();
-
-            _adsLoaded = false;
-            CrossMTAdmob.Current.OnRewardedVideoAdLoaded += OnRewardedVideoAdLoaded;
-            CrossMTAdmob.Current.OnRewarded += OnRewarded;
-            CrossMTAdmob.Current.OnRewardedVideoAdClosed += OnRewardedVideoAdClosed;
-            CrossMTAdmob.Current.OnRewardedVideoAdFailedToLoad += OnRewardedVideoAdFailedToLoad;
+            _isSetRewardEvent = false;
+            _adsPlayed = false;
             return true;
         }
 
@@ -47,12 +43,22 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         {
             if (PredictionsTaskLoaderNotifier.IsNotStarted)
                 PredictionsTaskLoaderNotifier.Load(InitPredictionData);
+
+            if (!_isSetRewardEvent)
+            {
+                _isSetRewardEvent = true;
+                CrossMTAdmob.Current.OnRewardedVideoAdLoaded += OnRewardedVideoAdLoaded;
+                CrossMTAdmob.Current.OnRewarded += OnRewarded;
+                CrossMTAdmob.Current.OnRewardedVideoAdClosed += OnRewardedVideoAdClosed;
+                CrossMTAdmob.Current.OnRewardedVideoAdFailedToLoad += OnRewardedVideoAdFailedToLoad;
+            }
         }
 
         public override void OnDisAppearing(params object[] datas)
         {
-            if (!_adsLoaded)
+            if (!_adsPlayed && _isSetRewardEvent)
             {
+                _isSetRewardEvent = false;
                 CrossMTAdmob.Current.OnRewardedVideoAdLoaded -= OnRewardedVideoAdLoaded;
                 CrossMTAdmob.Current.OnRewarded -= OnRewarded;
                 CrossMTAdmob.Current.OnRewardedVideoAdClosed -= OnRewardedVideoAdClosed;
@@ -75,7 +81,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         private TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>> _predictionsTaskLoaderNotifier;
         private List<FootballPredictionInfo> _allPredictions;
         private FootballPredictionGroup _selectedPrediction;
-        private bool _adsLoaded;
+        private bool _adsPlayed;
+        private bool _isSetRewardEvent;
 
         private FootballPredictionGroup _finalScorePredictions;
         private FootballPredictionGroup _matchWinnerPredictions;
@@ -200,9 +207,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
             {
                 // 동영상 광고
-                _adsLoaded = true;
-                UserDialogs.Instance.ShowLoading("loading...");
-                CrossMTAdmob.Current.LoadRewardedVideo(AppConfig.ADMOB_REWARD_ADS_ID);
+                if (CrossMTAdmob.Current.IsEnabled)
+                {
+                    CrossMTAdmob.Current.LoadRewardedVideo(AppConfig.ADMOB_REWARD_ADS_ID);
+                    UserDialogs.Instance.ShowLoading("Loading...");
+                }
 
                 return false;
             }
@@ -215,8 +224,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         /// </summary>
         /// <param name="matchInfo"></param>
         /// <returns></returns>
+        ///
+
         private void OnRewardedVideoAdLoaded(object sender, EventArgs e)
         {
+            _adsPlayed = true;
             CrossMTAdmob.Current.ShowRewardedVideo();
         }
 
@@ -251,7 +263,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private async void OnRewardedVideoAdClosed(object sender, EventArgs e)
         {
-            _adsLoaded = false;
+            _adsPlayed = false;
             UserDialogs.Instance.HideLoading();
 
 #if DEBUG
@@ -284,7 +296,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private async void OnRewardedVideoAdFailedToLoad(object sender, EventArgs e)
         {
-            _adsLoaded = false;
+            _adsPlayed = false;
             UserDialogs.Instance.HideLoading();
 
             await MaterialDialog.Instance.AlertAsync(LocalizeString.Occur_Error,
@@ -292,7 +304,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                     LocalizeString.Ok,
                     DialogConfiguration.DefaultAlterDialogConfiguration);
 
-#if DEBUG
+#if DEV_RELEASE
             _selectedPrediction.UnlockedTime = DateTime.UtcNow;
             await _sqliteService.InsertOrUpdateAsync(_selectedPrediction);
 

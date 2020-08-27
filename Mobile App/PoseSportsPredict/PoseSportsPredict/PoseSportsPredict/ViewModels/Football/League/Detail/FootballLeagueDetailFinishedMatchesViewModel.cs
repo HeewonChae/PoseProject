@@ -103,7 +103,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             var timeSpan = DateTime.UtcNow - _lastUpdateTime;
             if (timeSpan.TotalMinutes > 1) // 1분 마다 갱신
-                await InitMatchDatas();
+                await RefreshMatchesAsync();
 
             IsListViewRefrashing = false;
             SetIsBusy(false);
@@ -207,7 +207,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                         SearchFixtureStatusType.Finished);
                 },
                 key: $"P_GET_FIXTURES_BY_LEAGUE:{_leagueInfo.PrimaryKey}:{SearchFixtureStatusType.Finished}",
-                expireTime: TimeSpan.FromMinutes(1),
+                expireTime: TimeSpan.Zero,
                 serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
@@ -234,6 +234,48 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             SetIsBusy(false);
 
             return _matchList;
+        }
+
+        private async Task RefreshMatchesAsync()
+        {
+            this.SetIsBusy(true);
+
+            await Task.Delay(300);
+
+            var needRefrashMatchIndexes = _matchList.Where(elem => elem.MatchTime < DateTime.Now
+                   && elem.MatchStatus != FootballMatchStatusType.FT
+                   && elem.MatchStatus != FootballMatchStatusType.AET
+                   && elem.MatchStatus != FootballMatchStatusType.PEN)
+                   .Select(elem => elem.Id).ToList();
+
+            if (needRefrashMatchIndexes.Count() == 0)
+            {
+                _lastUpdateTime = DateTime.UtcNow;
+                this.SetIsBusy(false);
+                return;
+            }
+
+            var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
+            foreach (var match in updatedMatches)
+            {
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == match.Id);
+                _matchList.RemoveAt(foundIdx);
+
+                _matchList.Add(match);
+                needRefrashMatchIndexes.Remove(match.Id);
+            }
+
+            foreach (var remainIndex in needRefrashMatchIndexes)
+            {
+                var foundIdx = _matchList.FindIndex(elem => elem.Id == remainIndex);
+                _matchList.RemoveAt(foundIdx);
+            }
+
+            UpdateMatcheGroups(_matchList);
+
+            _lastUpdateTime = DateTime.UtcNow;
+
+            this.SetIsBusy(false);
         }
 
         private void UpdateMatcheGroups(List<FootballMatchInfo> matchList, bool? isAllExpand = null)

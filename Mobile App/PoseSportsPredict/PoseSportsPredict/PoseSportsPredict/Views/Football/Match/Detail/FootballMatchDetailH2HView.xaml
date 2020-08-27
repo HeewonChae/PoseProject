@@ -9,12 +9,14 @@
              xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:goalstatistics="clr-namespace:PoseSportsPredict.Views.Football.Team.GoalStatistics"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
-             xmlns:nativeads="clr-namespace:PoseSportsPredict.Views.Common.Ads"
+             xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
 
     <ContentView.Content>
-        <StackLayout x:DataType="viewmodels:FootballMatchDetailH2HViewModel">
+        <StackLayout 
+            x:DataType="viewmodels:FootballMatchDetailH2HViewModel"
+            Spacing="0">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -77,21 +79,9 @@
                             </Grid>
                         </materialui:MaterialCard>
 
-                        <materialui:MaterialCard
-                            CornerRadius="5"
-                            Elevation="3"
-                            Margin="7,0"
-                            Padding="5"
-                            IsVisible="{Binding Source={x:Reference _native_small_ads},Path=IsVisible}">
-                            <nativeads:AdmobSmallNativeAdsView
-                                x:Name="_native_small_ads"
-                                ButtonColor="{StaticResource SecondaryColor}">
-                            </nativeads:AdmobSmallNativeAdsView>
-                        </materialui:MaterialCard>
-
                         <!--Team Goal Statistics-->
                         <materialui:MaterialCard
-                            Margin="7,6"
+                            Margin="7,0"
                             Padding="10,5"
                             Elevation="3"
                             CornerRadius="5">
@@ -111,6 +101,13 @@
                     </StackLayout>
                 </ScrollView>
             </loader:TaskLoaderView>
+            <!--banner-->
+            <admobads:MTAdView
+                x:Name="_AdMob"
+                AdsLoaded="_AdMob_AdsLoaded"
+                VerticalOptions="End"
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

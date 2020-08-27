@@ -178,7 +178,9 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <StackLayout x:DataType="viewmodels:FootballLeagueDetailScheduledMatchesViewModel">
+        <StackLayout 
+            Spacing="0"
+            x:DataType="viewmodels:FootballLeagueDetailScheduledMatchesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"

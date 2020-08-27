@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
@@ -13,7 +11,9 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailOverview">
     <ContentView.Content>
-        <StackLayout x:DataType="viewmodels:FootballTeamDetailOverviewModel">
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:FootballTeamDetailOverviewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -158,18 +158,17 @@
                         </materialui:MaterialCard>
 
                         <materialui:MaterialCard
-                            CornerRadius="5"
-                            Elevation="3"
-                            Margin="7,6"
-                            Padding="5"
-                            IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="5"
+                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
                             <nativeads:AdmobSmallNativeAdsView
-                                x:Name="_native_midium_ads"
-                                ButtonColor="{StaticResource SecondaryColor}">
+                            x:Name="_native_ads"
+                            ButtonColor="{StaticResource SecondaryColor}">
                             </nativeads:AdmobSmallNativeAdsView>
                         </materialui:MaterialCard>
 
-                        <!--Team Goal Statistics-->
                         <materialui:MaterialCard
                             Margin="7,6"
                             Padding="10,5"

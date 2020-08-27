@@ -16,7 +16,9 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailScheduledMatchesView">
     <ContentView.Content>
-        <StackLayout x:DataType="viewmodels:FootballTeamDetailScheduledMatchesViewModel">
+        <StackLayout 
+            Spacing="0"
+            x:DataType="viewmodels:FootballTeamDetailScheduledMatchesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"

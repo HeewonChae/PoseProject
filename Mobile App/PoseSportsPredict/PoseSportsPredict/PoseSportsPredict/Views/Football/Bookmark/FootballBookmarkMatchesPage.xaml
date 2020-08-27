@@ -37,7 +37,9 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout x:DataType="viewmodels:FootballBookmarkMatchesViewModel">
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:FootballBookmarkMatchesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"

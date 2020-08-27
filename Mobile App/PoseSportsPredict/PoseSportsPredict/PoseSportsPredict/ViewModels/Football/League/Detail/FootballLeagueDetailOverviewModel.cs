@@ -128,7 +128,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                         _leagueInfo.LeagueName);
                 },
                 key: $"P_GET_LEAGUE_OVERVIEW:{_leagueInfo.PrimaryKey}",
-                expireTime: TimeSpan.FromMinutes(15),
+                expireTime: TimeSpan.Zero,
                 serializeType: SerializeType.MessagePack);
 
             if (server_result == null)
@@ -138,29 +138,29 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             LeagueInfo = ShinyHost.Resolve<LeagueDetailToLeagueInfo>().Convert(server_result.LeagueDetail);
 
             // 참가중인 팀
-            var teamInfos = new List<FootballTeamInfo>();
-            if (server_result.ParticipatingTeams.Length > 0)
-            {
-                foreach (var teamDetail in server_result.ParticipatingTeams)
-                {
-                    teamInfos.Add(ShinyHost.Resolve<TeamDetailToTeamInfo>().Convert(teamDetail));
-                }
+            //var teamInfos = new List<FootballTeamInfo>();
+            //if (server_result.ParticipatingTeams.Length > 0)
+            //{
+            //    foreach (var teamDetail in server_result.ParticipatingTeams)
+            //    {
+            //        teamInfos.Add(ShinyHost.Resolve<TeamDetailToTeamInfo>().Convert(teamDetail));
+            //    }
 
-                ParticipatingTeams_Left = new ObservableList<FootballTeamInfo>();
-                ParticipatingTeams_Right = new ObservableList<FootballTeamInfo>();
+            //    ParticipatingTeams_Left = new ObservableList<FootballTeamInfo>();
+            //    ParticipatingTeams_Right = new ObservableList<FootballTeamInfo>();
 
-                teamInfos = teamInfos.OrderBy(elem => elem.TeamName).ToList();
-                var loopCnt = 0;
-                foreach (var teamInfo in teamInfos)
-                {
-                    loopCnt++;
+            //    teamInfos = teamInfos.OrderBy(elem => elem.TeamName).ToList();
+            //    var loopCnt = 0;
+            //    foreach (var teamInfo in teamInfos)
+            //    {
+            //        loopCnt++;
 
-                    if (loopCnt % 2 == 1)
-                        ParticipatingTeams_Left.Add(teamInfo);
-                    else
-                        ParticipatingTeams_Right.Add(teamInfo);
-                }
-            }
+            //        if (loopCnt % 2 == 1)
+            //            ParticipatingTeams_Left.Add(teamInfo);
+            //        else
+            //            ParticipatingTeams_Right.Add(teamInfo);
+            //    }
+            //}
 
             // 순위 테이블
             var standingsInfos = new List<FootballStandingsInfo>();

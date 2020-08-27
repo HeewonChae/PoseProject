@@ -15,7 +15,9 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentView.Content>
-        <StackLayout x:DataType="viewmodels:FootballMatchDetailOverviewModel">
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:FootballMatchDetailOverviewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
@@ -605,6 +607,8 @@
                                 </recentform:FootballRecentFormView>
                             </StackLayout>
                         </materialui:MaterialCard>
+
+                        
 
                         <!--Standings-->
                         <materialui:MaterialCard

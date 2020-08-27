@@ -46,12 +46,12 @@ namespace Repository.Mysql.FootballDB.Procedures
             FinishedFixturesQuery = $"{DB_FootballFixtureDetail.SelectQuery} " +
                 $"WHERE ( f.{nameof(Fixture.home_team_id)} = {_input.TeamId} OR f.{nameof(Fixture.away_team_id)} = {_input.TeamId} ) " +
                 $"AND f.{nameof(Fixture.match_time)} <= @CurDate " +
-                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 15 ;";
+                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 32 ;";
 
             ScheduledixturesQuery = $"{DB_FootballFixtureDetail.SelectQuery} " +
                 $"WHERE ( f.{nameof(Fixture.home_team_id)} = {_input.TeamId} OR f.{nameof(Fixture.away_team_id)} = {_input.TeamId} ) " +
                 $"AND f.{nameof(Fixture.match_time)} > @CurDate " +
-                $"ORDER BY f.{nameof(Fixture.match_time)} ASC LIMIT 15 ;";
+                $"ORDER BY f.{nameof(Fixture.match_time)} ASC LIMIT 32 ;";
         }
 
         public override Output OnQuery()

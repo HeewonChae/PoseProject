@@ -10,6 +10,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;DEV_RELEASE;</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="CustomViews\**" />
     <Compile Remove="Utilities\DataCaching\**" />

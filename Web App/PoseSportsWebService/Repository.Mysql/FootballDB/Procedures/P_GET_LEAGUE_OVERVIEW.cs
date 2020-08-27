@@ -68,14 +68,14 @@ namespace Repository.Mysql.FootballDB.Procedures
                         }
 
                         _output.StandingsDetails = footballDB.Query<DB_FootballStandingsDetail>(StandingsQuery, new { LeagueId = _output.LeagueDetail.Id });
-                        if (_output.StandingsDetails.Count() == 0)
-                        {
-                            var participatingTeams = footballDB.Query<int>("SELECT home_team_id as team_id FROM fixture WHERE league_id = @LeagueId " +
-                                "UNION SELECT away_team_id as team_id FROM fixture WHERE league_id = @LeagueId;", new { LeagueId = _output.LeagueDetail.Id }).ToArray();
+                        //if (_output.StandingsDetails.Count() == 0)
+                        //{
+                        //    var participatingTeams = footballDB.Query<int>("SELECT home_team_id as team_id FROM fixture WHERE league_id = @LeagueId " +
+                        //        "UNION SELECT away_team_id as team_id FROM fixture WHERE league_id = @LeagueId LIMIT 64;", new { LeagueId = _output.LeagueDetail.Id }).ToArray();
 
-                            if (participatingTeams.Length > 0)
-                                _output.ParticipatingTeamDetails = footballDB.Query<DB_FootballTeamDetail>(TeamsQuery, new { TeamIds = participatingTeams });
-                        }
+                        //    if (participatingTeams.Length > 0)
+                        //        _output.ParticipatingTeamDetails = footballDB.Query<DB_FootballTeamDetail>(TeamsQuery, new { TeamIds = participatingTeams });
+                        //}
 
                         _output.Result = 0;
                     },

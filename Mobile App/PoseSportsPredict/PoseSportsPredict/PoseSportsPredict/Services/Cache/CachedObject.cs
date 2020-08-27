@@ -52,7 +52,8 @@ namespace PoseSportsPredict.Services.Cache
                 CachedData = new AppCacheData();
                 CachedData.BindCacheData(loadedData, CacheKey, ExpireTime, SerializeType);
 
-                await sqliteService.InsertOrUpdateAsync(CachedData);
+                if (ExpireTime != TimeSpan.Zero)
+                    await sqliteService.InsertOrUpdateAsync(CachedData);
             }
 
             return DeserializeCacheData(CachedData);

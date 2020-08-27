@@ -33,7 +33,9 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout x:DataType="viewmodels:FootballBookmarkLeaguesViewModel">
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:FootballBookmarkLeaguesViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"

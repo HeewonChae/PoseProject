@@ -15,7 +15,9 @@
              xmlns:admobads="clr-namespace:MarcTron.Plugin.Controls;assembly=Plugin.MtAdmob"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
     <ContentView.Content>
-        <StackLayout x:DataType="viewmodels:FootballMatchDetailPredictionsViewModel">
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:FootballMatchDetailPredictionsViewModel">
             <loader:TaskLoaderView
                 VerticalOptions="FillAndExpand"
                 Style="{StaticResource PoseTaskLoader}"
