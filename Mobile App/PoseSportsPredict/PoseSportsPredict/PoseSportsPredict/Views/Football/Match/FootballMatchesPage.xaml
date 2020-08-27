@@ -309,7 +309,7 @@
                                                             OutlineOffColor="{StaticResource IconActivated}"
                                                             Path="{x:Static customviews:PathConstants.Star}"
                                                             Count="5"
-                                                            Value="{Binding MaxRating}">
+                                                            Value="{Binding MaxRating, Mode=OneTime}">
                                                         </customviews:RatingView>
                                                     </ContentView>
                                                 </Grid>

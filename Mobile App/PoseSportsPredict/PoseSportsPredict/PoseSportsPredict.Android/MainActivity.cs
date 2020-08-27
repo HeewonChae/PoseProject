@@ -89,7 +89,6 @@ namespace PoseSportsPredict.Droid
             global::Xamarin.Auth.CustomTabsConfiguration.CustomTabsClosingMessage = null;
             //global::Xamarin.Auth.WebViewConfiguration.Android.UserAgent = "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36";
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
-            ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             UserDialogs.Init(this);
 

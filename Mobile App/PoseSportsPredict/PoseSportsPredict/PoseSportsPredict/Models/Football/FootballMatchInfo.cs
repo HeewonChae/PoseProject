@@ -61,5 +61,6 @@ namespace PoseSportsPredict.Models.Football
         public bool IsPredicted { get; set; }
         public bool IsRecommended { get; set; }
         public double MaxRating { get; set; }
+        public bool HasOdds { get; set; }
     }
 }

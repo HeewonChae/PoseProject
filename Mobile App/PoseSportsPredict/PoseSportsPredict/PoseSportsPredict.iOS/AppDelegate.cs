@@ -48,7 +48,6 @@ namespace PoseSportsPredict.iOS
         {
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
             XF.Material.iOS.Material.Init();
-            ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
             Sharpnado.Presentation.Forms.iOS.SharpnadoInitializer.Initialize();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Xam.Plugin.iOS.PopupEffect.Init();

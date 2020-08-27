@@ -91,6 +91,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             await Task.Delay(300);
 
+            if (!_matchInfo.HasOdds)
+            {
+                SetIsBusy(false);
+                return null;
+            }
+
             // call server
             var server_result = await _cacheService.GetAsync<O_GET_MATCH_ODDS>(
               loader: () =>

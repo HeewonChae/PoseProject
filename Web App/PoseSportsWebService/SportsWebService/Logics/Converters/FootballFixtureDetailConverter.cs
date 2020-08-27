@@ -54,8 +54,11 @@ namespace SportsWebService.Logics.Converters
                 result.AwayTeamScore = db_fixtureDetail.AwayTeamScore;
 
                 result.IsPredicted = db_fixtureDetail.IsPredicted;
+
                 result.IsRecommeded = db_fixtureDetail.IsRecommended;
                 result.MaxGrade = (byte)db_fixtureDetail.MaxGrade;
+
+                result.HasOdds = db_fixtureDetail.HasOdds;
             }
             return result;
         }

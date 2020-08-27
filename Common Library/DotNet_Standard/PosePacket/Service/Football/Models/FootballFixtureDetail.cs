@@ -42,5 +42,8 @@ namespace PosePacket.Service.Football.Models
 
         [Key(11)]
         public byte MaxGrade { get; set; }
+
+        [Key(12)]
+        public bool HasOdds { get; set; }
     }
 }

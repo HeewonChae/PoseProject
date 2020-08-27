@@ -396,7 +396,6 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.Fixture.home_score)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.away_score)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.is_completed)}`, " +
-                $"`{nameof(FootballDB.Tables.Fixture.is_predicted)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.upt_time)}`)");
             sb.Append("VALUES");
 
@@ -426,7 +425,6 @@ namespace SportsAdminTool.Logic.Database
                 $"{fixture.GoalsHomeTeam}, " +
                 $"{fixture.GoalsAwayTeam}, " +
                 $"{isCompleted}, " +
-                $"{false}, " +
                 $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
@@ -464,6 +462,8 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.Fixture.is_completed)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.is_predicted)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.is_recommended)}`, " +
+                $"`{nameof(FootballDB.Tables.Fixture.has_odds)}`, " +
+                $"`{nameof(FootballDB.Tables.Fixture.max_grade)}`, " +
                 $"`{nameof(FootballDB.Tables.Fixture.upt_time)}`)");
             sb.Append("VALUES");
 
@@ -485,6 +485,8 @@ namespace SportsAdminTool.Logic.Database
                     $"{fixture.is_completed}, " +
                     $"{fixture.is_predicted}, " +
                     $"{fixture.is_recommended}, " +
+                    $"{fixture.has_odds}, " +
+                    $"{fixture.max_grade}, " +
                     $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
             }
 
@@ -495,6 +497,8 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.Fixture.is_completed)} = VALUES({nameof(FootballDB.Tables.Fixture.is_completed)}), " +
                 $"{nameof(FootballDB.Tables.Fixture.is_predicted)} = VALUES({nameof(FootballDB.Tables.Fixture.is_predicted)}), " +
                 $"{nameof(FootballDB.Tables.Fixture.is_recommended)} = VALUES({nameof(FootballDB.Tables.Fixture.is_recommended)}), " +
+                $"{nameof(FootballDB.Tables.Fixture.has_odds)} = VALUES({nameof(FootballDB.Tables.Fixture.has_odds)}), " +
+                $"{nameof(FootballDB.Tables.Fixture.max_grade)} = VALUES({nameof(FootballDB.Tables.Fixture.max_grade)}), " +
                 $"{nameof(FootballDB.Tables.Fixture.upt_time)} = VALUES({nameof(FootballDB.Tables.Fixture.upt_time)});");
 
             return ExecuteQuery(sb.ToString());

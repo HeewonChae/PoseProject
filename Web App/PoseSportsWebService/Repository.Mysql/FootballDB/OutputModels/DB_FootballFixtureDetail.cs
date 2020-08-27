@@ -36,6 +36,7 @@ namespace Repository.Mysql.FootballDB.OutputModels
 
         public bool IsPredicted { get; set; }
         public bool IsRecommended { get; set; }
+        public bool HasOdds { get; set; }
         public short MaxGrade { get; set; }
 
         #region Select Query
@@ -58,7 +59,7 @@ namespace Repository.Mysql.FootballDB.OutputModels
                     sb.Append($"f.{nameof(Fixture.id)} as {nameof(FixtureId)}, f.{nameof(Fixture.status)} as {nameof(MatchStatus)}, ");
                     sb.Append($"f.{nameof(Fixture.match_time)} as {nameof(MatchTime)}, l.{nameof(League.type)} as {nameof(LeagueType)}, ");
                     sb.Append($"f.{nameof(Fixture.is_predicted)} as {nameof(IsPredicted)}, f.{nameof(Fixture.is_recommended)} as {nameof(IsRecommended)}, ");
-                    sb.Append($"(SELECT MAX({nameof(Prediction.grade)}) FROM prediction WHERE {nameof(Prediction.fixture_id)} = f.{nameof(Fixture.id)} GROUP BY {nameof(Prediction.fixture_id)}) as {nameof(MaxGrade)} ");
+                    sb.Append($"f.{nameof(Fixture.has_odds)} as {nameof(HasOdds)}, f.{nameof(Fixture.max_grade)} as {nameof(MaxGrade)} ");
                     sb.Append("FROM fixture as f ");
                     sb.Append($"INNER JOIN league as l on f.{nameof(Fixture.league_id)} = l.{nameof(League.id)} ");
                     sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");

@@ -78,6 +78,10 @@
     <Compile Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.designer.cs">
       <DependentUpon>202008221327234_AddPredictionBackTestingTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202008262305165_AlterFixtureTable.cs" />
+    <Compile Include="FootballDBMigrations\202008262305165_AlterFixtureTable.designer.cs">
+      <DependentUpon>202008262305165_AlterFixtureTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballLeagueDetail.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.resx">
       <DependentUpon>202008221327234_AddPredictionBackTestingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202008262305165_AlterFixtureTable.resx">
+      <DependentUpon>202008262305165_AlterFixtureTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
       <DependentUpon>202003170333152_Initialize.cs</DependentUpon>

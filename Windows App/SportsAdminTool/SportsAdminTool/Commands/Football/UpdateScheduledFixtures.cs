@@ -60,7 +60,13 @@ namespace SportsAdminTool.Commands.Football
                             //LogicFacade.UpdateTeamLastFixtures(fixture.home_team_id, 10);
                             //LogicFacade.UpdateTeamLastFixtures(fixture.away_team_id, 10);
                             //LogicFacade.UpdateH2H(fixture.home_team_id, fixture.away_team_id);
-                            LogicFacade.UpdateOdds(fixture.id);
+                            var ret = LogicFacade.UpdateOdds(fixture.id);
+
+                            if (ret > 0)
+                            {
+                                fixture.has_odds = true;
+                                Logic.Database.FootballDBFacade.UpdateFixture(fixture);
+                            }
                         }
                     }
 

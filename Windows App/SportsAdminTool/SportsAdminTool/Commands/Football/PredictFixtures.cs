@@ -64,6 +64,7 @@ namespace SportsAdminTool.Commands.Football
                     //    || (elem.main_label == 4 && elem.sub_label == 4 && elem.is_recommended)
                     //    || (elem.main_label == 4 && elem.sub_label == 5 && elem.is_recommended));
                     db_fixture.is_recommended = db_predictions.Any(elem => elem.is_recommended);
+                    db_fixture.max_grade = db_predictions.Max(elem => elem.grade);
                     Logic.Database.FootballDBFacade.UpdateFixture(db_fixture);
                     Logic.Database.FootballDBFacade.UpdatePrediction(db_predictions.ToArray());
                 }

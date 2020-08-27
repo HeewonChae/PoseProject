@@ -40,18 +40,17 @@ namespace SportsAdminTool.Logic.Football
             //Database.FootballDBFacade.UpdateOdds(api_odds.ToArray());
         }
 
-        public static void UpdateOdds(int fixtureId)
+        public static int UpdateOdds(int fixtureId)
         {
-            if (IsAlreadyUpdatedOdds(fixtureId))
-                return;
-
             // Call API
             var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByFixtureId(fixtureId);
             if (api_odds == null)
-                return;
+                return 0;
 
             // DB Save
             Database.FootballDBFacade.UpdateOdds(fixtureId, api_odds.Bookmakers);
+
+            return api_odds.Bookmakers.Length;
         }
 
         /// <summary>

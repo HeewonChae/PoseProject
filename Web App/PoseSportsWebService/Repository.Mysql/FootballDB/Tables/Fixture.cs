@@ -60,25 +60,32 @@ namespace Repository.Mysql.FootballDB.Tables
 
         [Required]
         [Column(TypeName = "MEDIUMINT")]
-        [SqlDefaultValue(DefaultValue = "0")]
         public short home_score { get; set; }
 
         [Required]
         [Column(TypeName = "MEDIUMINT")]
-        [SqlDefaultValue(DefaultValue = "0")]
         public short away_score { get; set; }
-
-        [Required]
-        [Index("IDX_PREDICTED_DATE", Order = 1, IsUnique = false)]
-        public bool is_predicted { get; set; }
 
         [Required]
         [Index("IDX_COMPLETED_DATE", Order = 1, IsUnique = false)]
         public bool is_completed { get; set; }
 
         [Required]
+        [Index("IDX_PREDICTED_DATE", Order = 1, IsUnique = false)]
+        [SqlDefaultValue(DefaultValue = "0")]
+        public bool is_predicted { get; set; }
+
+        [Required]
         [SqlDefaultValue(DefaultValue = "0")]
         public bool is_recommended { get; set; }
+
+        [Required]
+        [SqlDefaultValue(DefaultValue = "0")]
+        public bool has_odds { get; set; }
+
+        [Required]
+        [SqlDefaultValue(DefaultValue = "0")]
+        public short max_grade { get; set; }
 
         [Required]
         public DateTime upt_time { get; set; }
