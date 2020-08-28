@@ -1,10 +1,12 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Gms.Ads;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
+using Plugin.InAppBilling;
 using Plugin.LocalNotification;
 using PoseSportsPredict.Resources;
 using Shiny;
@@ -26,7 +28,6 @@ namespace PoseSportsPredict.Droid
             Android.Manifest.Permission.AccessNetworkState,
             Android.Manifest.Permission.BindNotificationListenerService,
             Android.Manifest.Permission.AccessNotificationPolicy,
-            Android.Manifest.Permission.ReceiveBootCompleted,
         };
 
         private int PermissionReqId = 0;
@@ -59,6 +60,12 @@ namespace PoseSportsPredict.Droid
             LoadApplication(new App());
 
             NotificationCenter.NotifyNotificationTapped(this.Intent);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            InAppBillingImplementation.HandleActivityResult(requestCode, resultCode, data);
         }
 
         //protected override void OnNewIntent(Intent intent)
@@ -99,6 +106,8 @@ namespace PoseSportsPredict.Droid
                 Name = "General",
                 Description = "General",
             });
+
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
         }
 
         public async override void OnBackPressed()
