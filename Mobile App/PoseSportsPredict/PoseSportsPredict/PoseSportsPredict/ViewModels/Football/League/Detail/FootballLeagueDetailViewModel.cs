@@ -30,15 +30,6 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
-            MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.LeagueBookmarkMessageHandler(e));
-
-            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
-            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
-
-            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
-            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
-
             return true;
         }
 
@@ -75,7 +66,28 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override void OnAppearing(params object[] datas)
         {
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
+            MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.LeagueBookmarkMessageHandler(e));
+
+            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
+
             _tabContents[SelectedViewIndex].OnAppearing();
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
+            MessagingCenter.Unsubscribe<BookmarkService, FootballLeagueInfo>(this, message);
+
+            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
         }
 
         #endregion NavigableViewModel
@@ -122,15 +134,6 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                 return;
 
             SetIsPageSwitched(true);
-
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
-            MessagingCenter.Unsubscribe<BookmarkService, FootballLeagueInfo>(this, message);
-
-            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
-            MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
-
-            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
-            MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
 
             await PageSwitcher.PopNavPageAsync();
         }
@@ -218,6 +221,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             if (OnInitializeView())
             {
                 CoupledPage.Appearing += (s, e) => OnAppearing();
+                CoupledPage.Disappearing += (s, e) => OnDisAppearing();
             }
 
             this.CoupledPage.FindByName<SfTabView>("_tabView").SelectionChanged

@@ -148,8 +148,9 @@
             <admobads:MTAdView
                 x:Name="_AdMob"
                 AdsLoaded="MTAdView_AdsLoaded"
-                VerticalOptions="End"
+                 Margin="0"
                 HorizontalOptions="CenterAndExpand"
+                VerticalOptions="End"
                 Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentPage.Content>

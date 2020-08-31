@@ -308,8 +308,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (_matchList.Count > 0)
                 await UpdateFilteredMatchesAsync();
 
-            _lastUpdateTime = DateTime.UtcNow;
-
             this.SetIsBusy(false);
 
             return _matchList;

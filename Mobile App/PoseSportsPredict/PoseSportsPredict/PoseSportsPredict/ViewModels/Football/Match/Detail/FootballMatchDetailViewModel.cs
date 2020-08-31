@@ -36,12 +36,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
-            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
-
-            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
-            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
-
             AlarmIcon = new ChangableIcon(
                 "ic_alarm_selected.png",
                 AppResourcesHelper.GetResourceColor("IconActivated"),
@@ -91,11 +85,23 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public override void OnAppearing(params object[] datas)
         {
             _tabContents[SelectedViewIndex].OnAppearing();
+
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
         }
 
         public override void OnDisAppearing(params object[] datas)
         {
             _tabContents[3].OnDisAppearing(); // prediction view
+
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
         }
 
         #endregion NavigableViewModel
@@ -110,7 +116,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Fields
 
-        private DateTime _LastUpdateTime = DateTime.UtcNow;
+        private DateTime _LastUpdateTime;
         private FootballMatchInfo _matchInfo;
         private int _selectedViewIndex;
         private FootballMatchDetailOverviewModel _overviewModel;
@@ -146,12 +152,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsPageSwitched(true);
 
-            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
-            MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
-
-            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
-            MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
-
             await PageSwitcher.PopNavPageAsync();
         }
 
@@ -173,10 +173,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private async void TouchAlarmButton()
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
 
             if (!MatchInfo.IsAlarmed)
             {
@@ -199,17 +199,17 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 await _notificationService.DeleteNotification(MatchInfo.Id, SportsType.Football, NotificationType.MatchStart);
             }
 
-            SetIsBusy(false);
+            SetIsPageSwitched(false);
         }
 
         public ICommand TouchBookmarkButtonCommand { get => new RelayCommand(TouchBookmarkButton); }
 
         private async void TouchBookmarkButton()
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
 
             // Add Bookmark
             if (MatchInfo.IsBookmarked)
@@ -217,49 +217,52 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             else
                 await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
 
-            SetIsBusy(false);
+            SetIsPageSwitched(false);
         }
 
         public ICommand LeagueNameClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => LeagueNameClick(e)); }
 
         private async void LeagueNameClick(FootballMatchInfo matchInfo)
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
+
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballLeagueDetailViewModel>()
                 , ShinyHost.Resolve<MatchInfoToLeagueInfo>().Convert(matchInfo));
 
-            SetIsBusy(false);
+            SetIsPageSwitched(false);
         }
 
         public ICommand HomeTeamLogoClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => HomeTeamLogoClick(e)); }
 
         private async void HomeTeamLogoClick(FootballMatchInfo matchInfo)
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
+
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
                 , ShinyHost.Resolve<MatchInfoToTeamInfo>().Convert(matchInfo, TeamCampType.Home));
 
-            SetIsBusy(false);
+            SetIsPageSwitched(false);
         }
 
         public ICommand AwayTeamLogoClickCommand { get => new RelayCommand<FootballMatchInfo>((e) => AwayTeamLogoClick(e)); }
 
         private async void AwayTeamLogoClick(FootballMatchInfo matchInfo)
         {
-            if (IsBusy)
+            if (IsPageSwitched)
                 return;
 
-            SetIsBusy(true);
+            SetIsPageSwitched(true);
+
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballTeamDetailViewModel>()
                 , ShinyHost.Resolve<MatchInfoToTeamInfo>().Convert(matchInfo, TeamCampType.Away));
 
-            SetIsBusy(false);
+            SetIsPageSwitched(false);
         }
 
         #endregion Commands

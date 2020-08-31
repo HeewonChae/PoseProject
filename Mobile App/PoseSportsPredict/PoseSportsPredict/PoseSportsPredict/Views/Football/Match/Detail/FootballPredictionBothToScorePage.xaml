@@ -55,7 +55,7 @@
                 Grid.Column="1"
                 Grid.Row="1"
                 Margin="0"
-                Padding="15,5"
+                Padding="10,5"
                 CornerRadius="5"
                 BackgroundColor="{StaticResource BackgroundColor_Default}">
 
@@ -68,7 +68,7 @@
                 <ScrollView>
                     <StackLayout Spacing="0">
                         <materialui:MaterialCard
-                            Margin="7,6"
+                            Margin="3,6"
                             Padding="10,5,10,10"
                             Elevation="3"
                             CornerRadius="5">
@@ -171,7 +171,7 @@
                                         UngaugeColor="{StaticResource ChartBackground}"
                                         HeightRequest="{Binding GaugeHeight}"
                                         GaugeThickness="13"
-                                        HeaderSize="21"
+                                        HeaderSize="22"
                                         MaxValue="100"
                                         CurValue="{Binding YesProba}">
                                     </customviews:CircularGauge>
@@ -183,7 +183,7 @@
                                         UngaugeColor="{StaticResource ChartBackground}"
                                         HeightRequest="{Binding GaugeHeight}"
                                         GaugeThickness="13"
-                                        HeaderSize="21"
+                                        HeaderSize="22"
                                         MaxValue="100"
                                         CurValue="{Binding NoProba}">
                                     </customviews:CircularGauge>
@@ -192,7 +192,7 @@
                         </materialui:MaterialCard>
 
                         <materialui:MaterialCard
-                            Margin="7,6"
+                            Margin="3,6"
                             Padding="10,5,10,10"
                             Elevation="3"
                             CornerRadius="5">
@@ -214,7 +214,7 @@
                         <materialui:MaterialCard
                             CornerRadius="5"
                             Elevation="3"
-                            Margin="7,6"
+                            Margin="3,6"
                             Padding="5"
                             IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
                             <nativeads:AdmobSmallNativeAdsView

@@ -22,6 +22,7 @@ using System.Linq;
 using PoseSportsPredict.Logics.LocalizedRes;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Models.Football;
+using Plugin.InAppBilling.Abstractions;
 
 namespace PoseSportsPredict.ViewModels
 {
@@ -68,9 +69,24 @@ namespace PoseSportsPredict.ViewModels
 
                 // Delete ExpiredCachedData
                 if (TimeZoneInfo.Local.Id.Equals(userTimeZoneId))
+                {
                     await _cacheService.DeleteExpiredCachedDataAsync();
+
+                    // Delete expired predictionGroup
+                    var allPredictionGroups = await _sqliteService.SelectAllAsync<FootballPredictionGroup>();
+                    foreach (var predictionGroup in allPredictionGroups)
+                    {
+                        if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
+                            await _sqliteService.DeleteAsync<FootballPredictionGroup>(predictionGroup.PrimaryKey);
+                    }
+                }
                 else
+                {
                     await _cacheService.DeleteAllCachedDataAsync();
+
+                    // Delete All predictionGroup
+                    await _sqliteService.DeleteAllAsync<FootballPredictionGroup>();
+                }
 
                 LocalStorage.Storage.AddOrUpdateValue<string>(LocalStorageKey.UserTimeZoneId, TimeZoneInfo.Local.Id);
             }
@@ -97,18 +113,14 @@ namespace PoseSportsPredict.ViewModels
             // Notify Init
             await _notificationService.Initialize();
 
+            // InAppBilling Item Init
+            var inAppPurchase = await ShinyHost.Resolve<InAppBillingService>().GetProductInfoAsync(ItemType.InAppPurchase, AppConfig.ANDROID_PRODUCT_IDS[0]);
+            var inAppSubscriptions = await ShinyHost.Resolve<InAppBillingService>().GetProductInfoAsync(ItemType.Subscription, AppConfig.ANDROID_PRODUCT_IDS[1]);
+
             if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
             {
                 await _OAuthService.Logout();
-            }
-
-            // Delete expired predictionGroup
-            var allPredictionGroups = await _sqliteService.SelectAllAsync<FootballPredictionGroup>();
-            foreach (var predictionGroup in allPredictionGroups)
-            {
-                if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
-                    await _sqliteService.DeleteAsync<FootballPredictionGroup>(predictionGroup.PrimaryKey);
             }
 
             IsLoaded = true;

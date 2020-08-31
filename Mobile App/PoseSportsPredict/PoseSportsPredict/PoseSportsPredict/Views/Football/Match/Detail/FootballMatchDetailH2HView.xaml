@@ -14,7 +14,7 @@
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailH2HView">
 
     <ContentView.Content>
-        <StackLayout 
+        <StackLayout
             x:DataType="viewmodels:FootballMatchDetailH2HViewModel"
             Spacing="0">
             <loader:TaskLoaderView
@@ -105,8 +105,9 @@
             <admobads:MTAdView
                 x:Name="_AdMob"
                 AdsLoaded="_AdMob_AdsLoaded"
-                VerticalOptions="End"
+                 Margin="0"
                 HorizontalOptions="CenterAndExpand"
+                VerticalOptions="End"
                 Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentView.Content>

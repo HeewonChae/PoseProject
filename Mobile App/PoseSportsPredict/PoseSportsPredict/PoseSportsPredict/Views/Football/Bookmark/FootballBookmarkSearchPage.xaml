@@ -62,7 +62,7 @@
                 Grid.Column="1"
                 Grid.Row="1"
                 Margin="0"
-                Padding="15,5"
+                Padding="10,5"
                 CornerRadius="5"
                 BackgroundColor="{StaticResource BackgroundColor_Default}">
 
@@ -143,7 +143,7 @@
                                                     ClickCommandParameter="{Binding .}">
                                                     <StackLayout
                                                         Spacing="0"
-                                                        Padding="15,5,15,0">
+                                                        Padding="10,5,10,0">
                                                         <!--SubTitle-->
                                                         <Grid
                                                             ColumnSpacing="15"
@@ -202,16 +202,18 @@
                                                         <!--MatchInfo-->
                                                         <Grid
                                                             VerticalOptions="FillAndExpand"
-                                                            Padding="5,10">
+                                                            Padding="0,11,0,13">
                                                             <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="10" />
                                                                 <ColumnDefinition Width="*" />
                                                                 <ColumnDefinition Width="Auto" />
                                                                 <ColumnDefinition Width="Auto" />
                                                                 <ColumnDefinition Width="Auto" />
                                                                 <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="10" />
                                                             </Grid.ColumnDefinitions>
                                                             <materialui:MaterialLabel
-                                                                Grid.Column="0"
+                                                                Grid.Column="1"
                                                                 LineHeight="1"
                                                                 HorizontalOptions="EndAndExpand"
                                                                 VerticalOptions="Center"
@@ -223,7 +225,7 @@
                                                                 Text="{Binding HomeName}">
                                                             </materialui:MaterialLabel>
                                                             <ffimageloading:CachedImage
-                                                                Grid.Column="1"
+                                                                Grid.Column="2"
                                                                 Margin="3,0"
                                                                 Aspect="AspectFit"
                                                                 HorizontalOptions="Center"
@@ -237,7 +239,7 @@
                                                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
                                                             </ffimageloading:CachedImage>
                                                             <StackLayout
-                                                                Grid.Column="2"
+                                                                Grid.Column="3"
                                                                 Spacing="0"
                                                                 VerticalOptions="FillAndExpand">
                                                                 <materialui:MaterialLabel
@@ -262,7 +264,7 @@
                                                                 </materialui:MaterialChip>
                                                             </StackLayout>
                                                             <ffimageloading:CachedImage
-                                                                Grid.Column="3"
+                                                                Grid.Column="4"
                                                                 Margin="3,0"
                                                                 Aspect="AspectFit"
                                                                 HorizontalOptions="Center"
@@ -276,7 +278,7 @@
                                                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
-                                                                Grid.Column="4"
+                                                                Grid.Column="5"
                                                                 LineHeight="1"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 VerticalOptions="Center"
@@ -287,6 +289,18 @@
                                                                 TextColor="{StaticResource TextColor_D}"
                                                                 Text="{Binding AwayName}">
                                                             </materialui:MaterialLabel>
+                                                            <materialui:MaterialCard
+                                                                Grid.Column="6"
+                                                                Padding="0"
+                                                                Margin="0"
+                                                                IsVisible="{Binding IsPredicted}"
+                                                                HorizontalOptions="Center"
+                                                                VerticalOptions="Center"
+                                                                HeightRequest="10"
+                                                                WidthRequest="10"
+                                                                CornerRadius="10"
+                                                                BackgroundColor="{StaticResource IconActivated}">
+                                                            </materialui:MaterialCard>
                                                         </Grid>
                                                     </StackLayout>
                                                 </materialui:MaterialCard>

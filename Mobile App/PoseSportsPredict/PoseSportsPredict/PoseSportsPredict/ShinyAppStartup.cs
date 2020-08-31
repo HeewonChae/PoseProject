@@ -93,6 +93,7 @@ namespace PoseSportsPredict
             services.AddSingleton<IBookmarkService, BookmarkService>();
             services.AddSingleton<INotificationService, NotificationService>();
             services.AddSingleton<ICacheService, CacheService>();
+            services.AddSingleton<InAppBillingService>();
         }
 
         private void RegisterConverters(IServiceCollection services)

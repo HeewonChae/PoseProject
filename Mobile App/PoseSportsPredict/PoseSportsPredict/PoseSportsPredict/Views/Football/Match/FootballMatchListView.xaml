@@ -23,13 +23,11 @@
                         Padding="10, 0"
                         ColumnSpacing="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="11" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="11" />
                         </Grid.ColumnDefinitions>
                         <StackLayout
-                            Grid.Column="1"
+                            Grid.Column="0"
                             Orientation="Horizontal"
                             Padding="0"
                             Spacing="0"
@@ -77,23 +75,25 @@
                         </StackLayout>
                         <Grid
                             x:Name="_grid"
-                            Grid.Column="2"
+                            Grid.Column="1"
                             Margin="0"
-                            Padding="10,20"
+                            Padding="0,20"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.LongTapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
                             </Grid.ColumnDefinitions>
                             <materialui:MaterialLabel
-                                Grid.Column="0"
+                                Grid.Column="1"
                                 LineHeight="1"
                                 HorizontalOptions="EndAndExpand"
                                 VerticalOptions="Center"
@@ -106,7 +106,7 @@
                             </materialui:MaterialLabel>
                             <!--HomeLogo-->
                             <ffimageloading:CachedImage
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Margin="3,0"
                                 Aspect="AspectFit"
                                 HorizontalOptions="Center"
@@ -121,7 +121,7 @@
                             </ffimageloading:CachedImage>
                             <!--Middle-->
                             <StackLayout
-                                Grid.Column="2"
+                                Grid.Column="3"
                                 Spacing="0"
                                 VerticalOptions="FillAndExpand">
                                 <materialui:MaterialLabel
@@ -147,7 +147,7 @@
                             </StackLayout>
                             <!--AwayLogo-->
                             <ffimageloading:CachedImage
-                                Grid.Column="3"
+                                Grid.Column="4"
                                 Margin="3,0"
                                 Aspect="AspectFit"
                                 HorizontalOptions="Center"
@@ -161,7 +161,7 @@
                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
-                                Grid.Column="4"
+                                Grid.Column="5"
                                 LineHeight="1"
                                 HorizontalOptions="StartAndExpand"
                                 VerticalOptions="Center"
@@ -172,19 +172,19 @@
                                 TextColor="{StaticResource TextColor_D}"
                                 Text="{Binding AwayName}">
                             </materialui:MaterialLabel>
+                            <materialui:MaterialCard
+                                Grid.Column="6"
+                                Padding="0"
+                                Margin="0"
+                                IsVisible="{Binding IsPredicted}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="10"
+                                WidthRequest="10"
+                                CornerRadius="10"
+                                BackgroundColor="{StaticResource IconActivated}">
+                            </materialui:MaterialCard>
                         </Grid>
-                        <materialui:MaterialCard
-                            Grid.Column="3"
-                            Padding="0"
-                            Margin="0"
-                            IsVisible="{Binding IsPredicted}"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            HeightRequest="11"
-                            WidthRequest="11"
-                            CornerRadius="11"
-                            BackgroundColor="{StaticResource IconActivated}">
-                        </materialui:MaterialCard>
                     </Grid>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>

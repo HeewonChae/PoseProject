@@ -35,7 +35,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         {
             PredictionsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>>();
             _isSetRewardEvent = false;
-            _adsPlayed = false;
+            AdsPlayed = false;
             return true;
         }
 
@@ -56,7 +56,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override void OnDisAppearing(params object[] datas)
         {
-            if (!_adsPlayed && _isSetRewardEvent)
+            if (!AdsPlayed && _isSetRewardEvent)
             {
                 _isSetRewardEvent = false;
                 CrossMTAdmob.Current.OnRewardedVideoAdLoaded -= OnRewardedVideoAdLoaded;
@@ -81,7 +81,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         private TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>> _predictionsTaskLoaderNotifier;
         private List<FootballPredictionInfo> _allPredictions;
         private FootballPredictionGroup _selectedPrediction;
-        private bool _adsPlayed;
         private bool _isSetRewardEvent;
 
         private FootballPredictionGroup _finalScorePredictions;
@@ -97,6 +96,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         #endregion Fields
 
         #region Properties
+
+        public bool AdsPlayed;
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballPredictionInfo>> PredictionsTaskLoaderNotifier { get => _predictionsTaskLoaderNotifier; set => SetValue(ref _predictionsTaskLoaderNotifier, value); }
         public bool IsFinalScoreUnlocked { get => _isFinalScoreUnlocked; set => SetValue(ref _isFinalScoreUnlocked, value); }
@@ -228,7 +229,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private void OnRewardedVideoAdLoaded(object sender, EventArgs e)
         {
-            _adsPlayed = true;
+            AdsPlayed = true;
             CrossMTAdmob.Current.ShowRewardedVideo();
         }
 
@@ -263,7 +264,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private async void OnRewardedVideoAdClosed(object sender, EventArgs e)
         {
-            _adsPlayed = false;
+            AdsPlayed = false;
             UserDialogs.Instance.HideLoading();
 
 #if DEBUG
@@ -296,7 +297,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private async void OnRewardedVideoAdFailedToLoad(object sender, EventArgs e)
         {
-            _adsPlayed = false;
+            AdsPlayed = false;
             UserDialogs.Instance.HideLoading();
 
             await MaterialDialog.Instance.AlertAsync(LocalizeString.Occur_Error,

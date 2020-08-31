@@ -39,6 +39,7 @@ namespace PoseSportsPredict.Logics
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage, false);
+            await Task.Delay(3000);
 
             return true;
         }
@@ -69,7 +70,10 @@ namespace PoseSportsPredict.Logics
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             if (viewModel.CoupledPage is PopupPage popupPage)
+            {
                 await Application.Current.MainPage.Navigation.PushPopupAsync(popupPage);
+                await Task.Delay(3000);
+            }
             else
                 return false;
 

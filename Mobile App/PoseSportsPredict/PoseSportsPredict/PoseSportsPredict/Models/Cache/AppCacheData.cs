@@ -59,7 +59,7 @@ namespace PoseSportsPredict.Models.Cache
                     CachedData = Convert.ToBase64String(bytes);
                 }
                 else
-                    Debug.Assert(false, "cachingData param is not byteArray");
+                    Debug.Assert(false, "cachingData param is must be byte array");
             }
         }
     }

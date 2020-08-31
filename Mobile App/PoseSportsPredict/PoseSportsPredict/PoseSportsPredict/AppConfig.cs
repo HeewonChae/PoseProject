@@ -34,5 +34,9 @@ namespace PoseSportsPredict
         public const string ADMOB_NATIVE_ADS_ID = "ca-app-pub-3381862928005780/5854172385";
         public const string ADMOB_BANNER_ADS_ID = "ca-app-pub-3381862928005780/2467669138";
         public const string ADMOB_REWARD_ADS_ID = "ca-app-pub-3381862928005780/8292633466";
+
+        // InAppBilling ProductId
+
+        public readonly static string[] ANDROID_PRODUCT_IDS = new string[] { "pose_poseidon_picks_0_1", "pose_poseidon_picks_1_1" };
     }
 }

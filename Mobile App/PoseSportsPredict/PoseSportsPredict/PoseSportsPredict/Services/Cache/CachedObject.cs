@@ -42,21 +42,31 @@ namespace PoseSportsPredict.Services.Cache
         {
             var sqliteService = ShinyHost.Resolve<ISQLiteService>();
 
-            var CachedData = await sqliteService.SelectAsync<AppCacheData>(this.CacheKey);
-            if (CachedData == null || CachedData?.ExpireTime < DateTime.UtcNow)
+            var cachedData = await sqliteService.SelectAsync<AppCacheData>(this.CacheKey);
+            if (cachedData == null || cachedData?.ExpireTime < DateTime.UtcNow)
             {
                 var loadedData = await Loader.Invoke();
                 if (loadedData == null)
                     return null;
 
-                CachedData = new AppCacheData();
-                CachedData.BindCacheData(loadedData, CacheKey, ExpireTime, SerializeType);
-
                 if (ExpireTime != TimeSpan.Zero)
-                    await sqliteService.InsertOrUpdateAsync(CachedData);
+                {
+                    cachedData = new AppCacheData();
+                    cachedData.BindCacheData(loadedData, CacheKey, ExpireTime, SerializeType);
+                    await sqliteService.InsertOrUpdateAsync(cachedData);
+                }
+                else
+                {
+                    if (SerializeType == SerializeType.Json)
+                        return (loadedData as string).JsonDeserialize<T>();
+                    else if (SerializeType == SerializeType.MessagePack)
+                    {
+                        return MessagePackSerializer.Deserialize<T>((loadedData as byte[]));
+                    }
+                }
             }
 
-            return DeserializeCacheData(CachedData);
+            return DeserializeCacheData(cachedData);
         }
 
         private T DeserializeCacheData(AppCacheData cachedData)

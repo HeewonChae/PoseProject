@@ -13,7 +13,7 @@ using Shiny;
 
 namespace PoseSportsPredict.Droid
 {
-    [Activity(Label = "PoseSportsPredict",
+    [Activity(Label = "Poseidon Picks",
         Icon = "@mipmap/icon_round",
         Theme = "@style/LoadingTheme",
         MainLauncher = true,
@@ -56,6 +56,7 @@ namespace PoseSportsPredict.Droid
 
             // Initialize extern module
             this.InitExternModule(savedInstanceState);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
 
             LoadApplication(new App());
 

@@ -246,10 +246,11 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             // Need Refrash MatchInfo
             var needRefrashMatchIndexes = oldBookmarkedMatches.Where(elem =>
-                  elem.MatchStatus != FootballMatchStatusType.FT
-                  && elem.MatchStatus != FootballMatchStatusType.AET
-                  && elem.MatchStatus != FootballMatchStatusType.PEN)
-                  .Select(elem => elem.Id).ToList();
+                elem.MatchTime < DateTime.Now
+                && elem.MatchStatus != FootballMatchStatusType.FT
+                && elem.MatchStatus != FootballMatchStatusType.AET
+                && elem.MatchStatus != FootballMatchStatusType.PEN)
+                .Select(elem => elem.Id).ToList();
 
             var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
 

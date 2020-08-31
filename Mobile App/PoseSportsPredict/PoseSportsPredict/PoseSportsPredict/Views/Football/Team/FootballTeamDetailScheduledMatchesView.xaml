@@ -16,7 +16,7 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Team.FootballTeamDetailScheduledMatchesView">
     <ContentView.Content>
-        <StackLayout 
+        <StackLayout
             Spacing="0"
             x:DataType="viewmodels:FootballTeamDetailScheduledMatchesViewModel">
             <loader:TaskLoaderView
@@ -265,10 +265,10 @@
             </loader:TaskLoaderView>
             <!--banner-->
             <admobads:MTAdView
+                Margin="0"
                 x:Name="_AdMob"
                 AdsLoaded="_AdMob_AdsLoaded"
                 VerticalOptions="End"
-                HorizontalOptions="CenterAndExpand"
                 Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentView.Content>
