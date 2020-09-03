@@ -2,20 +2,22 @@
 using Repository.Request;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Repository.Mysql.PoseGlobalDB.Procedures
 {
-    public class P_INSERT_USER_BASE : MysqlQuery<P_INSERT_USER_BASE.Input, bool>
+    public class P_INSERT_USER_BASE : MysqlQuery<P_INSERT_USER_BASE.Input, int>
     {
         public struct Input
         {
             public string PlatformId { get; set; }
             public string PlatformType { get; set; }
-            public int RoleType { get; set; }
-            public DateTime InsertTime { get; set; }
+            public string PlatformEmail { get; set; }
+            public string RoleType { get; set; }
+            public DateTime CurrentTime { get; set; }
         }
 
         public override void OnAlloc()
@@ -30,32 +32,25 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
 
         public override void BindParameters()
         {
-            // if you need Binding Parameters, write here
+            this.Parmeters.Add("i_platform_id", _input.PlatformId, DbType.String, ParameterDirection.Input);
+            this.Parmeters.Add("i_platform_type", _input.PlatformType, DbType.String, ParameterDirection.Input);
+            this.Parmeters.Add("i_platform_email", _input.PlatformEmail, DbType.String, ParameterDirection.Input);
+            this.Parmeters.Add("i_role_type", _input.RoleType, DbType.String, ParameterDirection.Input);
+            this.Parmeters.Add("i_cur_time", _input.CurrentTime, DbType.DateTime, ParameterDirection.Input);
+
+            this.Parmeters.Add("o_result", 0, DbType.Int32, ParameterDirection.Output);
         }
 
-        public override bool OnQuery()
+        public override int OnQuery()
         {
-            _output = false;
+            _output = -1;
 
             DapperFacade.DoWithDBContext(
                     null,
                     (Contexts.PoseGlobalDB pose_globalDB) =>
                     {
-                        var isExist = pose_globalDB.ExecuteScalar<bool>("SELECT IF (EXISTS (SELECT * FROM user_base WHERE platform_id = @PlatformId), 1, 0)",
-                                                                                new { _input.PlatformId });
-
-                        if (isExist)
-                        {
-                            _output = true;
-                        }
-                        else
-                        {
-                            var affectedRows = pose_globalDB.Execute("INSERT INTO user_base(platform_id, platform_type, role_type, last_login_date, ipt_date)VALUE(@PlatformId, @PlatformType, @RoleType, @InsertTime, @InsertTime);",
-                                                                            _input);
-
-                            if (affectedRows == 1)
-                                _output = true;
-                        }
+                        var affects = pose_globalDB.ExecuteSP("P_INSERT_USER_BASE", this.Parmeters);
+                        _output = this.Parmeters.Get<int>("o_result");
                     },
                     this.OnError);
 

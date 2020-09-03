@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PanCardView.Extensions;
 using PosePacket.Proxy;
 using PosePacket.Service.Enum;
 using PosePacket.Service.Football;
@@ -88,7 +89,11 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             groupInfo.Expanded = !groupInfo.Expanded;
 
-            MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
+            var itmeIdx = MatchListViewModels.FindIndex(groupInfo);
+            MatchListViewModels.RemoveAt(itmeIdx);
+            MatchListViewModels.Insert(itmeIdx, groupInfo);
+
+            //MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }

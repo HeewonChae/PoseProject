@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PoseSportsPredict.Models.Resources.Common;
+using PoseSportsPredict.Services;
+using Shiny;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +22,11 @@ namespace PoseSportsPredict.Views.Football.League.Detail
 
         private void _AdMob_AdsLoaded(object sender, EventArgs e)
         {
-            _AdMob.IsVisible = true;
+            var membershipType = ShinyHost.Resolve<MembershipService>().MemberRoleType;
+            if (MembershipAdvantage.TryGetValue(membershipType, out MembershipAdvantage advantage))
+            {
+                _AdMob.IsVisible = !advantage.IsBannerAdRemove;
+            }
         }
     }
 }

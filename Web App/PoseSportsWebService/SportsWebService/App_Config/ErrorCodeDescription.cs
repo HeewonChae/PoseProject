@@ -13,7 +13,7 @@ namespace SportsWebService.App_Config
             if (Errors.ContainsKey(errorCode))
                 return Errors[errorCode];
 
-            return string.Empty;
+            return "Unknown Error";
         }
     }
 }

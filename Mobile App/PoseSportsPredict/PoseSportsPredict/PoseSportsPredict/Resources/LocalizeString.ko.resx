@@ -246,7 +246,7 @@
   <data name="Collapse_All_Leagues" xml:space="preserve">
     <value>모든 리그 축소</value>
   </data>
-  <data name="Add_Delete_Matches_Bookmark" xml:space="preserve">
+  <data name="Edit_Bookmark" xml:space="preserve">
     <value>북마크 추가/삭제</value>
   </data>
   <data name="Ongoing_matches" xml:space="preserve">
@@ -444,8 +444,8 @@
   <data name="My_Profile" xml:space="preserve">
     <value>내정보</value>
   </data>
-  <data name="VIP_Club" xml:space="preserve">
-    <value>VIP 클럽</value>
+  <data name="VIP_Lounge" xml:space="preserve">
+    <value>VIP 라운지</value>
   </data>
   <data name="Check_For_Updates" xml:space="preserve">
     <value>업데이트 확인</value>
@@ -548,5 +548,32 @@
   </data>
   <data name="Recommended_Matches" xml:space="preserve">
     <value>추천 경기</value>
+  </data>
+  <data name="Product_Not_Consumed" xml:space="preserve">
+    <value>소비되지 않은 유료 상품이 존재합니다.</value>
+  </data>
+  <data name="Bookmark_Inventory_Full" xml:space="preserve">
+    <value>북마크가 가득 찾습니다.</value>
+  </data>
+  <data name="VidonAd_Load_Fail" xml:space="preserve">
+    <value>광고를 불러오는중 문제가 발생했습니다.</value>
+  </data>
+  <data name="Already_Owned_Purchase" xml:space="preserve">
+    <value>이미 소유하고 있는 상품 입니다.</value>
+  </data>
+  <data name="Fail_Store_Connect" xml:space="preserve">
+    <value>스토어에 접속할 수 없습니다.</value>
+  </data>
+  <data name="Success_Purchase_But_Server_Error" xml:space="preserve">
+    <value>구매는 성공했지만 서버에서 에러가 발생 했습니다.</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>복구</value>
+  </data>
+  <data name="Unknown_Error" xml:space="preserve">
+    <value>알 수 없는 에러가 발생했습니다.</value>
+  </data>
+  <data name="Payment_Pending_Please_Check" xml:space="preserve">
+    <value>결제가 보류 됐습니다. 결제 수단을 확인해주세요.</value>
   </data>
 </root>

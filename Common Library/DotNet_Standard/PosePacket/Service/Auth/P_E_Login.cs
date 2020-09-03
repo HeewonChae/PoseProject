@@ -1,4 +1,5 @@
 ﻿using MessagePack;
+using PosePacket.Service.Enum;
 using System;
 
 namespace PosePacket.Service.Auth
@@ -21,5 +22,11 @@ namespace PosePacket.Service.Auth
 
         [Key(2)]
         public DateTime LastLoginTime { get; set; }
+
+        [Key(3)]
+        public MemberRoleType MemberRoleType { get; set; }
+
+        [Key(4)]
+        public DateTime RoleExpireTime { get; set; }
     }
 }

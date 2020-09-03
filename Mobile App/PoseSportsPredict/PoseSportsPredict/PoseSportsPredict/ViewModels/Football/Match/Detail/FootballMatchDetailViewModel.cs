@@ -36,6 +36,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
+
             AlarmIcon = new ChangableIcon(
                 "ic_alarm_selected.png",
                 AppResourcesHelper.GetResourceColor("IconActivated"),
@@ -82,26 +88,23 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             return true;
         }
 
-        public override void OnAppearing(params object[] datas)
+        public override void OnPagePoped()
         {
-            _tabContents[SelectedViewIndex].OnAppearing();
-
-            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
-            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
-
-            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
-            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
-        }
-
-        public override void OnDisAppearing(params object[] datas)
-        {
-            _tabContents[3].OnDisAppearing(); // prediction view
-
             var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
             MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
             MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
+        }
+
+        public override void OnAppearing(params object[] datas)
+        {
+            _tabContents[SelectedViewIndex].OnAppearing();
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
+            _tabContents[3].OnDisAppearing(); // for prediction view
         }
 
         #endregion NavigableViewModel

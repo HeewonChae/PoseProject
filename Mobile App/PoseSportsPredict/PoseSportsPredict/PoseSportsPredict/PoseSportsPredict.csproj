@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Common\CoverageLanguage.json" />
+    <None Remove="Resources\Common\MembershipAdvantage.json" />
     <None Remove="Resources\Football\CoverageLeagues.json" />
     <None Remove="Resources\Football\RecommendedLeagues.json" />
     <None Remove="Resources\Football\StandingsDescription.json" />
@@ -33,6 +34,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Common\CoverageLanguage.json" />
+    <EmbeddedResource Include="Resources\Common\MembershipAdvantage.json" />
     <EmbeddedResource Include="Resources\Football\CoverageLeagues.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

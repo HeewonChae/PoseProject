@@ -1,0 +1,48 @@
+[
+  //"Regular",
+  //"Diamond",
+  //"VIP",
+  //"VVIP",
+  //"Admin",
+
+  {
+    "MemberRoleType": "Regular",
+    "MatchBookmarkLimit": 20,
+    "TeamBookmarkLimit": 20,
+    "LeagueBookmarkLimit": 20,
+    "IsBannerAdRemove": false,
+    "IsVideoAdRemove": false
+  },
+  {
+    "MemberRoleType": "Diamond",
+    "MatchBookmarkLimit": 50,
+    "TeamBookmarkLimit": 50,
+    "LeagueBookmarkLimit": 50,
+    "IsBannerAdRemove": false,
+    "IsVideoAdRemove": true
+  },
+  {
+    "MemberRoleType": "VIP",
+    "MatchBookmarkLimit": 100,
+    "TeamBookmarkLimit": 2147483647,
+    "LeagueBookmarkLimit": 2147483647,
+    "IsBannerAdRemove": true,
+    "IsVideoAdRemove": true
+  },
+  {
+    "MemberRoleType": "VVIP",
+    "MatchBookmarkLimit": 100,
+    "TeamBookmarkLimit": 2147483647,
+    "LeagueBookmarkLimit": 2147483647,
+    "IsBannerAdRemove": true,
+    "IsVideoAdRemove": true
+  },
+  {
+    "MemberRoleType": "Admin",
+    "MatchBookmarkLimit": 2147483647,
+    "TeamBookmarkLimit": 2147483647,
+    "LeagueBookmarkLimit": 2147483647,
+    "IsBannerAdRemove": true,
+    "IsVideoAdRemove": true
+  }
+]

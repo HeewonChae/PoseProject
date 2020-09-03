@@ -12,8 +12,8 @@ namespace PoseSportsPredict
 #endif
 
         // SQLite
-        public static string SQLiteServicePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
+        public static string SQLiteServicePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static string SQLiteScheme = "PoseSportsPredict.db3";
 
         // Syncfusion v18.1.0.46
@@ -23,8 +23,8 @@ namespace PoseSportsPredict
         public static string Psoe_Noti_Channel_01 = "psoe_channel_01";
 
         // For Culture
-        public const string DEFAULT_LANGUAGE = "en";
 
+        public const string DEFAULT_LANGUAGE = "en";
         public const string CULTURE_CHANGED_MSG = "UICultureChanged";
 
         public const int Prediction_Unlocked_Time = 1; // Hour
@@ -38,5 +38,8 @@ namespace PoseSportsPredict
         // InAppBilling ProductId
 
         public readonly static string[] ANDROID_PRODUCT_IDS = new string[] { "pose_poseidon_picks_0_1", "pose_poseidon_picks_1_1" };
+
+        // MemberRoleType Change Message
+        public const string MEMBERSHIP_TYPE_CHANGED = "Membership_Type_Changed";
     }
 }

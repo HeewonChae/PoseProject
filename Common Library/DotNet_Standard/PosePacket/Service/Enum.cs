@@ -37,4 +37,19 @@ namespace PosePacket.Service.Enum
         Yes,
         No,
     }
+
+    public enum MemberRoleType
+    {
+        Regular,
+        Diamond,
+        VIP,
+        VVIP,
+        Admin,
+    }
+
+    public enum StoreType
+    {
+        GooglePlay,
+        AppStore,
+    }
 }

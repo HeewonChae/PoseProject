@@ -39,14 +39,18 @@ namespace PoseSportsPredict.Logics
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage, false);
-            await Task.Delay(3000);
+            await Task.Delay(500);
 
             return true;
         }
 
         public static async Task PopNavPageAsync()
         {
-            await Application.Current.MainPage.Navigation.PopAsync(false);
+            var popedPage = await Application.Current.MainPage.Navigation.PopAsync(false);
+            if (popedPage.BindingContext is NavigableViewModel navigableViewModel)
+            {
+                navigableViewModel.OnPagePoped();
+            }
         }
 
         //public static async Task<bool> PushModalPageAsync(NavigableViewModel viewModel, params object[] prepareData)

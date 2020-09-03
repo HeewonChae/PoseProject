@@ -68,6 +68,7 @@
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DependencyImpl\DeviceInfoHelper.cs" />
     <Compile Include="DependencyImpl\ScreenHelper.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />

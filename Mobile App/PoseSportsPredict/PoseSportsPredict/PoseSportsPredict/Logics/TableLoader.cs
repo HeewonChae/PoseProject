@@ -47,6 +47,7 @@ namespace PoseSportsPredict.Logics
 #endif
             // Common
             Load_Common_CoverageLanguage(rootPath);
+            Load_Common_MembershipAdvantage(rootPath);
 
             // Football
             Load_Football_CoverageLeagues(rootPath);
@@ -62,6 +63,15 @@ namespace PoseSportsPredict.Logics
             Debug.Assert(coverageLanguage.Length != 0);
 
             CoverageLanguage.Load(coverageLanguage);
+        }
+
+        private static void Load_Common_MembershipAdvantage(string rootPath)
+        {
+            var advantages = LoadJson<MembershipAdvantage[]>("Resources.Common.MembershipAdvantage.json");
+
+            Debug.Assert(advantages.Length != 0);
+
+            MembershipAdvantage.Load(advantages);
         }
 
         private static void Load_Football_CoverageLeagues(string rootPath)

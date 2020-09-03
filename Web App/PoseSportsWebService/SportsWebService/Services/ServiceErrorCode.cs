@@ -23,6 +23,7 @@
             public const int HelloWorld = Root.WebService + 01000000;
             public const int Auth = Root.WebService + 02000000;
             public const int Football = Root.WebService + 03000000;
+            public const int Billing = Root.WebService + 04000000;
 
             public const int Max = Root.Max + 99000000;
         };
@@ -44,6 +45,13 @@
             public const int P_E_CheckVaildOAuthUser = WebService.Auth + 001000;
             public const int P_E_Login = WebService.Auth + 002000;
             public const int P_E_TokenRefresh = WebService.Auth + 003000;
+        }
+
+        public static class WebMethod_Billing
+        {
+            public const int P_E_INSERT_IN_APP_BILLING_BY_GOOGLE = WebService.Billing + 001000;
+            public const int P_E_UPDATE_IN_APP_BILLING_BY_GOOGLE = WebService.Billing + 002000;
+            public const int P_E_CHECK_MEMBERSHIP_BY_GOOGLE = WebService.Billing + 003000;
         }
 
         public static class WebMethod_Football
@@ -69,6 +77,10 @@
         {
             public const int P_E_CheckVaildOAuthUser = Database.GlobalDB + 001000;
             public const int P_E_Login = Database.GlobalDB + 002000;
+            public const int P_INSERT_IN_APP_BILLING = Database.GlobalDB + 003000;
+            public const int P_UPDATE_IN_APP_BILLING = Database.GlobalDB + 004000;
+            public const int P_SELECT_LINKED_BILLING = Database.GlobalDB + 005000;
+            public const int P_UPDATE_USER_ROLE = Database.GlobalDB + 006000;
         }
 
         public static class StoredProcedure_Football

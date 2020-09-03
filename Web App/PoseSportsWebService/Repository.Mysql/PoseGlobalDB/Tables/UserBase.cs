@@ -27,9 +27,10 @@ namespace Repository.Mysql.PoseGlobalDB.Tables
         [StringLength(16)]
         public string platform_type { get; set; }
 
-        [Required]
-        [Column(TypeName = "INT")]
-        public int role_type { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [Index("IDX_PLATFORM_EMAIL", Order = 1, IsUnique = false)]
+        [StringLength(64)]
+        public string platform_email { get; set; }
 
         [Required]
         public DateTime last_login_date { get; set; }

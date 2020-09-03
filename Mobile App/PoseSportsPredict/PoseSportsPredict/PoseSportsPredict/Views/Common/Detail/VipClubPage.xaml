@@ -5,19 +5,65 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
              materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
              materialui:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              materialui:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Common.Detail.VipClubPage"
-             Title="{Binding [VIP_Club], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+             Title="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
              BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            x:DataType="viewmodels:VIPClubViewModel">
+            <materialui:MaterialCard
+                ClickCommand="{Binding VIPClickCommand}"
+                IsClickable="True"
+                Margin="0"
+                Padding="0"
+                CornerRadius="3"
+                Elevation="3"
+                HorizontalOptions="FillAndExpand">
+                <materialui:MaterialLabel
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Padding="10,3"
+                    TypeScale="Body2"
+                    TextColor="{StaticResource TextColor_D}">
+                    <materialui:MaterialLabel.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding VIPProduct.Name}" />
+                            <Span Text=" - " />
+                            <Span Text="{Binding VIPProduct.LocalizedPrice}" />
+                        </FormattedString>
+                    </materialui:MaterialLabel.FormattedText>
+                </materialui:MaterialLabel>
+            </materialui:MaterialCard>
+
+            <materialui:MaterialCard
+                ClickCommand="{Binding DiamondClickCommand}"
+                IsClickable="True"
+                Margin="0"
+                Padding="0"
+                CornerRadius="3"
+                Elevation="3"
+                HorizontalOptions="FillAndExpand">
+                <materialui:MaterialLabel
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Padding="10,3"
+                    TypeScale="Body2"
+                    TextColor="{StaticResource TextColor_D}">
+                    <materialui:MaterialLabel.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding DiamondProduct.Name}" />
+                            <Span Text=" - " />
+                            <Span Text="{Binding DiamondProduct.LocalizedPrice}" />
+                        </FormattedString>
+                    </materialui:MaterialLabel.FormattedText>
+                </materialui:MaterialLabel>
+            </materialui:MaterialCard>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

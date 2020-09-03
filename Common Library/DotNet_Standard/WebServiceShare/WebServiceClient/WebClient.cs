@@ -33,6 +33,25 @@ namespace WebServiceShare.WebServiceClient
 
         #endregion Exception Handle Delegate
 
+        public static async Task<HttpResponseMessage> RequestSimpleAsync(WebRequestContext requestContext, string token = "")
+        {
+            var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
+            var flurlRequest = new FlurlClient(endPointAddr).Request();
+            flurlRequest.WithOAuthBearerToken(token);
+
+            var convertedSegments = ConvertSegments(requestContext.SegmentGroup, requestContext.SegmentData);
+            flurlRequest.AppendPathSegments(convertedSegments);
+
+            List<(string, string)> convertedParams = ConvertQueryParams(requestContext.QueryParamGroup, requestContext.QueryParamData);
+            foreach (var (name, value) in convertedParams)
+            {
+                flurlRequest.SetQueryParam(name, value);
+            }
+
+            requestContext.DataSerialize();
+            return await SendSimpleAsync(flurlRequest, requestContext);
+        }
+
         public static async Task<TOut> RequestAsync<TOut>(WebRequestContext requestContext, string token = "")
         {
             var endPointAddr = new Url(requestContext.BaseUrl ?? "").AppendPathSegment(requestContext.ServiceUrl ?? "");
@@ -101,6 +120,34 @@ namespace WebServiceShare.WebServiceClient
 
             requestContext.DataSerialize();
             return await SendAsync(flurlRequest, requestContext);
+        }
+
+        private static async Task<HttpResponseMessage> SendSimpleAsync(IFlurlRequest flurlRequest, WebRequestContext requestContext)
+        {
+            HttpResponseMessage result = default;
+            try
+            {
+                requestContext.AttemptCnt++;
+                if (requestContext.MethodType == WebMethodType.GET)
+                {
+                    result = await flurlRequest.GetAsync();
+                }
+                else if (requestContext.MethodType == WebMethodType.POST)
+                {
+                    result = await flurlRequest.PostJsonAsync((string)requestContext);
+                }
+            }
+            catch (FlurlHttpException flurlException)
+            {
+                if (flurlException.Call.Response != null
+                    && requestContext.AttemptCnt < WebConfig.ReTryCount)
+                    result = await SendSimpleAsync(flurlRequest, requestContext);
+            }
+            catch (Exception)
+            {
+            }
+
+            return result;
         }
 
         private static async Task<TOut> SendAsync<TOut>(IFlurlRequest flurlRequest, WebRequestContext requestContext)
@@ -263,7 +310,9 @@ namespace WebServiceShare.WebServiceClient
             {
                 if (segment.StartsWith("{"))
                 {
-                    var propertyName = String.Join("", segment.Split('{', '}'));
+                    var startIndex = segment.IndexOf("{") + 1;
+                    var length = segment.IndexOf("}") - startIndex;
+                    var propertyName = segment.Substring(startIndex, length);
                     convertedSegments.Add((string)data.GetType().GetProperty(propertyName).GetValue(data, null));
                 }
                 else

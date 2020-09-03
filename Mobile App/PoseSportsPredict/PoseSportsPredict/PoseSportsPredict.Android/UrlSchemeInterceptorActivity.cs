@@ -28,13 +28,14 @@ namespace PoseSportsPredict.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            global::Android.Net.Uri uri_android = Intent.Data;
+            Android.Net.Uri uri_android = Intent.Data;
 
             // Convert Android.Net.Url to Uri
             var uri = new Uri(uri_android.ToString());
 
             // Load redirectUrl page
-            ExternOAuthService.Cur_Authenticator.OnPageLoaded(uri);
+            ExternOAuthService.Cur_Authenticator.OnPageLoading(uri);
+
             var intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
             StartActivity(intent);

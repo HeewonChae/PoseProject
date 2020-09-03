@@ -1,0 +1,19 @@
+[
+  {
+    "ProductId": "pose_poseidon_picks_0_1",
+    "PurchaseType": "InAppProduct",
+    "StoreType": "GooglePlay",
+    "OfferRoleType": "Diamond",
+    "OfferPeriod": 7,
+    "Description": "Remove Prediction Video Ad"
+  },
+
+  {
+    "ProductId": "pose_poseidon_picks_1_1",
+    "PurchaseType": "Subscription",
+    "StoreType": "GooglePlay",
+    "OfferRoleType": "VIP",
+    "OfferPeriod": 30,
+    "Description": "Remove Prediction Video Ad"
+  }
+]

@@ -28,14 +28,9 @@ namespace SportsWebService.Commands.Auth
             if (ServerContext.Current.Credentials == PoseCredentials.Default)
                 ErrorHandler.OccurException(RowCode.Invalid_Credentials);
 
-            var credentials = new PoseCredentials();
-            credentials.SetUserNo(ServerContext.Current.Credentials.UserNo);
-            credentials.SetServiceRoleType(ServerContext.Current.Credentials.ServiceRoleType);
-            credentials.RefreshExpireTime();
-
             return new O_TokenRefresh
             {
-                PoseToken = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials)),
+                PoseToken = PoseCredentials.CreateToken(ServerContext.Current.Credentials.UserNo, ServerContext.Current.Credentials.ServiceRoleType),
                 TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
             };
         }

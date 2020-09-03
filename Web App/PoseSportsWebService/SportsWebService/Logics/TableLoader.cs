@@ -1,5 +1,6 @@
 ﻿using GameKernel;
 using LogicCore.File;
+using LogicCore.Utility.ThirdPartyLog;
 using SportsWebService.App_Config;
 using SportsWebService.Utilities;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace SportsWebService.Logics
 {
     public static class TableLoader
     {
-        private readonly static TableParser _parser = new TableParser();
+        //private readonly static TableParser _parser = new TableParser();
 
         public static void Init(string rootPath)
         {
@@ -19,6 +20,7 @@ namespace SportsWebService.Logics
         private static void LoadTable(string rootPath)
         {
             Load_ErrorCodeDescription(rootPath);
+            Load_InAppProduct(rootPath);
         }
 
         private static void Load_ErrorCodeDescription(string rootPath)
@@ -27,6 +29,14 @@ namespace SportsWebService.Logics
                             .JsonDeserialize<Dictionary<int, string>>();
 
             ErrorCodeDescription.Errors = errors;
+        }
+
+        private static void Load_InAppProduct(string rootPath)
+        {
+            var Purchases = FileFacade.ReadAllText(Path.Combine(rootPath, "InAppPurchase.json"))
+                            .JsonDeserialize<InAppPurchase[]>();
+
+            InAppPurchase.PostProcess(Purchases);
         }
     }
 }

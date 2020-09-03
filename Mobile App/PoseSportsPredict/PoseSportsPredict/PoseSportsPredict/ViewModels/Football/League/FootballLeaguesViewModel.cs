@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PanCardView.Extensions;
 using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.InfraStructure.SQLite;
@@ -116,7 +117,11 @@ namespace PoseSportsPredict.ViewModels.Football.League
         {
             groupInfo.Expanded = !groupInfo.Expanded;
 
-            LeagueGroups = new ObservableCollection<FootballLeagueListViewModel>(LeagueGroups);
+            var itmeIdx = LeagueGroups.FindIndex(groupInfo);
+            LeagueGroups.RemoveAt(itmeIdx);
+            LeagueGroups.Insert(itmeIdx, groupInfo);
+
+            //LeagueGroups = new ObservableCollection<FootballLeagueListViewModel>(LeagueGroups);
         }
 
         public ICommand SearchBarTextChangedCommand { get => new RelayCommand<TextChangedEventArgs>((e) => SearchBarTextChanged(e)); }

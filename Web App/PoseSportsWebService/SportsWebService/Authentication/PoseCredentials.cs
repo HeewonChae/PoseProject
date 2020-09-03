@@ -1,6 +1,7 @@
 ﻿using LogicCore.Utility;
 using PosePacket;
 using SportsWebService.Logics;
+using SportsWebService.Models.Enums;
 using SportsWebService.Services;
 using SportsWebService.Utilities;
 using System;
@@ -13,8 +14,11 @@ namespace SportsWebService.Authentication
 {
     public class PoseCredentials : IIdentity
     {
+#if DEBUG
+        public static readonly long TOKEN_EXPIRE_IN = (long)TimeSpan.FromMinutes(3).TotalMilliseconds; // 3분
+#else
         public static readonly long TOKEN_EXPIRE_IN = (long)TimeSpan.FromHours(1).TotalMilliseconds; // 1시간
-        //public static readonly long TOKEN_EXPIRE_IN = (long)TimeSpan.FromMinutes(3).TotalMilliseconds; // 3분
+#endif
 
         public static readonly PoseCredentials Default = new PoseCredentials();
 
@@ -54,13 +58,41 @@ namespace SportsWebService.Authentication
         public long ExpireTime => _expireTime;
         public int ServiceRoleType => _serviceRoleType;
 
-        public void SetUserNo(long userNo) => _userNo = userNo;
-
         public void RefreshExpireTime() => _expireTime = LogicTime.TIME() + PoseCredentials.TOKEN_EXPIRE_IN;
 
-        public void SetServiceRoleType(int serviceRoleType) => _serviceRoleType = serviceRoleType;
-
         #region Serialize Methods
+
+        public static PoseCredentials CreateCredentials(long userNo, ServiceRoleType serviceRoleType)
+        {
+            var newCredentials = new PoseCredentials();
+            newCredentials._userNo = userNo;
+            newCredentials._serviceRoleType = (int)serviceRoleType;
+            newCredentials.RefreshExpireTime();
+
+            return newCredentials;
+        }
+
+        public static byte[] CreateToken(long userNo, ServiceRoleType serviceRoleType)
+        {
+            var newCredentials = PoseCredentials.CreateCredentials(userNo, serviceRoleType);
+            return Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(newCredentials));
+        }
+
+        public static PoseCredentials CreateCredentials(long userNo, int serviceRoleType)
+        {
+            var newCredentials = new PoseCredentials();
+            newCredentials._userNo = userNo;
+            newCredentials._serviceRoleType = serviceRoleType;
+            newCredentials.RefreshExpireTime();
+
+            return newCredentials;
+        }
+
+        public static byte[] CreateToken(long userNo, int serviceRoleType)
+        {
+            var newCredentials = PoseCredentials.CreateCredentials(userNo, serviceRoleType);
+            return Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(newCredentials));
+        }
 
         public static byte[] Serialize(PoseCredentials credentials)
         {
@@ -74,7 +106,7 @@ namespace SportsWebService.Authentication
                 // CertifiedTime
                 buffer.AddRange(BitConverter.GetBytes(credentials._expireTime));
 
-                // CertifiedTime
+                // ServiceRoleType
                 buffer.AddRange(BitConverter.GetBytes(credentials._serviceRoleType));
             }
             catch (Exception)
@@ -101,7 +133,7 @@ namespace SportsWebService.Authentication
                 credentials._expireTime = BitConverter.ToInt64(buffer, curPosition);
                 curPosition += 8;
 
-                // CertifiedTime
+                // ServiceRoleType
                 credentials._serviceRoleType = BitConverter.ToInt32(buffer, curPosition);
                 curPosition += 4;
 

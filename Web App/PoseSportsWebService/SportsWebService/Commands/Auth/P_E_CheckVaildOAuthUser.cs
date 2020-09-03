@@ -5,6 +5,7 @@ using SportsWebService.Authentication;
 using SportsWebService.Authentication.ExternOAuth;
 using SportsWebService.Infrastructure;
 using SportsWebService.Logics;
+using SportsWebService.Models.Enums;
 using SportsWebService.Services;
 using SportsWebService.Utilities;
 using System;
@@ -54,13 +55,14 @@ namespace SportsWebService.Commands.Auth
                 {
                     PlatformId = externAuthUser.Id,
                     PlatformType = externAuthUser.SNSProvider.ToString(),
-                    RoleType = (int)ServiceRoleType.User,
-                    InsertTime = DateTime.UtcNow,
+                    PlatformEmail = externAuthUser.Email,
+                    RoleType = ServiceRoleType.Regular.ToString(), // default 회원등급
+                    CurrentTime = DateTime.UtcNow,
                 });
 
-                bool queryResult = P_INSERT_USER_BASE.OnQuery();
+                int queryResult = P_INSERT_USER_BASE.OnQuery();
 
-                if (P_INSERT_USER_BASE.EntityStatus != null || !queryResult)
+                if (P_INSERT_USER_BASE.EntityStatus != null || queryResult != 0)
                     ErrorHandler.OccurException(RowCode.DB_Failed_Save);
             }
 

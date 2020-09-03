@@ -10,7 +10,9 @@ using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.Services.Cache.Loader;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Match.Detail;
@@ -72,6 +74,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         private ICacheService _cacheService;
         private ISQLiteService _sqliteService;
+        private MembershipService _membershipService;
 
         #endregion Services
 
@@ -189,10 +192,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         public FootballMatchDetailPredictionsViewModel(
             FootballMatchDetailPredictionsView view,
             ICacheService cacheService,
-            ISQLiteService sqliteService) : base(view)
+            ISQLiteService sqliteService,
+            MembershipService membershipService) : base(view)
         {
             _cacheService = cacheService;
             _sqliteService = sqliteService;
+            _membershipService = membershipService;
 
             OnInitializeView();
         }
@@ -205,7 +210,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
         {
             _selectedPrediction = predictionGroup;
 
-            if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
+            MembershipAdvantage.TryGetValue(_membershipService.MemberRoleType, out MembershipAdvantage advantage);
+            if ((!advantage.IsVideoAdRemove)
+                && predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
             {
                 // 동영상 광고
                 if (CrossMTAdmob.Current.IsEnabled)
@@ -300,37 +307,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             AdsPlayed = false;
             UserDialogs.Instance.HideLoading();
 
-            await MaterialDialog.Instance.AlertAsync(LocalizeString.Occur_Error,
+            await MaterialDialog.Instance.AlertAsync(LocalizeString.VidonAd_Load_Fail,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
                     DialogConfiguration.DefaultAlterDialogConfiguration);
-
-#if DEV_RELEASE
-            _selectedPrediction.UnlockedTime = DateTime.UtcNow;
-            await _sqliteService.InsertOrUpdateAsync(_selectedPrediction);
-
-            switch (_selectedPrediction.MainLabel)
-            {
-                case FootballPredictionType.Final_Score:
-                    IsFinalScoreUnlocked = true;
-                    break;
-
-                case FootballPredictionType.Match_Winner:
-                    IsMatchWinnerUnlocked = true;
-                    break;
-
-                case FootballPredictionType.Both_Teams_to_Score:
-                    IsBothToScoreUnlocked = true;
-                    break;
-
-                case FootballPredictionType.Under_Over:
-                    IsUnderOverUnlocked = true;
-                    break;
-
-                default:
-                    break;
-            }
-#endif
         }
 
         public FootballMatchDetailPredictionsViewModel SetMatchInfo(FootballMatchInfo matchInfo)
@@ -378,32 +358,43 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             _allPredictions = dic_predictionGroup.Values.SelectMany(elem => elem.Predictions).ToList();
 
-            var sql_finalScoreGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(FinalScorePredictions.PrimaryKey);
-            if (sql_finalScoreGroup != null)
+            MembershipAdvantage.TryGetValue(_membershipService.MemberRoleType, out MembershipAdvantage advantage);
+            if (advantage.IsVideoAdRemove)
             {
-                IsFinalScoreUnlocked = sql_finalScoreGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
-                FinalScorePredictions.UnlockedTime = sql_finalScoreGroup.UnlockedTime;
+                IsFinalScoreUnlocked = true;
+                IsMatchWinnerUnlocked = true;
+                IsBothToScoreUnlocked = true;
+                IsUnderOverUnlocked = true;
             }
-
-            var sql_matchWinnerGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(MatchWinnerPredictions.PrimaryKey);
-            if (sql_matchWinnerGroup != null)
+            else
             {
-                IsMatchWinnerUnlocked = sql_matchWinnerGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
-                MatchWinnerPredictions.UnlockedTime = sql_matchWinnerGroup.UnlockedTime;
-            }
+                var sql_finalScoreGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(FinalScorePredictions.PrimaryKey);
+                if (sql_finalScoreGroup != null)
+                {
+                    IsFinalScoreUnlocked = sql_finalScoreGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
+                    FinalScorePredictions.UnlockedTime = sql_finalScoreGroup.UnlockedTime;
+                }
 
-            var sql_bothToScoreGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(BothToScorePredictions.PrimaryKey);
-            if (sql_bothToScoreGroup != null)
-            {
-                IsBothToScoreUnlocked = sql_bothToScoreGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
-                BothToScorePredictions.UnlockedTime = sql_bothToScoreGroup.UnlockedTime;
-            }
+                var sql_matchWinnerGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(MatchWinnerPredictions.PrimaryKey);
+                if (sql_matchWinnerGroup != null)
+                {
+                    IsMatchWinnerUnlocked = sql_matchWinnerGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
+                    MatchWinnerPredictions.UnlockedTime = sql_matchWinnerGroup.UnlockedTime;
+                }
 
-            var sql_UnderOverGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(UnderOverPredictions.PrimaryKey);
-            if (sql_UnderOverGroup != null)
-            {
-                IsUnderOverUnlocked = sql_UnderOverGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
-                UnderOverPredictions.UnlockedTime = sql_UnderOverGroup.UnlockedTime;
+                var sql_bothToScoreGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(BothToScorePredictions.PrimaryKey);
+                if (sql_bothToScoreGroup != null)
+                {
+                    IsBothToScoreUnlocked = sql_bothToScoreGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
+                    BothToScorePredictions.UnlockedTime = sql_bothToScoreGroup.UnlockedTime;
+                }
+
+                var sql_UnderOverGroup = await _sqliteService.SelectAsync<FootballPredictionGroup>(UnderOverPredictions.PrimaryKey);
+                if (sql_UnderOverGroup != null)
+                {
+                    IsUnderOverUnlocked = sql_UnderOverGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) > DateTime.UtcNow;
+                    UnderOverPredictions.UnlockedTime = sql_UnderOverGroup.UnlockedTime;
+                }
             }
 
             SetIsBusy(false);

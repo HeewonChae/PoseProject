@@ -75,7 +75,8 @@ namespace PoseSportsPredict.Services
                             }
                             else
                             {
-                                await MaterialDialog.Instance.AlertAsync($"{errorMessage}, E_{errorCode}",
+                                await MaterialDialog.Instance.AlertAsync($"{errorMessage}",
+                                    $"E_{errorCode}",
                                     LocalizeString.Ok,
                                     DialogConfiguration.DefaultAlterDialogConfiguration);
                             }
@@ -83,12 +84,16 @@ namespace PoseSportsPredict.Services
                         else
                         {
                             await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                            LocalizeString.App_Title,
+                            LocalizeString.Ok,
                             DialogConfiguration.DefaultAlterDialogConfiguration);
                         }
                     }
                     catch
                     {
                         await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                            LocalizeString.App_Title,
+                            LocalizeString.Ok,
                             DialogConfiguration.DefaultAlterDialogConfiguration);
                     }
 

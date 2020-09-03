@@ -98,7 +98,7 @@
                             VerticalTextAlignment="Center"
                             TypeScale="Body1"
                             TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding [VIP_Club], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                            Text="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                         </materialui:MaterialLabel>
                     </StackLayout>
                 </StackLayout>

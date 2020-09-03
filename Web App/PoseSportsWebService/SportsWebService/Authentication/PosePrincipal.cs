@@ -1,6 +1,7 @@
 ﻿using LogicCore.Converter;
 using PosePacket;
 using SportsWebService.Logics;
+using SportsWebService.Models.Enums;
 using SportsWebService.Services;
 using SportsWebService.Utilities;
 using System.ComponentModel;

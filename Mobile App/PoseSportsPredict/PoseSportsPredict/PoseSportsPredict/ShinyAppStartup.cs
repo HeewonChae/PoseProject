@@ -94,6 +94,7 @@ namespace PoseSportsPredict
             services.AddSingleton<INotificationService, NotificationService>();
             services.AddSingleton<ICacheService, CacheService>();
             services.AddSingleton<InAppBillingService>();
+            services.AddSingleton<MembershipService>();
         }
 
         private void RegisterConverters(IServiceCollection services)

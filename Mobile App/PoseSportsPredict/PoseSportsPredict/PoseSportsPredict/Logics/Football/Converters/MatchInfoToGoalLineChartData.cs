@@ -13,7 +13,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
             var goalFors = new List<FootballGoalLineChartData>();
             var goalAgainsts = new List<FootballGoalLineChartData>();
 
-            var orderedMatches = matches.OrderBy(elem => elem.MatchTime).Take(dataCnt);
+            var orderedMatches = matches.OrderByDescending(elem => elem.MatchTime).Take(dataCnt);
 
             foreach (var match in orderedMatches)
             {
@@ -32,6 +32,8 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 });
             }
 
+            goalFors.Reverse();
+            goalAgainsts.Reverse();
             return (goalFors, goalAgainsts);
         }
     }

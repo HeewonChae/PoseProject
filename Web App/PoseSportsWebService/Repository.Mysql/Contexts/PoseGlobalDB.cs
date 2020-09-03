@@ -38,5 +38,8 @@ namespace Repository.Mysql.Contexts
 
         // tables
         public virtual DbSet<UserBase> userBase { get; set; }
+
+        public virtual DbSet<UserRole> userRole { get; set; }
+        public virtual DbSet<InAppBilling> inAppBilling { get; set; }
     }
 }

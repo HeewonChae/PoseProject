@@ -49,7 +49,7 @@ namespace PoseSportsPredict.ViewModels
                 LocalStorage.Storage.GetValueOrDefault<string>(LocalStorageKey.UserLanguageId, out string userLanguageId);
                 if (userLanguageId == null)
                 {
-                    userLanguageId = CultureInfo.CurrentUICulture.Name.Split('-')[0];
+                    userLanguageId = CultureInfo.CurrentUICulture.Name.Split('-')[0].ToLower();
                     if (!CoverageLanguage.CoverageLanguages.ContainsKey(userLanguageId))
                     {
                         // Default Language : EN
@@ -114,10 +114,17 @@ namespace PoseSportsPredict.ViewModels
             await _notificationService.Initialize();
 
             // InAppBilling Item Init
-            var inAppPurchase = await ShinyHost.Resolve<InAppBillingService>().GetProductInfoAsync(ItemType.InAppPurchase, AppConfig.ANDROID_PRODUCT_IDS[0]);
-            var inAppSubscriptions = await ShinyHost.Resolve<InAppBillingService>().GetProductInfoAsync(ItemType.Subscription, AppConfig.ANDROID_PRODUCT_IDS[1]);
+            ShinyHost.Resolve<InAppBillingService>().InitializeProduct();
 
-            if (!await _OAuthService.IsAuthenticatedAndValid()
+            var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
+            if (!deviceInfoHelper.IsLicensed.HasValue || !deviceInfoHelper.IsLicensed.Value)
+            {
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
+                        LocalizeString.App_Title,
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
+            }
+            else if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
             {
                 await _OAuthService.Logout();

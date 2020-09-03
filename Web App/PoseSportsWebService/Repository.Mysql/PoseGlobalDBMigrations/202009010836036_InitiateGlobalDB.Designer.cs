@@ -7,13 +7,13 @@ namespace Repository.Mysql.PoseGlobalDBMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class Initialize : IMigrationMetadata
+    public sealed partial class InitiateGlobalDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialize));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitiateGlobalDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003170333152_Initialize"; }
+            get { return "202009010836036_InitiateGlobalDB"; }
         }
         
         string IMigrationMetadata.Source

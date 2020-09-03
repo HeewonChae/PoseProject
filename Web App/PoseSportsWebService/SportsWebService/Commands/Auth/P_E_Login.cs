@@ -1,18 +1,22 @@
-﻿using LogicCore.Utility;
+﻿using LogicCore.Converter;
+using LogicCore.Utility;
 using PosePacket;
 using PosePacket.Service.Auth;
+using PosePacket.Service.Enum;
 using SportsWebService.Authentication;
 using SportsWebService.Infrastructure;
 using SportsWebService.Logics;
+using SportsWebService.Models.Enums;
 using SportsWebService.Services;
 using SportsWebService.Utilities;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using PoseGlobalDB = Repository.Mysql.PoseGlobalDB;
 
 namespace SportsWebService.Commands.Auth
 {
+    using PoseGlobalDB = Repository.Mysql.PoseGlobalDB;
+
     [WebModelType(InputType = typeof(I_Login), OutputType = typeof(O_Login))]
     public static class P_E_Login
     {
@@ -48,16 +52,15 @@ namespace SportsWebService.Commands.Auth
                     ErrorHandler.OccurException(RowCode.DB_Failed_User_Login);
             }
 
-            var credentials = new PoseCredentials();
-            credentials.SetUserNo(db_output.UserNo);
-            credentials.SetServiceRoleType(db_output.RoleType);
-            credentials.RefreshExpireTime();
-
+            db_output.RoleType.TryParseEnum(out ServiceRoleType serviceRoleType);
+            db_output.RoleType.TryParseEnum(out MemberRoleType memberRoleType);
             return new O_Login
             {
-                PoseToken = Singleton.Get<CryptoFacade>().Encrypt_RSA(PoseCredentials.Serialize(credentials)),
+                PoseToken = PoseCredentials.CreateToken(db_output.UserNo, serviceRoleType),
                 TokenExpireIn = PoseCredentials.TOKEN_EXPIRE_IN,
                 LastLoginTime = db_output.LastLoginTime,
+                MemberRoleType = memberRoleType,
+                RoleExpireTime = db_output.RoleExpireTime,
             };
         }
     }

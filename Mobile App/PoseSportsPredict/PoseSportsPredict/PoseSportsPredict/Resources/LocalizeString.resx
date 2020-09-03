@@ -249,8 +249,8 @@
   <data name="Collapse_All_Leagues" xml:space="preserve">
     <value>Collapse all leagues</value>
   </data>
-  <data name="Add_Delete_Matches_Bookmark" xml:space="preserve">
-    <value>Add/Delete a bookmark</value>
+  <data name="Edit_Bookmark" xml:space="preserve">
+    <value>Edit Bookmarks</value>
   </data>
   <data name="Ongoing_matches" xml:space="preserve">
     <value>Ongoing matches</value>
@@ -448,8 +448,8 @@
   <data name="My_Profile" xml:space="preserve">
     <value>My Profile</value>
   </data>
-  <data name="VIP_Club" xml:space="preserve">
-    <value>VIP Club</value>
+  <data name="VIP_Lounge" xml:space="preserve">
+    <value>VIP Lounge</value>
   </data>
   <data name="Check_For_Updates" xml:space="preserve">
     <value>Check For Updates</value>
@@ -552,5 +552,32 @@
   </data>
   <data name="Recommended_Matches" xml:space="preserve">
     <value>Recommended Matches</value>
+  </data>
+  <data name="Product_Not_Consumed" xml:space="preserve">
+    <value>There are paid products that are not consumed.</value>
+  </data>
+  <data name="Bookmark_Inventory_Full" xml:space="preserve">
+    <value>Your bookmarks are full.</value>
+  </data>
+  <data name="VidonAd_Load_Fail" xml:space="preserve">
+    <value>There was a problem loading the ad.</value>
+  </data>
+  <data name="Already_Owned_Purchase" xml:space="preserve">
+    <value>This is a product you already own.</value>
+  </data>
+  <data name="Fail_Store_Connect" xml:space="preserve">
+    <value>The store cannot be accessed.</value>
+  </data>
+  <data name="Success_Purchase_But_Server_Error" xml:space="preserve">
+    <value>The purchase was successful, but an error occurred on the server.</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Unknown_Error" xml:space="preserve">
+    <value>An unknown error has occurred.</value>
+  </data>
+  <data name="Payment_Pending_Please_Check" xml:space="preserve">
+    <value>Payment has been pending. Please check your payment</value>
   </data>
 </root>

@@ -5,7 +5,9 @@ using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models;
 using PoseSportsPredict.Models.Enums;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
+using Shiny;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,17 +28,47 @@ namespace PoseSportsPredict.Services
 
         public async Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new()
         {
-            item.Order = 0;
-            item.StoredTime = DateTime.UtcNow;
-            item.IsBookmarked = true;
+            var membershipType = ShinyHost.Resolve<MembershipService>().MemberRoleType;
+            if (MembershipAdvantage.TryGetValue(membershipType, out MembershipAdvantage advantage))
+            {
+                int limitSize = 0;
+                switch (bookmarkType)
+                {
+                    case BookMarkType.Match:
+                        limitSize = advantage.MatchBookmarkLimit;
+                        break;
 
-            var ret = await _sqliteService.InsertOrUpdateAsync<T>(item);
-            Debug.Assert(ret != 0);
+                    case BookMarkType.League:
+                        limitSize = advantage.LeagueBookmarkLimit;
+                        break;
 
-            string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
-            MessagingCenter.Send(this, message, item);
+                    case BookMarkType.Team:
+                        limitSize = advantage.TeamBookmarkLimit;
+                        break;
+                }
 
-            UserDialogs.Instance.Toast(LocalizeString.Set_Bookmark);
+                int curSavedCnt = (await _sqliteService.SelectAllAsync<T>()).Count;
+                if (curSavedCnt < limitSize) // 저장 가능
+                {
+                    item.Order = 0;
+                    item.StoredTime = DateTime.UtcNow;
+                    item.IsBookmarked = true;
+
+                    var ret = await _sqliteService.InsertOrUpdateAsync<T>(item);
+                    Debug.Assert(ret != 0);
+
+                    string message = this.BuildBookmarkMessage(sportsType, bookmarkType);
+                    MessagingCenter.Send(this, message, item);
+
+                    UserDialogs.Instance.Toast(LocalizeString.Set_Bookmark);
+                }
+                else
+                {
+                    UserDialogs.Instance.Toast(LocalizeString.Bookmark_Inventory_Full);
+                }
+            }
+            else
+                return false;
 
             return true;
         }

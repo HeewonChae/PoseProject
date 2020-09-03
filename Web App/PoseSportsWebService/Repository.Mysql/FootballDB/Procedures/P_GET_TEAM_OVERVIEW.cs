@@ -80,8 +80,8 @@ namespace Repository.Mysql.FootballDB.Procedures
 
                         foreach (var league in leagues)
                         {
-                            var homeFixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(FixturesQueryString, new { LeagueId = league.Id });
-                            _output.DB_FixtureDetails.AddRange(homeFixtureDetails);
+                            var fixtureDetails = footballDB.Query<DB_FootballFixtureDetail>(FixturesQueryString, new { LeagueId = league.Id });
+                            _output.DB_FixtureDetails.AddRange(fixtureDetails);
                         }
                     },
                     this.OnError);

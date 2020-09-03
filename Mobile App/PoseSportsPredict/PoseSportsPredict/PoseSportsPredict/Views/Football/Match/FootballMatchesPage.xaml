@@ -23,7 +23,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" />
-        <ToolbarItem Text="{Binding [Add_Delete_Matches_Bookmark], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
+        <ToolbarItem Text="{Binding [Edit_Bookmark], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
         <ToolbarItem Text="{Binding [Expand_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
         <ToolbarItem Text="{Binding [Collapse_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
     </ContentPage.ToolbarItems>

@@ -237,17 +237,17 @@ namespace PoseSportsPredict.ViewModels.Football.Team.GoalStatistics
             if (GoalStatisticsType == FootballGoalStatisticsType.Team)
             {
                 TeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
-                .Convert(selectedMatches, _teamInfo.TeamId, 6, 0);
+                .Convert(selectedMatches, _teamInfo.TeamId, selectedMatches.Count, 0);
             }
             else if (GoalStatisticsType == FootballGoalStatisticsType.H2H)
             {
                 MatchStatistics = new FootballMatchStatistics
                 {
                     HomeTeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
-                    .Convert(selectedMatches, _matchInfo.HomeTeamId, 6, 0),
+                    .Convert(selectedMatches, _matchInfo.HomeTeamId, selectedMatches.Count, 0),
 
                     AwayTeamStatistics = ShinyHost.Resolve<MatchInfoToTeamStatistics>()
-                    .Convert(selectedMatches, _matchInfo.AwayTeamId, 6, 0),
+                    .Convert(selectedMatches, _matchInfo.AwayTeamId, selectedMatches.Count, 0),
                 };
             }
 

@@ -8,6 +8,7 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities;
 using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
@@ -132,15 +133,31 @@ namespace PoseSportsPredict.ViewModels
             ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
             ClientContext.LastLoginTime = loginResult.LastLoginTime.ToLocalTime();
 
+            // Set Membership Information
+            var membershipService = ShinyHost.Resolve<MembershipService>();
+            membershipService.SetMemberRoleType(loginResult.MemberRoleType);
+            membershipService.SetRoleExpireTime(loginResult.RoleExpireTime);
+
             await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
             await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
 
             // Setup NotiData
-            LocalStorage.Storage.GetValueOrDefault<FootballMatchInfo>(LocalStorageKey.NotifyIntentData, out FootballMatchInfo notiIntentData);
-            if (notiIntentData != null)
+            //LocalStorage.Storage.GetValueOrDefault<FootballMatchInfo>(LocalStorageKey.NotifyIntentData, out FootballMatchInfo notiIntentData);
+            //if (notiIntentData != null)
+            //{
+            //    LocalStorage.Storage.Remove(LocalStorageKey.NotifyIntentData);
+            //    await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), notiIntentData);
+            //}
+
+            // Restore PurchasedItem
+            var inAppBillingService = ShinyHost.Resolve<InAppBillingService>();
+            var restore_ret = await inAppBillingService.RestorePurchasedItem();
+            if (!restore_ret)
             {
-                LocalStorage.Storage.Remove(LocalStorageKey.NotifyIntentData);
-                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), notiIntentData);
+                await MaterialDialog.Instance.AlertAsync(LocalizeString.Product_Not_Consumed,
+                        LocalizeString.App_Title,
+                        LocalizeString.Ok,
+                        DialogConfiguration.DefaultAlterDialogConfiguration);
             }
 
             return true;

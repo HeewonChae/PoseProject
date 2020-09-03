@@ -858,7 +858,7 @@ namespace SportsAdminTool.Logic.Football
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
                         grade += meanAwayScore - meanHomeScore;
 
-                        isRecommend = grade >= 7;
+                        isRecommend = grade >= 8;
                     }
                     break;
 

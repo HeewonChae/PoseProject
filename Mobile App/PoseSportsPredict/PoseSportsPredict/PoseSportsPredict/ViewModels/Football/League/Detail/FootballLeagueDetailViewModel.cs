@@ -30,6 +30,15 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
+            MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.LeagueBookmarkMessageHandler(e));
+
+            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
+
+            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
+            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
+
             return true;
         }
 
@@ -64,21 +73,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             return true;
         }
 
-        public override void OnAppearing(params object[] datas)
-        {
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
-            MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.LeagueBookmarkMessageHandler(e));
-
-            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
-            MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
-
-            message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
-            MessagingCenter.Subscribe<NotificationService, NotificationInfo>(this, message, (s, e) => NotificationMessageHandler(e));
-
-            _tabContents[SelectedViewIndex].OnAppearing();
-        }
-
-        public override void OnDisAppearing(params object[] datas)
+        public override void OnPagePoped()
         {
             string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
             MessagingCenter.Unsubscribe<BookmarkService, FootballLeagueInfo>(this, message);
@@ -88,6 +83,15 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
             MessagingCenter.Unsubscribe<NotificationService, NotificationInfo>(this, message);
+        }
+
+        public override void OnAppearing(params object[] datas)
+        {
+            _tabContents[SelectedViewIndex].OnAppearing();
+        }
+
+        public override void OnDisAppearing(params object[] datas)
+        {
         }
 
         #endregion NavigableViewModel
@@ -169,7 +173,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             PopupMenuList = new List<string>()
             {
-                LocalizeString.Add_Delete_Matches_Bookmark,
+                LocalizeString.Edit_Bookmark,
                 LocalizeString.Expand_All_Matches,
                 LocalizeString.Collapse_All_Matches,
             };
@@ -221,7 +225,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
             if (OnInitializeView())
             {
                 CoupledPage.Appearing += (s, e) => OnAppearing();
-                CoupledPage.Disappearing += (s, e) => OnDisAppearing();
+                //CoupledPage.Disappearing += (s, e) => OnDisAppearing();
             }
 
             this.CoupledPage.FindByName<SfTabView>("_tabView").SelectionChanged

@@ -264,9 +264,6 @@
   <data name="Collapse_All_Leagues" xml:space="preserve">
     <value>すべてのリーク縮小</value>
   </data>
-  <data name="Add_Delete_Matches_Bookmark" xml:space="preserve">
-    <value>ブックマーク 追加/削除</value>
-  </data>
   <data name="Ongoing_matches" xml:space="preserve">
     <value>ライブ配信中</value>
   </data>
@@ -444,8 +441,8 @@
   <data name="My_Profile" xml:space="preserve">
     <value>マイ情報</value>
   </data>
-  <data name="VIP_Club" xml:space="preserve">
-    <value>VIPクラブ</value>
+  <data name="VIP_Lounge" xml:space="preserve">
+    <value>VIP ラウンジ</value>
   </data>
   <data name="Check_For_Updates" xml:space="preserve">
     <value>アップデート確認</value>

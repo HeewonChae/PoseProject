@@ -111,14 +111,20 @@
     <Compile Include="FootballDB\Tables\PredictionBackTesting.cs" />
     <Compile Include="FootballDB\Tables\Standings.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202003170333152_Initialize.designer.cs">
-      <DependentUpon>202003170333152_Initialize.cs</DependentUpon>
+    <Compile Include="PoseGlobalDBMigrations\202009010836036_InitiateGlobalDB.cs" />
+    <Compile Include="PoseGlobalDBMigrations\202009010836036_InitiateGlobalDB.designer.cs">
+      <DependentUpon>202009010836036_InitiateGlobalDB.cs</DependentUpon>
     </Compile>
     <Compile Include="PoseGlobalDBMigrations\Configuration.cs" />
+    <Compile Include="PoseGlobalDB\Procedures\P_INSERT_IN_APP_BILLING.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_INSERT_USER_BASE.cs" />
+    <Compile Include="PoseGlobalDB\Procedures\P_SELECT_LINKED_BILLING.cs" />
+    <Compile Include="PoseGlobalDB\Procedures\P_UPDATE_IN_APP_BILLING.cs" />
+    <Compile Include="PoseGlobalDB\Procedures\P_UPDATE_USER_ROLE.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_USER_LOGIN.cs" />
+    <Compile Include="PoseGlobalDB\Tables\InAppBilling.cs" />
     <Compile Include="PoseGlobalDB\Tables\UserBase.cs" />
+    <Compile Include="PoseGlobalDB\Tables\UserRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\FixedMySqlMigrationCodeGenerator.cs" />
   </ItemGroup>
@@ -152,8 +158,8 @@
     <EmbeddedResource Include="FootballDBMigrations\202008262305165_AlterFixtureTable.resx">
       <DependentUpon>202008262305165_AlterFixtureTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PoseGlobalDBMigrations\202003170333152_Initialize.resx">
-      <DependentUpon>202003170333152_Initialize.cs</DependentUpon>
+    <EmbeddedResource Include="PoseGlobalDBMigrations\202009010836036_InitiateGlobalDB.resx">
+      <DependentUpon>202009010836036_InitiateGlobalDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

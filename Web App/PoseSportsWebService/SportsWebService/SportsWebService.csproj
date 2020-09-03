@@ -55,6 +55,24 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Common Library\External\GameKernel.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.49.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.AndroidPublisher.v3, Version=1.49.0.2057, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.AndroidPublisher.v3.1.49.0.2057\lib\net45\Google.Apis.AndroidPublisher.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.49.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.49.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.49.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.49.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.49.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -162,7 +180,7 @@
       <HintPath>..\packages\Microsoft.SqlServer.SqlManagementObjects.150.18208.0\lib\net45\Microsoft.SqlServer.WmiEnum.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RestSharp, Version=106.11.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
@@ -206,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Services\Billing.svc" />
     <Content Include="Services\Football.svc" />
     <Content Include="Services\HelloWorld.svc" />
     <Content Include="Services\Auth.svc" />
@@ -213,16 +232,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Config\ErrorCodeDescription.cs" />
+    <Compile Include="App_Config\InAppPurchase.cs" />
     <Compile Include="Authentication\AuthenticationManager.cs" />
     <Compile Include="Authentication\AuthorizationPolicy.cs" />
     <Compile Include="Authentication\ExternOAuth\FacebookOAuth.cs" />
     <Compile Include="Authentication\ExternOAuth\GoogleOAuth.cs" />
     <Compile Include="Authentication\ExternOAuth\OAuthProviderFactory.cs" />
     <Compile Include="Authentication\PosePrincipal.cs" />
-    <Compile Include="Authentication\ServiceRoleType.cs" />
     <Compile Include="Commands\Auth\P_E_CheckVaildOAuthUser.cs" />
     <Compile Include="Commands\Auth\P_E_Login.cs" />
     <Compile Include="Commands\Auth\P_E_TokenRefresh.cs" />
+    <Compile Include="Commands\Billing\P_E_CHECK_MEMBERSHIP_BY_GOOGLE.cs" />
+    <Compile Include="Commands\Billing\P_E_INSERT_IN_APP_BILLING_BY_GOOGLE.cs" />
+    <Compile Include="Commands\Billing\P_E_UPDATE_IN_APP_BILLING_BY_GOOGLE.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_DATE.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_INDEX.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_LEAGUE.cs" />
@@ -242,6 +264,11 @@
     <Compile Include="Logics\Converters\FootballPredictionDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballStandingsDetailConverter.cs" />
     <Compile Include="Logics\Converters\FootballTeamDetailConverter.cs" />
+    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Services\Billing.svc.cs">
+      <DependentUpon>Billing.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Contract\IBilling.cs" />
     <Compile Include="Services\ServiceErrorCode.cs" />
     <Compile Include="Utilities\StreamExtensions.cs" />
     <Compile Include="ServerContext.cs" />
@@ -310,6 +337,12 @@
     <Content Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </Content>
+    <Content Include="App_Data\InAppPurchase.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\poseidon-picks-dev-681a7a0a4f9a.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -318,9 +351,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Analyzer Include="..\packages\MessagePackAnalyzer.2.1.115\analyzers\dotnet\MessagePackAnalyzer.dll" />
   </ItemGroup>

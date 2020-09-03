@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using PanCardView.Extensions;
 using PosePacket.Proxy;
 using PosePacket.Service.Enum;
 using PosePacket.Service.Football;
@@ -78,7 +79,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Fields
 
         private TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> _matchesTaskLoaderNotifier;
-        private ObservableCollection<FootballMatchListViewModel> _matchListViewModels;
+        private ObservableList<FootballMatchListViewModel> _matchListViewModels;
         private List<FootballMatchInfo> _matchList;
         private DateTime _matchDate;
         private DateTime _lastUpdateTime;
@@ -91,7 +92,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         #region Properties
 
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
-        public ObservableCollection<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
+        public ObservableList<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
         public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
 
         #endregion Properties
@@ -107,7 +108,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             groupInfo.Expanded = !groupInfo.Expanded;
 
-            MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
+            var itmeIdx = MatchListViewModels.FindIndex(groupInfo);
+            MatchListViewModels.RemoveAt(itmeIdx);
+            MatchListViewModels.Insert(itmeIdx, groupInfo);
+
+            //MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand MatchFilterCommand { get => new RelayCommand(MatchFilter); }
@@ -166,7 +171,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 MatchListViewModel.Expanded = true;
             }
 
-            MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
+            MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand CollapseAllLeaguesCommand { get => new RelayCommand(CollapseAllLeagues); }
@@ -181,7 +186,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 MatchListViewModel.Expanded = false;
             }
 
-            MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
+            MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }
@@ -261,7 +266,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public void CultureInfoChanged()
         {
             if (MatchListViewModels?.Count > 0)
-                MatchListViewModels = new ObservableCollection<FootballMatchListViewModel>(MatchListViewModels);
+                MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         private async Task<IReadOnlyCollection<FootballMatchInfo>> InitMatchesAsync()
@@ -404,8 +409,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         private async void UpdateMatcheGroups(List<FootballMatchInfo> matchList)
         {
-            ObservableCollection<FootballMatchListViewModel> matchGroupCollection;
-            matchGroupCollection = new ObservableCollection<FootballMatchListViewModel>();
+            var matchGroupCollection = new ObservableList<FootballMatchListViewModel>();
 
             // 추천 경기
             var recommendedMatches = _matchList.Where(elem => elem.IsRecommended).ToArray();
@@ -457,13 +461,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 mediumNativeAds2.AdsBannerType = AdsBannerType.NativeMedium2;
                 matchGroupCollection.Insert(14 + (totalGroupCnt - 14) / 2, mediumNativeAds2);
             }
-            else if (totalGroupCnt > 14)
+            else if (totalGroupCnt > 10)
             {
                 var mediumNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
                 mediumNativeAds.GroupType = MatchGroupType.NativeAds;
                 mediumNativeAds.AdsBannerType = AdsBannerType.NativeMedium;
 
-                matchGroupCollection.Insert(12, mediumNativeAds);
+                matchGroupCollection.Insert(10, mediumNativeAds);
             }
 
             MatchListViewModels = matchGroupCollection;

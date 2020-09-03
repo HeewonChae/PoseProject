@@ -5,6 +5,7 @@ using LogicCore.Utility.ThirdPartyLog;
 using Repository.Mysql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,7 @@ namespace Repository.Request
     {
         public DynamicParameters Parmeters { get; private set; }
         public EntityStatus EntityStatus { get; private set; }
+        public IDbTransaction transaction { get; set; }
 
         public override void OnAlloc()
         {
@@ -66,6 +68,12 @@ namespace Repository.Request
 
             Parmeters = null;
             EntityStatus = null;
+
+            if (transaction != null)
+            {
+                transaction.Dispose();
+                transaction = null;
+            }
         }
 
         public override void SetInput(T_in input)
@@ -79,6 +87,7 @@ namespace Repository.Request
 
         public virtual void OnError(EntityStatus entityStatus)
         {
+            transaction?.Rollback();
             EntityStatus = entityStatus;
 
             foreach (var error in entityStatus.Errors)

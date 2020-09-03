@@ -70,15 +70,6 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add/Delete a bookmark.
-        /// </summary>
-        public static string Add_Delete_Matches_Bookmark {
-            get {
-                return ResourceManager.GetString("Add_Delete_Matches_Bookmark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Add home team.
         /// </summary>
         public static string Add_Home_Team {
@@ -102,6 +93,15 @@ namespace PoseSportsPredict.Resources {
         public static string Add_Match {
             get {
                 return ResourceManager.GetString("Add_Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a product you already own..
+        /// </summary>
+        public static string Already_Owned_Purchase {
+            get {
+                return ResourceManager.GetString("Already_Owned_Purchase", resourceCulture);
             }
         }
         
@@ -138,6 +138,15 @@ namespace PoseSportsPredict.Resources {
         public static string Bookmaker {
             get {
                 return ResourceManager.GetString("Bookmaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your bookmarks are full..
+        /// </summary>
+        public static string Bookmark_Inventory_Full {
+            get {
+                return ResourceManager.GetString("Bookmark_Inventory_Full", resourceCulture);
             }
         }
         
@@ -322,6 +331,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Bookmarks.
+        /// </summary>
+        public static string Edit_Bookmark {
+            get {
+                return ResourceManager.GetString("Edit_Bookmark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand all leagues.
         /// </summary>
         public static string Expand_All_Leagues {
@@ -345,6 +363,15 @@ namespace PoseSportsPredict.Resources {
         public static string Facebook {
             get {
                 return ResourceManager.GetString("Facebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The store cannot be accessed..
+        /// </summary>
+        public static string Fail_Store_Connect {
+            get {
+                return ResourceManager.GetString("Fail_Store_Connect", resourceCulture);
             }
         }
         
@@ -880,6 +907,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment has been pending. Please check your payment.
+        /// </summary>
+        public static string Payment_Pending_Please_Check {
+            get {
+                return ResourceManager.GetString("Payment_Pending_Please_Check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to P.
         /// </summary>
         public static string Played_Initial {
@@ -921,6 +957,15 @@ namespace PoseSportsPredict.Resources {
         public static string PressBack_Twice_To_Exit {
             get {
                 return ResourceManager.GetString("PressBack_Twice_To_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are paid products that are not consumed..
+        /// </summary>
+        public static string Product_Not_Consumed {
+            get {
+                return ResourceManager.GetString("Product_Not_Consumed", resourceCulture);
             }
         }
         
@@ -984,6 +1029,15 @@ namespace PoseSportsPredict.Resources {
         public static string Rest_Period {
             get {
                 return ResourceManager.GetString("Rest_Period", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore.
+        /// </summary>
+        public static string Restore {
+            get {
+                return ResourceManager.GetString("Restore", resourceCulture);
             }
         }
         
@@ -1150,6 +1204,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The purchase was successful, but an error occurred on the server..
+        /// </summary>
+        public static string Success_Purchase_But_Server_Error {
+            get {
+                return ResourceManager.GetString("Success_Purchase_But_Server_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suggested.
         /// </summary>
         public static string Suggested_Leagues {
@@ -1276,6 +1339,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unknown error has occurred..
+        /// </summary>
+        public static string Unknown_Error {
+            get {
+                return ResourceManager.GetString("Unknown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unlock.
         /// </summary>
         public static string Unlock {
@@ -1294,6 +1366,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was a problem loading the ad..
+        /// </summary>
+        public static string VidonAd_Load_Fail {
+            get {
+                return ResourceManager.GetString("VidonAd_Load_Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View form.
         /// </summary>
         public static string View_Form {
@@ -1303,11 +1384,11 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VIP Club.
+        ///   Looks up a localized string similar to VIP Lounge.
         /// </summary>
-        public static string VIP_Club {
+        public static string VIP_Lounge {
             get {
-                return ResourceManager.GetString("VIP_Club", resourceCulture);
+                return ResourceManager.GetString("VIP_Lounge", resourceCulture);
             }
         }
         
