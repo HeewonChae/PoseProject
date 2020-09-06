@@ -6,64 +6,145 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
+             xmlns:models ="clr-namespace:PoseSportsPredict.Models"
              materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
              materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
              materialui:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
              materialui:MaterialNavigationPage.HasShadow="False"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              x:Class="PoseSportsPredict.Views.Common.Detail.VipClubPage"
              Title="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
-             BackgroundColor="White">
+             BackgroundColor="{StaticResource TransparentPrimary}">
     <ContentPage.Content>
         <StackLayout
             x:DataType="viewmodels:VIPClubViewModel">
-            <materialui:MaterialCard
-                ClickCommand="{Binding VIPClickCommand}"
-                IsClickable="True"
-                Margin="0"
-                Padding="0"
-                CornerRadius="3"
-                Elevation="3"
-                HorizontalOptions="FillAndExpand">
-                <materialui:MaterialLabel
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Padding="10,3"
-                    TypeScale="Body2"
-                    TextColor="{StaticResource TextColor_D}">
-                    <materialui:MaterialLabel.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding VIPProduct.Name}" />
-                            <Span Text=" - " />
-                            <Span Text="{Binding VIPProduct.LocalizedPrice}" />
-                        </FormattedString>
-                    </materialui:MaterialLabel.FormattedText>
-                </materialui:MaterialLabel>
-            </materialui:MaterialCard>
-
-            <materialui:MaterialCard
-                ClickCommand="{Binding DiamondClickCommand}"
-                IsClickable="True"
-                Margin="0"
-                Padding="0"
-                CornerRadius="3"
-                Elevation="3"
-                HorizontalOptions="FillAndExpand">
-                <materialui:MaterialLabel
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    Padding="10,3"
-                    TypeScale="Body2"
-                    TextColor="{StaticResource TextColor_D}">
-                    <materialui:MaterialLabel.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding DiamondProduct.Name}" />
-                            <Span Text=" - " />
-                            <Span Text="{Binding DiamondProduct.LocalizedPrice}" />
-                        </FormattedString>
-                    </materialui:MaterialLabel.FormattedText>
-                </materialui:MaterialLabel>
-            </materialui:MaterialCard>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.05*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.05*" />
+                </Grid.RowDefinitions>
+                    <materialui:MaterialCard
+                    Grid.Row="1"
+                    Margin="7,0"
+                    Padding="5,20"
+                    Elevation="0"
+                    BackgroundColor="{StaticResource TransparentBlack}">
+                        <CollectionView
+                        x:Name="_cv_purchase"
+                        VerticalOptions="Start"
+                        HorizontalScrollBarVisibility="Always"
+                        ItemsLayout="HorizontalList"
+                        ItemsSource="{Binding InAppPurchases}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:InAppPurchaseInfo">
+                                    <StackLayout>
+                                        <materialui:MaterialCard
+                                        VerticalOptions="CenterAndExpand"
+                                        Padding="0"
+                                        Margin="5,15"
+                                        Elevation="3"
+                                        CornerRadius="5"
+                                        BackgroundColor="{StaticResource PrimaryColor}">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <!--Title-->
+                                                <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="0">
+                                                    <Frame
+                                                    Margin="15,20"
+                                                    Padding="7"
+                                                    CornerRadius="77"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"
+                                                    BackgroundColor="{Binding ImageColor}">
+                                                        <Image
+                                                        Aspect="AspectFit"
+                                                        WidthRequest="37"
+                                                        HeightRequest="37"
+                                                        Source="{Binding ImageResource}">
+                                                        </Image>
+                                                    </Frame>
+                                                    <materialui:MaterialLabel
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalTextAlignment="Start"
+                                                    VerticalTextAlignment="Center"
+                                                    TypeScale="H4"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{Binding TitleColor}"
+                                                    Text="{Binding Title}">
+                                                    </materialui:MaterialLabel>
+                                                </StackLayout>
+                                                <!--Advantage-->
+                                                <materialui:MaterialLabel
+                                                Margin="15,0,15,3"
+                                                Grid.Row="1"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalTextAlignment="Start"
+                                                VerticalTextAlignment="Center"
+                                                TypeScale="H6"
+                                                FontAttributes="Bold"
+                                                TextColor="{StaticResource TextColor_L}"
+                                                Text="{x:Static localize:LocalizeString.Benefits}">
+                                                </materialui:MaterialLabel>
+                                                <StackLayout
+                                                Grid.Row="2"
+                                                Margin="15,0,15,15"
+                                                Spacing="10"
+                                                BindableLayout.ItemsSource="{Binding Advantages}">
+                                                    <BindableLayout.ItemTemplate>
+                                                        <DataTemplate x:DataType="x:String">
+                                                            <materialui:MaterialLabel
+                                                            VerticalOptions="CenterAndExpand"
+                                                            HorizontalTextAlignment="Start"
+                                                            VerticalTextAlignment="Center"
+                                                            TypeScale="Body1"
+                                                            FontAttributes="None"
+                                                            TextColor="{StaticResource TextColor_L}"
+                                                            Text="{Binding .}">
+                                                            </materialui:MaterialLabel>
+                                                        </DataTemplate>
+                                                    </BindableLayout.ItemTemplate>
+                                                </StackLayout>
+                                                <!--Purchase Button-->
+                                                <materialui:MaterialCard
+                                                Grid.Row="3"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Padding="0"
+                                                Margin="0,30,0,20"
+                                                Elevation="3"
+                                                CornerRadius="5"
+                                                IsClickable="True"
+                                                IsEnabled="{Binding IsAvailable}"
+                                                ClickCommand="{Binding Path=BindingContext.PurchaseButtonClickCommand, Source={x:Reference _cv_purchase}}"
+                                                ClickCommandParameter="{Binding .}"
+                                                BackgroundColor="{StaticResource WinColor}">
+                                                    <materialui:MaterialLabel
+                                                    Margin="18,13"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    HorizontalTextAlignment="Center"
+                                                    VerticalTextAlignment="Center"
+                                                    TypeScale="Subtitle1"
+                                                    FontAttributes="Bold"
+                                                    TextColor="{StaticResource TextColor_L}"
+                                                    Text="{Binding ButtonText}">
+                                                    </materialui:MaterialLabel>
+                                                </materialui:MaterialCard>
+                                            </Grid>
+                                        </materialui:MaterialCard>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                </materialui:MaterialCard>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

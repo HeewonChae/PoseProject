@@ -59,5 +59,47 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
             return returnValue;
         }
+
+        public FootballFixtureDetail Reverse(FootballMatchInfo value)
+        {
+            return new FootballFixtureDetail
+            {
+                FixtureId = value.Id,
+                League = new FootballLeagueDetail
+                {
+                    Country = new FootballCountryDetail
+                    {
+                        Logo = value.League_CountryLogo,
+                        Name = value.League_CountryName,
+                    },
+                    Name = value.LeagueName,
+                    Logo = value.LeagueLogo,
+                    LeagueType = value.LeagueType,
+                },
+                HomeTeam = new FootballTeamDetail
+                {
+                    Id = value.HomeTeamId,
+                    CountryName = value.Home_CountryName,
+                    Logo = value.HomeLogo,
+                    Name = value.HomeName
+                },
+                AwayTeam = new FootballTeamDetail
+                {
+                    Id = value.AwayTeamId,
+                    CountryName = value.Away_CountryName,
+                    Logo = value.AwayLogo,
+                    Name = value.AwayName
+                },
+                Round = value.Round,
+                MatchTime = value.MatchTime.ToUniversalTime(),
+                MatchStatus = value.MatchStatus,
+                HomeTeamScore = value.HomeScore,
+                AwayTeamScore = value.AwayScore,
+                IsPredicted = value.IsPredicted,
+                IsRecommeded = value.IsRecommended,
+                HasOdds = value.HasOdds,
+                MaxGrade = (byte)(value.MaxRating * 2),
+            };
+        }
     }
 }

@@ -8,7 +8,7 @@
         SortByLeague,
     }
 
-    public enum BookMarkType
+    public enum PageDetailType
     {
         Match,
         League,

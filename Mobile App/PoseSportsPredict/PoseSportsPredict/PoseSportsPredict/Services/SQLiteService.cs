@@ -28,7 +28,7 @@ namespace PoseSportsPredict.Services
                 await MaterialDialog.Instance.AlertAsync(ex.Message,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                 throw;
             }
         }
@@ -44,7 +44,7 @@ namespace PoseSportsPredict.Services
                 await MaterialDialog.Instance.AlertAsync(ex.Message,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                 throw;
             }
         }
@@ -68,7 +68,7 @@ namespace PoseSportsPredict.Services
                 await MaterialDialog.Instance.AlertAsync(ex.Message,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                 throw;
             }
         }
@@ -84,7 +84,7 @@ namespace PoseSportsPredict.Services
                 await MaterialDialog.Instance.AlertAsync(ex.Message,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                 throw;
             }
         }
@@ -100,7 +100,7 @@ namespace PoseSportsPredict.Services
                 await MaterialDialog.Instance.AlertAsync(ex.Message,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                 throw;
             }
         }

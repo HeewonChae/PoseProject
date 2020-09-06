@@ -1,5 +1,4 @@
 ﻿using Acr.UserDialogs;
-using Plugin.LocalNotification;
 using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure.SQLite;
 using PoseSportsPredict.Logics;
@@ -27,36 +26,38 @@ namespace PoseSportsPredict.Services
 
         public async Task Initialize()
         {
-            var allitems = await _sqliteService.SelectAllAsync<NotificationInfo>();
-            var deleteItems = allitems.Where(elem => elem.NotifyTime < DateTime.Now);
-            var registerItems = allitems.Except(deleteItems);
+            //var allitems = await _sqliteService.SelectAllAsync<NotificationInfo>();
+            //var deleteItems = allitems.Where(elem => elem.NotifyTime < DateTime.Now);
+            //var registerItems = allitems.Except(deleteItems);
 
-            // 지난 알람 삭제
-            foreach (var deleteitem in deleteItems)
-            {
-                await _sqliteService.DeleteAsync<NotificationInfo>(deleteitem.PrimaryKey);
-                NotificationCenter.Current.Cancel(deleteitem.Id);
-            }
+            //// 지난 알람 삭제
+            //foreach (var deleteitem in deleteItems)
+            //{
+            //    await _sqliteService.DeleteAsync<NotificationInfo>(deleteitem.PrimaryKey);
+            //    NotificationCenter.Current.Cancel(deleteitem.Id);
+            //}
 
-            // 노티 재등록
-            foreach (var registerItem in registerItems)
-            {
-                var req = new NotificationRequest
-                {
-                    NotificationId = registerItem.Id,
-                    Title = registerItem.Title,
-                    Description = registerItem.Description,
-                    ReturningData = registerItem.IntentData,
-                    NotifyTime = registerItem.NotifyTime,
-                    Android = new AndroidOptions
-                    {
-                        IconName = registerItem.IconName,
-                        ChannelId = AppConfig.Psoe_Noti_Channel_01,
-                    },
-                };
+            //// 노티 재등록
+            //foreach (var registerItem in registerItems)
+            //{
+            //    var req = new NotificationRequest
+            //    {
+            //        NotificationId = registerItem.Id,
+            //        Title = registerItem.Title,
+            //        Description = registerItem.Description,
+            //        ReturningData = registerItem.IntentData,
+            //        NotifyTime = registerItem.NotifyTime,
+            //        Android = new AndroidOptions
+            //        {
+            //            IconName = registerItem.IconName,
+            //            ChannelId = AppConfig.Psoe_Noti_Channel_01,
+            //        },
+            //    };
 
-                NotificationCenter.Current.Show(req);
-            }
+            //    NotificationCenter.Current.Show(req);
+            //}
+
+            await Task.CompletedTask;
         }
 
         public async Task<NotificationInfo> GetNotification(int id, SportsType sportsType, NotificationType notificationType)
@@ -76,32 +77,32 @@ namespace PoseSportsPredict.Services
             // For Debugging
             // item.NotifyTime = DateTime.Now.AddMinutes(2);
 
-            var ret = await _sqliteService.InsertOrUpdateAsync<NotificationInfo>(item);
-            Debug.Assert(ret != 0);
+            //var ret = await _sqliteService.InsertOrUpdateAsync<NotificationInfo>(item);
+            //Debug.Assert(ret != 0);
 
-            item.SetIsAlarmed(true);
+            //item.SetIsAlarmed(true);
 
-            var req = new NotificationRequest
-            {
-                NotificationId = item.Id,
-                Title = item.Title,
-                Description = item.Description,
-                ReturningData = item.IntentData,
-                NotifyTime = item.NotifyTime,
-                Android = new AndroidOptions
-                {
-                    IconName = item.IconName,
-                    ChannelId = AppConfig.Psoe_Noti_Channel_01,
-                },
-            };
-            NotificationCenter.Current.Show(req);
+            //var req = new NotificationRequest
+            //{
+            //    NotificationId = item.Id,
+            //    Title = item.Title,
+            //    Description = item.Description,
+            //    ReturningData = item.IntentData,
+            //    NotifyTime = item.NotifyTime,
+            //    Android = new AndroidOptions
+            //    {
+            //        IconName = item.IconName,
+            //        ChannelId = AppConfig.Psoe_Noti_Channel_01,
+            //    },
+            //};
+            //NotificationCenter.Current.Show(req);
 
-            var message = this.BuildNotificationMessage(item.SportsType, item.NotificationType);
-            MessagingCenter.Send(this, message, item);
+            //var message = this.BuildNotificationMessage(item.SportsType, item.NotificationType);
+            //MessagingCenter.Send(this, message, item);
 
-            UserDialogs.Instance.Toast(LocalizeString.Set_Alarm);
+            //UserDialogs.Instance.Toast(LocalizeString.Set_Alarm);
 
-            return true;
+            return await Task.FromResult(true);
         }
 
         public async Task<bool> DeleteNotification(int id, SportsType sportsType, NotificationType notificationType)
@@ -112,7 +113,7 @@ namespace PoseSportsPredict.Services
             var ret = await _sqliteService.DeleteAsync<NotificationInfo>(found.PrimaryKey);
             Debug.Assert(ret != 0);
 
-            NotificationCenter.Current.Cancel(found.Id);
+            //NotificationCenter.Current.Cancel(found.Id);
 
             found.SetIsAlarmed(false);
 

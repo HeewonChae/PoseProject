@@ -39,7 +39,7 @@ namespace PoseSportsPredict.Logics
                 throw new Exception($"Failed OnInitializeView, viewModel: {viewModel.GetType().FullName}");
 
             await Application.Current.MainPage.Navigation.PushAsync(viewModel.CoupledPage, false);
-            await Task.Delay(500);
+            await Task.Delay(1500);
 
             return true;
         }
@@ -50,6 +50,15 @@ namespace PoseSportsPredict.Logics
             if (popedPage.BindingContext is NavigableViewModel navigableViewModel)
             {
                 navigableViewModel.OnPagePoped();
+            }
+        }
+
+        public static async Task PopAllNavPageAsync()
+        {
+            int pageCount = Application.Current.MainPage.Navigation.NavigationStack.Count - 1;
+            for (int i = 0; i < pageCount; i++)
+            {
+                await PopNavPageAsync();
             }
         }
 
@@ -76,7 +85,7 @@ namespace PoseSportsPredict.Logics
             if (viewModel.CoupledPage is PopupPage popupPage)
             {
                 await Application.Current.MainPage.Navigation.PushPopupAsync(popupPage);
-                await Task.Delay(3000);
+                await Task.Delay(1500);
             }
             else
                 return false;

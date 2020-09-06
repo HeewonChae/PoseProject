@@ -26,6 +26,10 @@
   <ItemGroup>
     <None Remove="Resources\Common\CoverageLanguage.json" />
     <None Remove="Resources\Common\MembershipAdvantage.json" />
+    <None Remove="Resources\Fonts\HeirofLight\HeirofLightBold.ttf" />
+    <None Remove="Resources\Fonts\HeirofLight\HeirofLightOTFBold.otf" />
+    <None Remove="Resources\Fonts\HeirofLight\HeirofLightOTFRegular.otf" />
+    <None Remove="Resources\Fonts\HeirofLight\HeirofLightRegular.ttf" />
     <None Remove="Resources\Football\CoverageLeagues.json" />
     <None Remove="Resources\Football\RecommendedLeagues.json" />
     <None Remove="Resources\Football\StandingsDescription.json" />
@@ -35,9 +39,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Common\CoverageLanguage.json" />
     <EmbeddedResource Include="Resources\Common\MembershipAdvantage.json" />
-    <EmbeddedResource Include="Resources\Football\CoverageLeagues.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\HeirofLight\HeirofLightBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\HeirofLight\HeirofLightOTFBold.otf" />
+    <EmbeddedResource Include="Resources\Fonts\HeirofLight\HeirofLightOTFRegular.otf" />
+    <EmbeddedResource Include="Resources\Fonts\HeirofLight\HeirofLightRegular.ttf" />
+    <EmbeddedResource Include="Resources\Football\CoverageLeagues.json" />
     <EmbeddedResource Include="Resources\Football\RecommendedLeagues.json" />
     <EmbeddedResource Include="Resources\Football\StandingsDescription.json" />
     <EmbeddedResource Include="Resources\Football\StandingsRankColor.json" />
@@ -46,12 +52,13 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.442" />
     <PackageReference Include="CardsView" Version="2.6.3" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
     <PackageReference Include="MarcTron.Admob" Version="1.5.7" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
     <PackageReference Include="Naxam.TopTabbedPage.Forms" Version="0.0.3.5" />
     <PackageReference Include="Plugin.Google" Version="1.0.1" />
     <PackageReference Include="Plugin.InAppBilling" Version="2.0.0" />
-    <PackageReference Include="Plugin.LocalNotification" Version="4.1.4" />
+    <PackageReference Include="Plugin.StoreReview" Version="2.0.0.5" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.2.0.223" />
     <PackageReference Include="Sharpnado.Presentation.Forms" Version="1.6.0" />
     <PackageReference Include="Sharpnado.TaskLoaderView" Version="2.0.0" />
@@ -64,6 +71,7 @@
     <PackageReference Include="Syncfusion.Xamarin.SfGauge" Version="18.1.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.1.0.48" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="Xam.Plugin.LatestVersion" Version="1.1.2" />
     <PackageReference Include="Xam.Plugin.PopupMenu" Version="1.1.0" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xam.Plugins.Vibrate" Version="4.0.0.5" />
@@ -73,7 +81,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
     <PackageReference Include="XF.Material" Version="1.5.8" />

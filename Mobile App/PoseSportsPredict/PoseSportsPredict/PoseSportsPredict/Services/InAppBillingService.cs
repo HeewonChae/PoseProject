@@ -136,7 +136,7 @@ namespace PoseSportsPredict.Services
                     return new PoseBillingResult { PurchaseErrorType = PosePurchaseErrorType.FailStoreConnect };
 
                 // 서버 인증
-                using (UserDialogs.Instance.Loading("Loading..."))
+                using (UserDialogs.Instance.Loading(LocalizeString.Loading))
                 {
                     var server_billingResult = await webApiService.RequestAsyncWithToken<O_E_UPDATE_IN_APP_BILLING_BY_GOOGLE>(new WebRequestContext
                     {
@@ -162,9 +162,9 @@ namespace PoseSportsPredict.Services
                     //    return result;
 
                     // 소비성 상품은 컨슘 처리
-                    //if (itemType == ItemType.InAppPurchase
-                    //    && billingResult.PurchaseStateType == PosePurchaseStateType.Purchased)
-                    //    await CrossInAppBilling.Current.ConsumePurchaseAsync(googlePurchaseResult.ProductId, googlePurchaseResult.PurchaseToken);
+                    if (itemType == ItemType.InAppPurchase
+                        && billingResult.PurchaseStateType == PosePurchaseStateType.Purchased)
+                        await CrossInAppBilling.Current.ConsumePurchaseAsync(googlePurchaseResult.ProductId, googlePurchaseResult.PurchaseToken);
                 }
             }
             catch (InAppBillingPurchaseException pEx)
@@ -174,7 +174,7 @@ namespace PoseSportsPredict.Services
                 if (pEx.PurchaseError == PurchaseError.AlreadyOwned)
                     billingResult.PurchaseErrorType = PosePurchaseErrorType.AlreadyOwned;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 billingResult = new PoseBillingResult();
                 billingResult.PurchaseErrorType = PosePurchaseErrorType.UnknownError;

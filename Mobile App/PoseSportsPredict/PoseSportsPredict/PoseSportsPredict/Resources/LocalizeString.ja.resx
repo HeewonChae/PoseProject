@@ -459,4 +459,10 @@
   <data name="Draw" xml:space="preserve">
     <value>分</value>
   </data>
+  <data name="VIP" xml:space="preserve">
+    <value>VIP</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diamond</value>
+  </data>
 </root>

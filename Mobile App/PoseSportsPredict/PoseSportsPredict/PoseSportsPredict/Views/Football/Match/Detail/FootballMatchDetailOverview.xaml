@@ -75,7 +75,7 @@
                                     HorizontalTextAlignment="End"
                                     TypeScale="Body2"
                                     TextColor="{StaticResource TextColor_D}"
-                                    Text="{x:Static localize:LocalizeString.League}">
+                                    Text="{x:Static localize:LocalizeString.Country}">
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialLabel
                                     Grid.Row="1"
@@ -85,8 +85,36 @@
                                     TextColor="{StaticResource TextColor_D}"
                                     Text=" : ">
                                 </materialui:MaterialLabel>
-                                <materialui:MaterialCard
+                                <materialui:MaterialLabel
                                     Grid.Row="1"
+                                    Grid.Column="2"
+                                    VerticalTextAlignment="Center"
+                                    MaxLines="1"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding MatchInfo.League_CountryName}">
+                                </materialui:MaterialLabel>
+
+                                <materialui:MaterialLabel
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    VerticalTextAlignment="Center"
+                                    HorizontalTextAlignment="End"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{x:Static localize:LocalizeString.League}">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialLabel
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    VerticalTextAlignment="Center"
+                                    TypeScale="Body2"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text=" : ">
+                                </materialui:MaterialLabel>
+                                <materialui:MaterialCard
+                                    Grid.Row="2"
                                     Grid.Column="2"
                                     Margin="3,0"
                                     Padding="0"
@@ -109,7 +137,7 @@
                                 </materialui:MaterialCard>
 
                                 <materialui:MaterialLabel
-                                    Grid.Row="2"
+                                    Grid.Row="3"
                                     Grid.Column="0"
                                     VerticalTextAlignment="Center"
                                     HorizontalTextAlignment="End"
@@ -125,7 +153,7 @@
                                     </materialui:MaterialLabel.Triggers>
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialLabel
-                                    Grid.Row="2"
+                                    Grid.Row="3"
                                     Grid.Column="1"
                                     VerticalTextAlignment="Center"
                                     TypeScale="Body2"
@@ -140,7 +168,7 @@
                                     </materialui:MaterialLabel.Triggers>
                                 </materialui:MaterialLabel>
                                 <materialui:MaterialLabel
-                                    Grid.Row="2"
+                                    Grid.Row="3"
                                     Grid.Column="2"
                                     VerticalTextAlignment="Center"
                                     MaxLines="1"
@@ -607,8 +635,6 @@
                                 </recentform:FootballRecentFormView>
                             </StackLayout>
                         </materialui:MaterialCard>
-
-                        
 
                         <!--Standings-->
                         <materialui:MaterialCard

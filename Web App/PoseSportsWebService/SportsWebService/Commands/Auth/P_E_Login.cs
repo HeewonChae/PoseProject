@@ -61,6 +61,7 @@ namespace SportsWebService.Commands.Auth
                 LastLoginTime = db_output.LastLoginTime,
                 MemberRoleType = memberRoleType,
                 RoleExpireTime = db_output.RoleExpireTime,
+                UserNo = db_output.UserNo,
             };
         }
     }

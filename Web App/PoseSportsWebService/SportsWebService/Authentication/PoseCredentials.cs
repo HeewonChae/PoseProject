@@ -15,7 +15,7 @@ namespace SportsWebService.Authentication
     public class PoseCredentials : IIdentity
     {
 #if DEBUG
-        public static readonly long TOKEN_EXPIRE_IN = (long)TimeSpan.FromMinutes(3).TotalMilliseconds; // 3분
+        public static readonly long TOKEN_EXPIRE_IN = (long)TimeSpan.FromMinutes(10).TotalMilliseconds; // 10분
 #else
         public static readonly long TOKEN_EXPIRE_IN = (long)TimeSpan.FromHours(1).TotalMilliseconds; // 1시간
 #endif

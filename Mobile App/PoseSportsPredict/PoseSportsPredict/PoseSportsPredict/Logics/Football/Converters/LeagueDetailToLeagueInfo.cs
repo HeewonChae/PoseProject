@@ -32,5 +32,22 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
             return returnValue;
         }
+
+        public FootballLeagueDetail Reverse(FootballLeagueInfo value)
+        {
+            return new FootballLeagueDetail
+            {
+                Country = new FootballCountryDetail
+                {
+                    Logo = value.CountryLogo,
+                    Name = value.CountryName,
+                },
+                Name = value.LeagueName,
+                Logo = value.LeagueLogo,
+                LeagueType = value.LeagueType,
+                SeasonStartDate = value.SeasonStartDate,
+                SeasonEndDate = value.SeasonEndDate
+            };
+        }
     }
 }

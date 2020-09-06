@@ -218,7 +218,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 if (CrossMTAdmob.Current.IsEnabled)
                 {
                     CrossMTAdmob.Current.LoadRewardedVideo(AppConfig.ADMOB_REWARD_ADS_ID);
-                    UserDialogs.Instance.ShowLoading("Loading...");
+                    UserDialogs.Instance.ShowLoading(LocalizeString.Loading);
                 }
 
                 return false;
@@ -269,37 +269,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             }
         }
 
-        private async void OnRewardedVideoAdClosed(object sender, EventArgs e)
+        private void OnRewardedVideoAdClosed(object sender, EventArgs e)
         {
             AdsPlayed = false;
             UserDialogs.Instance.HideLoading();
-
-#if DEBUG
-            _selectedPrediction.UnlockedTime = DateTime.UtcNow;
-            await _sqliteService.InsertOrUpdateAsync(_selectedPrediction);
-
-            switch (_selectedPrediction.MainLabel)
-            {
-                case FootballPredictionType.Final_Score:
-                    IsFinalScoreUnlocked = true;
-                    break;
-
-                case FootballPredictionType.Match_Winner:
-                    IsMatchWinnerUnlocked = true;
-                    break;
-
-                case FootballPredictionType.Both_Teams_to_Score:
-                    IsBothToScoreUnlocked = true;
-                    break;
-
-                case FootballPredictionType.Under_Over:
-                    IsUnderOverUnlocked = true;
-                    break;
-
-                default:
-                    break;
-            }
-#endif
         }
 
         private async void OnRewardedVideoAdFailedToLoad(object sender, EventArgs e)
@@ -310,7 +283,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             await MaterialDialog.Instance.AlertAsync(LocalizeString.VidonAd_Load_Fail,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
         }
 
         public FootballMatchDetailPredictionsViewModel SetMatchInfo(FootballMatchInfo matchInfo)

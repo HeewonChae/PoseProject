@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Plugin.StoreReview;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.LocalizedRes;
@@ -14,7 +15,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
 
@@ -136,16 +139,40 @@ namespace PoseSportsPredict.ViewModels.Common
             SetIsBusy(false);
         }
 
-        public ICommand SelectCheckUpdatesCommand { get => new RelayCommand(SelectCheckUpdates); }
+        public ICommand SelectWriteReviewCommand { get => new RelayCommand(SelectWriteReview); }
 
-        private async void SelectCheckUpdates()
+        private async void SelectWriteReview()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<CheckForUpdatesViewModel>());
+            if (CrossStoreReview.IsSupported)
+            {
+                var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
+                CrossStoreReview.Current.OpenStoreReviewPage(deviceInfoHelper.AppPackageName);
+            }
+
+            await Task.Delay(1500);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectShareAppCommand { get => new RelayCommand(SelectShareApp); }
+
+        private async void SelectShareApp()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Uri = AppConfig.APP_LINK,
+                Title = "Share App Link"
+            });
 
             SetIsBusy(false);
         }

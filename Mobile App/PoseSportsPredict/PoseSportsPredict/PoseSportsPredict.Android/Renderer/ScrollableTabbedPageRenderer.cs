@@ -1,6 +1,7 @@
 ﻿using Android.Content;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
+using Google.Android.Material.Tabs;
 using PoseSportsPredict.Droid.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

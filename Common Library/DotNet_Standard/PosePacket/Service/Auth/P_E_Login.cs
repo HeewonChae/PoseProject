@@ -28,5 +28,8 @@ namespace PosePacket.Service.Auth
 
         [Key(4)]
         public DateTime RoleExpireTime { get; set; }
+
+        [Key(5)]
+        public long UserNo { get; set; }
     }
 }

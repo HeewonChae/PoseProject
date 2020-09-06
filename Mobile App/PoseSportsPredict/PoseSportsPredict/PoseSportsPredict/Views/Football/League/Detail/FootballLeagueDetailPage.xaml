@@ -66,10 +66,24 @@
                         </ContentView>
                         <!--Toolbar button-->
                         <StackLayout
-                            Spacing="9"
+                            Spacing="15"
                             Orientation="Horizontal"
                             HorizontalOptions="EndAndExpand"
                             VerticalOptions="Center">
+
+                            <ContentView
+                                Padding="4"
+                                BackgroundColor="Transparent"
+                                effects:TapCommandEffect.Tap="{Binding MatchShareCommand}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <Image
+                                    HeightRequest="21"
+                                    WidthRequest="21"
+                                    Source="ic_share"
+                                    Aspect="AspectFit">
+                                </Image>
+                            </ContentView>
+
                             <ContentView
                                 Padding="4"
                                 BackgroundColor="Transparent"
@@ -89,6 +103,7 @@
                                     Value="{Binding LeagueInfo.IsBookmarked, Converter={StaticResource boolToDoubleConverter}, Mode=TwoWay}">
                                 </customviews:RatingView>
                             </ContentView>
+
                             <ContentView
                                 x:Name="_moreButton"
                                 IsVisible="{Binding IsMoreButtonVisible}"

@@ -88,9 +88,9 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
             // Add Bookmark
             if (leagueInfo.IsBookmarked)
-                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
+                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, PageDetailType.League);
             else
-                await _bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
+                await _bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, PageDetailType.League);
 
             SetIsBusy(false);
         }

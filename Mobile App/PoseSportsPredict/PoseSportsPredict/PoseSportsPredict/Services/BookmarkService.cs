@@ -26,7 +26,7 @@ namespace PoseSportsPredict.Services
             _sqliteService = sqliteService;
         }
 
-        public async Task<bool> AddBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new()
+        public async Task<bool> AddBookmark<T>(T item, SportsType sportsType, PageDetailType bookmarkType) where T : ISQLiteStorable, IBookmarkable, new()
         {
             var membershipType = ShinyHost.Resolve<MembershipService>().MemberRoleType;
             if (MembershipAdvantage.TryGetValue(membershipType, out MembershipAdvantage advantage))
@@ -34,15 +34,15 @@ namespace PoseSportsPredict.Services
                 int limitSize = 0;
                 switch (bookmarkType)
                 {
-                    case BookMarkType.Match:
+                    case PageDetailType.Match:
                         limitSize = advantage.MatchBookmarkLimit;
                         break;
 
-                    case BookMarkType.League:
+                    case PageDetailType.League:
                         limitSize = advantage.LeagueBookmarkLimit;
                         break;
 
-                    case BookMarkType.Team:
+                    case PageDetailType.Team:
                         limitSize = advantage.TeamBookmarkLimit;
                         break;
                 }
@@ -81,7 +81,7 @@ namespace PoseSportsPredict.Services
             return true;
         }
 
-        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, BookMarkType bookmarkType, bool showToastMsg = true) where T : ISQLiteStorable, IBookmarkable, new()
+        public async Task<bool> RemoveBookmark<T>(T item, SportsType sportsType, PageDetailType bookmarkType, bool showToastMsg = true) where T : ISQLiteStorable, IBookmarkable, new()
         {
             item.Order = 0;
             item.StoredTime = DateTime.UtcNow;

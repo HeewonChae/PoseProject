@@ -1,4 +1,5 @@
 ﻿using MarcTron.Plugin;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.ViewModels;
 using Shiny;
 using Xamarin.Forms;
@@ -31,8 +32,9 @@ namespace PoseSportsPredict
         {
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
+            await PageUriLinker.GoUrlLinkedPage();
         }
 
         //private async void OnLocalNotificationTapped(NotificationTappedEventArgs e)

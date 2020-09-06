@@ -151,9 +151,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             // Add Bookmark
             if (matchInfo.IsBookmarked)
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, PageDetailType.Match);
             else
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, PageDetailType.Match);
 
             SetIsBusy(false);
         }

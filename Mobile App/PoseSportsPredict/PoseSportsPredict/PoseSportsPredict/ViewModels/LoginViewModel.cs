@@ -130,6 +130,7 @@ namespace PoseSportsPredict.ViewModels
 
             // Update PoseToken, Update ExpireTime
             ClientContext.SetCredentialsFrom(loginResult.PoseToken);
+            ClientContext.UserNo = loginResult.UserNo;
             ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
             ClientContext.LastLoginTime = loginResult.LastLoginTime.ToLocalTime();
 
@@ -157,8 +158,10 @@ namespace PoseSportsPredict.ViewModels
                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Product_Not_Consumed,
                         LocalizeString.App_Title,
                         LocalizeString.Ok,
-                        DialogConfiguration.DefaultAlterDialogConfiguration);
+                        DialogConfiguration.AppTitleAlterDialogConfiguration);
             }
+
+            await PageUriLinker.GoUrlLinkedPage();
 
             return true;
         }

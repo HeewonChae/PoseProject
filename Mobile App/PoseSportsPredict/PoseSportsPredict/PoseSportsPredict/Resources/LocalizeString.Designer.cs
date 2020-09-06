@@ -61,6 +61,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activated.
+        /// </summary>
+        public static string Activated {
+            get {
+                return ResourceManager.GetString("Activated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add away team.
         /// </summary>
         public static string Add_Away_Team {
@@ -129,6 +138,15 @@ namespace PoseSportsPredict.Resources {
         public static string Away {
             get {
                 return ResourceManager.GetString("Away", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Benefits.
+        /// </summary>
+        public static string Benefits {
+            get {
+                return ResourceManager.GetString("Benefits", resourceCulture);
             }
         }
         
@@ -259,6 +277,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string Country {
+            get {
+                return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete away team.
         /// </summary>
         public static string Delete_Away_Team {
@@ -304,6 +331,51 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Diamond.
+        /// </summary>
+        public static string Diamond {
+            get {
+                return ResourceManager.GetString("Diamond", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View prediction data without video ad for 7 days.
+        /// </summary>
+        public static string Diamond_Advantage_1 {
+            get {
+                return ResourceManager.GetString("Diamond_Advantage_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expanded to 50 bookmarked matches.
+        /// </summary>
+        public static string Diamond_Advantage_2 {
+            get {
+                return ResourceManager.GetString("Diamond_Advantage_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expanded to 30 bookmarked leagues.
+        /// </summary>
+        public static string Diamond_Advantage_3 {
+            get {
+                return ResourceManager.GetString("Diamond_Advantage_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expanded to 30 bookmarked teams.
+        /// </summary>
+        public static string Diamond_Advantage_4 {
+            get {
+                return ResourceManager.GetString("Diamond_Advantage_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to logout?.
         /// </summary>
         public static string Do_You_Want_Logout {
@@ -340,6 +412,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is a new app update..
+        /// </summary>
+        public static string Exist_App_Update {
+            get {
+                return ResourceManager.GetString("Exist_App_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand all leagues.
         /// </summary>
         public static string Expand_All_Leagues {
@@ -354,6 +435,15 @@ namespace PoseSportsPredict.Resources {
         public static string Expand_All_Matches {
             get {
                 return ResourceManager.GetString("Expand_All_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiration date.
+        /// </summary>
+        public static string Expiration_Date {
+            get {
+                return ResourceManager.GetString("Expiration_Date", resourceCulture);
             }
         }
         
@@ -520,6 +610,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Later.
+        /// </summary>
+        public static string Later {
+            get {
+                return ResourceManager.GetString("Later", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to League.
         /// </summary>
         public static string League {
@@ -547,6 +646,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login with Facebook.
         /// </summary>
         public static string Login_With_Facebook {
@@ -570,6 +678,15 @@ namespace PoseSportsPredict.Resources {
         public static string Loginning {
             get {
                 return ResourceManager.GetString("Loginning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -705,6 +822,24 @@ namespace PoseSportsPredict.Resources {
         public static string Matches {
             get {
                 return ResourceManager.GetString("Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Membership.
+        /// </summary>
+        public static string Membership {
+            get {
+                return ResourceManager.GetString("Membership", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mo.
+        /// </summary>
+        public static string Monthly {
+            get {
+                return ResourceManager.GetString("Monthly", resourceCulture);
             }
         }
         
@@ -907,7 +1042,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Payment has been pending. Please check your payment.
+        ///   Looks up a localized string similar to Payment has been pending. Please check your payment..
         /// </summary>
         public static string Payment_Pending_Please_Check {
             get {
@@ -1020,6 +1155,15 @@ namespace PoseSportsPredict.Resources {
         public static string Remember_Account {
             get {
                 return ResourceManager.GetString("Remember_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove video ads.
+        /// </summary>
+        public static string Remove_Video_Ads {
+            get {
+                return ResourceManager.GetString("Remove_Video_Ads", resourceCulture);
             }
         }
         
@@ -1186,6 +1330,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share app.
+        /// </summary>
+        public static string Share_App {
+            get {
+                return ResourceManager.GetString("Share_App", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Standings.
         /// </summary>
         public static string Standings {
@@ -1272,6 +1425,15 @@ namespace PoseSportsPredict.Resources {
         public static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unavailable.
+        /// </summary>
+        public static string Unavailable {
+            get {
+                return ResourceManager.GetString("Unavailable", resourceCulture);
             }
         }
         
@@ -1366,6 +1528,24 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member No.
+        /// </summary>
+        public static string User_No {
+            get {
+                return ResourceManager.GetString("User_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was a problem loading the ad..
         /// </summary>
         public static string VidonAd_Load_Fail {
@@ -1380,6 +1560,60 @@ namespace PoseSportsPredict.Resources {
         public static string View_Form {
             get {
                 return ResourceManager.GetString("View_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP.
+        /// </summary>
+        public static string VIP {
+            get {
+                return ResourceManager.GetString("VIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View prediction data without video ad for one month.
+        /// </summary>
+        public static string VIP_Advantage_1 {
+            get {
+                return ResourceManager.GetString("VIP_Advantage_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expanded to 100 bookmarked matches.
+        /// </summary>
+        public static string VIP_Advantage_2 {
+            get {
+                return ResourceManager.GetString("VIP_Advantage_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited number of bookmarked leagues.
+        /// </summary>
+        public static string VIP_Advantage_3 {
+            get {
+                return ResourceManager.GetString("VIP_Advantage_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlimited number of bookmarked teams.
+        /// </summary>
+        public static string VIP_Advantage_4 {
+            get {
+                return ResourceManager.GetString("VIP_Advantage_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete banner ad at the bottom of the page.
+        /// </summary>
+        public static string VIP_Advantage_5 {
+            get {
+                return ResourceManager.GetString("VIP_Advantage_5", resourceCulture);
             }
         }
         
@@ -1416,6 +1650,15 @@ namespace PoseSportsPredict.Resources {
         public static string Win_Initial {
             get {
                 return ResourceManager.GetString("Win_Initial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write a review.
+        /// </summary>
+        public static string Write_Review {
+            get {
+                return ResourceManager.GetString("Write_Review", resourceCulture);
             }
         }
         

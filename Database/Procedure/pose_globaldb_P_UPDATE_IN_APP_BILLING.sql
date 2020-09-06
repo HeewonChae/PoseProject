@@ -39,7 +39,7 @@ BEGIN
         ,   upt_date = i_cur_time
         WHERE
             trans_no = i_trans_no
-        AND user_no = i_user_no
+        AND user_no = i_user_no;
 
         UPDATE user_role
         SET

@@ -37,7 +37,7 @@ namespace PoseSportsPredict.ViewModels.Football.League
 
             LeaguesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballLeagueInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.BookmarkMessageHandler(e));
 
             MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this,

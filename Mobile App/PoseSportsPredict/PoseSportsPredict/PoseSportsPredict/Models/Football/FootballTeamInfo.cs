@@ -33,7 +33,7 @@ namespace PoseSportsPredict.Models.Football
         public DateTime StoredTime { get; set; }
         public string MenuName { get => TeamName; }
         public string Logo { get => TeamLogo; }
-        public BookMarkType BookMarkType { get => BookMarkType.Team; }
+        public PageDetailType BookMarkType { get => PageDetailType.Team; }
 
         #endregion IBookmarkMenuItem
 

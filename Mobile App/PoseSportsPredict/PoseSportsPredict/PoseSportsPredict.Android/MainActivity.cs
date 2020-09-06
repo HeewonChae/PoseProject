@@ -6,14 +6,15 @@ using Android.Gms.Ads;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
+using Firebase;
 using Google.Android.Vending.Licensing;
 using Plugin.InAppBilling;
-using Plugin.LocalNotification;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Resources;
 using Shiny;
 using Xamarin.Auth;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android.AppLinks;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Droid
@@ -109,15 +110,17 @@ namespace PoseSportsPredict.Droid
             //global::Xamarin.Auth.WebViewConfiguration.Android.UserAgent = "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Mobile Safari/537.36";
             Sharpnado.Presentation.Forms.Droid.SharpnadoInitializer.Initialize();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+            FirebaseApp.InitializeApp(this);
+            AndroidAppLinks.Init(this);
             UserDialogs.Init(this);
 
-            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
-            {
-                Id = AppConfig.Psoe_Noti_Channel_01,
-                Importance = NotificationImportance.High,
-                Name = "General",
-                Description = "General",
-            });
+            //NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
+            //{
+            //    Id = AppConfig.Psoe_Noti_Channel_01,
+            //    Importance = NotificationImportance.High,
+            //    Name = "General",
+            //    Description = "General",
+            //});
 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
         }
@@ -164,6 +167,7 @@ namespace PoseSportsPredict.Droid
             var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
             deviceInfoHelper.AppPackageName = this.PackageName;
             deviceInfoHelper.DeviceId = Android.Provider.Settings.Secure.GetString(ContentResolver, Android.Provider.Settings.Secure.AndroidId);
+            deviceInfoHelper.AppVersionName = this.ApplicationContext.PackageManager.GetPackageInfo(PackageName, 0).VersionName;
 
             // create the obfuscator that will read and write the saved responses,
             // passing the salt, the package name and the device identifier

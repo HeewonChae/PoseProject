@@ -27,6 +27,7 @@ namespace PoseSportsPredict
         public const string DEFAULT_LANGUAGE = "en";
         public const string CULTURE_CHANGED_MSG = "UICultureChanged";
 
+        // 예측데이터 광고보고 해제 유지할 시간
         public const int Prediction_Unlocked_Time = 1; // Hour
 
         // Ads
@@ -36,10 +37,14 @@ namespace PoseSportsPredict
         public const string ADMOB_REWARD_ADS_ID = "ca-app-pub-3381862928005780/8292633466";
 
         // InAppBilling ProductId
-
         public readonly static string[] ANDROID_PRODUCT_IDS = new string[] { "pose_poseidon_picks_0_1", "pose_poseidon_picks_1_1" };
 
         // MemberRoleType Change Message
         public const string MEMBERSHIP_TYPE_CHANGED = "Membership_Type_Changed";
+
+        // Firebase Deep Link
+
+        public const string APP_LINK = "https://poseidonpicks.page.link/app";
+        public const string PAGE_BASE_LINK = "https://poseidonpicks.page.link/pagelinker";
     }
 }

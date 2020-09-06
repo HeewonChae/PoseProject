@@ -46,7 +46,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
             MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this, AppConfig.CULTURE_CHANGED_MSG, OnCultureChanged);
 
@@ -265,7 +265,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deletedIndex in needRefrashMatchIndexes)
             {
                 var foundMatchInfo = oldBookmarkedMatches.Find(elem => elem.Id == deletedIndex);
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match, false);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, PageDetailType.Match, false);
             }
 
             _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
@@ -311,7 +311,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deletedIndex in needRefrashMatchIndexes)
             {
                 var foundMatchInfo = _matchList.Find(elem => elem.Id == deletedIndex);
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, BookMarkType.Match, false);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(foundMatchInfo, SportsType.Football, PageDetailType.Match, false);
             }
 
             _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())
@@ -332,7 +332,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             foreach (var deleteMatchInfo in _DeleteMatchList)
             {
                 deleteMatchInfo.IsBookmarked = false;
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, SportsType.Football, BookMarkType.Match, false);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(deleteMatchInfo, SportsType.Football, PageDetailType.Match, false);
             }
 
             _matchList = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>())

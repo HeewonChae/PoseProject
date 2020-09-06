@@ -17,6 +17,7 @@
                  xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
                  xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Bookmark"
                  xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+                 xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
                  material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
                  material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
                  BackgroundColor="{StaticResource TransparentBlack}"
@@ -198,11 +199,27 @@
                                                                 Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
                                                             </materialui:MaterialLabel>
                                                         </Grid>
-
+                                                        <ContentView
+                                                            HorizontalOptions="EndAndExpand"
+                                                            BackgroundColor="Transparent">
+                                                            <customviews:RatingView
+                                                                IsVisible="{Binding IsPredicted, Mode=OneTime}"
+                                                                WidthRequest="95"
+                                                                HeightRequest="19"
+                                                                StrokeWidth="0.8"
+                                                                RatingType="Full"
+                                                                ColorOn="{StaticResource IconActivated}"
+                                                                OutlineOnColor="{StaticResource IconActivated}"
+                                                                OutlineOffColor="{StaticResource IconActivated}"
+                                                                Path="{x:Static customviews:PathConstants.Star}"
+                                                                Count="5"
+                                                                Value="{Binding MaxRating, Mode=OneTime}">
+                                                            </customviews:RatingView>
+                                                        </ContentView>
                                                         <!--MatchInfo-->
                                                         <Grid
                                                             VerticalOptions="FillAndExpand"
-                                                            Padding="0,11,0,13">
+                                                            Padding="0,3,0,13">
                                                             <Grid.ColumnDefinitions>
                                                                 <ColumnDefinition Width="10" />
                                                                 <ColumnDefinition Width="*" />

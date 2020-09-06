@@ -20,8 +20,8 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate x:DataType="models:FootballMatchInfo">
                     <Grid
-                        Padding="10, 0"
-                        ColumnSpacing="0">
+                        ColumnSpacing="0"
+                        Margin="10,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
@@ -51,8 +51,9 @@
                             </ContentView>-->
                             <!--Bookmark-->
                             <ContentView
+                                Margin="0,12,0,0"
                                 Padding="7"
-                                VerticalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
                                 BackgroundColor="Transparent"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.TouchBookmarkButtonCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
@@ -76,13 +77,17 @@
                         <Grid
                             x:Name="_grid"
                             Grid.Column="1"
-                            Margin="0"
-                            Padding="0,20"
+                            RowSpacing="0"
+                            Padding="0,10,0,12"
                             effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.TapParameter="{Binding .}"
                             effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"
                             effects:TapCommandEffect.LongTapParameter="{Binding .}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="10" />
                                 <ColumnDefinition Width="*" />
@@ -92,7 +97,29 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="10" />
                             </Grid.ColumnDefinitions>
+                            <ContentView
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="EndAndExpand"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="7"
+                            BackgroundColor="Transparent">
+                                <customviews:RatingView
+                                IsVisible="{Binding IsRecommended, Mode=OneTime}"
+                                WidthRequest="95"
+                                HeightRequest="19"
+                                StrokeWidth="0.8"
+                                RatingType="Full"
+                                ColorOn="{StaticResource IconActivated}"
+                                OutlineOnColor="{StaticResource IconActivated}"
+                                OutlineOffColor="{StaticResource IconActivated}"
+                                Path="{x:Static customviews:PathConstants.Star}"
+                                Count="5"
+                                Value="{Binding MaxRating, Mode=OneTime}">
+                                </customviews:RatingView>
+                            </ContentView>
+
                             <materialui:MaterialLabel
+                                Grid.Row="1"
                                 Grid.Column="1"
                                 LineHeight="1"
                                 HorizontalOptions="EndAndExpand"
@@ -106,6 +133,7 @@
                             </materialui:MaterialLabel>
                             <!--HomeLogo-->
                             <ffimageloading:CachedImage
+                                Grid.Row="1"
                                 Grid.Column="2"
                                 Margin="3,0"
                                 Aspect="AspectFit"
@@ -121,6 +149,7 @@
                             </ffimageloading:CachedImage>
                             <!--Middle-->
                             <StackLayout
+                                Grid.Row="1"
                                 Grid.Column="3"
                                 Spacing="0"
                                 VerticalOptions="FillAndExpand">
@@ -147,6 +176,7 @@
                             </StackLayout>
                             <!--AwayLogo-->
                             <ffimageloading:CachedImage
+                                Grid.Row="1"
                                 Grid.Column="4"
                                 Margin="3,0"
                                 Aspect="AspectFit"
@@ -161,6 +191,7 @@
                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                             </ffimageloading:CachedImage>
                             <materialui:MaterialLabel
+                                Grid.Row="1"
                                 Grid.Column="5"
                                 LineHeight="1"
                                 HorizontalOptions="StartAndExpand"
@@ -173,6 +204,7 @@
                                 Text="{Binding AwayName}">
                             </materialui:MaterialLabel>
                             <materialui:MaterialCard
+                                Grid.Row="1"
                                 Grid.Column="6"
                                 Padding="0"
                                 Margin="0"

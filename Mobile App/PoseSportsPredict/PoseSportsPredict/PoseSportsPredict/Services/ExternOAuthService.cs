@@ -134,7 +134,7 @@ namespace PoseSportsPredict.Services
             await MaterialDialog.Instance.AlertAsync($"OAuth Error: {eventArgs.Message}",
                 LocalizeString.App_Title,
                 LocalizeString.Ok,
-                DialogConfiguration.DefaultAlterDialogConfiguration);
+                DialogConfiguration.AppTitleAlterDialogConfiguration);
 
             ShinyHost.Resolve<LoginViewModel>().SetIsBusy(false);
         }
@@ -163,6 +163,7 @@ namespace PoseSportsPredict.Services
             _authenticatedUser = null;
             LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
 
+            await PageSwitcher.PopAllNavPageAsync();
             await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
         }
     }

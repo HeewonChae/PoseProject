@@ -41,6 +41,7 @@
 
         <Color x:Key="TextColor_L">#fafafa</Color>
         <Color x:Key="TextColor_D">#212121</Color>
+        <Color x:Key="TextColor_D2">#34515e</Color>
 
         <Color x:Key="TransparentWhite">#79ffffff</Color>
         <Color x:Key="TransparentBlack">#39000000</Color>

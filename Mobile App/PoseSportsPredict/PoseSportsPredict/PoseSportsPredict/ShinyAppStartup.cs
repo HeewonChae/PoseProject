@@ -134,14 +134,14 @@ namespace PoseSportsPredict
             services.AddSingleton<SettingsPage>();
             services.AddSingleton<SettingsViewModel>();
             // Settings - My Profile
-            services.AddTransient<MyProfilePage>();
-            services.AddTransient<MyProfileViewModel>();
+            services.AddSingleton<MyProfilePage>();
+            services.AddSingleton<MyProfileViewModel>();
             // Settings - VIP Club
-            services.AddTransient<VipClubPage>();
-            services.AddTransient<VIPClubViewModel>();
+            services.AddSingleton<VipClubPage>();
+            services.AddSingleton<VIPClubViewModel>();
             // Settings - Check For Updates
-            services.AddTransient<CheckForUpdatesPage>();
-            services.AddTransient<CheckForUpdatesViewModel>();
+            services.AddSingleton<CheckForUpdatesPage>();
+            services.AddSingleton<CheckForUpdatesViewModel>();
 
             // Football
             services.AddSingleton<FootballMainPage>();

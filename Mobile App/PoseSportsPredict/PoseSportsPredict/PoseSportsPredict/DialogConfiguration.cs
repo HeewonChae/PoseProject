@@ -21,6 +21,18 @@ namespace PoseSportsPredict
             ButtonAllCaps = true
         };
 
+        public static readonly MaterialAlertDialogConfiguration AppTitleAlterDialogConfiguration = new MaterialAlertDialogConfiguration
+        {
+            BackgroundColor = Color.White,
+            TitleTextColor = AppResourcesHelper.GetResource<Color>("TextColor_D2"),
+            MessageTextColor = AppResourcesHelper.GetResource<Color>("CustomGrey_D"),
+            TintColor = AppResourcesHelper.GetResource<Color>("PrimaryColor"),
+            CornerRadius = 5,
+            ScrimColor = Color.FromHex("#232F34").MultiplyAlpha(0.32),
+            TitleFontFamily = "AppTitleFont_B",
+            ButtonAllCaps = true
+        };
+
         public static readonly MaterialSimpleDialogConfiguration DefaultSimpleDialogConfiguration = new MaterialSimpleDialogConfiguration
         {
             BackgroundColor = Color.White,

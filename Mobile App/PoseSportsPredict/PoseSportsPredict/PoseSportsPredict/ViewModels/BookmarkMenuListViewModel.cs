@@ -30,9 +30,9 @@ namespace PoseSportsPredict.ViewModels
             _expanded = true;
 
             // Football
-            var message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.League);
+            var message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, PageDetailType.League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
-            message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, BookMarkType.Team);
+            message = BookmarkServiceHelper.BuildBookmarkMessage(null, SportsType.Football, PageDetailType.Team);
             MessagingCenter.Subscribe<BookmarkService, FootballTeamInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
@@ -52,7 +52,7 @@ namespace PoseSportsPredict.ViewModels
 
         public MatchGroupType GroupType { get; set; }
         public AdsBannerType AdsBannerType { get; set; }
-        public BookMarkType BookMarkType { get; set; }
+        public PageDetailType BookMarkType { get; set; }
         public ObservableCollection<IBookmarkMenuItem> Items { get => _items; set => SetValue(ref _items, value); }
         public string StateIcon => Expanded ? "ic_expanded.png" : "ic_collapsed.png";
         public string Title { get => _title; set => SetValue(ref _title, value); }
@@ -120,11 +120,11 @@ namespace PoseSportsPredict.ViewModels
 
             switch (BookMarkType)
             {
-                case BookMarkType.League:
+                case PageDetailType.League:
                     await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedLeague();
                     break;
 
-                case BookMarkType.Team:
+                case PageDetailType.Team:
                     await ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashBookmarkedTeam();
                     break;
             }

@@ -27,7 +27,7 @@ namespace PoseSportsPredict.ViewModels
             return true;
         }
 
-        public override Task<bool> OnPrepareViewAsync(params object[] datas)
+        public override async Task<bool> OnPrepareViewAsync(params object[] datas)
         {
             var masterPage = this.CoupledPage as AppMasterPage;
             masterPage.IsPresented = false;
@@ -35,7 +35,12 @@ namespace PoseSportsPredict.ViewModels
             ShinyHost.Resolve<AppMasterMenuViewModel>().RefrashUserInfo();
             ShinyHost.Resolve<AppMasterMenuViewModel>().LastLoginTime = ClientContext.LastLoginTime;
 
-            return Task.FromResult(true);
+            if (masterPage.Detail.BindingContext is NavigableViewModel detailViewModel)
+            {
+                await detailViewModel.OnPrepareViewAsync();
+            }
+
+            return true;
         }
 
         public override void OnAppearing(params object[] datas)

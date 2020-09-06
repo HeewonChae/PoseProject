@@ -11,5 +11,6 @@ namespace PoseSportsPredict.Droid.DependencyImpl
         public string DeviceId { get; set; }
         public string AppPackageName { get; set; }
         public bool? IsLicensed { get; set; }
+        public string AppVersionName { get; set; }
     }
 }

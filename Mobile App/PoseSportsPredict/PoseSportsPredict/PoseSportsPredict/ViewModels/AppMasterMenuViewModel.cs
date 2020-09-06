@@ -8,6 +8,7 @@ using PoseSportsPredict.Models.Enums;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.Utilities.SQLite;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Common;
@@ -38,6 +39,8 @@ namespace PoseSportsPredict.ViewModels
             MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this,
                 AppConfig.CULTURE_CHANGED_MSG, OnUpdateCultureInfo);
 
+            MessagingCenter.Subscribe<MembershipService, MemberRoleType>(this, AppConfig.MEMBERSHIP_TYPE_CHANGED, (s, e) => MembershipTypeChanged(e));
+
             var footballPage = ShinyHost.Resolve<FootballMainViewModel>().CoupledPage;
 
             SportsCategories = new ObservableCollection<Models.AppMenuDetailItem>
@@ -54,13 +57,13 @@ namespace PoseSportsPredict.ViewModels
             BookmarkedLeauges = new BookmarkMenuListViewModel()
             {
                 Title = LocalizeString.Favorite_Leagues,
-                BookMarkType = BookMarkType.League,
+                BookMarkType = PageDetailType.League,
             };
 
             BookmarkedTeams = new BookmarkMenuListViewModel()
             {
                 Title = LocalizeString.Favorite_Teams,
-                BookMarkType = BookMarkType.Team,
+                BookMarkType = PageDetailType.Team,
             };
 
             _curActiveSportsType = SportsType.Football;
@@ -88,6 +91,7 @@ namespace PoseSportsPredict.ViewModels
         private BookmarkMenuListViewModel _bookmarkedLeauges;
         private BookmarkMenuListViewModel _bookmarkedTeams;
         private DateTime _lastLoginTime;
+        private bool _isExistRemoveAdsPurchase;
 
         #endregion Fields
 
@@ -99,6 +103,7 @@ namespace PoseSportsPredict.ViewModels
         public BookmarkMenuListViewModel BookmarkedLeauges { get => _bookmarkedLeauges; set => SetValue(ref _bookmarkedLeauges, value); }
         public BookmarkMenuListViewModel BookmarkedTeams { get => _bookmarkedTeams; set => SetValue(ref _bookmarkedTeams, value); }
         public DateTime LastLoginTime { get => _lastLoginTime; set => SetValue(ref _lastLoginTime, value); }
+        public bool IsExistRemoveAdsPurchase { get => _isExistRemoveAdsPurchase; set => SetValue(ref _isExistRemoveAdsPurchase, value); }
 
         #endregion Properties
 
@@ -118,7 +123,7 @@ namespace PoseSportsPredict.ViewModels
                 LocalizeString.App_Title,
                 LocalizeString.Ok,
                 LocalizeString.Cancel,
-                DialogConfiguration.DefaultAlterDialogConfiguration);
+                DialogConfiguration.AppTitleAlterDialogConfiguration);
 
             if (isLogout.HasValue && isLogout.Value)
                 await _OAuthService.Logout();
@@ -136,6 +141,20 @@ namespace PoseSportsPredict.ViewModels
             SetIsBusy(true);
 
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<MyProfileViewModel>());
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectVipLoungeCommand { get => new RelayCommand(SelectVipLounge); }
+
+        private async void SelectVipLounge()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
 
             SetIsBusy(false);
         }
@@ -224,6 +243,11 @@ namespace PoseSportsPredict.ViewModels
             footballMainPage.Children[1].Title = LocalizeString.Leagues;
             footballMainPage.Children[2].Title = LocalizeString.Bookmarks;
             footballMainPage.Children[3].Title = LocalizeString.Settings;
+        }
+
+        private void MembershipTypeChanged(MemberRoleType value)
+        {
+            IsExistRemoveAdsPurchase = value > MemberRoleType.Regular;
         }
 
         #endregion Methods

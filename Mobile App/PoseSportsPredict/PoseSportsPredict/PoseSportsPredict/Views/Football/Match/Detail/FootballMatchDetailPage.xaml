@@ -26,10 +26,6 @@
             <pancakeview:PancakeView
                 CornerRadius="0,0,37,37">
 
-                <pancakeview:PancakeView.Shadow>
-                    <pancakeview:DropShadow Color="{StaticResource SecondaryColor_D}" />
-                </pancakeview:PancakeView.Shadow>
-
                 <pancakeview:PancakeView.BackgroundGradientStops>
                     <pancakeview:GradientStopCollection>
                         <pancakeview:GradientStop Color="{StaticResource SecondaryColor_D}" Offset="0.0" />
@@ -68,19 +64,19 @@
                         <!--Toolbar button-->
                         <StackLayout
                             Orientation="Horizontal"
-                            Spacing="12"
+                            Spacing="15"
                             HorizontalOptions="EndAndExpand"
                             VerticalOptions="Center">
 
                             <ContentView
-                                Padding="6"
+                                Padding="4"
                                 BackgroundColor="Transparent"
                                 IsVisible="{Binding MatchInfo, Converter={StaticResource isFootballMatchOngoingConverter}}"
                                 effects:TapCommandEffect.Tap="{Binding TouchRefrashButtonCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <StackLayout Orientation="Horizontal" Spacing="0" Margin="0" Padding="0">
                                     <Image
-                                         IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}"
+                                        IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}"
                                         HeightRequest="21"
                                         WidthRequest="21"
                                         Source="ic_refresh.png"
@@ -90,10 +86,23 @@
                                         IsVisible="{Binding IsBusy}"
                                         IsRunning="{Binding IsBusy}"
                                         Color="{StaticResource PrimaryColor_L}"
-                                        WidthRequest="21"
-                                        HeightRequest="21">
+                                        WidthRequest="22"
+                                        HeightRequest="22">
                                     </ActivityIndicator>
                                 </StackLayout>
+                            </ContentView>
+
+                            <ContentView
+                                Padding="4"
+                                BackgroundColor="Transparent"
+                                effects:TapCommandEffect.Tap="{Binding MatchShareCommand}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <Image
+                                    HeightRequest="21"
+                                    WidthRequest="21"
+                                    Source="ic_share"
+                                    Aspect="AspectFit">
+                                </Image>
                             </ContentView>
 
                             <!--<ContentView
@@ -158,10 +167,7 @@
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
                                 HeightRequest="43"
-                                WidthRequest="43"
                                 DownsampleHeight="90"
                                 DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
@@ -265,7 +271,6 @@
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
                                 HeightRequest="43"
-                                WidthRequest="43"
                                 DownsampleHeight="90"
                                 DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"

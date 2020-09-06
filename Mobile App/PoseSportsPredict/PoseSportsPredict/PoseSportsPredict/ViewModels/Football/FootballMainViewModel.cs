@@ -29,6 +29,15 @@ namespace PoseSportsPredict.ViewModels.Football
             return true;
         }
 
+        public override Task<bool> OnPrepareViewAsync(params object[] datas)
+        {
+            if (this.CoupledPage is TabbedPage tabbedPage)
+            {
+                tabbedPage.CurrentPage = tabbedPage.Children[0];
+            }
+            return base.OnPrepareViewAsync(datas);
+        }
+
         public override void OnAppearing(params object[] datas)
         {
             if (this.CoupledPage is TabbedPage tabbedpage

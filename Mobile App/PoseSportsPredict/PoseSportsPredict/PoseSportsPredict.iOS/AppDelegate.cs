@@ -41,7 +41,7 @@ namespace PoseSportsPredict.iOS
 
         public override void WillEnterForeground(UIApplication uiApplication)
         {
-            Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
+            //Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
         }
 
         private void InitExternModule()
@@ -54,7 +54,7 @@ namespace PoseSportsPredict.iOS
             Syncfusion.XForms.iOS.TabView.SfTabViewRenderer.Init();
             Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
             Syncfusion.SfGauge.XForms.iOS.SfGaugeRenderer.Init();
-            Plugin.LocalNotification.NotificationCenter.AskPermission();
+            //Plugin.LocalNotification.NotificationCenter.AskPermission();
             MobileAds.SharedInstance.Start(CompletionHandler);
         }
 

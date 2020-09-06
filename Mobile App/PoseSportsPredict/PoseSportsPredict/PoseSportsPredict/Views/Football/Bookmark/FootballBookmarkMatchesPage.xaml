@@ -53,7 +53,7 @@
                         x:Name="lv_bookmarkedMatches"
                         EnableDragAndDrop="False"
                         ColumnCount="1"
-                        ItemHeight="109"
+                        ItemHeight="121"
                         ItemSpacing="0"
                         ListLayout="Grid"
                         ItemsSource="{Binding BookmarkedMatches}">
@@ -143,9 +143,27 @@
                                                         </Image>
                                                     </ContentView>
                                                 </Grid>
+                                                <ContentView
+                                                    HorizontalOptions="EndAndExpand"
+                                                    VerticalOptions="EndAndExpand"
+                                                    BackgroundColor="Transparent">
+                                                    <customviews:RatingView
+                                                        IsVisible="{Binding IsRecommended, Mode=OneTime}"
+                                                        WidthRequest="95"
+                                                        HeightRequest="19"
+                                                        StrokeWidth="0.8"
+                                                        RatingType="Full"
+                                                        ColorOn="{StaticResource IconActivated}"
+                                                        OutlineOnColor="{StaticResource IconActivated}"
+                                                        OutlineOffColor="{StaticResource IconActivated}"
+                                                        Path="{x:Static customviews:PathConstants.Star}"
+                                                        Count="5"
+                                                        Value="{Binding MaxRating, Mode=OneTime}">
+                                                    </customviews:RatingView>
+                                                </ContentView>
                                                 <Grid
                                                     VerticalOptions="EndAndExpand"
-                                                    Padding="0,13,0,15">
+                                                    Padding="0,0,0,11">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="10" />
                                                         <ColumnDefinition Width="*" />

@@ -49,7 +49,7 @@ namespace PoseSportsPredict.ViewModels
                 LocalStorage.Storage.GetValueOrDefault<string>(LocalStorageKey.UserLanguageId, out string userLanguageId);
                 if (userLanguageId == null)
                 {
-                    userLanguageId = CultureInfo.CurrentUICulture.Name.Split('-')[0].ToLower();
+                    userLanguageId = CultureInfo.CurrentUICulture.Name.Split('-')[0];
                     if (!CoverageLanguage.CoverageLanguages.ContainsKey(userLanguageId))
                     {
                         // Default Language : EN
@@ -107,22 +107,24 @@ namespace PoseSportsPredict.ViewModels
                 ClientContext.eSignatureIV = CryptoFacade.Instance.GetEncryptedSignatureIV();
             }
 
+            // Check Exist Latest Version
+            await UpdateChecker.Execute();
+
             // Prepare SingletonPage
             ShinyHost.Resolve<AppMasterViewModel>();
 
             // Notify Init
-            await _notificationService.Initialize();
+            //await _notificationService.Initialize();
 
             // InAppBilling Item Init
-            ShinyHost.Resolve<InAppBillingService>().InitializeProduct();
-
             var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
+            ShinyHost.Resolve<InAppBillingService>().InitializeProduct();
             if (!deviceInfoHelper.IsLicensed.HasValue || !deviceInfoHelper.IsLicensed.Value)
             {
                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
                         LocalizeString.App_Title,
                         LocalizeString.Ok,
-                        DialogConfiguration.DefaultAlterDialogConfiguration);
+                        DialogConfiguration.AppTitleAlterDialogConfiguration);
             }
             else if (!await _OAuthService.IsAuthenticatedAndValid()
                 || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())

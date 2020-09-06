@@ -41,7 +41,7 @@ namespace PoseSportsPredict.Services
                     await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
                         LocalizeString.App_Title,
                         LocalizeString.Ok,
-                        DialogConfiguration.DefaultAlterDialogConfiguration);
+                        DialogConfiguration.AppTitleAlterDialogConfiguration);
 
                     return;
                 }
@@ -67,7 +67,7 @@ namespace PoseSportsPredict.Services
                                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials,
                                     LocalizeString.App_Title,
                                     LocalizeString.Ok,
-                                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                                    DialogConfiguration.AppTitleAlterDialogConfiguration);
 
                                 // 로그인 화면으로 이동
                                 await ShinyHost.Resolve<IOAuthService>().Logout();
@@ -86,7 +86,7 @@ namespace PoseSportsPredict.Services
                             await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
                             LocalizeString.App_Title,
                             LocalizeString.Ok,
-                            DialogConfiguration.DefaultAlterDialogConfiguration);
+                            DialogConfiguration.AppTitleAlterDialogConfiguration);
                         }
                     }
                     catch
@@ -94,7 +94,7 @@ namespace PoseSportsPredict.Services
                         await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
                             LocalizeString.App_Title,
                             LocalizeString.Ok,
-                            DialogConfiguration.DefaultAlterDialogConfiguration);
+                            DialogConfiguration.AppTitleAlterDialogConfiguration);
                     }
 
                     return;
@@ -120,7 +120,7 @@ namespace PoseSportsPredict.Services
             await MaterialDialog.Instance.AlertAsync(exception.Message,
                         LocalizeString.App_Title,
                         LocalizeString.Ok,
-                        DialogConfiguration.DefaultAlterDialogConfiguration);
+                        DialogConfiguration.AppTitleAlterDialogConfiguration);
 
             return;
         }
@@ -174,7 +174,7 @@ namespace PoseSportsPredict.Services
                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Check_Internet_Connection,
                     LocalizeString.App_Title,
                     LocalizeString.Ok,
-                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                 return false;
             }
 

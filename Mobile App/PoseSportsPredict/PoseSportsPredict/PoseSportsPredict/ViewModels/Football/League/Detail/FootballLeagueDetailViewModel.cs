@@ -20,6 +20,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xam.Plugin;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.League.Detail
@@ -30,10 +31,10 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.League);
             MessagingCenter.Subscribe<BookmarkService, FootballLeagueInfo>(this, message, (s, e) => this.LeagueBookmarkMessageHandler(e));
 
-            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
@@ -75,10 +76,10 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         public override void OnPagePoped()
         {
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.League);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.League);
             MessagingCenter.Unsubscribe<BookmarkService, FootballLeagueInfo>(this, message);
 
-            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Match);
             MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
@@ -130,6 +131,28 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
         #region Commands
 
+        public ICommand MatchShareCommand { get => new RelayCommand(MatchShare); }
+
+        private async void MatchShare()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            string link = PageUriLinker.MakePageUrl(PageDetailType.League, _leagueInfo);
+            if (link != null)
+            {
+                await Share.RequestAsync(new ShareTextRequest
+                {
+                    Uri = link,
+                    Title = "Football League Page Link"
+                });
+            }
+
+            SetIsBusy(false);
+        }
+
         public ICommand TouchBackButtonCommand { get => new RelayCommand(TouchBackButton); }
 
         private async void TouchBackButton()
@@ -153,9 +176,9 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
 
             // Add Bookmark
             if (LeagueInfo.IsBookmarked)
-                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(LeagueInfo, SportsType.Football, BookMarkType.League);
+                await _bookmarkService.RemoveBookmark<FootballLeagueInfo>(LeagueInfo, SportsType.Football, PageDetailType.League);
             else
-                await _bookmarkService.AddBookmark<FootballLeagueInfo>(LeagueInfo, SportsType.Football, BookMarkType.League);
+                await _bookmarkService.AddBookmark<FootballLeagueInfo>(LeagueInfo, SportsType.Football, PageDetailType.League);
 
             SetIsBusy(false);
         }

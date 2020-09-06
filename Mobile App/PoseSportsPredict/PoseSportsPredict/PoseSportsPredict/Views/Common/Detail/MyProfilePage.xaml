@@ -5,7 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
-             materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
+             xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor_D}"
              materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
              materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
              materialui:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
@@ -14,10 +18,197 @@
              Title="{Binding [My_Profile], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
              BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            x:DataType="viewmodels:MyProfileViewModel">
+            <pancakeview:PancakeView
+                CornerRadius="0,0,95,0">
+                <pancakeview:PancakeView.BackgroundGradientStops>
+                    <pancakeview:GradientStopCollection>
+                        <pancakeview:GradientStop Color="{StaticResource PrimaryColor_D}" Offset="0.0" />
+                        <pancakeview:GradientStop Color="{StaticResource PrimaryColor}" Offset="0.5" />
+                        <pancakeview:GradientStop Color="{StaticResource PrimaryColor_L}" Offset="1.0" />
+                    </pancakeview:GradientStopCollection>
+                </pancakeview:PancakeView.BackgroundGradientStops>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ffimageloading:CachedImage
+                        Grid.Row="0"
+                        Margin="0,0,0,10"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="85"
+                        WidthRequest="85"
+                        LoadingPlaceholder="ic_profile.png"
+                        ErrorPlaceholder="ic_profile.png"
+                        Source="{Binding AuthUser.PictureUrl, Converter={StaticResource svgImageSourceConverter}}">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+
+                    <materialui:MaterialLabel
+                        Margin="0,0,0,15"
+                        Grid.Row="1"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation"
+                        TypeScale="H6"
+                        TextColor="{StaticResource TextColor_L}">
+                        <materialui:MaterialLabel.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AuthUser.FirstName}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding AuthUser.LastName}" />
+                            </FormattedString>
+                        </materialui:MaterialLabel.FormattedText>
+                    </materialui:MaterialLabel>
+                </Grid>
+            </pancakeview:PancakeView>
+            <Grid
+                Margin="15"
+                RowSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <materialui:MaterialLabel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text="{Binding [User_No], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                </materialui:MaterialLabel>
+                <materialui:MaterialLabel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text=" : ">
+                </materialui:MaterialLabel>
+                <materialui:MaterialLabel
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalTextAlignment="Center"
+                    MaxLines="1"
+                    LineBreakMode="TailTruncation"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text="{Binding UserNo}">
+                </materialui:MaterialLabel>
+
+                <materialui:MaterialLabel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text="{Binding [Membership], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                </materialui:MaterialLabel>
+                <materialui:MaterialLabel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalTextAlignment="Center"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text=" : ">
+                </materialui:MaterialLabel>
+                <materialui:MaterialLabel
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    VerticalTextAlignment="Center"
+                    MaxLines="1"
+                    LineBreakMode="TailTruncation"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text="{Binding MemberRoleType}">
+                </materialui:MaterialLabel>
+
+                <materialui:MaterialLabel
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    IsVisible="{Binding IsValidExpireTime}"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="End"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text="{Binding [Expiration_Date], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                </materialui:MaterialLabel>
+                <materialui:MaterialLabel
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    IsVisible="{Binding IsValidExpireTime}"
+                    VerticalTextAlignment="Center"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text=" : ">
+                </materialui:MaterialLabel>
+                <materialui:MaterialLabel
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    IsVisible="{Binding IsValidExpireTime}"
+                    VerticalTextAlignment="Center"
+                    MaxLines="1"
+                    LineBreakMode="TailTruncation"
+                    TypeScale="Body1"
+                    TextColor="{StaticResource TextColor_D}"
+                    Text="{Binding RoleExpireTime, StringFormat='{0:yyyy.MM.dd tt hh:mm}'}">
+                </materialui:MaterialLabel>
+            </Grid>
+            <BoxView
+                Margin="10,0"
+                HeightRequest="0.5"
+                Color="{StaticResource CustomGrey_L}">
+            </BoxView>
+            <materialui:MaterialCard
+                Elevation="0"
+                Margin="0"
+                Padding="15,10"
+                IsClickable="True"
+                ClickCommand="{Binding LogoutCommand}">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Frame
+                        Padding="0"
+                        HeightRequest="33"
+                        WidthRequest="33"
+                        CornerRadius="59"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="{StaticResource CustomGrey}">
+                        <Image
+                            Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="23"
+                            HeightRequest="23"
+                            Source="ic_logout.png">
+                        </Image>
+                    </Frame>
+                    <materialui:MaterialLabel
+                        VerticalOptions="Center"
+                        TypeScale="Body1"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{Binding [Logout], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                    </materialui:MaterialLabel>
+                </StackLayout>
+            </materialui:MaterialCard>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

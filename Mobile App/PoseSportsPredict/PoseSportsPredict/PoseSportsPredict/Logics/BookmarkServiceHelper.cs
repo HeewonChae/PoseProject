@@ -10,7 +10,7 @@ namespace PoseSportsPredict.Logics
 {
     public static class BookmarkServiceHelper
     {
-        public static string BuildBookmarkMessage(this IBookmarkService bookmarkService, SportsType sportsType, BookMarkType bookmarkType)
+        public static string BuildBookmarkMessage(this IBookmarkService bookmarkService, SportsType sportsType, PageDetailType bookmarkType)
         {
             return $"{sportsType}-{bookmarkType}";
         }

@@ -23,9 +23,9 @@ namespace PoseSportsPredict.Services
 {
     public class MembershipService
     {
-        public Timer _timer;
-        public SecureString _memberRoleType;
-        public DateTime _roleExpireTime;
+        private Timer _timer;
+        private SecureString _memberRoleType;
+        private DateTime _roleExpireTime;
 
         public MemberRoleType MemberRoleType => GetMemberRoleType();
         public DateTime RoleExpireTime => _roleExpireTime;
@@ -104,11 +104,11 @@ namespace PoseSportsPredict.Services
                             LocalizeString.App_Title,
                             LocalizeString.Ok,
                             LocalizeString.Cancel,
-                            DialogConfiguration.DefaultAlterDialogConfiguration);
+                            DialogConfiguration.AppTitleAlterDialogConfiguration);
 
                     if (ret.HasValue && ret.Value)
                     {
-                        using (Acr.UserDialogs.UserDialogs.Instance.Loading("Loading..."))
+                        using (Acr.UserDialogs.UserDialogs.Instance.Loading(LocalizeString.Loading))
                         {
                             await Browser.OpenAsync(
                             $"https://play.google.com/store/account/subscriptions?sku={server_result.BillingResult.ProductId}&package={deviceInfoHelper.AppPackageName}",

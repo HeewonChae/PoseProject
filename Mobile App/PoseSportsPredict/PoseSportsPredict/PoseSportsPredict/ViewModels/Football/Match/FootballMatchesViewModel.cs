@@ -43,7 +43,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override bool OnInitializeView(params object[] datas)
         {
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
@@ -431,6 +431,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
 
+            // 경기 그룹 리스트
             foreach (var grouppingMatch in grouppingMatches)
             {
                 var matchListViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
@@ -441,8 +442,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Matches);
                 matchListViewModel.IsPredicted = grouppingMatch.Matches.Any(elem => elem.IsPredicted);
 
-                var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
-                matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;
+                if (_curMatchFilterType == MatchFilterType.SortByLeague)
+                {
+                    var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
+                    matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;
+                }
+                else
+                {
+                    matchListViewModel.Expanded = grouppingMatch.IsExpanded;
+                }
 
                 matchGroupCollection.Add(matchListViewModel);
             }
@@ -504,7 +512,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         var bookmarkedTeams = await _bookmarkService.GetAllBookmark<FootballTeamInfo>();
                         var bookmarkedMatches = (await _bookmarkService.GetAllBookmark<FootballMatchInfo>()).Where(elem => elem.MatchTime >= _matchDate && _matchDate.AddDays(1) > elem.MatchTime);
 
-                        var bookmarked = new List<FootballMatchGroupInfo>();
+                        //var bookmarked = new List<FootballMatchGroupInfo>();
                         var recommend = new List<FootballMatchGroupInfo>();
                         var world = new List<FootballMatchGroupInfo>();
                         var other = new List<FootballMatchGroupInfo>();
@@ -512,70 +520,163 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                         // 1순위 북마크(리그, 경기, 팀), 2순위 추천 리그, 3순위 월드리그, 4순위 나머지
                         foreach (var data in grouping)
                         {
-                            if (bookmarkedLeagues.FirstOrDefault(elem => elem.CountryName == data.Key.Country && elem.LeagueName == data.Key.League) != null
-                                || bookmarkedMatches.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem2.PrimaryKey == elem.PrimaryKey) != null) != null
-                                || bookmarkedTeams.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem.TeamId == elem2.HomeTeamId || elem.TeamId == elem2.AwayTeamId) != null) != null)
+                            var speratedData = data.SeperateByCount(15);
+
+                            //if (bookmarkedLeagues.FirstOrDefault(elem => elem.CountryName == data.Key.Country && elem.LeagueName == data.Key.League) != null
+                            //    || bookmarkedMatches.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem2.PrimaryKey == elem.PrimaryKey) != null) != null
+                            //    || bookmarkedTeams.FirstOrDefault(elem => data.ToArray().FirstOrDefault(elem2 => elem.TeamId == elem2.HomeTeamId || elem.TeamId == elem2.AwayTeamId) != null) != null)
+                            //{
+                            //    if (speratedData.Count > 1)
+                            //    {
+                            //        for (int i = 0; i < speratedData.Count; i++)
+                            //        {
+                            //            bookmarked.Add(new FootballMatchGroupInfo
+                            //            {
+                            //                Country = data.Key.Country,
+                            //                League = data.Key.League,
+                            //                GroupLogo = data.Key.CountryLogo,
+                            //                Matches = speratedData[i],
+                            //                GroupSubString = (i + 1).ToString(),
+                            //                IsExpanded = false
+                            //            });
+                            //        }
+                            //    }
+                            //    else
+                            //    {
+                            //        bookmarked.Add(new FootballMatchGroupInfo
+                            //        {
+                            //            Country = data.Key.Country,
+                            //            League = data.Key.League,
+                            //            GroupLogo = data.Key.CountryLogo,
+                            //            Matches = data.ToArray(),
+                            //            IsExpanded = false
+                            //        });
+                            //    }
+                            //}
+                            //else if (RecommendedLeague.HasLeague(data.Key.Country, data.Key.League))
+                            if (RecommendedLeague.HasLeague(data.Key.Country, data.Key.League))
                             {
-                                bookmarked.Add(new FootballMatchGroupInfo
+                                if (speratedData.Count > 1)
                                 {
-                                    Country = data.Key.Country,
-                                    League = data.Key.League,
-                                    GroupLogo = data.Key.CountryLogo,
-                                    Matches = data.ToArray(),
-                                    IsExpanded = true
-                                });
-                            }
-                            else if (RecommendedLeague.HasLeague(data.Key.Country, data.Key.League))
-                            {
-                                recommend.Add(new FootballMatchGroupInfo
+                                    for (int i = 0; i < speratedData.Count; i++)
+                                    {
+                                        recommend.Add(new FootballMatchGroupInfo
+                                        {
+                                            Country = data.Key.Country,
+                                            League = data.Key.League,
+                                            GroupLogo = data.Key.CountryLogo,
+                                            Matches = speratedData[i],
+                                            GroupSubString = (i + 1).ToString(),
+                                            IsExpanded = false
+                                        });
+                                    }
+                                }
+                                else
                                 {
-                                    Country = data.Key.Country,
-                                    League = data.Key.League,
-                                    GroupLogo = data.Key.CountryLogo,
-                                    Matches = data.ToArray(),
-                                    IsExpanded = true
-                                });
+                                    recommend.Add(new FootballMatchGroupInfo
+                                    {
+                                        Country = data.Key.Country,
+                                        League = data.Key.League,
+                                        GroupLogo = data.Key.CountryLogo,
+                                        Matches = data.ToArray(),
+                                        IsExpanded = false
+                                    });
+                                }
                             }
                             else if (data.Key.Country == "World")
                             {
-                                world.Add(new FootballMatchGroupInfo
+                                if (speratedData.Count > 1)
                                 {
-                                    Country = data.Key.Country,
-                                    League = data.Key.League,
-                                    GroupLogo = data.Key.CountryLogo,
-                                    Matches = data.ToArray(),
-                                    IsExpanded = _curMatchFilterType == MatchFilterType.Ongoing
-                                });
+                                    for (int i = 0; i < speratedData.Count; i++)
+                                    {
+                                        world.Add(new FootballMatchGroupInfo
+                                        {
+                                            Country = data.Key.Country,
+                                            League = data.Key.League,
+                                            GroupLogo = data.Key.CountryLogo,
+                                            Matches = speratedData[i],
+                                            GroupSubString = (i + 1).ToString(),
+                                            IsExpanded = false
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    world.Add(new FootballMatchGroupInfo
+                                    {
+                                        Country = data.Key.Country,
+                                        League = data.Key.League,
+                                        GroupLogo = data.Key.CountryLogo,
+                                        Matches = data.ToArray(),
+                                        IsExpanded = false
+                                    });
+                                }
                             }
                             else
                             {
-                                other.Add(new FootballMatchGroupInfo
+                                if (speratedData.Count > 1)
                                 {
-                                    Country = data.Key.Country,
-                                    League = data.Key.League,
-                                    GroupLogo = data.Key.CountryLogo,
-                                    Matches = data.ToArray(),
-                                    IsExpanded = _curMatchFilterType == MatchFilterType.Ongoing
-                                });
+                                    for (int i = 0; i < speratedData.Count; i++)
+                                    {
+                                        other.Add(new FootballMatchGroupInfo
+                                        {
+                                            Country = data.Key.Country,
+                                            League = data.Key.League,
+                                            GroupLogo = data.Key.CountryLogo,
+                                            Matches = speratedData[i],
+                                            GroupSubString = (i + 1).ToString(),
+                                            IsExpanded = false
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    other.Add(new FootballMatchGroupInfo
+                                    {
+                                        Country = data.Key.Country,
+                                        League = data.Key.League,
+                                        GroupLogo = data.Key.CountryLogo,
+                                        Matches = data.ToArray(),
+                                        IsExpanded = false
+                                    });
+                                }
                             }
                         }
 
-                        bookmarked.AddRange(recommend);
-                        bookmarked.AddRange(world);
-                        bookmarked.AddRange(other);
+                        recommend.AddRange(world);
+                        recommend.AddRange(other);
 
-                        result = bookmarked;
+                        result = recommend;
                     }
                     break;
 
                 case MatchFilterType.SortByTime:
-                    result.Add(new FootballMatchGroupInfo
                     {
-                        Country = LocalizeString.Match_Sort_By_Time,
-                        GroupLogo = "img_world.png",
-                        Matches = matchList.ToArray(),
-                        IsExpanded = true
-                    });
+                        var speratedData = matchList.SeperateByCount(15);
+                        if (speratedData.Count > 1)
+                        {
+                            for (int i = 0; i < speratedData.Count; i++)
+                            {
+                                result.Add(new FootballMatchGroupInfo
+                                {
+                                    GroupLogo = "img_world.png",
+                                    Matches = speratedData[i],
+                                    GroupSubString = $"{speratedData[i].First().MatchTime:tt hh:mm} ~",
+                                    IsExpanded = false
+                                });
+                            }
+                        }
+                        else
+                        {
+                            result.Add(new FootballMatchGroupInfo
+                            {
+                                Country = LocalizeString.Match_Sort_By_Time,
+                                GroupLogo = "img_world.png",
+                                Matches = matchList.ToArray(),
+                                IsExpanded = true
+                            });
+                        }
+                    }
                     break;
 
                 default:

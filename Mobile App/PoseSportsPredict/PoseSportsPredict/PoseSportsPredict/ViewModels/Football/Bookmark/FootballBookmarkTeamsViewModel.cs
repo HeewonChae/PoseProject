@@ -31,7 +31,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
         {
             BookmarkedTeamsTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballTeamInfo>>();
 
-            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Team);
+            string message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Team);
             MessagingCenter.Subscribe<BookmarkService, FootballTeamInfo>(this, message, (s, e) => BookmarkMessageHandler(e));
 
             return true;
@@ -202,7 +202,7 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
             {
                 deleteTeamInfo.IsBookmarked = false;
 
-                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(deleteTeamInfo, SportsType.Football, BookMarkType.Team, false);
+                await _bookmarkService.RemoveBookmark<FootballTeamInfo>(deleteTeamInfo, SportsType.Football, PageDetailType.Team, false);
             }
 
             _DeleteTeamList.Clear();

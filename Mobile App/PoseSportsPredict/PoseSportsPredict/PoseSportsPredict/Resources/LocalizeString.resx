@@ -578,6 +578,88 @@
     <value>An unknown error has occurred.</value>
   </data>
   <data name="Payment_Pending_Please_Check" xml:space="preserve">
-    <value>Payment has been pending. Please check your payment</value>
+    <value>Payment has been pending. Please check your payment.</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diamond</value>
+  </data>
+  <data name="VIP" xml:space="preserve">
+    <value>VIP</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>mo</value>
+    <comment>2글자 이하 번역</comment>
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>Activated</value>
+  </data>
+  <data name="Diamond_Advantage_1" xml:space="preserve">
+    <value>View prediction data without video ad for 7 days</value>
+  </data>
+  <data name="Diamond_Advantage_2" xml:space="preserve">
+    <value>Expanded to 50 bookmarked matches</value>
+  </data>
+  <data name="Diamond_Advantage_3" xml:space="preserve">
+    <value>Expanded to 30 bookmarked leagues</value>
+  </data>
+  <data name="Diamond_Advantage_4" xml:space="preserve">
+    <value>Expanded to 30 bookmarked teams</value>
+  </data>
+  <data name="VIP_Advantage_1" xml:space="preserve">
+    <value>View prediction data without video ad for one month</value>
+  </data>
+  <data name="VIP_Advantage_2" xml:space="preserve">
+    <value>Expanded to 100 bookmarked matches</value>
+  </data>
+  <data name="VIP_Advantage_3" xml:space="preserve">
+    <value>Unlimited number of bookmarked leagues</value>
+  </data>
+  <data name="VIP_Advantage_4" xml:space="preserve">
+    <value>Unlimited number of bookmarked teams</value>
+  </data>
+  <data name="VIP_Advantage_5" xml:space="preserve">
+    <value>Delete banner ad at the bottom of the page</value>
+  </data>
+  <data name="Benefits" xml:space="preserve">
+    <value>Benefits</value>
+  </data>
+  <data name="Write_Review" xml:space="preserve">
+    <value>Write a review</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Later</value>
+  </data>
+  <data name="Share_App" xml:space="preserve">
+    <value>Share app</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Exist_App_Update" xml:space="preserve">
+    <value>There is a new app update.</value>
+  </data>
+  <data name="Remove_Video_Ads" xml:space="preserve">
+    <value>Remove video ads</value>
+  </data>
+  <data name="User_No" xml:space="preserve">
+    <value>Member No</value>
+  </data>
+  <data name="Membership" xml:space="preserve">
+    <value>Membership</value>
+  </data>
+  <data name="Expiration_Date" xml:space="preserve">
+    <value>Expiration date</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
   </data>
 </root>

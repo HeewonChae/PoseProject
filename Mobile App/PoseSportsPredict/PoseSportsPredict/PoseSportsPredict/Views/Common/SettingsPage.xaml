@@ -34,7 +34,9 @@
                     Spacing="0">
                     <Frame
                         Margin="15,0"
-                        Padding="7"
+                        Padding="0"
+                        HeightRequest="41"
+                        WidthRequest="41"
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -43,22 +45,19 @@
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             Source="ic_profile.png">
                         </Image>
                     </Frame>
-                    <StackLayout
-                        Margin="0,0,15,0"
-                        Spacing="0"
-                        HorizontalOptions="FillAndExpand">
-                        <materialui:MaterialLabel
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalTextAlignment="Start"
-                            VerticalTextAlignment="Center"
-                            TypeScale="Body1"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding [My_Profile], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
+                    <materialui:MaterialLabel
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        TypeScale="Body1"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{Binding [My_Profile], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                    </materialui:MaterialLabel>
                 </StackLayout>
             </materialui:MaterialCard>
 
@@ -76,7 +75,9 @@
                     Spacing="0">
                     <Frame
                         Margin="15,0"
-                        Padding="7"
+                        Padding="0"
+                        HeightRequest="41"
+                        WidthRequest="41"
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -85,22 +86,19 @@
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             Source="ic_vip.png">
                         </Image>
                     </Frame>
-                    <StackLayout
-                        Margin="0,0,15,0"
-                        Spacing="0"
-                        HorizontalOptions="FillAndExpand">
-                        <materialui:MaterialLabel
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalTextAlignment="Start"
-                            VerticalTextAlignment="Center"
-                            TypeScale="Body1"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
+                    <materialui:MaterialLabel
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        TypeScale="Body1"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                    </materialui:MaterialLabel>
                 </StackLayout>
             </materialui:MaterialCard>
 
@@ -116,7 +114,9 @@
                     Spacing="0">
                     <Frame
                         Margin="15,0"
-                        Padding="7"
+                        Padding="0"
+                        HeightRequest="41"
+                        WidthRequest="41"
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -125,6 +125,8 @@
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
                             Source="ic_global.png">
                         </Image>
                     </Frame>
@@ -137,7 +139,7 @@
                             HorizontalTextAlignment="Start"
                             VerticalTextAlignment="End"
                             TypeScale="Caption"
-                            TextColor="{StaticResource CustomGrey}"
+                            TextColor="{StaticResource TextColor_D2}"
                             Text="{Binding [Select_Interface_Language], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                         </materialui:MaterialLabel>
                         <combobox:SfComboBox
@@ -179,13 +181,13 @@
                 </StackLayout>
             </materialui:MaterialCard>
 
-            <!--Update-->
+            <!--Review-->
             <materialui:MaterialCard
                 Elevation="0"
                 Margin="0"
                 Padding="0"
                 IsClickable="True"
-                ClickCommand="{Binding SelectCheckUpdatesCommand}"
+                ClickCommand="{Binding SelectWriteReviewCommand}"
                 HeightRequest="71"
                 HorizontalOptions="FillAndExpand">
                 <StackLayout
@@ -193,31 +195,71 @@
                     Spacing="0">
                     <Frame
                         Margin="15,0"
-                        Padding="7"
+                        Padding="0"
+                        HeightRequest="41"
+                        WidthRequest="41"
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        BackgroundColor="#00acc1">
+                        BackgroundColor="#ff7043">
                         <Image
                             Aspect="AspectFit"
-                            WidthRequest="27"
-                            HeightRequest="27"
-                            Source="ic_check_update.png">
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="29"
+                            HeightRequest="29"
+                            Source="ic_review.png">
                         </Image>
                     </Frame>
-                    <StackLayout
-                        Margin="0,0,15,0"
-                        Spacing="0"
-                        HorizontalOptions="FillAndExpand">
-                        <materialui:MaterialLabel
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalTextAlignment="Start"
-                            VerticalTextAlignment="Center"
-                            TypeScale="Body1"
-                            TextColor="{StaticResource TextColor_D}"
-                            Text="{Binding [Check_For_Updates], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
+                    <materialui:MaterialLabel
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        TypeScale="Body1"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{Binding [Write_Review], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                    </materialui:MaterialLabel>
+                </StackLayout>
+            </materialui:MaterialCard>
+
+            <!--Share-->
+            <materialui:MaterialCard
+                Elevation="0"
+                Margin="0"
+                Padding="0"
+                IsClickable="True"
+                ClickCommand="{Binding SelectShareAppCommand}"
+                HeightRequest="71"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Orientation="Horizontal"
+                    Spacing="0">
+                    <Frame
+                        Margin="15,0"
+                        Padding="0"
+                        HeightRequest="41"
+                        WidthRequest="41"
+                        CornerRadius="59"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="#757575">
+                        <Image
+                            Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="22"
+                            HeightRequest="22"
+                            Source="ic_share.png">
+                        </Image>
+                    </Frame>
+                    <materialui:MaterialLabel
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Center"
+                        TypeScale="Body1"
+                        TextColor="{StaticResource TextColor_D}"
+                        Text="{Binding [Share_App], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                    </materialui:MaterialLabel>
                 </StackLayout>
             </materialui:MaterialCard>
             <!--banner-->

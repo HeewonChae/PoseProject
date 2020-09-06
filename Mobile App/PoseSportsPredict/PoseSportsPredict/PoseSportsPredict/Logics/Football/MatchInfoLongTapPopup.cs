@@ -58,30 +58,30 @@ namespace PoseSportsPredict.Logics.Football
             {
                 case 0: // match
                     if (matchInfo.IsBookmarked)
-                        await bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
+                        await bookmarkService.RemoveBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, PageDetailType.Match);
                     else
-                        await bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, BookMarkType.Match);
+                        await bookmarkService.AddBookmark<FootballMatchInfo>(matchInfo, SportsType.Football, PageDetailType.Match);
                     break;
 
                 case 1: // league
                     if (leagueInfo.IsBookmarked)
-                        await bookmarkService.RemoveBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
+                        await bookmarkService.RemoveBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, PageDetailType.League);
                     else
-                        await bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, BookMarkType.League);
+                        await bookmarkService.AddBookmark<FootballLeagueInfo>(leagueInfo, SportsType.Football, PageDetailType.League);
                     break;
 
                 case 2: // homeTeam
                     if (homeTeamInfo.IsBookmarked)
-                        await bookmarkService.RemoveBookmark<FootballTeamInfo>(homeTeamInfo, SportsType.Football, BookMarkType.Team);
+                        await bookmarkService.RemoveBookmark<FootballTeamInfo>(homeTeamInfo, SportsType.Football, PageDetailType.Team);
                     else
-                        await bookmarkService.AddBookmark<FootballTeamInfo>(homeTeamInfo, SportsType.Football, BookMarkType.Team);
+                        await bookmarkService.AddBookmark<FootballTeamInfo>(homeTeamInfo, SportsType.Football, PageDetailType.Team);
                     break;
 
                 case 3: // awayTeam
                     if (awayTeamInfo.IsBookmarked)
-                        await bookmarkService.RemoveBookmark<FootballTeamInfo>(awayTeamInfo, SportsType.Football, BookMarkType.Team);
+                        await bookmarkService.RemoveBookmark<FootballTeamInfo>(awayTeamInfo, SportsType.Football, PageDetailType.Team);
                     else
-                        await bookmarkService.AddBookmark<FootballTeamInfo>(awayTeamInfo, SportsType.Football, BookMarkType.Team);
+                        await bookmarkService.AddBookmark<FootballTeamInfo>(awayTeamInfo, SportsType.Football, PageDetailType.Team);
                     break;
 
                 default:

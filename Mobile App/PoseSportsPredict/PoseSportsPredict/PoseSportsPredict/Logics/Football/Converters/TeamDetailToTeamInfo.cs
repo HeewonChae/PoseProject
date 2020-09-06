@@ -27,5 +27,16 @@ namespace PoseSportsPredict.Logics.Football.Converters
 
             return returnValue;
         }
+
+        public FootballTeamDetail Reverse(FootballTeamInfo value)
+        {
+            return new FootballTeamDetail
+            {
+                Id = value.TeamId,
+                Logo = value.Logo,
+                Name = value.TeamName,
+                CountryName = value.CountryName,
+            };
+        }
     }
 }

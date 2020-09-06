@@ -9,5 +9,6 @@ namespace PoseSportsPredict.InfraStructure
         string DeviceId { get; set; }
         string AppPackageName { get; set; }
         bool? IsLicensed { get; set; }
+        string AppVersionName { get; set; }
     }
 }

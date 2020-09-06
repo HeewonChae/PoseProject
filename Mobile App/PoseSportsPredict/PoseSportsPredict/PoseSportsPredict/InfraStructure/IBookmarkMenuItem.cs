@@ -11,6 +11,6 @@ namespace PoseSportsPredict.InfraStructure
     {
         string MenuName { get; }
         string Logo { get; }
-        BookMarkType BookMarkType { get; }
+        PageDetailType BookMarkType { get; }
     }
 }

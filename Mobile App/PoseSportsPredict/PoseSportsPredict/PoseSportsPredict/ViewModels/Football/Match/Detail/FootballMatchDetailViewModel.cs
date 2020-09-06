@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict.ViewModels.Football.Match.Detail
@@ -36,7 +37,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Match);
             MessagingCenter.Subscribe<BookmarkService, FootballMatchInfo>(this, message, (s, e) => MatchBookmarkMessageHandler(e));
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
@@ -90,7 +91,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         public override void OnPagePoped()
         {
-            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, BookMarkType.Match);
+            var message = _bookmarkService.BuildBookmarkMessage(SportsType.Football, PageDetailType.Match);
             MessagingCenter.Unsubscribe<BookmarkService, FootballMatchInfo>(this, message);
 
             message = _notificationService.BuildNotificationMessage(SportsType.Football, NotificationType.MatchStart);
@@ -172,6 +173,28 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
             SetIsBusy(false);
         }
 
+        public ICommand MatchShareCommand { get => new RelayCommand(MatchShare); }
+
+        private async void MatchShare()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            string link = PageUriLinker.MakePageUrl(PageDetailType.Match, _matchInfo);
+            if (link != null)
+            {
+                await Share.RequestAsync(new ShareTextRequest
+                {
+                    Uri = link,
+                    Title = "Football Match Page Link"
+                });
+            }
+
+            SetIsBusy(false);
+        }
+
         public ICommand TouchAlarmButtonCommand { get => new RelayCommand(TouchAlarmButton); }
 
         private async void TouchAlarmButton()
@@ -216,9 +239,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             // Add Bookmark
             if (MatchInfo.IsBookmarked)
-                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
+                await _bookmarkService.RemoveBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, PageDetailType.Match);
             else
-                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, BookMarkType.Match);
+                await _bookmarkService.AddBookmark<FootballMatchInfo>(MatchInfo, SportsType.Football, PageDetailType.Match);
 
             SetIsPageSwitched(false);
         }

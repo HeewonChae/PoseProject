@@ -8,16 +8,16 @@
   {
     "MemberRoleType": "Regular",
     "MatchBookmarkLimit": 20,
-    "TeamBookmarkLimit": 20,
-    "LeagueBookmarkLimit": 20,
+    "TeamBookmarkLimit": 10,
+    "LeagueBookmarkLimit": 10,
     "IsBannerAdRemove": false,
     "IsVideoAdRemove": false
   },
   {
     "MemberRoleType": "Diamond",
     "MatchBookmarkLimit": 50,
-    "TeamBookmarkLimit": 50,
-    "LeagueBookmarkLimit": 50,
+    "TeamBookmarkLimit": 30,
+    "LeagueBookmarkLimit": 30,
     "IsBannerAdRemove": false,
     "IsVideoAdRemove": true
   },

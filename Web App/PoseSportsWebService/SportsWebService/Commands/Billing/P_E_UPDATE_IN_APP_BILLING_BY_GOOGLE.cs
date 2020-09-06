@@ -201,7 +201,7 @@ namespace SportsWebService.Commands.Billing
             DateTime expireTiem = origin.AddMilliseconds(subscriptionPurchase.ExpiryTimeMillis ?? 0);
 
             PoseBillingResult billingResult = new PoseBillingResult();
-            billingResult.PurchaseStateType = ParseScriptionPurchaseState(subscriptionPurchase);
+            billingResult.PurchaseStateType = ParseSubscriptionPurchaseState(subscriptionPurchase);
             billingResult.MemberRoleType = inAppPurchase.OfferRoleType;
             billingResult.RoleExpireTime = expireTiem;
             billingResult.ProductId = inAppPurchase.ProductId;
@@ -209,7 +209,7 @@ namespace SportsWebService.Commands.Billing
             return (billingResult, payLoad, subscriptionPurchase.OrderId);
         }
 
-        public static PosePurchaseStateType ParseScriptionPurchaseState(SubscriptionPurchase subscriptionPurchase)
+        public static PosePurchaseStateType ParseSubscriptionPurchaseState(SubscriptionPurchase subscriptionPurchase)
         {
             PosePurchaseStateType result = PosePurchaseStateType.Unknown;
             switch (subscriptionPurchase.PaymentState)
