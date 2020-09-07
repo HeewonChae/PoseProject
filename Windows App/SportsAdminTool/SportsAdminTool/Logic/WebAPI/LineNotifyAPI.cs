@@ -35,7 +35,7 @@ namespace SportsAdminTool.Logic.WebAPI
             _clients.Add(LineNotifyType.Football_Picks, football_picks);
 
             var dev = new LineNotify.LineNotify();
-            football_picks.Init(host_url, football_dev);
+            dev.Init(host_url, football_dev);
             _clients.Add(LineNotifyType.Dev, dev);
         }
 
