@@ -14,6 +14,14 @@
     "IsVideoAdRemove": false
   },
   {
+    "MemberRoleType": "Promotion",
+    "MatchBookmarkLimit": 50,
+    "TeamBookmarkLimit": 30,
+    "LeagueBookmarkLimit": 30,
+    "IsBannerAdRemove": false,
+    "IsVideoAdRemove": true
+  },
+  {
     "MemberRoleType": "Diamond",
     "MatchBookmarkLimit": 50,
     "TeamBookmarkLimit": 30,

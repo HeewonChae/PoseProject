@@ -28,8 +28,8 @@ namespace SportsAdminTool.Commands.Football
                 {
                     P_SELECT_PREDICTABLE_FIXTURES.SetInput(new FootballDB.Procedures.P_SELECT_PREDICTABLE_FIXTURES.Input
                     {
-                        WHERE = $"f.is_completed = 0 " +
-                        $"AND f.match_time BETWEEN \"{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}\" AND \"{DateTime.UtcNow.AddDays(6).ToString("yyyyMMddTHHmmss")}\" " +
+                        WHERE = $"f.is_completed = 0 AND f.is_predicted = 0" +
+                        $"AND f.match_time BETWEEN \"{DateTime.UtcNow.AddDays(1):yyyyMMddTHHmmss}\" AND \"{DateTime.UtcNow.AddDays(6):yyyyMMddTHHmmss}\" " +
                         $"AND lc.{nameof(LeagueCoverage.predictions)} = 1 ",
                     });
                     db_fixtures = P_SELECT_PREDICTABLE_FIXTURES.OnQuery();

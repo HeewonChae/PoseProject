@@ -23,10 +23,10 @@ namespace SportsAdminTool.Commands.Football
 
                 mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, "Update scheduled fixtures");
 
-                // 5일치 경기
-                var db_fixtures = Logic.Database.FootballDBFacade.SelectFixtures(
-                    where: $"is_completed = 0 " +
-                    $"AND match_time BETWEEN '{DateTime.UtcNow.ToString("yyyyMMddTHHmmss")}' AND '{DateTime.UtcNow.AddDays(6).ToString("yyyyMMddTHHmmss")}'");
+                // 5일치 커버중인 경기
+                var db_fixtures = Logic.Database.FootballDBFacade.SelectCoverageFixtures(
+                    where: $"f.is_completed = 0 " +
+                    $"AND f.match_time < '{DateTime.UtcNow.AddDays(6):yyyyMMddTHHmmss}' AND lc.predictions = 1");
 
                 // grouping by leagueID
                 var api_groupingbyLeague = db_fixtures.GroupBy(elem => elem.league_id);
@@ -35,9 +35,6 @@ namespace SportsAdminTool.Commands.Football
                 {
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Update scheduled leagues ({loop}/{api_groupingbyLeague.Count()})");
-
-                    if (!Singleton.Get<CheckValidation>().IsValidLeague((short)api_groupingFixtures.Key, null, null, out League db_league, out LeagueCoverage db_leagueCoverage))
-                        continue;
 
                     // Update Fixtures, Odds, Statistics,
                     int innerloop = 0;
@@ -55,18 +52,14 @@ namespace SportsAdminTool.Commands.Football
                             continue;
                         }
 
-                        if (db_leagueCoverage.predictions)
+                        //LogicFacade.UpdateTeamLastFixtures(fixture.home_team_id, 10);
+                        //LogicFacade.UpdateTeamLastFixtures(fixture.away_team_id, 10);
+                        //LogicFacade.UpdateH2H(fixture.home_team_id, fixture.away_team_id);
+                        var ret = LogicFacade.UpdateOdds(fixture.id);
+                        if (ret > 0)
                         {
-                            //LogicFacade.UpdateTeamLastFixtures(fixture.home_team_id, 10);
-                            //LogicFacade.UpdateTeamLastFixtures(fixture.away_team_id, 10);
-                            //LogicFacade.UpdateH2H(fixture.home_team_id, fixture.away_team_id);
-                            var ret = LogicFacade.UpdateOdds(fixture.id);
-
-                            if (ret > 0)
-                            {
-                                fixture.has_odds = true;
-                                Logic.Database.FootballDBFacade.UpdateFixture(fixture);
-                            }
+                            fixture.has_odds = true;
+                            Logic.Database.FootballDBFacade.UpdateFixture(fixture);
                         }
                     }
 

@@ -1,4 +1,6 @@
 ﻿using LogicCore.Debug;
+using LogicCore.Utility;
+using LogicCore.Utility.ThirdPartyLog;
 using Newtonsoft.Json;
 using RapidAPI.Models.Football;
 using RestSharp;
@@ -20,11 +22,10 @@ namespace RapidAPI
             int repeatCnt = 1;
             while (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
-                // 10번 시도 모두 실패할 경우
-                if (repeatCnt > 10)
-                    Dev.Assert(false, $"Fail API Call RepeatCnt: {repeatCnt}");
-
-                Dev.DebugString($"Fail API Call RepeatCnt: {repeatCnt}", ConsoleColor.Red);
+                if (repeatCnt % 3 == 0)
+                {
+                    Log4Net.WriteLog($"Fail API Call URL:{client.BaseUrl}/{request.Resource} RepeatCnt: {repeatCnt}", Log4Net.Level.ERROR);
+                }
 
                 response = client.Execute(request);
 

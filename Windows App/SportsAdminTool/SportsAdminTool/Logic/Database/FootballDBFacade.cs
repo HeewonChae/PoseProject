@@ -911,6 +911,19 @@ namespace SportsAdminTool.Logic.Database
             });
         }
 
+        public static IEnumerable<FootballDB.Tables.Fixture> SelectCoverageFixtures(string where = null, string groupBy = null, string orderBy = null)
+        {
+            Dev.DebugString("Call DB - FootballFacade.SelectCoverageFixtures");
+
+            return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.Fixture>.Input
+            {
+                Query = "SELECT f.* FROM fixture as f INNER JOIN league_coverage as lc ON f.league_id = lc.league_id",
+                Where = where,
+                GroupBy = groupBy,
+                OrderBy = orderBy,
+            });
+        }
+
         public static IEnumerable<FootballDB.Tables.Prediction> SelectPredictions(string where = null, string groupBy = null, string orderBy = null)
         {
             Dev.DebugString("Call DB - FootballFacade.SelectFixtures");

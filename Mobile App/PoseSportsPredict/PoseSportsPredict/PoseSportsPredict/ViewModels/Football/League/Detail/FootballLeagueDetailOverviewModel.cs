@@ -128,7 +128,7 @@ namespace PoseSportsPredict.ViewModels.Football.League.Detail
                         _leagueInfo.LeagueName);
                 },
                 key: $"P_GET_LEAGUE_OVERVIEW:{_leagueInfo.PrimaryKey}",
-                expireTime: TimeSpan.Zero,
+                expireTime: TimeSpan.FromHours(1),
                 serializeType: SerializeType.MessagePack);
 
             if (server_result == null)

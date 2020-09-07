@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release;Poseidon_Picks_Release_Live;Pose_Release_Live</Configurations>
   </PropertyGroup>
 
 </Project>

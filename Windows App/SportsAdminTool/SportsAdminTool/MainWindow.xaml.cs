@@ -15,12 +15,17 @@ using FootballCommands = SportsAdminTool.Commands.Football;
 using System.Collections.Generic;
 
 using FootballDB = Repository.Mysql.FootballDB;
+using GlobalDb = Repository.Mysql.PoseGlobalDB;
 using System.Linq;
 using System.Drawing;
 using SportsAdminTool.Logic.WebAPI;
 
 using SportsAdminTool.Logic.Football;
 using SportsAdminTool.Commands.Football;
+
+using PosePacket.Service.Enum;
+using Syncfusion.UI.Xaml.Grid;
+using LogicCore.Converter;
 
 namespace SportsAdminTool
 {
@@ -37,6 +42,8 @@ namespace SportsAdminTool
             Singleton.Register(this);
 
             Logic.LogicStatic.StartWindow();
+
+            this._sfdg_user_role.Columns.Add(new GridComboBoxColumn() { HeaderText = "role_type", MappingName = "role_type", ItemsSource = this.MemberRoleTypeList });
         }
 
         private void TitleBar_ListIcon_Click(object sender, RoutedEventArgs e)
@@ -64,7 +71,7 @@ namespace SportsAdminTool
 
         #region Automated Processing Methods
 
-        private void Fv_football_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Fv_football_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var flipview = ((FlipView)sender);
             switch (flipview.SelectedIndex)
@@ -97,7 +104,7 @@ namespace SportsAdminTool
             string org_bannerText = this._lbl_initialize_footballdb.Content.ToString();
             this._progRing_initialize_footballdb.IsActive = true;
 
-            await FootballCommands.UpdateLeagueAndTeam.Execute();
+            await FootballCommands.UpdateLeagueAndTeam.Execute(this._cb_League_Update_All.IsChecked.Value);
 
             // Error처리
             await FootballLogic.LogicFacade.SolveErrors(_lbl_initialize_footballdb);
@@ -134,9 +141,13 @@ namespace SportsAdminTool
                 await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
             }
 
-            await FootballCommands.PredictFixtures.Execute();
-
-            await NotifyFootballPredictions.Execute();
+            if (this._cb_fixture_predict.IsChecked.Value)
+            {
+                await FootballCommands.PredictFixtures.Execute();
+#if LINE_NOTIFY
+                await NotifyFootballPredictions.Execute();
+#endif
+            }
 
             await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateScheduledFixtures_Errors.json");
 
@@ -189,6 +200,108 @@ namespace SportsAdminTool
 
         #endregion Export
 
+        #region Manage User Role
+
+        public IEnumerable<MemberRoleType> MemberRoleTypeList = new MemberRoleType[]
+        {
+            MemberRoleType.Regular,
+            MemberRoleType.Promotion,
+            MemberRoleType.Diamond,
+            MemberRoleType.VIP,
+            MemberRoleType.VVIP,
+            MemberRoleType.Admin,
+        };
+
+        private async void Button_UserRole_Update(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var refreshingUserRole = (button.Tag as Syncfusion.UI.Xaml.Grid.Cells.DataContextHelper).Value as GlobalDb.Tables.UserRole;
+            if (refreshingUserRole == null)
+                return;
+
+            button.Content = "Updating...";
+
+            await Task.Delay(300);
+
+            refreshingUserRole.role_type.TryParseEnum(out MemberRoleType selectedRoleType);
+
+            // 유료 상품은 건들지 말자..
+            if (refreshingUserRole.linked_trans_no != 0
+                || refreshingUserRole.linked_trans_no == 0 && selectedRoleType == MemberRoleType.Diamond
+                || refreshingUserRole.linked_trans_no == 0 && selectedRoleType == MemberRoleType.VIP)
+            {
+                _lbl_manage_userRole_result.Content = "linked_trans_no 를 확인해주세요, 유료 상품 구독 유저는 변경할 수 없습니다.";
+                button.Content = "Update";
+                return;
+            }
+
+            DateTime roleExpireTime = DateTime.UtcNow;
+            if (selectedRoleType == MemberRoleType.Promotion)
+            {
+                roleExpireTime = DateTime.UtcNow.AddDays(3);
+            }
+
+            using (var P_UPDATE_QUERY = new GlobalDb.Procedures.AdminTool.P_EXECUTE_QUERY())
+            {
+                P_UPDATE_QUERY.SetInput($"UPDATE user_role " +
+                    $"SET role_type = '{refreshingUserRole.role_type}', " +
+                    $"expire_time = '{roleExpireTime:yyyyMMddTHHmmss}', " +
+                    $"upt_date = '{DateTime.UtcNow:yyyyMMddTHHmmss}', " +
+                    $"linked_trans_no = {refreshingUserRole.linked_trans_no} " +
+                    $"WHERE user_no = {refreshingUserRole.user_no}; ");
+
+                var db_output = P_UPDATE_QUERY.OnQuery();
+                if (P_UPDATE_QUERY.EntityStatus != null)
+                {
+                    _lbl_manage_userRole_result.Content = P_UPDATE_QUERY.EntityStatus.Errors?.FirstOrDefault()?.ErrorMessage;
+                    button.Content = "Update";
+                    return;
+                }
+                else if (db_output == 0)
+                {
+                    _lbl_manage_userRole_result.Content = "Update Failed";
+                    button.Content = "Update";
+                    return;
+                }
+            }
+
+            User_Role_Search_Button(null, null);
+        }
+
+        private void User_Role_Search_Button(object sender, RoutedEventArgs e)
+        {
+            var userNo = string.IsNullOrEmpty(this._tb_userNo.Text) ? "0" : this._tb_userNo.Text;
+            var email = this._tb_email.Text;
+
+            IEnumerable<GlobalDb.Tables.UserRole> serchedUserRole = null;
+            using (var P_SELECT_QUERY = new GlobalDb.Procedures.AdminTool.P_SELECT_QUERY<GlobalDb.Tables.UserRole>())
+            {
+                P_SELECT_QUERY.SetInput(new GlobalDb.Procedures.AdminTool.P_SELECT_QUERY<GlobalDb.Tables.UserRole>.Input
+                {
+                    Query = "SELECT role.* FROM user_role as role INNER JOIN user_base as base ON role.user_no = base.user_no ",
+                    Where = $"base.user_no = {userNo} OR base.platform_email = \'{email}\'; "
+                });
+
+                serchedUserRole = P_SELECT_QUERY.OnQuery();
+                if (P_SELECT_QUERY.EntityStatus != null)
+                {
+                    _lbl_manage_userRole_result.Content = P_SELECT_QUERY.EntityStatus.Errors?.FirstOrDefault()?.ErrorMessage;
+                    return;
+                }
+                else if (serchedUserRole.Count() == 0)
+                {
+                    _lbl_manage_userRole_result.Content = "Not Found User";
+                    return;
+                }
+            }
+
+            this._sfdg_user_role.ItemsSource = serchedUserRole;
+
+            _lbl_manage_userRole_result.Content = "Completed";
+        }
+
+        #endregion Manage User Role
+
         #region Manage LeagueCoverageTable
 
         private void LeagueCoverage_CountryName_Initialized(object sender, EventArgs e)
@@ -198,7 +311,7 @@ namespace SportsAdminTool
             _cb_countryName_for_leagueCoverage.ItemsSource = allCountries.Select(elem => elem.name);
         }
 
-        private void LeagueCoverage_CountryName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LeagueCoverage_CountryName_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             string selectedCountry = e.AddedItems[0] as string;
 
@@ -211,7 +324,7 @@ namespace SportsAdminTool
                 _cb_leagueName.SelectedIndex = 0;
         }
 
-        private void LeagueCoverage_LeagueName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LeagueCoverage_LeagueName_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             string selectedCountry = _cb_countryName_for_leagueCoverage.SelectedItem as string;
             string selectedLeague = _cb_leagueName.SelectedItem as string;
@@ -248,7 +361,7 @@ namespace SportsAdminTool
             _lbl_manage_leagueCoverage_result.Content = "Select complete!";
         }
 
-        private void leagueCoverage_CurrentCellValueChanged(object sender, Syncfusion.UI.Xaml.Grid.CurrentCellValueChangedEventArgs e)
+        private void leagueCoverage_CurrentCellValueChanged(object sender, CurrentCellValueChangedEventArgs e)
         {
             var changedCoverage = e.Record as FootballDB.Tables.LeagueCoverage;
 
@@ -272,7 +385,7 @@ namespace SportsAdminTool
             _cb_countryName_for_league_fixtures.ItemsSource = allCountries.Select(elem => elem.name);
         }
 
-        private void League_CountryName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void League_CountryName_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             string selectedCountry = _cb_countryName_for_league_fixtures.SelectedItem as string;
 

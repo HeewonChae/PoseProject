@@ -66,12 +66,24 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label
+                        <StackPanel
+                            Grid.RowSpan="2"
+                            Grid.Row="0">
+                            <Label
                             x:Name="_lbl_initialize_footballdb"
-                            Grid.Row="0"
                             Content="Ready (country, league, team)"
                             Foreground="Black"
                             FontSize="14" />
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <CheckBox
+                                    x:Name="_cb_League_Update_All" />
+                                <Label
+                                    VerticalContentAlignment="Top"
+                                    Content="Update All"
+                                    Foreground="Black"
+                                    FontSize="14" />
+                            </StackPanel>
+                        </StackPanel>
                         <iconPacks:PackIconModern
                             Width="80"
                             Height="80"
@@ -98,12 +110,24 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Label
-                            x:Name="_lbl_collectDatasAndPredict"
+                        <StackPanel
                             Grid.Row="0"
-                            Content="Ready (fixtures, odds, standings)"
-                            Foreground="Black"
-                            FontSize="14" />
+                            Grid.RowSpan="2">
+                            <Label
+                                x:Name="_lbl_collectDatasAndPredict"
+                                Content="Ready (fixtures, odds, standings)"
+                                Foreground="Black"
+                                FontSize="14" />
+                            <StackPanel Orientation="Horizontal" Margin="10,0">
+                                <CheckBox
+                                    x:Name="_cb_fixture_predict" />
+                                <Label
+                                    VerticalContentAlignment="Top"
+                                    Content="Req Predict"
+                                    Foreground="Black"
+                                    FontSize="14" />
+                            </StackPanel>
+                        </StackPanel>
                         <iconPacks:PackIconModern
                             Width="80"
                             Height="80"
@@ -155,6 +179,53 @@
                     </Grid>
                 </Controls:FlipView.Items>
             </Controls:FlipView>
+
+            <Separator Margin="0 10" />
+
+            <!--Manage Promotion-->
+            <StackPanel>
+                <Label
+                    Content="User Role 관리"
+                    FontSize="18"
+                    FontWeight="Bold">
+                </Label>
+                <StackPanel
+                    Orientation="Horizontal"
+                    Margin="0 5">
+                    <Label Content="유저번호" />
+                    <TextBox Name="_tb_userNo" Width="80" Margin="5,0,15,0" />
+                    <Label Content="이메일" />
+                    <TextBox Name="_tb_email" Width="190" Margin="5,0,15,0" />
+                    <Button Content="Search" Margin="10,0" Click="User_Role_Search_Button" />
+                </StackPanel>
+                <ScrollViewer
+                    Margin="0 5">
+                    <syncfusion:SfDataGrid
+                        x:Name="_sfdg_user_role"
+                        AllowEditing="True">
+                        <syncfusion:SfDataGrid.Columns>
+                            <syncfusion:GridUnBoundColumn HeaderText="Update">
+                                <syncfusion:GridUnBoundColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Width="80"
+                                            FontSize="10"
+                                            Content="Update"
+                                            Tag="{Binding .}"
+                                            Click="Button_UserRole_Update">
+                                        </Button>
+                                    </DataTemplate>
+                                </syncfusion:GridUnBoundColumn.CellTemplate>
+                            </syncfusion:GridUnBoundColumn>
+                        </syncfusion:SfDataGrid.Columns>
+                    </syncfusion:SfDataGrid>
+                </ScrollViewer>
+                <Label
+                    x:Name="_lbl_manage_userRole_result"
+                    FontSize="14"
+                    Foreground="OrangeRed">
+                </Label>
+            </StackPanel>
 
             <Separator Margin="0 10" />
 

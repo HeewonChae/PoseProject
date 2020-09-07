@@ -41,6 +41,7 @@ namespace PosePacket.Service.Enum
     public enum MemberRoleType
     {
         Regular,
+        Promotion,
         Diamond,
         VIP,
         VVIP,

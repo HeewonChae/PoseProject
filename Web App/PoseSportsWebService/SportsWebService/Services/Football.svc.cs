@@ -103,6 +103,7 @@ namespace SportsWebService.Services
             return output.SerializeToStream();
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_GET_MATCH_PREDICTIONS(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_MATCH_PREDICTIONS>();

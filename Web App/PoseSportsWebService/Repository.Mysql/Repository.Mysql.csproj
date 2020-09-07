@@ -33,6 +33,36 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Poseidon_Picks_Release_Live|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Poseidon_Picks_Release_Live\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Pose_Release_Live|AnyCPU'">
+    <OutputPath>bin\Pose_Release_Live\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Pose_AdminTool_Live|AnyCPU'">
+    <OutputPath>bin\Pose_AdminTool_Live\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
@@ -70,17 +100,9 @@
   <ItemGroup>
     <Compile Include="Contexts\FootballDB.cs" />
     <Compile Include="Contexts\PoseGlobalDB.cs" />
-    <Compile Include="FootballDBMigrations\202008101047066_InitiateFootballDB.cs" />
-    <Compile Include="FootballDBMigrations\202008101047066_InitiateFootballDB.designer.cs">
-      <DependentUpon>202008101047066_InitiateFootballDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.cs" />
-    <Compile Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.designer.cs">
-      <DependentUpon>202008221327234_AddPredictionBackTestingTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FootballDBMigrations\202008262305165_AlterFixtureTable.cs" />
-    <Compile Include="FootballDBMigrations\202008262305165_AlterFixtureTable.designer.cs">
-      <DependentUpon>202008262305165_AlterFixtureTable.cs</DependentUpon>
+    <Compile Include="FootballDBMigrations\202009071103322_InitiateFootballDB.cs" />
+    <Compile Include="FootballDBMigrations\202009071103322_InitiateFootballDB.designer.cs">
+      <DependentUpon>202009071103322_InitiateFootballDB.cs</DependentUpon>
     </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
@@ -111,11 +133,13 @@
     <Compile Include="FootballDB\Tables\PredictionBackTesting.cs" />
     <Compile Include="FootballDB\Tables\Standings.cs" />
     <Compile Include="FootballDB\Tables\Team.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202009010836036_InitiateGlobalDB.cs" />
-    <Compile Include="PoseGlobalDBMigrations\202009010836036_InitiateGlobalDB.designer.cs">
-      <DependentUpon>202009010836036_InitiateGlobalDB.cs</DependentUpon>
+    <Compile Include="PoseGlobalDBMigrations\202009071104274_InitiateGlobalDB.cs" />
+    <Compile Include="PoseGlobalDBMigrations\202009071104274_InitiateGlobalDB.designer.cs">
+      <DependentUpon>202009071104274_InitiateGlobalDB.cs</DependentUpon>
     </Compile>
     <Compile Include="PoseGlobalDBMigrations\Configuration.cs" />
+    <Compile Include="PoseGlobalDB\Procedures\AdminTool\P_EXECUTE_QUERY.cs" />
+    <Compile Include="PoseGlobalDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_INSERT_IN_APP_BILLING.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_INSERT_USER_BASE.cs" />
     <Compile Include="PoseGlobalDB\Procedures\P_SELECT_LINKED_BILLING.cs" />
@@ -149,17 +173,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FootballDBMigrations\202008101047066_InitiateFootballDB.resx">
-      <DependentUpon>202008101047066_InitiateFootballDB.cs</DependentUpon>
+    <EmbeddedResource Include="FootballDBMigrations\202009071103322_InitiateFootballDB.resx">
+      <DependentUpon>202009071103322_InitiateFootballDB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202008221327234_AddPredictionBackTestingTable.resx">
-      <DependentUpon>202008221327234_AddPredictionBackTestingTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FootballDBMigrations\202008262305165_AlterFixtureTable.resx">
-      <DependentUpon>202008262305165_AlterFixtureTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PoseGlobalDBMigrations\202009010836036_InitiateGlobalDB.resx">
-      <DependentUpon>202009010836036_InitiateGlobalDB.cs</DependentUpon>
+    <EmbeddedResource Include="PoseGlobalDBMigrations\202009071104274_InitiateGlobalDB.resx">
+      <DependentUpon>202009071104274_InitiateGlobalDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

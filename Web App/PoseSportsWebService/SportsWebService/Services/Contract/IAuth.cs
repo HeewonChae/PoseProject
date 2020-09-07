@@ -17,6 +17,10 @@ namespace SportsWebService.Services.Contract
     public interface IAuth
     {
         [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "server_check")]
+        void P_CHECK_SERVER_STATE();
+
+        [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "PUBLISHKEY")]
         Stream P_PUBLISH_KEY();
 

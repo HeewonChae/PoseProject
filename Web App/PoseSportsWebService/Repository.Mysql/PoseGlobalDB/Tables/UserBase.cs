@@ -29,7 +29,7 @@ namespace Repository.Mysql.PoseGlobalDB.Tables
 
         [Column(TypeName = "VARCHAR")]
         [Index("IDX_PLATFORM_EMAIL", Order = 1, IsUnique = false)]
-        [StringLength(64)]
+        [StringLength(128)]
         public string platform_email { get; set; }
 
         [Required]

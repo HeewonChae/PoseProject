@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\Pose_Deploy</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include=".editorconfig">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="App_Data/ErrorCodeDescription.json">
+      <publishTime>09/03/2020 22:49:59</publishTime>
+    </File>
+    <File Include="App_Data/InAppPurchase.json">
+      <publishTime>09/07/2020 08:15:46</publishTime>
+    </File>
+    <File Include="App_Data/poseidon-picks-dev-681a7a0a4f9a.json">
+      <publishTime>09/02/2020 14:37:57</publishTime>
+    </File>
+    <File Include="bin/App_Data/ErrorCodeDescription.json">
+      <publishTime>09/03/2020 22:49:59</publishTime>
+    </File>
+    <File Include="bin/App_Data/InAppPurchase.json">
+      <publishTime>09/07/2020 08:15:46</publishTime>
+    </File>
+    <File Include="bin/App_Data/poseidon-picks-dev-681a7a0a4f9a.json">
+      <publishTime>09/02/2020 14:37:57</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>06/02/2020 07:29:27</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>06/02/2020 07:29:27</publishTime>
+    </File>
+    <File Include="bin/Flurl.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Flurl.Http.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/GameKernel.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.AndroidPublisher.v3.dll">
+      <publishTime>08/20/2020 08:09:22</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.AndroidPublisher.v3.pdb">
+      <publishTime>08/20/2020 08:09:22</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.dll">
+      <publishTime>08/17/2020 16:09:02</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.pdb">
+      <publishTime>08/17/2020 16:09:02</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Auth.PlatformServices.dll">
+      <publishTime>08/17/2020 16:09:02</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Core.dll">
+      <publishTime>08/17/2020 16:08:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.Core.pdb">
+      <publishTime>08/17/2020 16:08:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.dll">
+      <publishTime>08/17/2020 16:08:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.pdb">
+      <publishTime>08/17/2020 16:08:52</publishTime>
+    </File>
+    <File Include="bin/Google.Apis.PlatformServices.dll">
+      <publishTime>08/17/2020 16:09:02</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/LogicCore.dll">
+      <publishTime>09/07/2020 13:00:02</publishTime>
+    </File>
+    <File Include="bin/LogicCore.pdb">
+      <publishTime>09/07/2020 13:00:02</publishTime>
+    </File>
+    <File Include="bin/MessagePack.Annotations.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/MessagePack.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Assessment.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.BatchParserClient.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.ConnectionInfo.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.ConnectionInfoExtended.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Diagnostics.Strace.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Dmf.Common.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Dmf.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.Assessment.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.Collector.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.CollectorEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.RegisteredServers.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.Sdk.Sfc.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.SqlParser.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.Utility.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.UtilityEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.XEvent.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.XEventDbScoped.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.XEventDbScopedEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Management.XEventEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.PolicyEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.RegSvrEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.ServiceBrokerEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Smo.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.SmoExtended.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.SqlClrProvider.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.SqlEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.SqlTDiagm.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.SqlWmiManagement.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.SString.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Types.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.WmiEnum.dll">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>06/02/2020 07:29:27</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.Entity.EF6.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/Pipelines.Sockets.Unofficial.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/PoseCrypto.dll">
+      <publishTime>09/07/2020 13:00:02</publishTime>
+    </File>
+    <File Include="bin/PoseCrypto.pdb">
+      <publishTime>09/07/2020 13:00:02</publishTime>
+    </File>
+    <File Include="bin/PosePacket.dll">
+      <publishTime>09/07/2020 13:00:02</publishTime>
+    </File>
+    <File Include="bin/PosePacket.pdb">
+      <publishTime>09/07/2020 13:00:02</publishTime>
+    </File>
+    <File Include="bin/Repository.dll">
+      <publishTime>09/07/2020 13:00:03</publishTime>
+    </File>
+    <File Include="bin/Repository.dll.config">
+      <publishTime>06/02/2020 07:29:27</publishTime>
+    </File>
+    <File Include="bin/Repository.Mysql.dll">
+      <publishTime>09/07/2020 13:00:04</publishTime>
+    </File>
+    <File Include="bin/Repository.Mysql.dll.config">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="bin/Repository.Mysql.pdb">
+      <publishTime>09/07/2020 13:00:04</publishTime>
+    </File>
+    <File Include="bin/Repository.pdb">
+      <publishTime>09/07/2020 13:00:03</publishTime>
+    </File>
+    <File Include="bin/RestSharp.dll">
+      <publishTime>05/18/2020 11:55:38</publishTime>
+    </File>
+    <File Include="bin/SportsWebService.dll">
+      <publishTime>09/07/2020 13:06:15</publishTime>
+    </File>
+    <File Include="bin/SportsWebService.pdb">
+      <publishTime>09/07/2020 13:06:15</publishTime>
+    </File>
+    <File Include="bin/StackExchange.Redis.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/System.IO.Pipelines.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Channels.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Dataflow.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/System.Threading.Tasks.Extensions.dll">
+      <publishTime>06/02/2020 07:29:30</publishTime>
+    </File>
+    <File Include="bin/UnityEngine.dll">
+      <publishTime>06/02/2020 07:29:28</publishTime>
+    </File>
+    <File Include="bin/WebServiceShare.dll">
+      <publishTime>09/07/2020 13:00:03</publishTime>
+    </File>
+    <File Include="bin/WebServiceShare.pdb">
+      <publishTime>09/07/2020 13:00:03</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>06/02/2020 07:42:26</publishTime>
+    </File>
+    <File Include="Services/Auth.svc">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="Services/Billing.svc">
+      <publishTime>09/01/2020 14:38:13</publishTime>
+    </File>
+    <File Include="Services/Football.svc">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="Services/HelloWorld.svc">
+      <publishTime>06/02/2020 07:29:29</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/07/2020 14:18:51</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

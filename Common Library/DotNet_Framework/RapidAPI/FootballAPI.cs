@@ -62,7 +62,7 @@ namespace RapidAPI
 
             var response = apiClient.ExecuteEx<FootballApiResponse<FixturesResponse>>(request);
 
-            return response.Api.Fixtures.FirstOrDefault();
+            return response.Api.Fixtures?.FirstOrDefault();
         }
 
         /// <summary>

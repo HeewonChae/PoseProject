@@ -139,7 +139,7 @@ namespace PoseSportsPredict.ViewModels.Football.Team
                     return FootballDataLoader.TeamOverview(_teamInfo.TeamId);
                 },
                 key: $"P_GET_TEAM_OVERVIEW:{_teamInfo.PrimaryKey}",
-                expireTime: TimeSpan.Zero,
+                expireTime: TimeSpan.FromHours(1),
                 serializeType: SerializeType.MessagePack);
 
             if (server_result == null)

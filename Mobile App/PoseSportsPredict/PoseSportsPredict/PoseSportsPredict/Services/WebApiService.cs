@@ -109,9 +109,9 @@ namespace PoseSportsPredict.Services
                         DialogConfiguration.DefaultAlterDialogConfiguration);
 #else
                     await MaterialDialog.Instance.AlertAsync(flurlException.Call.Response.StatusCode.ToString(),
-                        $"ErrorCode: {flurlException.Call.Response.StatusCode}",
+                        LocalizeString.App_Title,
                         LocalizeString.Ok,
-                        DialogConfiguration.DefaultAlterDialogConfiguration);
+                        DialogConfiguration.AppTitleAlterDialogConfiguration);
 #endif
                     return;
                 }

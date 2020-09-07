@@ -58,8 +58,6 @@ namespace SportsWebService.Authentication
         public long ExpireTime => _expireTime;
         public int ServiceRoleType => _serviceRoleType;
 
-        public void RefreshExpireTime() => _expireTime = LogicTime.TIME() + PoseCredentials.TOKEN_EXPIRE_IN;
-
         #region Serialize Methods
 
         public static PoseCredentials CreateCredentials(long userNo, ServiceRoleType serviceRoleType)
@@ -67,7 +65,7 @@ namespace SportsWebService.Authentication
             var newCredentials = new PoseCredentials();
             newCredentials._userNo = userNo;
             newCredentials._serviceRoleType = (int)serviceRoleType;
-            newCredentials.RefreshExpireTime();
+            newCredentials._expireTime = LogicTime.GetUnixTimeNow(DateTime.UtcNow.AddMilliseconds(TOKEN_EXPIRE_IN));
 
             return newCredentials;
         }
@@ -83,7 +81,7 @@ namespace SportsWebService.Authentication
             var newCredentials = new PoseCredentials();
             newCredentials._userNo = userNo;
             newCredentials._serviceRoleType = serviceRoleType;
-            newCredentials.RefreshExpireTime();
+            newCredentials._expireTime = LogicTime.GetUnixTimeNow(DateTime.UtcNow.AddMilliseconds(TOKEN_EXPIRE_IN));
 
             return newCredentials;
         }

@@ -2,6 +2,7 @@
 using LogicCore.Utility;
 using LogicCore.Utility.ThirdPartyLog;
 using SportsAdminTool.Logic.Football;
+using SportsAdminTool.Logic.WebAPI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -28,6 +29,9 @@ namespace SportsAdminTool
             // Global Exception Handler
             AppDomain.CurrentDomain.UnhandledException += (s, eArgs) =>
             {
+#if LINE_NOTIFY
+                Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Dev, eArgs.ExceptionObject.ToString());
+#endif
                 Log4Net.WriteLog(eArgs.ExceptionObject.ToString(), Log4Net.Level.FATAL);
                 Trace.Assert(false, eArgs.ExceptionObject.ToString());
             };

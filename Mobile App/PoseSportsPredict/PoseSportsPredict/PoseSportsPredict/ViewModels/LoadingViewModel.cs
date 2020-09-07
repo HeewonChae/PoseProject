@@ -41,6 +41,9 @@ namespace PoseSportsPredict.ViewModels
 
             while (!await WebApiService.CheckInternetConnection()) { }
 
+            // Check Exist Latest Version
+            await UpdateChecker.Execute();
+
             // Table Loader
             TableLoader.Init(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
@@ -106,9 +109,6 @@ namespace PoseSportsPredict.ViewModels
                 ClientContext.eSignature = CryptoFacade.Instance.GetEncryptedSignature();
                 ClientContext.eSignatureIV = CryptoFacade.Instance.GetEncryptedSignatureIV();
             }
-
-            // Check Exist Latest Version
-            await UpdateChecker.Execute();
 
             // Prepare SingletonPage
             ShinyHost.Resolve<AppMasterViewModel>();

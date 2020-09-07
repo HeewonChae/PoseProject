@@ -29,7 +29,7 @@ namespace SportsWebService.Authentication
             credentials.IsAuthenticated = false;
 
             if (credentials != PoseCredentials.Default
-                && credentials.ExpireTime > LogicTime.TIME())
+                && LogicTime.FromUnixTimeStamp(credentials.ExpireTime) > DateTime.UtcNow)
             {
                 credentials.IsAuthenticated = true;
             }

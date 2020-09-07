@@ -87,7 +87,7 @@ namespace SportsAdminTool.Logic.Football
 
                 db_prediction.is_hit = isHit;
                 Logic.Database.FootballDBFacade.UpdatePrediction(db_prediction);
-
+#if LINE_NOTIFY
                 if (db_prediction.is_recommended && db_prediction.is_hit && isNotify)
                 {
                     string notiMSG = Logic.Football.PredictionFacade.MakeHitNotificationMessage(api_fixture, db_prediction);
@@ -95,6 +95,7 @@ namespace SportsAdminTool.Logic.Football
                     if (!string.IsNullOrEmpty(notiMSG))
                         Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Football_Picks, notiMSG);
                 }
+#endif
             }
         }
 
@@ -198,7 +199,13 @@ namespace SportsAdminTool.Logic.Football
 
                     if (api_league != null)
                     {
-                        // TODO: 추가된 리그 메시지로 전송
+#if LINE_NOTIFY
+                        // 추가된 리그 메시지로 전송
+                        if (errorLeagueCnt < 50)
+                        {
+                            Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Dev, $"새로운 리그가 추가 됐습니다. ID: {api_league.LeagueId}, 국가: {api_league.Country}, 이름: {api_league.Name}");
+                        }
+#endif
 
                         api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type);
 

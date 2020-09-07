@@ -14,6 +14,7 @@ namespace SportsAdminTool.Logic.WebAPI
     public enum LineNotifyType
     {
         Football_Picks,
+        Dev,
     }
 
     public class LineNotifyAPI : Singleton.INode
@@ -26,11 +27,16 @@ namespace SportsAdminTool.Logic.WebAPI
         {
             string host_url = ConfigurationManager.AppSettings["line_noti_url"];
             string football_picks_token = ConfigurationManager.AppSettings["line_noti_token_football_pick"];
+            string football_dev = ConfigurationManager.AppSettings["line_noti_token_Dev"];
 
             var football_picks = new LineNotify.LineNotify();
             football_picks.Init(host_url, football_picks_token);
 
             _clients.Add(LineNotifyType.Football_Picks, football_picks);
+
+            var dev = new LineNotify.LineNotify();
+            football_picks.Init(host_url, football_dev);
+            _clients.Add(LineNotifyType.Dev, dev);
         }
 
         public void SendMessageAsync(LineNotifyType clientType, string msg)

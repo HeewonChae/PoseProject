@@ -19,7 +19,7 @@ namespace SportsAdminTool.Commands.Football
 
     public static class UpdateLeagueAndTeam
     {
-        public static Task<bool> Execute()
+        public static Task<bool> Execute(bool isUpdateAll)
         {
             return Task.Run(() =>
             {
@@ -52,7 +52,7 @@ namespace SportsAdminTool.Commands.Football
                     Logic.Database.FootballDBFacade.UpdateLeague(api_league);
 
                     // 전체 경기 다 가져오고 싶을땐 해당 코드 주석처리
-                    if (api_league.IsCurrent == 0)
+                    if (!isUpdateAll && api_league.IsCurrent == 0)
                         continue;
 
                     // Update All Teams

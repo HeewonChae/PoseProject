@@ -9,6 +9,7 @@ namespace SportsWebService.Models.Enums
     {
         _NONE_,
         Regular = 1 << 0,
+        Promotion = 1 << 7,
         Diamond = 1 << 15,
         VIP = 1 << 22,
         VVIP = 1 << 29,

@@ -1,4 +1,5 @@
 ﻿using LogicCore.Converter;
+using LogicCore.Utility;
 using LogicCore.Utility.ThirdPartyLog;
 using PosePacket.Service.Billing;
 using PosePacket.Service.Billing.Models;
@@ -41,8 +42,54 @@ namespace SportsWebService.Commands.Billing
             public const int DB_User_Role_Update_Failed = ServiceErrorCode.StoredProcedure_Global.P_UPDATE_USER_ROLE + 1;
         }
 
-        public static async Task<O_E_CHECK_MEMBERSHIP_BY_GOOGLE> Execute(I_E_CHECK_MEMBERSHIP_BY_GOOGLE input, long userNo)
+        public static async Task<O_E_CHECK_MEMBERSHIP_BY_GOOGLE> Execute(I_E_CHECK_MEMBERSHIP_BY_GOOGLE input, long userNo, int serviceRoleType)
         {
+            PoseBillingResult billingResult = null;
+
+            ////////////////////////////////////////////////////
+            /// 프로모션 유저 만료 처리
+            ///////////////////////////////////////////////////
+            if (serviceRoleType == (int)ServiceRoleType.Promotion)
+            {
+                billingResult = new PoseBillingResult()
+                {
+                    MemberRoleType = MemberRoleType.Regular,
+                    RoleExpireTime = DateTime.UtcNow,
+                };
+
+                // Update DB
+                bool db_output_promo;
+                using (var P_UPDATE_USER_ROLE = new PoseGlobalDB.Procedures.P_UPDATE_USER_ROLE())
+                {
+                    P_UPDATE_USER_ROLE.SetInput(new PoseGlobalDB.Procedures.P_UPDATE_USER_ROLE.Input
+                    {
+                        UserNo = userNo,
+                        LinkedTransNo = 0,
+                        RoleType = billingResult.MemberRoleType.ToString(),
+                        RoleExpireTime = billingResult.RoleExpireTime,
+                        CurrentTime = DateTime.UtcNow,
+                    });
+
+                    db_output_promo = P_UPDATE_USER_ROLE.OnQuery();
+
+                    if (P_UPDATE_USER_ROLE.EntityStatus != null || db_output_promo == false)
+                        ErrorHandler.OccurException(RowCode.DB_User_Role_Update_Failed);
+                }
+
+                // Refrash PoseToken
+                billingResult.MemberRoleType.ToString().TryParseEnum(out ServiceRoleType promoServiceRoleType);
+                billingResult.PoseToken = PoseCredentials.CreateToken(userNo, promoServiceRoleType);
+
+                return new O_E_CHECK_MEMBERSHIP_BY_GOOGLE
+                {
+                    BillingResult = billingResult,
+                };
+            }
+
+            ////////////////////////////////////////////////////
+            /// 결제 유저 멤버십 처리
+            ///////////////////////////////////////////////////
+
             // Check DB
             PoseGlobalDB.Procedures.P_SELECT_LINKED_BILLING.Output db_output;
             using (var P_SELECT_LINKED_BILLING = new PoseGlobalDB.Procedures.P_SELECT_LINKED_BILLING())
@@ -63,7 +110,6 @@ namespace SportsWebService.Commands.Billing
                 ErrorHandler.OccurException(RowCode.Invalid_Product_Id);
             }
 
-            PoseBillingResult billingResult = null;
             long linkedTransNo = 0;
             if (inAppPurchase.PurchaseType == InAppPurchaseType.InAppProduct)
             {
@@ -111,8 +157,8 @@ namespace SportsWebService.Commands.Billing
             }
 
             // Refrash PoseToken
-            billingResult.MemberRoleType.ToString().TryParseEnum(out ServiceRoleType serviceRoleType);
-            billingResult.PoseToken = PoseCredentials.CreateToken(userNo, serviceRoleType);
+            billingResult.MemberRoleType.ToString().TryParseEnum(out ServiceRoleType convertedServiceRoleType);
+            billingResult.PoseToken = PoseCredentials.CreateToken(userNo, convertedServiceRoleType);
 
             return new O_E_CHECK_MEMBERSHIP_BY_GOOGLE
             {

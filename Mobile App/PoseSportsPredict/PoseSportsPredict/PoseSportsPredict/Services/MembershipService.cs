@@ -56,8 +56,9 @@ namespace PoseSportsPredict.Services
             _timer?.Stop();
             _roleExpireTime = value;
 
-            if (MemberRoleType == MemberRoleType.Diamond
-                || MemberRoleType == MemberRoleType.VIP) // 결제 유저 등급
+            if (MemberRoleType == MemberRoleType.Promotion  // 프로모션 유저
+                || MemberRoleType == MemberRoleType.Diamond // 결제 유저 등급
+                || MemberRoleType == MemberRoleType.VIP)    // 결제 유저 등급
             {
                 var expireMilliSec = (_roleExpireTime - DateTime.UtcNow).TotalMilliseconds;
                 if (expireMilliSec > 0)

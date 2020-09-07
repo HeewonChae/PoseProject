@@ -18,6 +18,10 @@ namespace SportsWebService.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class Auth : Contract.IAuth
     {
+        public void P_CHECK_SERVER_STATE()
+        {
+        }
+
         public Stream P_PUBLISH_KEY()
         {
             var pub_key = Singleton.Get<CryptoFacade>().GetPub_Key();
