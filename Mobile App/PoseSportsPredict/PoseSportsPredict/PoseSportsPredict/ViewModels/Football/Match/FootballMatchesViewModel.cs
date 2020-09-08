@@ -442,15 +442,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchListViewModel.Matches = new ObservableCollection<FootballMatchInfo>(grouppingMatch.Matches);
                 matchListViewModel.IsPredicted = grouppingMatch.Matches.Any(elem => elem.IsPredicted);
 
-                if (_curMatchFilterType == MatchFilterType.SortByLeague)
-                {
-                    var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
-                    matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;
-                }
-                else
-                {
-                    matchListViewModel.Expanded = grouppingMatch.IsExpanded;
-                }
+                var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
+                matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;
 
                 matchGroupCollection.Add(matchListViewModel);
             }
