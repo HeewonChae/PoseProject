@@ -8,6 +8,7 @@
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
              BackgroundColor="White"
              NavigationPage.HasNavigationBar="False">
@@ -118,7 +119,7 @@
                         VerticalOptions="Center"
                         TypeScale="Body2"
                         TextColor="{StaticResource TextColor_D2}"
-                        Text="{x:Static localize:LocalizeString.Remember_Account}">
+                        Text="{Binding [Remember_Account], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                         </materialui:MaterialLabel>
                         <Switch
                         IsToggled="{Binding IsRemeberAccount}">

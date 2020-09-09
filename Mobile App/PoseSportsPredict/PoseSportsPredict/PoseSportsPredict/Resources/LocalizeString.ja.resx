@@ -465,4 +465,202 @@
   <data name="Diamond" xml:space="preserve">
     <value>Diamond</value>
   </data>
+  <data name="Edit_Bookmark" xml:space="preserve">
+    <value>ブックマーク追加・削除</value>
+  </data>
+  <data name="Not_Enough_Data_Predict" xml:space="preserve">
+    <value>予測のためのデータが足りないです。</value>
+  </data>
+  <data name="Final_Score" xml:space="preserve">
+    <value>最終のスコア</value>
+  </data>
+  <data name="Match_Winner" xml:space="preserve">
+    <value>勝　分　敗</value>
+  </data>
+  <data name="Both_To_Score" xml:space="preserve">
+    <value>両チームの得点</value>
+  </data>
+  <data name="Under_Over" xml:space="preserve">
+    <value>アンダーオーバー</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>ロック解除</value>
+  </data>
+  <data name="Unlocked" xml:space="preserve">
+    <value>解除され</value>
+  </data>
+  <data name="Collapse_All_Matches" xml:space="preserve">
+    <value>すべての試合縮小</value>
+  </data>
+  <data name="Expand_All_Matches" xml:space="preserve">
+    <value>すべての試合拡大</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>はい</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
+  <data name="Under" xml:space="preserve">
+    <value>アンダー</value>
+  </data>
+  <data name="Over" xml:space="preserve">
+    <value>オーバー</value>
+  </data>
+  <data name="Predicted_Picks" xml:space="preserve">
+    <value>予測ピック</value>
+  </data>
+  <data name="Match_Winner_Win" xml:space="preserve">
+    <value>ホーム勝</value>
+  </data>
+  <data name="Match_Winner_Lose" xml:space="preserve">
+    <value>ホーム敗</value>
+  </data>
+  <data name="Match_Winner_Win_Or_Draw" xml:space="preserve">
+    <value>ホームの勝または敗</value>
+  </data>
+  <data name="Match_Winner_Lose_Or_Draw" xml:space="preserve">
+    <value>ホームの分または敗</value>
+  </data>
+  <data name="Both_To_Score_Yes" xml:space="preserve">
+    <value>両チームの得点 ・ はい</value>
+  </data>
+  <data name="Both_To_Score_No" xml:space="preserve">
+    <value>両チームの得点 ・ いいえ</value>
+  </data>
+  <data name="Under_1_5" xml:space="preserve">
+    <value>1.5ゴールアンダー</value>
+  </data>
+  <data name="Over_1_5" xml:space="preserve">
+    <value>1.5ゴールオーバー</value>
+  </data>
+  <data name="Under_2_5" xml:space="preserve">
+    <value>2.5ゴールアンダー</value>
+  </data>
+  <data name="Over_2_5" xml:space="preserve">
+    <value>2.5ゴールオーバー</value>
+  </data>
+  <data name="Under_3_5" xml:space="preserve">
+    <value>3.5ゴールアンダー</value>
+  </data>
+  <data name="Over_3_5" xml:space="preserve">
+    <value>3.5ゴールオーバー</value>
+  </data>
+  <data name="Under_4_5" xml:space="preserve">
+    <value>4.5ゴールアンダー</value>
+  </data>
+  <data name="Over_4_5" xml:space="preserve">
+    <value>4.5ゴールオーバー</value>
+  </data>
+  <data name="Recommended_Matches" xml:space="preserve">
+    <value>オススメ試合</value>
+  </data>
+  <data name="Product_Not_Consumed" xml:space="preserve">
+    <value>まだ有料商品が残っています</value>
+  </data>
+  <data name="Bookmark_Inventory_Full" xml:space="preserve">
+    <value>ブックマークがいっぱいです</value>
+  </data>
+  <data name="VidonAd_Load_Fail" xml:space="preserve">
+    <value>CMを読み込み中に問題が発生しました</value>
+  </data>
+  <data name="Already_Owned_Purchase" xml:space="preserve">
+    <value>もう持っている商品です</value>
+  </data>
+  <data name="Fail_Store_Connect" xml:space="preserve">
+    <value>ストアに繋がりません</value>
+  </data>
+  <data name="Success_Purchase_But_Server_Error" xml:space="preserve">
+    <value>ご購入しましたが、サーバーにエラーが発生しました</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>元に戻す</value>
+  </data>
+  <data name="Unknown_Error" xml:space="preserve">
+    <value>不明なエラーが発生しました</value>
+  </data>
+  <data name="Payment_Pending_Please_Check" xml:space="preserve">
+    <value>支払いは保留中です。 お支払いの確認をお願いします。</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>読み込み中...</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>国</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>使用不可</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>月</value>
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>活性化</value>
+  </data>
+  <data name="Diamond_Advantage_1" xml:space="preserve">
+    <value>ビデオ広告なしで7日間予測データを表示</value>
+  </data>
+  <data name="Diamond_Advantage_2" xml:space="preserve">
+    <value>ブックマーク試合の制限を50個までに広げる</value>
+  </data>
+  <data name="Diamond_Advantage_3" xml:space="preserve">
+    <value>ブックマークリーグ制限を30個までに広げる</value>
+  </data>
+  <data name="Diamond_Advantage_4" xml:space="preserve">
+    <value>ブックマークチーム制限を30個までに広げる</value>
+  </data>
+  <data name="VIP_Advantage_1" xml:space="preserve">
+    <value>1ヶ月間、ビデオ広告なしで予測データを表示</value>
+  </data>
+  <data name="VIP_Advantage_2" xml:space="preserve">
+    <value>ブックマーク試合の制限を100個までに広げる</value>
+  </data>
+  <data name="VIP_Advantage_3" xml:space="preserve">
+    <value>ブックマークリーグ制限を無制限にする</value>
+  </data>
+  <data name="VIP_Advantage_4" xml:space="preserve">
+    <value>ブックマークチーム制限を無制限にする</value>
+  </data>
+  <data name="VIP_Advantage_5" xml:space="preserve">
+    <value>ページ下部のバナー広告を削除する</value>
+  </data>
+  <data name="Benefits" xml:space="preserve">
+    <value>お得</value>
+  </data>
+  <data name="Write_Review" xml:space="preserve">
+    <value>レビューを書く</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>あとで</value>
+  </data>
+  <data name="Share_App" xml:space="preserve">
+    <value>アプリの共有</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>アップデート</value>
+  </data>
+  <data name="Exist_App_Update" xml:space="preserve">
+    <value>新しいアプリのアップデートがあります</value>
+  </data>
+  <data name="Remove_Video_Ads" xml:space="preserve">
+    <value>ビデオ広告の削除</value>
+  </data>
+  <data name="User_No" xml:space="preserve">
+    <value>メンバー番号</value>
+  </data>
+  <data name="Membership" xml:space="preserve">
+    <value>メンバーシップ</value>
+  </data>
+  <data name="Expiration_Date" xml:space="preserve">
+    <value>有効期限</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="Dont_Show_Again" xml:space="preserve">
+    <value>再度見ない</value>
+  </data>
+  <data name="Unlocked_Prediction_Keep_Hour" xml:space="preserve">
+    <value>解除された予測データは1時間の間保持されます</value>
+  </data>
 </root>

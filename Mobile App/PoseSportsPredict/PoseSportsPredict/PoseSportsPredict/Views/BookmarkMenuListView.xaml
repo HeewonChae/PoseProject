@@ -18,7 +18,7 @@
                 <materialui:MaterialLabel
                     Text="{Binding Title}"
                     TypeScale="Caption"
-                    TextColor="{StaticResource CustomGrey_D}">
+                    TextColor="{StaticResource TextColor_D2}">
                 </materialui:MaterialLabel>
                 <Image
                     Margin="5,0"
