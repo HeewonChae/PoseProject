@@ -8,6 +8,6 @@ namespace PredictorAPI
 {
     public interface IPredictorAPI
     {
-        void Init(string host_url);
+        void Init(string host_url, string line_notify_host, string line_notify_token);
     }
 }

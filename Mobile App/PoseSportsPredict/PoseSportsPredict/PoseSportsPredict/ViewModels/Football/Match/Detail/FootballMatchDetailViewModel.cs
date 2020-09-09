@@ -213,7 +213,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                     Title = LocalizeString.Match_Begin_Soon,
                     Description = $"{MatchInfo.LeagueName}.  {MatchInfo.HomeName}  vs  {MatchInfo.AwayName}",
                     IntentData = MatchInfo.JsonSerialize(),
-                    IconName = "ic_soccer_alarm",
+                    IconName = "ic_pose_noti",
                     SportsType = SportsType.Football,
                     NotificationType = NotificationType.MatchStart,
                     NotifyTime = notifyTime,

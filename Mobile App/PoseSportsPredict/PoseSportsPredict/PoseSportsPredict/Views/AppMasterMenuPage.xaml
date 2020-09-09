@@ -172,8 +172,8 @@
                         <Frame
                             Margin="1,3,0,5"
                             Padding="0"
-                            HeightRequest="33"
-                            WidthRequest="33"
+                            HeightRequest="32"
+                            WidthRequest="32"
                             CornerRadius="59"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"

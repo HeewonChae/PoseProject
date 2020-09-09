@@ -32,7 +32,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Pose_AdminTool_Live|AnyCPU'">
     <OutputPath>bin\Pose_AdminTool_Live\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;LINE_NOTIFY;</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -77,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LineNotify\LineNotify.csproj">
+      <Project>{100ece24-7e39-4ce9-99d1-529b9362492d}</Project>
+      <Name>LineNotify</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LogicCore\LogicCore.csproj">
       <Project>{4375D35A-CCB4-4714-BE12-7828A548C543}</Project>
       <Name>LogicCore</Name>

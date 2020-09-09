@@ -123,12 +123,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 return;
 
             string isBookmarkFilter = _curMatchFilterType == MatchFilterType.Bookmark ? $"({LocalizeString.Applying})" : "";
+            string isRecommendedFilter = _curMatchFilterType == MatchFilterType.Recommended ? $"({LocalizeString.Applying})" : "";
             string isOngoingFilter = _curMatchFilterType == MatchFilterType.Ongoing ? $"({LocalizeString.Applying})" : "";
             string isTimeFilter = _curMatchFilterType == MatchFilterType.SortByTime ? $"({LocalizeString.Applying})" : "";
             string isLeagueFilter = _curMatchFilterType == MatchFilterType.SortByLeague ? $"({LocalizeString.Applying})" : "";
             var actions = new string[]
             {
                 $"{LocalizeString.Match_Filter_By_Bookmark} {isBookmarkFilter}",
+                $"{LocalizeString.Recommended_Matches} {isRecommendedFilter}",
                 $"{LocalizeString.Ongoing_matches} {isOngoingFilter}",
                 $"{LocalizeString.Match_Sort_By_Time} {isTimeFilter}",
                 $"{LocalizeString.Match_Sort_By_League} {isLeagueFilter}",
@@ -383,6 +385,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     }
                     break;
 
+                case MatchFilterType.Recommended:
+                    {
+                        matchList = _matchList.Where(elem => elem.IsRecommended).OrderBy(elem => elem.MatchTime).ToList();
+                    }
+                    break;
+
                 case MatchFilterType.Ongoing:
                     matchList = _matchList.Where(elem =>
                         elem.MatchStatus != FootballMatchStatusType.NS
@@ -423,11 +431,13 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchGroupCollection.Add(recommendedMatchesViewModel);
             }
 
+#if !REMOVE_ADS
             // 네이티브 광고
             var nativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
             nativeAds.GroupType = MatchGroupType.NativeAds;
             nativeAds.AdsBannerType = AdsBannerType.NativeSmall;
             matchGroupCollection.Add(nativeAds);
+#endif
 
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
 
@@ -447,7 +457,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 matchGroupCollection.Add(matchListViewModel);
             }
-
+#if !REMOVE_ADS
             // 그룹 개수에 따라 동적으로 광고 처리
             int totalGroupCnt = grouppingMatches.Count;
             if (totalGroupCnt > 28)
@@ -470,6 +480,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 matchGroupCollection.Insert(10, mediumNativeAds);
             }
+#endif
 
             MatchListViewModels = matchGroupCollection;
         }
@@ -480,6 +491,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             switch (_curMatchFilterType)
             {
+                case MatchFilterType.Recommended:
                 case MatchFilterType.Bookmark:
                     {
                         var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, CountryLogo = elem.League_CountryLogo, League = elem.LeagueName });

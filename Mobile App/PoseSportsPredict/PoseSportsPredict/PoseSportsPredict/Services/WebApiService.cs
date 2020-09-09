@@ -75,10 +75,10 @@ namespace PoseSportsPredict.Services
                             }
                             else
                             {
-                                await MaterialDialog.Instance.AlertAsync($"{errorMessage}",
-                                    $"E_{errorCode}",
+                                await MaterialDialog.Instance.AlertAsync($"E_{errorCode}: {errorMessage}",
+                                    LocalizeString.App_Title,
                                     LocalizeString.Ok,
-                                    DialogConfiguration.DefaultAlterDialogConfiguration);
+                                    DialogConfiguration.AppTitleAlterDialogConfiguration);
                             }
                         }
                         else

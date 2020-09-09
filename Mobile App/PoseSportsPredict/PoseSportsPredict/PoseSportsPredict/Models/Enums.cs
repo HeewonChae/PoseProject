@@ -3,6 +3,7 @@
     public enum MatchFilterType
     {
         Bookmark,
+        Recommended,
         Ongoing,
         SortByTime,
         SortByLeague,

@@ -29,8 +29,8 @@
                 <pancakeview:PancakeView.BackgroundGradientStops>
                     <pancakeview:GradientStopCollection>
                         <pancakeview:GradientStop Color="{StaticResource SecondaryColor_D}" Offset="0.0" />
-                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor}" Offset="0.7" />
-                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor}" Offset="1.0" />
+                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor}" Offset="0.5" />
+                        <pancakeview:GradientStop Color="{StaticResource SecondaryColor_D}" Offset="1.0" />
                     </pancakeview:GradientStopCollection>
                 </pancakeview:PancakeView.BackgroundGradientStops>
 

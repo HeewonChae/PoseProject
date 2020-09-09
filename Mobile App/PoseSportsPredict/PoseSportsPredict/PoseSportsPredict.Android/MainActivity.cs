@@ -19,13 +19,13 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Droid
 {
-    [Activity(Label = "Poseidon Picks",
-        Icon = "@mipmap/icon_round",
+    [Activity(Label = "@string/App_Title",
+        Icon = "@mipmap/icon",
         Theme = "@style/LoadingTheme",
         MainLauncher = true,
         ScreenOrientation = ScreenOrientation.Portrait,
         LaunchMode = LaunchMode.SingleTask,
-        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+        ConfigurationChanges = ConfigChanges.Locale | ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, ILicenseCheckerCallback
     {
         private const string ApiKey =

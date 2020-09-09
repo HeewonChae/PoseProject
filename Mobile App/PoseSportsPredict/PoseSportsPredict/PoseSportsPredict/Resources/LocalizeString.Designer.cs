@@ -385,6 +385,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dot&apos;t show again.
+        /// </summary>
+        public static string Dont_Show_Again {
+            get {
+                return ResourceManager.GetString("Dont_Show_Again", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string Draw {
@@ -1524,6 +1533,15 @@ namespace PoseSportsPredict.Resources {
         public static string Unlocked {
             get {
                 return ResourceManager.GetString("Unlocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The unlocked prediction data is kept for an hour..
+        /// </summary>
+        public static string Unlocked_Prediction_Keep_Hour {
+            get {
+                return ResourceManager.GetString("Unlocked_Prediction_Keep_Hour", resourceCulture);
             }
         }
         

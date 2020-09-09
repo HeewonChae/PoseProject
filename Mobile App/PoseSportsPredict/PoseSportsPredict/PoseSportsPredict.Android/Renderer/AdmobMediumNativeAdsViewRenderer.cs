@@ -62,7 +62,7 @@ namespace PoseSportsPredict.Droid.Renderer
                         populateUnifiedNativeAdView(ad, nativeAdView);
                         SetNativeControl(nativeAdView);
 
-                        e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(83);
+                        e.NewElement.HeightRequest = 217; // DependencyService.Resolve<IScreenHelper>().DpToPixels(83);
                         e.NewElement.IsVisible = true;
                     }
                     catch
@@ -76,7 +76,7 @@ namespace PoseSportsPredict.Droid.Renderer
             }
             else
             {
-                e.NewElement.HeightRequest = DependencyService.Resolve<IScreenHelper>().DpToPixels(83);
+                e.NewElement.HeightRequest = 217; // DependencyService.Resolve<IScreenHelper>().DpToPixels(83);
                 e.NewElement.IsVisible = true;
             }
         }

@@ -42,7 +42,7 @@ namespace Repository.Mysql.FootballDB.Procedures
             ParticipatingLeaguesQueryString = $"{DB_FootballLeagueDetail.SelectQuery} " +
                 $"INNER JOIN fixture as f ON l.{nameof(League.id)} = f.{nameof(Fixture.league_id)} " +
                 $"WHERE (f.{nameof(Fixture.home_team_id)} = {_input.TeamId} OR f.{nameof(Fixture.away_team_id)} = {_input.TeamId}) AND l.{nameof(League.is_current)} = 1 " +
-                $"GROUP BY l.{nameof(League.id)};";
+                $"GROUP BY l.{nameof(League.id)}, c.{nameof(Country.logo)};";
 
             FixturesQueryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
                 $"WHERE f.{nameof(Fixture.league_id)} = @LeagueId AND ( f.{nameof(Fixture.home_team_id)} = {_input.TeamId} OR  f.{nameof(Fixture.away_team_id)} = {_input.TeamId} ) AND f.{nameof(Fixture.is_completed)} = 1 " +

@@ -25,11 +25,11 @@
                 Grid.Row="2">
                 <Image
                     Aspect="AspectFit"
-                    HeightRequest="192"
-                    WidthRequest="192"
+                    HeightRequest="200"
+                    WidthRequest="200"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
-                    Source="img_app_logo.png">
+                    Source="img_app_logo_white.png">
                 </Image>
             </StackLayout>
 

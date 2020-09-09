@@ -116,7 +116,7 @@ namespace SportsAdminTool
             //await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateLeagueAndTeam_Errors.json");
 
             // 다음 업데이트 알람
-            TimeSpan ts = DateTime.Now.AddHours(9) - DateTime.Now; // 9시간 후
+            TimeSpan ts = DateTime.Now.AddHours(12) - DateTime.Now; // 12시간 후
             Singleton.Get<FootballAlarm.InitializeDatabase>().SetAlarm((long)ts.TotalMilliseconds);
         }
 
@@ -145,7 +145,7 @@ namespace SportsAdminTool
             {
                 await FootballCommands.PredictFixtures.Execute();
 #if LINE_NOTIFY
-                await NotifyFootballPredictions.Execute();
+                // await NotifyFootballPredictions.Execute();
 #endif
             }
 

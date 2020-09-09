@@ -114,7 +114,7 @@ namespace SportsAdminTool.Logic.Football
 
         public bool IsValidFixtureStatus(ApiModel.Football.Enums.FixtureStatusType status, DateTime matchTime)
         {
-            if (DateTime.UtcNow > matchTime.AddDays(1)
+            if (DateTime.UtcNow > matchTime.AddHours(4)
                 && status != ApiModel.Football.Enums.FixtureStatusType.FT // 경기전
                 && status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
                 && status != ApiModel.Football.Enums.FixtureStatusType.PEN) // 승부차기 후 종료

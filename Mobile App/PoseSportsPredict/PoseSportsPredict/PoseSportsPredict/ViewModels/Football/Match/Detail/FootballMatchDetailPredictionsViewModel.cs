@@ -14,6 +14,7 @@ using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.Services.Cache.Loader;
+using PoseSportsPredict.Utilities.LocalStorage;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.Views.Football.Match.Detail;
 using Sharpnado.Presentation.Forms;
@@ -126,7 +127,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            var isUnlock = UnlockProcess(FinalScorePredictions);
+            var isUnlock = await UnlockProcess(FinalScorePredictions);
 
             if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionFinalScoreViewModel>(), FinalScorePredictions);
@@ -143,7 +144,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            var isUnlock = UnlockProcess(MatchWinnerPredictions);
+            var isUnlock = await UnlockProcess(MatchWinnerPredictions);
 
             if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionMatchWinnerViewModel>(), MatchWinnerPredictions);
@@ -160,7 +161,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            var isUnlock = UnlockProcess(BothToScorePredictions);
+            var isUnlock = await UnlockProcess(BothToScorePredictions);
 
             if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionBothToScoreViewModel>(), BothToScorePredictions);
@@ -177,7 +178,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
             SetIsBusy(true);
 
-            var isUnlock = UnlockProcess(UnderOverPredictions);
+            var isUnlock = await UnlockProcess(UnderOverPredictions);
 
             if (isUnlock)
                 await PageSwitcher.PushPopupAsync(ShinyHost.Resolve<FootballPredictionUnderOverViewModel>(), UnderOverPredictions);
@@ -206,7 +207,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
 
         #region Methods
 
-        public bool UnlockProcess(FootballPredictionGroup predictionGroup)
+        public async Task<bool> UnlockProcess(FootballPredictionGroup predictionGroup)
         {
             _selectedPrediction = predictionGroup;
 
@@ -217,6 +218,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match.Detail
                 // 동영상 광고
                 if (CrossMTAdmob.Current.IsEnabled)
                 {
+                    LocalStorage.Storage.GetValueOrDefault(LocalStorageKey.IsDismissVideoAdsInfoPopup, out bool isDismiss);
+
+                    if (!isDismiss)
+                    {
+                        var ret = await MaterialDialog.Instance.ConfirmAsync(LocalizeString.Unlocked_Prediction_Keep_Hour,
+                        LocalizeString.App_Title,
+                        LocalizeString.Ok,
+                        LocalizeString.Dont_Show_Again,
+                        DialogConfiguration.AppTitleAlterDialogConfiguration);
+
+                        if (ret.HasValue && !ret.Value)
+                            LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.IsDismissVideoAdsInfoPopup, true);
+                    }
+
                     CrossMTAdmob.Current.LoadRewardedVideo(AppConfig.ADMOB_REWARD_ADS_ID);
                     UserDialogs.Instance.ShowLoading(LocalizeString.Loading);
                 }

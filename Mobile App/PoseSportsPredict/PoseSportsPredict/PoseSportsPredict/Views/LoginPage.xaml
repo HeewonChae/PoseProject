@@ -23,10 +23,10 @@
                 Spacing="0"
                 VerticalOptions="Center">
                 <Image
-                    HeightRequest="156"
-                    WidthRequest="156"
-                    VerticalOptions="Center"
                     HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="200"
+                    WidthRequest="200"
                     Aspect="AspectFit"
                     Source="img_app_logo.png">
                 </Image>
@@ -39,13 +39,14 @@
                     Text="{x:Static localize:LocalizeString.App_Title}">
                 </materialui:MaterialLabel>
             </StackLayout>
-
-            <StackLayout
+            <ScrollView
+                 Grid.Row="1">
+                <StackLayout
                 VerticalOptions="Start"
                 HorizontalOptions="CenterAndExpand"
                 Grid.Row="1"
                 Spacing="20">
-                <materialui:MaterialCard
+                    <materialui:MaterialCard
                     CornerRadius="5"
                     Elevation="3"
                     Padding="0"
@@ -53,31 +54,31 @@
                     IsClickable="True"
                     ClickCommand="{Binding ExternLoginCommand}"
                     ClickCommandParameter="Google">
-                    <StackLayout
+                        <StackLayout
                         Orientation="Horizontal"
                         Spacing="10"
                         Padding="10,7">
-                        <Image
+                            <Image
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
                             Source="ic_google.png">
-                        </Image>
-                        <BoxView
+                            </Image>
+                            <BoxView
                             Color="{StaticResource TransparentWhite}"
                             HeightRequest="1"
                             WidthRequest="0.5">
-                        </BoxView>
-                        <materialui:MaterialLabel
+                            </BoxView>
+                            <materialui:MaterialLabel
                             VerticalOptions="Center"
                             TypeScale="Body1"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{x:Static localize:LocalizeString.Login_With_Google}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
-                </materialui:MaterialCard>
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                    </materialui:MaterialCard>
 
-                <materialui:MaterialCard
+                    <materialui:MaterialCard
                     CornerRadius="5"
                     Elevation="3"
                     Padding="0"
@@ -85,49 +86,50 @@
                     IsClickable="True"
                     ClickCommand="{Binding ExternLoginCommand}"
                     ClickCommandParameter="Facebook">
-                    <StackLayout
+                        <StackLayout
                         Orientation="Horizontal"
                         Spacing="10"
                         Padding="10,7">
-                        <Image
+                            <Image
                             Aspect="AspectFit"
                             WidthRequest="27"
                             HeightRequest="27"
                             Source="ic_facebook.png">
-                        </Image>
-                        <BoxView
+                            </Image>
+                            <BoxView
                             Color="{StaticResource TransparentWhite}"
                             HeightRequest="1"
                             WidthRequest="0.5">
-                        </BoxView>
-                        <materialui:MaterialLabel
+                            </BoxView>
+                            <materialui:MaterialLabel
                             VerticalOptions="Center"
                             TypeScale="Body1"
                             TextColor="{StaticResource TextColor_L}"
                             Text="{x:Static localize:LocalizeString.Login_With_Facebook}">
-                        </materialui:MaterialLabel>
-                    </StackLayout>
-                </materialui:MaterialCard>
+                            </materialui:MaterialLabel>
+                        </StackLayout>
+                    </materialui:MaterialCard>
 
-                <StackLayout
+                    <StackLayout
                     Orientation="Horizontal"
                     HorizontalOptions="Center"
                     Spacing="10">
-                    <materialui:MaterialLabel
+                        <materialui:MaterialLabel
                         VerticalOptions="Center"
                         TypeScale="Body2"
-                        TextColor="{StaticResource TextColor_D}"
+                        TextColor="{StaticResource TextColor_D2}"
                         Text="{x:Static localize:LocalizeString.Remember_Account}">
-                    </materialui:MaterialLabel>
-                    <Switch
+                        </materialui:MaterialLabel>
+                        <Switch
                         IsToggled="{Binding IsRemeberAccount}">
-                        <Switch.Behaviors>
-                            <logics:EventToCommandBehavior EventName="Toggled" Command="{Binding RemeberAccountToggleCommand}">
-                            </logics:EventToCommandBehavior>
-                        </Switch.Behaviors>
-                    </Switch>
+                            <Switch.Behaviors>
+                                <logics:EventToCommandBehavior EventName="Toggled" Command="{Binding RemeberAccountToggleCommand}">
+                                </logics:EventToCommandBehavior>
+                            </Switch.Behaviors>
+                        </Switch>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
+            </ScrollView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

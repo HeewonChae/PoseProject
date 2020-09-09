@@ -1,0 +1,6 @@
+// 랜덤 키 생성
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -pc "PoseLiveRSA" -exp
+
+// Export
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -px "PoseLiveRSA" "C:\Users\korman2444\Desktop\Script\PoseLiveRSA_Key.xml" -pri
+

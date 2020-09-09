@@ -3,6 +3,7 @@ using PredictorAPI.Models.Football;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,11 +14,15 @@ namespace PredictorAPI
     {
         private string _host_url;
         private RequestBuilder _requestBuilder;
+        public static LineNotify.LineNotify ErrorNotify;
 
-        public void Init(string host_url)
+        public void Init(string host_url, string line_notify_host, string line_notify_token)
         {
             this._host_url = host_url;
             _requestBuilder = new RequestBuilder();
+
+            ErrorNotify = new LineNotify.LineNotify();
+            ErrorNotify.Init(line_notify_host, line_notify_token);
         }
 
         public FootballPrediction PredictFixture(int fixture_id)

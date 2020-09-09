@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.8.013" package="com.pose.poseidon.picks" android:installLocation="auto" android:versionCode="18013">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.12.002" package="com.pose.poseidon.picks" android:installLocation="auto" android:versionCode="112002">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
-	<application android:label="Poseidon Picks" android:icon="@mipmap/icon">
+	<application android:label="Poseidon Picks">
 		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3381862928005780~9770007298" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />

@@ -18,9 +18,11 @@ namespace SportsAdminTool.Logic.WebAPI
         public FootballPredictorAPI()
         {
             string host_url = ConfigurationManager.AppSettings["predictor_api_url"];
+            string list_noti_url = ConfigurationManager.AppSettings["line_noti_url"];
+            string line_noti_token = ConfigurationManager.AppSettings["line_noti_token_Dev"];
 
             _api = new FootballPredictor();
-            _api.Init(host_url);
+            _api.Init(host_url, list_noti_url, line_noti_token);
         }
 
         public FootballPrediction PredictFixture(int fixture_id)
