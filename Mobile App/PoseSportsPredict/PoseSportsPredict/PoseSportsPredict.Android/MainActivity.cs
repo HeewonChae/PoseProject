@@ -21,6 +21,7 @@ namespace PoseSportsPredict.Droid
 {
     [Activity(Label = "@string/App_Title",
         Icon = "@mipmap/icon",
+        RoundIcon = "@mipmap/icon_round",
         Theme = "@style/LoadingTheme",
         MainLauncher = true,
         ScreenOrientation = ScreenOrientation.Portrait,

@@ -110,6 +110,8 @@ namespace PoseSportsPredict.Services
                         // PoseLogin success
                         if (await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
                         {
+                            _isAuthenticated = true;
+
                             LocalStorage.Storage.GetValueOrDefault<bool>(LocalStorageKey.IsRememberAccount, out bool isRemeberAccount);
                             if (isRemeberAccount)
                             {

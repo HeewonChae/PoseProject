@@ -2,6 +2,8 @@
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.ViewModels;
 using Shiny;
+using WebServiceShare.ExternAuthentication;
+using WebServiceShare.ServiceContext;
 using Xamarin.Forms;
 
 namespace PoseSportsPredict
@@ -34,7 +36,11 @@ namespace PoseSportsPredict
 
         protected override async void OnResume()
         {
-            await PageUriLinker.GoUrlLinkedPage();
+            if (ShinyHost.Resolve<IOAuthService>().IsAuthenticated
+                && ClientContext.eCredentials.Length > 0)
+            {
+                await PageUriLinker.GoUrlLinkedPage();
+            }
         }
 
         //private async void OnLocalNotificationTapped(NotificationTappedEventArgs e)
