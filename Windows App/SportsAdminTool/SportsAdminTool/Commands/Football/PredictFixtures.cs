@@ -1,5 +1,6 @@
 ﻿using LogicCore.Debug;
 using LogicCore.Utility;
+using PredictorAPI.Models.Football;
 using Repository.Mysql.FootballDB.Procedures;
 using Repository.Mysql.FootballDB.Tables;
 using SportsAdminTool.Logic.Football;
@@ -44,9 +45,17 @@ namespace SportsAdminTool.Commands.Football
                     loop++;
                     mainWindow.Set_Lable(mainWindow._lbl_collectDatasAndPredict, $"Predict fixtrues ({loop}/{fixtureCnt})");
 
-                    var pred_data = Singleton.Get<FootballPredictorAPI>().PredictFixture(db_fixture.id);
-                    if (pred_data == null)
-                        continue;
+                    FootballPrediction pred_data = null;
+                    try
+                    {
+                        pred_data = Singleton.Get<FootballPredictorAPI>().PredictFixture(db_fixture.id);
+                        if (pred_data == null)
+                            continue;
+                    }
+                    catch
+                    {
+                        break;
+                    }
 
                     // Predict Fixture
                     List<FootballDB.Tables.Prediction> db_predictions = new List<FootballDB.Tables.Prediction>();

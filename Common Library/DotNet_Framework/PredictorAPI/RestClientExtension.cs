@@ -27,12 +27,15 @@ namespace PredictorAPI
 #endif
 
 #if LINE_NOTIFY
-                if (repeatCnt % 3 == 0)
+                if (repeatCnt % 10 == 0)
                 {
                     FootballPredictor.ErrorNotify.SendMessage($"Fail PredictorAPI Call BaseHost: {client.BaseHost}, RepeatCnt: {repeatCnt}");
                 }
 #endif
                 Log4Net.WriteLog($"Fail PredictorAPI Call RepeatCnt: {repeatCnt}", Log4Net.Level.ERROR);
+
+                if (repeatCnt == 50)
+                    throw new Exception("Predictor server Error");
 
                 response = client.Execute(request);
 
