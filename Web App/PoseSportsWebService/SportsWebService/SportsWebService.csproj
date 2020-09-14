@@ -340,6 +340,7 @@
     <Content Include="App_Data\InAppPurchase.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Data\poseidon-picks-dev-7b7bab10d5ea.json" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

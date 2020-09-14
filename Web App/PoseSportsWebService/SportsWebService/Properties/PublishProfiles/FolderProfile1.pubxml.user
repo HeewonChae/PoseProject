@@ -19,6 +19,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="App_Data/poseidon-picks-dev-681a7a0a4f9a.json">
       <publishTime>09/02/2020 14:37:57</publishTime>
     </File>
+    <File Include="App_Data/poseidon-picks-dev-7b7bab10d5ea.json">
+      <publishTime>09/15/2020 01:49:33</publishTime>
+    </File>
     <File Include="bin/App_Data/ErrorCodeDescription.json">
       <publishTime>09/03/2020 22:49:59</publishTime>
     </File>
@@ -77,10 +80,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/02/2020 07:29:30</publishTime>
     </File>
     <File Include="bin/LogicCore.dll">
-      <publishTime>09/07/2020 22:31:49</publishTime>
+      <publishTime>09/15/2020 01:52:44</publishTime>
     </File>
     <File Include="bin/LogicCore.pdb">
-      <publishTime>09/07/2020 22:31:49</publishTime>
+      <publishTime>09/15/2020 01:52:44</publishTime>
     </File>
     <File Include="bin/MessagePack.Annotations.dll">
       <publishTime>06/02/2020 07:29:29</publishTime>
@@ -209,31 +212,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/08/2020 16:10:33</publishTime>
     </File>
     <File Include="bin/Repository.dll">
-      <publishTime>09/07/2020 22:31:50</publishTime>
+      <publishTime>09/15/2020 01:52:45</publishTime>
     </File>
     <File Include="bin/Repository.dll.config">
       <publishTime>06/02/2020 07:29:27</publishTime>
     </File>
     <File Include="bin/Repository.Mysql.dll">
-      <publishTime>09/08/2020 19:02:59</publishTime>
+      <publishTime>09/15/2020 01:52:46</publishTime>
     </File>
     <File Include="bin/Repository.Mysql.dll.config">
       <publishTime>06/02/2020 07:29:29</publishTime>
     </File>
     <File Include="bin/Repository.Mysql.pdb">
-      <publishTime>09/08/2020 19:02:59</publishTime>
+      <publishTime>09/15/2020 01:52:46</publishTime>
     </File>
     <File Include="bin/Repository.pdb">
-      <publishTime>09/07/2020 22:31:50</publishTime>
+      <publishTime>09/15/2020 01:52:45</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>05/18/2020 11:55:38</publishTime>
     </File>
     <File Include="bin/SportsWebService.dll">
-      <publishTime>09/08/2020 19:03:02</publishTime>
+      <publishTime>09/15/2020 01:52:49</publishTime>
     </File>
     <File Include="bin/SportsWebService.pdb">
-      <publishTime>09/08/2020 19:03:02</publishTime>
+      <publishTime>09/15/2020 01:52:49</publishTime>
     </File>
     <File Include="bin/StackExchange.Redis.dll">
       <publishTime>06/02/2020 07:29:28</publishTime>

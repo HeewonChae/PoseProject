@@ -36,7 +36,7 @@ namespace SportsWebService.Commands.Billing
 
         static P_E_UPDATE_IN_APP_BILLING_BY_GOOGLE()
         {
-            var keyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data/poseidon-picks-dev-681a7a0a4f9a.json");
+            var keyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data/poseidon-picks-dev-7b7bab10d5ea.json");
             using (var stream = new FileStream(keyPath, FileMode.Open, FileAccess.Read))
 
             {
