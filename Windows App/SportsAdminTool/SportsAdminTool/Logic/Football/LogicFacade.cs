@@ -199,15 +199,16 @@ namespace SportsAdminTool.Logic.Football
 
                     if (api_league != null)
                     {
+                        bool isCoverageLeague = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type);
 #if LINE_NOTIFY
                         // 추가된 리그 메시지로 전송
                         if (errorLeagueCnt < 50)
                         {
-                            Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Dev, $"새로운 리그가 추가 됐습니다. ID: {api_league.LeagueId}, 국가: {api_league.Country}, 이름: {api_league.Name}");
+                            Singleton.Get<LineNotifyAPI>().SendMessage(LineNotifyType.Dev, $"새로운 리그가 추가 됐습니다. ID: {api_league.LeagueId}, 국가: {api_league.Country}, 이름: {api_league.Name}, isCoverageLeague: {isCoverageLeague}");
                         }
 #endif
 
-                        api_league.Coverage.Predictions = CoverageLeague.HasLeague(api_league.Country, api_league.Name, api_league.Type);
+                        api_league.Coverage.Predictions = isCoverageLeague;
 
                         // Update League
                         Database.FootballDBFacade.UpdateCoverage(api_league);

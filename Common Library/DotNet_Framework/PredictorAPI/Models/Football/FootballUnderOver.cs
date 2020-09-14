@@ -24,7 +24,6 @@ namespace PredictorAPI.Models.Football
 
     public class UnderOverProba
     {
-        [Obsolete]
         [JsonProperty("knn")]
         public ProbaYN KNN { get; set; }
 

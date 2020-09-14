@@ -11,11 +11,11 @@ namespace PredictionBackTesting.Commands
 
     public static class SelecltPredictedFixtures
     {
-        public static db_table.Fixture[] Execute(DateTime startDate)
+        public static db_table.Fixture[] Execute(DateTime startDate, DateTime endData)
         {
-            return FootballDBFacade.SelectFixtures(where: $"{nameof(db_table.Fixture.is_predicted)} = 1 " +
-                $"AND {nameof(db_table.Fixture.match_time)} >= \'{startDate.ToString("yyyyMMdd")}\' " +
-                $"AND {nameof(db_table.Fixture.is_completed)} = 1 ").ToArray();
+            return FootballDBFacade.SelectCoverageFixtures(where: $"f.{nameof(db_table.Fixture.is_completed)} = 1 " +
+                $"AND f.{nameof(db_table.Fixture.match_time)} BETWEEN \'{startDate:yyyyMMdd}\' AND \'{endData.AddDays(1):yyyyMMdd}\' " +
+                $"AND lc.{nameof(db_table.LeagueCoverage.predictions)} = 1 ").ToArray();
         }
     }
 }

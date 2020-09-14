@@ -36,7 +36,7 @@ namespace PredictionBackTesting.Commands
                 result.Add(hitPercentageInfo);
             }
 
-            // under over sublabel
+            // under over sub label
             result.AddRange(
                 GetUnderOverSubLaPercentage(dic_predictions[FootballPredictionType.Under_Over].ToArray()));
 

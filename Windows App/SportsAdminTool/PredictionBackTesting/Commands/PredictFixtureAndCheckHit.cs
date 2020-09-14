@@ -29,6 +29,10 @@ namespace PredictionBackTesting.Commands
             int loop = 0;
             foreach (var db_fixture in db_fixtures)
             {
+                loop++;
+                if (loop % 10 == 0 || loop == fixtureCnt)
+                    Console.WriteLine($"Progress {loop} / {fixtureCnt}");
+
                 // predict
                 var pred_data = Singleton.Get<FootballPredictorAPI>().PredictFixture(db_fixture.id);
                 if (pred_data == null)
@@ -62,10 +66,6 @@ namespace PredictionBackTesting.Commands
 
                 // DB Save
                 SportsAdminTool.Logic.Database.FootballDBFacade.UpdatePredictionBackTesting(db_predictionBackTestings.ToArray());
-
-                loop++;
-                if (loop % 10 == 0 || loop == fixtureCnt)
-                    Console.WriteLine($"Progress {loop} / {fixtureCnt}");
             }
 
             return dic_result;
