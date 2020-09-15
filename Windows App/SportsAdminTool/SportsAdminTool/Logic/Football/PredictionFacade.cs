@@ -909,7 +909,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 6.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) > 2 ? 2 : -1;
+                        grade += (meanHomeScore + meanAwayScore) > 2 ? 2 : -2;
 
                         isRecommend = grade >= 8;
                     }
@@ -945,7 +945,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 6.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 3 ? 2 : -1;
+                        grade += (meanHomeScore + meanAwayScore) < 3 ? 2 : -2;
 
                         isRecommend = grade >= 8;
                     }
@@ -1001,7 +1001,7 @@ namespace SportsAdminTool.Logic.Football
             var homeScores = scoreSet[TeamCampType.Home];
             var awayScores = scoreSet[TeamCampType.Away];
 
-            int[] meanProbas = GetYNMeanProbas(data.BothToScore.KNN, data.BothToScore.SGD, data.BothToScore.Sub);
+            int[] meanProbas = GetYNMeanProbas(data.BothToScore.SGD, data.BothToScore.Sub);
             double meanHomeScore = homeScores.Average();
             double meanAwayScore = awayScores.Average();
 
@@ -1013,8 +1013,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += meanHomeScore < 1 ? 2 : -1.5;
-                        grade += meanAwayScore < 1 ? 2 : -1.5;
+                        grade += meanHomeScore < 1 ? 2 : -1;
+                        grade += meanAwayScore < 1 ? 2 : -1;
                     }
                     break;
 
@@ -1022,11 +1022,11 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += meanHomeScore > 1 ? 1.5 : -1.5;
-                        grade += meanAwayScore > 1 ? 1.5 : -1.5;
+                        grade += meanHomeScore > 1 ? 1 : -1;
+                        grade += meanAwayScore > 1 ? 1 : -1;
 
-                        grade += meanHomeScore >= 2 ? 1.5 : 0;
-                        grade += meanAwayScore >= 2 ? 1.5 : 0;
+                        grade += meanHomeScore >= 2 ? 2 : 0;
+                        grade += meanAwayScore >= 2 ? 2 : 0;
                     }
                     break;
 
