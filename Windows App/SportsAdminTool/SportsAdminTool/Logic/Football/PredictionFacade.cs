@@ -921,7 +921,7 @@ namespace SportsAdminTool.Logic.Football
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 2.5 ? 3 : -1;
+                        grade += (meanHomeScore + meanAwayScore) < 2 ? 3 : -1;
 
                         isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }
@@ -1027,6 +1027,8 @@ namespace SportsAdminTool.Logic.Football
 
                         grade += meanHomeScore >= 2 ? 2 : 0;
                         grade += meanAwayScore >= 2 ? 2 : 0;
+
+                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }
                     break;
 

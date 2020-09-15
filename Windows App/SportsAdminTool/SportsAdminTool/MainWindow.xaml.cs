@@ -135,11 +135,13 @@ namespace SportsAdminTool
             string org_bannerText = this._lbl_collectDatasAndPredict.Content.ToString();
             this._progRing_collectDatasAndPredict.IsActive = true;
 
+#if !DEBUG
             if (!await FootballCommands.UpdateScheduledFixtures.Execute())
             {
                 // Error처리
                 await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
             }
+#endif
 
             if (this._cb_fixture_predict.IsChecked.Value)
             {
