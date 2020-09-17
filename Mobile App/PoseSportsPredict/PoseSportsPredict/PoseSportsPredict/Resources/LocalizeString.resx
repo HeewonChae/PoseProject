@@ -665,7 +665,7 @@
   <data name="Dont_Show_Again" xml:space="preserve">
     <value>Dot't show again</value>
   </data>
-  <data name="Unlocked_Prediction_Keep_Hour" xml:space="preserve">
-    <value>The unlocked prediction data is kept for an hour.</value>
+  <data name="Unlocked_Prediction_Five_Minutes" xml:space="preserve">
+    <value>All prediction data is released for 5 minutes.</value>
   </data>
 </root>

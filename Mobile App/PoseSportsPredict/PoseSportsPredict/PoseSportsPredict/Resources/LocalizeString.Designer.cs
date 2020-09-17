@@ -1537,11 +1537,11 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The unlocked prediction data is kept for an hour..
+        ///   Looks up a localized string similar to All prediction data is released for 5 minutes..
         /// </summary>
-        public static string Unlocked_Prediction_Keep_Hour {
+        public static string Unlocked_Prediction_Five_Minutes {
             get {
-                return ResourceManager.GetString("Unlocked_Prediction_Keep_Hour", resourceCulture);
+                return ResourceManager.GetString("Unlocked_Prediction_Five_Minutes", resourceCulture);
             }
         }
         

@@ -660,7 +660,7 @@
   <data name="Dont_Show_Again" xml:space="preserve">
     <value>再度見ない</value>
   </data>
-  <data name="Unlocked_Prediction_Keep_Hour" xml:space="preserve">
-    <value>解除された予測データは1時間の間保持されます</value>
+  <data name="Unlocked_Prediction_Five_Minutes" xml:space="preserve">
+    <value>5分間、すべての予測データが解除されます</value>
   </data>
 </root>

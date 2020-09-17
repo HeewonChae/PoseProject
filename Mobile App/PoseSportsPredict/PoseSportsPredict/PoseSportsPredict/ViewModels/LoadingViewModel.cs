@@ -74,21 +74,10 @@ namespace PoseSportsPredict.ViewModels
                 if (TimeZoneInfo.Local.Id.Equals(userTimeZoneId))
                 {
                     await _cacheService.DeleteExpiredCachedDataAsync();
-
-                    // Delete expired predictionGroup
-                    var allPredictionGroups = await _sqliteService.SelectAllAsync<FootballPredictionGroup>();
-                    foreach (var predictionGroup in allPredictionGroups)
-                    {
-                        if (predictionGroup.UnlockedTime.AddHours(AppConfig.Prediction_Unlocked_Time) < DateTime.UtcNow)
-                            await _sqliteService.DeleteAsync<FootballPredictionGroup>(predictionGroup.PrimaryKey);
-                    }
                 }
                 else
                 {
                     await _cacheService.DeleteAllCachedDataAsync();
-
-                    // Delete All predictionGroup
-                    await _sqliteService.DeleteAllAsync<FootballPredictionGroup>();
                 }
 
                 LocalStorage.Storage.AddOrUpdateValue<string>(LocalStorageKey.UserTimeZoneId, TimeZoneInfo.Local.Id);

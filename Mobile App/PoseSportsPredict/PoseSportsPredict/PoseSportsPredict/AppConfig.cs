@@ -31,7 +31,7 @@ namespace PoseSportsPredict
         public const string CULTURE_CHANGED_MSG = "UICultureChanged";
 
         // 예측데이터 광고보고 해제 유지할 시간
-        public const int Prediction_Unlocked_Time = 1; // Hour
+        public const int Prediction_Unlocked_Time_Mil = 5 * 60 * 1000; // Millisec
 
         // Ads
 
@@ -49,5 +49,6 @@ namespace PoseSportsPredict
 
         public const string APP_LINK = "https://poseidonpicks.page.link/app";
         public const string PAGE_BASE_LINK = "https://poseidonpicks.page.link/pagelinker";
+        public const string GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.pose.poseidon.picks";
     }
 }
