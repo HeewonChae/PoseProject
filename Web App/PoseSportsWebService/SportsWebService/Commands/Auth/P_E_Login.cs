@@ -18,7 +18,7 @@ namespace SportsWebService.Commands.Auth
     using PoseGlobalDB = Repository.Mysql.PoseGlobalDB;
 
     [WebModelType(InputType = typeof(I_Login), OutputType = typeof(O_Login))]
-    public static class P_E_Login
+    public static class P_E_LOGIN
     {
         public static class RowCode
         {

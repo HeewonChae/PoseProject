@@ -18,7 +18,7 @@ namespace SportsWebService.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class Billing : IBilling
     {
-        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "Regular")]
         public Stream P_E_INSERT_IN_APP_BILLING_BY_GOOGLE(Stream e_stream)
         {
             var signature = ServerContext.Current.Signature;
@@ -31,7 +31,7 @@ namespace SportsWebService.Services
             return result.SerializeToStream(signature, signatureIV);
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "Regular")]
         public async Task<Stream> P_E_UPDATE_IN_APP_BILLING_BY_GOOGLE(Stream e_stream)
         {
             var signature = ServerContext.Current.Signature;
@@ -44,7 +44,7 @@ namespace SportsWebService.Services
             return result.SerializeToStream(signature, signatureIV);
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "Regular")]
         public async Task<Stream> P_E_CHECK_MEMBERSHIP_BY_GOOGLE(Stream e_stream)
         {
             var signature = ServerContext.Current.Signature;

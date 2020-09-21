@@ -1,4 +1,5 @@
-﻿using LogicCore.Utility;
+﻿using Google.Apis.Auth;
+using LogicCore.Utility;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
 using SportsWebService.Utilities;
@@ -34,25 +35,26 @@ namespace SportsWebService.Authentication.ExternOAuth
         public override async Task<ExternAuthUser> GetUserInfoAsync(string token)
         {
             // Get user information
-            var googleUser = await WebClient.RequestAsync<GoogleUser>(new WebRequestContext()
-            {
-                MethodType = WebMethodType.GET,
-                BaseUrl = UserInfoUrl,
-                QueryParamGroup = "access_token={access_token}",
-                QueryParamData = new { access_token = token },
-            });
+            //var googleUser = await WebClient.RequestAsync<GoogleUser>(new WebRequestContext()
+            //{
+            //    MethodType = WebMethodType.GET,
+            //    BaseUrl = UserInfoUrl,
+            //    QueryParamGroup = "id_token={id_token}",
+            //    QueryParamData = new { id_token = token },
+            //});
 
-            if (googleUser == null)
+            var validPayload = await GoogleJsonWebSignature.ValidateAsync(token);
+            if (validPayload == null)
                 return null;
 
             return new ExternAuthUser
             {
                 SNSProvider = SNSProviderType.Google,
-                Id = Singleton.Get<CryptoFacade>().SHA_256.ComputeHash(googleUser.Id),
-                Email = googleUser.Email,
-                FirstName = googleUser.FirstName,
-                LastName = googleUser.LastName,
-                PictureUrl = googleUser.Picture,
+                Id = Singleton.Get<CryptoFacade>().SHA_256.ComputeHash(validPayload.Subject),
+                Email = validPayload.Email,
+                FirstName = validPayload.GivenName,
+                LastName = validPayload.FamilyName,
+                PictureUrl = validPayload.Picture,
             };
 
             #endregion Implement Abstract Method

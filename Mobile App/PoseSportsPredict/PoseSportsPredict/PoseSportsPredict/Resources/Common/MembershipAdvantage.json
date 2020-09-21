@@ -6,6 +6,14 @@
   //"Admin",
 
   {
+    "MemberRoleType": "Guest",
+    "MatchBookmarkLimit": 20,
+    "TeamBookmarkLimit": 10,
+    "LeagueBookmarkLimit": 10,
+    "IsBannerAdRemove": false,
+    "IsVideoAdRemove": false
+  },
+  {
     "MemberRoleType": "Regular",
     "MatchBookmarkLimit": 20,
     "TeamBookmarkLimit": 10,

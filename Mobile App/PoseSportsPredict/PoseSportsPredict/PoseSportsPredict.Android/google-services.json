@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "217594391151-mnpcen26krhd9mpipcnabg68sslsehjo.apps.googleusercontent.com",
+          "client_id": "217594391151-f9mi3d947t5rp76onpl52th8pqui1s0q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pose.poseidon.picks",
-            "certificate_hash": "fe534032f125abe40c45b09b09d86aba1c97489c"
+            "certificate_hash": "8211f57bc75f88d7e1b67db217e0941e17d4e7c4"
           }
         }
       ],
@@ -37,7 +37,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-3381862928005780~9770007298"
     }
   ],
   "configuration_version": "1"

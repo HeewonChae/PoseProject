@@ -4,6 +4,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Models.Football;
@@ -55,18 +56,15 @@ namespace PoseSportsPredict.ViewModels
         #region Services
 
         private IOAuthService _OAuthService;
-        private IWebApiService _webApiService;
 
         #endregion Services
 
         #region Constructors
 
         public LoginViewModel(LoginPage page,
-            IOAuthService OAuthService,
-            IWebApiService webApiService) : base(page)
+            IOAuthService OAuthService) : base(page)
         {
             _OAuthService = OAuthService;
-            _webApiService = webApiService;
 
             CoupledPage.Appearing += (s, e) => OnAppearing();
         }
@@ -107,60 +105,37 @@ namespace PoseSportsPredict.ViewModels
 
         #region Methods
 
-        public async Task<bool> PoseLogin()
+        public async Task<bool> PoseLogin(bool isAutoLogin)
         {
-            var loginResult = await _webApiService.RequestAsync<O_Login>(new WebRequestContext
-            {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = AuthProxy.ServiceUrl,
-                SegmentGroup = AuthProxy.P_E_Login,
-                NeedEncrypt = true,
-                PostData = new I_Login
-                {
-                    PlatformId = _OAuthService.AuthenticatedUser.Id,
-                }
-            });
-
-            if (loginResult == null)
-            {
+            var loginRet = await LoginFacade.ExternOAuthLogin();
+            if (!loginRet)
                 return false;
-            }
-
-            // Update PoseToken, Update ExpireTime
-            ClientContext.SetCredentialsFrom(loginResult.PoseToken);
-            ClientContext.UserNo = loginResult.UserNo;
-            ClientContext.TokenExpireIn = DateTime.UtcNow.AddMilliseconds(loginResult.TokenExpireIn);
-            ClientContext.LastLoginTime = loginResult.LastLoginTime.ToLocalTime();
-
-            // Set Membership Information
-            var membershipService = ShinyHost.Resolve<MembershipService>();
-            membershipService.SetMemberRoleType(loginResult.MemberRoleType);
-            membershipService.SetRoleExpireTime(loginResult.RoleExpireTime);
 
             await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
 
-            // Setup NotiData
-            //LocalStorage.Storage.GetValueOrDefault<FootballMatchInfo>(LocalStorageKey.NotifyIntentData, out FootballMatchInfo notiIntentData);
-            //if (notiIntentData != null)
-            //{
-            //    LocalStorage.Storage.Remove(LocalStorageKey.NotifyIntentData);
-            //    await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), notiIntentData);
-            //}
+            if (isAutoLogin)
+            {
+                await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
+                await PageUriLinker.GoUrlLinkedPage();
+            }
+            else
+                await PageSwitcher.PopNavPageAsync();
 
             // Restore PurchasedItem
             var inAppBillingService = ShinyHost.Resolve<InAppBillingService>();
             var restore_ret = await inAppBillingService.RestorePurchasedItem();
-            if (!restore_ret)
-            {
-                await MaterialDialog.Instance.AlertAsync(LocalizeString.Product_Not_Consumed,
-                        LocalizeString.App_Title,
-                        LocalizeString.Ok,
-                        DialogConfiguration.AppTitleAlterDialogConfiguration);
-            }
 
+            return true;
+        }
+
+        public async Task<bool> GuestLogin()
+        {
+            var loginRet = await LoginFacade.GuestLogin();
+            if (!loginRet)
+                return false;
+
+            await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
+            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
             await PageUriLinker.GoUrlLinkedPage();
 
             return true;
@@ -171,7 +146,7 @@ namespace PoseSportsPredict.ViewModels
             base.SetIsBusy(isBusy);
 
             if (isBusy)
-                UserDialogs.Instance.ShowLoading(LocalizeString.Loginning);
+                UserDialogs.Instance.ShowLoading(LocalizeString.Loading);
             else
                 UserDialogs.Instance.HideLoading();
         }

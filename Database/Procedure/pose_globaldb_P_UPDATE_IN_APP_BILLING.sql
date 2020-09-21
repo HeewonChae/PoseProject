@@ -24,7 +24,7 @@ BEGIN
 
 	SET o_result = 1;
 
-    IF NOT EXISTS (SELECT trans_no FROM in_app_billing WHERE trans_no = i_trans_no)
+    IF NOT EXISTS (SELECT trans_no FROM in_app_billing WHERE trans_no = i_trans_no AND user_no = i_user_no)
 	THEN    
 		SET o_result = 2;
 		leave proc_body;

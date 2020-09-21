@@ -40,6 +40,7 @@ namespace PosePacket.Service.Enum
 
     public enum MemberRoleType
     {
+        Guest,
         Regular,
         Promotion,
         Diamond,

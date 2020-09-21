@@ -62,16 +62,17 @@ namespace PoseSportsPredict.Services
                             length = errorString.IndexOf("</Message>") - startIndex;
                             var errorMessage = errorString.Substring(startIndex, length);
 
-                            if (errorCode == 101000001) // ServiceErrorCode.Authenticate.Credentials + 1
+                            // 무시할 에러 코드
+                            if (errorCode == 301004002) // Not found billing data
+                            {
+                                return;
+                            }
+                            else if (errorCode == 101000001) // ServiceErrorCode.Authenticate.Credentials + 1
                             {
                                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Not_Authenticated_Credencials,
                                     LocalizeString.App_Title,
                                     LocalizeString.Ok,
                                     DialogConfiguration.AppTitleAlterDialogConfiguration);
-
-                                // 로그인 화면으로 이동
-                                await ShinyHost.Resolve<IOAuthService>().Logout();
-                                return;
                             }
                             else
                             {
@@ -193,7 +194,7 @@ namespace PoseSportsPredict.Services
                     MethodType = WebMethodType.GET,
                     BaseUrl = AppConfig.PoseWebBaseUrl,
                     ServiceUrl = AuthProxy.ServiceUrl,
-                    SegmentGroup = AuthProxy.P_E_TokenRefresh,
+                    SegmentGroup = AuthProxy.P_E_TOKEN_REFRESH,
                     NeedEncrypt = true,
                 });
 

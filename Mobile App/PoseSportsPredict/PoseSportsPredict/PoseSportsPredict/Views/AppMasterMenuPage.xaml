@@ -79,10 +79,10 @@
                                 Aspect="AspectFit"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
-                                HeightRequest="40"
-                                WidthRequest="40"
-                                LoadingPlaceholder="ic_profile.png"
-                                ErrorPlaceholder="ic_profile.png"
+                                HeightRequest="38"
+                                WidthRequest="38"
+                                LoadingPlaceholder="ic_profile_d.png"
+                                ErrorPlaceholder="ic_profile_d.png"
                                 Source="{Binding AuthUser.PictureUrl, Converter={StaticResource svgImageSourceConverter}}">
                                 <ffimageloading:CachedImage.Transformations>
                                     <fftransformations:CircleTransformation />
@@ -126,13 +126,13 @@
                         Padding="5"
                         HorizontalOptions="End"
                         VerticalOptions="Center"
-                        effects:TapCommandEffect.Tap="{Binding LogoutCommand}"
+                        effects:TapCommandEffect.Tap="{Binding LogonCommand}"
                         effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                         <Image
                             Aspect="AspectFit"
                             WidthRequest="21"
                             HeightRequest="21"
-                            Source="ic_logout.png"
+                            Source="ic_logon.png"
                             effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                         </Image>
                     </ContentView>

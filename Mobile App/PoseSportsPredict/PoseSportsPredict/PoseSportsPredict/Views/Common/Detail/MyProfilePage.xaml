@@ -180,7 +180,7 @@
                 Margin="0"
                 Padding="15,10"
                 IsClickable="True"
-                ClickCommand="{Binding LogoutCommand}">
+                ClickCommand="{Binding LogonCommand}">
                 <StackLayout
                     Orientation="Horizontal"
                     Spacing="10">
@@ -198,14 +198,14 @@
                             VerticalOptions="Center"
                             WidthRequest="23"
                             HeightRequest="23"
-                            Source="ic_logout.png">
+                            Source="ic_logon.png">
                         </Image>
                     </Frame>
                     <materialui:MaterialLabel
                         VerticalOptions="Center"
                         TypeScale="Body1"
                         TextColor="{StaticResource TextColor_D}"
-                        Text="{Binding [Logout], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        Text="{Binding LogonMessage}">
                     </materialui:MaterialLabel>
                 </StackLayout>
             </materialui:MaterialCard>

@@ -664,6 +664,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login with Facebook.
         /// </summary>
         public static string Login_With_Facebook {
@@ -1173,6 +1182,15 @@ namespace PoseSportsPredict.Resources {
         public static string Remove_Video_Ads {
             get {
                 return ResourceManager.GetString("Remove_Video_Ads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login is required..
+        /// </summary>
+        public static string Require_Login {
+            get {
+                return ResourceManager.GetString("Require_Login", resourceCulture);
             }
         }
         

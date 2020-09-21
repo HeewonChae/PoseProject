@@ -668,4 +668,10 @@
   <data name="Unlocked_Prediction_Five_Minutes" xml:space="preserve">
     <value>All prediction data is released for 5 minutes.</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Require_Login" xml:space="preserve">
+    <value>Login is required.</value>
+  </data>
 </root>

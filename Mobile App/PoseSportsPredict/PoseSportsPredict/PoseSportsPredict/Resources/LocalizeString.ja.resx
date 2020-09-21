@@ -663,4 +663,10 @@
   <data name="Unlocked_Prediction_Five_Minutes" xml:space="preserve">
     <value>5分間、すべての予測データが解除されます</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="Require_Login" xml:space="preserve">
+    <value>ログインが必要です</value>
+  </data>
 </root>

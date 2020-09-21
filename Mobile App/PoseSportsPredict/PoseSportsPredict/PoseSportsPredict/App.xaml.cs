@@ -36,8 +36,7 @@ namespace PoseSportsPredict
 
         protected override async void OnResume()
         {
-            if (ShinyHost.Resolve<IOAuthService>().IsAuthenticated
-                && ClientContext.eCredentials.Length > 0)
+            if (ClientContext.eCredentials.Length > 0)
             {
                 await PageUriLinker.GoUrlLinkedPage();
             }

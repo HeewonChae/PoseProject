@@ -3,6 +3,7 @@ using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PosePacket.Service.Auth.Models;
 using PosePacket.Service.Auth.Models.Enums;
+using PosePacket.Service.Enum;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Resources;
@@ -28,13 +29,15 @@ namespace PoseSportsPredict.Services
         private bool _isAuthenticated;
         private ExternAuthUser _authenticatedUser;
         private IWebApiService _webApiService;
+        private MembershipService _membershipService;
 
         public bool IsAuthenticated => _isAuthenticated;
         public ExternAuthUser AuthenticatedUser => _authenticatedUser;
 
-        public ExternOAuthService(IWebApiService webApiService)
+        public ExternOAuthService(IWebApiService webApiService, MembershipService membershipService)
         {
             _webApiService = webApiService;
+            _membershipService = membershipService;
         }
 
         public static OAuth2Authenticator Cur_Authenticator;
@@ -53,15 +56,8 @@ namespace PoseSportsPredict.Services
 
             if (oAuth.Provider == SNSProviderType.Google)
             {
-                Cur_Authenticator = new OAuth2Authenticator(
-                    oAuth.ClientId,
-                    null,
-                    oAuth.Scope,
-                    new Uri(oAuth.AuthorizationUrl),
-                    new Uri(oAuth.RedirectUrl),
-                    new Uri(oAuth.RequestTokenUrl),
-                    null,
-                    true);
+                var googleOAuthService = DependencyService.Resolve<IGoogleOAuth>();
+                googleOAuthService.Login(oAuth.ClientId);
             }
             else if (oAuth.Provider == SNSProviderType.Facebook)
             {
@@ -70,13 +66,13 @@ namespace PoseSportsPredict.Services
                    oAuth.Scope,
                    new Uri(oAuth.AuthorizationUrl),
                    new Uri(oAuth.RedirectUrl));
+
+                Cur_Authenticator.Completed += OnOAuthComplete;
+                Cur_Authenticator.Error += OnOAuthError;
+
+                var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+                presenter.Login(Cur_Authenticator);
             }
-
-            Cur_Authenticator.Completed += OnOAuthComplete;
-            Cur_Authenticator.Error += OnOAuthError;
-
-            var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
-            presenter.Login(Cur_Authenticator);
         }
 
         public async void OnOAuthComplete(object sender, EventArgs args)
@@ -96,7 +92,7 @@ namespace PoseSportsPredict.Services
                         MethodType = WebMethodType.POST,
                         BaseUrl = AppConfig.PoseWebBaseUrl,
                         ServiceUrl = AuthProxy.ServiceUrl,
-                        SegmentGroup = AuthProxy.P_E_CheckVaildOAuthUser,
+                        SegmentGroup = AuthProxy.P_E_CHECK_OAUTH_VALID,
                         NeedEncrypt = true,
                         PostData = new I_CheckVaildOAuthUser
                         {
@@ -107,11 +103,11 @@ namespace PoseSportsPredict.Services
 
                     if (_authenticatedUser != null)
                     {
-                        // PoseLogin success
-                        if (await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
-                        {
-                            _isAuthenticated = true;
+                        _isAuthenticated = true;
 
+                        // PoseLogin success
+                        if (await ShinyHost.Resolve<LoginViewModel>().PoseLogin(false))
+                        {
                             LocalStorage.Storage.GetValueOrDefault<bool>(LocalStorageKey.IsRememberAccount, out bool isRemeberAccount);
                             if (isRemeberAccount)
                             {
@@ -121,6 +117,7 @@ namespace PoseSportsPredict.Services
                         else
                         {
                             _authenticatedUser = null;
+                            _isAuthenticated = false;
                         }
                     }
                 }
@@ -132,11 +129,13 @@ namespace PoseSportsPredict.Services
         public async void OnOAuthError(object sender, EventArgs args)
         {
             var eventArgs = args as AuthenticatorErrorEventArgs;
-
-            await MaterialDialog.Instance.AlertAsync($"OAuth Error: {eventArgs.Message}",
+            if (eventArgs != null)
+            {
+                await MaterialDialog.Instance.AlertAsync($"OAuth Error: {eventArgs.Message}",
                 LocalizeString.App_Title,
                 LocalizeString.Ok,
                 DialogConfiguration.AppTitleAlterDialogConfiguration);
+            }
 
             ShinyHost.Resolve<LoginViewModel>().SetIsBusy(false);
         }
@@ -159,14 +158,13 @@ namespace PoseSportsPredict.Services
             return Task.FromResult(_isAuthenticated);
         }
 
-        public async Task Logout()
+        public Task Logout()
         {
             _isAuthenticated = false;
             _authenticatedUser = null;
             LocalStorage.Storage.Remove(LocalStorageKey.SavedAuthenticatedUser);
 
-            await PageSwitcher.PopAllNavPageAsync();
-            await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<LoginViewModel>(), true);
+            return Task.CompletedTask;
         }
     }
 }

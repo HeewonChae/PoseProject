@@ -17,10 +17,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WebServiceShare.ExternAuthentication;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
-
+using XF.Material.Forms.UI.Dialogs;
 using ComboBox = Syncfusion.XForms.ComboBox;
 
 namespace PoseSportsPredict.ViewModels.Common
@@ -56,6 +57,12 @@ namespace PoseSportsPredict.ViewModels.Common
         }
 
         #endregion NavigableViewModel
+
+        #region Services
+
+        private IOAuthService _OAuthService;
+
+        #endregion Services
 
         #region IIconChange
 
@@ -134,7 +141,22 @@ namespace PoseSportsPredict.ViewModels.Common
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
+            if (_OAuthService.IsAuthenticated)
+                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
+            else
+            {
+                bool? isLogin = await MaterialDialog.Instance.ConfirmAsync(
+                LocalizeString.Require_Login,
+                LocalizeString.App_Title,
+                LocalizeString.Ok,
+                LocalizeString.Cancel,
+                DialogConfiguration.AppTitleAlterDialogConfiguration);
+
+                if (isLogin ?? false)
+                {
+                    await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<LoginViewModel>());
+                }
+            }
 
             SetIsBusy(false);
         }
@@ -181,8 +203,10 @@ namespace PoseSportsPredict.ViewModels.Common
 
         #region Constructors
 
-        public SettingsViewModel(SettingsPage page) : base(page)
+        public SettingsViewModel(SettingsPage page, IOAuthService OAuthService) : base(page)
         {
+            _OAuthService = OAuthService;
+
             NavigationPage = new MaterialNavigationPage(this.CoupledPage)
             {
                 Title = LocalizeString.Settings,

@@ -663,4 +663,10 @@
   <data name="Unlocked_Prediction_Five_Minutes" xml:space="preserve">
     <value>5분간 모든 예측 데이터가 해제 됩니다.</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>로그인</value>
+  </data>
+  <data name="Require_Login" xml:space="preserve">
+    <value>로그인이 필요합니다.</value>
+  </data>
 </root>

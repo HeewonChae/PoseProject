@@ -68,7 +68,7 @@ namespace SportsWebService.Commands.Billing
             [Description("Failed update database")]
             public const int DB_Failed_Insert_Billing = ServiceErrorCode.StoredProcedure_Global.P_UPDATE_IN_APP_BILLING + 1;
 
-            [Description("Not found dilling dada")]
+            [Description("Not found billing data")]
             public const int DB_Not_Found_Billing_Data = ServiceErrorCode.StoredProcedure_Global.P_UPDATE_IN_APP_BILLING + 2;
 
             [Description("Not found user role data")]

@@ -18,13 +18,17 @@ namespace PosePacket.Proxy
         
         private static string _serviceUrl = "Services/Auth.svc";
         
+        private static string _P_CHECK_SERVER_STATE = "server_check";
+        
         private static string _P_PUBLISH_KEY = "PUBLISHKEY";
         
-        private static string _P_E_TokenRefresh = "TokenRefresh";
+        private static string _P_E_TOKEN_REFRESH = "TokenRefresh";
         
-        private static string _P_E_CheckVaildOAuthUser = "CheckVaildOAuthUser";
+        private static string _P_E_CHECK_OAUTH_VALID = "CheckVaildOAuthUser";
         
-        private static string _P_E_Login = "Login";
+        private static string _P_E_LOGIN = "Login";
+        
+        private static string _P_E_GUEST_LOGIN = "GuestLogin";
         
         // Service base url
         public static string ServiceUrl
@@ -32,6 +36,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _serviceUrl;
+            }
+        }
+        
+        // MethodType: GET, Segment: server_check 
+        // InputType: null 
+        // OutputType: null
+        public static string P_CHECK_SERVER_STATE
+        {
+            get
+            {
+                return _P_CHECK_SERVER_STATE;
             }
         }
         
@@ -49,33 +64,44 @@ namespace PosePacket.Proxy
         // MethodType: GET, Segment: TokenRefresh 
         // InputType: null 
         // OutputType: PosePacket.Service.Auth.O_TokenRefresh
-        public static string P_E_TokenRefresh
+        public static string P_E_TOKEN_REFRESH
         {
             get
             {
-                return _P_E_TokenRefresh;
+                return _P_E_TOKEN_REFRESH;
             }
         }
         
         // MethodType: POST, Segment: CheckVaildOAuthUser 
         // InputType: PosePacket.Service.Auth.I_CheckVaildOAuthUser 
         // OutputType: PosePacket.Service.Auth.Models.ExternAuthUser
-        public static string P_E_CheckVaildOAuthUser
+        public static string P_E_CHECK_OAUTH_VALID
         {
             get
             {
-                return _P_E_CheckVaildOAuthUser;
+                return _P_E_CHECK_OAUTH_VALID;
             }
         }
         
         // MethodType: POST, Segment: Login 
         // InputType: PosePacket.Service.Auth.I_Login 
         // OutputType: PosePacket.Service.Auth.O_Login
-        public static string P_E_Login
+        public static string P_E_LOGIN
         {
             get
             {
-                return _P_E_Login;
+                return _P_E_LOGIN;
+            }
+        }
+        
+        // MethodType: GET, Segment: GuestLogin 
+        // InputType: null 
+        // OutputType: PosePacket.Service.Auth.O_Login
+        public static string P_E_GUEST_LOGIN
+        {
+            get
+            {
+                return _P_E_GUEST_LOGIN;
             }
         }
     }

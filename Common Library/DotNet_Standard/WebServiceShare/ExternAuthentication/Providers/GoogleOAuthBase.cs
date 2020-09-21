@@ -11,7 +11,7 @@ namespace WebServiceShare.ExternAuthentication.Providers
         {
             Provider = SNSProviderType.Google;
             Description = "Google Login Provider";
-            ClientId = "217594391151-mnpcen26krhd9mpipcnabg68sslsehjo.apps.googleusercontent.com";
+            ClientId = "217594391151-3abvvp6gbboo7mrt9bc5o3uef2epv27v.apps.googleusercontent.com";
             AuthorizationUrl = "https://accounts.google.com/o/oauth2/v2/auth";
             RequestTokenUrl = "https://oauth2.googleapis.com/token";
             RedirectUrl = "com.pose.poseidon.picks:/oauth2redirect";

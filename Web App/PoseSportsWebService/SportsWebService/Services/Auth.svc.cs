@@ -29,34 +29,45 @@ namespace SportsWebService.Services
             return pub_key.SerializeToStream();
         }
 
-        public Stream P_E_TokenRefresh()
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public Stream P_E_TOKEN_REFRESH()
         {
             var signature = ServerContext.Current.Signature;
             var signatureIV = ServerContext.Current.SignatureIV;
 
-            var result = Commands.Auth.P_E_TokenRefresh.Execute();
+            var result = Commands.Auth.P_E_TOKEN_REFRESH.Execute();
 
             return result.SerializeToStream(signature, signatureIV);
         }
 
-        public async Task<Stream> P_E_CheckVaildOAuthUser(Stream e_stream)
+        public async Task<Stream> P_E_CHECK_OAUTH_VALID(Stream e_stream)
         {
             var signature = ServerContext.Current.Signature;
             var signatureIV = ServerContext.Current.SignatureIV;
 
             var input = e_stream.StreamDeserialize<I_CheckVaildOAuthUser>(signature, signatureIV);
-            var result = await Commands.Auth.P_E_CheckVaildOAuthUser.Execute(input);
+            var result = await Commands.Auth.P_E_CHECK_OAUTH_VALID.Execute(input);
 
             return result.SerializeToStream(signature, signatureIV);
         }
 
-        public Stream P_E_Login(Stream e_stream)
+        public Stream P_E_LOGIN(Stream e_stream)
         {
             var signature = ServerContext.Current.Signature;
             var signatureIV = ServerContext.Current.SignatureIV;
 
             var input = e_stream.StreamDeserialize<I_Login>(signature, signatureIV);
-            var result = Commands.Auth.P_E_Login.Execute(input);
+            var result = Commands.Auth.P_E_LOGIN.Execute(input);
+
+            return result.SerializeToStream(signature, signatureIV);
+        }
+
+        public Stream P_E_GUEST_LOGIN()
+        {
+            var signature = ServerContext.Current.Signature;
+            var signatureIV = ServerContext.Current.SignatureIV;
+
+            var result = Commands.Auth.P_E_GUEST_LOGIN.Execute();
 
             return result.SerializeToStream(signature, signatureIV);
         }

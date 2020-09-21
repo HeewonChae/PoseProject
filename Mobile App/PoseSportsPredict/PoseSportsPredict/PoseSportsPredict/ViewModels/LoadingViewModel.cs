@@ -106,8 +106,9 @@ namespace PoseSportsPredict.ViewModels
             //await _notificationService.Initialize();
 
             // InAppBilling Item Init
-            var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
             ShinyHost.Resolve<InAppBillingService>().InitializeProduct();
+
+            var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
             if (!deviceInfoHelper.IsLicensed.HasValue || !deviceInfoHelper.IsLicensed.Value)
             {
                 await MaterialDialog.Instance.AlertAsync(LocalizeString.Service_Not_Available,
@@ -116,9 +117,10 @@ namespace PoseSportsPredict.ViewModels
                         DialogConfiguration.AppTitleAlterDialogConfiguration);
             }
             else if (!await _OAuthService.IsAuthenticatedAndValid()
-                || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin())
+                || !await ShinyHost.Resolve<LoginViewModel>().PoseLogin(true))
             {
                 await _OAuthService.Logout();
+                await ShinyHost.Resolve<LoginViewModel>().GuestLogin();
             }
 
             IsLoaded = true;

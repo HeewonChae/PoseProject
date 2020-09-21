@@ -25,6 +25,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WebServiceShare.ExternAuthentication;
+using WebServiceShare.ServiceContext;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
@@ -109,24 +110,34 @@ namespace PoseSportsPredict.ViewModels
 
         #region Commands
 
-        public ICommand LogoutCommand { get => new RelayCommand(Logout); }
+        public ICommand LogonCommand { get => new RelayCommand(Logon); }
 
-        private async void Logout()
+        private async void Logon()
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            bool? isLogout = await MaterialDialog.Instance.ConfirmAsync(
+            if (_OAuthService.IsAuthenticated)
+            {
+                bool? isLogout = await MaterialDialog.Instance.ConfirmAsync(
                 LocalizeString.Do_You_Want_Logout,
                 LocalizeString.App_Title,
                 LocalizeString.Ok,
                 LocalizeString.Cancel,
                 DialogConfiguration.AppTitleAlterDialogConfiguration);
 
-            if (isLogout.HasValue && isLogout.Value)
-                await _OAuthService.Logout();
+                if (isLogout.HasValue && isLogout.Value)
+                {
+                    await _OAuthService.Logout();
+                    await LoginFacade.GuestLogin();
+                }
+            }
+            else
+            {
+                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<LoginViewModel>());
+            }
 
             SetIsBusy(false);
         }
@@ -154,7 +165,22 @@ namespace PoseSportsPredict.ViewModels
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
+            if (_OAuthService.IsAuthenticated)
+                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
+            else
+            {
+                bool? isLogin = await MaterialDialog.Instance.ConfirmAsync(
+                LocalizeString.Require_Login,
+                LocalizeString.App_Title,
+                LocalizeString.Ok,
+                LocalizeString.Cancel,
+                DialogConfiguration.AppTitleAlterDialogConfiguration);
+
+                if (isLogin ?? false)
+                {
+                    await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<LoginViewModel>());
+                }
+            }
 
             SetIsBusy(false);
         }
@@ -180,11 +206,13 @@ namespace PoseSportsPredict.ViewModels
 
         public void RefrashUserInfo()
         {
-            AuthUser = _OAuthService.AuthenticatedUser;
-            if (string.IsNullOrEmpty(AuthUser.PictureUrl))
+            AuthUser = _OAuthService.AuthenticatedUser ?? new ExternAuthUser
             {
-                AuthUser.PictureUrl = "ic_profile.png";
-            }
+                FirstName = "Guest",
+                PictureUrl = "ic_profile_d.png",
+            };
+
+            LastLoginTime = ClientContext.LastLoginTime;
         }
 
         public async Task RefrashBookmarkedTeam()
@@ -247,6 +275,7 @@ namespace PoseSportsPredict.ViewModels
 
         private void MembershipTypeChanged(MemberRoleType value)
         {
+            RefrashUserInfo();
             IsExistRemoveAdsPurchase = value > MemberRoleType.Regular;
         }
 

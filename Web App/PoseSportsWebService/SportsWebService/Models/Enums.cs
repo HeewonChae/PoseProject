@@ -7,7 +7,7 @@ namespace SportsWebService.Models.Enums
 {
     public enum ServiceRoleType
     {
-        _NONE_,
+        Guest = 0,
         Regular = 1 << 0,
         Promotion = 1 << 7,
         Diamond = 1 << 15,

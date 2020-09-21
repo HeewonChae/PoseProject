@@ -62,7 +62,7 @@ namespace ReferenceText.NetCore
                 MethodType = WebMethodType.POST,
                 BaseUrl = ServiceBaseUrl,
                 ServiceUrl = AuthProxy.ServiceUrl,
-                SegmentGroup = AuthProxy.P_E_Login,
+                SegmentGroup = AuthProxy.P_E_LOGIN,
                 NeedEncrypt = true,
                 PostData = new I_Login
                 {

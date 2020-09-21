@@ -26,14 +26,18 @@ namespace SportsWebService.Services.Contract
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "TokenRefresh")]
-        Stream P_E_TokenRefresh();
+        Stream P_E_TOKEN_REFRESH();
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "CheckVaildOAuthUser")]
-        Task<Stream> P_E_CheckVaildOAuthUser(Stream e_stream);
+        Task<Stream> P_E_CHECK_OAUTH_VALID(Stream e_stream);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "Login")]
-        Stream P_E_Login(Stream e_stream);
+        Stream P_E_LOGIN(Stream e_stream);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "GuestLogin")]
+        Stream P_E_GUEST_LOGIN();
     }
 }

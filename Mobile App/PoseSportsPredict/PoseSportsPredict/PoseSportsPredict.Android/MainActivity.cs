@@ -3,6 +3,8 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Gms.Ads;
+using Android.Gms.Auth.Api;
+using Android.Gms.Auth.Api.SignIn;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
@@ -11,7 +13,10 @@ using Google.Android.Vending.Licensing;
 using Plugin.InAppBilling;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
 using Shiny;
+using System.Collections.Generic;
+using WebServiceShare.ExternAuthentication;
 using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android.AppLinks;
@@ -79,7 +84,28 @@ namespace PoseSportsPredict.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            InAppBillingImplementation.HandleActivityResult(requestCode, resultCode, data);
+            if (requestCode == 99) // google oauth
+            {
+                GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
+                if (result.IsSuccess)
+                {
+                    GoogleSignInAccount account = result.SignInAccount;
+
+                    var properties = new Dictionary<string, string>();
+                    properties.Add("access_token", account.IdToken);
+
+                    ShinyHost.Resolve<IOAuthService>().OnOAuthComplete(null,
+                        new AuthenticatorCompletedEventArgs(new Account(account.DisplayName, properties)));
+                }
+                else
+                {
+                    ShinyHost.Resolve<IOAuthService>().OnOAuthError(null, null);
+                }
+            }
+            else
+            {
+                InAppBillingImplementation.HandleActivityResult(requestCode, resultCode, data);
+            }
         }
 
         //protected override void OnNewIntent(Intent intent)
