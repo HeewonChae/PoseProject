@@ -25,54 +25,58 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="0.05*" />
                 </Grid.RowDefinitions>
-                    <materialui:MaterialCard
+                <materialui:MaterialCard
                     Grid.Row="1"
                     Margin="7,0"
                     Padding="5,20"
                     Elevation="0"
                     BackgroundColor="{StaticResource TransparentBlack}">
-                        <CollectionView
+                    <CollectionView
                         x:Name="_cv_purchase"
                         VerticalOptions="Start"
                         HorizontalScrollBarVisibility="Always"
                         ItemsLayout="HorizontalList"
                         ItemsSource="{Binding InAppPurchases}">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="models:InAppPurchaseInfo">
-                                    <StackLayout>
-                                        <materialui:MaterialCard
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:InAppPurchaseInfo">
+                                <StackLayout>
+                                    <materialui:MaterialCard
                                         VerticalOptions="CenterAndExpand"
                                         Padding="0"
                                         Margin="5,15"
                                         Elevation="3"
                                         CornerRadius="5"
                                         BackgroundColor="{StaticResource PrimaryColor}">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <!--Title-->
-                                                <StackLayout
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <!--Title-->
+                                            <StackLayout
                                                 Orientation="Horizontal"
                                                 Spacing="0">
-                                                    <Frame
-                                                    Margin="15,20"
-                                                    Padding="7"
-                                                    CornerRadius="77"
-                                                    HorizontalOptions="Center"
-                                                    VerticalOptions="Center"
-                                                    BackgroundColor="{Binding ImageColor}">
-                                                        <Image
+                                                <Frame
+                                                        Margin="15,20"
+                                                        Padding="0"
+                                                        WidthRequest="49"
+                                                        HeightRequest="49"
+                                                        CornerRadius="77"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center"
+                                                        BackgroundColor="{Binding ImageColor}">
+                                                    <Image
                                                         Aspect="AspectFit"
-                                                        WidthRequest="37"
-                                                        HeightRequest="37"
+                                                        WidthRequest="33"
+                                                        HeightRequest="33"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center"
                                                         Source="{Binding ImageResource}">
-                                                        </Image>
-                                                    </Frame>
-                                                    <materialui:MaterialLabel
+                                                    </Image>
+                                                </Frame>
+                                                <materialui:MaterialLabel
                                                     VerticalOptions="CenterAndExpand"
                                                     HorizontalTextAlignment="Start"
                                                     VerticalTextAlignment="Center"
@@ -80,10 +84,10 @@
                                                     FontAttributes="Bold"
                                                     TextColor="{Binding TitleColor}"
                                                     Text="{Binding Title}">
-                                                    </materialui:MaterialLabel>
-                                                </StackLayout>
-                                                <!--Advantage-->
-                                                <materialui:MaterialLabel
+                                                </materialui:MaterialLabel>
+                                            </StackLayout>
+                                            <!--Advantage-->
+                                            <materialui:MaterialLabel
                                                 Margin="15,0,15,3"
                                                 Grid.Row="1"
                                                 VerticalOptions="CenterAndExpand"
@@ -93,15 +97,15 @@
                                                 FontAttributes="Bold"
                                                 TextColor="{StaticResource TextColor_L}"
                                                 Text="{x:Static localize:LocalizeString.Benefits}">
-                                                </materialui:MaterialLabel>
-                                                <StackLayout
+                                            </materialui:MaterialLabel>
+                                            <StackLayout
                                                 Grid.Row="2"
                                                 Margin="15,0,15,15"
                                                 Spacing="10"
                                                 BindableLayout.ItemsSource="{Binding Advantages}">
-                                                    <BindableLayout.ItemTemplate>
-                                                        <DataTemplate x:DataType="x:String">
-                                                            <materialui:MaterialLabel
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="x:String">
+                                                        <materialui:MaterialLabel
                                                             VerticalOptions="CenterAndExpand"
                                                             HorizontalTextAlignment="Start"
                                                             VerticalTextAlignment="Center"
@@ -109,12 +113,12 @@
                                                             FontAttributes="None"
                                                             TextColor="{StaticResource TextColor_L}"
                                                             Text="{Binding .}">
-                                                            </materialui:MaterialLabel>
-                                                        </DataTemplate>
-                                                    </BindableLayout.ItemTemplate>
-                                                </StackLayout>
-                                                <!--Purchase Button-->
-                                                <materialui:MaterialCard
+                                                        </materialui:MaterialLabel>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                            <!--Purchase Button-->
+                                            <materialui:MaterialCard
                                                 Grid.Row="3"
                                                 HorizontalOptions="CenterAndExpand"
                                                 Padding="0"
@@ -126,7 +130,7 @@
                                                 ClickCommand="{Binding Path=BindingContext.PurchaseButtonClickCommand, Source={x:Reference _cv_purchase}}"
                                                 ClickCommandParameter="{Binding .}"
                                                 BackgroundColor="{StaticResource WinColor}">
-                                                    <materialui:MaterialLabel
+                                                <materialui:MaterialLabel
                                                     Margin="18,13"
                                                     VerticalOptions="CenterAndExpand"
                                                     HorizontalTextAlignment="Center"
@@ -135,14 +139,14 @@
                                                     FontAttributes="Bold"
                                                     TextColor="{StaticResource TextColor_L}"
                                                     Text="{Binding ButtonText}">
-                                                    </materialui:MaterialLabel>
-                                                </materialui:MaterialCard>
-                                            </Grid>
-                                        </materialui:MaterialCard>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                                </materialui:MaterialLabel>
+                                            </materialui:MaterialCard>
+                                        </Grid>
+                                    </materialui:MaterialCard>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </materialui:MaterialCard>
             </Grid>
         </StackLayout>
