@@ -186,8 +186,8 @@
                     Spacing="10">
                     <Frame
                         Padding="0"
-                        HeightRequest="33"
-                        WidthRequest="33"
+                        HeightRequest="37"
+                        WidthRequest="37"
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
