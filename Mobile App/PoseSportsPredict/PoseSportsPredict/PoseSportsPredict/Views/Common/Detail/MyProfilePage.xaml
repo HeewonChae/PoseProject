@@ -186,8 +186,8 @@
                     Spacing="10">
                     <Frame
                         Padding="0"
-                        HeightRequest="37"
-                        WidthRequest="37"
+                        HeightRequest="36"
+                        WidthRequest="36"
                         CornerRadius="59"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
@@ -196,8 +196,8 @@
                             Aspect="AspectFit"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
-                            WidthRequest="23"
-                            HeightRequest="23"
+                            WidthRequest="24"
+                            HeightRequest="24"
                             Source="ic_logon.png">
                         </Image>
                     </Frame>
