@@ -176,7 +176,7 @@ namespace PoseSportsPredict.ViewModels
                 LocalizeString.Cancel,
                 DialogConfiguration.AppTitleAlterDialogConfiguration);
 
-                if (isLogin ?? false)
+                if (isLogin.HasValue && isLogin.Value)
                 {
                     await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<LoginViewModel>());
                 }

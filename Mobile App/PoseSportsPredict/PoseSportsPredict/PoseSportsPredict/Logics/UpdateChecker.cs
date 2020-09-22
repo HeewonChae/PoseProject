@@ -32,7 +32,7 @@ namespace PoseSportsPredict.Logics
                         LocalizeString.Later,
                         DialogConfiguration.AppTitleAlterDialogConfiguration);
 
-                    if (ret ?? false)
+                    if (ret.HasValue && ret.Value)
                         await CrossLatestVersion.Current.OpenAppInStore();
                 }
             }
