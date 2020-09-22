@@ -131,7 +131,7 @@
                                     Grid.Row="0"
                                     Grid.Column="1"
                                     LineBreakMode="TailTruncation"
-                                    TextColor="{StaticResource CustomGrey_D}"
+                                    TextColor="{StaticResource TextColor_D2}"
                                     TypeScale="Subtitle2"
                                     FontAttributes="None"
                                     HorizontalOptions="Center"

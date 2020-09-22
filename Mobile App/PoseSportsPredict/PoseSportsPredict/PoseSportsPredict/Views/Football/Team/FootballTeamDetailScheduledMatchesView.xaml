@@ -74,9 +74,8 @@
                                                 Grid.Row="0"
                                                 Grid.Column="1"
                                                 LineBreakMode="TailTruncation"
-                                                TextColor="{StaticResource CustomGrey_D}"
+                                                TextColor="{StaticResource TextColor_D2}"
                                                 TypeScale="Subtitle2"
-                                                FontAttributes="None"
                                                 VerticalOptions="CenterAndExpand">
                                                 <materialui:MaterialLabel.FormattedText>
                                                     <FormattedString>
@@ -87,8 +86,8 @@
                                             <materialui:MaterialLabel
                                                 Grid.Row="1"
                                                 Grid.Column="1"
-                                                TextColor="{StaticResource CustomGrey_D}"
-                                                TypeScale="Caption"
+                                                TextColor="{StaticResource TextColor_D2}"
+                                                TypeScale="Subtitle2"
                                                 FontAttributes="None"
                                                 Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
                                             </materialui:MaterialLabel>

@@ -98,7 +98,7 @@
                                                 </materialui:MaterialLabel>
                                                 <materialui:MaterialLabel
                                                     LineBreakMode="TailTruncation"
-                                                    TextColor="{StaticResource CustomGrey}"
+                                                    TextColor="{StaticResource TextColor_D2}"
                                                     TypeScale="Body2"
                                                     Text="{Binding CountryName}">
                                                 </materialui:MaterialLabel>

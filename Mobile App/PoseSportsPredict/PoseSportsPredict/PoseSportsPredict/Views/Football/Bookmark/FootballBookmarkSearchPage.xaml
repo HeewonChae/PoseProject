@@ -117,7 +117,7 @@
                                     <materialui:MaterialLabel
                                         TypeScale="Subtitle1"
                                         FontAttributes="Bold"
-                                        TextColor="{StaticResource CustomGrey_D}">
+                                        TextColor="{StaticResource TextColor_D2}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding [Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
@@ -176,7 +176,7 @@
                                                                 Grid.Row="0"
                                                                 Grid.Column="1"
                                                                 LineBreakMode="TailTruncation"
-                                                                TextColor="{StaticResource CustomGrey_D}"
+                                                                TextColor="{StaticResource TextColor_D2}"
                                                                 TypeScale="Subtitle2"
                                                                 FontAttributes="Bold"
                                                                 VerticalOptions="CenterAndExpand">
@@ -191,7 +191,7 @@
                                                             <materialui:MaterialLabel
                                                                 Grid.Row="1"
                                                                 Grid.Column="1"
-                                                                TextColor="{StaticResource CustomGrey_D}"
+                                                                TextColor="{StaticResource TextColor_D2}"
                                                                 TypeScale="Subtitle2"
                                                                 FontAttributes="None"
                                                                 Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
@@ -332,7 +332,7 @@
                                     <materialui:MaterialLabel
                                         TypeScale="Subtitle1"
                                         FontAttributes="Bold"
-                                        TextColor="{StaticResource CustomGrey_D}">
+                                        TextColor="{StaticResource TextColor_D2}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding [Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
@@ -385,7 +385,7 @@
                                                             </materialui:MaterialLabel>
                                                             <materialui:MaterialLabel
                                                                 LineBreakMode="TailTruncation"
-                                                                TextColor="{StaticResource CustomGrey}"
+                                                                TextColor="{StaticResource TextColor_D2}"
                                                                 TypeScale="Body2"
                                                                 Text="{Binding CountryName}">
                                                             </materialui:MaterialLabel>
@@ -409,7 +409,7 @@
                                     <materialui:MaterialLabel
                                         TypeScale="Subtitle1"
                                         FontAttributes="Bold"
-                                        TextColor="{StaticResource CustomGrey_D}">
+                                        TextColor="{StaticResource TextColor_D2}">
                                         <materialui:MaterialLabel.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding [Teams], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" />
@@ -460,7 +460,7 @@
                                                             <materialui:MaterialLabel
                                                                 LineBreakMode="TailTruncation"
                                                                 TypeScale="Body2"
-                                                                TextColor="{StaticResource CustomGrey}"
+                                                                TextColor="{StaticResource TextColor_D2}"
                                                                 Text="{Binding CountryName}">
                                                             </materialui:MaterialLabel>
                                                         </StackLayout>
@@ -481,7 +481,7 @@
                         <materialui:MaterialLabel
                             TypeScale="Subtitle1"
                             FontAttributes="Bold"
-                            TextColor="{StaticResource CustomGrey_D}"
+                            TextColor="{StaticResource TextColor_D2}"
                             Text="{Binding [Recent_Search], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                         </materialui:MaterialLabel>
                         <ListView
