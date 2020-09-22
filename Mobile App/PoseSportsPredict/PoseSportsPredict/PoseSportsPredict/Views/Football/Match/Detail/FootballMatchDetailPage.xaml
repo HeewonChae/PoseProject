@@ -168,8 +168,6 @@
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
                                 HeightRequest="43"
-                                DownsampleHeight="90"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding MatchInfo.HomeLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -271,8 +269,6 @@
                             <ffimageloading:CachedImage
                                 Aspect="AspectFit"
                                 HeightRequest="43"
-                                DownsampleHeight="90"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding MatchInfo.AwayLogo, Converter={StaticResource svgImageSourceConverter}}">

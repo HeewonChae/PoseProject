@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "217594391151-11ih5j20qopkfbm6g6vn35la868klvu2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pose.poseidon.picks",
+            "certificate_hash": "dbf64a1e76830586ec31e6fb70aed577f1f0d9e7"
+          }
+        },
+        {
           "client_id": "217594391151-f9mi3d947t5rp76onpl52th8pqui1s0q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

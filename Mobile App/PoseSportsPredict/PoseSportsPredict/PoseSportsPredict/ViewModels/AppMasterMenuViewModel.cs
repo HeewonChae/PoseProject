@@ -122,7 +122,7 @@ namespace PoseSportsPredict.ViewModels
             if (_OAuthService.IsAuthenticated)
             {
                 bool? isLogout = await MaterialDialog.Instance.ConfirmAsync(
-                LocalizeString.Do_You_Want_Logout,
+                LocalizeString.Want_Logout,
                 LocalizeString.App_Title,
                 LocalizeString.Ok,
                 LocalizeString.Cancel,

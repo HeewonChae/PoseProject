@@ -141,8 +141,6 @@
                                 VerticalOptions="Center"
                                 WidthRequest="29"
                                 HeightRequest="29"
-                                DownsampleHeight="90"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
@@ -184,8 +182,6 @@
                                 VerticalOptions="Center"
                                 WidthRequest="29"
                                 HeightRequest="29"
-                                DownsampleHeight="90"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">

@@ -42,8 +42,6 @@
                                     VerticalOptions="Center"
                                     HeightRequest="27"
                                     WidthRequest="27"
-                                    DownsampleHeight="90"
-                                    DownsampleToViewSize="True"
                                     LoadingPlaceholder="img_world.png"
                                     ErrorPlaceholder="img_world.png"
                                     Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
@@ -117,8 +115,6 @@
                                     VerticalOptions="Center"
                                     HeightRequest="27"
                                     WidthRequest="27"
-                                    DownsampleHeight="90"
-                                    DownsampleToViewSize="True"
                                     LoadingPlaceholder="img_world.png"
                                     ErrorPlaceholder="img_world.png"
                                     Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">

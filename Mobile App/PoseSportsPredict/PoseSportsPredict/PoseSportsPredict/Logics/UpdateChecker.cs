@@ -36,7 +36,7 @@ namespace PoseSportsPredict.Logics
                         await CrossLatestVersion.Current.OpenAppInStore();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return;
             }

@@ -148,8 +148,6 @@
                                 VerticalOptions="Center"
                                 HeightRequest="50"
                                 WidthRequest="50"
-                                DownsampleHeight="90"
-                                DownsampleToViewSize="True"
                                 LoadingPlaceholder="img_football.png"
                                 ErrorPlaceholder="img_football.png"
                                 Source="{Binding TeamInfo.TeamLogo, Converter={StaticResource svgImageSourceConverter}}">

@@ -99,7 +99,10 @@ namespace PoseSportsPredict.Droid
                 }
                 else
                 {
-                    ShinyHost.Resolve<IOAuthService>().OnOAuthError(null, null);
+                    if (result.Status.StatusCode == 12501)
+                        ShinyHost.Resolve<IOAuthService>().OnOAuthError(null, null);
+                    else
+                        ShinyHost.Resolve<IOAuthService>().OnOAuthError(null, new AuthenticatorErrorEventArgs($"Google OAuth ErrorCode: {result.Status.StatusCode}"));
                 }
             }
             else

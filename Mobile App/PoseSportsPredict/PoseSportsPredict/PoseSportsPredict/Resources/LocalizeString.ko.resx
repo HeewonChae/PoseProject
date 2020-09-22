@@ -288,7 +288,7 @@
   <data name="Ok" xml:space="preserve">
     <value>확인</value>
   </data>
-  <data name="Do_You_Want_Logout" xml:space="preserve">
+  <data name="Want_Logout" xml:space="preserve">
     <value>로그아웃 하시겠습니까?</value>
   </data>
   <data name="App_Title" xml:space="preserve">

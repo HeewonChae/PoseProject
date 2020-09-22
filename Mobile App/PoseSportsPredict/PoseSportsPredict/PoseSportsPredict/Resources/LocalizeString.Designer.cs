@@ -376,15 +376,6 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to logout?.
-        /// </summary>
-        public static string Do_You_Want_Logout {
-            get {
-                return ResourceManager.GetString("Do_You_Want_Logout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dot&apos;t show again.
         /// </summary>
         public static string Dont_Show_Again {
@@ -1659,6 +1650,15 @@ namespace PoseSportsPredict.Resources {
         public static string VIP_Lounge {
             get {
                 return ResourceManager.GetString("VIP_Lounge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to logout?.
+        /// </summary>
+        public static string Want_Logout {
+            get {
+                return ResourceManager.GetString("Want_Logout", resourceCulture);
             }
         }
         

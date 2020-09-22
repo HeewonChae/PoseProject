@@ -297,7 +297,7 @@
   <data name="Ok" xml:space="preserve">
     <value>確認</value>
   </data>
-  <data name="Do_You_Want_Logout" xml:space="preserve">
+  <data name="Want_Logout" xml:space="preserve">
     <value>ログアウトしますか？</value>
   </data>
   <data name="Favorite_Leagues" xml:space="preserve">
