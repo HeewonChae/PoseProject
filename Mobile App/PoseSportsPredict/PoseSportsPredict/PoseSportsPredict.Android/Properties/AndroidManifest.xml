@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.17.005" package="com.pose.poseidon.picks" android:installLocation="auto" android:versionCode="117005">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.18.003" package="com.pose.poseidon.picks" android:installLocation="auto" android:versionCode="118003">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
 	<application android:label="@string/App_Title" android:icon="@mipmap/icon" android:roundIcon="@mipmap/icon_round">
 		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3381862928005780~9770007298" />

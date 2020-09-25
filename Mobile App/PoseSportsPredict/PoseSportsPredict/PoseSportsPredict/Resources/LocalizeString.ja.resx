@@ -669,4 +669,7 @@
   <data name="Require_Login" xml:space="preserve">
     <value>ログインが必要です</value>
   </data>
+  <data name="All_Matches" xml:space="preserve">
+    <value>すべての試合</value>
+  </data>
 </root>

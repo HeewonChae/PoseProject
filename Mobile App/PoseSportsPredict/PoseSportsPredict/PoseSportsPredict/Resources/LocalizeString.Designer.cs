@@ -106,6 +106,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Matches.
+        /// </summary>
+        public static string All_Matches {
+            get {
+                return ResourceManager.GetString("All_Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This is a product you already own..
         /// </summary>
         public static string Already_Owned_Purchase {

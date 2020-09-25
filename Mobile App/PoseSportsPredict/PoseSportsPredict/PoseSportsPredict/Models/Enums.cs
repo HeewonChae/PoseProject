@@ -2,11 +2,11 @@
 {
     public enum MatchFilterType
     {
+        AllMatches,
         Bookmark,
         Recommended,
         Ongoing,
         SortByTime,
-        SortByLeague,
     }
 
     public enum PageDetailType

@@ -674,4 +674,7 @@
   <data name="Require_Login" xml:space="preserve">
     <value>Login is required.</value>
   </data>
+  <data name="All_Matches" xml:space="preserve">
+    <value>All Matches</value>
+  </data>
 </root>

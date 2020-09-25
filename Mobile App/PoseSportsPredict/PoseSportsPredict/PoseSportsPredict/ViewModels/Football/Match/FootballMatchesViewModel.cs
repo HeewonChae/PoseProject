@@ -122,18 +122,18 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (IsBusy)
                 return;
 
+            string isAllMatchesFilter = _curMatchFilterType == MatchFilterType.AllMatches ? $"({LocalizeString.Applying})" : "";
             string isBookmarkFilter = _curMatchFilterType == MatchFilterType.Bookmark ? $"({LocalizeString.Applying})" : "";
             string isRecommendedFilter = _curMatchFilterType == MatchFilterType.Recommended ? $"({LocalizeString.Applying})" : "";
             string isOngoingFilter = _curMatchFilterType == MatchFilterType.Ongoing ? $"({LocalizeString.Applying})" : "";
             string isTimeFilter = _curMatchFilterType == MatchFilterType.SortByTime ? $"({LocalizeString.Applying})" : "";
-            string isLeagueFilter = _curMatchFilterType == MatchFilterType.SortByLeague ? $"({LocalizeString.Applying})" : "";
             var actions = new string[]
             {
+                $"{LocalizeString.All_Matches} {isAllMatchesFilter}",
                 $"{LocalizeString.Match_Filter_By_Bookmark} {isBookmarkFilter}",
                 $"{LocalizeString.Recommended_Matches} {isRecommendedFilter}",
                 $"{LocalizeString.Ongoing_matches} {isOngoingFilter}",
                 $"{LocalizeString.Match_Sort_By_Time} {isTimeFilter}",
-                $"{LocalizeString.Match_Sort_By_League} {isLeagueFilter}",
             };
 
             int intResult = await MaterialDialog.Instance.SelectActionAsync(LocalizeString.Select_Filter, actions, DialogConfiguration.DefaultSimpleDialogConfiguration);
@@ -237,7 +237,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
             MatchListViewModels = null;
-            _curMatchFilterType = MatchFilterType.SortByLeague;
+            _curMatchFilterType = MatchFilterType.Recommended;
             _matchDate = date.Date;
 
             UpdatePageTitle();
@@ -401,7 +401,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     break;
 
                 case MatchFilterType.SortByTime:
-                case MatchFilterType.SortByLeague:
+                case MatchFilterType.AllMatches:
                     matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
                     break;
             }
@@ -453,7 +453,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 matchListViewModel.IsPredicted = grouppingMatch.Matches.Any(elem => elem.IsPredicted);
 
                 var existGroup = _matchListViewModels?.FirstOrDefault(elem => elem.Title == grouppingMatch.Key);
-                matchListViewModel.Expanded = existGroup?.Expanded ?? grouppingMatch.IsExpanded;
+                matchListViewModel.Expanded = grouppingMatch.IsExpanded ? true : existGroup?.Expanded ?? grouppingMatch.IsExpanded;
 
                 matchGroupCollection.Add(matchListViewModel);
             }
@@ -491,7 +491,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             switch (_curMatchFilterType)
             {
-                case MatchFilterType.Recommended:
                 case MatchFilterType.Bookmark:
                     {
                         var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, CountryLogo = elem.League_CountryLogo, League = elem.LeagueName });
@@ -509,8 +508,9 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     }
                     break;
 
+                case MatchFilterType.Recommended:
                 case MatchFilterType.Ongoing:
-                case MatchFilterType.SortByLeague:
+                case MatchFilterType.AllMatches:
                     {
                         var grouping = matchList.GroupBy(elem => new { Country = elem.League_CountryName, CountryLogo = elem.League_CountryLogo, League = elem.LeagueName });
                         var bookmarkedLeagues = await _bookmarkService.GetAllBookmark<FootballLeagueInfo>();
@@ -572,7 +572,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                                             GroupLogo = data.Key.CountryLogo,
                                             Matches = speratedData[i],
                                             GroupSubString = (i + 1).ToString(),
-                                            IsExpanded = false
+                                            IsExpanded = true
                                         });
                                     }
                                 }
@@ -584,7 +584,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                                         League = data.Key.League,
                                         GroupLogo = data.Key.CountryLogo,
                                         Matches = data.ToArray(),
-                                        IsExpanded = false
+                                        IsExpanded = true
                                     });
                                 }
                             }
