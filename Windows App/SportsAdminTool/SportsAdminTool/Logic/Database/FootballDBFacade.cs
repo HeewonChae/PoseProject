@@ -872,13 +872,13 @@ namespace SportsAdminTool.Logic.Database
             });
         }
 
-        public static IEnumerable<FootballDB.Tables.League> SelectLeagues(string where = null, string groupBy = null, string orderBy = null)
+        public static IEnumerable<FootballDB.Tables.League> SelectLeagues(string select = "*", string where = null, string groupBy = null, string orderBy = null)
         {
             Dev.DebugString("Call DB - FootballFacade.SelectLeagues");
 
             return SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<FootballDB.Tables.League>.Input
             {
-                Query = "SELECT * FROM league",
+                Query = $"SELECT {select} FROM league",
                 Where = where,
                 GroupBy = groupBy,
                 OrderBy = orderBy,

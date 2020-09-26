@@ -317,10 +317,14 @@ namespace SportsAdminTool
         {
             string selectedCountry = e.AddedItems[0] as string;
 
-            var queryLeagues = Logic.Database.FootballDBFacade.SelectLeagues(
-                where: $"country_name = \"{selectedCountry}\" ", groupBy: "name, type");
+            var queryLeagues = Logic.Database.FootballDBFacade.SelectQuery(new FootballDB.Procedures.P_SELECT_QUERY<string>.Input
+            {
+                Query = $"SELECT name FROM league",
+                Where = $"country_name = \"{selectedCountry}\"",
+                GroupBy = "name",
+            });
 
-            _cb_leagueName.ItemsSource = queryLeagues.Select(elem => elem.name);
+            _cb_leagueName.ItemsSource = queryLeagues;
 
             if (queryLeagues.Count() > 0)
                 _cb_leagueName.SelectedIndex = 0;

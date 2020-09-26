@@ -51,6 +51,8 @@ namespace PoseSportsPredict.Services
             MessagingCenter.Send<MembershipService, MemberRoleType>(this, AppConfig.MEMBERSHIP_TYPE_CHANGED, value);
         }
 
+        private const long THREE_HOUR_MILLI_SEC = 3 * 3600 * 1000;
+
         public void SetRoleExpireTime(DateTime value)
         {
             _timer?.Stop();
@@ -61,9 +63,10 @@ namespace PoseSportsPredict.Services
                 || MemberRoleType == MemberRoleType.VIP)    // 결제 유저 등급
             {
                 var expireMilliSec = (_roleExpireTime - DateTime.UtcNow).TotalMilliseconds;
-                if (expireMilliSec > 0)
+                var timer_sec = expireMilliSec > THREE_HOUR_MILLI_SEC ? THREE_HOUR_MILLI_SEC : expireMilliSec;
+                if (timer_sec > 0)
                 {
-                    _timer = new Timer(expireMilliSec);
+                    _timer = new Timer(timer_sec);
                     _timer.Elapsed += OnCheckMemberRoleType;
                     _timer.AutoReset = false;
                     _timer.Enabled = true;

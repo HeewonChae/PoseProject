@@ -18,9 +18,6 @@ namespace PoseSportsPredict.Logics
         {
             try
             {
-                if (!await CrossLatestVersion.Current.IsUsingLatestVersion())
-                    return;
-
                 string latestVersionNumber = await CrossLatestVersion.Current.GetLatestVersionNumber();
                 string installedVersionNumber = CrossLatestVersion.Current.InstalledVersionNumber;
 

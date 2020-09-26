@@ -45,7 +45,7 @@ namespace Repository.Mysql.FootballDB.Procedures
             sb.Append($"INNER JOIN league as l on lc.{nameof(LeagueCoverage.league_id)} = l.{nameof(League.id)} ");
             sb.Append($"INNER JOIN country as c on l.{nameof(League.country_name)} = c.{nameof(Country.name)} ");
             sb.Append($"WHERE lc.{nameof(LeagueCoverage.predictions)} = 1 ");
-            sb.Append($"GROUP BY l.{nameof(League.country_name)}, l.{nameof(League.name)}, l.{nameof(League.type)};");
+            sb.Append($"GROUP BY l.{nameof(League.country_name)}, l.{nameof(League.name)}, l.{nameof(League.type)}, l.{nameof(League.logo)}, c.{nameof(Country.logo)};");
 
             DapperFacade.DoWithDBContext(
                     null,

@@ -975,8 +975,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += meanHomeScore < 1 ? 2 : -1;
-                        grade += meanAwayScore < 1 ? 2 : -1;
+                        grade += meanHomeScore < 1 ? 1 : 0;
+                        grade += meanAwayScore < 1 ? 1 : 0;
                     }
                     break;
 
@@ -984,11 +984,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += meanHomeScore > 1 ? 1 : -1;
-                        grade += meanAwayScore > 1 ? 1 : -1;
-
-                        grade += meanHomeScore >= 2 ? 2 : 0;
-                        grade += meanAwayScore >= 2 ? 2 : 0;
+                        grade += meanHomeScore > 1 ? 2 : 0;
+                        grade += meanAwayScore > 1 ? 2 : 0;
                     }
                     break;
 

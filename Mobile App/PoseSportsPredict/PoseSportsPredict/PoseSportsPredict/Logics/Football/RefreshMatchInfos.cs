@@ -21,48 +21,55 @@ namespace PoseSportsPredict.Logics.Football
     {
         public static async Task<IReadOnlyCollection<FootballMatchInfo>> Execute(int[] indexes)
         {
-            if (indexes == null || indexes.Length == 0)
-                return new FootballMatchInfo[0];
-
-            var webApiService = ShinyHost.Resolve<IWebApiService>();
-            var bookmarkService = ShinyHost.Resolve<IBookmarkService>();
-            var notificationService = ShinyHost.Resolve<INotificationService>();
-
-            // call server
-            var server_result = await webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
+            try
             {
-                SerializeType = SerializeType.MessagePack,
-                MethodType = WebMethodType.POST,
-                BaseUrl = AppConfig.PoseWebBaseUrl,
-                ServiceUrl = FootballProxy.ServiceUrl,
-                SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_INDEX,
-                PostData = new I_GET_FIXTURES_BY_INDEX
+                if (indexes == null || indexes.Length == 0)
+                    return new FootballMatchInfo[0];
+
+                var webApiService = ShinyHost.Resolve<IWebApiService>();
+                var bookmarkService = ShinyHost.Resolve<IBookmarkService>();
+                var notificationService = ShinyHost.Resolve<INotificationService>();
+
+                // call server
+                var server_result = await webApiService.RequestAsyncWithToken<O_GET_FIXTURES_BY_INDEX>(new WebRequestContext
                 {
-                    FixtureIds = indexes,
+                    SerializeType = SerializeType.MessagePack,
+                    MethodType = WebMethodType.POST,
+                    BaseUrl = AppConfig.PoseWebBaseUrl,
+                    ServiceUrl = FootballProxy.ServiceUrl,
+                    SegmentGroup = FootballProxy.P_GET_FIXTURES_BY_INDEX,
+                    PostData = new I_GET_FIXTURES_BY_INDEX
+                    {
+                        FixtureIds = indexes,
+                    }
+                });
+
+                if (server_result == null)
+                    return new FootballMatchInfo[0];
+
+                var bookmarkedMatches = await bookmarkService.GetAllBookmark<FootballMatchInfo>();
+                var notifications = await notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart);
+
+                var matchList = new List<FootballMatchInfo>();
+                foreach (var fixture in server_result.Fixtures)
+                {
+                    var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
+
+                    var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
+                    var notifiedMatch = notifications.FirstOrDefault(elem => elem.Id == convertedMatchInfo.Id);
+
+                    convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
+                    convertedMatchInfo.IsAlarmed = notifiedMatch != null ? true : false;
+
+                    matchList.Add(convertedMatchInfo);
                 }
-            });
 
-            if (server_result == null)
-                throw new Exception(LocalizeString.Occur_Error);
-
-            var bookmarkedMatches = await bookmarkService.GetAllBookmark<FootballMatchInfo>();
-            var notifications = await notificationService.GetAllNotification(SportsType.Football, NotificationType.MatchStart);
-
-            var matchList = new List<FootballMatchInfo>();
-            foreach (var fixture in server_result.Fixtures)
-            {
-                var convertedMatchInfo = ShinyHost.Resolve<FixtureDetailToMatchInfo>().Convert(fixture);
-
-                var bookmarkedMatch = bookmarkedMatches.FirstOrDefault(elem => elem.PrimaryKey == convertedMatchInfo.PrimaryKey);
-                var notifiedMatch = notifications.FirstOrDefault(elem => elem.Id == convertedMatchInfo.Id);
-
-                convertedMatchInfo.IsBookmarked = bookmarkedMatch?.IsBookmarked ?? false;
-                convertedMatchInfo.IsAlarmed = notifiedMatch != null ? true : false;
-
-                matchList.Add(convertedMatchInfo);
+                return matchList;
             }
-
-            return matchList;
+            catch
+            {
+                return new FootballMatchInfo[0];
+            }
         }
     }
 }
