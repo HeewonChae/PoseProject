@@ -29,7 +29,6 @@ namespace SportsWebService.Services
             return pub_key.SerializeToStream();
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
         public Stream P_E_TOKEN_REFRESH()
         {
             var signature = ServerContext.Current.Signature;
