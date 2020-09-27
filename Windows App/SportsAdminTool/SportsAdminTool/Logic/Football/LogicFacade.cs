@@ -30,7 +30,7 @@ namespace SportsAdminTool.Logic.Football
         {
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetFixturesByLeagueId(leagueId);
-            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
+            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixture(elem));
             var api_deleteFixtures = api_fixtures.Except(api_filteredFixtures);
             //var api_odds = Singleton.Get<ApiLogic.FootballWebAPI>().GetOddsByLeagueIdAndLabelId(leagueId, (int)OddsLabelType.Match_Winner);
 
@@ -155,7 +155,7 @@ namespace SportsAdminTool.Logic.Football
         {
             // Call API
             var api_h2h = Singleton.Get<ApiLogic.FootballWebAPI>().GetH2HFixtures(teamId1, teamId2);
-            var api_filteredFixtures = api_h2h.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
+            var api_filteredFixtures = api_h2h.Where(elem => Singleton.Get<CheckValidation>().IsValidFixture(elem));
 
             foreach (var api_fixture in api_filteredFixtures)
             {
@@ -169,7 +169,7 @@ namespace SportsAdminTool.Logic.Football
         {
             // Call API
             var api_fixtures = Singleton.Get<ApiLogic.FootballWebAPI>().GetLastFixturesByTeamId(teamId, count);
-            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixtureStatus(elem.Status, elem.MatchTime));
+            var api_filteredFixtures = api_fixtures.Where(elem => Singleton.Get<CheckValidation>().IsValidFixture(elem));
 
             foreach (var api_fixture in api_filteredFixtures)
             {

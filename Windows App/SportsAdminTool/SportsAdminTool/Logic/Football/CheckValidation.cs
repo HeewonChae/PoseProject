@@ -16,6 +16,7 @@ using ApiModel = RapidAPI.Models;
 using System.Collections.Concurrent;
 using LogicCore.Utility.ThirdPartyLog;
 using SportsAdminTool.Model.Resource.Football;
+using SportsAdminTool.Model.Football;
 
 namespace SportsAdminTool.Logic.Football
 {
@@ -112,9 +113,15 @@ namespace SportsAdminTool.Logic.Football
             return isValidTeamId && db_result;
         }
 
-        public bool IsValidFixtureStatus(ApiModel.Football.Enums.FixtureStatusType status, DateTime matchTime)
+        public bool IsValidFixture(Fixture fixture)
         {
+            var matchTime = fixture.MatchTime;
+            var status = fixture.Status;
+
             if (DateTime.UtcNow > matchTime.AddHours(6)
+                && status != ApiModel.Football.Enums.FixtureStatusType.SH // 후반
+                && status != ApiModel.Football.Enums.FixtureStatusType.ET // 연장
+                && status != ApiModel.Football.Enums.FixtureStatusType.P // 승부차기
                 && status != ApiModel.Football.Enums.FixtureStatusType.FT // 경기전
                 && status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
                 && status != ApiModel.Football.Enums.FixtureStatusType.PEN) // 승부차기 후 종료
