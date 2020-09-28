@@ -118,24 +118,25 @@ namespace SportsAdminTool.Logic.Football
             var matchTime = fixture.MatchTime;
             var status = fixture.Status;
 
-            if (DateTime.UtcNow > matchTime.AddHours(6)
-                && status != ApiModel.Football.Enums.FixtureStatusType.SH // 후반
-                && status != ApiModel.Football.Enums.FixtureStatusType.ET // 연장
-                && status != ApiModel.Football.Enums.FixtureStatusType.P // 승부차기
-                && status != ApiModel.Football.Enums.FixtureStatusType.FT // 경기전
-                && status != ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
+            if (matchTime < DateTime.UtcNow.AddHours(-4) // 경기시작 후 4시간 지남
+                && status != ApiModel.Football.Enums.FixtureStatusType.SH   // 후반
+                && status != ApiModel.Football.Enums.FixtureStatusType.ET   // 연장
+                && status != ApiModel.Football.Enums.FixtureStatusType.BT   // 연장 브레이크 타임
+                && status != ApiModel.Football.Enums.FixtureStatusType.P    // 승부차기
+                && status != ApiModel.Football.Enums.FixtureStatusType.FT   // 종료
+                && status != ApiModel.Football.Enums.FixtureStatusType.AET  // 연장 후 종료
                 && status != ApiModel.Football.Enums.FixtureStatusType.PEN) // 승부차기 후 종료
                 return false;
 
-            if (status == ApiModel.Football.Enums.FixtureStatusType.NS // 경기전
-                || status == ApiModel.Football.Enums.FixtureStatusType.FH // 전반
-                || status == ApiModel.Football.Enums.FixtureStatusType.HT // 하프타임
-                || status == ApiModel.Football.Enums.FixtureStatusType.SH // 후반
-                || status == ApiModel.Football.Enums.FixtureStatusType.ET // 연장
-                || status == ApiModel.Football.Enums.FixtureStatusType.P // 승부차기
-                || status == ApiModel.Football.Enums.FixtureStatusType.BT // 연장 브레이크 타임
-                || status == ApiModel.Football.Enums.FixtureStatusType.FT // 종료
-                || status == ApiModel.Football.Enums.FixtureStatusType.AET // 연장 후 종료
+            if (status == ApiModel.Football.Enums.FixtureStatusType.NS      // 경기전
+                || status == ApiModel.Football.Enums.FixtureStatusType.FH   // 전반
+                || status == ApiModel.Football.Enums.FixtureStatusType.HT   // 하프타임
+                || status == ApiModel.Football.Enums.FixtureStatusType.SH   // 후반
+                || status == ApiModel.Football.Enums.FixtureStatusType.ET   // 연장
+                || status == ApiModel.Football.Enums.FixtureStatusType.P    // 승부차기
+                || status == ApiModel.Football.Enums.FixtureStatusType.BT   // 연장 브레이크 타임
+                || status == ApiModel.Football.Enums.FixtureStatusType.FT   // 종료
+                || status == ApiModel.Football.Enums.FixtureStatusType.AET  // 연장 후 종료
                 || status == ApiModel.Football.Enums.FixtureStatusType.PEN) // 승부차기 후 종료
                 return true;
 
