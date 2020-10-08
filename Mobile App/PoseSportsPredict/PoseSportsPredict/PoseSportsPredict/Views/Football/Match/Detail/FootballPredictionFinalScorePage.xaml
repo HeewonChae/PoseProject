@@ -262,9 +262,8 @@
                             Elevation="3"
                             Margin="3,6"
                             Padding="5"
-                            IsVisible="{Binding Source={x:Reference _native_midium_ads},Path=IsVisible}">
+                            HeightRequest="217">
                             <nativeads:AdmobMediumNativeAdsView
-                                x:Name="_native_midium_ads"
                                 ButtonColor="{StaticResource PrimaryColor}">
                             </nativeads:AdmobMediumNativeAdsView>
                         </materialui:MaterialCard>

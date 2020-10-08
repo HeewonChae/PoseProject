@@ -25,7 +25,7 @@ namespace PredictionBackTesting
             DataMapper.Resolve<db_table.Prediction, db_table.PredictionBackTesting>();
 
             // select predicted fixtures
-            var predictedFixtures = SelecltPredictedFixtures.Execute(startDate: new DateTime(2020, 9, 1), endData: new DateTime(2020, 9, 30));
+            var predictedFixtures = SelecltPredictedFixtures.Execute(startDate: new DateTime(2020, 10, 1), endData: new DateTime(2020, 10, 30));
 
             // Predict fixture and check hit
             var dic_predictions = PredictFixtureAndCheckHit.Execute(predictedFixtures);

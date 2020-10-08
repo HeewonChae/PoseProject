@@ -51,14 +51,14 @@
                         Margin="10,5"
                         Orientation="Horizontal">
                         <ContentView
-                            Padding="4"
+                            Padding="2"
                             VerticalOptions="Center"
                             BackgroundColor="Transparent"
                             effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
                             effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                             <Image
-                                HeightRequest="24"
-                                WidthRequest="24"
+                                HeightRequest="25"
+                                WidthRequest="25"
                                 Source="ic_arrow_back"
                                 Aspect="AspectFit"
                                 effects:ImageEffect.TintColor="White">
@@ -66,7 +66,7 @@
                         </ContentView>
                         <!--Toolbar button-->
                         <StackLayout
-                            Spacing="15"
+                            Spacing="13"
                             Orientation="Horizontal"
                             HorizontalOptions="EndAndExpand"
                             VerticalOptions="Center">
@@ -77,8 +77,8 @@
                                 effects:TapCommandEffect.Tap="{Binding MatchShareCommand}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
-                                    HeightRequest="21"
-                                    WidthRequest="21"
+                                    HeightRequest="19"
+                                    WidthRequest="19"
                                     Source="ic_share"
                                     Aspect="AspectFit">
                                 </Image>
@@ -91,8 +91,8 @@
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <customviews:RatingView
                                     VerticalOptions="Center"
-                                    WidthRequest="23"
-                                    HeightRequest="23"
+                                    WidthRequest="21"
+                                    HeightRequest="21"
                                     StrokeWidth="0.8"
                                     RatingType="Full"
                                     ColorOn="{StaticResource IconActivated}"
@@ -113,8 +113,8 @@
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
                                 <Image
                                     Aspect="AspectFit"
-                                    HeightRequest="19"
-                                    WidthRequest="19"
+                                    HeightRequest="18"
+                                    WidthRequest="18"
                                     Source="ic_more"
                                     effects:ImageEffect.TintColor="White">
                                 </Image>

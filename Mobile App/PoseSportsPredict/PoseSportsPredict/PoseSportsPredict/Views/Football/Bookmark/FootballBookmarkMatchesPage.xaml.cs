@@ -20,33 +20,6 @@ namespace PoseSportsPredict.Views.Football.Bookmark
         public FootballBookmarkMatchesPage()
         {
             InitializeComponent();
-            MessagingCenter.Subscribe<MembershipService, MemberRoleType>(this, AppConfig.MEMBERSHIP_TYPE_CHANGED, (s, e) => MembershipTypeChanged(e));
-        }
-
-        private MemberRoleType oldMemberRoleType;
-
-        private void MTAdView_AdsLoaded(object sender, EventArgs e)
-        {
-            if (MembershipAdvantage.TryGetValue(oldMemberRoleType, out MembershipAdvantage advantage))
-            {
-                _AdMob.IsVisible = !advantage.IsBannerAdRemove;
-            }
-        }
-
-        private void MembershipTypeChanged(MemberRoleType value)
-        {
-            if (oldMemberRoleType != value)
-            {
-                if (MembershipAdvantage.TryGetValue(value, out MembershipAdvantage advantage))
-                {
-                    if (_AdMob.IsVisible)
-                    {
-                        _AdMob.IsVisible = !advantage.IsBannerAdRemove;
-                    }
-                }
-
-                oldMemberRoleType = value;
-            }
         }
     }
 }

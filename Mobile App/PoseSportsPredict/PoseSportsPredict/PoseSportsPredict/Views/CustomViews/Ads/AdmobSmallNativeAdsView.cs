@@ -19,7 +19,6 @@ namespace PoseSportsPredict.Views.Common.Ads
 
         public AdmobSmallNativeAdsView()
         {
-            this.IsVisible = false;
         }
     }
 }

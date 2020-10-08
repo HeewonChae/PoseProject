@@ -191,9 +191,8 @@
                         Elevation="3"
                         Margin="7,6"
                         Padding="5"
-                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
+                        HeightRequest="91">
                             <nativeads:AdmobSmallNativeAdsView
-                            x:Name="_native_ads"
                             ButtonColor="{StaticResource SecondaryColor}">
                             </nativeads:AdmobSmallNativeAdsView>
                         </materialui:MaterialCard>

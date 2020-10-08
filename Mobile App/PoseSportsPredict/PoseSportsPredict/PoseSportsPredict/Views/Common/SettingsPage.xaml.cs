@@ -16,36 +16,9 @@ namespace PoseSportsPredict.Views.Common
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        private MemberRoleType oldMemberRoleType;
-
         public SettingsPage()
         {
             InitializeComponent();
-            MessagingCenter.Subscribe<MembershipService, MemberRoleType>(this, AppConfig.MEMBERSHIP_TYPE_CHANGED, (s, e) => MembershipTypeChanged(e));
-        }
-
-        private void _AdMob_AdsLoaded(object sender, EventArgs e)
-        {
-            if (MembershipAdvantage.TryGetValue(oldMemberRoleType, out MembershipAdvantage advantage))
-            {
-                _AdMob.IsVisible = !advantage.IsBannerAdRemove;
-            }
-        }
-
-        private void MembershipTypeChanged(MemberRoleType value)
-        {
-            if (oldMemberRoleType != value)
-            {
-                if (MembershipAdvantage.TryGetValue(value, out MembershipAdvantage advantage))
-                {
-                    if (_AdMob.IsVisible)
-                    {
-                        _AdMob.IsVisible = !advantage.IsBannerAdRemove;
-                    }
-                }
-
-                oldMemberRoleType = value;
-            }
         }
     }
 }

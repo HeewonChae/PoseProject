@@ -14,7 +14,6 @@ namespace PoseSportsPredict.Views.Common.Ads
 
         public AdmobMediumNativeAdsView()
         {
-            this.IsVisible = false;
         }
     }
 }

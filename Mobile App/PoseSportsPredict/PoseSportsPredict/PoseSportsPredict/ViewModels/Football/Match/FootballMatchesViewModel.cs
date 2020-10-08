@@ -277,7 +277,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             await Task.Delay(300);
 
-            TimeSpan expireTime = _matchDate == DateTime.Now.Date ? TimeSpan.Zero : DateTime.Now.Date.AddDays(1) - DateTime.Now;
+            TimeSpan expireTime = Math.Abs((_matchDate - DateTime.Now.Date).Days) <= 1 ? TimeSpan.Zero : DateTime.Now.Date.AddDays(1) - DateTime.Now;
             var result = await _cacheService.GetAsync<O_GET_FIXTURES_BY_DATE>(
                 loader: () =>
                 {
@@ -420,7 +420,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var matchGroupCollection = new ObservableList<FootballMatchListViewModel>();
 
             // 추천 경기
-            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended).ToArray();
+            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended && elem.MatchTime > DateTime.Now.AddHours(-2)).ToArray();
             if (recommendedMatches.Length > 0)
             {
                 var recommendedMatchesViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
@@ -429,15 +429,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 recommendedMatchesViewModel.AlarmEditMode = _alarmEditMode;
                 recommendedMatchesViewModel.Matches = new ObservableCollection<FootballMatchInfo>(recommendedMatches.OrderBy(elem => elem.MatchTime));
                 matchGroupCollection.Add(recommendedMatchesViewModel);
-            }
 
 #if !REMOVE_ADS
-            // 네이티브 광고
-            var nativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
-            nativeAds.GroupType = MatchGroupType.NativeAds;
-            nativeAds.AdsBannerType = AdsBannerType.NativeSmall;
-            matchGroupCollection.Add(nativeAds);
+                // 네이티브 광고
+                var nativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
+                nativeAds.GroupType = MatchGroupType.NativeAds;
+                nativeAds.AdsBannerType = AdsBannerType.NativeSmall;
+                matchGroupCollection.Add(nativeAds);
 #endif
+            }
 
             var grouppingMatches = await MatchGroupingByFilterType(matchList);
 
@@ -460,7 +460,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 #if !REMOVE_ADS
             // 그룹 개수에 따라 동적으로 광고 처리
             int totalGroupCnt = grouppingMatches.Count;
-            if (totalGroupCnt > 28)
+            if (totalGroupCnt > 24)
             {
                 var mediumNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
                 mediumNativeAds.GroupType = MatchGroupType.NativeAds;
@@ -470,15 +470,15 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 var mediumNativeAds2 = ShinyHost.Resolve<FootballMatchListViewModel>();
                 mediumNativeAds2.GroupType = MatchGroupType.NativeAds;
                 mediumNativeAds2.AdsBannerType = AdsBannerType.NativeMedium2;
-                matchGroupCollection.Insert(14 + (totalGroupCnt - 14) / 2, mediumNativeAds2);
+                matchGroupCollection.Insert(matchGroupCollection.Count, mediumNativeAds2);
             }
-            else if (totalGroupCnt > 10)
+            else
             {
                 var mediumNativeAds = ShinyHost.Resolve<FootballMatchListViewModel>();
                 mediumNativeAds.GroupType = MatchGroupType.NativeAds;
                 mediumNativeAds.AdsBannerType = AdsBannerType.NativeMedium;
 
-                matchGroupCollection.Insert(10, mediumNativeAds);
+                matchGroupCollection.Insert(matchGroupCollection.Count, mediumNativeAds);
             }
 #endif
 

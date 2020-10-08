@@ -39,70 +39,64 @@
                         Elevation="3"
                         Margin="7,6"
                         Padding="0">
-                        <StackLayout Spacing="0">
-                            <StackLayout
+                        <Grid ColumnSpacing="15"
+                              Padding="15,11"
+                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="27" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="21" />
+                                <ColumnDefinition Width="14" />
+                            </Grid.ColumnDefinitions>
+                            <ffimageloading:CachedImage
+                                Grid.Column="0"
+                                Aspect="AspectFit"
+                                LoadingPlaceholder="img_world.png"
+                                ErrorPlaceholder="img_world.png"
+                                WidthRequest="27"
+                                HeightRequest="27"
+                                Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
                                 VerticalOptions="Center"
-                                Orientation="Horizontal"
-                                Padding="15,11"
-                                Spacing="15"
-                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
-                                effects:TapCommandEffect.TapParameter="{Binding .}"
-                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
-                                <ffimageloading:CachedImage
-                                    Aspect="AspectFit"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    HeightRequest="27"
-                                    WidthRequest="27"
-                                    LoadingPlaceholder="img_world.png"
-                                    ErrorPlaceholder="img_world.png"
-                                    Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
-                                    <ffimageloading:CachedImage.Transformations>
-                                        <fftransformations:CircleTransformation />
-                                    </ffimageloading:CachedImage.Transformations>
-                                </ffimageloading:CachedImage>
+                                LineBreakMode="TailTruncation"
+                                TypeScale="Subtitle1"
+                                TextColor="{StaticResource TextColor_D}"
+                                Text="{Binding Title}">
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialCard
+                                Grid.Column="2"
+                                Padding="0"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="21"
+                                WidthRequest="21"
+                                CornerRadius="21"
+                                BackgroundColor="{StaticResource CustomGrey}">
                                 <materialui:MaterialLabel
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="Center"
-                                    LineBreakMode="TailTruncation"
-                                    TypeScale="Subtitle1"
-                                    TextColor="{StaticResource TextColor_D}"
-                                    Text="{Binding Title}">
+                                    Text="{Binding MatchCount}"
+                                    TypeScale="Caption"
+                                    TextColor="White"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center">
                                 </materialui:MaterialLabel>
-                                <Image
-                                    Source="ic_prediction.png"
-                                    IsVisible="{Binding IsPredicted}"
-                                    HeightRequest="25"
-                                    WidthRequest="25"
-                                    effects:ImageEffect.TintColor="{StaticResource IconActivated}">
-                                </Image>
-                                <materialui:MaterialCard
-                                    Padding="0"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    MinimumWidthRequest="19"
-                                    MinimumHeightRequest="19"
-                                    HeightRequest="21"
-                                    WidthRequest="21"
-                                    CornerRadius="21"
-                                    BackgroundColor="{StaticResource CustomGrey}">
-                                    <materialui:MaterialLabel
-                                        Text="{Binding MatchCount}"
-                                        TypeScale="Caption"
-                                        TextColor="White"
-                                        HorizontalTextAlignment="Center"
-                                        VerticalTextAlignment="Center">
-                                    </materialui:MaterialLabel>
-                                </materialui:MaterialCard>
-                                <Image
-                                    Source="{Binding StateIcon}"
-                                    HorizontalOptions="Center"
-                                    HeightRequest="14"
-                                    WidthRequest="14"
-                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
-                                </Image>
-                            </StackLayout>
-                        </StackLayout>
+                            </materialui:MaterialCard>
+                            <Image
+                                Grid.Column="3"
+                                Source="{Binding StateIcon}"
+                                HorizontalOptions="Center"
+                                WidthRequest="14"
+                                HeightRequest="14"
+                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                            </Image>
+                        </Grid>
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
@@ -115,29 +109,40 @@
                         Elevation="3"
                         Margin="7,6"
                         Padding="0">
-                        <StackLayout Spacing="0">
-                            <StackLayout
-                                VerticalOptions="Center"
-                                Orientation="Horizontal"
+                        <Grid RowSpacing="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="0.5" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid
+                                HorizontalOptions="FillAndExpand"
+                                Grid.Row="0"
+                                ColumnSpacing="15"
                                 Padding="15,11"
-                                Spacing="15"
                                 effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
                                 effects:TapCommandEffect.TapParameter="{Binding .}"
                                 effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="27" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="14" />
+                                </Grid.ColumnDefinitions>
                                 <ffimageloading:CachedImage
+                                    Grid.Column="0"
                                     Aspect="AspectFit"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    HeightRequest="27"
-                                    WidthRequest="27"
                                     LoadingPlaceholder="img_world.png"
                                     ErrorPlaceholder="img_world.png"
+                                    WidthRequest="27"
+                                    HeightRequest="27"
                                     Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
                                     <ffimageloading:CachedImage.Transformations>
                                         <fftransformations:CircleTransformation />
                                     </ffimageloading:CachedImage.Transformations>
                                 </ffimageloading:CachedImage>
                                 <materialui:MaterialLabel
+                                    Grid.Column="1"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="Center"
                                     LineBreakMode="TailTruncation"
@@ -146,23 +151,26 @@
                                     Text="{Binding Title}">
                                 </materialui:MaterialLabel>
                                 <Image
+                                    Grid.Column="2"
                                     Source="{Binding StateIcon}"
                                     HorizontalOptions="Center"
-                                    HeightRequest="14"
                                     WidthRequest="14"
+                                    HeightRequest="14"
                                     effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
                                 </Image>
-                            </StackLayout>
+                            </Grid>
+
                             <BoxView
+                                Grid.Row="1"
+                                Margin="10,0"
                                 VerticalOptions="Center"
-                                Margin="10, 0"
-                                HeightRequest="0.5"
                                 Color="{StaticResource CustomGrey_L}">
                             </BoxView>
 
                             <!--Inner List-->
-                            <footballmatchview:FootballMatchListView />
-                        </StackLayout>
+                            <footballmatchview:FootballMatchListView
+                                Grid.Row="2" />
+                        </Grid>
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
@@ -409,9 +417,8 @@
                         Elevation="3"
                         Margin="7,6"
                         Padding="5"
-                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
+                        HeightRequest="217">
                         <nativeads:AdmobMediumNativeAdsView
-                            x:Name="_native_ads"
                             ButtonColor="{StaticResource PrimaryColor}">
                         </nativeads:AdmobMediumNativeAdsView>
                     </materialui:MaterialCard>
@@ -426,11 +433,10 @@
                         Elevation="3"
                         Margin="7,6"
                         Padding="5"
-                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
-                        <nativeads:AdmobMediumNativeAdsView
-                            x:Name="_native_ads"
+                        HeightRequest="217">
+                        <nativeads:AdmobMediumNativeAdsView2
                             ButtonColor="{StaticResource PrimaryColor}">
-                        </nativeads:AdmobMediumNativeAdsView>
+                        </nativeads:AdmobMediumNativeAdsView2>
                     </materialui:MaterialCard>
                 </ViewCell>
             </DataTemplate>
@@ -443,9 +449,8 @@
                         Elevation="3"
                         Margin="7,6"
                         Padding="5"
-                        IsVisible="{Binding Source={x:Reference _native_ads},Path=IsVisible}">
+                        HeightRequest="91">
                         <nativeads:AdmobSmallNativeAdsView
-                            x:Name="_native_ads"
                             ButtonColor="{StaticResource PrimaryColor}">
                         </nativeads:AdmobSmallNativeAdsView>
                     </materialui:MaterialCard>
@@ -471,6 +476,7 @@
                 EmptyStateMessage="{Binding [No_Match_datas], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                 <ListView
                     x:Name="lv_matches"
+                    CachingStrategy="RetainElement"
                     SeparatorVisibility="None"
                     HasUnevenRows="True"
                     SelectionMode="None"

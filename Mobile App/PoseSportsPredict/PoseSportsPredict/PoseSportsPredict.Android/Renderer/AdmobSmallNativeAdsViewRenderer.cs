@@ -40,43 +40,32 @@ namespace PoseSportsPredict.Droid.Renderer
         {
             base.OnElementChanged(e);
 
-            if (Control == null)
-            {
-                var adLoader = new AdLoader.Builder(Context, AppConfig.ADMOB_NATIVE_ADS_ID);
+            var adLoader = new AdLoader.Builder(Context, AppConfig.ADMOB_NATIVE_ADS_ID);
 
-                var listener = new UnifiedNativeAdLoadedListener();
-                listener.OnNativeAdLoaded += (s, ad) =>
+            var listener = new UnifiedNativeAdLoadedListener();
+            listener.OnNativeAdLoaded += (s, ad) =>
+            {
+                // Load ad Completed
+                try
                 {
-                    // Load ad Completed
-                    try
-                    {
-                        ButtonColor = (e.NewElement as AdmobSmallNativeAdsView).ButtonColor.ToAndroid();
-                        nativeAd = ad;
-                        var root = new UnifiedNativeAdView(Context);
-                        var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
+                    ButtonColor = (e.NewElement as AdmobSmallNativeAdsView).ButtonColor.ToAndroid();
+                    nativeAd = ad;
+                    var root = new UnifiedNativeAdView(Context);
+                    var inflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
 
-                        var nativeAdView = (UnifiedNativeAdView)inflater.Inflate(Resource.Layout.gnt_small_template_view, root);
+                    var nativeAdView = (UnifiedNativeAdView)inflater.Inflate(Resource.Layout.gnt_small_template_view, root);
 
-                        populateUnifiedNativeAdView(ad, nativeAdView);
-                        SetNativeControl(nativeAdView);
+                    populateUnifiedNativeAdView(ad, nativeAdView);
+                    SetNativeControl(nativeAdView);
+                }
+                catch
+                {
+                }
+            };
 
-                        e.NewElement.HeightRequest = 91; // DependencyService.Resolve<IScreenHelper>().DpToPixels(35);
-                        e.NewElement.IsVisible = true;
-                    }
-                    catch
-                    {
-                    }
-                };
-
-                adLoader.ForUnifiedNativeAd(listener);
-                var requestBuilder = new AdRequest.Builder();
-                adLoader.Build().LoadAd(requestBuilder.Build());
-            }
-            else
-            {
-                e.NewElement.HeightRequest = 91; //DependencyService.Resolve<IScreenHelper>().DpToPixels(35);
-                e.NewElement.IsVisible = true;
-            }
+            adLoader.ForUnifiedNativeAd(listener);
+            var requestBuilder = new AdRequest.Builder();
+            adLoader.Build().LoadAd(requestBuilder.Build());
         }
 
         private void populateUnifiedNativeAdView(UnifiedNativeAd nativeAd, UnifiedNativeAdView adView)

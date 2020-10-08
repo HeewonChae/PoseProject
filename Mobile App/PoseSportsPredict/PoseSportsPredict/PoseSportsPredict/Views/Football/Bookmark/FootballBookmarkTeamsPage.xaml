@@ -142,14 +142,6 @@
                     </renderedviews:HorizontalListView.ItemTemplate>
                 </renderedviews:HorizontalListView>
             </loader:TaskLoaderView>
-            <!--banner-->
-            <admobads:MTAdView
-                x:Name="_AdMob"
-                AdsLoaded="MTAdView_AdsLoaded"
-                 Margin="0"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="End"
-                Style="{StaticResource PoseAdsBanner}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
