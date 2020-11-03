@@ -95,6 +95,8 @@
             public const int P_GET_MATCH_H2H = Database.FootballDB + 008000;
             public const int P_GET_MATCH_ODDS = Database.FootballDB + 009000;
             public const int P_GET_MATCH_PREDICTIONS = Database.FootballDB + 010000;
+            public const int P_GET_MATCH_VIP = Database.FootballDB + 011000;
+            public const int P_GET_MATCH_VIP_HISTORY = Database.FootballDB + 012000;
         }
 
         public static class Procedure

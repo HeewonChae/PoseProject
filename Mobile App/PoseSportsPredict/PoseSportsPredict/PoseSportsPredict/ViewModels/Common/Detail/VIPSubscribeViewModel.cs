@@ -22,16 +22,9 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Common.Detail
 {
-    public class VIPClubViewModel : NavigableViewModel
+    public class VIPSubscribeViewModel : NavigableViewModel
     {
         #region NavigableViewModel
-
-        public override Task<bool> OnPrepareViewAsync(params object[] datas)
-        {
-            RefrashPurchase();
-
-            return Task.FromResult(true);
-        }
 
         public override bool OnInitializeView(params object[] datas)
         {
@@ -41,6 +34,11 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             var screenHelper = DependencyService.Resolve<IScreenHelper>();
             CardMaxWidth = screenHelper.ScreenSize.Width - 33;
             return true;
+        }
+
+        public override void OnAppearing(params object[] datas)
+        {
+            RefrashPurchase();
         }
 
         #endregion NavigableViewModel
@@ -98,8 +96,8 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
         #region Constructors
 
-        public VIPClubViewModel(
-            VipClubPage page,
+        public VIPSubscribeViewModel(
+            VIPSubscribePage page,
             InAppBillingService inAppBillingService,
             MembershipService membershipService) : base(page)
         {
@@ -128,6 +126,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             diamond.IsAvailable = _DiamondProduct != null;
             diamond.Advantages = new string[] {
                 $"● {LocalizeString.Diamond_Advantage_1}",
+                $"● {LocalizeString.Provide_VIP_Picks}",
                 $"● {LocalizeString.Diamond_Advantage_2}",
                 $"● {LocalizeString.Diamond_Advantage_3}",
                 $"● {LocalizeString.Diamond_Advantage_4}",
@@ -146,6 +145,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             vip.IsAvailable = _VIPProduct != null;
             vip.Advantages = new string[] {
                 $"● {LocalizeString.VIP_Advantage_1}",
+                $"● {LocalizeString.Provide_VIP_Picks}",
                 $"● {LocalizeString.VIP_Advantage_2}",
                 $"● {LocalizeString.VIP_Advantage_3}",
                 $"● {LocalizeString.VIP_Advantage_4}",

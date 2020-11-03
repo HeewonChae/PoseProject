@@ -124,14 +124,14 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             string isAllMatchesFilter = _curMatchFilterType == MatchFilterType.AllMatches ? $"({LocalizeString.Applying})" : "";
             string isBookmarkFilter = _curMatchFilterType == MatchFilterType.Bookmark ? $"({LocalizeString.Applying})" : "";
-            string isRecommendedFilter = _curMatchFilterType == MatchFilterType.Recommended ? $"({LocalizeString.Applying})" : "";
+            //string isRecommendedFilter = _curMatchFilterType == MatchFilterType.Recommended ? $"({LocalizeString.Applying})" : "";
             string isOngoingFilter = _curMatchFilterType == MatchFilterType.Ongoing ? $"({LocalizeString.Applying})" : "";
             string isTimeFilter = _curMatchFilterType == MatchFilterType.SortByTime ? $"({LocalizeString.Applying})" : "";
             var actions = new string[]
             {
                 $"{LocalizeString.All_Matches} {isAllMatchesFilter}",
                 $"{LocalizeString.Match_Filter_By_Bookmark} {isBookmarkFilter}",
-                $"{LocalizeString.Recommended_Matches} {isRecommendedFilter}",
+                //$"{LocalizeString.Recommended_Matches} {isRecommendedFilter}",
                 $"{LocalizeString.Ongoing_matches} {isOngoingFilter}",
                 $"{LocalizeString.Match_Sort_By_Time} {isTimeFilter}",
             };
@@ -237,7 +237,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             MatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>>();
             MatchListViewModels = null;
-            _curMatchFilterType = MatchFilterType.Recommended;
+            _curMatchFilterType = MatchFilterType.AllMatches;
             _matchDate = date.Date;
 
             UpdatePageTitle();
@@ -420,7 +420,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var matchGroupCollection = new ObservableList<FootballMatchListViewModel>();
 
             // 추천 경기
-            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended && elem.MatchTime > DateTime.Now.AddHours(-2)).ToArray();
+            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended && elem.MaxRating >= 4.5 && elem.MatchTime > DateTime.Now.AddHours(-1)).ToArray();
             if (recommendedMatches.Length > 0)
             {
                 var recommendedMatchesViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();

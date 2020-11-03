@@ -520,6 +520,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This content is for VIP members..
+        /// </summary>
+        public static string For_VIP_User {
+            get {
+                return ResourceManager.GetString("For_VIP_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Form.
         /// </summary>
         public static string Form {
@@ -943,7 +952,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is not enough data to predict.
+        ///   Looks up a localized string similar to There is not enough data to predict..
         /// </summary>
         public static string Not_Enough_Data_Predict {
             get {
@@ -1119,6 +1128,15 @@ namespace PoseSportsPredict.Resources {
         public static string Product_Not_Consumed {
             get {
                 return ResourceManager.GetString("Product_Not_Consumed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VIP Lounge daily recommended matches provided.
+        /// </summary>
+        public static string Provide_VIP_Picks {
+            get {
+                return ResourceManager.GetString("Provide_VIP_Picks", resourceCulture);
             }
         }
         
@@ -1380,6 +1398,15 @@ namespace PoseSportsPredict.Resources {
         public static string Statistics {
             get {
                 return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscribe.
+        /// </summary>
+        public static string Subscribe {
+            get {
+                return ResourceManager.GetString("Subscribe", resourceCulture);
             }
         }
         

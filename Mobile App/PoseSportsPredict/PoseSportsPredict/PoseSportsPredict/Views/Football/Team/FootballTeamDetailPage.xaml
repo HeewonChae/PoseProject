@@ -195,8 +195,8 @@
                         SelectedIndex="{Binding SelectedViewIndex, Mode=TwoWay}">
                         <tabs:TabHostView.Tabs>
                             <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Overview}" />
-                            <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Finished_Matches}" />
                             <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Scheduled_Matches}" />
+                            <tabs:UnderlinedTabItem Label="{x:Static localize:LocalizeString.Finished_Matches}" />
                         </tabs:TabHostView.Tabs>
                     </tabs:TabHostView>
                 </Grid>
@@ -217,13 +217,13 @@
                 <tabView:SfTabItem>
                     <tabView:SfTabItem.Content>
                         <ContentView
-                            Content="{Binding FinishedMatchesViewModel.CoupledView}" />
+                            Content="{Binding ScheduledMatchesViewModel.CoupledView}" />
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
                 <tabView:SfTabItem>
                     <tabView:SfTabItem.Content>
                         <ContentView
-                            Content="{Binding ScheduledMatchesViewModel.CoupledView}" />
+                            Content="{Binding FinishedMatchesViewModel.CoupledView}" />
                     </tabView:SfTabItem.Content>
                 </tabView:SfTabItem>
             </tabView:SfTabView>

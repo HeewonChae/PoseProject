@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace PoseSportsPredict.Views.Common.Detail
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class VipClubPage : ContentPage
+    public partial class VIPLoungeTabPage : TabbedPage
     {
-        public VipClubPage()
+        public VIPLoungeTabPage()
         {
             InitializeComponent();
         }

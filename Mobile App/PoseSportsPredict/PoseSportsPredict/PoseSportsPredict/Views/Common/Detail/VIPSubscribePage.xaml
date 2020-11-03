@@ -7,18 +7,13 @@
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
              xmlns:models ="clr-namespace:PoseSportsPredict.Models"
-             materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
-             materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
-             materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
-             materialui:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
-             materialui:MaterialNavigationPage.HasShadow="False"
              xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
-             x:Class="PoseSportsPredict.Views.Common.Detail.VipClubPage"
-             Title="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
-             BackgroundColor="{StaticResource TransparentPrimary}">
+             x:Class="PoseSportsPredict.Views.Common.Detail.VIPSubscribePage"
+             Title="{Binding [Subscribe], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+             BackgroundColor="{StaticResource BackgroundColor_Default}">
     <ContentPage.Content>
         <StackLayout
-            x:DataType="viewmodels:VIPClubViewModel">
+            x:DataType="viewmodels:VIPSubscribeViewModel">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.05*" />

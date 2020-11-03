@@ -36,7 +36,7 @@ namespace SportsAdminTool.Commands.Football
                     if (api_fixture == null || !Singleton.Get<CheckValidation>().IsValidFixture(api_fixture))
                     {
                         Logic.Database.FootballDBFacade.DeleteFixtures(where: $"id = {db_fixture.id}");
-                        //Logic.Database.FootballDBFacade.DeletePrediction(where: $"fixture_id = {db_fixture.id}");
+                        Logic.Database.FootballDBFacade.DeletePrediction(where: $"fixture_id = {db_fixture.id}");
                         continue;
                     }
 

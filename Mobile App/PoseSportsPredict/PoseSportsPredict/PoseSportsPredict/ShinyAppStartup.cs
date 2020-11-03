@@ -136,9 +136,14 @@ namespace PoseSportsPredict
             // Settings - My Profile
             services.AddSingleton<MyProfilePage>();
             services.AddSingleton<MyProfileViewModel>();
-            // Settings - VIP Club
-            services.AddSingleton<VipClubPage>();
-            services.AddSingleton<VIPClubViewModel>();
+            // Settings - VIP Lounge
+            services.AddSingleton<VIPLoungeTabPageViewModel>();
+            services.AddTransient<VIPSubscribePage>();
+            services.AddTransient<VIPSubscribeViewModel>();
+            services.AddTransient<VIPMatchesPage>();
+            services.AddTransient<VIPMatchesViewModel>();
+            services.AddTransient<VIPHistoryPage>();
+            services.AddTransient<VIPHistoryViewModel>();
             // Settings - Check For Updates
             services.AddSingleton<CheckForUpdatesPage>();
             services.AddSingleton<CheckForUpdatesViewModel>();

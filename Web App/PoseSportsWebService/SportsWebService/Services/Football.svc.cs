@@ -1,5 +1,6 @@
 ﻿using PosePacket.Service.Football;
 using SportsWebService.Logics;
+using SportsWebService.Models.Enums;
 using SportsWebService.Services.Contract;
 using SportsWebService.Utilities;
 using System;
@@ -109,6 +110,22 @@ namespace SportsWebService.Services
             var input = stream.StreamDeserialize<I_GET_MATCH_PREDICTIONS>();
 
             var output = Commands.Football.P_GET_MATCH_PREDICTIONS.Execute(input);
+
+            return output.SerializeToStream();
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "Promotion")]
+        public Stream P_GET_MATCH_VIP()
+        {
+            var output = Commands.Football.P_GET_MATCH_VIP.Execute();
+
+            return output.SerializeToStream();
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true)]
+        public Stream P_GET_MATCH_VIP_HISTORY()
+        {
+            var output = Commands.Football.P_GET_MATCH_VIP_HISTORY.Execute();
 
             return output.SerializeToStream();
         }

@@ -91,14 +91,24 @@
                             Source="ic_vip.png">
                         </Image>
                     </Frame>
-                    <materialui:MaterialLabel
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalTextAlignment="Start"
-                        VerticalTextAlignment="Center"
-                        TypeScale="Body1"
-                        TextColor="{StaticResource TextColor_D}"
-                        Text="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
-                    </materialui:MaterialLabel>
+                    <StackLayout Spacing="0" VerticalOptions="Center">
+                        <materialui:MaterialLabel
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="End"
+                            MaxLines="1"
+                            TypeScale="Caption"
+                            TextColor="{StaticResource TextColor_D2}"
+                            Text="{Binding [Recommended_Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
+                        <materialui:MaterialLabel
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Start"
+                            TypeScale="Body1"
+                            TextColor="{StaticResource TextColor_D}"
+                            Text="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
+                    </StackLayout>
                 </StackLayout>
             </materialui:MaterialCard>
 

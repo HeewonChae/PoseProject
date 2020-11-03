@@ -62,8 +62,8 @@ namespace PoseSportsPredict.ViewModels.Football.Team
             _tabContents = new List<BaseViewModel>
             {
                 OverviewModel,
-                FinishedMatchesViewModel,
                 ScheduledMatchesViewModel,
+                FinishedMatchesViewModel,
             };
 
             SelectedViewIndex = 0;

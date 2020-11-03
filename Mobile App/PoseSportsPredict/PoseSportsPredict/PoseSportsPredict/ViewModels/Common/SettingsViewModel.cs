@@ -142,7 +142,7 @@ namespace PoseSportsPredict.ViewModels.Common
             SetIsBusy(true);
 
             if (_OAuthService.IsAuthenticated)
-                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPClubViewModel>());
+                await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<VIPLoungeTabPageViewModel>());
             else
             {
                 bool? isLogin = await MaterialDialog.Instance.ConfirmAsync(

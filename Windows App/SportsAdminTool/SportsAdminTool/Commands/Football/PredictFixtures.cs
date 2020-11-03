@@ -64,6 +64,9 @@ namespace SportsAdminTool.Commands.Football
                     db_predictions.AddRange(PredictionFacade.PredictBothToScore(db_fixture.id, pred_data));
                     db_predictions.AddRange(PredictionFacade.PredictUnderOver(db_fixture.id, pred_data));
 
+                    // VIP Picks
+                    VIPPickFacade.CheckVipPicks(pred_data, db_predictions);
+
                     // DB Save
                     db_fixture.is_predicted = true;
                     //db_fixture.is_recommended = db_predictions.Any(elem =>

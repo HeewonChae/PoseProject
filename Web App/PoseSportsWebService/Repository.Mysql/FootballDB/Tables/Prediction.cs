@@ -55,6 +55,9 @@ namespace Repository.Mysql.FootballDB.Tables
         public bool is_hit { get; set; }
 
         [Required]
+        public bool is_vip_pick { get; set; }
+
+        [Required]
         public DateTime upt_time { get; set; }
     }
 }

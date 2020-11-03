@@ -154,8 +154,9 @@
                                                                 <RowDefinition />
                                                             </Grid.RowDefinitions>
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="27" />
                                                                 <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="90" />
                                                             </Grid.ColumnDefinitions>
                                                             <ffimageloading:CachedImage
                                                                 Grid.RowSpan="2"
@@ -196,39 +197,47 @@
                                                                 FontAttributes="None"
                                                                 Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
                                                             </materialui:MaterialLabel>
+                                                            <ContentView
+                                                                VerticalOptions="CenterAndExpand"
+                                                                Grid.RowSpan="2"
+                                                                Grid.Column="2"
+                                                                BackgroundColor="Transparent">
+                                                                <customviews:RatingView
+                                                                    x:Name="_rating"
+                                                                    WidthRequest="90"
+                                                                    HeightRequest="17"
+                                                                    StrokeWidth="0.8"
+                                                                    RatingType="Full"
+                                                                    ColorOn="{StaticResource IconActivated}"
+                                                                    OutlineOnColor="{StaticResource IconActivated}"
+                                                                    OutlineOffColor="{StaticResource IconActivated}"
+                                                                    Path="{x:Static customviews:PathConstants.Star}"
+                                                                    Count="5"
+                                                                    Value="{Binding MaxRating, Mode=OneTime}">
+                                                                    <customviews:RatingView.Triggers>
+                                                                        <DataTrigger
+                                                                            TargetType="customviews:RatingView"
+                                                                            Binding="{Binding Source={x:Reference _rating}, Path=Value}"
+                                                                            Value="0">
+                                                                            <Setter Property="IsVisible" Value="False" />
+                                                                        </DataTrigger>
+                                                                    </customviews:RatingView.Triggers>
+                                                                </customviews:RatingView>
+                                                            </ContentView>
                                                         </Grid>
-                                                        <ContentView
-                                                            HorizontalOptions="EndAndExpand"
-                                                            BackgroundColor="Transparent">
-                                                            <customviews:RatingView
-                                                                IsVisible="{Binding IsPredicted, Mode=OneTime}"
-                                                                WidthRequest="95"
-                                                                HeightRequest="19"
-                                                                StrokeWidth="0.8"
-                                                                RatingType="Full"
-                                                                ColorOn="{StaticResource IconActivated}"
-                                                                OutlineOnColor="{StaticResource IconActivated}"
-                                                                OutlineOffColor="{StaticResource IconActivated}"
-                                                                Path="{x:Static customviews:PathConstants.Star}"
-                                                                Count="5"
-                                                                Value="{Binding MaxRating, Mode=OneTime}">
-                                                            </customviews:RatingView>
-                                                        </ContentView>
                                                         <!--MatchInfo-->
                                                         <Grid
                                                             VerticalOptions="FillAndExpand"
-                                                            Padding="0,3,0,13">
+                                                            Padding="0,11,0,11">
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="10" />
                                                                 <ColumnDefinition Width="*" />
                                                                 <ColumnDefinition Width="Auto" />
                                                                 <ColumnDefinition Width="Auto" />
                                                                 <ColumnDefinition Width="Auto" />
                                                                 <ColumnDefinition Width="*" />
-                                                                <ColumnDefinition Width="10" />
                                                             </Grid.ColumnDefinitions>
                                                             <materialui:MaterialLabel
-                                                                Grid.Column="1"
+                                                                Grid.Column="0"
                                                                 LineHeight="1"
                                                                 HorizontalOptions="EndAndExpand"
                                                                 VerticalOptions="Center"
@@ -240,7 +249,7 @@
                                                                 Text="{Binding HomeName}">
                                                             </materialui:MaterialLabel>
                                                             <ffimageloading:CachedImage
-                                                                Grid.Column="2"
+                                                                Grid.Column="1"
                                                                 Margin="3,0"
                                                                 Aspect="AspectFit"
                                                                 HorizontalOptions="Center"
@@ -252,7 +261,7 @@
                                                                 Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
                                                             </ffimageloading:CachedImage>
                                                             <StackLayout
-                                                                Grid.Column="3"
+                                                                Grid.Column="2"
                                                                 Spacing="0"
                                                                 VerticalOptions="FillAndExpand">
                                                                 <materialui:MaterialLabel
@@ -277,7 +286,7 @@
                                                                 </materialui:MaterialChip>
                                                             </StackLayout>
                                                             <ffimageloading:CachedImage
-                                                                Grid.Column="4"
+                                                                Grid.Column="3"
                                                                 Margin="3,0"
                                                                 Aspect="AspectFit"
                                                                 HorizontalOptions="Center"
@@ -289,7 +298,7 @@
                                                                 Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
                                                             </ffimageloading:CachedImage>
                                                             <materialui:MaterialLabel
-                                                                Grid.Column="5"
+                                                                Grid.Column="4"
                                                                 LineHeight="1"
                                                                 HorizontalOptions="StartAndExpand"
                                                                 VerticalOptions="Center"
@@ -300,18 +309,6 @@
                                                                 TextColor="{StaticResource TextColor_D}"
                                                                 Text="{Binding AwayName}">
                                                             </materialui:MaterialLabel>
-                                                            <materialui:MaterialCard
-                                                                Grid.Column="6"
-                                                                Padding="0"
-                                                                Margin="0"
-                                                                IsVisible="{Binding IsPredicted}"
-                                                                HorizontalOptions="Center"
-                                                                VerticalOptions="Center"
-                                                                HeightRequest="10"
-                                                                WidthRequest="10"
-                                                                CornerRadius="10"
-                                                                BackgroundColor="{StaticResource IconActivated}">
-                                                            </materialui:MaterialCard>
                                                         </Grid>
                                                     </StackLayout>
                                                 </materialui:MaterialCard>

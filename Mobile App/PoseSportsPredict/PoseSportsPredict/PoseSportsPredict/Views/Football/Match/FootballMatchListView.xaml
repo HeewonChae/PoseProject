@@ -102,6 +102,7 @@
                                 Grid.ColumnSpan="5"
                                 BackgroundColor="Transparent">
                                 <customviews:RatingView
+                                    x:Name="_rating"
                                     WidthRequest="87"
                                     HeightRequest="14"
                                     StrokeWidth="0.8"
@@ -112,6 +113,14 @@
                                     Path="{x:Static customviews:PathConstants.Star}"
                                     Count="5"
                                     Value="{Binding MaxRating, Mode=OneTime}">
+                                    <customviews:RatingView.Triggers>
+                                        <DataTrigger
+                                            TargetType="customviews:RatingView"
+                                            Binding="{Binding Source={x:Reference _rating}, Path=Value}"
+                                            Value="0">
+                                            <Setter Property="IsVisible" Value="False" />
+                                        </DataTrigger>
+                                    </customviews:RatingView.Triggers>
                                 </customviews:RatingView>
                             </ContentView>
 

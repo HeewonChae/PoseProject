@@ -759,6 +759,7 @@ namespace SportsAdminTool.Logic.Database
                 $"`{nameof(FootballDB.Tables.Prediction.grade)}`, " +
                 $"`{nameof(FootballDB.Tables.Prediction.is_recommended)}`, " +
                 $"`{nameof(FootballDB.Tables.Prediction.is_hit)}`, " +
+                $"`{nameof(FootballDB.Tables.Prediction.is_vip_pick)}`, " +
                 $"`{nameof(FootballDB.Tables.Prediction.upt_time)}`)");
             sb.Append("VALUES");
 
@@ -779,7 +780,8 @@ namespace SportsAdminTool.Logic.Database
                     $"{prediction.grade}, " +
                     $"{prediction.is_recommended}, " +
                     $"{prediction.is_hit}, " +
-                    $"\"{upt_time.ToString("yyyyMMddTHHmmss")}\")");
+                    $"{prediction.is_vip_pick}, " +
+                    $"\"{upt_time:yyyyMMddTHHmmss}\")");
             }
 
             sb.Append($" ON DUPLICATE KEY UPDATE {nameof(FootballDB.Tables.Prediction.main_label)} = VALUES({nameof(FootballDB.Tables.Prediction.main_label)}), " +
@@ -791,6 +793,7 @@ namespace SportsAdminTool.Logic.Database
                 $"{nameof(FootballDB.Tables.Prediction.grade)} = VALUES({nameof(FootballDB.Tables.Prediction.grade)}), " +
                 $"{nameof(FootballDB.Tables.Prediction.is_recommended)} = VALUES({nameof(FootballDB.Tables.Prediction.is_recommended)}), " +
                 $"{nameof(FootballDB.Tables.Prediction.is_hit)} = VALUES({nameof(FootballDB.Tables.Prediction.is_hit)}), " +
+                $"{nameof(FootballDB.Tables.Prediction.is_vip_pick)} = VALUES({nameof(FootballDB.Tables.Prediction.is_vip_pick)}), " +
                 $"{nameof(FootballDB.Tables.Prediction.upt_time)} = VALUES({nameof(FootballDB.Tables.Prediction.upt_time)});");
 
             return ExecuteQuery(sb.ToString());

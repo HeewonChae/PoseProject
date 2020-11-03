@@ -4,6 +4,7 @@ using PosePacket.Service.Football.Models.Enums;
 using PredictorAPI.Models;
 using PredictorAPI.Models.Football;
 using SportsAdminTool.Model.Football;
+using Syncfusion.Data.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace SportsAdminTool.Logic.Football
     {
         private static readonly double Score_std_dev = 0.6;
 
-        private static readonly int Winner_Proba_Criteria = 55;
+        private static readonly int Winner_Proba_Criteria = 50;
         private static readonly int YN_Proba_Criteria = 50;
 
         public static List<FootballTable.Prediction> PredictFinalScore(int fixtureId, FootballPrediction data)
@@ -146,7 +147,7 @@ namespace SportsAdminTool.Logic.Football
 
         public static List<FootballTable.Prediction> PredictBothToScore(int fixtureId, FootballPrediction data)
         {
-            int[] meanProbas = GetYNMeanProbas(data.BothToScore.SGD, data.BothToScore.Sub);
+            int[] meanProbas = GetYNMeanProbas(data.BothToScore.KNN, data.BothToScore.Sub);
 
             List<FootballTable.Prediction> predictions = new List<FootballTable.Prediction>();
 
@@ -190,7 +191,7 @@ namespace SportsAdminTool.Logic.Football
             List<FootballTable.Prediction> predictions = new List<FootballTable.Prediction>();
 
             // 1.5 under over
-            int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_1_5.SGD, data.UnderOver.UO_1_5.Sub);
+            int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_1_5.KNN, data.UnderOver.UO_1_5.Sub);
             var under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_1_5, out bool isRecommend_under);
             var over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_1_5, out bool isRecommend_over);
 
@@ -224,7 +225,7 @@ namespace SportsAdminTool.Logic.Football
             }
 
             // 2.5 under over
-            meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.SGD, data.UnderOver.UO_2_5.Sub);
+            meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.KNN, data.UnderOver.UO_2_5.Sub);
             under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_2_5, out isRecommend_under);
             over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_2_5, out isRecommend_over);
 
@@ -258,7 +259,7 @@ namespace SportsAdminTool.Logic.Football
             }
 
             // 3.5 under over
-            meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.SGD, data.UnderOver.UO_3_5.Sub);
+            meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.KNN, data.UnderOver.UO_3_5.Sub);
             under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_3_5, out isRecommend_under);
             over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_3_5, out isRecommend_over);
 
@@ -292,7 +293,7 @@ namespace SportsAdminTool.Logic.Football
             }
 
             // 4.5 under over
-            meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.SGD, data.UnderOver.UO_4_5.Sub);
+            meanProbas = GetYNMeanProbas(data.UnderOver.UO_4_5.KNN, data.UnderOver.UO_4_5.Sub);
             under_grade = GetUnderOverGrade(data, FootballUnderOverType.UNDER_4_5, out isRecommend_under);
             over_grade = GetUnderOverGrade(data, FootballUnderOverType.OVER_4_5, out isRecommend_over);
 
@@ -615,7 +616,7 @@ namespace SportsAdminTool.Logic.Football
             return result;
         }
 
-        private static List<int> GetAvailableScoreSet(double pred_score, double my_att_trend, double op_def_trend, double my_avg_gf)
+        private static List<int> GetAvailableScoreList(double pred_score, double my_att_trend, double op_def_trend, double my_avg_gf)
         {
             // 예측 스코어 (반올림)
             double score1 = pred_score;
@@ -627,50 +628,36 @@ namespace SportsAdminTool.Logic.Football
             double score4 = pred_score + PredictionFacade.Score_std_dev;
 
             HashSet<int> scoreSet = new HashSet<int>();
-            scoreSet.Add((int)Math.Round(my_avg_gf, MidpointRounding.AwayFromZero));
+            scoreSet.Add((int)Math.Truncate(my_avg_gf));
             scoreSet.Add((int)Math.Round(score1, MidpointRounding.AwayFromZero));
             scoreSet.Add((int)Math.Round(score2, MidpointRounding.AwayFromZero));
             scoreSet.Add((int)Math.Truncate(score3));
             scoreSet.Add((int)Math.Truncate(score4));
 
-            var sortedArray = scoreSet.ToArray();
-            Array.Sort(sortedArray);
+            var scoreList = scoreSet.OrderBy(elem => elem).ToList();
+            for (int i = 0; i < 2; i++)
+            {
+                if (scoreList.Count > 3)
+                    scoreList.RemoveAt(0);
+                else
+                    break;
+            }
 
-            return new List<int>(sortedArray);
+            return scoreList;
         }
 
         private static Dictionary<TeamCampType, int[]> GetScoreSet(FootballPrediction data)
         {
-            var homeScoreSet = GetAvailableScoreSet(data.MatchScore.Lin_HomeScore, data.HomeStat.AttTrend, data.AwayStat.DefTrend, data.HomeStat.AvgGF);
-            var awayScoreSet = GetAvailableScoreSet(data.MatchScore.Lin_AwayScore, data.AwayStat.AttTrend, data.HomeStat.DefTrend, data.AwayStat.AvgGF);
+            var homeScoreSet = GetAvailableScoreList(data.MatchScore.Lin_HomeScore, data.HomeStat.AttTrend, data.AwayStat.DefTrend, data.HomeStat.AvgGF);
+            var awayScoreSet = GetAvailableScoreList(data.MatchScore.Lin_AwayScore, data.AwayStat.AttTrend, data.HomeStat.DefTrend, data.AwayStat.AvgGF);
             var matchWinnerType = GetMatchWinner(data.MatchWinner, out double proba);
 
             if (matchWinnerType == MatchResultType.Win)
             {
-                if (homeScoreSet.Count > 3)
-                {
-                    homeScoreSet.RemoveAt(index: homeScoreSet.Count - 2);
-                }
-
-                if (awayScoreSet.Count > 3)
-                {
-                    awayScoreSet.RemoveAt(0);
-                }
-
                 homeScoreSet.Reverse();
             }
             else if (matchWinnerType == MatchResultType.Lose)
             {
-                if (awayScoreSet.Count > 3)
-                {
-                    awayScoreSet.RemoveAt(index: homeScoreSet.Count - 2);
-                }
-
-                if (homeScoreSet.Count > 3)
-                {
-                    homeScoreSet.RemoveAt(0);
-                }
-
                 awayScoreSet.Reverse();
             }
 
@@ -686,10 +673,10 @@ namespace SportsAdminTool.Logic.Football
         private static MatchResultType GetMatchWinner(FootballMatchWinner data, out double proba)
         {
             int[] knnProba = ConvertProbaWinnerToArray(data.KNN);
-            int[] sgdProba = ConvertProbaWinnerToArray(data.SGD);
+            //int[] sgdProba = ConvertProbaWinnerToArray(data.SGD);
             int[] subProba = ConvertProbaWinnerToArray(data.Sub);
 
-            var maenProba = GetProbaArithmeticMean(knnProba, sgdProba, subProba);
+            var maenProba = GetProbaArithmeticMean(knnProba, /*sgdProba,*/ subProba);
 
             return GetMatchWinner(maenProba, out proba); ;
         }
@@ -747,13 +734,14 @@ namespace SportsAdminTool.Logic.Football
             List<int> meanProbas = new List<int>();
             for (int i = 0; i < probaElemCnt; i++)
             {
-                int elemSum = 0;
-                for (int j = 0; j < probaListCnt; j++)
-                {
-                    elemSum += probas[j][i];
-                }
+                //int elemSum = 0;
+                //for (int j = 0; j < probaListCnt; j++)
+                //{
+                //    elemSum += probas[j][i];
+                //}
 
-                meanProbas.Add(elemSum);
+                // knn 확률하고 sub 확률 기하 평균
+                meanProbas.Add(Get2ItemsHarmonicMean(probas[0][i], probas[1][i]));
             }
 
             double totalSum = meanProbas.Sum();
@@ -763,6 +751,21 @@ namespace SportsAdminTool.Logic.Football
             }
 
             return meanProbas.ToArray();
+        }
+
+        /// <summary>
+        /// 기하 평균
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private static int Get2ItemsHarmonicMean(int value1, int value2)
+        {
+            if (value1 == 0 || value2 == 0)
+                return value1 + value2;
+
+            var denominator = value1 + value2;
+
+            return 2 * (value1 * value2) / denominator;
         }
 
         private static int[] ConvertProbaWinnerToArray(ProbaWinner data)
@@ -788,21 +791,12 @@ namespace SportsAdminTool.Logic.Football
             var sgdProbas = ConvertProbaWinnerToArray(sgd);
             var subProbas = ConvertProbaWinnerToArray(sub);
 
-            if (GetMatchWinner(knnProbas, out double _) != GetMatchWinner(sgdProbas, out double _))
-                meanProbas = GetProbaArithmeticMean(knnProbas, sgdProbas, subProbas);
-            else
-                meanProbas = GetProbaArithmeticMean(sgdProbas, subProbas);
+            //if (GetMatchWinner(knnProbas, out double _) != GetMatchWinner(sgdProbas, out double _))
+            //    meanProbas = GetProbaArithmeticMean(knnProbas, sgdProbas, subProbas);
+            //else
+            //    meanProbas = GetProbaArithmeticMean(sgdProbas, subProbas);
 
-            return meanProbas;
-        }
-
-        private static int[] GetWinnerMeanProbas(ProbaWinner sgd, ProbaWinner sub)
-        {
-            int[] meanProbas = null;
-            var sgdProbas = ConvertProbaWinnerToArray(sgd);
-            var subProbas = ConvertProbaWinnerToArray(sub);
-
-            meanProbas = GetProbaArithmeticMean(sgdProbas, subProbas);
+            meanProbas = GetProbaArithmeticMean(knnProbas, subProbas);
 
             return meanProbas;
         }
@@ -849,19 +843,19 @@ namespace SportsAdminTool.Logic.Football
                 case FootballMatchWinnerType.Win:
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.Winner_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
+                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
                         grade += (meanHomeScore - meanAwayScore) > 0 ? (meanHomeScore - meanAwayScore) * 1.5 : -1;
 
-                        isRecommend = grade >= 8;
+                        isRecommend = grade >= 7;
                     }
                     break;
 
                 case FootballMatchWinnerType.Lose:
                     {
                         int probaDiff = meanProbas[2] - PredictionFacade.Winner_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
+                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
                         grade += (meanAwayScore - meanHomeScore) > 0 ? (meanAwayScore - meanHomeScore) * 1.5 : -1;
-                        isRecommend = grade >= 8;
+                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }
                     break;
 
@@ -918,13 +912,13 @@ namespace SportsAdminTool.Logic.Football
             {
                 case FootballUnderOverType.OVER_1_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_1_5.SGD, data.UnderOver.UO_1_5.Sub);
+                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_1_5.KNN, data.UnderOver.UO_1_5.Sub);
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
-                        grade += meanHomeScore > 1 ? 2 : -1.5;
-                        grade += meanAwayScore > 1 ? 2 : -1.5;
+                        grade += meanHomeScore > 1 ? 1 : -1;
+                        grade += meanAwayScore > 1 ? 1 : -1;
 
                         isRecommend = grade >= 8;
                     }
@@ -932,14 +926,12 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.UNDER_2_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.SGD, data.UnderOver.UO_2_5.Sub);
+                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.KNN, data.UnderOver.UO_2_5.Sub);
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) < 2 ? 2 : -1;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
-                        grade += meanHomeScore < 1 ? 1 : -2;
-                        grade += meanAwayScore < 1 ? 1 : -2;
+                        grade += meanHomeScore + meanAwayScore < 2.5 ? 1.5 : -0.5;
 
                         isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }
@@ -947,14 +939,12 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.OVER_2_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.SGD, data.UnderOver.UO_2_5.Sub);
+                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_2_5.KNN, data.UnderOver.UO_2_5.Sub);
 
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore + meanAwayScore) > 2 ? 2 : -1;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
-                        grade += meanHomeScore > 1.5 ? 2 : -1.5;
-                        grade += meanAwayScore > 1.5 ? 2 : -1.5;
+                        grade += meanHomeScore + meanAwayScore > 2.5 ? 1.5 : -0.5;
 
                         isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }
@@ -962,13 +952,13 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.UNDER_3_5:
                     {
-                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.SGD, data.UnderOver.UO_3_5.Sub);
+                        int[] meanProbas = GetYNMeanProbas(data.UnderOver.UO_3_5.KNN, data.UnderOver.UO_3_5.Sub);
 
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
-                        grade += meanHomeScore < 1.5 ? 1 : -2;
-                        grade += meanAwayScore < 1.5 ? 1 : -2;
+                        grade += meanHomeScore < 1.5 ? 1 : -1;
+                        grade += meanAwayScore < 1.5 ? 1 : -1;
 
                         isRecommend = grade >= 8;
                     }
@@ -988,7 +978,7 @@ namespace SportsAdminTool.Logic.Football
             var homeScores = scoreSet[TeamCampType.Home];
             var awayScores = scoreSet[TeamCampType.Away];
 
-            int[] meanProbas = GetYNMeanProbas(data.BothToScore.SGD, data.BothToScore.Sub);
+            int[] meanProbas = GetYNMeanProbas(data.BothToScore.KNN, data.BothToScore.Sub);
             double meanHomeScore = homeScores.Average();
             double meanAwayScore = awayScores.Average();
 
@@ -999,9 +989,10 @@ namespace SportsAdminTool.Logic.Football
                 case YesNoType.No:
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.YN_Proba_Criteria;
-                        grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += meanHomeScore < 1 ? 1 : -2;
-                        grade += meanAwayScore < 1 ? 1 : -2;
+                        grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
+
+                        grade += meanHomeScore < 1 ? 1 : 0;
+                        grade += meanAwayScore < 1 ? 1 : 0;
 
                         isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }
@@ -1011,8 +1002,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[1] - PredictionFacade.YN_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
-                        grade += meanHomeScore > 1.5 ? 2 : -1.5;
-                        grade += meanAwayScore > 1.5 ? 2 : -1.5;
+
+                        grade += meanHomeScore > 1 ? 1 : 0;
+                        grade += meanAwayScore > 1 ? 1 : 0;
 
                         isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
                     }

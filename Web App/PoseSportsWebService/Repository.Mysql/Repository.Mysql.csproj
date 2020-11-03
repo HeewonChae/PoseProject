@@ -104,11 +104,16 @@
     <Compile Include="FootballDBMigrations\202009071103322_InitiateFootballDB.designer.cs">
       <DependentUpon>202009071103322_InitiateFootballDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="FootballDBMigrations\202011030005434_AddVIPPickProperty.cs" />
+    <Compile Include="FootballDBMigrations\202011030005434_AddVIPPickProperty.designer.cs">
+      <DependentUpon>202011030005434_AddVIPPickProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="FootballDBMigrations\Configuration.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballFixtureDetail.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballLeagueDetail.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballStandingsDetail.cs" />
     <Compile Include="FootballDB\OutputModels\DB_FootballTeamDetail.cs" />
+    <Compile Include="FootballDB\OutputModels\DB_FootballVIPFixtureDetail.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_EXECUTE_Query.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_DATE.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_INDEX.cs" />
     <Compile Include="FootballDB\Procedures\P_SELECT_FIXTURES_BY_TEAM.cs" />
+    <Compile Include="FootballDB\Procedures\P_SELECT_VP_FIXTURES.cs" />
     <Compile Include="FootballDB\Tables\Country.cs" />
     <Compile Include="FootballDB\Tables\LeagueCoverage.cs" />
     <Compile Include="FootballDB\Tables\Fixture.cs" />
@@ -175,6 +181,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FootballDBMigrations\202009071103322_InitiateFootballDB.resx">
       <DependentUpon>202009071103322_InitiateFootballDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FootballDBMigrations\202011030005434_AddVIPPickProperty.resx">
+      <DependentUpon>202011030005434_AddVIPPickProperty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PoseGlobalDBMigrations\202009071104274_InitiateGlobalDB.resx">
       <DependentUpon>202009071104274_InitiateGlobalDB.cs</DependentUpon>

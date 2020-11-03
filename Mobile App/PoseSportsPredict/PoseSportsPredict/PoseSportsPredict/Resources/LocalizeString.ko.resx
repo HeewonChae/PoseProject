@@ -454,7 +454,7 @@
     <value>추천 리그</value>
   </data>
   <data name="Not_Enough_Data_Predict" xml:space="preserve">
-    <value>예측을 위한 데이터가 부족합니다</value>
+    <value>예측을 위한 데이터가 부족합니다.</value>
   </data>
   <data name="Final_Score" xml:space="preserve">
     <value>최종 점수</value>
@@ -671,5 +671,14 @@
   </data>
   <data name="All_Matches" xml:space="preserve">
     <value>모든 경기</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>구독</value>
+  </data>
+  <data name="Provide_VIP_Picks" xml:space="preserve">
+    <value>VIP 라운지 일일 추천 경기 제공</value>
+  </data>
+  <data name="For_VIP_User" xml:space="preserve">
+    <value>VIP 회원을 위한 컨텐츠 입니다.</value>
   </data>
 </root>

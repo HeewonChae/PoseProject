@@ -107,6 +107,15 @@
     <Compile Update="Views\AppMasterMenuPage.xaml.cs">
       <DependentUpon>AppMasterMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Common\Detail\VipSubscribePage.xaml.cs">
+      <DependentUpon>VIPSubscribePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Common\Detail\VIPLoungeTabPage.xaml.cs">
+      <DependentUpon>VIPLoungeTabPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Common\Detail\VIPLoungeTabPage_IOS.xaml.cs">
+      <DependentUpon>VIPLoungeTabPage_IOS.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Football\Bookmark\FootballBookmarkMatchesPage.xaml.cs">
       <DependentUpon>FootballBookmarkMatchesPage.xaml</DependentUpon>
     </Compile>
@@ -152,7 +161,19 @@
     <EmbeddedResource Update="Views\Common\Detail\MyProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Common\Detail\VipClubPage.xaml">
+    <EmbeddedResource Update="Views\Common\Detail\VIPHistoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Common\Detail\VIPMatchesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Common\Detail\VIPSubscribePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Common\Detail\VIPLoungeTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Common\Detail\VIPLoungeTabPage_IOS.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\League\Detail\FootballLeagueDetailScheduledMatchesView.xaml">

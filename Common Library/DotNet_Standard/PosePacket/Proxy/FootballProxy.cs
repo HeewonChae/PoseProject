@@ -38,6 +38,10 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_MATCH_PREDICTIONS = "GetMatchPredictions";
         
+        private static string _P_GET_MATCH_VIP = "GetMatchVip";
+        
+        private static string _P_GET_MATCH_VIP_HISTORY = "GetMatchVipHistory";
+        
         // Service base url
         public static string ServiceUrl
         {
@@ -154,6 +158,28 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_MATCH_PREDICTIONS;
+            }
+        }
+        
+        // MethodType: GET, Segment: GetMatchVip 
+        // InputType: null 
+        // OutputType: PosePacket.Service.Football.O_GET_MATCH_VIP
+        public static string P_GET_MATCH_VIP
+        {
+            get
+            {
+                return _P_GET_MATCH_VIP;
+            }
+        }
+        
+        // MethodType: GET, Segment: GetMatchVipHistory 
+        // InputType: null 
+        // OutputType: PosePacket.Service.Football.O_GET_MATCH_VIP_HISTORY
+        public static string P_GET_MATCH_VIP_HISTORY
+        {
+            get
+            {
+                return _P_GET_MATCH_VIP_HISTORY;
             }
         }
     }

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PoseSportsPredict.Views.Common.Detail.VIPMatchesPage"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
+             xmlns:models ="clr-namespace:PoseSportsPredict.Models"
+             Title="{Binding [Scheduled_Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+             BackgroundColor="{StaticResource BackgroundColor_Default}">
+    <ContentPage.Content>
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:VIPMatchesViewModel">
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Match_datas}"
+                TaskLoaderNotifier="{Binding VIPMatchesTaskLoaderNotifier}">
+            </loader:TaskLoaderView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

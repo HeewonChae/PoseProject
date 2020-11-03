@@ -154,8 +154,8 @@
             <!--Menu Info-->
             <StackLayout
                 Grid.Row="3"
-                Spacing="3"
-                IsVisible="{Binding IsExistRemoveAdsPurchase, Converter={StaticResource inverseBoolConverter}}">
+                Spacing="3">
+                <!--IsVisible="{Binding IsExistRemoveAdsPurchase, Converter={StaticResource inverseBoolConverter}}">-->
                 <BoxView
                     HeightRequest="0.5"
                     Color="{StaticResource CustomGrey_L}">
@@ -196,7 +196,7 @@
                                 <FormattedString>
                                     <Span Text="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" TextColor="{StaticResource TextColor_D}" />
                                     <Span Text=" ( " TextColor="{StaticResource TextColor_D2}" FontSize="13" />
-                                    <Span Text="{Binding [Remove_Video_Ads], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" TextColor="{StaticResource TextColor_D2}" FontSize="13" />
+                                    <Span Text="{Binding [Recommended_Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" TextColor="{StaticResource TextColor_D2}" FontSize="13" />
                                     <Span Text=" )" TextColor="{StaticResource TextColor_D2}" FontSize="13" />
                                 </FormattedString>
                             </materialui:MaterialLabel.FormattedText>

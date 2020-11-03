@@ -221,6 +221,7 @@
     <Compile Include="Logic\Football\Alarm\CollectDatasAndPredict.cs" />
     <Compile Include="Logic\Football\Alarm\InitializeDatabase.cs" />
     <Compile Include="Logic\Football\PredictionFacade.cs" />
+    <Compile Include="Logic\Football\VIPPickFacade.cs" />
     <Compile Include="Logic\LogicAlarmBase.cs" />
     <Compile Include="Logic\Football\CheckValidation.cs" />
     <Compile Include="Logic\Football\DataConverter.cs" />

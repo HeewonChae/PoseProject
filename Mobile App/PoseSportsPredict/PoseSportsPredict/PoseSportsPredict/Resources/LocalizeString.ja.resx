@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Check_Internet_Connection" xml:space="preserve">
-    <value>インターネットの状態を確認してください</value>
+    <value>インターネットの状態を確認してください。</value>
   </data>
   <data name="Service_Not_Available" xml:space="preserve">
-    <value>サービスがご利用出来ません</value>
+    <value>サービスがご利用出来ません。</value>
   </data>
   <data name="Not_Authenticated_Credencials" xml:space="preserve">
-    <value>認証されていないアカウントです</value>
+    <value>認証されていないアカウントです。</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>今日</value>
@@ -145,7 +145,7 @@
     <value>リーグ</value>
   </data>
   <data name="Occur_Error" xml:space="preserve">
-    <value>エラーが発生しました</value>
+    <value>エラーが発生しました。</value>
   </data>
   <data name="Loginning" xml:space="preserve">
     <value>ログイン中...</value>
@@ -154,22 +154,22 @@
     <value>リトライ</value>
   </data>
   <data name="No_Match_datas" xml:space="preserve">
-    <value>予測された試合がありません</value>
+    <value>予測された試合がありません。</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>ようこそ！</value>
   </data>
   <data name="Set_Alarm" xml:space="preserve">
-    <value>アラームが設定されました</value>
+    <value>アラームが設定されました。</value>
   </data>
   <data name="Set_Bookmark" xml:space="preserve">
-    <value>ブックマークにセーブしました</value>
+    <value>ブックマークにセーブしました。</value>
   </data>
   <data name="Cancle_Alarm" xml:space="preserve">
-    <value>アラームが消されました</value>
+    <value>アラームが消されました。</value>
   </data>
   <data name="Delete_Bookmark" xml:space="preserve">
-    <value>ブックマークが削除されました</value>
+    <value>ブックマークが削除されました。</value>
   </data>
   <data name="Overview" xml:space="preserve">
     <value>概要</value>
@@ -220,7 +220,7 @@
     <value>Poseidon Picks</value>
   </data>
   <data name="PressBack_Twice_To_Exit" xml:space="preserve">
-    <value>’戻る’ボタンをもう一度押すと閉じます</value>
+    <value>’戻る’ボタンをもう一度押すと閉じます。</value>
   </data>
   <data name="Scheduled_Matches" xml:space="preserve">
     <value>試合日程</value>
@@ -238,16 +238,16 @@
     <value>チーム</value>
   </data>
   <data name="No_Bookmarked_Leagues" xml:space="preserve">
-    <value>ブックマークされたリーグがありません</value>
+    <value>ブックマークされたリーグがありません。</value>
   </data>
   <data name="No_Bookmarked_Teams" xml:space="preserve">
-    <value>ブックマークされたチームがありません</value>
+    <value>ブックマークされたチームがありません。</value>
   </data>
   <data name="No_Bookmarked_Matches" xml:space="preserve">
-    <value>ブックマークされた試合がありません</value>
+    <value>ブックマークされた試合がありません。</value>
   </data>
   <data name="Search_League_Country" xml:space="preserve">
-    <value>国、リーグ検索</value>
+    <value>国、リーグ検索...</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>セーブ</value>
@@ -271,7 +271,7 @@
     <value>試合フィルター選択</value>
   </data>
   <data name="Match_Begin_Soon" xml:space="preserve">
-    <value>試合がすぐはじまります</value>
+    <value>試合がすぐはじまります。</value>
   </data>
   <data name="Selected" xml:space="preserve">
     <value>選択完了</value>
@@ -280,10 +280,10 @@
     <value>適用中</value>
   </data>
   <data name="No_Search_Results" xml:space="preserve">
-    <value>検索結果がありません</value>
+    <value>検索結果がありません。</value>
   </data>
   <data name="Search_Bookmark" xml:space="preserve">
-    <value>ブックマーク検索</value>
+    <value>ブックマーク検索...</value>
   </data>
   <data name="Recent_Search" xml:space="preserve">
     <value>最近検索</value>
@@ -325,7 +325,7 @@
     <value>H/A 得点</value>
   </data>
   <data name="No_Data_Available" xml:space="preserve">
-    <value>利用できるデータがありません</value>
+    <value>利用できるデータがありません。</value>
   </data>
   <data name="Statistics" xml:space="preserve">
     <value>通計</value>
@@ -415,7 +415,7 @@
     <value>得点通計</value>
   </data>
   <data name="Bookmark_Modification_Completed" xml:space="preserve">
-    <value>ブックマークの修正が完了しました</value>
+    <value>ブックマークの修正が完了しました。</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>全体</value>
@@ -556,28 +556,28 @@
     <value>オススメ試合</value>
   </data>
   <data name="Product_Not_Consumed" xml:space="preserve">
-    <value>まだ有料商品が残っています</value>
+    <value>まだ有料商品が残っています。</value>
   </data>
   <data name="Bookmark_Inventory_Full" xml:space="preserve">
-    <value>ブックマークがいっぱいです</value>
+    <value>ブックマークがいっぱいです。</value>
   </data>
   <data name="VidonAd_Load_Fail" xml:space="preserve">
-    <value>CMを読み込み中に問題が発生しました</value>
+    <value>CMを読み込み中に問題が発生しました。</value>
   </data>
   <data name="Already_Owned_Purchase" xml:space="preserve">
-    <value>もう持っている商品です</value>
+    <value>もう持っている商品です。</value>
   </data>
   <data name="Fail_Store_Connect" xml:space="preserve">
-    <value>ストアに繋がりません</value>
+    <value>ストアに繋がりません。</value>
   </data>
   <data name="Success_Purchase_But_Server_Error" xml:space="preserve">
-    <value>ご購入しましたが、サーバーにエラーが発生しました</value>
+    <value>ご購入しましたが、サーバーにエラーが発生しました。</value>
   </data>
   <data name="Restore" xml:space="preserve">
     <value>元に戻す</value>
   </data>
   <data name="Unknown_Error" xml:space="preserve">
-    <value>不明なエラーが発生しました</value>
+    <value>不明なエラーが発生しました。</value>
   </data>
   <data name="Payment_Pending_Please_Check" xml:space="preserve">
     <value>支払いは保留中です。 お支払いの確認をお願いします。</value>
@@ -640,7 +640,7 @@
     <value>アップデート</value>
   </data>
   <data name="Exist_App_Update" xml:space="preserve">
-    <value>新しいアプリのアップデートがあります</value>
+    <value>新しいアプリのアップデートがあります。</value>
   </data>
   <data name="Remove_Video_Ads" xml:space="preserve">
     <value>ビデオ広告の削除</value>
@@ -661,15 +661,24 @@
     <value>再度見ない</value>
   </data>
   <data name="Unlocked_Prediction_Five_Minutes" xml:space="preserve">
-    <value>5分間、すべての予測データが解除されます</value>
+    <value>5分間、すべての予測データが解除されます。</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>ログイン</value>
   </data>
   <data name="Require_Login" xml:space="preserve">
-    <value>ログインが必要です</value>
+    <value>ログインが必要です。</value>
   </data>
   <data name="All_Matches" xml:space="preserve">
     <value>すべての試合</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>購読</value>
+  </data>
+  <data name="Provide_VIP_Picks" xml:space="preserve">
+    <value>VIPデイリー推奨試合が提供されます</value>
+  </data>
+  <data name="For_VIP_User" xml:space="preserve">
+    <value>VIPメンバーのためのコンテンツです。</value>
   </data>
 </root>

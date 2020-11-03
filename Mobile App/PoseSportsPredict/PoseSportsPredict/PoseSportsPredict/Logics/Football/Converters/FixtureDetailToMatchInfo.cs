@@ -52,7 +52,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 IsBookmarked = false,
 
                 IsPredicted = fixtureDetail.IsPredicted,
-                IsRecommended = fixtureDetail.IsRecommeded,
+                IsRecommended = fixtureDetail.IsRecommended,
                 MaxRating = fixtureDetail.MaxGrade / 2.0,
                 HasOdds = fixtureDetail.HasOdds,
             };
@@ -96,7 +96,7 @@ namespace PoseSportsPredict.Logics.Football.Converters
                 HomeTeamScore = value.HomeScore,
                 AwayTeamScore = value.AwayScore,
                 IsPredicted = value.IsPredicted,
-                IsRecommeded = value.IsRecommended,
+                IsRecommended = value.IsRecommended,
                 HasOdds = value.HasOdds,
                 MaxGrade = (byte)(value.MaxRating * 2),
             };

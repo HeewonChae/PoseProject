@@ -458,7 +458,7 @@
     <value>Suggested</value>
   </data>
   <data name="Not_Enough_Data_Predict" xml:space="preserve">
-    <value>There is not enough data to predict</value>
+    <value>There is not enough data to predict.</value>
   </data>
   <data name="Final_Score" xml:space="preserve">
     <value>Final Score</value>
@@ -676,5 +676,14 @@
   </data>
   <data name="All_Matches" xml:space="preserve">
     <value>All Matches</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="Provide_VIP_Picks" xml:space="preserve">
+    <value>VIP Lounge daily recommended matches provided</value>
+  </data>
+  <data name="For_VIP_User" xml:space="preserve">
+    <value>This content is for VIP members.</value>
   </data>
 </root>

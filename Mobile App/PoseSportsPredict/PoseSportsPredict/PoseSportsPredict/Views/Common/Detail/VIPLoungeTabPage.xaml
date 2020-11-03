@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
+             xmlns:models ="clr-namespace:PoseSportsPredict.Models"
+             materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
+             materialui:MaterialNavigationPage.AppBarTitleTextFontSize="20"
+             materialui:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
+             materialui:MaterialNavigationPage.AppBarTitleTextAlignment="Start"
+             materialui:MaterialNavigationPage.HasShadow="False"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             x:Class="PoseSportsPredict.Views.Common.Detail.VIPLoungeTabPage"
+             Title="{Binding [VIP_Lounge], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
+             BackgroundColor="{StaticResource TransparentPrimary}">
+</TabbedPage>

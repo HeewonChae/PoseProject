@@ -55,6 +55,14 @@ namespace SportsWebService.Services.Contract
         [WebInvoke(Method = "POST", UriTemplate = "GetMatchPredictions")]
         Stream P_GET_MATCH_PREDICTIONS(Stream stream);
 
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "GetMatchVip")]
+        Stream P_GET_MATCH_VIP();
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "GetMatchVipHistory")]
+        Stream P_GET_MATCH_VIP_HISTORY();
+
         #region For Benchmark
 
         //[OperationContract]
