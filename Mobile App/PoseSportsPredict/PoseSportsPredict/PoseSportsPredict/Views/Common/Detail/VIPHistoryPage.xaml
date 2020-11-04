@@ -2,18 +2,286 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PoseSportsPredict.Views.Common.Detail.VIPHistoryPage"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
              xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:triggers="clr-namespace:PoseSportsPredict.Logics.View.Triggers"
+             xmlns:customviews="clr-namespace:PoseSportsPredict.Views.CustomViews"
              xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Common.Detail"
-             xmlns:models ="clr-namespace:PoseSportsPredict.Models"
-             xmlns:localize="clr-namespace:PoseSportsPredict.Resources"
+             xmlns:models ="clr-namespace:PoseSportsPredict.Models.Football"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              Title="{Binding [Finished_Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}"
              BackgroundColor="{StaticResource BackgroundColor_Default}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            Spacing="0"
+            x:DataType="viewmodels:VIPHistoryViewModel">
+            <loader:TaskLoaderView
+                VerticalOptions="FillAndExpand"
+                Style="{StaticResource PoseTaskLoader}"
+                EmptyStateMessage="{x:Static localize:LocalizeString.No_Match_datas}"
+                TaskLoaderNotifier="{Binding VIPMatchesTaskLoaderNotifier}">
+                <ListView
+                    x:Name="lv_matches"
+                    CachingStrategy="RetainElement"
+                    HasUnevenRows="True"
+                    SeparatorVisibility="None"
+                    SelectionMode="None"
+                    IsPullToRefreshEnabled="False"
+                    ItemsSource="{Binding Matches}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:FootballVIPMatchInfo">
+                            <ViewCell>
+                                <materialui:MaterialCard
+                                    CornerRadius="5"
+                                    Elevation="3"
+                                    Margin="7,6"
+                                    Padding="0">
+                                    <StackLayout
+                                        effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectMatchCommand, Source={x:Reference lv_matches}}"
+                                        effects:TapCommandEffect.TapParameter="{Binding .}"
+                                        effects:TapCommandEffect.LongTap="{Binding Path=BindingContext.SelectMatch_LongTapCommand, Source={x:Reference lv_matches}}"
+                                        effects:TapCommandEffect.LongTapParameter="{Binding .}"
+                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                        Spacing="0"
+                                        Padding="0">
+                                        <!--Header-->
+                                        <Grid
+                                            Padding="15,5,15,0"
+                                            ColumnSpacing="15"
+                                            RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="27" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <ffimageloading:CachedImage
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                HeightRequest="27"
+                                                WidthRequest="27"
+                                                LoadingPlaceholder="img_world.png"
+                                                ErrorPlaceholder="img_world.png"
+                                                Source="{Binding League_CountryLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                                <ffimageloading:CachedImage.Transformations>
+                                                    <fftransformations:CircleTransformation />
+                                                </ffimageloading:CachedImage.Transformations>
+                                            </ffimageloading:CachedImage>
+                                            <materialui:MaterialLabel
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                LineBreakMode="TailTruncation"
+                                                TextColor="{StaticResource TextColor_D2}"
+                                                TypeScale="Subtitle2"
+                                                VerticalOptions="CenterAndExpand">
+                                                <materialui:MaterialLabel.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding League_CountryName}" />
+                                                        <Span Text=". " />
+                                                        <Span Text="{Binding LeagueName}" />
+                                                    </FormattedString>
+                                                </materialui:MaterialLabel.FormattedText>
+                                            </materialui:MaterialLabel>
+                                            <materialui:MaterialLabel
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                TextColor="{StaticResource TextColor_D2}"
+                                                TypeScale="Subtitle2"
+                                                FontAttributes="None"
+                                                Text="{Binding MatchTime, StringFormat='{0:yyyy. MM. dd (ddd)}'}">
+                                            </materialui:MaterialLabel>
+                                        </Grid>
+
+                                        <!--MatchInfo-->
+                                        <Grid
+                                            RowSpacing="0"
+                                            Padding="20,11">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <materialui:MaterialLabel
+                                                Grid.Column="0"
+                                                LineHeight="1"
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="Center"
+                                                LineBreakMode="TailTruncation"
+                                                HorizontalTextAlignment="End"
+                                                MaxLines="2"
+                                                TypeScale="Body2"
+                                                TextColor="{StaticResource TextColor_D}"
+                                                Text="{Binding Path=BindingContext.TeamInfo.TeamId, Source={x:Reference lv_matches}}">
+                                                <materialui:MaterialLabel.Triggers>
+                                                    <EventTrigger Event="BindingContextChanged">
+                                                        <triggers:SelectedTeamLabelTrigger_Home />
+                                                    </EventTrigger>
+                                                </materialui:MaterialLabel.Triggers>
+                                            </materialui:MaterialLabel>
+                                            <ffimageloading:CachedImage
+                                                Grid.Column="1"
+                                                Margin="3,0"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                WidthRequest="29"
+                                                HeightRequest="29"
+                                                LoadingPlaceholder="img_football.png"
+                                                ErrorPlaceholder="img_football.png"
+                                                Source="{Binding HomeLogo , Converter={StaticResource svgImageSourceConverter}}">
+                                            </ffimageloading:CachedImage>
+                                            <StackLayout
+                                                Grid.Column="2"
+                                                Spacing="0"
+                                                VerticalOptions="FillAndExpand">
+                                                <materialui:MaterialLabel
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="End"
+                                                    TypeScale="Subtitle2"
+                                                    FontAttributes="None"
+                                                    TextColor="{StaticResource CustomGrey_D}"
+                                                    Text="{Binding MatchTime, StringFormat='{0:tt hh:mm}'}">
+                                                </materialui:MaterialLabel>
+                                                <materialui:MaterialChip
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="StartAndExpand"
+                                                    FontSize="14"
+                                                    TextColor="{StaticResource TextColor_L}"
+                                                    HeightRequest="19">
+                                                    <materialui:MaterialChip.Triggers>
+                                                        <EventTrigger Event="BindingContextChanged">
+                                                            <triggers:MatchStatusCtxChangeTrigger />
+                                                        </EventTrigger>
+                                                    </materialui:MaterialChip.Triggers>
+                                                </materialui:MaterialChip>
+                                            </StackLayout>
+                                            <ffimageloading:CachedImage
+                                                Grid.Column="3"
+                                                Margin="3,0"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                WidthRequest="29"
+                                                HeightRequest="29"
+                                                LoadingPlaceholder="img_football.png"
+                                                ErrorPlaceholder="img_football.png"
+                                                Source="{Binding AwayLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                            </ffimageloading:CachedImage>
+                                            <materialui:MaterialLabel
+                                                Grid.Column="4"
+                                                LineHeight="1"
+                                                HorizontalOptions="StartAndExpand"
+                                                VerticalOptions="Center"
+                                                LineBreakMode="TailTruncation"
+                                                HorizontalTextAlignment="Start"
+                                                MaxLines="2"
+                                                TypeScale="Body2"
+                                                TextColor="{StaticResource TextColor_D}"
+                                                Text="{Binding Path=BindingContext.TeamInfo.TeamId, Source={x:Reference lv_matches}}">
+                                                <materialui:MaterialLabel.Triggers>
+                                                    <EventTrigger Event="BindingContextChanged">
+                                                        <triggers:SelectedTeamLabelTrigger_Away />
+                                                    </EventTrigger>
+                                                </materialui:MaterialLabel.Triggers>
+                                            </materialui:MaterialLabel>
+                                        </Grid>
+
+                                        <!--Recommended Picks-->
+                                        <StackLayout
+                                            Spacing="2"
+                                            Margin="0,5,0,7"
+                                            BindableLayout.ItemsSource="{Binding PredictionPicks}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="models:FootballPredictionPickInfo">
+                                                    <materialui:MaterialCard
+                                                        Margin="20,0"
+                                                        Padding="0"
+                                                        Elevation="0"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        CornerRadius="5">
+                                                        <Grid
+                                                        ColumnSpacing="0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="100" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <materialui:MaterialLabel
+                                                                Grid.Column="0"
+                                                                Padding="10,4"
+                                                                HorizontalOptions="FillAndExpand"
+                                                                VerticalTextAlignment="Center"
+                                                                HorizontalTextAlignment="Start"
+                                                                TypeScale="Body2"
+                                                                FontAttributes="Bold"
+                                                                TextColor="{StaticResource TextColor_L}"
+                                                                Text="{Binding Title}">
+                                                                <materialui:MaterialLabel.Triggers>
+                                                                    <DataTrigger
+                                                                    TargetType="materialui:MaterialLabel"
+                                                                    Binding="{Binding IsHit}" Value="True">
+                                                                        <Setter Property="BackgroundColor" Value="{StaticResource WinColor}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger
+                                                                    TargetType="materialui:MaterialLabel"
+                                                                    Binding="{Binding IsHit}" Value="False">
+                                                                        <Setter Property="BackgroundColor" Value="{StaticResource LoseColor}" />
+                                                                    </DataTrigger>
+                                                                </materialui:MaterialLabel.Triggers>
+                                                            </materialui:MaterialLabel>
+                                                            <ContentView
+                                                            Grid.Column="1"
+                                                            Padding="5,0"
+                                                            HorizontalOptions="Center">
+                                                                <customviews:RatingView
+                                                                VerticalOptions="Center"
+                                                                WidthRequest="90"
+                                                                HeightRequest="17"
+                                                                StrokeWidth="0.8"
+                                                                RatingType="Full"
+                                                                ColorOn="{StaticResource IconActivated}"
+                                                                OutlineOnColor="{StaticResource IconActivated}"
+                                                                OutlineOffColor="{StaticResource IconActivated}"
+                                                                Path="{x:Static customviews:PathConstants.Star}"
+                                                                Count="5"
+                                                                Value="{Binding Rate}">
+                                                                </customviews:RatingView>
+                                                                <ContentView.Triggers>
+                                                                    <DataTrigger
+                                                                    TargetType="ContentView"
+                                                                    Binding="{Binding IsHit}" Value="True">
+                                                                        <Setter Property="BackgroundColor" Value="#c06cc72a" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger
+                                                                    TargetType="ContentView"
+                                                                    Binding="{Binding IsHit}" Value="False">
+                                                                        <Setter Property="BackgroundColor" Value="#c0d95d1c" />
+                                                                    </DataTrigger>
+                                                                </ContentView.Triggers>
+                                                            </ContentView>
+                                                        </Grid>
+                                                    </materialui:MaterialCard>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </materialui:MaterialCard>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </loader:TaskLoaderView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

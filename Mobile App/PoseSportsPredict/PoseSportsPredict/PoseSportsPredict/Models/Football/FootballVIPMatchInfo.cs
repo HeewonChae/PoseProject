@@ -6,6 +6,6 @@ namespace PoseSportsPredict.Models.Football
 {
     public class FootballVIPMatchInfo : FootballMatchInfo
     {
-        public List<FootballPredictionInfo> Predictions { get; set; }
+        public List<FootballPredictionPickInfo> PredictionPicks { get; set; }
     }
 }

@@ -14,6 +14,8 @@
              xmlns:viewmodels="clr-namespace:PoseSportsPredict.ViewModels.Football.Match.Detail"
              xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              material:MaterialNavigationPage.StatusBarColor="{StaticResource SecondaryColor_D}"
+             materialui:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
+             materialui:MaterialNavigationPage.HasShadow="False"
              BackgroundColor="{StaticResource BackgroundColor_Default}"
              x:Class="PoseSportsPredict.Views.Football.Match.Detail.FootballMatchDetailPage"
              NavigationPage.HasNavigationBar="False">

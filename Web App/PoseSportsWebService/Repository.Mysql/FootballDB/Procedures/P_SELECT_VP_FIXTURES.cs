@@ -52,7 +52,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         // Finished Fixtures
                         if (_input.IsSelectHistory)
                         {
-                            _output = footballDB.Query<DB_FootballVIPFixtureDetail>(_finishedFixturesQuery, new { StartTime = DateTime.UtcNow, EndTime = DateTime.UtcNow.AddHours(-48) });
+                            _output = footballDB.Query<DB_FootballVIPFixtureDetail>(_finishedFixturesQuery, new { StartTime = DateTime.UtcNow.AddHours(-48), EndTime = DateTime.UtcNow });
                         }
                         // Scheduled Fixtures
                         else

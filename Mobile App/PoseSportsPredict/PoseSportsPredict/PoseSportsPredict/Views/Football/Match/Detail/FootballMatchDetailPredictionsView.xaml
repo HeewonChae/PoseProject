@@ -27,11 +27,13 @@
                     <StackLayout>
                         <!--FinalScore-->
                         <materialui:MaterialCard
-                        VerticalOptions="Start"
-                        Margin="7,6"
-                        Padding="0"
-                        Elevation="3"
-                        CornerRadius="5">
+                            VerticalOptions="Start"
+                            Margin="7,6"
+                            Padding="0"
+                            Elevation="3"
+                            CornerRadius="5"
+                            IsClickable="True"
+                            ClickCommand="{Binding FinalScoreUnlockCommand}">
                             <Grid
                                 ColumnSpacing="0"
                                 RowSpacing="0">
@@ -62,9 +64,7 @@
                                         AbsoluteLayout.LayoutFlags="PositionProportional"
                                         BackgroundColor="{StaticResource CustomGrey_D}"
                                         FontSize="14"
-                                        TextColor="{StaticResource TextColor_L}"
-                                        effects:TapCommandEffect.Tap="{Binding FinalScoreUnlockCommand}"
-                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        TextColor="{StaticResource TextColor_L}">
                                         <materialui:MaterialChip.Triggers>
                                             <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsFinalScoreUnlocked}" Value="True">
                                                 <Setter Property="Image" Value="ic_unlock.png" />
@@ -86,7 +86,9 @@
                             Margin="7,6"
                             Padding="0"
                             Elevation="3"
-                            CornerRadius="5">
+                            CornerRadius="5"
+                            IsClickable="True"
+                            ClickCommand="{Binding MatchWinnerUnlockCommand}">
                             <Grid
                                 ColumnSpacing="0"
                                 RowSpacing="0">
@@ -154,9 +156,7 @@
                                         AbsoluteLayout.LayoutFlags="PositionProportional"
                                         FontSize="14"
                                         BackgroundColor="{StaticResource CustomGrey_D}"
-                                        TextColor="{StaticResource TextColor_L}"
-                                        effects:TapCommandEffect.Tap="{Binding MatchWinnerUnlockCommand}"
-                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        TextColor="{StaticResource TextColor_L}">
                                         <materialui:MaterialChip.Triggers>
                                             <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsMatchWinnerUnlocked}" Value="True">
                                                 <Setter Property="Image" Value="ic_unlock.png" />
@@ -178,7 +178,9 @@
                             Margin="7,6"
                             Padding="0"
                             Elevation="3"
-                            CornerRadius="5">
+                            CornerRadius="5"
+                            IsClickable="True"
+                            ClickCommand="{Binding BothToScoreUnlockCommand}">
                             <Grid
                                 ColumnSpacing="0"
                                 RowSpacing="0">
@@ -246,9 +248,7 @@
                                         AbsoluteLayout.LayoutFlags="PositionProportional"
                                         FontSize="14"
                                         BackgroundColor="{StaticResource CustomGrey_D}"
-                                        TextColor="{StaticResource TextColor_L}"
-                                        effects:TapCommandEffect.Tap="{Binding BothToScoreUnlockCommand}"
-                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        TextColor="{StaticResource TextColor_L}">
                                         <materialui:MaterialChip.Triggers>
                                             <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsBothToScoreUnlocked}" Value="True">
                                                 <Setter Property="Image" Value="ic_unlock.png" />
@@ -270,7 +270,9 @@
                             Margin="7,6"
                             Padding="0"
                             Elevation="3"
-                            CornerRadius="5">
+                            CornerRadius="5"
+                            IsClickable="True"
+                            ClickCommand="{Binding UnderOverUnlockCommand}">
                             <Grid
                                 ColumnSpacing="0"
                                 RowSpacing="0">
@@ -338,9 +340,7 @@
                                         AbsoluteLayout.LayoutFlags="PositionProportional"
                                         FontSize="14"
                                         BackgroundColor="{StaticResource CustomGrey_D}"
-                                        TextColor="{StaticResource TextColor_L}"
-                                        effects:TapCommandEffect.Tap="{Binding UnderOverUnlockCommand}"
-                                        effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                        TextColor="{StaticResource TextColor_L}">
                                         <materialui:MaterialChip.Triggers>
                                             <DataTrigger TargetType="materialui:MaterialChip" Binding="{Binding IsUnderOverUnlocked}" Value="True">
                                                 <Setter Property="Image" Value="ic_unlock.png" />

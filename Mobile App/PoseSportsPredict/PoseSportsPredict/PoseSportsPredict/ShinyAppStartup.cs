@@ -36,6 +36,7 @@ using PoseSportsPredict.InfraStructure.Cache;
 using PoseSportsPredict.ViewModels.Common.Detail;
 using PoseSportsPredict.Views.Common.Detail;
 using PoseSportsPredict.ViewModels.Football.Match.PredictionPick;
+using PoseSportsPredict.Logics.View.Converters;
 
 namespace PoseSportsPredict
 {
@@ -102,6 +103,8 @@ namespace PoseSportsPredict
             services.AddSingleton<FixtureDetailToMatchInfo>();
             services.AddSingleton<MatchInfoToFormInfo>();
             services.AddSingleton<FixtureDetailToTeamStatistics>();
+            services.AddSingleton<VIPFixtureDetailToVIPMatchInfo>();
+
             services.AddSingleton<StandingsDetailToStandingsInfo>();
             services.AddSingleton<LeagueDetailToLeagueInfo>();
             services.AddSingleton<TeamDetailToTeamInfo>();
@@ -112,6 +115,7 @@ namespace PoseSportsPredict
             services.AddSingleton<MatchInfoToTeamStatistics>();
             services.AddSingleton<MatchInfoToGoalLineChartData>();
             services.AddSingleton<PredictionDetailsToPredictionGroup>();
+            services.AddSingleton<PredictionLabelToString>();
         }
 
         private void MatchViewModels(IServiceCollection services)

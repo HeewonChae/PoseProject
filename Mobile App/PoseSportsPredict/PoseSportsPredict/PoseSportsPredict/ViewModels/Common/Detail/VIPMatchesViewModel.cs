@@ -1,14 +1,19 @@
-﻿using PanCardView.Extensions;
+﻿using GalaSoft.MvvmLight.Command;
+using PanCardView.Extensions;
 using PosePacket.Proxy;
 using PosePacket.Service.Football;
 using PosePacket.Service.Football.Models;
 using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football;
+using PoseSportsPredict.Logics.View.Converters;
 using PoseSportsPredict.Models.Football;
+using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
+using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Common.Detail;
 using Sharpnado.Presentation.Forms;
 using Shiny;
@@ -17,8 +22,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.ViewModels.Common.Detail
@@ -30,12 +37,19 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
         public override bool OnInitializeView(params object[] datas)
         {
             VIPMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballVIPMatchInfo>>();
+            MessagingCenter.Subscribe<SettingsViewModel, CoverageLanguage>(this, AppConfig.CULTURE_CHANGED_MSG, OnCultureChanged);
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
+            if (VIPMatchesTaskLoaderNotifier.IsSuccessfullyCompleted)
+            {
+                PullToRefresh();
+                return;
+            }
+
             if (VIPMatchesTaskLoaderNotifier.IsNotStarted)
                 VIPMatchesTaskLoaderNotifier.Load(InitVIPMatchDatas);
         }
@@ -66,6 +80,56 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
         public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
 
         #endregion Properties
+
+        #region Commands
+
+        public ICommand SelectMatchCommand { get => new RelayCommand<FootballVIPMatchInfo>((e) => SelectMatch(e)); }
+
+        private async void SelectMatch(FootballVIPMatchInfo vipMatchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), vipMatchInfo);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand SelectMatch_LongTapCommand { get => new RelayCommand<FootballVIPMatchInfo>((e) => SelectMatch_LongTap(e)); }
+
+        private void SelectMatch_LongTap(FootballVIPMatchInfo vipMatchInfo)
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            MatchInfoLongTapPopup.Execute(vipMatchInfo);
+
+            SetIsBusy(false);
+        }
+
+        public ICommand PullToRefreshCommand { get => new RelayCommand(PullToRefresh); }
+
+        private async void PullToRefresh()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+            IsListViewRefrashing = true;
+
+            var timeSpan = DateTime.UtcNow - _lastUpdateTime;
+            if (timeSpan.TotalMinutes > 1) // 1분 마다 갱신
+                await RefreshMatchesAsync();
+
+            IsListViewRefrashing = false;
+            SetIsBusy(false);
+        }
+
+        #endregion Commands
 
         #region Constructors
 
@@ -114,11 +178,17 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             if (server_result == null)
                 throw new Exception(LocalizeString.Occur_Error);
 
+            var group_vipFixtures = server_result.VIPFixtureDetails.GroupBy(elem => elem.FixtureId);
+
             _matchList = new List<FootballVIPMatchInfo>();
-            foreach (var vipFixture in server_result.VIPFixtureDetails)
+            foreach (var group_vipFixture in group_vipFixtures)
             {
+                var vipFixtures = group_vipFixture.ToArray();
+                var vipMatchInfo = ShinyHost.Resolve<VIPFixtureDetailToVIPMatchInfo>().Convert(vipFixtures);
+                _matchList.Add(vipMatchInfo);
             }
 
+            _matchList = _matchList.OrderBy(elem => elem.MatchTime).ToList();
             Matches = new ObservableList<FootballVIPMatchInfo>(_matchList);
 
             _lastUpdateTime = DateTime.UtcNow;
@@ -170,6 +240,23 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             _lastUpdateTime = DateTime.UtcNow;
 
             this.SetIsBusy(false);
+        }
+
+        private void OnCultureChanged(object sender, CoverageLanguage cl)
+        {
+            if (_matchList == null || _matchList.Count == 0)
+                return;
+
+            var predTitleConverter = ShinyHost.Resolve<PredictionLabelToString>();
+
+            foreach (var vipMmatch in _matchList)
+            {
+                foreach (var pick in vipMmatch.PredictionPicks)
+                {
+                    pick.Title = predTitleConverter.Convert(pick.MainLabel, pick.SubLabel);
+                }
+            }
+            Matches = new ObservableList<FootballVIPMatchInfo>(_matchList);
         }
 
         #endregion Methods

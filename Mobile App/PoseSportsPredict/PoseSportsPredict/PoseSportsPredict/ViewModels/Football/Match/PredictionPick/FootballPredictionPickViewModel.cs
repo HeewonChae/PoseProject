@@ -1,5 +1,6 @@
 ﻿using PosePacket.Service.Enum;
 using PosePacket.Service.Football.Models.Enums;
+using PoseSportsPredict.Logics.View.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Utilities;
@@ -84,11 +85,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.PredictionPick
 
         private void SetMatchWinnerPredictionPick(FootballPredictionInfo[] predictionInfos)
         {
+            var predTitleConverter = ShinyHost.Resolve<PredictionLabelToString>();
             var sortedPredictions = SortByGrade(predictionInfos);
 
             foreach (var prediction in sortedPredictions)
             {
-                string predictionTitle = GetMatchWinnerSubTitle(prediction.SubLabel);
+                string predictionTitle = predTitleConverter.Convert(prediction.MainLabel, prediction.SubLabel);
                 PredictionPicks.Add(new FootballPredictionPickInfo
                 {
                     Title = predictionTitle,
@@ -100,11 +102,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.PredictionPick
 
         private void SetBothToScorePredictionPick(FootballPredictionInfo[] predictionInfos)
         {
+            var predTitleConverter = ShinyHost.Resolve<PredictionLabelToString>();
             var sortedPredictions = SortByGrade(predictionInfos);
 
             foreach (var prediction in sortedPredictions)
             {
-                string predictionTitle = GetBothToScoreSubTitle(prediction.SubLabel);
+                string predictionTitle = predTitleConverter.Convert(prediction.MainLabel, prediction.SubLabel);
                 PredictionPicks.Add(new FootballPredictionPickInfo
                 {
                     Title = predictionTitle,
@@ -116,11 +119,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match.PredictionPick
 
         private void SetUnderOverPredictionPick(FootballPredictionInfo[] predictionInfos)
         {
+            var predTitleConverter = ShinyHost.Resolve<PredictionLabelToString>();
             var sortedPredictions = SortByGrade(predictionInfos);
 
             foreach (var prediction in sortedPredictions)
             {
-                string predictionTitle = GetUnderOverSubTitle(prediction.SubLabel);
+                string predictionTitle = predTitleConverter.Convert(prediction.MainLabel, prediction.SubLabel);
                 PredictionPicks.Add(new FootballPredictionPickInfo
                 {
                     Title = predictionTitle,
@@ -128,104 +132,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match.PredictionPick
                     Rate = prediction.Grade / 2.0,
                 });
             }
-        }
-
-        private string GetMatchWinnerSubTitle(int subTitle)
-        {
-            string result = string.Empty;
-
-            subTitle.TryParseEnum(out FootballMatchWinnerType subType);
-            switch (subType)
-            {
-                case FootballMatchWinnerType.Win:
-                    result = LocalizeString.Match_Winner_Win;
-                    break;
-
-                case FootballMatchWinnerType.Lose:
-                    result = LocalizeString.Match_Winner_Lose;
-                    break;
-
-                case FootballMatchWinnerType.WinOrDraw:
-                    result = LocalizeString.Match_Winner_Win_Or_Draw;
-                    break;
-
-                case FootballMatchWinnerType.DrawOrLose:
-                    result = LocalizeString.Match_Winner_Lose_Or_Draw;
-                    break;
-
-                default:
-                    break;
-            }
-
-            return result;
-        }
-
-        private string GetBothToScoreSubTitle(int subTitle)
-        {
-            string result = string.Empty;
-
-            subTitle.TryParseEnum(out YesNoType subType);
-            switch (subType)
-            {
-                case YesNoType.Yes:
-                    result = LocalizeString.Both_To_Score_Yes;
-                    break;
-
-                case YesNoType.No:
-                    result = LocalizeString.Both_To_Score_No;
-                    break;
-
-                default:
-                    break;
-            }
-
-            return result;
-        }
-
-        private string GetUnderOverSubTitle(int subTitle)
-        {
-            string result = string.Empty;
-
-            subTitle.TryParseEnum(out FootballUnderOverType subType);
-            switch (subType)
-            {
-                case FootballUnderOverType.UNDER_1_5:
-                    result = LocalizeString.Under_1_5;
-                    break;
-
-                case FootballUnderOverType.OVER_1_5:
-                    result = LocalizeString.Over_1_5;
-                    break;
-
-                case FootballUnderOverType.UNDER_2_5:
-                    result = LocalizeString.Under_2_5;
-                    break;
-
-                case FootballUnderOverType.OVER_2_5:
-                    result = LocalizeString.Over_2_5;
-                    break;
-
-                case FootballUnderOverType.UNDER_3_5:
-                    result = LocalizeString.Under_3_5;
-                    break;
-
-                case FootballUnderOverType.OVER_3_5:
-                    result = LocalizeString.Over_3_5;
-                    break;
-
-                case FootballUnderOverType.UNDER_4_5:
-                    result = LocalizeString.Under_4_5;
-                    break;
-
-                case FootballUnderOverType.OVER_4_5:
-                    result = LocalizeString.Over_4_5;
-                    break;
-
-                default:
-                    break;
-            }
-
-            return result;
         }
 
         #endregion Methods

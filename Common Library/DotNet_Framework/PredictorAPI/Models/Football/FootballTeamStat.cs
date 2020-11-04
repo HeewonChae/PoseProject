@@ -20,5 +20,8 @@ namespace PredictorAPI.Models.Football
 
         [JsonProperty("def_trend")]
         public double DefTrend { get; set; }
+
+        [JsonProperty("rest_date")]
+        public int RestDate { get; set; }
     }
 }

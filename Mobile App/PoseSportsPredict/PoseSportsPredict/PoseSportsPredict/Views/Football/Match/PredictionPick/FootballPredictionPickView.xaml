@@ -54,8 +54,8 @@
                                 BackgroundColor="{StaticResource SecondaryColor_L}">
                                     <customviews:RatingView
                                     VerticalOptions="Center"
-                                    WidthRequest="95"
-                                    HeightRequest="19"
+                                    WidthRequest="90"
+                                    HeightRequest="17"
                                     StrokeWidth="0.8"
                                     RatingType="Full"
                                     ColorOn="{StaticResource IconActivated}"
