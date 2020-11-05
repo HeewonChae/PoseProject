@@ -678,7 +678,7 @@ namespace SportsAdminTool.Logic.Football
             //int[] sgdProba = ConvertProbaWinnerToArray(data.SGD);
             int[] subProba = ConvertProbaWinnerToArray(data.Sub);
 
-            var maenProba = GetProbaArithmeticMean(knnProba, /*sgdProba,*/ subProba);
+            var maenProba = GetProbaWithWeight(knnProba, subProba);
 
             return GetMatchWinner(maenProba, out proba); ;
         }
@@ -754,12 +754,37 @@ namespace SportsAdminTool.Logic.Football
             return meanProbas.ToArray();
         }
 
+        private static int[] GetProbaWithWeight(int[] knn, int[] sub)
+        {
+            if (knn.Length == 0 || sub.Length == 0
+                || knn.Length != sub.Length)
+                throw new Exception("proba.Length is zero");
+
+            List<double> newProbas = new List<double>();
+            for (int i = 0; i < knn.Length; i++)
+            {
+                var newProba = sub[i] + (sub[i] * knn[i] / 150);
+                newProbas.Add(newProba);
+            }
+
+            double totalSum = newProbas.Sum();
+            List<int> finalProbas = new List<int>();
+            for (int i = 0; i < knn.Length; i++)
+            {
+                finalProbas.Add((int)Math.Truncate((newProbas[i] / totalSum) * 100));
+            }
+
+            return finalProbas.ToArray();
+        }
+
         private static int[] ConvertProbaWinnerToArray(ProbaWinner data)
         {
             if (data == null)
                 return new int[] { 0, 0, 0 };
 
-            return new int[] { (int)Math.Truncate(data.WinProba * 100), (int)Math.Truncate(data.DrawProba * 100), (int)Math.Truncate(data.LoseProba * 100) };
+            var sum = data.WinProba + data.DrawProba + data.LoseProba;
+
+            return new int[] { (int)Math.Truncate(data.WinProba / sum * 100), (int)Math.Truncate(data.DrawProba / sum * 100), (int)Math.Truncate(data.LoseProba / sum * 100) };
         }
 
         private static int[] ConvertProbaYNToArray(ProbaYN data)
@@ -767,7 +792,9 @@ namespace SportsAdminTool.Logic.Football
             if (data == null)
                 return new int[] { 0, 0 };
 
-            return new int[] { (int)Math.Truncate(data.NO * 100), (int)Math.Truncate(data.YES * 100) };
+            var sum = data.NO + data.YES;
+
+            return new int[] { (int)Math.Truncate(data.NO / sum * 100), (int)Math.Truncate(data.YES / sum * 100) };
         }
 
         private static int[] GetWinnerMeanProbas(ProbaWinner knn, ProbaWinner sgd, ProbaWinner sub)
@@ -782,32 +809,32 @@ namespace SportsAdminTool.Logic.Football
             //else
             //    meanProbas = GetProbaArithmeticMean(sgdProbas, subProbas);
 
-            meanProbas = GetProbaArithmeticMean(knnProbas, subProbas);
+            meanProbas = GetProbaWithWeight(knnProbas, subProbas);
 
             return meanProbas;
         }
 
-        private static int[] GetYNMeanProbas(ProbaYN knn, ProbaYN sgd, ProbaYN sub)
+        //private static int[] GetYNMeanProbas(ProbaYN knn, ProbaYN sgd, ProbaYN sub)
+        //{
+        //    int[] meanProbas = null;
+        //    var knnProbas = ConvertProbaYNToArray(knn);
+        //    var sgdProbas = ConvertProbaYNToArray(sgd);
+        //    var subProbas = ConvertProbaYNToArray(sub);
+
+        //    if (GetYesOrNo(knnProbas, out double _) != GetYesOrNo(sgdProbas, out double _))
+        //        meanProbas = GetProbaArithmeticMean(knnProbas, sgdProbas, subProbas);
+        //    else
+        //        meanProbas = GetProbaWithWeight(sgdProbas, subProbas);
+
+        //    return meanProbas;
+        //}
+
+        private static int[] GetYNMeanProbas(ProbaYN knn, ProbaYN sub)
         {
-            int[] meanProbas = null;
-            var knnProbas = ConvertProbaYNToArray(knn);
-            var sgdProbas = ConvertProbaYNToArray(sgd);
+            var sgdProbas = ConvertProbaYNToArray(knn);
             var subProbas = ConvertProbaYNToArray(sub);
 
-            if (GetYesOrNo(knnProbas, out double _) != GetYesOrNo(sgdProbas, out double _))
-                meanProbas = GetProbaArithmeticMean(knnProbas, sgdProbas, subProbas);
-            else
-                meanProbas = GetProbaArithmeticMean(sgdProbas, subProbas);
-
-            return meanProbas;
-        }
-
-        private static int[] GetYNMeanProbas(ProbaYN sgd, ProbaYN sub)
-        {
-            var sgdProbas = ConvertProbaYNToArray(sgd);
-            var subProbas = ConvertProbaYNToArray(sub);
-
-            int[] meanProbas = GetProbaArithmeticMean(sgdProbas, subProbas);
+            int[] meanProbas = GetProbaWithWeight(sgdProbas, subProbas);
 
             return meanProbas;
         }

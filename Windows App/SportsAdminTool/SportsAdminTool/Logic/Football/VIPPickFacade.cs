@@ -254,6 +254,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMax + opPredScoreMax) <= 2
                             && (myAvgGF + opAvgGF) < 1.6
+                            && myAvgGF < 0.8
+                            && myAvgGF < 0.8
                             && myAvgGA < 1
                             && opAvgGA < 1
                             && (myAvgGA + opAvgGA) < 1.6)
@@ -268,6 +270,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMax + opPredScoreMax) <= 3
                             && (myAvgGF + opAvgGF) < 2.6
+                            && myAvgGF < 1.3
+                            && myAvgGF < 1.3
                             && myAvgGA < 1.3
                             && opAvgGA < 1.3
                             && (myAvgGA + opAvgGA) < 2.3)
