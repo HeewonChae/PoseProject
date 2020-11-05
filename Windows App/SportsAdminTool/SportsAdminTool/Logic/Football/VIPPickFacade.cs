@@ -240,9 +240,11 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin + opPredScoreMin) >= 3
                             && (myAvgGF + opAvgGF) > 3.6
+                            && myAvgGF < 1.6
+                            && myAvgGF < 1.6
                             && myAvgGA > 1.3
                             && opAvgGA > 1.3
-                            && (myAvgGA + opAvgGA) > 2.9)
+                            && (myAvgGA + opAvgGA) > 2.8)
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -253,7 +255,6 @@ namespace SportsAdminTool.Logic.Football
                 case FootballUnderOverType.UNDER_2_5:
                     {
                         if ((myPredScoreMax + opPredScoreMax) <= 2
-                            && (myAvgGF + opAvgGF) < 1.6
                             && myAvgGF < 0.8
                             && myAvgGF < 0.8
                             && myAvgGA < 1
@@ -269,7 +270,6 @@ namespace SportsAdminTool.Logic.Football
                 case FootballUnderOverType.UNDER_3_5:
                     {
                         if ((myPredScoreMax + opPredScoreMax) <= 3
-                            && (myAvgGF + opAvgGF) < 2.6
                             && myAvgGF < 1.3
                             && myAvgGF < 1.3
                             && myAvgGA < 1.3

@@ -420,7 +420,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var matchGroupCollection = new ObservableList<FootballMatchListViewModel>();
 
             // 추천 경기
-            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended && elem.MaxRating >= 4.5 && elem.MatchTime > DateTime.Now.AddHours(-1)).ToArray();
+            var recommendedMatches = _matchList.Where(elem => elem.IsRecommended && elem.MaxRating > 4.5 && elem.MatchTime > DateTime.Now.AddHours(-1)).ToArray();
             if (recommendedMatches.Length > 0)
             {
                 var recommendedMatchesViewModel = ShinyHost.Resolve<FootballMatchListViewModel>();
