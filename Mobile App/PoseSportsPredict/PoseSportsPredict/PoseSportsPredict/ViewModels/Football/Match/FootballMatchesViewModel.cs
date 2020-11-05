@@ -385,11 +385,11 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     }
                     break;
 
-                case MatchFilterType.Recommended:
-                    {
-                        matchList = _matchList.Where(elem => elem.IsRecommended).OrderBy(elem => elem.MatchTime).ToList();
-                    }
-                    break;
+                //case MatchFilterType.Recommended:
+                //    {
+                //        matchList = _matchList.Where(elem => elem.IsRecommended).OrderBy(elem => elem.MatchTime).ToList();
+                //    }
+                //    break;
 
                 case MatchFilterType.Ongoing:
                     matchList = _matchList.Where(elem =>
@@ -508,7 +508,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                     }
                     break;
 
-                case MatchFilterType.Recommended:
+                //case MatchFilterType.Recommended:
                 case MatchFilterType.Ongoing:
                 case MatchFilterType.AllMatches:
                     {

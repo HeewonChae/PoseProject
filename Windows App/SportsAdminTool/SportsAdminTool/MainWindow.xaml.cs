@@ -135,20 +135,20 @@ namespace SportsAdminTool
             string org_bannerText = this._lbl_collectDatasAndPredict.Content.ToString();
             this._progRing_collectDatasAndPredict.IsActive = true;
 
-#if !DEBUG
-            if (!await FootballCommands.UpdateScheduledFixtures.Execute())
-            {
-                // Error처리
-                await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
-            }
-#endif
-
             if (this._cb_fixture_predict.IsChecked.Value)
             {
                 await FootballCommands.PredictFixtures.Execute();
 #if LINE_NOTIFY
                 // await NotifyFootballPredictions.Execute();
 #endif
+            }
+            else
+            {
+                if (!await FootballCommands.UpdateScheduledFixtures.Execute())
+                {
+                    // Error처리
+                    await FootballLogic.LogicFacade.SolveErrors(_lbl_collectDatasAndPredict);
+                }
             }
 
             await AsyncHelper.Async(Singleton.Get<FootballLogic.CheckValidation>().OutputErrorToJsonFile, "UpdateScheduledFixtures_Errors.json");

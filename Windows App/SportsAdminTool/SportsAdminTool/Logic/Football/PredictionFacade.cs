@@ -635,12 +635,14 @@ namespace SportsAdminTool.Logic.Football
             scoreSet.Add((int)Math.Truncate(score4));
 
             var scoreList = scoreSet.OrderBy(elem => elem).ToList();
-            for (int i = 0; i < 2; i++)
+            if (scoreList.Count == 5)
             {
-                if (scoreList.Count > 3)
-                    scoreList.RemoveAt(0);
-                else
-                    break;
+                scoreList.RemoveAt(4); // 최대 최소값 삭제
+                scoreList.RemoveAt(0);
+            }
+            else if (scoreList.Count == 4)
+            {
+                scoreList.RemoveAt(0); // 최소값 삭제
             }
 
             return scoreList;
@@ -734,14 +736,13 @@ namespace SportsAdminTool.Logic.Football
             List<int> meanProbas = new List<int>();
             for (int i = 0; i < probaElemCnt; i++)
             {
-                //int elemSum = 0;
-                //for (int j = 0; j < probaListCnt; j++)
-                //{
-                //    elemSum += probas[j][i];
-                //}
+                int elemSum = 0;
+                for (int j = 0; j < probaListCnt; j++)
+                {
+                    elemSum += probas[j][i];
+                }
 
-                // knn 확률하고 sub 확률 기하 평균
-                meanProbas.Add(Get2ItemsHarmonicMean(probas[0][i], probas[1][i]));
+                meanProbas.Add(elemSum);
             }
 
             double totalSum = meanProbas.Sum();
@@ -751,21 +752,6 @@ namespace SportsAdminTool.Logic.Football
             }
 
             return meanProbas.ToArray();
-        }
-
-        /// <summary>
-        /// 기하 평균
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private static int Get2ItemsHarmonicMean(int value1, int value2)
-        {
-            if (value1 == 0 || value2 == 0)
-                return value1 + value2;
-
-            var denominator = value1 + value2;
-
-            return 2 * (value1 * value2) / denominator;
         }
 
         private static int[] ConvertProbaWinnerToArray(ProbaWinner data)

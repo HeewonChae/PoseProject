@@ -52,7 +52,7 @@ namespace SportsAdminTool.Commands.Football
                         if (pred_data == null)
                             continue;
                     }
-                    catch
+                    catch(Exception e)
                     {
                         break;
                     }

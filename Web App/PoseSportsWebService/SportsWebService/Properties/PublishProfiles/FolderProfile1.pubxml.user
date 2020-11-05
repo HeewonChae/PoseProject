@@ -11,7 +11,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/02/2020 07:29:29</publishTime>
     </File>
     <File Include="App_Data/ErrorCodeDescription.json">
-      <publishTime>09/21/2020 07:37:32</publishTime>
+      <publishTime>11/04/2020 04:52:28</publishTime>
     </File>
     <File Include="App_Data/InAppPurchase.json">
       <publishTime>09/07/2020 08:15:46</publishTime>
@@ -23,7 +23,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/15/2020 01:49:33</publishTime>
     </File>
     <File Include="bin/App_Data/ErrorCodeDescription.json">
-      <publishTime>09/21/2020 07:37:32</publishTime>
+      <publishTime>11/04/2020 04:52:28</publishTime>
     </File>
     <File Include="bin/App_Data/InAppPurchase.json">
       <publishTime>09/07/2020 08:15:46</publishTime>
@@ -80,10 +80,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/02/2020 07:29:30</publishTime>
     </File>
     <File Include="bin/LogicCore.dll">
-      <publishTime>09/15/2020 01:52:44</publishTime>
+      <publishTime>11/05/2020 05:55:06</publishTime>
     </File>
     <File Include="bin/LogicCore.pdb">
-      <publishTime>09/15/2020 01:52:44</publishTime>
+      <publishTime>11/05/2020 05:55:06</publishTime>
     </File>
     <File Include="bin/MessagePack.Annotations.dll">
       <publishTime>06/02/2020 07:29:29</publishTime>
@@ -200,43 +200,43 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/02/2020 07:29:28</publishTime>
     </File>
     <File Include="bin/PoseCrypto.dll">
-      <publishTime>09/27/2020 14:56:23</publishTime>
+      <publishTime>11/05/2020 05:55:06</publishTime>
     </File>
     <File Include="bin/PoseCrypto.pdb">
-      <publishTime>09/27/2020 14:56:23</publishTime>
+      <publishTime>11/05/2020 05:55:06</publishTime>
     </File>
     <File Include="bin/PosePacket.dll">
-      <publishTime>09/27/2020 14:56:23</publishTime>
+      <publishTime>11/05/2020 05:55:06</publishTime>
     </File>
     <File Include="bin/PosePacket.pdb">
-      <publishTime>09/27/2020 14:56:23</publishTime>
+      <publishTime>11/05/2020 05:55:06</publishTime>
     </File>
     <File Include="bin/Repository.dll">
-      <publishTime>09/27/2020 14:56:24</publishTime>
+      <publishTime>11/05/2020 05:55:07</publishTime>
     </File>
     <File Include="bin/Repository.dll.config">
       <publishTime>06/02/2020 07:29:27</publishTime>
     </File>
     <File Include="bin/Repository.Mysql.dll">
-      <publishTime>09/27/2020 14:56:25</publishTime>
+      <publishTime>11/05/2020 05:55:08</publishTime>
     </File>
     <File Include="bin/Repository.Mysql.dll.config">
       <publishTime>06/02/2020 07:29:29</publishTime>
     </File>
     <File Include="bin/Repository.Mysql.pdb">
-      <publishTime>09/27/2020 14:56:25</publishTime>
+      <publishTime>11/05/2020 05:55:08</publishTime>
     </File>
     <File Include="bin/Repository.pdb">
-      <publishTime>09/27/2020 14:56:24</publishTime>
+      <publishTime>11/05/2020 05:55:07</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>05/18/2020 11:55:38</publishTime>
     </File>
     <File Include="bin/SportsWebService.dll">
-      <publishTime>09/27/2020 14:56:29</publishTime>
+      <publishTime>11/05/2020 05:55:11</publishTime>
     </File>
     <File Include="bin/SportsWebService.pdb">
-      <publishTime>09/27/2020 14:56:29</publishTime>
+      <publishTime>11/05/2020 05:55:11</publishTime>
     </File>
     <File Include="bin/StackExchange.Redis.dll">
       <publishTime>06/02/2020 07:29:28</publishTime>
@@ -269,10 +269,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/02/2020 07:29:28</publishTime>
     </File>
     <File Include="bin/WebServiceShare.dll">
-      <publishTime>09/27/2020 14:56:26</publishTime>
+      <publishTime>11/05/2020 05:55:08</publishTime>
     </File>
     <File Include="bin/WebServiceShare.pdb">
-      <publishTime>09/27/2020 14:56:26</publishTime>
+      <publishTime>11/05/2020 05:55:08</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>06/02/2020 07:42:26</publishTime>
@@ -290,7 +290,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/02/2020 07:29:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/08/2020 16:10:38</publishTime>
+      <publishTime>11/05/2020 06:10:07</publishTime>
     </File>
   </ItemGroup>
 </Project>
