@@ -104,6 +104,7 @@ namespace PoseSportsPredict
             services.AddSingleton<MatchInfoToFormInfo>();
             services.AddSingleton<FixtureDetailToTeamStatistics>();
             services.AddSingleton<VIPFixtureDetailToVIPMatchInfo>();
+            services.AddSingleton<VIPMatchInfoToMatchInfo>();
 
             services.AddSingleton<StandingsDetailToStandingsInfo>();
             services.AddSingleton<LeagueDetailToLeagueInfo>();

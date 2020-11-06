@@ -7,6 +7,7 @@ using PosePacket.Service.Football.Models.Enums;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
 using PoseSportsPredict.Logics.Football;
+using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Logics.View.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Common;
@@ -92,7 +93,8 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
             SetIsBusy(true);
 
-            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), vipMatchInfo);
+            FootballMatchInfo matchInfo = ShinyHost.Resolve<VIPMatchInfoToMatchInfo>().Convert(vipMatchInfo);
+            await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
 
             SetIsBusy(false);
         }
@@ -106,7 +108,8 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
             SetIsBusy(true);
 
-            MatchInfoLongTapPopup.Execute(vipMatchInfo);
+            FootballMatchInfo matchInfo = ShinyHost.Resolve<VIPMatchInfoToMatchInfo>().Convert(vipMatchInfo);
+            MatchInfoLongTapPopup.Execute(matchInfo);
 
             SetIsBusy(false);
         }

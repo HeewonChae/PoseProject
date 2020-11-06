@@ -118,7 +118,8 @@ namespace SportsAdminTool.Logic.Football
             var matchTime = fixture.MatchTime;
             var status = fixture.Status;
 
-            if (matchTime < DateTime.UtcNow.AddHours(-4) // 경기시작 후 4시간 지남
+            if (matchTime < DateTime.UtcNow.AddHours(-2) // 경기시작 후 2시간 지남
+                && status != ApiModel.Football.Enums.FixtureStatusType.FH   // 전반
                 && status != ApiModel.Football.Enums.FixtureStatusType.SH   // 후반
                 && status != ApiModel.Football.Enums.FixtureStatusType.ET   // 연장
                 && status != ApiModel.Football.Enums.FixtureStatusType.BT   // 연장 브레이크 타임
