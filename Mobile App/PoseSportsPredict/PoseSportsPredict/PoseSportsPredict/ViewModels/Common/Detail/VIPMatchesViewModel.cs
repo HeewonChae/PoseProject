@@ -229,7 +229,17 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
                 vipMatch.AwayScore = match.AwayScore;
                 vipMatch.MatchTime = match.MatchTime;
 
-                needRefrashMatchIndexes.Remove(match.Id);
+                if (vipMatch.MatchStatus == FootballMatchStatusType.FT
+                   || vipMatch.MatchStatus == FootballMatchStatusType.AET
+                   || vipMatch.MatchStatus == FootballMatchStatusType.PEN)
+                {
+                    // VIP History 페이지로 전달
+                    ShinyHost.Resolve<VIPHistoryViewModel>().NeedHistoryUpdate();
+                }
+                else
+                {
+                    needRefrashMatchIndexes.Remove(match.Id);
+                }
             }
 
             foreach (var remainIndex in needRefrashMatchIndexes)

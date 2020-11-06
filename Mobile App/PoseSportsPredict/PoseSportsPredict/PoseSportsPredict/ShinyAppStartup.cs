@@ -144,11 +144,11 @@ namespace PoseSportsPredict
             // Settings - VIP Lounge
             services.AddSingleton<VIPLoungeTabPageViewModel>();
             services.AddTransient<VIPSubscribePage>();
-            services.AddTransient<VIPSubscribeViewModel>();
+            services.AddSingleton<VIPSubscribeViewModel>();
             services.AddTransient<VIPMatchesPage>();
-            services.AddTransient<VIPMatchesViewModel>();
+            services.AddSingleton<VIPMatchesViewModel>();
             services.AddTransient<VIPHistoryPage>();
-            services.AddTransient<VIPHistoryViewModel>();
+            services.AddSingleton<VIPHistoryViewModel>();
             // Settings - Check For Updates
             services.AddSingleton<CheckForUpdatesPage>();
             services.AddSingleton<CheckForUpdatesViewModel>();

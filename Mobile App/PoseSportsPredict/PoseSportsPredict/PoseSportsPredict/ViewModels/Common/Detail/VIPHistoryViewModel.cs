@@ -154,6 +154,11 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             return _matchList;
         }
 
+        public void NeedHistoryUpdate()
+        {
+            VIPMatchesTaskLoaderNotifier = new TaskLoaderNotifier<IReadOnlyCollection<FootballVIPMatchInfo>>();
+        }
+
         private void OnCultureChanged(object sender, CoverageLanguage cl)
         {
             if (_matchList == null || _matchList.Count == 0)

@@ -194,7 +194,7 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (btsPred.grade > 5
                             && (myPredScoreMin >= 1 && opPredScoreMin >= 1)
-                            && ((myAvgGF > 1.8 && opAvgGA > 1.5) && (opAvgGF > 1.8 && myAvgGA > 1.5)))
+                            && ((myAvgGF > 1.6 && opAvgGA > 1.4) && (opAvgGF > 1.6 && myAvgGA > 1.4)))
                             btsPred.is_vip_pick = true;
                     }
                     break;
@@ -203,7 +203,7 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (btsPred.grade > 5
                             && (myPredScoreMin == 0 && opPredScoreMin == 0)
-                            && ((myAvgGF < 0.6 && opAvgGA < 0.6) || (opAvgGF < 0.6 && myAvgGA < 0.6)))
+                            && ((myAvgGF < 0.8 && opAvgGA < 0.6) || (opAvgGF < 0.8 && myAvgGA < 0.6)))
                             btsPred.is_vip_pick = true;
                     }
                     break;
@@ -235,12 +235,10 @@ namespace SportsAdminTool.Logic.Football
                 return;
             else if (over_1_5_Pred != null
                 && over_1_5_Pred.is_recommended
-                && btsResultType == YesNoType.Yes
                 && CheckUnderOverProcess(FootballUnderOverType.OVER_1_5, data, over_1_5_Pred, homeScorePred, awayScorePred))
                 return;
             else if (under_3_5_Pred != null
                 && under_3_5_Pred.is_recommended
-                && btsResultType == YesNoType.No
                 && CheckUnderOverProcess(FootballUnderOverType.UNDER_3_5, data, under_3_5_Pred, homeScorePred, awayScorePred))
                 return;
         }
@@ -261,12 +259,10 @@ namespace SportsAdminTool.Logic.Football
             {
                 case FootballUnderOverType.OVER_1_5:
                     {
-                        if ((myPredScoreMin + opPredScoreMin) > 0.5
+                        if ((myPredScoreMin + opPredScoreMin) >= 1
                             && (myAvgGF + opAvgGF) > 2.8
-                            && myAvgGF > 1.3
-                            && opAvgGF > 1.3
-                            && myAvgGA > 1.0
-                            && opAvgGA > 1.0)
+                            && ((myAvgGF > 1.4 && opAvgGF > 1.4 && myAvgGA > 1.2 && opAvgGA > 1.2)
+                                || ((myAvgGF > 1.8 && opAvgGA > 1.8) || (opAvgGF > 1.8 && myAvgGA > 1.8))))
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -276,12 +272,12 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.OVER_2_5:
                     {
-                        if ((myPredScoreMin + opPredScoreMin) > 1.5
+                        if ((myPredScoreMin + opPredScoreMin) >= 2
                             && (myAvgGF + opAvgGF) > 3.8
                             && myAvgGF > 1.8
                             && opAvgGF > 1.8
-                            && myAvgGA > 1.5
-                            && opAvgGA > 1.5)
+                            && myAvgGA > 1.6
+                            && opAvgGA > 1.6)
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -291,7 +287,7 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.UNDER_2_5:
                     {
-                        if ((myPredScoreMax + opPredScoreMax) < 2.5
+                        if ((myPredScoreMax + opPredScoreMax) <= 2
                             && myAvgGF < 0.8
                             && opAvgGF < 0.8
                             && myAvgGA < 1
@@ -306,11 +302,11 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballUnderOverType.UNDER_3_5:
                     {
-                        if ((myPredScoreMax + opPredScoreMax) < 3.5
-                            && myAvgGF < 1.3
-                            && opAvgGF < 1.3
-                            && myAvgGA < 1.5
-                            && opAvgGA < 1.5
+                        if ((myPredScoreMax + opPredScoreMax) <= 3
+                            && myAvgGF < 1.2
+                            && opAvgGF < 1.2
+                            && myAvgGA < 1.4
+                            && opAvgGA < 1.4
                             && (myAvgGA + opAvgGA) < 2.8)
                         {
                             underOverPred.is_vip_pick = true;
