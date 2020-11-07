@@ -109,7 +109,7 @@ namespace SportsAdminTool.Logic.Football
                         if ((myPredScoreMin - opPredScoreMin) > 1
                             && (myPredScoreMax - opPredScoreMax) > 1
                             && (myAvgGF - opAvgGF) > 1
-                            && (myAvgGA - opAvgGA) < -1
+                            && (myAvgGA - opAvgGA) < -0.6
                             && myRestDate > 3
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -123,8 +123,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin - opPredScoreMin) > 1
                             && (myPredScoreMax - opPredScoreMax) > 1
-                            && (myAvgGF - opAvgGF) > 1.3
-                            && (myAvgGA - opAvgGA) < -1.3
+                            && (myAvgGF - opAvgGF) > 1.2
+                            && (myAvgGA - opAvgGA) < -0.8
                             && myRestDate > 3
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -138,8 +138,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (myPredScoreMin > opPredScoreMin
                             && myPredScoreMax > opPredScoreMax
-                            && (myAvgGF - opAvgGF) > 0.5
-                            && (myAvgGA - opAvgGA) < -0.5
+                            && (myAvgGF - opAvgGF) > 0.6
+                            && (myAvgGA - opAvgGA) < -0.4
                             && myRestDate > 3
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -154,7 +154,7 @@ namespace SportsAdminTool.Logic.Football
                         if (myPredScoreMin > opPredScoreMin
                             && myPredScoreMax > opPredScoreMax
                             && (myAvgGF - opAvgGF) > 0.8
-                            && (myAvgGA - opAvgGA) < -0.8
+                            && (myAvgGA - opAvgGA) < -0.6
                             && myRestDate > 3
                             && (myRestDate - opRestDate) > -6)
                         {
