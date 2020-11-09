@@ -221,6 +221,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             }
 
             var updatedMatches = await RefreshMatchInfos.Execute(needRefrashMatchIndexes.ToArray());
+            bool isNeedHistoryUpdate = false;
             foreach (var match in updatedMatches)
             {
                 var vipMatch = _matchList.Find(elem => elem.Id == match.Id);
@@ -233,8 +234,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
                    || vipMatch.MatchStatus == FootballMatchStatusType.AET
                    || vipMatch.MatchStatus == FootballMatchStatusType.PEN)
                 {
-                    // VIP History 페이지로 전달
-                    ShinyHost.Resolve<VIPHistoryViewModel>().NeedHistoryUpdate();
+                    isNeedHistoryUpdate = true;
                 }
                 else
                 {
@@ -246,6 +246,12 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             {
                 var foundIdx = _matchList.FindIndex(elem => elem.Id == remainIndex);
                 _matchList.RemoveAt(foundIdx);
+            }
+
+            if (isNeedHistoryUpdate)
+            {
+                // VIP History 페이지로 전달
+                ShinyHost.Resolve<VIPHistoryViewModel>().NeedHistoryUpdate();
             }
 
             Matches = new ObservableList<FootballVIPMatchInfo>(_matchList);

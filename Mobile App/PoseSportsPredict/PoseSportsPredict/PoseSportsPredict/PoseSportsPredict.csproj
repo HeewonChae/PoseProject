@@ -137,6 +137,9 @@
     <Compile Update="Views\Football\League\Detail\FootballLeagueDetailPage.xaml.cs">
       <DependentUpon>FootballLeagueDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Football\Match\FootballMatchesSearchPage.xaml.cs">
+      <DependentUpon>FootballMatchesSearchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Football\Match\FootballMatchesTabPage_IOS.xaml.cs">
       <DependentUpon>FootballMatchesTabPage_IOS.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Match\Detail\FootballPredictionUnderOverPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Football\Match\FootballMatchesSearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Football\Match\PredictionPick\FootballPredictionPickView.xaml">

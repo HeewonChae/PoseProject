@@ -56,7 +56,8 @@ namespace SportsWebService.Commands.Auth
                     PlatformId = externAuthUser.Id,
                     PlatformType = externAuthUser.SNSProvider.ToString(),
                     PlatformEmail = externAuthUser.Email,
-                    RoleType = ServiceRoleType.Regular.ToString(), // default 회원등급
+                    RoleType = ServiceRoleType.Promotion.ToString(),//ServiceRoleType.Regular.ToString(), // default 회원등급
+                    RoleExpireTime = DateTime.UtcNow.AddDays(7),
                     CurrentTime = DateTime.UtcNow,
                 });
 

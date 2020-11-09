@@ -686,4 +686,13 @@
   <data name="For_VIP_User" xml:space="preserve">
     <value>This content is for VIP members.</value>
   </data>
+  <data name="New_Signup_Event_Contents" xml:space="preserve">
+    <value>When you sign up for a new one, you will receive a 7-day free pass to the VIP lounge.</value>
+  </data>
+  <data name="Event_Title" xml:space="preserve">
+    <value>★ Event ★</value>
+  </data>
+  <data name="Search_Matches" xml:space="preserve">
+    <value>Search Match...</value>
+  </data>
 </root>

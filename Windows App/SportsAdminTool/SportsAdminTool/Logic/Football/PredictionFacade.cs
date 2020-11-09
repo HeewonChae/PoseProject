@@ -631,16 +631,16 @@ namespace SportsAdminTool.Logic.Football
             scoreSet.Add((int)Math.Truncate(my_avg_gf));
             scoreSet.Add((int)Math.Round(score1, MidpointRounding.AwayFromZero));
             scoreSet.Add((int)Math.Round(score2, MidpointRounding.AwayFromZero));
-            scoreSet.Add((int)Math.Truncate(score3));
+            scoreSet.Add((int)Math.Round(score3, MidpointRounding.AwayFromZero));
             scoreSet.Add((int)Math.Truncate(score4));
 
             var scoreList = scoreSet.OrderBy(elem => elem).ToList();
-            if (scoreList.Count == 5)
+            if (scoreList.Count > 4)
             {
-                scoreList.RemoveAt(4); // 최대 최소값 삭제
+                scoreList.RemoveAt(4); // 최대,최소값 삭제
                 scoreList.RemoveAt(0);
             }
-            else if (scoreList.Count == 4)
+            else if (scoreList.Count >= 3)
             {
                 scoreList.RemoveAt(0); // 최소값 삭제
             }

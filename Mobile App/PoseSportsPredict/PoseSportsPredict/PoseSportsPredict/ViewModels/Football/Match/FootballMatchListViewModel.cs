@@ -88,6 +88,12 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsBusy(true);
 
+            if (FootballMatchesSearchViewModel.Singleton.IsSearching)
+            {
+                await PageSwitcher.PopPopupAsync();
+                FootballMatchesSearchViewModel.Singleton.SelectedMatchInfo(matchInfo);
+            }
+
             await PageSwitcher.PushNavPageAsync(ShinyHost.Resolve<FootballMatchDetailViewModel>(), matchInfo);
 
             SetIsBusy(false);

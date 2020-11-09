@@ -119,7 +119,9 @@ namespace PoseSportsPredict.ViewModels
                 await PageUriLinker.GoUrlLinkedPage();
             }
             else
+            {
                 await PageSwitcher.PopNavPageAsync();
+            }
 
             // Restore PurchasedItem
             var inAppBillingService = ShinyHost.Resolve<InAppBillingService>();
@@ -137,6 +139,20 @@ namespace PoseSportsPredict.ViewModels
             await MaterialDialog.Instance.SnackbarAsync(LocalizeString.Welcome);
             await PageSwitcher.SwitchMainPageAsync(ShinyHost.Resolve<AppMasterViewModel>(), true);
             await PageUriLinker.GoUrlLinkedPage();
+
+            // 첫 로그인 프로모션 이벤트 창
+            LocalStorage.Storage.GetValueOrDefault(LocalStorageKey.IsDismissLoginEventPopup, out bool isDismiss);
+            if (!isDismiss)
+            {
+                var ret = await MaterialDialog.Instance.ConfirmAsync(LocalizeString.New_Signup_Event_Contents,
+                LocalizeString.Event_Title,
+                LocalizeString.Ok,
+                LocalizeString.Dont_Show_Again,
+                DialogConfiguration.AppTitleAlterDialogConfiguration);
+
+                if (ret.HasValue && !ret.Value)
+                    LocalStorage.Storage.AddOrUpdateValue(LocalStorageKey.IsDismissLoginEventPopup, true);
+            }
 
             return true;
         }

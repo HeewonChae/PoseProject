@@ -681,4 +681,13 @@
   <data name="For_VIP_User" xml:space="preserve">
     <value>VIPメンバーのためのコンテンツです。</value>
   </data>
+  <data name="New_Signup_Event_Contents" xml:space="preserve">
+    <value>新規加入時、VIPラウンジ7日間の無料利用券を差し上げます。</value>
+  </data>
+  <data name="Event_Title" xml:space="preserve">
+    <value>★ Event ★</value>
+  </data>
+  <data name="Search_Matches" xml:space="preserve">
+    <value>試合検索...</value>
+  </data>
 </root>

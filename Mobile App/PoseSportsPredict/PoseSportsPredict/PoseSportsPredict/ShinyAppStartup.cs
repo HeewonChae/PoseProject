@@ -171,6 +171,8 @@ namespace PoseSportsPredict
             services.AddTransient<FootballMatchDetailPredictionsViewModel>();
             services.AddTransient<FootballMatchDetailOddsView>();
             services.AddTransient<FootballMatchDetailOddsViewModel>();
+            services.AddTransient<FootballMatchesSearchPage>();
+            services.AddTransient<FootballMatchesSearchViewModel>();
 
             // Football - Prediction Pupup
             services.AddSingleton<FootballPredictionFinalScorePage>();

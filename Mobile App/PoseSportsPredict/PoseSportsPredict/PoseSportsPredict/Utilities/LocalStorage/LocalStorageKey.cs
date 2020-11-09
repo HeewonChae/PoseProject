@@ -8,6 +8,7 @@
         public const string UserTimeZoneId = "UserTimeZoneId";
         public const string UserLanguageId = "UserLanguageId";
         public const string IsDismissVideoAdsInfoPopup = "IsDismissVideoAdsInfoPopup";
+        public const string IsDismissLoginEventPopup = "IsDismissLoginEventPopup";
         public const string LatestVideoAdView = "LatestVideoAdView";
     }
 }

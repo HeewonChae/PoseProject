@@ -221,8 +221,9 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                List<ISQLiteStorable> searchResult = new List<ISQLiteStorable>();
                 IsSearching = true;
+
+                List<ISQLiteStorable> searchResult = new List<ISQLiteStorable>();
 
                 var bookmarkedMatches = await _bookmarkService.GetAllBookmark<FootballMatchInfo>();
                 var searchedMatches = bookmarkedMatches.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())

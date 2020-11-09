@@ -86,6 +86,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private bool _alarmEditMode;
         private MatchFilterType _curMatchFilterType;
         private bool _isListViewRefrashing = false;
+        public bool _isSearchIconVisible;
 
         #endregion Fields
 
@@ -94,6 +95,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public TaskLoaderNotifier<IReadOnlyCollection<FootballMatchInfo>> MatchesTaskLoaderNotifier { get => _matchesTaskLoaderNotifier; set => SetValue(ref _matchesTaskLoaderNotifier, value); }
         public ObservableList<FootballMatchListViewModel> MatchListViewModels { get => _matchListViewModels; set => SetValue(ref _matchListViewModels, value); }
         public bool IsListViewRefrashing { get => _isListViewRefrashing; set => SetValue(ref _isListViewRefrashing, value); }
+        public bool IsSearchIconVisible { get => _isSearchIconVisible; set => SetValue(ref _isSearchIconVisible, value); }
 
         #endregion Properties
 
@@ -111,8 +113,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             var itmeIdx = MatchListViewModels.FindIndex(groupInfo);
             MatchListViewModels.RemoveAt(itmeIdx);
             MatchListViewModels.Insert(itmeIdx, groupInfo);
-
-            //MatchListViewModels = new ObservableList<FootballMatchListViewModel>(MatchListViewModels);
         }
 
         public ICommand MatchFilterCommand { get => new RelayCommand(MatchFilter); }
@@ -206,6 +206,20 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 await RefreshMatchesAsync();
 
             IsListViewRefrashing = false;
+            SetIsBusy(false);
+        }
+
+        public ICommand SearchButtonClickCommand { get => new RelayCommand(SearchButtonClick); }
+
+        private async void SearchButtonClick()
+        {
+            if (IsBusy)
+                return;
+
+            SetIsBusy(true);
+
+            await PageSwitcher.PushPopupAsync(FootballMatchesSearchViewModel.Singleton, _matchList);
+
             SetIsBusy(false);
         }
 
@@ -313,7 +327,10 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             }
 
             if (_matchList.Count > 0)
+            {
+                IsSearchIconVisible = true;
                 await UpdateFilteredMatchesAsync();
+            }
 
             this.SetIsBusy(false);
 

@@ -154,7 +154,7 @@
                 <ListView
                     x:Name="lv_matches"
                     Scrolled="lv_matches_Scrolled"
-                    CachingStrategy="RetainElement"
+                    CachingStrategy="RecycleElement"
                     ItemsSource="{Binding LeagueGroups}"
                     HasUnevenRows="True"
                     IsPullToRefreshEnabled="False"

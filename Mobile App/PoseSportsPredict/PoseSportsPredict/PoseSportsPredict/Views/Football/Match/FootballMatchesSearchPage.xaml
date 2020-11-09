@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:loader="clr-namespace:Sharpnado.Presentation.Forms.CustomViews;assembly=Sharpnado.TaskLoaderView"
+             xmlns:baseviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Base"
+             xmlns:materialui="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:effects="clr-namespace:Sharpnado.Presentation.Forms.Effects;assembly=Sharpnado.Presentation.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:logics="clr-namespace:PoseSportsPredict.Logics"
+             xmlns:models="clr-namespace:PoseSportsPredict.Models.Football"
+             xmlns:matchviewmodel="clr-namespace:PoseSportsPredict.ViewModels.Football.Match"
+             xmlns:footballmatchview="clr-namespace:PoseSportsPredict.Views.Football.Match"
+             material:MaterialNavigationPage.AppBarColor="{StaticResource PrimaryColor}"
+             material:MaterialNavigationPage.StatusBarColor="{StaticResource PrimaryColor_D}"
+             xmlns:templeteselectors="clr-namespace:PoseSportsPredict.Logics.View.TempleteSelectors"
+             BackgroundColor="{StaticResource TransparentBlack}"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesSearchPage">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Right"
+            PositionOut="Right"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate
+                x:Key="collapsedTemplate"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="0">
+                        <Grid ColumnSpacing="15"
+                              Padding="15,11"
+                            effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
+                            effects:TapCommandEffect.TapParameter="{Binding .}"
+                            effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="27" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="21" />
+                                <ColumnDefinition Width="14" />
+                            </Grid.ColumnDefinitions>
+                            <ffimageloading:CachedImage
+                                Grid.Column="0"
+                                Aspect="AspectFit"
+                                LoadingPlaceholder="img_world.png"
+                                ErrorPlaceholder="img_world.png"
+                                WidthRequest="27"
+                                HeightRequest="27"
+                                Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            <materialui:MaterialLabel
+                                Grid.Column="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="Center"
+                                LineBreakMode="TailTruncation"
+                                TypeScale="Subtitle1"
+                                TextColor="{StaticResource TextColor_D}"
+                                Text="{Binding Title}">
+                            </materialui:MaterialLabel>
+                            <materialui:MaterialCard
+                                Grid.Column="2"
+                                Padding="0"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                HeightRequest="21"
+                                WidthRequest="21"
+                                CornerRadius="21"
+                                BackgroundColor="{StaticResource CustomGrey}">
+                                <materialui:MaterialLabel
+                                    Text="{Binding MatchCount}"
+                                    TypeScale="Caption"
+                                    TextColor="White"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center">
+                                </materialui:MaterialLabel>
+                            </materialui:MaterialCard>
+                            <Image
+                                Grid.Column="3"
+                                Source="{Binding StateIcon}"
+                                HorizontalOptions="Center"
+                                WidthRequest="14"
+                                HeightRequest="14"
+                                effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                            </Image>
+                        </Grid>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate
+                x:Key="expandedTamplete"
+                x:DataType="matchviewmodel:FootballMatchListViewModel">
+                <ViewCell>
+                    <materialui:MaterialCard
+                        CornerRadius="5"
+                        Elevation="3"
+                        Margin="7,6"
+                        Padding="0">
+                        <Grid RowSpacing="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="0.5" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid
+                                HorizontalOptions="FillAndExpand"
+                                Grid.Row="0"
+                                ColumnSpacing="15"
+                                Padding="15,11"
+                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectGroupHeaderCommand, Source={x:Reference lv_matches}}"
+                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="27" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="14" />
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage
+                                    Grid.Column="0"
+                                    Aspect="AspectFit"
+                                    LoadingPlaceholder="img_world.png"
+                                    ErrorPlaceholder="img_world.png"
+                                    WidthRequest="27"
+                                    HeightRequest="27"
+                                    Source="{Binding TitleLogo, Converter={StaticResource svgImageSourceConverter}}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:CircleTransformation />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                                <materialui:MaterialLabel
+                                    Grid.Column="1"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="Center"
+                                    LineBreakMode="TailTruncation"
+                                    TypeScale="Subtitle1"
+                                    TextColor="{StaticResource TextColor_D}"
+                                    Text="{Binding Title}">
+                                </materialui:MaterialLabel>
+                                <Image
+                                    Grid.Column="2"
+                                    Source="{Binding StateIcon}"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="14"
+                                    HeightRequest="14"
+                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                </Image>
+                            </Grid>
+
+                            <BoxView
+                                Grid.Row="1"
+                                Margin="10,0"
+                                VerticalOptions="Center"
+                                Color="{StaticResource CustomGrey_L}">
+                            </BoxView>
+
+                            <!--Inner List-->
+                            <footballmatchview:FootballMatchListView
+                                Grid.Row="2" />
+                        </Grid>
+                    </materialui:MaterialCard>
+                </ViewCell>
+            </DataTemplate>
+            <templeteselectors:GroupListTempleteSelector x:Key="matchDataTemplateSelector"
+                CollapsedTemplate="{StaticResource collapsedTemplate}"
+                ExpandedTamplete="{StaticResource expandedTamplete}" />
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+
+    <RelativeLayout x:DataType="matchviewmodel:FootballMatchesSearchViewModel">
+        <Grid
+            RelativeLayout.WidthConstraint="{ConstraintExpression
+                Type=RelativeToParent,
+                Property=Width,
+                Factor=1}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression
+                Type=RelativeToParent,
+                Property=Height,
+                Factor=1}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TouchBackButtonCommand}" />
+            </Grid.GestureRecognizers>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.02*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.02*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.02*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.02*" />
+            </Grid.RowDefinitions>
+            <materialui:MaterialCard
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="0"
+                Padding="10,5"
+                CornerRadius="5"
+                BackgroundColor="{StaticResource BackgroundColor_Default}">
+
+                <!--Ignore cancel command-->
+                <materialui:MaterialCard.GestureRecognizers>
+                    <TapGestureRecognizer />
+                </materialui:MaterialCard.GestureRecognizers>
+
+                <StackLayout Spacing="0">
+                    <materialui:MaterialCard
+                        Margin="3,3,3,5"
+                        Padding="0"
+                        CornerRadius="25"
+                        Elevation="3">
+                        <SearchBar
+                            x:Name="_searchBar"
+                            Margin ="15,4"
+                            HeightRequest="35"
+                            FontSize="Body"
+                            Placeholder="{Binding [Search_Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                            <SearchBar.Behaviors>
+                                <logics:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchBarTextChangedCommand}">
+                                </logics:EventToCommandBehavior>
+                            </SearchBar.Behaviors>
+                        </SearchBar>
+                    </materialui:MaterialCard>
+
+                    <!--Searched Matches-->
+                    <loader:TaskLoaderView
+                        VerticalOptions="FillAndExpand"
+                        IsVisible="{Binding IsSearching}"
+                        Style="{StaticResource PoseTaskLoader}"
+                        TaskLoaderNotifier="{Binding FootballMatchesSearchTaskLoaderNotifier}"
+                        EmptyStateMessage="{Binding [No_Search_Results], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        <ListView
+                            x:Name="lv_matches"
+                            Scrolled="lv_Scrolled"
+                            CachingStrategy="RecycleElement"
+                            SeparatorVisibility="None"
+                            HasUnevenRows="True"
+                            SelectionMode="None"
+                            IsPullToRefreshEnabled="False"
+                            ItemsSource="{Binding SearchMatchesViewModels}"
+                            ItemTemplate="{StaticResource matchDataTemplateSelector}">
+                        </ListView>
+                    </loader:TaskLoaderView>
+
+                    <!--Recent Search Keywords-->
+                    <StackLayout
+                        Margin="5"
+                        IsVisible="{Binding IsSearching, Converter={StaticResource inverseBoolConverter}}">
+                        <materialui:MaterialLabel
+                            TypeScale="Subtitle1"
+                            FontAttributes="Bold"
+                            TextColor="{StaticResource TextColor_D2}"
+                            Text="{Binding [Recent_Search], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+                        </materialui:MaterialLabel>
+                        <ListView
+                            x:Name="lv_recent_search"
+                            CachingStrategy="RecycleElement"
+                            Scrolled="lv_Scrolled"
+                            ItemsSource="{Binding RecentSearches}"
+                            HasUnevenRows="True"
+                            IsPullToRefreshEnabled="False"
+                            SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:FootballRecentSearch">
+                                    <ViewCell>
+                                        <StackLayout
+                                            Spacing="0"
+                                            Orientation="Horizontal">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Spacing="15"
+                                                Padding="0,10"
+                                                HorizontalOptions="FillAndExpand"
+                                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.SelectSearchKeywordCommand, Source={x:Reference lv_recent_search}}"
+                                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                                                <ffimageloading:CachedImage
+                                                    Aspect="AspectFit"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center"
+                                                    HeightRequest="27"
+                                                    WidthRequest="27"
+                                                    LoadingPlaceholder="img_world.png"
+                                                    ErrorPlaceholder="img_world.png"
+                                                    Source="{Binding Logo, Converter={StaticResource svgImageSourceConverter}}">
+                                                </ffimageloading:CachedImage>
+                                                <materialui:MaterialLabel
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"
+                                                    TypeScale="Body2"
+                                                    FontAttributes="None"
+                                                    TextColor="{StaticResource TextColor_D}"
+                                                    Text="{Binding Keyword}">
+                                                </materialui:MaterialLabel>
+                                            </StackLayout>
+                                            <ContentView
+                                                Padding="10"
+                                                VerticalOptions="CenterAndExpand"
+                                                effects:TapCommandEffect.Tap="{Binding Path=BindingContext.DeleteSearchKeywordCommand, Source={x:Reference lv_recent_search}}"
+                                                effects:TapCommandEffect.TapParameter="{Binding .}"
+                                                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}"
+                                                HorizontalOptions="End">
+                                                <Image
+                                                    HeightRequest="11"
+                                                    WidthRequest="11"
+                                                    Source="ic_close"
+                                                    Aspect="AspectFit"
+                                                    effects:ImageEffect.TintColor="{StaticResource CustomGrey}">
+                                                </Image>
+                                            </ContentView>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </StackLayout>
+            </materialui:MaterialCard>
+        </Grid>
+
+        <!--Close button-->
+        <materialui:MaterialCard
+            Margin="0"
+            Padding="0"
+            WidthRequest="25"
+            HeightRequest="25"
+            CornerRadius="25"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.98, Constant=-23}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.02, Constant=0}">
+            <ContentView
+                Padding="7"
+                effects:TapCommandEffect.Tap="{Binding TouchBackButtonCommand}"
+                effects:ViewEffect.TouchFeedbackColor="{StaticResource CustomGrey_L}">
+                <Image
+                    Aspect="AspectFill"
+                    Source="ic_close.png"
+                    effects:ImageEffect.TintColor="{StaticResource TextColor_L}">
+                </Image>
+            </ContentView>
+        </materialui:MaterialCard>
+    </RelativeLayout>
+</pages:PopupPage>

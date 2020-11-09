@@ -22,7 +22,11 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" />
+        <ToolbarItem IconImageSource="ic_calendar.png" Command="{Binding SelectMatchDateCommand}" Order="Primary" Priority="1" />
+        <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" Order="Primary" Priority="2" />
+        <customviews:HideableToolbarItem IconImageSource="ic_search.png" Order="Primary" Priority="3"
+                                         IsVisible="{Binding IsSearchIconVisible}"
+                                         Command="{Binding SearchButtonClickCommand}" />
         <ToolbarItem Text="{Binding [Edit_Bookmark], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding AlarmEditModeCommand}" Order="Secondary" Priority="1" />
         <ToolbarItem Text="{Binding [Expand_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding ExpandAllLeaguesCommand}" Order="Secondary" Priority="2" />
         <ToolbarItem Text="{Binding [Collapse_All_Leagues], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}" Command="{Binding CollapseAllLeaguesCommand}" Order="Secondary" Priority="3" />
@@ -115,7 +119,7 @@
                                 <RowDefinition Height="0.5" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            
+
                             <Grid
                                 HorizontalOptions="FillAndExpand"
                                 Grid.Row="0"
@@ -476,7 +480,7 @@
                 EmptyStateMessage="{Binding [No_Match_datas], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                 <ListView
                     x:Name="lv_matches"
-                    CachingStrategy="RetainElement"
+                    CachingStrategy="RecycleElement"
                     SeparatorVisibility="None"
                     HasUnevenRows="True"
                     SelectionMode="None"

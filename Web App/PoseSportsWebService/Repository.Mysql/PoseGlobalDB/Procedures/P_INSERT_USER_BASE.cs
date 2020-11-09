@@ -17,6 +17,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
             public string PlatformType { get; set; }
             public string PlatformEmail { get; set; }
             public string RoleType { get; set; }
+            public DateTime RoleExpireTime { get; set; }
             public DateTime CurrentTime { get; set; }
         }
 
@@ -36,6 +37,7 @@ namespace Repository.Mysql.PoseGlobalDB.Procedures
             this.Parmeters.Add("i_platform_type", _input.PlatformType, DbType.String, ParameterDirection.Input);
             this.Parmeters.Add("i_platform_email", _input.PlatformEmail, DbType.String, ParameterDirection.Input);
             this.Parmeters.Add("i_role_type", _input.RoleType, DbType.String, ParameterDirection.Input);
+            this.Parmeters.Add("i_role_expire_time", _input.RoleExpireTime, DbType.DateTime, ParameterDirection.Input);
             this.Parmeters.Add("i_cur_time", _input.CurrentTime, DbType.DateTime, ParameterDirection.Input);
 
             this.Parmeters.Add("o_result", 0, DbType.Int32, ParameterDirection.Output);

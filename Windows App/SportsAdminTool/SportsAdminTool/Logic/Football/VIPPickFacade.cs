@@ -71,13 +71,13 @@ namespace SportsAdminTool.Logic.Football
                 case FootballMatchWinnerType.WinOrDraw:
                     {
                         myPredScoreMin = homeScorePred.value1;
-                        myPredScoreMax = homeScorePred.value2;
+                        myPredScoreMax = homeScorePred.value2 == 0 ? homeScorePred.value1 : homeScorePred.value2; ;
                         myAvgGF = data.HomeStat.AvgGF + data.HomeStat.AttTrend;
                         myAvgGA = data.HomeStat.AvgGA - data.HomeStat.DefTrend;
                         myRestDate = data.HomeStat.RestDate;
 
                         opPredScoreMin = awayScorePred.value1;
-                        opPredScoreMax = awayScorePred.value2;
+                        opPredScoreMax = awayScorePred.value2 == 0 ? awayScorePred.value1 : awayScorePred.value2;
                         opAvgGF = data.AwayStat.AvgGF + data.AwayStat.AttTrend;
                         opAvgGA = data.AwayStat.AvgGA - data.AwayStat.DefTrend;
                         opRestDate = data.AwayStat.RestDate;
@@ -88,13 +88,13 @@ namespace SportsAdminTool.Logic.Football
                 case FootballMatchWinnerType.DrawOrLose:
                     {
                         myPredScoreMin = awayScorePred.value1;
-                        myPredScoreMax = awayScorePred.value2;
+                        myPredScoreMax = awayScorePred.value2 == 0 ? awayScorePred.value1 : awayScorePred.value2;
                         myAvgGF = data.AwayStat.AvgGF + data.AwayStat.AttTrend;
                         myAvgGA = data.AwayStat.AvgGA - data.AwayStat.DefTrend;
                         myRestDate = data.AwayStat.RestDate;
 
                         opPredScoreMin = homeScorePred.value1;
-                        opPredScoreMax = homeScorePred.value2;
+                        opPredScoreMax = homeScorePred.value2 == 0 ? homeScorePred.value1 : homeScorePred.value2; ;
                         opAvgGF = data.HomeStat.AvgGF + data.HomeStat.AttTrend;
                         opAvgGA = data.HomeStat.AvgGA - data.HomeStat.DefTrend;
                         opRestDate = data.HomeStat.RestDate;
@@ -108,9 +108,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin - opPredScoreMin) > 1
                             && (myPredScoreMax - opPredScoreMax) > 1
-                            && (myAvgGF - opAvgGF) > 1
-                            && (myAvgGA - opAvgGA) < -0.6
-                            && myRestDate > 3
+                            && (myAvgGF - opAvgGF) > 1.2
+                            && (myAvgGA - opAvgGA) < -1
+                            && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
                             matchWinnerPred.is_vip_pick = true;
@@ -123,9 +123,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin - opPredScoreMin) > 1
                             && (myPredScoreMax - opPredScoreMax) > 1
-                            && (myAvgGF - opAvgGF) > 1.2
-                            && (myAvgGA - opAvgGA) < -0.8
-                            && myRestDate > 3
+                            && (myAvgGF - opAvgGF) > 1.4
+                            && (myAvgGA - opAvgGA) < -1.2
+                            && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
                             matchWinnerPred.is_vip_pick = true;
@@ -138,9 +138,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (myPredScoreMin > opPredScoreMin
                             && myPredScoreMax > opPredScoreMax
-                            && (myAvgGF - opAvgGF) > 0.6
-                            && (myAvgGA - opAvgGA) < -0.4
-                            && myRestDate > 3
+                            && (myAvgGF - opAvgGF) > 0.8
+                            && (myAvgGA - opAvgGA) < -0.6
+                            && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
                             matchWinnerPred.is_vip_pick = true;
@@ -153,9 +153,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (myPredScoreMin > opPredScoreMin
                             && myPredScoreMax > opPredScoreMax
-                            && (myAvgGF - opAvgGF) > 0.8
-                            && (myAvgGA - opAvgGA) < -0.6
-                            && myRestDate > 3
+                            && (myAvgGF - opAvgGF) > 1
+                            && (myAvgGA - opAvgGA) < -0.8
+                            && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
                             matchWinnerPred.is_vip_pick = true;
@@ -177,12 +177,12 @@ namespace SportsAdminTool.Logic.Football
                 return;
 
             double myPredScoreMin = homeScorePred.value1;
-            double myPredScoreMax = homeScorePred.value2;
+            double myPredScoreMax = homeScorePred.value2 == 0 ? homeScorePred.value1 : homeScorePred.value2;
             double myAvgGF = data.HomeStat.AvgGF + data.HomeStat.AttTrend;
             double myAvgGA = data.HomeStat.AvgGA - data.HomeStat.DefTrend;
 
             double opPredScoreMin = awayScorePred.value1;
-            double opPredScoreMax = awayScorePred.value2;
+            double opPredScoreMax = awayScorePred.value2 == 0 ? awayScorePred.value1 : awayScorePred.value2;
             double opAvgGF = data.AwayStat.AvgGF + data.AwayStat.AttTrend;
             double opAvgGA = data.AwayStat.AvgGA - data.AwayStat.DefTrend;
 
@@ -194,7 +194,11 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (btsPred.grade > 5
                             && (myPredScoreMin >= 1 && opPredScoreMin >= 1)
-                            && ((myAvgGF > 1.6 && opAvgGA > 1.4) && (opAvgGF > 1.6 && myAvgGA > 1.4)))
+                            && (myAvgGF + opAvgGF) > 3
+                            && myAvgGF > 1.4
+                            && opAvgGF > 1.4
+                            && myAvgGA > 1.2
+                            && opAvgGA > 1.2)
                             btsPred.is_vip_pick = true;
                     }
                     break;
@@ -246,12 +250,12 @@ namespace SportsAdminTool.Logic.Football
         public static bool CheckUnderOverProcess(FootballUnderOverType underOverType, FootballPrediction data, FootballTable.Prediction underOverPred, FootballTable.Prediction homeScorePred, FootballTable.Prediction awayScorePred)
         {
             double myPredScoreMin = homeScorePred.value1;
-            double myPredScoreMax = homeScorePred.value2;
+            double myPredScoreMax = homeScorePred.value2 == 0 ? homeScorePred.value1 : homeScorePred.value2;
             double myAvgGF = data.HomeStat.AvgGF + data.HomeStat.AttTrend;
             double myAvgGA = data.HomeStat.AvgGA - data.HomeStat.DefTrend;
 
             double opPredScoreMin = awayScorePred.value1;
-            double opPredScoreMax = awayScorePred.value2;
+            double opPredScoreMax = awayScorePred.value2 == 0 ? awayScorePred.value1 : awayScorePred.value2;
             double opAvgGF = data.AwayStat.AvgGF + data.AwayStat.AttTrend;
             double opAvgGA = data.AwayStat.AvgGA - data.AwayStat.DefTrend;
 
@@ -260,9 +264,9 @@ namespace SportsAdminTool.Logic.Football
                 case FootballUnderOverType.OVER_1_5:
                     {
                         if ((myPredScoreMin + opPredScoreMin) >= 1
-                            && (myAvgGF + opAvgGF) > 2.8
+                            && (myAvgGF + opAvgGF) > 3
                             && ((myAvgGF > 1.4 && opAvgGF > 1.4 && myAvgGA > 1.2 && opAvgGA > 1.2)
-                                || ((myAvgGF > 1.8 && opAvgGA > 1.8) || (opAvgGF > 1.8 && myAvgGA > 1.8))))
+                                || ((myAvgGF > 2 && opAvgGA > 1.6 && myAvgGA > 1.2) || (opAvgGF > 2 && myAvgGA > 1.6 && opAvgGA > 1.2))))
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -274,10 +278,8 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin + opPredScoreMin) >= 2
                             && (myAvgGF + opAvgGF) > 3.8
-                            && myAvgGF > 1.8
-                            && opAvgGF > 1.8
-                            && myAvgGA > 1.6
-                            && opAvgGA > 1.6)
+                            && ((myAvgGF > 1.8 && opAvgGF > 1.8 && myAvgGA > 1.6 && opAvgGA > 1.6)
+                                || ((myAvgGF > 2.4 && opAvgGA > 2 && myAvgGA > 1.6) || (opAvgGF > 2.4 && myAvgGA > 2 && opAvgGA > 1.6))))
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -292,7 +294,7 @@ namespace SportsAdminTool.Logic.Football
                             && opAvgGF < 0.8
                             && myAvgGA < 1
                             && opAvgGA < 1
-                            && (myAvgGA + opAvgGA) < 1.8)
+                            && (myAvgGA + opAvgGA) < 1.6)
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -307,7 +309,7 @@ namespace SportsAdminTool.Logic.Football
                             && opAvgGF < 1.2
                             && myAvgGA < 1.4
                             && opAvgGA < 1.4
-                            && (myAvgGA + opAvgGA) < 2.8)
+                            && (myAvgGA + opAvgGA) < 2.4)
                         {
                             underOverPred.is_vip_pick = true;
                             return true;

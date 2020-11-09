@@ -1,7 +1,9 @@
 ﻿using PosePacket.Proxy;
 using PosePacket.Service.Auth;
 using PoseSportsPredict.InfraStructure;
+using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
+using PoseSportsPredict.Utilities.LocalStorage;
 using Shiny;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using WebServiceShare.ServiceContext;
 using WebServiceShare.WebServiceClient;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Logics
 {

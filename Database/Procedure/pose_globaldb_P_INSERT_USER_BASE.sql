@@ -8,6 +8,7 @@ CREATE DEFINER=`poseadmin`@`%` PROCEDURE `P_INSERT_USER_BASE`(
 	IN	i_platform_type		VARCHAR(16),
     IN  i_platform_email    VARCHAR(64),
     IN	i_role_type		    VARCHAR(16),
+    IN  i_role_expire_time  DATETIME,
     IN  i_cur_time          DATETIME,
 	OUT o_result			INT
 )
@@ -67,7 +68,7 @@ BEGIN
                 v_user_no,
                 i_role_type,
                 0,
-                i_cur_time,
+                i_role_expire_time,
                 i_cur_time
             );
             

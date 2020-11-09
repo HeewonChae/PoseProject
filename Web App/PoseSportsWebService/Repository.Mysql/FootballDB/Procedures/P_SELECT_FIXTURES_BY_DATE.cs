@@ -33,9 +33,8 @@ namespace Repository.Mysql.FootballDB.Procedures
         public override void BindParameters()
         {
             queryString = $"{DB_FootballFixtureDetail.SelectQuery} " +
-                $"INNER JOIN league_coverage as lc on lc.{nameof(LeagueCoverage.league_id)} = l.{nameof(League.id)} " +
                 $"WHERE f.{nameof(Fixture.match_time)} BETWEEN \"{_input.StartTime.ToString("yyyyMMddTHHmmss")}\" AND \"{_input.EndTime.ToString("yyyyMMddTHHmmss")}\" " +
-                $"AND lc.{nameof(LeagueCoverage.predictions)} = 1 " +
+                $"AND f.{nameof(Fixture.is_predicted)} = 1 " +
                 $"AND f.{nameof(Fixture.is_recommended)} = 1; ";
         }
 

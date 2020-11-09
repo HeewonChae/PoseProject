@@ -421,6 +421,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ★ Event ★.
+        /// </summary>
+        public static string Event_Title {
+            get {
+                return ResourceManager.GetString("Event_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is a new app update..
         /// </summary>
         public static string Exist_App_Update {
@@ -880,6 +889,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When you sign up for a new one, you will receive a 7-day free pass to the VIP lounge..
+        /// </summary>
+        public static string New_Signup_Event_Contents {
+            get {
+                return ResourceManager.GetString("New_Signup_Event_Contents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
@@ -1281,6 +1299,15 @@ namespace PoseSportsPredict.Resources {
         public static string Search_League_Country {
             get {
                 return ResourceManager.GetString("Search_League_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Match....
+        /// </summary>
+        public static string Search_Matches {
+            get {
+                return ResourceManager.GetString("Search_Matches", resourceCulture);
             }
         }
         
