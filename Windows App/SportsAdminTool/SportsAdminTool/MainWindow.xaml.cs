@@ -240,7 +240,7 @@ namespace SportsAdminTool
             DateTime roleExpireTime = DateTime.UtcNow;
             if (selectedRoleType == MemberRoleType.Promotion)
             {
-                roleExpireTime = DateTime.UtcNow.AddDays(3);
+                roleExpireTime = DateTime.UtcNow.AddDays(7);
             }
 
             using (var P_UPDATE_QUERY = new GlobalDb.Procedures.AdminTool.P_EXECUTE_QUERY())

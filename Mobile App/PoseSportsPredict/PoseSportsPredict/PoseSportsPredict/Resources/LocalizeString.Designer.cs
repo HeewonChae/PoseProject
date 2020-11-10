@@ -889,7 +889,7 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When you sign up for a new one, you will receive a 7-day free pass to the VIP lounge..
+        ///   Looks up a localized string similar to Upon new sign-up, you will receive a 7-day free pass to the VIP lounge..
         /// </summary>
         public static string New_Signup_Event_Contents {
             get {
