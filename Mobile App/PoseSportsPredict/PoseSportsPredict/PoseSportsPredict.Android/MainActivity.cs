@@ -15,7 +15,11 @@ using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Resources;
 using PoseSportsPredict.Services;
 using Shiny;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using WebServiceShare.ExternAuthentication;
 using Xamarin.Auth;
 using Xamarin.Forms;
@@ -67,10 +71,16 @@ namespace PoseSportsPredict.Droid
             //Initialize shiny
             this.InitShiny();
 
+            // Global exception handler
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
+
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             RequestPermissions(Permissions, PermissionReqId);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            DisplayCrashReport();
 
             // Initialize extern module
             this.InitExternModule(savedInstanceState);
@@ -245,6 +255,64 @@ namespace PoseSportsPredict.Droid
                 // try the check again
                 CheckLVL();
             }
+        }
+
+        //‬ Error handling
+        private void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
+        {
+            var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", unobservedTaskExceptionEventArgs.Exception);
+            LogUnhandledException(newExc);
+        }
+
+        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        {
+            var newExc = new Exception("CurrentDomainOnUnhandledException", unhandledExceptionEventArgs.ExceptionObject as Exception);
+            LogUnhandledException(newExc);
+        }
+
+        internal void LogUnhandledException(Exception exception)
+        {
+            try
+            {
+                const string errorFileName = "Fatal.log";
+                var libraryPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                var errorFilePath = Path.Combine(libraryPath, errorFileName);
+                var errorMessage = $"{exception}";
+                File.WriteAllText(errorFilePath, errorMessage);
+
+                // Log to Android Device Logging.
+                Android.Util.Log.Error("Crash Report", errorMessage);
+            }
+            catch
+            {
+                // just suppress any error logging exceptions
+            }
+        }
+
+        /// <summary>
+        // If there is an unhandled exception, the exception information is diplayed
+        // on screen the next time the app is started (only in debug configuration)
+        /// </summary>
+        private void DisplayCrashReport()
+        {
+            const string errorFilename = "Fatal.log";
+            var libraryPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var errorFilePath = Path.Combine(libraryPath, errorFilename);
+
+            if (!File.Exists(errorFilePath))
+            {
+                return;
+            }
+
+            var errorText = File.ReadAllText(errorFilePath);
+            new AlertDialog.Builder(this)
+                .SetPositiveButton("Clear", (sender, args) =>
+                {
+                    File.Delete(errorFilePath);
+                })
+                .SetMessage(errorText)
+                .SetTitle("Crash Report")
+                .Show();
         }
     }
 }

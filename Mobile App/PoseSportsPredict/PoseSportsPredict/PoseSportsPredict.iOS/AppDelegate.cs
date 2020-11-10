@@ -2,6 +2,8 @@
 using Google.MobileAds;
 using Shiny;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using UIKit;
 
 namespace PoseSportsPredict.iOS
@@ -28,11 +30,16 @@ namespace PoseSportsPredict.iOS
             // Initialize Shiny
             this.InitShiny();
 
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
+
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
 
             // Initialize extern module
             this.InitExternModule();
+
+            DisplayCrashReport();
 
             LoadApplication(new App());
 
@@ -71,6 +78,58 @@ namespace PoseSportsPredict.iOS
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
         {
             Shiny.Jobs.JobManager.OnBackgroundFetch(completionHandler);
+        }
+
+        //‬ Error handling
+        private void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
+        {
+            var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", unobservedTaskExceptionEventArgs.Exception);
+            LogUnhandledException(newExc);
+        }
+
+        private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        {
+            var newExc = new Exception("CurrentDomainOnUnhandledException", unhandledExceptionEventArgs.ExceptionObject as Exception);
+            LogUnhandledException(newExc);
+        }
+
+        internal void LogUnhandledException(Exception exception)
+        {
+            try
+            {
+                const string errorFileName = "Fatal.log";
+                var libraryPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // iOS: Environment.SpecialFolder.Resources
+                var errorFilePath = Path.Combine(libraryPath, errorFileName);
+                var errorMessage = $"{exception}";
+                File.WriteAllText(errorFilePath, errorMessage);
+            }
+            catch
+            {
+                // just suppress any error logging exceptions
+            }
+        }
+
+        private void DisplayCrashReport()
+        {
+            const string errorFilename = "Fatal.log";
+            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
+            var errorFilePath = Path.Combine(libraryPath, errorFilename);
+
+            if (!File.Exists(errorFilePath))
+            {
+                return;
+            }
+
+            var errorText = File.ReadAllText(errorFilePath);
+            var alertView = new UIAlertView("Crash Report", errorText, null, "Close", "Clear") { UserInteractionEnabled = true };
+            alertView.Clicked += (sender, args) =>
+            {
+                if (args.ButtonIndex != 0)
+                {
+                    File.Delete(errorFilePath);
+                }
+            };
+            alertView.Show();
         }
     }
 }
