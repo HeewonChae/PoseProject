@@ -106,10 +106,10 @@ namespace SportsAdminTool.Logic.Football
             {
                 case FootballMatchWinnerType.Win:
                     {
-                        if ((myPredScoreMin - opPredScoreMin) > 1
-                            && (myPredScoreMax - opPredScoreMax) > 1
-                            && (myAvgGF - opAvgGF) > 0.8
-                            && (myAvgGA - opAvgGA) < -0.8
+                        if ((myPredScoreMin > opPredScoreMin)
+                            && (myPredScoreMax > opPredScoreMax)
+                            && (myAvgGF - opAvgGF) > 1.2
+                            && (myAvgGA - opAvgGA) < -1.2
                             && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -121,10 +121,10 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballMatchWinnerType.Lose:
                     {
-                        if ((myPredScoreMin - opPredScoreMin) > 1
-                            && (myPredScoreMax - opPredScoreMax) > 1
-                            && (myAvgGF - opAvgGF) > 1
-                            && (myAvgGA - opAvgGA) < -1
+                        if ((myPredScoreMin > opPredScoreMin)
+                            && (myPredScoreMax > opPredScoreMax)
+                            && (myAvgGF - opAvgGF) > 1.4
+                            && (myAvgGA - opAvgGA) < -1.4
                             && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -136,10 +136,10 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballMatchWinnerType.WinOrDraw:
                     {
-                        if (myPredScoreMin > opPredScoreMin
-                            && myPredScoreMax > opPredScoreMax
-                            && (myAvgGF - opAvgGF) > 0.6
-                            && (myAvgGA - opAvgGA) < -0.6
+                        if (myPredScoreMin >= opPredScoreMin
+                            && myPredScoreMax >= opPredScoreMax
+                            && (myAvgGF - opAvgGF) > 0.8
+                            && (myAvgGA - opAvgGA) < -0.8
                             && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -151,10 +151,10 @@ namespace SportsAdminTool.Logic.Football
 
                 case FootballMatchWinnerType.DrawOrLose:
                     {
-                        if (myPredScoreMin > opPredScoreMin
-                            && myPredScoreMax > opPredScoreMax
-                            && (myAvgGF - opAvgGF) > 0.8
-                            && (myAvgGA - opAvgGA) < -0.8
+                        if (myPredScoreMin >= opPredScoreMin
+                            && myPredScoreMax >= opPredScoreMax
+                            && (myAvgGF - opAvgGF) > 1
+                            && (myAvgGA - opAvgGA) < -1
                             && myRestDate >= 4
                             && (myRestDate - opRestDate) > -6)
                         {
@@ -193,8 +193,9 @@ namespace SportsAdminTool.Logic.Football
                 case YesNoType.Yes:
                     {
                         if (btsPred.grade > 5
-                            && (myPredScoreMin >= 1 && opPredScoreMin >= 1)
-                            && (myAvgGF + opAvgGF) > 3
+                            && (myPredScoreMin + opPredScoreMin) >= 1
+                            && (myAvgGF + opAvgGF) > 3.2
+                            && (myAvgGA + opAvgGA) > 2.8
                             && myAvgGF > 1.4
                             && opAvgGF > 1.4
                             && myAvgGA > 1.2
@@ -206,7 +207,7 @@ namespace SportsAdminTool.Logic.Football
                 case YesNoType.No:
                     {
                         if (btsPred.grade > 5
-                            && (myPredScoreMin == 0 && opPredScoreMin == 0)
+                            && (myPredScoreMin + opPredScoreMin) == 0
                             && ((myAvgGF < 0.8 && opAvgGA < 0.6) || (opAvgGF < 0.8 && myAvgGA < 0.6)))
                             btsPred.is_vip_pick = true;
                     }
@@ -265,8 +266,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin + opPredScoreMin) >= 1
                             && (myAvgGF + opAvgGF) > 3
+                            && (myAvgGA + opAvgGA) > 2.6
                             && ((myAvgGF > 1.4 && opAvgGF > 1.4 && myAvgGA > 1.2 && opAvgGA > 1.2)
-                                || ((myAvgGF > 2 && opAvgGA > 1.6 && myAvgGA > 1) || (opAvgGF > 2 && myAvgGA > 1.6 && opAvgGA > 1))))
+                                || ((myAvgGF > 2 && opAvgGA > 1.8 && myAvgGA > 1) || (opAvgGF > 2 && myAvgGA > 1.8 && opAvgGA > 1))))
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -278,8 +280,9 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin + opPredScoreMin) >= 2
                             && (myAvgGF + opAvgGF) > 3.8
-                            && ((myAvgGF > 1.8 && opAvgGF > 1.8 && myAvgGA > 1.6 && opAvgGA > 1.6)
-                                || ((myAvgGF > 2.4 && opAvgGA > 2 && myAvgGA > 1.4) || (opAvgGF > 2.4 && myAvgGA > 2 && opAvgGA > 1.4))))
+                            && (myAvgGA + opAvgGA) > 3.2
+                            && ((myAvgGF > 1.8 && opAvgGF > 1.8 && myAvgGA > 1.4 && opAvgGA > 1.4)
+                                || ((myAvgGF > 2.4 && opAvgGA > 2 && myAvgGF > 1.2) || (opAvgGF > 2.4 && myAvgGA > 2 && opAvgGA > 1.2))))
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -290,11 +293,12 @@ namespace SportsAdminTool.Logic.Football
                 case FootballUnderOverType.UNDER_2_5:
                     {
                         if ((myPredScoreMax + opPredScoreMax) <= 2
-                            && myAvgGF < 0.8
-                            && opAvgGF < 0.8
+                            && (myAvgGF + opAvgGF) < 1.8
+                            && (myAvgGA + opAvgGA) < 1.8
+                            && myAvgGF < 1
+                            && opAvgGF < 1
                             && myAvgGA < 1
-                            && opAvgGA < 1
-                            && (myAvgGA + opAvgGA) < 1.6)
+                            && opAvgGA < 1)
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
@@ -305,11 +309,12 @@ namespace SportsAdminTool.Logic.Football
                 case FootballUnderOverType.UNDER_3_5:
                     {
                         if ((myPredScoreMax + opPredScoreMax) <= 3
-                            && myAvgGF < 1.2
-                            && opAvgGF < 1.2
+                            && (myAvgGF + opAvgGF) < 2.6
+                            && (myAvgGA + opAvgGA) < 2.6
+                            && myAvgGF < 1.4
+                            && opAvgGF < 1.4
                             && myAvgGA < 1.4
-                            && opAvgGA < 1.4
-                            && (myAvgGA + opAvgGA) < 2.4)
+                            && opAvgGA < 1.4)
                         {
                             underOverPred.is_vip_pick = true;
                             return true;
