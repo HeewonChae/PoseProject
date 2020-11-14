@@ -78,7 +78,6 @@ namespace SportsWebService.Services
         public Stream P_GET_LEAGUE_OVERVIEW(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_LEAGUE_OVERVIEW>();
-
             var output = Commands.Football.P_GET_LEAGUE_OVERVIEW.Execute(input);
 
             return output.SerializeToStream();
@@ -88,7 +87,6 @@ namespace SportsWebService.Services
         public Stream P_GET_TEAM_OVERVIEW(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_TEAM_OVERVIEW>();
-
             var output = Commands.Football.P_GET_TEAM_OVERVIEW.Execute(input);
 
             return output.SerializeToStream();
@@ -98,7 +96,6 @@ namespace SportsWebService.Services
         public Stream P_GET_MATCH_ODDS(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_MATCH_ODDS>();
-
             var output = Commands.Football.P_GET_MATCH_ODDS.Execute(input);
 
             return output.SerializeToStream();
@@ -108,7 +105,6 @@ namespace SportsWebService.Services
         public Stream P_GET_MATCH_PREDICTIONS(Stream stream)
         {
             var input = stream.StreamDeserialize<I_GET_MATCH_PREDICTIONS>();
-
             var output = Commands.Football.P_GET_MATCH_PREDICTIONS.Execute(input);
 
             return output.SerializeToStream();
@@ -126,6 +122,15 @@ namespace SportsWebService.Services
         public Stream P_GET_MATCH_VIP_HISTORY()
         {
             var output = Commands.Football.P_GET_MATCH_VIP_HISTORY.Execute();
+
+            return output.SerializeToStream();
+        }
+
+        [PrincipalPermission(SecurityAction.Demand, Authenticated = true, Role = "Admin")]
+        public Stream P_DELETE_VIP_PICK(Stream stream)
+        {
+            var input = stream.StreamDeserialize<I_DELETE_VIP_PICK>();
+            var output = Commands.Football.P_DELETE_VIP_PICK.Execute(input);
 
             return output.SerializeToStream();
         }

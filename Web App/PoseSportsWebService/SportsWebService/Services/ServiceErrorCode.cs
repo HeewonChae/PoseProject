@@ -66,6 +66,7 @@
             public const int P_GET_MATCH_H2H = WebService.Football + 008000;
             public const int P_GET_MATCH_ODDS = WebService.Football + 009000;
             public const int P_GET_MATCH_PREDICTIONS = WebService.Football + 010000;
+            public const int P_DELETE_VIP_PICK = WebService.Football + 011000;
         }
 
         public static class WebMethod_HelloWorld
@@ -97,6 +98,7 @@
             public const int P_GET_MATCH_PREDICTIONS = Database.FootballDB + 010000;
             public const int P_GET_MATCH_VIP = Database.FootballDB + 011000;
             public const int P_GET_MATCH_VIP_HISTORY = Database.FootballDB + 012000;
+            public const int P_DELETE_VIP_PICK = Database.FootballDB + 013000;
         }
 
         public static class Procedure

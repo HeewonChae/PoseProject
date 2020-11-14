@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using PosePacket.Proxy;
+using PosePacket.Service.Enum;
 using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics;
@@ -9,6 +10,7 @@ using PoseSportsPredict.Logics.View.Converters;
 using PoseSportsPredict.Models.Football;
 using PoseSportsPredict.Models.Resources.Common;
 using PoseSportsPredict.Resources;
+using PoseSportsPredict.Services;
 using PoseSportsPredict.ViewModels.Base;
 using PoseSportsPredict.ViewModels.Football.Match.Detail;
 using PoseSportsPredict.Views.Common.Detail;
@@ -48,6 +50,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
         #region Services
 
+        private MembershipService _membershipService;
         private IWebApiService _webApiService;
 
         #endregion Services
@@ -86,15 +89,31 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
         public ICommand SelectMatch_LongTapCommand { get => new RelayCommand<FootballVIPMatchInfo>((e) => SelectMatch_LongTap(e)); }
 
-        private void SelectMatch_LongTap(FootballVIPMatchInfo vipMatchInfo)
+        private async void SelectMatch_LongTap(FootballVIPMatchInfo vipMatchInfo)
         {
             if (IsBusy)
                 return;
 
             SetIsBusy(true);
 
-            FootballMatchInfo matchInfo = ShinyHost.Resolve<VIPMatchInfoToMatchInfo>().Convert(vipMatchInfo);
-            MatchInfoLongTapPopup.Execute(matchInfo);
+            if (_membershipService.MemberRoleType == MemberRoleType.Admin)
+            {
+                var delete_ret = await MatchInfoLongTapPopup.Admin_DeletePick(vipMatchInfo);
+                if (delete_ret)
+                {
+                    if (vipMatchInfo.PredictionPicks.Count == 0)
+                    {
+                        _matchList.Remove(vipMatchInfo);
+                    }
+
+                    Matches = new ObservableList<FootballVIPMatchInfo>(_matchList);
+                }
+            }
+            else
+            {
+                FootballMatchInfo matchInfo = ShinyHost.Resolve<VIPMatchInfoToMatchInfo>().Convert(vipMatchInfo);
+                MatchInfoLongTapPopup.Execute(matchInfo);
+            }
 
             SetIsBusy(false);
         }
@@ -105,9 +124,11 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
         public VIPHistoryViewModel(
             VIPHistoryPage page,
-            IWebApiService webApiService) : base(page)
+            IWebApiService webApiService,
+            MembershipService membershipService) : base(page)
         {
             _webApiService = webApiService;
+            _membershipService = membershipService;
 
             OnInitializeView();
         }

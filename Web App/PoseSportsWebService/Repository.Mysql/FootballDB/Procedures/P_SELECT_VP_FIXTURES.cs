@@ -35,7 +35,8 @@ namespace Repository.Mysql.FootballDB.Procedures
             _finishedFixturesQuery = $"{DB_FootballVIPFixtureDetail.SelectQuery} " +
                 $"WHERE f.{nameof(Fixture.match_time)} BETWEEN @StartTime AND @EndTime " +
                 $"AND f.{nameof(Fixture.is_predicted)} = 1 AND f.{nameof(Fixture.is_completed)} = 1 " +
-                $"AND p.{nameof(Prediction.is_vip_pick)} = 1; ";
+                $"AND p.{nameof(Prediction.is_vip_pick)} = 1 " +
+                $"ORDER BY f.{nameof(Fixture.match_time)} DESC LIMIT 64; ";
 
             _scheduledixturesQuery = $"{DB_FootballVIPFixtureDetail.SelectQuery} " +
                 $"WHERE f.{nameof(Fixture.match_time)} BETWEEN @StartTime AND @EndTime " +
@@ -52,7 +53,7 @@ namespace Repository.Mysql.FootballDB.Procedures
                         // Finished Fixtures
                         if (_input.IsSelectHistory)
                         {
-                            _output = footballDB.Query<DB_FootballVIPFixtureDetail>(_finishedFixturesQuery, new { StartTime = DateTime.UtcNow.AddHours(-48), EndTime = DateTime.UtcNow });
+                            _output = footballDB.Query<DB_FootballVIPFixtureDetail>(_finishedFixturesQuery, new { StartTime = DateTime.UtcNow.AddDays(-7), EndTime = DateTime.UtcNow });
                         }
                         // Scheduled Fixtures
                         else

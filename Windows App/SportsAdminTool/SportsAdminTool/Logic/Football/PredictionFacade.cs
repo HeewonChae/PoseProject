@@ -839,6 +839,22 @@ namespace SportsAdminTool.Logic.Football
             return meanProbas;
         }
 
+        public static double AdjustGrade(double grade)
+        {
+            if (grade < 0)
+                return 0;
+
+            if (grade < 7)
+                return grade;
+            else
+            {
+                double overValue = grade - 7;
+                grade = 7 + (overValue / 2.0);
+            }
+
+            return grade > 10 ? 10 : grade;
+        }
+
         private static double GetMatchWinnerGrade(FootballPrediction data, FootballMatchWinnerType subType, out bool isRecommend)
         {
             var scoreSet = GetScoreSet(data);
@@ -849,6 +865,15 @@ namespace SportsAdminTool.Logic.Football
             double meanHomeScore = homeScores.Average();
             double meanAwayScore = awayScores.Average();
 
+            double myAvgGF = data.HomeStat.AvgGF;
+            double myAvgGA = data.HomeStat.AvgGA;
+
+            double opAvgGF = data.AwayStat.AvgGF;
+            double opAvgGA = data.AwayStat.AvgGA;
+
+            double myMeanGF = (myAvgGF + opAvgGA) / 2.0;
+            double opMeanGF = (opAvgGF + myAvgGA) / 2.0;
+
             isRecommend = false;
             double grade = 0.0;
             switch (subType)
@@ -857,9 +882,10 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[0] - PredictionFacade.Winner_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanHomeScore - meanAwayScore) > 0 ? (meanHomeScore - meanAwayScore) * 1.5 : -1;
+                        grade += meanHomeScore - meanAwayScore;
+                        grade += (myMeanGF - opMeanGF) * 1.5;
 
-                        isRecommend = grade >= 7;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -867,8 +893,10 @@ namespace SportsAdminTool.Logic.Football
                     {
                         int probaDiff = meanProbas[2] - PredictionFacade.Winner_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
-                        grade += (meanAwayScore - meanHomeScore) > 0 ? (meanAwayScore - meanHomeScore) * 1.5 : -1;
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
+                        grade += meanAwayScore - meanHomeScore;
+                        grade += (opMeanGF - myMeanGF) * 1.5;
+
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -877,6 +905,7 @@ namespace SportsAdminTool.Logic.Football
                         int probaDiff = (meanProbas[0] + meanProbas[1]) - PredictionFacade.Winner_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
                         grade += meanHomeScore - meanAwayScore;
+                        grade += myMeanGF - opMeanGF;
 
                         isRecommend = grade >= 8;
                     }
@@ -887,6 +916,7 @@ namespace SportsAdminTool.Logic.Football
                         int probaDiff = (meanProbas[1] + meanProbas[2]) - PredictionFacade.Winner_Proba_Criteria;
                         grade += probaDiff > 0 ? probaDiff / 5.0 : 0;
                         grade += meanAwayScore - meanHomeScore;
+                        grade += opMeanGF - myMeanGF;
 
                         isRecommend = grade >= 8;
                     }
@@ -906,8 +936,7 @@ namespace SportsAdminTool.Logic.Football
                     break;
             }
 
-            return grade > 10 ? 10 :
-                grade < 0 ? 0 : grade;
+            return AdjustGrade(grade);
         }
 
         private static double GetUnderOverGrade(FootballPrediction data, FootballUnderOverType subType, out bool isRecommend)
@@ -919,11 +948,14 @@ namespace SportsAdminTool.Logic.Football
             double meanHomeScore = homeScores.Average();
             double meanAwayScore = awayScores.Average();
 
-            double myAvgGF = data.HomeStat.AvgGF + data.HomeStat.AttTrend;
-            double myAvgGA = data.HomeStat.AvgGA - data.HomeStat.DefTrend;
+            double myAvgGF = data.HomeStat.AvgGF;
+            double myAvgGA = data.HomeStat.AvgGA;
 
-            double opAvgGF = data.AwayStat.AvgGF + data.AwayStat.AttTrend;
-            double opAvgGA = data.AwayStat.AvgGA - data.AwayStat.DefTrend;
+            double opAvgGF = data.AwayStat.AvgGF;
+            double opAvgGA = data.AwayStat.AvgGA;
+
+            double myMeanGF = (myAvgGF + opAvgGA) / 2.0;
+            double opMeanGF = (opAvgGF + myAvgGA) / 2.0;
 
             isRecommend = false;
             double grade = 0.0;
@@ -937,8 +969,8 @@ namespace SportsAdminTool.Logic.Football
                         grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
                         grade += meanHomeScore + meanAwayScore > 1.5 ? 1 : -1;
-                        grade += (myAvgGF + opAvgGF) > 2 ? 0.5 : -1;
-                        grade += (myAvgGA + opAvgGA) > 2 ? 0.5 : -1;
+                        grade += myMeanGF > 1.4 ? 0.5 : -0.5;
+                        grade += opMeanGF > 1.4 ? 0.5 : -0.5;
 
                         isRecommend = grade >= 8;
                     }
@@ -952,8 +984,10 @@ namespace SportsAdminTool.Logic.Football
                         grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
                         grade += meanHomeScore + meanAwayScore < 2 ? 1.5 : -1;
+                        grade += myMeanGF < 1.2 ? 1 : -0.5;
+                        grade += opMeanGF < 1.2 ? 1 : -0.5;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -965,8 +999,10 @@ namespace SportsAdminTool.Logic.Football
                         grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
                         grade += meanHomeScore + meanAwayScore > 2.5 ? 1.5 : -1;
+                        grade += myMeanGF > 1.8 ? 1 : -0.5;
+                        grade += opMeanGF > 1.8 ? 1 : -0.5;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -978,8 +1014,8 @@ namespace SportsAdminTool.Logic.Football
                         grade += probaDiff > 0 ? probaDiff / 4.0 : 0;
 
                         grade += meanHomeScore + meanAwayScore < 3 ? 1 : -1;
-                        grade += (myAvgGF + opAvgGF) < 2.6 ? 0.5 : -1;
-                        grade += (myAvgGA + opAvgGA) < 2.6 ? 0.5 : -1;
+                        grade += myMeanGF < 1.6 ? 0.5 : -0.5;
+                        grade += opMeanGF < 1.6 ? 0.5 : -0.5;
 
                         isRecommend = grade >= 8;
                     }
@@ -989,8 +1025,7 @@ namespace SportsAdminTool.Logic.Football
                     break;
             }
 
-            return grade > 10 ? 10 :
-                grade < 0 ? 0 : grade;
+            return AdjustGrade(grade);
         }
 
         private static double GetBothToScoreGrade(FootballPrediction data, YesNoType subType, out bool isRecommend)
@@ -1003,6 +1038,15 @@ namespace SportsAdminTool.Logic.Football
             double meanHomeScore = homeScores.Average();
             double meanAwayScore = awayScores.Average();
 
+            double myAvgGF = data.HomeStat.AvgGF;
+            double myAvgGA = data.HomeStat.AvgGA;
+
+            double opAvgGF = data.AwayStat.AvgGF;
+            double opAvgGA = data.AwayStat.AvgGA;
+
+            double myMeanGF = (myAvgGF + opAvgGA) / 2.0;
+            double opMeanGF = (opAvgGF + myAvgGA) / 2.0;
+
             double grade = 0.0;
             isRecommend = false;
             switch (subType)
@@ -1014,8 +1058,10 @@ namespace SportsAdminTool.Logic.Football
 
                         grade += meanHomeScore < 1 ? 1 : 0;
                         grade += meanAwayScore < 1 ? 1 : 0;
+                        grade += myMeanGF < 0.8 ? 1 : 0;
+                        grade += opMeanGF < 0.8 ? 1 : 0;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -1026,8 +1072,10 @@ namespace SportsAdminTool.Logic.Football
 
                         grade += meanHomeScore > 1 ? 1 : 0;
                         grade += meanAwayScore > 1 ? 1 : 0;
+                        grade += myMeanGF > 1.6 ? 1 : -0.5;
+                        grade += opMeanGF > 1.6 ? 1 : -0.5;
 
-                        isRecommend = Math.Round(grade, MidpointRounding.AwayFromZero) >= 8;
+                        isRecommend = grade >= 8;
                     }
                     break;
 
@@ -1035,8 +1083,7 @@ namespace SportsAdminTool.Logic.Football
                     break;
             }
 
-            return grade > 10 ? 10 :
-                grade < 0 ? 0 : grade;
+            return AdjustGrade(grade);
         }
 
         #endregion Private Function

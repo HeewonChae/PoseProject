@@ -118,6 +118,7 @@
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_COVERAGE_LEAGUES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_PREDICTABLE_FIXTURES.cs" />
     <Compile Include="FootballDB\Procedures\AdminTool\P_SELECT_QUERY.cs" />
+    <Compile Include="FootballDB\Procedures\P_DELETE_VIP_PICK.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_H2H.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_ODDS.cs" />
     <Compile Include="FootballDB\Procedures\P_GET_MATCH_PREDICTIONS.cs" />

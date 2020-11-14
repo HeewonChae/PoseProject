@@ -1,5 +1,7 @@
 ﻿using Plugin.Vibrate;
+using PosePacket.Proxy;
 using PosePacket.Service.Enum;
+using PosePacket.Service.Football;
 using PoseSportsPredict.InfraStructure;
 using PoseSportsPredict.Logics.Football.Converters;
 using PoseSportsPredict.Models.Enums;
@@ -8,7 +10,11 @@ using PoseSportsPredict.Resources;
 using Shiny;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using WebServiceShare.ServiceContext;
+using WebServiceShare.WebServiceClient;
 using XF.Material.Forms.UI.Dialogs;
 
 namespace PoseSportsPredict.Logics.Football
@@ -87,6 +93,45 @@ namespace PoseSportsPredict.Logics.Football
                 default:
                     break;
             }
+        }
+
+        public static async Task<bool> Admin_DeletePick(FootballVIPMatchInfo matchInfo)
+        {
+            var actions = matchInfo.PredictionPicks.Select(elem => elem.Title).ToArray();
+
+            int intResult = await MaterialDialog.Instance.SelectActionAsync("추천픽 관리", actions, DialogConfiguration.DefaultSimpleDialogConfiguration);
+            if (intResult == -1)
+                return false;
+
+            var selectedPick = matchInfo.PredictionPicks[intResult];
+
+            // Server Request
+            var webApiService = ShinyHost.Resolve<IWebApiService>();
+
+            var server_result = await webApiService.RequestAsyncWithToken<O_DELETE_VIP_PICK>(new WebRequestContext
+            {
+                SerializeType = SerializeType.MessagePack,
+                MethodType = WebMethodType.POST,
+                BaseUrl = AppConfig.PoseWebBaseUrl,
+                ServiceUrl = FootballProxy.ServiceUrl,
+                SegmentGroup = FootballProxy.P_DELETE_VIP_PICK,
+                PostData = new I_DELETE_VIP_PICK
+                {
+                    FixtureId = matchInfo.Id,
+                    MainLabel = selectedPick.MainLabel,
+                    SubLabel = selectedPick.SubLabel,
+                }
+            });
+
+            if (server_result == null)
+                return false;
+
+            if (server_result.IsSuccess)
+            {
+                matchInfo.PredictionPicks.RemoveAt(intResult);
+            }
+
+            return server_result.IsSuccess;
         }
     }
 }

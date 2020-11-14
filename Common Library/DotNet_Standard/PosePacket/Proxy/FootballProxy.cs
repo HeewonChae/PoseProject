@@ -42,6 +42,8 @@ namespace PosePacket.Proxy
         
         private static string _P_GET_MATCH_VIP_HISTORY = "GetMatchVipHistory";
         
+        private static string _P_DELETE_VIP_PICK = "DeleteVIPPick";
+        
         // Service base url
         public static string ServiceUrl
         {
@@ -180,6 +182,17 @@ namespace PosePacket.Proxy
             get
             {
                 return _P_GET_MATCH_VIP_HISTORY;
+            }
+        }
+        
+        // MethodType: POST, Segment: DeleteVIPPick 
+        // InputType: PosePacket.Service.Football.I_DELETE_VIP_PICK 
+        // OutputType: PosePacket.Service.Football.O_DELETE_VIP_PICK
+        public static string P_DELETE_VIP_PICK
+        {
+            get
+            {
+                return _P_DELETE_VIP_PICK;
             }
         }
     }

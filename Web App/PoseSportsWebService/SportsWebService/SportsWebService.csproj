@@ -246,6 +246,7 @@
     <Compile Include="Commands\Billing\P_E_CHECK_MEMBERSHIP_BY_GOOGLE.cs" />
     <Compile Include="Commands\Billing\P_E_INSERT_IN_APP_BILLING_BY_GOOGLE.cs" />
     <Compile Include="Commands\Billing\P_E_UPDATE_IN_APP_BILLING_BY_GOOGLE.cs" />
+    <Compile Include="Commands\Football\P_DELETE_VIP_PICK.cs" />
     <Compile Include="Commands\Football\P_GET_MATCH_VIP.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_DATE.cs" />
     <Compile Include="Commands\Football\P_GET_FIXTURES_BY_INDEX.cs" />

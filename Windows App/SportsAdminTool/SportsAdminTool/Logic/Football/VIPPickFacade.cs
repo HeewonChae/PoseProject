@@ -195,11 +195,11 @@ namespace SportsAdminTool.Logic.Football
                         if (btsPred.grade > 5
                             && (myPredScoreMin + opPredScoreMin) >= 1
                             && (myAvgGF + opAvgGF) > 3.2
-                            && (myAvgGA + opAvgGA) > 2.8
+                            && (myAvgGA + opAvgGA) > 3
                             && myAvgGF > 1.4
                             && opAvgGF > 1.4
-                            && myAvgGA > 1.2
-                            && opAvgGA > 1.2)
+                            && myAvgGA > 1.4
+                            && opAvgGA > 1.4)
                             btsPred.is_vip_pick = true;
                     }
                     break;
@@ -208,7 +208,7 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (btsPred.grade > 5
                             && (myPredScoreMin + opPredScoreMin) == 0
-                            && ((myAvgGF < 0.8 && opAvgGA < 0.6) || (opAvgGF < 0.8 && myAvgGA < 0.6)))
+                            && ((myAvgGF < 0.7 && opAvgGA < 0.7) || (opAvgGF < 0.7 && myAvgGA < 0.7)))
                             btsPred.is_vip_pick = true;
                     }
                     break;
@@ -266,7 +266,7 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if ((myPredScoreMin + opPredScoreMin) >= 1
                             && (myAvgGF + opAvgGF) > 3
-                            && (myAvgGA + opAvgGA) > 2.6
+                            && (myAvgGA + opAvgGA) > 2.8
                             && ((myAvgGF > 1.4 && opAvgGF > 1.4 && myAvgGA > 1.2 && opAvgGA > 1.2)
                                 || ((myAvgGF > 2 && opAvgGA > 1.8 && myAvgGA > 1) || (opAvgGF > 2 && myAvgGA > 1.8 && opAvgGA > 1))))
                         {
