@@ -90,6 +90,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             if (FootballMatchesSearchViewModel.Singleton.IsSearching)
             {
+                FootballMatchesSearchViewModel.Singleton.IsSearching = false;
                 await PageSwitcher.PopPopupAsync();
                 FootballMatchesSearchViewModel.Singleton.SelectedMatchInfo(matchInfo);
             }

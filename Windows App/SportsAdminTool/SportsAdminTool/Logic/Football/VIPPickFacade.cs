@@ -208,7 +208,7 @@ namespace SportsAdminTool.Logic.Football
                     {
                         if (btsPred.grade > 5
                             && (myPredScoreMin + opPredScoreMin) == 0
-                            && ((myAvgGF < 0.7 && opAvgGA < 0.7) || (opAvgGF < 0.7 && myAvgGA < 0.7)))
+                            && ((myAvgGF < 0.8 && opAvgGA < 0.6) || (opAvgGF < 0.8 && myAvgGA < 0.6)))
                             btsPred.is_vip_pick = true;
                     }
                     break;

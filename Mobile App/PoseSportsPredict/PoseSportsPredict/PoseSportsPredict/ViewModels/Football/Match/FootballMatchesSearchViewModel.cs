@@ -65,7 +65,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
         public override void OnAppearing(params object[] datas)
         {
-            IsSearching = false;
+            IsSearching = true;
 
             var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
             searchBar.Text = string.Empty;
@@ -164,6 +164,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsPageSwitched(true);
 
+            IsSearching = false;
             await PageSwitcher.PopPopupAsync();
 
             SetIsPageSwitched(false);
@@ -195,8 +196,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                IsSearching = true;
-
                 var searchedMatches = _allMatches.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())
                             || elem.League_CountryName.ToLower().Contains(searchText.ToLower())
                             || elem.HomeName.ToLower().Contains(searchText.ToLower())
@@ -224,8 +223,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 return searchedMatches;
             }
-            else
-                IsSearching = false;
 
             return null;
         }
