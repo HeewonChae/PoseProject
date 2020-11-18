@@ -7,4 +7,7 @@
                      BarIndicatorColor="#00b9e1"
                      BarBackgroundColor="#ffffff"
                      SwipeEnabled="True">
+    <forms:TopTabbedPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_calendar.png" Command="{Binding SelectMatchDateCommand}" Order="Primary" Priority="1" />
+    </forms:TopTabbedPage.ToolbarItems>
 </forms:TopTabbedPage>

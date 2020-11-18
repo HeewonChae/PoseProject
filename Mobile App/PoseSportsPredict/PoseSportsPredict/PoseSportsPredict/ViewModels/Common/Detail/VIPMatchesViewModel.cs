@@ -251,7 +251,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             if (isNeedHistoryUpdate)
             {
                 // VIP History 페이지로 전달
-                ShinyHost.Resolve<VIPHistoryViewModel>().NeedHistoryUpdate();
+                VIPHistoryViewModel.Singleton.NeedHistoryUpdate();
             }
 
             Matches = new ObservableList<FootballVIPMatchInfo>(_matchList);

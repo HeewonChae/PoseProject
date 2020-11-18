@@ -30,6 +30,19 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 {
     public class VIPHistoryViewModel : NavigableViewModel
     {
+        private static VIPHistoryViewModel _singleton;
+
+        public static VIPHistoryViewModel Singleton
+        {
+            get
+            {
+                if (_singleton == null)
+                    _singleton = ShinyHost.Resolve<VIPHistoryViewModel>();
+
+                return _singleton;
+            }
+        }
+
         #region NavigableViewModel
 
         public override bool OnInitializeView(params object[] datas)

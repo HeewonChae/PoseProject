@@ -12,4 +12,7 @@
              material:MaterialNavigationPage.HasShadow="False"
              x:Class="PoseSportsPredict.Views.Football.Match.FootballMatchesTabPage"
              Title="{Binding [Matches], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_calendar.png" Command="{Binding SelectMatchDateCommand}" Order="Primary" Priority="1" />
+    </TabbedPage.ToolbarItems>
 </TabbedPage>

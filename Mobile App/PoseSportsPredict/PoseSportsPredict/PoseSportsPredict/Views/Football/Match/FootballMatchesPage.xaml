@@ -22,7 +22,6 @@
              BackgroundColor="{StaticResource BackgroundColor_Default}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_calendar.png" Command="{Binding SelectMatchDateCommand}" Order="Primary" Priority="1" />
         <ToolbarItem IconImageSource="ic_filter.png" Command="{Binding MatchFilterCommand}" Order="Primary" Priority="2" />
         <customviews:HideableToolbarItem IconImageSource="ic_search.png" Order="Primary" Priority="3"
                                          IsVisible="{Binding IsSearchIconVisible}"

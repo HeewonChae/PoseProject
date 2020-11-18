@@ -20,7 +20,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
             tabbedPage.Children.Clear();
 
             var matchesPage = ShinyHost.Resolve<VIPMatchesViewModel>().CoupledPage;
-            var historyPage = ShinyHost.Resolve<VIPHistoryViewModel>().CoupledPage;
+            var historyPage = VIPHistoryViewModel.Singleton.CoupledPage;
             var subscribePage = ShinyHost.Resolve<VIPSubscribeViewModel>().CoupledPage;
 
             tabbedPage.Children.Add(matchesPage);
