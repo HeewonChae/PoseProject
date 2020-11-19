@@ -35,22 +35,19 @@ namespace PoseSportsPredict.ViewModels.Football.Bookmark
 
         public override async Task<bool> OnPrepareViewAsync(params object[] datas)
         {
-            if (_recentSearchList == null)
-            {
-                _recentSearchList = await _sqliteService.SelectAllAsync<FootballRecentSearch>();
-                _recentSearchList.Sort(ShinyHost.Resolve<StoredData_InverseDateComparer>());
-                RecentSearches = new ObservableCollection<FootballRecentSearch>(_recentSearchList);
-            }
+            _recentSearchList = await _sqliteService.SelectAllAsync<FootballRecentSearch>();
+            _recentSearchList.Sort(ShinyHost.Resolve<StoredData_InverseDateComparer>());
+            RecentSearches = new ObservableCollection<FootballRecentSearch>(_recentSearchList);
+
+            IsSearching = false;
+            var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
+            searchBar.Text = string.Empty;
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
-            IsSearching = false;
-
-            var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
-            searchBar.Text = string.Empty;
         }
 
         #endregion NavigableViewModel

@@ -483,7 +483,6 @@
                         </materialui:MaterialLabel>
                         <ListView
                             x:Name="lv_recent_search"
-                            CachingStrategy="RecycleElement"
                             Scrolled="lv_Scrolled"
                             ItemsSource="{Binding RecentSearches}"
                             HasUnevenRows="True"

@@ -53,22 +53,25 @@ namespace PoseSportsPredict.ViewModels.Football.Match
                 _allMatches = matchList;
             }
 
-            if (_recentSearchList == null)
-            {
-                _recentSearchList = await _sqliteService.SelectAllAsync<FootballRecentSearch>();
-                _recentSearchList.Sort(ShinyHost.Resolve<StoredData_InverseDateComparer>());
-                RecentSearches = new ObservableCollection<FootballRecentSearch>(_recentSearchList);
-            }
+            _recentSearchList = await _sqliteService.SelectAllAsync<FootballRecentSearch>();
+            _recentSearchList.Sort(ShinyHost.Resolve<StoredData_InverseDateComparer>());
+            RecentSearches = new ObservableCollection<FootballRecentSearch>(_recentSearchList);
+
+            IsSearching = false;
+            var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
+            searchBar.Text = string.Empty;
 
             return true;
         }
 
         public override void OnAppearing(params object[] datas)
         {
-            IsSearching = true;
+            IsPoped = true;
+        }
 
-            var searchBar = this.CoupledPage.FindByName<SearchBar>("_searchBar");
-            searchBar.Text = string.Empty;
+        public override void OnDisAppearing(params object[] datas)
+        {
+            IsPoped = false;
         }
 
         #endregion NavigableViewModel
@@ -82,6 +85,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         private ObservableCollection<FootballRecentSearch> _recentSearches;
         private ObservableCollection<FootballMatchListViewModel> _searchMatchesViewModels;
         private string _searchText;
+        private bool _isPoped;
         private bool _isSearching;
 
         #endregion Field
@@ -92,6 +96,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
         public ObservableCollection<FootballRecentSearch> RecentSearches { get => _recentSearches; set => SetValue(ref _recentSearches, value); }
         public ObservableCollection<FootballMatchListViewModel> SearchMatchesViewModels { get => _searchMatchesViewModels; set => SetValue(ref _searchMatchesViewModels, value); }
         public bool IsSearching { get => _isSearching; set => SetValue(ref _isSearching, value); }
+        public bool IsPoped { get => _isPoped; set => SetValue(ref _isPoped, value); }
 
         #endregion Properties
 
@@ -164,7 +169,6 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsPageSwitched(true);
 
-            IsSearching = false;
             await PageSwitcher.PopPopupAsync();
 
             SetIsPageSwitched(false);
@@ -183,6 +187,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
             if (OnInitializeView())
             {
                 CoupledPage.Appearing += (s, e) => this.OnAppearing();
+                CoupledPage.Disappearing += (s, e) => this.OnDisAppearing();
             }
         }
 
@@ -196,6 +201,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             if (!string.IsNullOrEmpty(searchText))
             {
+                IsSearching = true;
                 var searchedMatches = _allMatches.Where(elem => elem.LeagueName.ToLower().Contains(searchText.ToLower())
                             || elem.League_CountryName.ToLower().Contains(searchText.ToLower())
                             || elem.HomeName.ToLower().Contains(searchText.ToLower())
@@ -223,6 +229,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
                 return searchedMatches;
             }
+            else
+                IsSearching = false;
 
             return null;
         }

@@ -49,6 +49,5 @@ namespace PoseSportsPredict
 
         public const string APP_LINK = "https://poseidonpicks.page.link/app";
         public const string PAGE_BASE_LINK = "https://poseidonpicks.page.link/pagelinker";
-        public const string GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.pose.poseidon.picks";
     }
 }

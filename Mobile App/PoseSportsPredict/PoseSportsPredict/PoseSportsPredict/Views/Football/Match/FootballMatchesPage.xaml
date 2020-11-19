@@ -479,7 +479,6 @@
                 EmptyStateMessage="{Binding [No_Match_datas], Source={x:Static baseviewmodel:BaseViewModel.LocalizeStringRes}}">
                 <ListView
                     x:Name="lv_matches"
-                    CachingStrategy="RecycleElement"
                     SeparatorVisibility="None"
                     HasUnevenRows="True"
                     SelectionMode="None"

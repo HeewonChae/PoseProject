@@ -27,7 +27,6 @@
                 <ListView
                     x:Name="lv_matches"
                     HasUnevenRows="True"
-                    CachingStrategy="RecycleElement"
                     SeparatorVisibility="None"
                     SelectionMode="None"
                     IsPullToRefreshEnabled="True"

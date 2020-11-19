@@ -26,7 +26,6 @@
                 TaskLoaderNotifier="{Binding MatchesTaskLoaderNotifier}">
                 <ListView
                     x:Name="lv_matches"
-                    CachingStrategy="RecycleElement"
                     HasUnevenRows="True"
                     SeparatorVisibility="None"
                     SelectionMode="None"

@@ -192,7 +192,7 @@ namespace PoseSportsPredict.ViewModels.Common
 
             await Share.RequestAsync(new ShareTextRequest
             {
-                Uri = AppConfig.GOOGLE_PLAY_URL,
+                Uri = AppConfig.APP_LINK,
                 Title = "Share App Link"
             });
 

@@ -88,9 +88,8 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             SetIsBusy(true);
 
-            if (FootballMatchesSearchViewModel.Singleton.IsSearching)
+            if (FootballMatchesSearchViewModel.Singleton.IsPoped)
             {
-                FootballMatchesSearchViewModel.Singleton.IsSearching = false;
                 await PageSwitcher.PopPopupAsync();
                 FootballMatchesSearchViewModel.Singleton.SelectedMatchInfo(matchInfo);
             }
