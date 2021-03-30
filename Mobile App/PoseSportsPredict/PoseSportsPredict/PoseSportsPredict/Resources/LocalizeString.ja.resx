@@ -690,4 +690,7 @@
   <data name="Search_Matches" xml:space="preserve">
     <value>試合検索...</value>
   </data>
+  <data name="BillingSystem_Not_Available" xml:space="preserve">
+    <value>支払いモジュールの初期化に失敗しました。</value>
+  </data>
 </root>

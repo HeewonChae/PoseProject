@@ -291,7 +291,7 @@ namespace PoseSportsPredict.ViewModels.Football.Match
 
             await Task.Delay(300);
 
-            TimeSpan expireTime = Math.Abs((_matchDate - DateTime.Now.Date).Days) <= 1 ? TimeSpan.Zero : DateTime.Now.Date.AddDays(1) - DateTime.Now;
+            TimeSpan expireTime = (_matchDate - DateTime.Now.Date).Days <= 2 ? TimeSpan.Zero : DateTime.Now.Date.AddDays(1) - DateTime.Now;
             var result = await _cacheService.GetAsync<O_GET_FIXTURES_BY_DATE>(
                 loader: () =>
                 {

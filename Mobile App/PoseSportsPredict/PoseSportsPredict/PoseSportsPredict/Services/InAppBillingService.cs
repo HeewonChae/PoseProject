@@ -26,13 +26,22 @@ namespace PoseSportsPredict.Services
         public InAppBillingProduct[] InAppProduct;
         public InAppBillingProduct[] SubscriptionProduct;
 
-        public async void InitializeProduct()
+        public async Task<bool> InitializeProduct()
         {
+            bool isSuccess = false;
+
             if (Device.RuntimePlatform == Device.Android)
             {
                 InAppProduct = (await GetProductInfoAsync(ItemType.InAppPurchase, AppConfig.ANDROID_PRODUCT_IDS[0])).ToArray();
                 SubscriptionProduct = (await GetProductInfoAsync(ItemType.Subscription, AppConfig.ANDROID_PRODUCT_IDS[1])).ToArray();
+
+                isSuccess = InAppProduct != null
+                    && InAppProduct.Length != 0
+                    && SubscriptionProduct != null
+                    && SubscriptionProduct.Length != 0;
             }
+
+            return isSuccess;
         }
 
         public async Task<IEnumerable<InAppBillingProduct>> GetProductInfoAsync(ItemType itemType, params string[] productIds)

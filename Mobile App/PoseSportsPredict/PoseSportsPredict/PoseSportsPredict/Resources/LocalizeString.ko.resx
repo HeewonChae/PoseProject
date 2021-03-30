@@ -690,4 +690,7 @@
   <data name="Search_Matches" xml:space="preserve">
     <value>경기 검색...</value>
   </data>
+  <data name="BillingSystem_Not_Available" xml:space="preserve">
+    <value>결제 모듈 초기화에 문제가 발생 했습니다.</value>
+  </data>
 </root>

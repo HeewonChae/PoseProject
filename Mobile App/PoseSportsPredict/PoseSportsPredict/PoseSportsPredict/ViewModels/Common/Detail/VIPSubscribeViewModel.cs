@@ -28,8 +28,8 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
         public override bool OnInitializeView(params object[] datas)
         {
-            _VIPProduct = _inAppBillingService.SubscriptionProduct.Length == 0 ? null : _inAppBillingService.SubscriptionProduct[0];
-            _DiamondProduct = _inAppBillingService.InAppProduct.Length == 0 ? null : _inAppBillingService.InAppProduct[0];
+            _VIPProduct = _inAppBillingService?.SubscriptionProduct?.FirstOrDefault() ?? null;
+            _DiamondProduct = _inAppBillingService?.InAppProduct?.FirstOrDefault() ?? null;
 
             var screenHelper = DependencyService.Resolve<IScreenHelper>();
             CardMaxWidth = screenHelper.ScreenSize.Width - 33;
@@ -115,7 +115,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
         {
             // 다이아몬드
             var diamond = new InAppPurchaseInfo();
-            diamond.ProductId = _DiamondProduct?.ProductId;
+            diamond.ProductId = _DiamondProduct?.ProductId ?? string.Empty;
             diamond.PurchaseType = ItemType.InAppPurchase;
             diamond.Title = LocalizeString.Diamond;
             diamond.TitleColor = Color.DarkTurquoise;
@@ -134,7 +134,7 @@ namespace PoseSportsPredict.ViewModels.Common.Detail
 
             // VIP
             var vip = new InAppPurchaseInfo();
-            vip.ProductId = _VIPProduct?.ProductId;
+            vip.ProductId = _VIPProduct?.ProductId ?? string.Empty;
             vip.PurchaseType = ItemType.Subscription;
             vip.Title = LocalizeString.VIP;
             vip.TitleColor = Color.Gold;

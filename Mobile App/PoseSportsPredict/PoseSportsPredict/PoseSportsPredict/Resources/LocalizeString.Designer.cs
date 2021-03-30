@@ -160,6 +160,15 @@ namespace PoseSportsPredict.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment module initialization failure..
+        /// </summary>
+        public static string BillingSystem_Not_Available {
+            get {
+                return ResourceManager.GetString("BillingSystem_Not_Available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmaker.
         /// </summary>
         public static string Bookmaker {

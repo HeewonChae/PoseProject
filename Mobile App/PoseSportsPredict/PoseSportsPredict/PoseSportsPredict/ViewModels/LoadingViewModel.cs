@@ -106,7 +106,18 @@ namespace PoseSportsPredict.ViewModels
             //await _notificationService.Initialize();
 
             // InAppBilling Item Init
-            ShinyHost.Resolve<InAppBillingService>().InitializeProduct();
+            bool isBillingSystemInit = false;
+            do
+            {
+                isBillingSystemInit = await ShinyHost.Resolve<InAppBillingService>().InitializeProduct();
+                if (!isBillingSystemInit)
+                {
+                    await MaterialDialog.Instance.AlertAsync(LocalizeString.BillingSystem_Not_Available,
+                            LocalizeString.App_Title,
+                            LocalizeString.Ok,
+                            DialogConfiguration.AppTitleAlterDialogConfiguration);
+                }
+            } while (!isBillingSystemInit);
 
             var deviceInfoHelper = DependencyService.Resolve<IDeviceInfoHelper>();
             if (!deviceInfoHelper.IsLicensed.HasValue || !deviceInfoHelper.IsLicensed.Value)

@@ -695,4 +695,7 @@
   <data name="Search_Matches" xml:space="preserve">
     <value>Search Match...</value>
   </data>
+  <data name="BillingSystem_Not_Available" xml:space="preserve">
+    <value>Payment module initialization failure.</value>
+  </data>
 </root>
