@@ -45,3 +45,17 @@
 * 프레임워크: Flask
 * 구현된 머신러닝 모델을 이용해 다음 경기 예측데이터 제공
 
+# 스크린샷
+<table>
+  <tr>
+    <td><img src = "https://user-images.githubusercontent.com/23075175/113114348-35a05c80-9246-11eb-8755-51b09b56ed6d.PNG" width="350px"></td>
+    <td><img src = "https://user-images.githubusercontent.com/23075175/113114368-3b963d80-9246-11eb-9ea0-8a4760af1454.PNG" width="350px"></td>
+    <td><img src = "https://user-images.githubusercontent.com/23075175/113114375-3df89780-9246-11eb-93c2-d3ef51546f9b.PNG" width="350px"></td>
+    <td><img src = "https://user-images.githubusercontent.com/23075175/113114427-4c46b380-9246-11eb-825c-b57dc970453c.PNG" width="350px"></td>
+	</tr>
+  <tr>
+    <td><img src = "https://user-images.githubusercontent.com/23075175/113114442-5072d100-9246-11eb-97fb-c8ee907b7d66.PNG" width="300px"></td>
+ <td><img src = "https://user-images.githubusercontent.com/23075175/113114453-52d52b00-9246-11eb-8f1f-82830e8f8a8c.PNG" width="300px"></td>
+ <td><img src = "https://user-images.githubusercontent.com/23075175/113115352-51f0c900-9247-11eb-8344-e6a609be3eb2.PNG" width="300px"></td>
+	</tr>
+</table>
