@@ -1,0 +1,11 @@
+// result
+pscp -r -P 22 -i "G:\poseidon\ssh-key\pose-ssh-private.ppk" "C:\inetpub\Pose_Deploy\Pose Predictor\Poseidon_Predictor_Server\machine_learning\football\result" poseidon@34.69.140.155:/home/poseidon/predictor/machine_learning/football
+
+// score
+pscp -r -P 22 -i "G:\poseidon\ssh-key\pose-ssh-private.ppk" "C:\inetpub\Pose_Deploy\Pose Predictor\Poseidon_Predictor_Server\machine_learning\football\score" poseidon@34.69.140.155:/home/poseidon/predictor/machine_learning/football
+
+// bts
+pscp -r -P 22 -i "G:\poseidon\ssh-key\pose-ssh-private.ppk" "C:\inetpub\Pose_Deploy\Pose Predictor\Poseidon_Predictor_Server\machine_learning\football\both_to_score" poseidon@34.69.140.155:/home/poseidon/predictor/machine_learning/football
+
+// under over
+pscp -r -P 22 -i "G:\poseidon\ssh-key\pose-ssh-private.ppk" "C:\inetpub\Pose_Deploy\Pose Predictor\Poseidon_Predictor_Server\machine_learning\football\under_over" poseidon@34.69.140.155:/home/poseidon/predictor/machine_learning/football
