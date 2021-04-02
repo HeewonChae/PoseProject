@@ -17,9 +17,11 @@
 * 경로: Web App/PoseSportsWebService
 * 개발언어: c#, Json
 * 프레임워크: .Net WCF
+* REST API
 * User Auth 처리
 * Sports Data 제공
 * google Billing 처리
+* RSA,AES 를 이용해 패킷 보안
 
 ### DataBase
 * RDBMS: My-SQL
