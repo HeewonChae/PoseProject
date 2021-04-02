@@ -11,7 +11,7 @@
 * 프레임워크: Xamarin.Forms
 * AOS / IOS 크로스플랫폼 어플
 * 비동기 네트워크 데이터 처리
-* Google OAuth 처리
+* Social Login OAuth 처리
 
 ### Server
 * 경로: Web App/PoseSportsWebService
