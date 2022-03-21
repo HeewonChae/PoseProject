@@ -3,7 +3,7 @@ flask==1.1.2
 numpy==1.18.1
 pandas==1.0.4
 scikit-learn==0.22.1
-waitress==1.4.4
+waitress==2.1.1
 flask-restplus==0.13.0
 werkzeug==0.16.0
 pymysql==0.9.3
